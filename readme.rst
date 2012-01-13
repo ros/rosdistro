@@ -1,7 +1,7 @@
 This is a repo with the list of git-buildpackage repos to build into binaries.
 
 To add your project to our build farm, fork this repository, append your git buildpackage release
-repo to the ``<ROS_RELEASE_CODENAME>.yaml``
+repo to the ``repos.yaml``
 file, and give us a pull request.
 
 
