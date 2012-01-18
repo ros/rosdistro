@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import yaml, argparse
 
-parser = argparse.ArgumentParser(description='Insert an git buildpackage repo into the yaml database.')
+parser = argparse.ArgumentParser(description='Sort the release yaml db in place.')
 parser.add_argument('yaml_file',help='the yaml file to update')
 args = parser.parse_args()
 db = yaml.load(open(args.yaml_file,'r'))
