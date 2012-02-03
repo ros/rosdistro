@@ -4,10 +4,8 @@ To add your project to our build farm, fork this repository, append your git bui
 repo to the ``ROSDISTRO.yaml``
 file, and give us a pull request.
 
-Try::
-	
-	./add_release_repo.py --help
+Directories:
 
-or::
-
-	./sort --help
+ - releases: list of released resources (e.g. GBP distro files) and targets configuration  
+ - rosdep: rosdep YAML files and default configuration
+ - scripts: support scripts
