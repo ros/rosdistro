@@ -50,6 +50,10 @@ bazaar:
   macports: bazaar
   opensuse: bzr
   ubuntu: bzr
+bison:
+  ubuntu: bison
+  debian: bison
+  macports: bison
 boost:
   arch: boost
   cygwin: libboost-devel libboost1.40
@@ -146,15 +150,10 @@ ffmpeg:
   macports: ffmpeg
   arch: ffmpeg
   gentoo: ffmpeg
-  osxbrew:
-    homebrew:
-      packages: [ ffmpeg  ]
-jasper:
-  ubuntu: libjasper-dev
-  debian: libjasper-dev
-  macports: jasper
-  arch: jasper
-  gentoo: jasper
+flex:
+  ubuntu: flex
+  debian: flex
+  macports: flex
 fltk:
   arch: fltk
   debian: libfltk1.1-dev
@@ -164,6 +163,32 @@ fltk:
   macports: fltk
   opensuse: fltk-devel
   ubuntu: libfltk1.1-dev
+freeimage:
+  ubuntu: libfreeimage-dev
+  macports: freeimage
+  debian: libfreeimage-dev
+  arch: freeimage
+  gentoo: freeimage
+  fedora: freeimage-devel
+glut:
+  ubuntu: 
+    lucid: 
+      apt:
+        packages: [ libglut3-dev ]
+    maverick: 
+      apt:
+        packages: [ libglut3-dev ]
+    natty: 
+      apt:
+        packages: [ libglut3-dev ]
+    oneiric:
+      apt:
+        packages: [ freeglut3-dev ]
+  debian: libglut3-dev
+  fedora: freeglut-devel
+  arch: freeglut
+  gentoo: freeglut
+  macports: mesa
 git:
   debian: git-core
   fedora: git
@@ -212,6 +237,12 @@ intltool:
   fedora: intltool
   gentoo: dev-util/intltool
   freebsd: intltool
+jasper:
+  ubuntu: libjasper-dev
+  debian: libjasper-dev
+  macports: jasper
+  arch: jasper
+  gentoo: jasper
 libstdc++5:
   ubuntu: libstdc++5
   debian: libstdc++5
@@ -228,9 +259,6 @@ libtool:
   fedora: libtool libtool-ltdl-devel
   rhel: libtool libtool-ltdl-devel
   macports: libtool
-  osxbrew:
-    homebrew:
-      packages: |
   arch: libtool
   gentoo: sys-devel/libtool
   freebsd: libtool
@@ -273,6 +301,50 @@ libxxf86vm:
   opensuse: xorg-x11-devel
   rhel: libXxf86vm-devel
   ubuntu: libxxf86vm-dev
+libjpeg:
+  ubuntu: libjpeg62-dev
+  debian: libjpeg62-dev
+  fedora: libjpeg-devel
+  macports: jpeg
+  arch: libjpeg
+libogg:
+  ubuntu: libogg-dev
+  debian: libogg-dev
+  fedora: libogg-devel
+  macports: libogg
+  gentoo: media-libs/libogg
+libpq-dev:
+  ubuntu: libpq-dev
+libtheora:
+  ubuntu: libtheora-dev
+  debian: libtheora-dev
+  fedora: libtheora-devel
+  macports: libtheora
+  gentoo: media-libs/libtheora
+libqhull:
+  ubuntu: libqhull-dev
+  debian: libqhull-dev
+  fedora: qhull-devel
+  macports: qhull
+libusb:
+  ubuntu: libusb-1.0-0-dev
+libvtk:
+  ubuntu: libvtk5-dev
+  debian: libvtk5-dev
+  fedora: vtk-devel
+  macports: vtk-devel
+libx11:
+  ubuntu: libx11-dev
+  debian: libx11-dev
+  fedora: libX11-devel
+  macports: xorg-libX11
+libxrandr:
+  ubuntu: libxrandr-dev
+  debian: libxrandr-dev
+  arch: libxrandr
+  gentoo: x11-libs/libXrandr
+  macports: xorg-libXrandr
+  fedora: libXrandr-devel
 log4cxx:
   arch: 'if ! pacman -Q log4cxx; then yaourt -S log4cxx; fi
 
@@ -297,6 +369,14 @@ mercurial:
   macports: mercurial
   opensuse: mercurial
   ubuntu: mercurial
+nvidia-cg:
+  ubuntu: nvidia-cg-toolkit
+  debian: nvidia-cg-toolkit
+  fedora: Cg
+  arch: |
+    if ! pacman -Q nvidia-cg-toolkit ; then yaourt -S nvidia-cg-toolkit; fi
+  gentoo: nvidia-cg-toolkit
+  debian: nvidia-cg-toolkit
 opengl:
   arch: mesa
   debian: libgl1-mesa-dev libglu1-mesa-dev
@@ -307,6 +387,20 @@ opengl:
   opensuse: Mesa-devel
   rhel: mesa-libGL-devel mesa-libGLU-devel
   ubuntu: libgl1-mesa-dev libglu1-mesa-dev
+netpbm:
+  ubuntu: libnetpbm10-dev
+  debian: libnetpbm10-dev
+  arch: netpbm
+  macports: netpbm
+  fedora: netpbm-devel
+  gentoo: netpbm
+pcre-dev:
+  ubuntu: libpcre++-dev
+  fedora: pcre-devel
+pcre:
+  ubuntu: libpcre3-dev
+  fedora: pcre-devel
+  debian: libpcre3-dev
 pkg-config:
   arch: pkg-config
   cygwin: pkg-config
@@ -334,22 +428,13 @@ libqt:
   ubuntu: libqt4-dev libqt4-opengl-dev
 libqt4-dev:
   ubuntu: libqt4-dev
-  osxbrew:
-    lion:
-      homebrew:
-        packages: [ qt ]
 libqt4-opengl-dev:
   ubuntu: libqt4-opengl-dev
-  osxbrew:
-    lion:
-      homebrew:
-        packages: [ qt ]
 qt4-qmake:
   ubuntu: qt4-qmake
-  osxbrew:
-    lion:
-      homebrew:
-        packages: [ qt ]
+readline-dev:
+  ubuntu: libreadline-dev
+  fedora: readline-devel
 scons:
   arch: scons
   debian: scons
@@ -359,6 +444,13 @@ scons:
   macports: scons
   opensuse: scons
   ubuntu: scons
+sdl-image:
+  ubuntu: libsdl-image1.2-dev
+  debian: libsdl-image1.2-dev
+  fedora: SDL_image-devel
+  arch: sdl_image
+  macports: libsdl_image
+  gentoo: sdl-image
 subversion:
   debian: subversion
   fedora: subversion
@@ -371,6 +463,16 @@ tinyxml:
   debian: libtinyxml-dev
   fedora: tinyxml-devel
   ubuntu: libtinyxml-dev
+tbb:
+  ubuntu: libtbb-dev
+tcsh:
+  ubuntu: tcsh
+  fedora: tcsh
+uuid:
+  ubuntu: uuid-dev
+  debian: uuid-dev
+  fedora: libuuid-devel
+  macports: ossp-uuid
 unzip:
   arch: unzip
   debian: unzip
@@ -402,6 +504,9 @@ wxwidgets:
   opensuse: wxGTK-devel
   rhel: wxGTK-devel
   ubuntu: libwxgtk2.8-dev
+xulrunner-dev:
+  ubuntu: libv8-dev
+  fedora: libv8-devel
 yaml:
   fedora: libyaml-devel
   ubuntu: libyaml-dev
@@ -432,170 +537,3 @@ zziplib:
   opensuse: zziplib-devel
   rhel: zziplib-devel
   ubuntu: libzzip-0-13 libzzip-dev
-libvtk:
-  ubuntu: libvtk5-dev
-  debian: libvtk5-dev
-  fedora: vtk-devel
-  macports: vtk-devel
-libqhull:
-  ubuntu: libqhull-dev
-  debian: libqhull-dev
-  fedora: qhull-devel
-  macports: qhull
-libusb:
-  ubuntu: libusb-1.0-0-dev
-bison:
-  ubuntu: bison
-  debian: bison
-  macports: bison
-  osxbrew:
-    homebrew:
-      packages: |
-flex:
-  ubuntu: flex
-  debian: flex
-  macports: flex
-  osxbrew:
-    homebrew:
-       packages: |
-libjpeg:
-  ubuntu: libjpeg62-dev
-  debian: libjpeg62-dev
-  fedora: libjpeg-devel
-  macports: jpeg
-  arch: libjpeg
-freeimage:
-  ubuntu: libfreeimage-dev
-  macports: freeimage
-  osx:
-    lion:
-      homebrew:
-        packages: [ freeimage ]
-  debian: libfreeimage-dev
-  arch: freeimage
-  gentoo: freeimage
-  fedora: freeimage-devel
-nvidia-cg:
-  ubuntu: nvidia-cg-toolkit
-  debian: nvidia-cg-toolkit
-  fedora: Cg
-  arch: |
-    if ! pacman -Q nvidia-cg-toolkit ; then yaourt -S nvidia-cg-toolkit; fi
-  gentoo: nvidia-cg-toolkit
-  debian: nvidia-cg-toolkit
-  osx:
-    lion:
-      source:
-        uri: 'http://mirror.ausparc.com/ros/sourcedeps/nvidia-cg.rdmanifest'
-        md5sum: 5877923536b171586bab4e17b25e276f
-libxrandr:
-  ubuntu: libxrandr-dev
-  debian: libxrandr-dev
-  arch: libxrandr
-  gentoo: x11-libs/libXrandr
-  macports: xorg-libXrandr
-  osx:
-    lion:
-      homebrew:
-        packages: |
-  fedora: libXrandr-devel
-uuid:
-  ubuntu: uuid-dev
-  debian: uuid-dev
-  fedora: libuuid-devel
-  macports: ossp-uuid
-  osxbrew: 
-    lion:
-      homebrew:
-        packages: [ ossp-uuid ]
-        args: [ --universal ]
-libogg:
-  ubuntu: libogg-dev
-  debian: libogg-dev
-  fedora: libogg-devel
-  macports: libogg
-  osxbrew:
-    homebrew:
-      packages: [ libogg ]
-  gentoo: media-libs/libogg
-libtheora:
-  ubuntu: libtheora-dev
-  debian: libtheora-dev
-  fedora: libtheora-devel
-  macports: libtheora
-  osxbrew:
-    homebrew:
-      packages: [ theora ]
-  gentoo: media-libs/libtheora
-tbb:
-  ubuntu: libtbb-dev
-pcre-dev:
-  ubuntu: libpcre++-dev
-  fedora: pcre-devel
-pcre:
-  ubuntu: libpcre3-dev
-  fedora: pcre-devel
-  debian: libpcre3-dev
-  osxbrew:
-    homebrew:
-      packages: [ pcre++]
-netpbm:
-  ubuntu: libnetpbm10-dev
-  debian: libnetpbm10-dev
-  arch: netpbm
-  macports: netpbm
-  fedora: netpbm-devel
-  gentoo: netpbm
-sdl-image:
-  ubuntu: libsdl-image1.2-dev
-  debian: libsdl-image1.2-dev
-  fedora: SDL_image-devel
-  arch: sdl_image
-  macports: libsdl_image
-  gentoo: sdl-image
-  osxbrew:
-    lion:
-      homebrew:
-        packages: [ sdl_image ]
-tcsh:
-  ubuntu: tcsh
-  fedora: tcsh
-xulrunner-dev:
-  ubuntu: libv8-dev
-  fedora: libv8-devel
-readline-dev:
-  ubuntu: libreadline-dev
-  fedora: readline-devel
-glut:
-  ubuntu: 
-    lucid: 
-      apt:
-        packages: [ libglut3-dev ]
-    maverick: 
-      apt:
-        packages: [ libglut3-dev ]
-    natty: 
-      apt:
-        packages: [ libglut3-dev ]
-    oneiric:
-      apt:
-        packages: [ freeglut3-dev ]
-  debian: libglut3-dev
-  fedora: freeglut-devel
-  arch: freeglut
-  gentoo: freeglut
-  macports: mesa
-  osxbrew:
-    homebrew:
-      packages: |
-libpq-dev:
-  ubuntu: libpq-dev
-libx11:
-  ubuntu: libx11-dev
-  debian: libx11-dev
-  fedora: libX11-devel
-  macports: xorg-libX11
-  osxbrew:
-    lion:
-      homebrew:
-        packages: |
