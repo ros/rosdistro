@@ -51,9 +51,19 @@ bazaar:
   opensuse: bzr
   ubuntu: bzr
 bison:
-  ubuntu: bison
+  arch: bison
   debian: bison
+  fedora: bison
+  gentoo: sys-devel/bison
   macports: bison
+  ubuntu: bison
+bluez:
+  arch: bluez
+  debian: bluez
+  fedora: bluez-libs
+  gentoo: net-wireless/bluez-utils
+  rhel: bluez-libs
+  ubuntu: bluez
 boost:
   arch: boost
   cygwin: libboost-devel libboost1.40
@@ -154,9 +164,12 @@ ffmpeg:
   gentoo: ffmpeg
   fedora: ffmpeg-devel
 flex:
-  ubuntu: flex
+  arch: flex
   debian: flex
+  fedora: flex
+  gentoo: sys-devel/flex
   macports: flex
+  ubuntu: flex
 fltk:
   arch: fltk
   debian: libfltk1.1-dev
@@ -248,8 +261,20 @@ jasper:
   arch: jasper
   gentoo: jasper
   fedora: jasper-devel
+joystick:
+  arch: |
+    if ! pacman -Q joyutils; then yaourt -S joyutils; fi
+  debian: joystick
+  fedora: joystick
+  gentoo: games-util/joystick
+  rhel: joystick
+  ubuntu: joystick
 libann-dev:
   ubuntu: libann-dev
+libbluetooth-dev:
+  fedora: bluez-libs-devel
+  gentoo: net-wireless/bluez-libs
+  ubuntu: libbluetooth-dev
 libdc1394-dev:
   ubuntu:
     apt: 
@@ -383,11 +408,15 @@ libvtk:
   debian: libvtk5-dev
   fedora: vtk-devel
   macports: vtk-devel
-libx11:
+libx11-dev:
+  fedora: libX11-devel
+  gentoo: x11-libs/libX11
   ubuntu: libx11-dev
+libx11:
   debian: libx11-dev
   fedora: libX11-devel
   macports: xorg-libX11
+  ubuntu: libx11-dev
 libxaw:
   arch: libxaw
   debian: libxaw7-dev
