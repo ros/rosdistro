@@ -18,13 +18,14 @@ ant:
     natty: ant
     oneiric: ant
 assimp:
+  arch: assimp
   debian:
     source: {md5sum: d5137302d8f00241ee10e623b97f9d22, uri: 'https://kforge.ros.org/rosrelease/viewvc/sourcedeps/assimp/assimp-2.0.86-1.rdmanifest'}
   ubuntu:
     apt:
       packages: [assimp-dev]
 atlas:
-  arch: ''
+  arch: atlas-lapack
   debian: libatlas-base-dev
   fedora: atlas-devel
   gentoo: atlas
@@ -112,6 +113,7 @@ bzip2:
   rhel: bzip2-devel
   ubuntu: libbz2-dev
 checkinstall:
+  arch: checkinstall
   debian:
     apt:
       packages: [checkinstall]
@@ -119,6 +121,7 @@ checkinstall:
     apt:
       packages: [checkinstall]
 cmake:
+  arch: cmake
   ubuntu: cmake
 coinor-libipopt-dev:
   ubuntu: coinor-libipopt-dev
@@ -151,6 +154,7 @@ doxygen:
   rhel: doxygen
   ubuntu: doxygen
 eigen:
+  arch: eigen3
   debian:
     source: {md5sum: 941db2fbb09d80c28426d335022fad95, uri: 'https://kforge.ros.org/rosrelease/viewvc/sourcedeps/eigen/eigen-3.0.1-1.rdmanifest'}
   gentoo: '>=dev-cpp/eigen-3'
@@ -158,6 +162,7 @@ eigen:
     apt:
       packages: [libeigen3-dev]
 epydoc:
+  arch: epydoc
   debian: python-epydoc
   fedora: epydoc
   freebsd: epydoc
@@ -204,6 +209,7 @@ gforth:
   gentoo: gforth
   fedora: gforth
 git:
+  arch: git
   debian: git-core
   fedora: git
   freebsd: git
@@ -248,6 +254,7 @@ graphviz:
   rhel: graphviz
   ubuntu: graphviz
 gtest:
+  arch: gtest
   debian: libgtest-dev
   fedora: gtest-devel
   freebsd: googletest
@@ -270,6 +277,7 @@ hddtemp:
 hostapd:
   ubuntu: hostapd
 intltool:
+  arch: intltool
   ubuntu: intltool
   opensuse: intltool 
   fedora: intltool
@@ -285,18 +293,19 @@ jasper:
   gentoo: jasper
   fedora: jasper-devel
 joystick:
-  arch: |
-    if ! pacman -Q joyutils; then yaourt -S joyutils; fi
+  arch: joyutils
   debian: joystick
   fedora: joystick
   gentoo: games-util/joystick
   rhel: joystick
   ubuntu: joystick
 libann-dev:
+  arch: ann
   ubuntu: libann-dev
 libapache2-mod-python:
   ubuntu: libapache2-mod-python
 libbluetooth-dev:
+  arch: bluez
   fedora: bluez-libs-devel
   gentoo: net-wireless/bluez-libs
   ubuntu: libbluetooth-dev
@@ -314,18 +323,24 @@ libdc1394-dev:
     macports:
       packages: [libdc1394]
 libcoin60-dev:
+  arch: coin
   ubuntu: libcoin60-dev
 libdbus-dev:
   ubuntu: libdbus-1-dev
 libdevil-dev:
+  arch: devil
   ubuntu: libdevil-dev
 libftgl-dev:
+  arch: ftgl
   ubuntu: libftgl-dev
 libglew-dev:
+  arch: glew
   ubuntu: libglew1.5-dev
 libglui-dev:
+  arch: glui
   ubuntu: libglui-dev
 libgphoto-dev:
+  arch: libgphoto2
   ubuntu: libgphoto2-2-dev
 libgstreamer0.10-dev:
   ubuntu:
@@ -340,20 +355,24 @@ libjpeg:
   macports: jpeg
   arch: libjpeg
 liblapack-dev:
+  arch: lapack
   debian: liblapack-dev
   fedora: lapack-devel
   ubuntu: liblapack-dev
 libleptonica-dev:
+  arch: leptonica
   ubuntu: libleptonica-dev
 libnl-dev:
   ubuntu: libnl-dev
 libogg:
+  arch: libogg
   ubuntu: libogg-dev
   debian: libogg-dev
   fedora: libogg-devel
   macports: libogg
   gentoo: media-libs/libogg
 libomniorb4-dev:
+  arch: omniorb
   ubuntu: libomniorb4-dev
 libpcap:
   ubuntu:
@@ -374,11 +393,14 @@ libpcap:
 libpcsclite-dev:
   ubuntu: libpcsclite-dev
 libpng12-dev:
+  arch: libpng
   fedora: libpng-devel
   ubuntu: libpng12-dev
 libpq-dev:
+  arch: postgresql-libs
   ubuntu: libpq-dev
 libqhull:
+  arch: qhull
   ubuntu: libqhull-dev
   debian: libqhull-dev
   fedora: qhull-devel
@@ -394,8 +416,12 @@ libqt4-dev:
   opensuse: libqt4-devel
   ubuntu: libqt4-dev
 libqt4-opengl-dev:
+  arch: qt
   ubuntu: libqt4-opengl-dev
 libraw1394-dev:
+  arch:
+    pacman:
+      packages: [libraw1394]
   ubuntu:
     apt:
       packages: [libraw1394-dev]
@@ -405,9 +431,11 @@ libraw1394-dev:
 libreadline-dev:
   ubuntu: libreadline-dev
 libsoqt4-dev:
+  arch: soqt
   fedora: SoQt-devel
   ubuntu: libsoqt4-dev
 libstdc++5:
+  arch: libstdc++5
   ubuntu: libstdc++5
   debian: libstdc++5
   opensuse: libstdc++33 
@@ -415,12 +443,14 @@ libstdc++5:
 libswscale-dev:
   ubuntu: libswscale-dev
 libtheora:
+  arch: libtheora
   ubuntu: libtheora-dev
   debian: libtheora-dev
   fedora: libtheora-devel
   macports: libtheora
   gentoo: media-libs/libtheora
 libtiff4-dev:
+  arch: libtiff
   ubuntu: libtiff4-dev
 libtool:
   ubuntu:
@@ -437,21 +467,27 @@ libtool:
   gentoo: sys-devel/libtool
   freebsd: libtool
 libusb-1.0-dev:
+  arch: libusb
   ubuntu: libusb-1.0-0-dev
 libusb-dev:
+  arch: libusb-compat
   ubuntu: libusb-dev
 libv4l-dev:
+  arch: v4l-utils
   ubuntu: libv4l-dev
 libvtk:
+  arch: vtk
   ubuntu: libvtk5-dev
   debian: libvtk5-dev
   fedora: vtk-devel
   macports: vtk-devel
 libx11-dev:
+  arch: libx11
   fedora: libX11-devel
   gentoo: x11-libs/libX11
   ubuntu: libx11-dev
 libx11:
+  arch: libx11
   debian: libx11-dev
   fedora: libX11-devel
   macports: xorg-libX11
@@ -503,9 +539,7 @@ libxrandr:
   macports: xorg-libXrandr
   fedora: libXrandr-devel
 log4cxx:
-  arch: 'if ! pacman -Q log4cxx; then yaourt -S log4cxx; fi
-
-    '
+  arch: log4cxx
   cygwin: liblog4cxx-devel
   debian: {lenny: "if [ ! -f /opt/ros/lib/liblog4cxx.so.10 ] ; then\n  mkdir -p ~/ros/ros-deps\n\
       \  cd ~/ros/ros-deps\n  wget --tries=10 http://pr.willowgarage.com/downloads/apache-log4cxx-0.10.0-wg_patched.tar.gz\n\
@@ -519,6 +553,7 @@ log4cxx:
   rhel: log4cxx-devel
   ubuntu: liblog4cxx10-dev
 mercurial:
+  arch: mercurial
   debian: mercurial
   fedora: mercurial
   freebsd: mercurial
@@ -529,11 +564,10 @@ mercurial:
 nite-dev:
   ubuntu: nite-dev
 nvidia-cg:
+  arch: nvidia-cg-toolkit
   ubuntu: nvidia-cg-toolkit
   debian: nvidia-cg-toolkit
   fedora: Cg
-  arch: |
-    if ! pacman -Q nvidia-cg-toolkit ; then yaourt -S nvidia-cg-toolkit; fi
   gentoo: nvidia-cg-toolkit
   debian: nvidia-cg-toolkit
 omniorb4-idl:
@@ -558,9 +592,11 @@ netpbm:
   fedora: netpbm-devel
   gentoo: netpbm
 pcre-dev:
+  arch: pcre
   ubuntu: libpcre++-dev
   fedora: pcre-devel
 pcre:
+  arch: pcre
   ubuntu: libpcre3-dev
   fedora: pcre-devel
   debian: libpcre3-dev
@@ -576,13 +612,17 @@ pkg-config:
   rhel: pkgconfig
   ubuntu: pkg-config
 protobuf:
+  arch: protobuf
   ubuntu:
     oneiric: libprotobuf7
 ps-engine:
+  arch: primesense-sensor
   ubuntu: ps-engine
 qt4-qmake:
+  arch: qt
   ubuntu: qt4-qmake
 readline-dev:
+  arch: readline
   ubuntu: libreadline-dev
   fedora: readline-devel
 scons:
@@ -602,6 +642,7 @@ sdl-image:
   macports: libsdl_image
   gentoo: sdl-image
 subversion:
+  arch: subversion
   debian: subversion
   fedora: subversion
   freebsd: subversion
@@ -610,23 +651,29 @@ subversion:
   opensuse: subversion
   ubuntu: subversion
 suitesparse:
+  arch: suitesparse
   ubuntu: libsuitesparse-dev
 sysstat:
   ubuntu: sysstat
 tinyxml:
+  arch: tinyxml
   debian: libtinyxml-dev
   fedora: tinyxml-devel
   ubuntu: libtinyxml-dev
 tbb:
+  arch: intel-tbb
   ubuntu: libtbb-dev
 tcsh:
+  arch: tcsh
   ubuntu: tcsh
   fedora: tcsh
 texlive-latex-base:
+  arch: texlive-base
   ubuntu: texlive-latex-base
 udhcpc:
   ubuntu: udhcpc
 uuid:
+  arch: util-linux
   ubuntu: uuid-dev
   debian: uuid-dev
   fedora: libuuid-devel
@@ -663,6 +710,7 @@ wxwidgets:
   rhel: wxGTK-devel
   ubuntu: libwxgtk2.8-dev
 xulrunner-dev:
+  arch: xulrunner
   ubuntu: libv8-dev
   fedora: libv8-devel
 yaml:
