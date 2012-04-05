@@ -19,6 +19,10 @@ ant:
     natty: ant
     oneiric: ant
   fedora: ant
+antlr:
+  fedora: antlr3-C antlr-C++
+  ubuntu: antlr libantlr-dev
+  debian: antlr libantlr-dev
 assimp:
   arch: assimp
   debian:
@@ -228,6 +232,10 @@ gcc-avr:
   ubuntu: gcc-avr
   gentoo: cross-avr/gcc
   fedora: avr-gcc
+gccxml:
+  ubuntu: gccxml
+  fedora: gccxml
+  debian: gccxml
 gforth:
   ubuntu: gforth
   debian: gforth
@@ -439,6 +447,18 @@ libogg:
 libomniorb4-dev:
   arch: omniorb
   ubuntu: libomniorb4-dev
+omniorb:
+  ubuntu:
+    'oneiric': omniorb omniidl omniorb-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
+    '11.04': omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
+    '10.10': omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
+    '10.04': omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
+    '9.10': omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
+    '9.04': omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
+  debian: omniorb4 omniidl4 omniorb4-nameserver libomniorb4-1 libomniorb4-dev libomnithread3-dev libomnithread3c2
+  fedora: |
+    #!/bin/bash
+    echo "omniorb is not available in the Fedora package manager - please install it from source";
 libpcap:
   ubuntu:
     apt:
@@ -605,6 +625,10 @@ libxml2:
   macports: libxml2
   opensuse: libxml2-devel
   ubuntu: libxml2-dev
+libxslt:
+  fedora: libxslt-devel
+  ubuntu: libxslt1-dev
+  debian: libxslt1-dev
 libxxf86vm:
   arch: libxxf86vm
   debian: libxxf86vm-dev
@@ -636,6 +660,10 @@ log4cxx:
   opensuse: log4cxx-devel
   rhel: log4cxx-devel
   ubuntu: liblog4cxx10-dev
+lua-dev:
+  ubuntu: liblua5.1-0-dev
+  debian: liblua5.1-0-dev
+  fedora: lua-devel
 mercurial:
   arch: mercurial
   debian: mercurial
@@ -715,6 +743,17 @@ readline-dev:
   arch: readline
   ubuntu: libreadline-dev
   fedora: readline-devel
+  debian: libreadline-dev
+ruby:
+  ubuntu:
+    'oneiric': ruby1.8-dev libruby1.8 rubygems1.8
+    '11.04': ruby1.8-dev libruby1.8 rubygems1.8
+    '10.10': ruby1.8-dev libruby1.8 rubygems1.8
+    '10.04': ruby1.8-dev libopenssl-ruby1.8 rubygems1.8
+    '9.10': ruby1.8-dev libopenssl-ruby1.8 rubygems1.8
+    '9.04': ruby1.8-dev libopenssl-ruby1.8 rubygems1.8
+  fedora: ruby ruby-devel openssl-devel rubygems
+  debian: ruby1.8-dev libruby1.8 rubygems1.8
 sbcl:
   ubuntu: sbcl
   debian: sbcl
