@@ -899,6 +899,15 @@ texlive-latex-base:
   arch: texlive-base
   ubuntu: texlive-latex-base
   fedora: texlive-latex
+ttf-mscorefonts-installer:
+  ubuntu: |
+    #!/bin/sh
+    if [ ! -d /usr/share/doc/ttf-mscorefonts-installer ] ; then
+      echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections 
+      sudo apt-get -y --force-yes install ttf-mscorefonts-installer
+    fi
+  debian: ttf-mscorefonts-installer
+  macports:
 udhcpc:
   arch: udhcp
   ubuntu: udhcpc
@@ -950,6 +959,18 @@ wxwidgets:
   opensuse: wxGTK-devel
   rhel: wxGTK-devel
   ubuntu: libwxgtk2.8-dev
+xfont-server:
+  ubuntu: xfs
+  debian: xfs
+  macports:
+xfonts-100dpi:
+  ubuntu: xfonts-100dpi
+  debian: xfonts-100dpi
+  macports:
+xfonts-75dpi:
+  ubuntu: xfonts-75dpi
+  debian: xfonts-75dpi
+  macports:
 xz-utils:
   ubuntu: xz-utils
 xulrunner-dev:
