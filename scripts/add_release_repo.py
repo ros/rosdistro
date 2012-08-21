@@ -1,17 +1,37 @@
 #!/usr/bin/env python
-import yaml, argparse
 
-parser = argparse.ArgumentParser(description='Insert an git buildpackage repo into the yaml database.')
-parser.add_argument('yaml_file',help='the yaml file to update')
-parser.add_argument('clone_url',help='a clonable url')
-parser.add_argument('--target',help='the target ubuntu distros. default : %(default)s', default='all')
-args = parser.parse_args()
-db = yaml.load(open(args.yaml_file,'r'))
-db.append(dict(url=args.clone_url,target=args.target))
-db = sorted(db)
-new_db = []
-for x in db:
-    new_db.append("- url: %s"%x['url'])
-    new_db.append("  target: %s"%x['target'])
-with open(args.yaml_file, 'w') as f:
-    f.write('\n'.join(new_db) + '\n')
+from __future__ import print_function
+import argparse
+import sys
+import yaml
+
+from sort_yaml import sort_yaml_data
+
+
+def add_release_repository(yaml_file, name, url, version):
+    data = yaml.load(open(yaml_file, 'r'))
+    if data['type'] != 'gbp':
+        raise RuntimeError('The passed .yaml file is not of type "gbp"')
+    if name in data['repositories']:
+        raise RuntimeError('Repository with name "%s" is already in the .yaml file' % name)
+    data['repositories'][name] = {
+        'url': url,
+        'version': version,
+    }
+    sort_yaml_data(data)
+    yaml.dump(data, file(yaml_file, 'w'), default_flow_style=False)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Insert a git-buildpackage repository into the .yaml file.')
+    parser.add_argument('yaml_file', help='The yaml file to update')
+    parser.add_argument('name', help='The unique name of the repo')
+    parser.add_argument('url', help='The url of the GBP repository')
+    parser.add_argument('version', help='The version')
+    args = parser.parse_args()
+
+    try:
+        add_release_repository(args.yaml_file, args.name, args.url, args.version)
+    except Exception as e:
+        print(str(e), file=sys.stderr)
+        exit(1)
