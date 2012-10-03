@@ -13,6 +13,7 @@ apr:
   ubuntu: libapr1-dev libaprutil1-dev
 arista:
   ubuntu: arista
+  debian: arista
 ant:
   arch: apache-ant
   ubuntu: 
@@ -22,6 +23,7 @@ ant:
     oneiric: ant
     precise: ant
     quantal: ant
+  debian: ant
   fedora: ant
 antlr:
   fedora: antlr3-C antlr-C++
@@ -31,6 +33,7 @@ armadillo:
   ubuntu:
     apt: 
       packages: [libarmadillo-dev]
+  debian: libarmadillo-dev
 assimp:
   arch: assimp
   debian:
@@ -54,6 +57,8 @@ assimp:
       apt:
         packages: [libassimp-dev]
 assimp-dev:
+  debian:
+    sid: libassimp-dev
   ubuntu:
     lucid: 
       apt:
@@ -98,13 +103,17 @@ automake:
   rhel: automake
   ubuntu: automake
 autopoint:
+  debian: autopoint
   ubuntu: autopoint
 avahi-daemon:
+  debian: avahi-daemon
   ubuntu: avahi-daemon
 avahi-utils:
+  debian: avahi-utils
   ubuntu: avahi-utils
 avr-libc:
   arch: avr-libc
+  debian: avr-libc
   ubuntu: avr-libc
   gentoo: cross-avr/avr-libc
   fedora: avr-libc
@@ -119,6 +128,7 @@ bazaar:
   ubuntu: bzr
 beep:
   arch: beep
+  debian: beep
   ubuntu: beep
   fedora: beep
 bison:
@@ -144,7 +154,7 @@ boost:
   debian: {lenny: "if [ ! -f /opt/ros/lib/libboost_date_time-gcc43-mt*-1_37.a ] ;\
       \ then\n  mkdir -p ~/ros/ros-deps\n  cd ~/ros/ros-deps\n  wget --tries=10 http://pr.willowgarage.com/downloads/boost_1_37_0.tar.gz\n\
       \  tar xzf boost_1_37_0.tar.gz\n  cd boost_1_37_0\n  ./configure --prefix=/opt/ros\n\
-      \  make\n  sudo make install\nfi\n", squeeze: libboost1.42-all-dev, sid: libboost-all-dev}
+      \  make\n  sudo make install\nfi\n", squeeze: libboost1.42-all-dev, wheezy: libboost-all-dev, sid: libboost-all-dev}
   fedora: boost-devel
   freebsd: boost-python-libs
   gentoo: dev-libs/boost
@@ -190,22 +200,25 @@ checkinstall:
     apt:
       packages: [checkinstall]
 cgal:
+  debian: libcgal-dev
   ubuntu:
     apt: 
       packages: [libcgal-dev]
 cmake:
   arch: cmake
+  debian: cmake
   ubuntu: cmake
   fedora: cmake
 coinor-libipopt-dev:
+  debian: coinor-libipopt-dev
   ubuntu: coinor-libipopt-dev
   fedora: cmake
 collada-dev:
   ubuntu: collada-dom-dev
 coreutils:
   arch: coreutils
-  ubuntu: coreutils
   debian: coreutils
+  ubuntu: coreutils
   fedora: coreutils
 cppunit:
   arch: cppunit
@@ -240,6 +253,7 @@ doxygen:
   rhel: doxygen
   ubuntu: doxygen
 eclipse:
+  debian: eclipse eclipse-rcp eclipse-xsd eclipse-pde
   ubuntu:
    karmic: eclipse eclipse-platform eclipse-rcp eclipse-pde
    lucid: eclipse eclipse-platform eclipse-rcp eclipse-pde
@@ -249,6 +263,7 @@ eclipse:
 eigen:
   arch: eigen3
   debian:
+    wheezy: libeigen3-dev
     sid: libeigen3-dev
   gentoo: '>=dev-cpp/eigen-3'
   ubuntu:
@@ -265,8 +280,10 @@ epydoc:
   macports: py26-epydoc
   ubuntu: python-epydoc
 f2c:
+  debian: f2c libf2c2 libf2c2-dev
   ubuntu: f2c libf2c2 libf2c2-dev
 fcgi:
+  debian: libfcgi-dev libapache2-mod-fastcgi spawn-fcgi
   ubuntu: libfcgi-dev libapache2-mod-fastcgi spawn-fcgi
 festival: {arch: festival festival-kallpc16k, debian: festival festvox-kallpc16k,
   ubuntu: festival festvox-kallpc16k}
@@ -278,6 +295,7 @@ ffmpeg:
   gentoo: ffmpeg
   fedora: ffmpeg-devel
 ffmpeg2theora:
+  debian: ffmpeg2theora
   ubuntu: ffmpeg2theora
 flex:
   arch: flex
@@ -304,9 +322,11 @@ freeimage:
   fedora: freeimage-devel
   rhel: freeimage-devel
 ftdi-eeprom:
+  debian: ftdi-eeprom
   ubuntu: ftdi-eeprom
 gcc-avr:
   arch: avr-gcc
+  debian: gcc-avr
   ubuntu: gcc-avr
   gentoo: cross-avr/gcc
   fedora: avr-gcc
@@ -315,13 +335,14 @@ gccxml:
   fedora: gccxml
   debian: gccxml
 gforth:
-  ubuntu: gforth
   debian: gforth
+  ubuntu: gforth
   macports: gforth
   arch: gforth
   gentoo: gforth
   fedora: gforth
 gifsicle:
+  debian: gifsicle
   ubuntu: gifsicle
 git:
   arch: git
@@ -364,11 +385,13 @@ graphviz:
   ubuntu: graphviz
 gstreamer0.10-plugins-good:
   arch: gstreamer0.10-good-plugins
+  debian: gstreamer0.10-plugins-good
   ubuntu:
     gstreamer0.10-plugins-good
   fedora: gstreamer-plugins-good
 gstreamer0.10-plugins-ugly:
   arch: gstreamer0.10-ugly-plugins
+  debian: gstreamer0.10-plugins-ugly
   ubuntu:
     lucid: gstreamer0.10-plugins-ugly-multiverse
     maverick: gstreamer0.10-plugins-ugly-multiverse
@@ -398,21 +421,27 @@ gtk2:
   rhel: gtk2-devel
   ubuntu: libgtk2.0-dev
 gtk-doc-tools:
+  debian: gtk-doc-tools
   ubuntu: gtk-doc-tools
 gv:
+  debian: gv
   ubuntu: gv
 hddtemp:
   arch: hddtemp
+  debian: hddtemp
   ubuntu: hddtemp
   fedora: hddtemp
 hdf5:
+  debian: libhdf5-serial-dev
   ubuntu: libhdf5-serial-dev
 hostapd:
   arch: hostapd
+  debian: hostapd
   ubuntu: hostapd
   fedora: hostapd
 intltool:
   arch: intltool
+  debian: intltool
   ubuntu: intltool
   opensuse: intltool 
   fedora: intltool
@@ -420,6 +449,7 @@ intltool:
   freebsd: intltool
 ipmitool:
   arch: ipmitool
+  debian: ipmitool
   ubuntu: ipmitool
   fedora: ipmitool
 jasper:
@@ -443,15 +473,18 @@ joystick:
   rhel: joystick
   ubuntu: joystick
 jython:
+  debian: jython
   ubuntu: jython
 kgraphviewer:
   ubuntu: kgraphviewer
 libann-dev:
   arch: ann
+  debian: libann-dev
   ubuntu: libann-dev
   fedora: ann-devel
 libapache2-mod-python:
   arch: mod_python
+  debian: libapache2-mod-python
   ubuntu: libapache2-mod-python
   fedora: mod_python
 libargtable2-dev:
@@ -459,15 +492,21 @@ libargtable2-dev:
   debian: libargtable2-dev
   fedora: argtable2-devel
 libavahi-client-dev:
+  debian: libavahi-client-dev
   ubuntu: libavahi-client-dev
 libavahi-core-dev:
+  debian: libavahi-core-dev
   ubuntu: libavahi-core-dev
 libbluetooth-dev:
   arch: bluez
   fedora: bluez-libs-devel
   gentoo: net-wireless/bluez-libs
+  debian: libbluetooth-dev
   ubuntu: libbluetooth-dev
 libdc1394-dev:
+  debian:
+    apt:
+      packages: [libdc1394-22-dev]
   ubuntu:
     apt: 
       packages: [libdc1394-22-dev]
@@ -482,55 +521,72 @@ libdc1394-dev:
       packages: [libdc1394]
 libcoin60-dev:
   arch: coin
+  debian: libcoin60-dev
   ubuntu: libcoin60-dev
   fedora: Coin2-devel
 libdbus-dev:
   arch: dbus-core
+  debian: libdbus-1-dev
   ubuntu: libdbus-1-dev
   fedora: dbus-devel
 libdevil-dev:
   arch: devil
+  debian: libdevil-dev
   ubuntu: libdevil-dev
   fedora: DevIL-devel
 libdrm-dev:
+  debian: libdrm-dev
   ubuntu: libdrm-dev
 libexpat1-dev:
+  debian: libexpat1-dev
   ubuntu: libexpat1-dev
 libfftw3:
+  debian: libfftw3-3 libfftw3-dev
   ubuntu: libfftw3-3 libfftw3-dev
 libgfortran3:
+  debian: libgfortran3
   ubuntu: libgfortran3
 libftdi-dev:
+  debian: libftdi-dev
   ubuntu: libftdi-dev
 libftgl-dev:
   arch: ftgl
+  debian: libftgl-dev
   ubuntu: libftgl-dev
   fedora: ftgl-devel
 libglew-dev:
   arch: glew
+  debian: libglew-dev
   ubuntu: libglew1.5-dev
   fedora: glew-devel
 libglib-dev:
+  debian: libglib2.0-dev
   ubuntu: libglib2.0-dev
 libglui-dev:
   arch: glui
+  debian: libglui-dev
   ubuntu: libglui-dev
 libglw1-mesa:
+  debian: libglw1-mesa
   ubuntu: libglw1-mesa
 libgphoto-dev:
   arch: libgphoto2
+  debian: libgphoto2-2-dev
   ubuntu: libgphoto2-2-dev
   fedora: libgphoto2-devel
 libgps:
+  debian: libgps-dev
   ubuntu: libgps-dev
   fedora: gpsd-devel
 libgstreamer0.10-dev:
   arch: gstreamer0.10
+  debian: libgstreamer0.10-dev
   ubuntu:
     libgstreamer0.10-dev
   fedora: gstreamer-devel
 libgstreamer-plugins-base0.10-dev:
   arch: gstreamer0.10-base-plugins
+  debian: libgstreamer-plugins-base0.10-dev
   ubuntu:
     libgstreamer-plugins-base0.10-dev
   fedora: gstreamer-plugins-base-devel
@@ -587,18 +643,23 @@ liblapack-dev:
   ubuntu: liblapack-dev
 libleptonica-dev:
   arch: leptonica
+  debian: libleptonica-dev
   ubuntu: libleptonica-dev
 libmotif-dev:
+  debian: libmotif-dev
   ubuntu: libmotif-dev
 libmp3lame-dev:
+  debian: libmp3lame-dev
   ubuntu: libmp3lame-dev
 libmysqlclient-dev:
+  debian: libmysqlclient-dev
   ubuntu: libmysqlclient-dev
   fedora: mysql
 libncurses-dev:
   ubuntu: libncurses5-dev
 libnl-dev:
   arch: libnl
+  debian: libnl-dev
   ubuntu: libnl-dev
 libogg:
   arch: libogg
@@ -617,6 +678,7 @@ libogre-dev:
   rhel: ogre-devel
   ubuntu: libogre-dev
 libsimage-dev:
+  debian: libsimage-dev
   ubuntu: libsimage-dev
 omniorb:
   ubuntu:
@@ -639,6 +701,7 @@ libopenscenegraph:
    '10.10': openscenegraph libopenscenegraph-dev libopenscenegraph65 libopenthreads-dev libopenthreads13
    '10.04': openscenegraph libopenscenegraph-dev libopenscenegraph56 libopenthreads-dev libopenthreads12
    '9.10': openscenegraph libopenscenegraph-dev libopenscenegraph56 libopenthreads-dev libopenthreads12
+  debian: openscenegraph libopenscenegraph-dev libopenscenegraph80 libopenthreads-dev libopenthreads14
 libpcap:
   ubuntu:
     apt:
@@ -657,16 +720,20 @@ libpcap:
       packages: [libpcap]
 libpcsclite-dev:
   arch: pcsclite
+  debian: libpcsclite-dev
   ubuntu: libpcsclite-dev
   fedora: pcsc-lite-devel
 libpng12-dev:
   arch: libpng
   fedora: libpng-devel
+  debian: libpng12-dev
   ubuntu: libpng12-dev
 libpopt-dev:
+  debian: libpopt-dev
   ubuntu: libpopt-dev
 libpq-dev:
   arch: postgresql-libs
+  debian: libpq-dev
   ubuntu: libpq-dev
 libqglviewer-qt4:
   ubuntu: libqglviewer-qt4-2
@@ -731,6 +798,9 @@ libraw1394-dev:
   arch:
     pacman:
       packages: [libraw1394]
+  debian:
+    apt:
+      packages: [libraw1394-dev]
   ubuntu:
     apt:
       packages: [libraw1394-dev]
@@ -739,9 +809,11 @@ libraw1394-dev:
       packages: [libraw1394-devel]
 libreadline-dev:
   arch: readline
+  debian: libreadline-dev
   ubuntu: libreadline-dev
   fedora: readline
 libreadline-java:
+  debian: libreadline-java
   ubuntu: libreadline-java
 libsoqt4-dev:
   arch: soqt
@@ -749,6 +821,7 @@ libsoqt4-dev:
   ubuntu: libsoqt4-dev
   debian: libsoqt4-dev
 libsqlite3-dev:
+  debian: libsqlite3-dev
   ubuntu: libsqlite3-dev
 libstdc++5:
   arch: libstdc++5
@@ -758,6 +831,7 @@ libstdc++5:
   freebsd: builtin
   fedora: libstdc++
 libswscale-dev:
+  debian: libswscale-dev
   ubuntu: libswscale-dev
 libtheora:
   arch: libtheora
@@ -768,6 +842,7 @@ libtheora:
   gentoo: media-libs/libtheora
 libtiff4-dev:
   arch: libtiff
+  debian: libtiff4-dev
   ubuntu: libtiff4-dev
   fedora: libtiff
 libtool:
@@ -791,14 +866,17 @@ libudev-dev:
   fedora: libudev-devel
 libusb-1.0-dev:
   arch: libusb
+  debian: libusb-1.0-0-dev
   ubuntu: libusb-1.0-0-dev
   fedora: libusb1-devel
 libusb-dev:
   arch: libusb-compat
+  debian: libusb-dev
   ubuntu: libusb-dev
   fedora: libusb-devel
 libv4l-dev:
   arch: v4l-utils
+  debian: libv4l-dev
   ubuntu: libv4l-dev
   fedora: libv4l-devel
 libvtk:
@@ -808,17 +886,20 @@ libvtk:
   fedora: vtk-devel
   macports: vtk-devel
 libvtk-qt:
+  debian: libvtk5-qt4-dev
   ubuntu: libvtk5-qt4-dev 
 libx11-dev:
   arch: libx11
   fedora: libX11-devel
   gentoo: x11-libs/libX11
+  debian: libx11-dev
   ubuntu: libx11-dev
 libx11:
   arch: libx11
   debian: libx11-dev
   fedora: libX11-devel
   macports: xorg-libX11
+  debian: libx11-dev
   ubuntu: libx11-dev
 libxaw:
   arch: libxaw
@@ -851,14 +932,17 @@ libxml2:
   opensuse: libxml2-devel
   ubuntu: libxml2-dev
 libxml++-2.6:
+  debian: libxml++2.6-2 libxml++2.6-dev
   ubuntu: libxml++2.6-2 libxml++2.6-dev
 libxslt:
   fedora: libxslt-devel
   ubuntu: libxslt1-dev
   debian: libxslt1-dev
 libxt-dev:
+  debian: libxt-dev
   ubuntu: libxt-dev
 libxtst-dev:
+  debian: libxtst-dev
   ubuntu: libxtst-dev
 libxxf86vm:
   arch: libxxf86vm
@@ -879,6 +963,7 @@ libxrandr:
   fedora: libXrandr-devel
   rhel: libXrandr-devel
 linux-headers-generic:
+  debian: linux-headers-generic
   ubuntu: linux-headers-generic
 log4cxx:
   arch: log4cxx
@@ -904,6 +989,7 @@ m4:
   opensuse: m4
   ubuntu: m4
 maven:
+  debian: maven
   ubuntu: maven
 mercurial:
   arch: mercurial
@@ -928,6 +1014,7 @@ nvidia-cg:
   gentoo: nvidia-cg-toolkit
   debian: nvidia-cg-toolkit
 omniorb4-idl:
+  debian: omniorb-idl
   ubuntu: omniorb4-idl
 opencv2:
   debian: libcv-dev
@@ -942,6 +1029,7 @@ opengl:
   rhel: mesa-libGL-devel mesa-libGLU-devel
   ubuntu: libgl1-mesa-dev libglu1-mesa-dev
 openjdk-6-jdk:
+  debian: openjdk-6-jdk
   ubuntu: openjdk-6-jdk
   arch: openjdk6
   freebsd: openjdk6 
@@ -958,6 +1046,7 @@ netpbm:
   gentoo: netpbm
 pcre-dev:
   arch: pcre
+  debian: libpcre++-dev
   ubuntu: libpcre++-dev
   fedora: pcre-devel
   rhel: pcre-devel
@@ -1008,15 +1097,18 @@ qt4-qmake:
   rhel: qt-devel
   debian: qt4-qmake
 qhull-bin:
-  ubuntu: qhull-bin        
+  debian: qhull-bin
+  ubuntu: qhull-bin
 readline-dev:
   arch: readline
   ubuntu: libreadline-dev
   fedora: readline-devel
   debian: libreadline-dev
 recordmydesktop:
+  debian: recordmydesktop
   ubuntu: recordmydesktop
 redis-server:
+  debian: redis-server
   ubuntu: redis-server
 ruby:
   ubuntu:
@@ -1051,6 +1143,7 @@ sdl-image:
   gentoo: sdl-image
   freebsd: sdl_image
 sqlite3:
+  debian: sqlite3
   ubuntu: sqlite3
 subversion:
   arch: subversion
@@ -1063,6 +1156,7 @@ subversion:
   ubuntu: subversion
 suitesparse:
   arch: suitesparse
+  debian: libsuitesparse-dev
   ubuntu: libsuitesparse-dev
   fedora: suitesparse-devel
 swi-prolog:
@@ -1118,6 +1212,7 @@ swi-prolog-xpce:
     quantal: swi-prolog
 sysstat:
   arch: sysstat
+  debian: sysstat
   ubuntu: sysstat
   fedora: sysstat
 tinyxml:
@@ -1133,13 +1228,16 @@ tbb:
   fedora: tbb-devel
 tcsh:
   arch: tcsh
+  debian: tcsh
   ubuntu: tcsh
   fedora: tcsh
 texlive-latex-base:
   arch: texlive-base
+  debian: texlive-latex-base
   ubuntu: texlive-latex-base
   fedora: texlive-latex
 tix:
+  debian: tix
   ubuntu: tix
 ttf-mscorefonts-installer:
   ubuntu: |
@@ -1151,21 +1249,28 @@ ttf-mscorefonts-installer:
   debian: ttf-mscorefonts-installer
   macports:
 ttf-sazanami-gothic:
+  debian: ttf-sazanami-gothic
   ubuntu: ttf-sazanami-gothic
 ttf-sazanami-mincho:
+  debian: ttf-sazanami-mincho
   ubuntu: ttf-sazanami-mincho
 ttf-kochi-gothic:
+  debian: ttf-kochi-gothic
   ubuntu: ttf-kochi-gothic
 ttf-kochi-mincho:
+  debian: ttf-kochi-mincho
   ubuntu: ttf-kochi-mincho
 udhcpc:
   arch: udhcp
+  debian: udhcpc
   ubuntu: udhcpc
 unison:
+  debian: unison
   ubuntu:
     apt:
       packages: [unison]
 unison-gui:
+  debian: unison-gtk
   ubuntu:
     apt:
       packages: [unison-gtk]      
@@ -1178,6 +1283,7 @@ uuid:
   macports: ossp-uuid
   freebsd: e2fsprogs-libuuid
 unrar:
+  debian: unrar
   ubuntu: unrar
 unzip:
   arch: unzip
@@ -1190,10 +1296,13 @@ unzip:
   rhel: unzip
   ubuntu: unzip
 vlc:
+  debian: vlc
   ubuntu: vlc
 wkhtmltopdf:
+  debian: wkhtmltopdf
   ubuntu: wkhtmltopdf
 wx-common:
+  debian: wx-common
   ubuntu: wx-common
 wxpython:
   arch: wxpython
@@ -1217,12 +1326,16 @@ wxwidgets:
   rhel: wxGTK-devel
   ubuntu: libwxgtk2.8-dev
 x11proto-dri2-dev:
+  debian: x11proto-dri2-dev
   ubuntu: x11proto-dri2-dev
 x11proto-gl-dev:
+  debian: x11proto-gl-dev
   ubuntu: x11proto-gl-dev
 x11proto-print-dev:
+  debian: x11proto-print-dev
   ubuntu: x11proto-print-dev
 xdotool:
+  debian: xdotool
   ubuntu: xdotool
 xfont-server:
   ubuntu: xfs
@@ -1237,9 +1350,11 @@ xfonts-75dpi:
   debian: xfonts-75dpi
   macports:
 xz-utils:
+  debian: xz-utils
   ubuntu: xz-utils
 xulrunner-dev:
   arch: xulrunner
+  debian: libv8-dev
   ubuntu: libv8-dev
   fedora: libv8-devel
 xulrunner-1.9.2:
@@ -1279,6 +1394,7 @@ yaml-cpp:
   fedora: yaml-cpp-devel 
   rhel: yaml-cpp-devel 
 yasm:
+  debian: yasm
   ubuntu: yasm
 zlib:
   arch: zlib
