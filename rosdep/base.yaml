@@ -38,6 +38,7 @@ assimp:
   arch: assimp
   debian:
     sid: libassimp-dev
+    wheezy: libassimp-dev
   fedora: assimp-devel
   rhel: assimp-devel
   ubuntu:
@@ -56,6 +57,7 @@ assimp:
     quantal: 
       apt:
         packages: [libassimp-dev]
+  gentoo: assimp
 assimp-dev:
   debian:
     sid: libassimp-dev
@@ -635,6 +637,7 @@ libjpeg:
   fedora: libjpeg-devel
   macports: jpeg
   arch: libjpeg-turbo
+  gentoo: libjpeg-turbo
 libjson-java:
   debian: libjson-java
   ubuntu: libjson-java
@@ -784,6 +787,7 @@ libqt4-opengl-dev:
   debian: libqt4-opengl-dev
   fedora: qt-devel
   rhel: qt-devel
+  gentoo: qt-opengl
 libqtgui4:
   ubuntu: libqtgui4
   debian: libqtgui4
@@ -860,6 +864,7 @@ libtool:
       packages: [libtool, libltdl-dev]
   debian:
     squeeze: libtool libltdl-dev
+    wheezy: libtool libltdl-dev
     sid: libtool libltdl-dev
     lenny: libtool libltdl3-dev
   opensuse: libtool libltdl3
@@ -910,6 +915,7 @@ libx11:
   macports: xorg-libX11
   debian: libx11-dev
   ubuntu: libx11-dev
+  gentoo: libX11
 libxaw:
   arch: libxaw
   debian: libxaw7-dev
@@ -984,7 +990,7 @@ log4cxx:
   debian: {lenny: "if [ ! -f /opt/ros/lib/liblog4cxx.so.10 ] ; then\n  mkdir -p ~/ros/ros-deps\n\
       \  cd ~/ros/ros-deps\n  wget --tries=10 http://pr.willowgarage.com/downloads/apache-log4cxx-0.10.0-wg_patched.tar.gz\n\
       \  tar xzf apache-log4cxx-0.10.0-wg_patched.tar.gz\n  cd apache-log4cxx-0.10.0\n\
-      \  ./configure --prefix=/opt/ros\n  make\n  sudo make install\nfi\n", squeeze: liblog4cxx10-dev, sid: liblog4cxx10-dev}
+      \  ./configure --prefix=/opt/ros\n  make\n  sudo make install\nfi\n", squeeze: liblog4cxx10-dev, wheezy: liblog4cxx10-dev, sid: liblog4cxx10-dev}
   fedora: log4cxx-devel
   freebsd: log4cxx
   gentoo: dev-libs/log4cxx
@@ -1069,6 +1075,7 @@ pcre:
   fedora: pcre-devel
   rhel: pcre-devel
   debian: libpcre3-dev
+  gentoo: libpcre
 pkg-config:
   arch: pkg-config
   cygwin: pkg-config
@@ -1089,6 +1096,8 @@ protobuf:
   ubuntu: libprotobuf7
   fedora: protobuf
   debian: libprotobuf7
+protobuf-dev:
+  ubuntu: libprotobuf-dev protobuf-compiler libprotoc-dev
 ps-engine:
   arch: primesense-sensor
   ubuntu: ps-engine
@@ -1107,6 +1116,7 @@ qt4-qmake:
   fedora: qt-devel
   rhel: qt-devel
   debian: qt4-qmake
+  gentoo: qt-core
 qhull-bin:
   debian: qhull-bin
   ubuntu: qhull-bin
@@ -1145,6 +1155,12 @@ scons:
   macports: scons
   opensuse: scons
   ubuntu: scons
+sdl:
+  debian: libsdl1.2-dev
+  ubuntu: libsdl1.2-dev
+sdl-gfx:
+  debian: libsdl-gfx1.2-dev
+  ubuntu: libsdl-gfx1.2-dev
 sdl-image:
   ubuntu: libsdl-image1.2-dev
   debian: libsdl-image1.2-dev
@@ -1153,6 +1169,9 @@ sdl-image:
   macports: libsdl_image
   gentoo: sdl-image
   freebsd: sdl_image
+sdl-ttf:
+  debian: libsdl-ttf2.0-dev
+  ubuntu: libsdl-ttf2.0-dev
 sqlite3:
   debian: sqlite3
   ubuntu: sqlite3
@@ -1242,11 +1261,13 @@ tinyxml:
   fedora: tinyxml-devel
   rhel: tinyxml-devel
   ubuntu: libtinyxml-dev
+  gentoo: tinyxml
 tbb:
   arch: intel-tbb
   ubuntu: libtbb-dev
   debian: libtbb-dev
   fedora: tbb-devel
+  gentoo: tbb
 tcsh:
   arch: tcsh
   debian: tcsh
@@ -1303,6 +1324,7 @@ uuid:
   rhel: libuuid-devel
   macports: ossp-uuid
   freebsd: e2fsprogs-libuuid
+  gentoo: util-linux
 libunittest++:
   ubuntu:
     apt:
@@ -1406,6 +1428,7 @@ yaml:
   fedora: libyaml-devel
   ubuntu: libyaml-dev
   debian: libyaml-dev
+  gentoo: libyaml
 yaml-cpp:
   arch: yaml-cpp
   debian:
@@ -1422,6 +1445,7 @@ yaml-cpp:
     lucid: yaml-cpp0.2.6-dev
   fedora: yaml-cpp-devel 
   rhel: yaml-cpp-devel 
+  gentoo: yaml-cpp
 yasm:
   debian: yasm
   ubuntu: yasm
