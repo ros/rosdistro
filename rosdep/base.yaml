@@ -1,3 +1,5 @@
+alsa-oss:
+  ubuntu: alsa-oss
 apache2-mpm-prefork:
   ubuntu: apache2-mpm-prefork
 apr:
@@ -222,6 +224,8 @@ coreutils:
   debian: coreutils
   ubuntu: coreutils
   fedora: coreutils
+couchdb:
+  ubuntu: couchdb
 cppunit:
   arch: cppunit
   debian: libcppunit-dev
@@ -355,6 +359,8 @@ gforth:
   arch: gforth
   gentoo: gforth
   fedora: gforth
+gfortran:
+  ubuntu: gfortran
 gifsicle:
   debian: gifsicle
   ubuntu: gifsicle
@@ -564,6 +570,9 @@ libexpat1-dev:
 libfftw3:
   debian: libfftw3-3 libfftw3-dev
   ubuntu: libfftw3-3 libfftw3-dev
+libfreenect-dev:
+  debian: libfreenect-dev
+  ubuntu: libfreenect-dev
 libgfortran3:
   debian: libgfortran3
   ubuntu: libgfortran3
@@ -624,6 +633,9 @@ libgts:
 libmagick:
   ubuntu: libmagick++-dev
   debian: libmagick++-dev
+libmarble-dev:
+  ubuntu: libmarble-dev
+  debian: libmarble-dev
 libhal-dev:
   arch:
     pacman:
@@ -685,6 +697,9 @@ libnl-dev:
   arch: libnl
   debian: libnl-dev
   ubuntu: libnl-dev
+libois-dev:
+  debian: libois-dev
+  ubuntu: libois-dev
 libogg:
   arch: libogg
   ubuntu: libogg-dev
@@ -716,6 +731,18 @@ omniorb:
   fedora: |
     #!/bin/bash
     echo "omniorb is not available in the Fedora package manager - please install it from source";
+libopenni-dev:
+  arch: openni
+  ubuntu: libopenni-dev
+  fedora: openni-devel
+libopenni-nite-dev:
+  arch: nite
+  ubuntu: libopenni-nite-dev
+  fedora: openni-nite-devel
+libopenni-sensor-primesense-dev:
+  arch: primesense-sensor
+  ubuntu: libopenni-sensor-primesense-dev
+  fedora: openni-primesense
 libopenscenegraph:
   ubuntu:
     quantal: openscenegraph libopenscenegraph-dev libopenscenegraph80 libopenthreads-dev libopenthreads14
@@ -777,7 +804,7 @@ libqhull:
   fedora: qhull-devel
   macports: qhull
 libqt4:
-  ubuntu: libqt4-core
+  ubuntu: [libqt4-dbus, libqt4-network, libqt4-script, libqt4-test, libqt4-xml, libqtcore4]
   arch: qt
   debian: libqt4-core
   fedora: qt
@@ -861,6 +888,8 @@ libspnav-dev:
 libsqlite3-dev:
   debian: libsqlite3-dev
   ubuntu: libsqlite3-dev
+libssl-dev:
+  ubuntu: libssl-dev
 libstdc++5:
   arch: libstdc++5
   ubuntu: libstdc++5
@@ -973,6 +1002,8 @@ libxaw:
   opensuse: xorg-x11-devel
   rhel: libXaw-devel
   ubuntu: libxaw7-dev
+libxenomai-dev:
+  ubuntu: libxenomai-dev
 libxext:
   arch: libxext
   debian: libxext-dev
@@ -1104,6 +1135,11 @@ openjdk-6-jdk:
   ubuntu: openjdk-6-jdk
   arch: openjdk6
   freebsd: openjdk6 
+openmpi:
+  debian: []
+  ubuntu: []
+  arch: []
+  freebsd: []
 openni-dev:
   arch: openni
   ubuntu: openni-dev
@@ -1152,6 +1188,8 @@ ps-engine:
   arch: primesense-sensor
   ubuntu: ps-engine
   fedora: openni-primesense
+pyqt4-dev-tools:
+  ubuntu: pyqt4-dev-tools
 python-pyside:
   ubuntu: python-pyside
   debian: python-pyside
@@ -1325,11 +1363,23 @@ tcsh:
   debian: tcsh
   ubuntu: tcsh
   fedora: tcsh
+texlive-fonts-extra:
+  debian: texlive-fonts-extra
+  ubuntu: texlive-fonts-extra
+texlive-fonts-recommended:
+  debian: texlive-fonts-recommended
+  ubuntu: texlive-fonts-recommended
 texlive-latex-base:
   arch: texlive-base
   debian: texlive-latex-base
   ubuntu: texlive-latex-base
   fedora: texlive-latex
+texlive-latex-extra:
+  debian: texlive-latex-extra
+  ubuntu: texlive-latex-extra
+texlive-latex-recommended:
+  debian: texlive-latex-recommended
+  ubuntu: texlive-latex-recommended
 tix:
   debian: tix
   ubuntu: tix
@@ -1484,10 +1534,14 @@ yaml:
 yaml-cpp:
   arch: yaml-cpp
   debian:
-    apt:
-      wheezy: libyaml-cpp-dev
-      sid: libyaml-cpp-dev
-    source: {md5sum: f7fb81fd4a2fbd5022daa7686e816359, uri: 'https://kforge.ros.org/rosrelease/viewvc/sourcedeps/yaml-cpp/yaml-cpp-0.2.5.rdmanifest'}
+    squeeze:
+      source: {md5sum: f7fb81fd4a2fbd5022daa7686e816359, uri: 'https://kforge.ros.org/rosrelease/viewvc/sourcedeps/yaml-cpp/yaml-cpp-0.2.5.rdmanifest'}
+    wheezy:
+      apt:
+        packages: [libyaml-cpp-dev]
+    sid:
+      apt:
+        packages: [libyaml-cpp-dev]
   ubuntu:
     quantal: libyaml-cpp-dev
     precise: yaml-cpp

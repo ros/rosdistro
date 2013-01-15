@@ -23,7 +23,16 @@ python:
   cygwin: python
   freebsd: python
 python-argparse:
-  ubuntu: python-argparse
+  debian: python-argparse
+  ubuntu: 
+    lucid: python-argparse
+    maverick: python-argparse
+    natty: python-argparse
+    oneiric: python-argparse
+    precise:
+      packages: []
+    quantal:
+      packages: []
   fedora: python-argparse
 python-avahi:
   ubuntu: python-avahi
@@ -36,13 +45,16 @@ python-bluez:
   rhel: python-bluez
   ubuntu: python-bluez
 python-catkin-pkg:
-  ubuntu: python-catkin-pkg
+  debian:
+    pip:
+      packages: [ catkin-pkg ]
   fedora:
     pip:
-      packages: [ catkin_pkg ]
+      packages: [ catkin-pkg ]
   osx:
     pip:
       packages: [ catkin-pkg ]
+  ubuntu: python-catkin-pkg
 python-clearsilver:
   ubuntu: python-clearsilver
   debian: python-clearsilver
@@ -59,6 +71,7 @@ python-cwiid:
   rhel: cwiid
   ubuntu: python-cwiid
 python-empy:
+  debian: python-empy
   ubuntu: python-empy
   fedora: python-empy
 python-gst:
@@ -73,6 +86,8 @@ python-gtk2:
   rhel: pygtk2
   gentoo: "=dev-python/pygtk-2*"
   freebsd: py-gtk2
+python-httplib2:
+  ubuntu: python-httplib2
 python-imaging:
   ubuntu: python-imaging
   debian: python-imaging
@@ -105,6 +120,7 @@ python-mock:
   ubuntu: python-mock
 python-nose:
   arch: python2-nose
+  debian: python-nose
   ubuntu: python-nose
   fedora: python-nose
 python-numpy:
@@ -142,6 +158,8 @@ python-pydot:
   osx:
     pip:
       packages: [ pydot ]
+python-pygame:
+  ubuntu: python-pygame
 python-pygraphviz:
   ubuntu: python-pygraphviz
 python-pyproj:
@@ -179,11 +197,18 @@ python-rdflib:
 python-redis:
   ubuntu: python-redis
 python-rosdep:
-  ubuntu: python-rosdep
+  debian:
+    pip:
+      packages: [ rosdep ]
   osx:
     pip:
       packages: [ rosdep ]
+  ubuntu: python-rosdep
+
 python-rospkg:
+  debian:
+    pip:
+      packages: [ rospkg ]
   ubuntu: python-rospkg
   fedora: python-rospkg
 python-scapy:
