@@ -23,7 +23,16 @@ python:
   cygwin: python
   freebsd: python
 python-argparse:
-  ubuntu: python-argparse
+  debian: python-argparse
+  ubuntu: 
+    lucid: python-argparse
+    maverick: python-argparse
+    natty: python-argparse
+    oneiric: python-argparse
+    precise:
+      packages: []
+    quantal:
+      packages: []
   fedora: python-argparse
 python-avahi:
   ubuntu: python-avahi
@@ -36,16 +45,24 @@ python-bluez:
   rhel: python-bluez
   ubuntu: python-bluez
 python-catkin-pkg:
-  ubuntu: python-catkin-pkg
+  debian:
+    pip:
+      packages: [ catkin-pkg ]
   fedora:
     pip:
-      packages: [ catkin_pkg ]
+      packages: [ catkin-pkg ]
+  osx:
+    pip:
+      packages: [ catkin-pkg ]
+  ubuntu: python-catkin-pkg
 python-clearsilver:
   ubuntu: python-clearsilver
   debian: python-clearsilver
   centos: python-clearsilver
 python-couchdb:
   ubuntu: python-couchdb
+python-coverage:
+  ubuntu: python-coverage
 python-cwiid:
   arch: cwiid
   debian: python-cwiid
@@ -54,6 +71,7 @@ python-cwiid:
   rhel: cwiid
   ubuntu: python-cwiid
 python-empy:
+  debian: python-empy
   ubuntu: python-empy
   fedora: python-empy
 python-gst:
@@ -68,6 +86,8 @@ python-gtk2:
   rhel: pygtk2
   gentoo: "=dev-python/pygtk-2*"
   freebsd: py-gtk2
+python-httplib2:
+  ubuntu: python-httplib2
 python-imaging:
   ubuntu: python-imaging
   debian: python-imaging
@@ -78,6 +98,10 @@ python-imaging:
   macports: py26-pil
   gentoo: dev-python/imaging
   freebsd: py27-imaging
+python-beautifulsoup:
+  ubuntu: python-beautifulsoup
+python-kitchen:
+  ubuntu: python-kitchen
 python-libpcap:
   ubuntu: python-libpcap
 python-matplotlib:
@@ -92,8 +116,11 @@ python-matplotlib:
   freebsd: py27-matplotlib
 python-mechanize:
   ubuntu: python-mechanize
+python-mock:
+  ubuntu: python-mock
 python-nose:
   arch: python2-nose
+  debian: python-nose
   ubuntu: python-nose
   fedora: python-nose
 python-numpy:
@@ -110,12 +137,12 @@ python-opengl:
   ubuntu: python-opengl
 python-omniorb:
   ubuntu:
-   kermic: python-omniorb2
-   lucid: python-omniorb2
-   maverick: python-omniorb
-   natty: python-omniorb
-   oneiric: python-omniorb
-   precise: python-omniorb
+   lucid: python-omniorb2 omniidl4-python
+   maverick: python-omniorb omniidl-python
+   natty: python-omniorb omniidl-python
+   oneiric: python-omniorb omniidl-python
+   precise: python-omniorb omniidl-python
+   quantal: python-omniorb omniidl-python
 python-paramiko:
   ubuntu: python-paramiko
   debian: python-paramiko
@@ -126,8 +153,15 @@ python-paramiko:
   gentoo: dev-python/paramiko
   freebsd: py27-paramiko
   arch: python-paramiko
+python-pexpect:
+  ubuntu: python-pexpect
 python-pydot:
   ubuntu: python-pydot
+  osx:
+    pip:
+      packages: [ pydot ]
+python-pygame:
+  ubuntu: python-pygame
 python-pygraphviz:
   ubuntu: python-pygraphviz
 python-pyproj:
@@ -145,6 +179,11 @@ python-qt-bindings:
     precise: python-pyside libpyside-dev libshiboken-dev shiboken libgenrunner-dev python-qt4 python-qt4-dev python-sip-dev
     quantal: python-pyside libpyside-dev libshiboken-dev shiboken python-qt4 python-qt4-dev python-sip-dev
   rhel: PyQt4 PyQt4-devel sip-devel
+  debian:
+    squeeze: python-qt4 python-qt4-dev pyhton-sip-dev
+    wheezy: python-pyside libpyside-dev libshiboken-dev shiboken python-qt4 python-qt4-dev python-sip-dev
+    sid: python-pyside libpyside-dev libshiboken-dev shiboken python-qt4 python-qt4-dev python-sip-dev
+  gentoo: PyQt4
 python-qt-bindings-gl:
   ubuntu: python-qt4-gl
 python-qt-bindings-qwt5:
@@ -155,11 +194,25 @@ python-qt4-gl:
       packages: [python-qt4-gl]
 python-qwt5-qt4:
   ubuntu: python-qwt5-qt4
-python-rospkg:
-  ubuntu: python-rospkg
-  fedora: python-rospkg
+python-rdflib:
+  ubuntu: python-rdflib
 python-redis:
   ubuntu: python-redis
+python-rosdep:
+  debian:
+    pip:
+      packages: [ rosdep ]
+  osx:
+    pip:
+      packages: [ rosdep ]
+  ubuntu: python-rosdep
+
+python-rospkg:
+  debian:
+    pip:
+      packages: [ rospkg ]
+  ubuntu: python-rospkg
+  fedora: python-rospkg
 python-scapy:
   ubuntu: python-scapy
 python-scipy:
@@ -179,7 +232,7 @@ python-setuptools:
   fedora: python-setuptools
 python-sip:
   ubuntu: python-sip-dev
-  debian: python-sip4-dev sip4
+  debian: python-sip-dev
   fedora: sip-devel
   rhel: sip-devel
   macports: py26-sip
