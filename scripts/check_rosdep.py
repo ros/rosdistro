@@ -5,8 +5,7 @@ import argparse
 import sys
 
 indent_atom = '  '
-#!/usr/bin/env python
-#
+
 # pretty - A miniature library that provides a Python print and stdout
 # wrapper that makes colored terminal text easier to use (eg. without
 # having to mess around with ANSI escape sequences). This code is public
@@ -14,8 +13,8 @@ indent_atom = '  '
 #
 # Copyright (C) 2008 Brian Nez <thedude at bri1 dot com>
 #
-
-import sys
+# With modifications
+#           (C) 2013 Paul M <pmathieu@willowgarage.com>
 
 codeCodes = {
     'black':    '0;30',     'bright gray':  '0;37',
@@ -103,7 +102,7 @@ def check_brackets(buf):
     def fun(i, l, o):
         m = re.match(r'^(?:' + indent_atom + r')*([^:]*):\s*(\w.*)$', l)
         if m is not None and m.groups()[0] not in excepts:
-            print_err("lists of packages not in square brackets line %u" % (i+1))
+            print_err("list not in square brackets line %u" % (i+1))
             return False
         return True
     return generic_parser(buf, fun)
