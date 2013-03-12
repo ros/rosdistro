@@ -19,4 +19,4 @@ If this fails you can run scripts/clean_rosdep.py to help cleanup"""
         print "Checking rosdep file %s" % fname
         assert subprocess.call(['scripts/check_rosdep.py', fname]) == 0
 
-    assert False
+
