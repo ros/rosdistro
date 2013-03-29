@@ -62,7 +62,7 @@ def generic_parser(buf, cb):
         if re.search(r'^\s*#', l) is not None:
             continue
         try:
-            s = re.search(r'(?!' + indent_atom + ')\w', l).start()
+            s = re.search(r'(?!' + indent_atom + ')(\w|\?)', l).start()
         except:
             print_err("line %u: %s" % (i, l))
             raise
@@ -74,7 +74,7 @@ def generic_parser(buf, cb):
         opts = {'lvl': lvl, 's': s}
         if not cb(i, l, opts):
             clean = False
-        if re.search(r'\|$', l) is not None:
+        if re.search(r'\|$|\?$|^\s*\?', l) is not None:
             stringblock = True
             strlvl = lvl
     return clean
@@ -115,6 +115,8 @@ def check_order(buf):
             st.pop()
         if len(st) < lvl + 1:
             st.append('')
+        if re.search(r'^\s?', l) is not None:
+            return True
         m = re.match(r'^(?:' + indent_atom + r')*([^:]*):.*$', l)
         prev = st[lvl]
         item = m.groups()[0]
