@@ -115,11 +115,15 @@ def check_order(buf):
             st.pop()
         if len(st) < lvl + 1:
             st.append('')
-        if re.search(r'^\s?', l) is not None:
+        if re.search(r'^\s*\?', l) is not None:
             return True
         m = re.match(r'^(?:' + indent_atom + r')*([^:]*):.*$', l)
         prev = st[lvl]
-        item = m.groups()[0]
+        try:
+            item = m.groups()[0]
+        except:
+            print('woops line %d' % i)
+            raise
         st[lvl] = item
         if item < prev:
             print_err("list out of order line %u" % (i+1))
@@ -129,12 +133,8 @@ def check_order(buf):
     return generic_parser(buf, fun)
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Checks whether yaml syntax corresponds to ROS rules')
-    parser.add_argument('infile', help='input rosdep YAML file')
-    args = parser.parse_args()
-
-    with open(args.infile) as f:
+def main(fname):
+    with open(fname) as f:
         buf = f.read()
 
     def my_assert(val):
@@ -160,6 +160,16 @@ if __name__ == '__main__':
 
     if not my_assert.clean:
         printc("there were errors, please correct the file", 'bright red')
+        return False
+    return True
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Checks whether yaml syntax corresponds to ROS rules')
+    parser.add_argument('infile', help='input rosdep YAML file')
+    args = parser.parse_args()
+
+    if not main(args.infile):
         sys.exit(1)
 
 
