@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
+from scripts.check_rosdep import main as check_rosdep
 import os
-import subprocess
 
 
 def test():
@@ -17,6 +17,6 @@ If this fails you can run scripts/clean_rosdep.py to help cleanup"""
             print "Skipping rosdep check of file %s"%fname
             continue
         print "Checking rosdep file %s" % fname
-        assert subprocess.call(['scripts/check_rosdep.py', fname]) == 0
+        assert check_rosdep(fname)
 
 
