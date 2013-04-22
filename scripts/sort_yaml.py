@@ -1,11 +1,17 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
+
 import argparse
+import sys
 import yaml
 
 
 def sort_yaml(yaml_file):
     data = yaml.load(open(yaml_file, 'r'))
+    if 'version' in data:
+        print('This script does not support the new rosdistro yaml files', file=sys.stderr)
+        sys.exit(1)
     sort_yaml_data(data)
     yaml.dump(data, file(yaml_file, 'w'), default_flow_style=False)
 
