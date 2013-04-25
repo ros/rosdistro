@@ -625,15 +625,22 @@ repositories:
     type: git
     url: https://github.com/ros-drivers/korg_nanokontrol.git
   kurt_apps:
+    depends:
+    - kurt_driver
+    - navigation
+    - laser_drivers
+    - simulator_gazebo
     type: git
     url: https://github.com/uos/kurt_apps.git
     version: groovy
-    depends: [kurt_driver, navigation, laser_drivers, simulator_gazebo]
   kurt_driver:
+    depends:
+    - laser_drivers
+    - simulator_gazebo
+    - uos_tools
     type: git
     url: https://github.com/uos/kurt_driver.git
     version: groovy
-    depends: [laser_drivers, simulator_gazebo, uos_tools]
   langs:
     type: git
     url: https://github.com/ros/langs.git
@@ -1408,10 +1415,11 @@ repositories:
     url: https://github.com/uos/uos_slam.git
     version: groovy
   uos_tools:
+    depends:
+    - simulator_gazebo
     type: git
     url: https://github.com/uos/uos_tools.git
     version: groovy
-    depends: [simulator_gazebo]
   velodyne:
     type: svn
     url: https://utexas-art-ros-pkg.googlecode.com/svn/trunk/stacks/velodyne
