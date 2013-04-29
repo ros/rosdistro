@@ -1,4 +1,20 @@
-This repo maintains the lists of repositories defining ROS distributions.
+This repo maintains the lists of repositories defining ROS distributions.  
+
+It is the implementation of [REP 137](rosdistro_reformat)
+
+How to submit pull requests
+---------------------------
+
+When submitting pull requests it is expected that they pass the unit tests for formatting. 
+The unit tests enforce alphabetization of elements and a consistant formatting to keep merging as clean as possible. 
+
+To run the tests run `nosetests` in the root of the repository.  They require the rosdistro library, 
+available on Ubuntu with the ROS repositories as python-rosdistro or via pip as rosdistro.
+
+There is a tool rosdistro_reformat which will fix most formatting errors such as alphabetization and correct formatting.
+
+A Quick Overview of How to Use this Repository
+----------------------------------------------
 
 To add your project to our build farm, fork this repository, modify the .yaml files, and give us a pull request.
 For Fuerte and older the ROS packages are maintained in the subfolder ``releases`` and ``doc``.
@@ -20,3 +36,4 @@ Files and directories:
  - releases: list of released resources (e.g. GBP distro files) and targets configuration (Fuerte and older)
  - rosdep: rosdep YAML files and default configuration
  - scripts: support scripts
+
