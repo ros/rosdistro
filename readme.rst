@@ -8,10 +8,10 @@ How to submit pull requests
 When submitting pull requests it is expected that they pass the unit tests for formatting. 
 The unit tests enforce alphabetization of elements and a consistant formatting to keep merging as clean as possible. 
 
-To run the tests run `nosetests` in the root of the repository.  They require the rosdistro library, 
+To run the tests run ``nosetests`` in the root of the repository.  They require the rosdistro library, 
 available on Ubuntu with the ROS repositories as python-rosdistro or via pip as rosdistro.
 
-There is a tool rosdistro_reformat which will fix most formatting errors such as alphabetization and correct formatting.
+There is a tool ``rosdistro_reformat`` which will fix most formatting errors such as alphabetization and correct formatting.
 
 A Quick Overview of How to Use this Repository
 ----------------------------------------------
