@@ -1,6 +1,6 @@
 This repo maintains the lists of repositories defining ROS distributions.  
 
-It is the implementation of [REP 137](rosdistro_reformat)
+It is the implementation of [REP 137](http://ros.org/reps/rep-0137.html)
 
 How to submit pull requests
 ---------------------------
