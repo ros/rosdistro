@@ -148,7 +148,7 @@ def main(fname):
         print_err("could not build the dict: %s" % (str(e)))
         my_assert(False)
 
-    if 'release-name' not in ydict:
+    if 'release-name' not in ydict and isinstance(ydict, dict) and 'fuerte' not in ydict.keys():
         print_err("The file does not contain a 'release-name'. (Only files for Fuerte and older are supported by this script)")
     else:
         print_test("checking for trailing spaces...")
