@@ -589,12 +589,12 @@ repositories:
     url: https://tu-darmstadt-ros-pkg.googlecode.com/svn/trunk/hlugv_common
     version: HEAD
   humanoid_msgs:
+    type: git
+    url: https://github.com/ahornung/humanoid_msgs.git
+    version: master
+  humanoid_navigation:
     type: svn
-    url: https://alufr-ros-pkg.googlecode.com/svn/trunk/humanoid_stacks/humanoid_msgs
-    version: HEAD
-  humanoid_stacks-trunk:
-    type: svn
-    url: http://alufr-ros-pkg.googlecode.com/svn/trunk/humanoid_stacks
+    url: http://alufr-ros-pkg.googlecode.com/svn/trunk/humanoid_stacks/humanoid_navigation
     version: HEAD
   ias_common:
     type: git
@@ -862,6 +862,19 @@ repositories:
     type: git
     url: https://github.com/fkie/multimaster_fkie.git
     version: groovy-devel
+  nao_common:
+    depends:
+    - nao_robot
+    - humanoid_msgs
+    type: git
+    url: https://github.com/ahornung/nao_common.git
+    version: master
+  nao_robot:
+    depends:
+    - humanoid_msgs
+    type: git
+    url: https://github.com/ahornung/nao_robot.git
+    version: master
   nasa_r2_common:
     type: git
     url: https://bitbucket.org/nasa_ros_pkg/nasa_r2_common
