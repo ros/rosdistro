@@ -228,17 +228,6 @@ boost:
   arch: [boost]
   cygwin: [libboost-devel, libboost1.40]
   debian:
-    lenny: |
-      if [ ! -f /opt/ros/lib/libboost_date_time-gcc43-mt*-1_37.a ] ; then
-        mkdir -p ~/ros/ros-deps
-        cd ~/ros/ros-deps
-        wget --tries=10 http://pr.willowgarage.com/downloads/boost_1_37_0.tar.gz
-        tar xzf boost_1_37_0.tar.gz
-        cd boost_1_37_0
-        ./configure --prefix=/opt/ros
-        make
-        sudo make install
-      fi
     sid: [libboost-all-dev]
     squeeze: [libboost1.42-all-dev]
     wheezy: [libboost-all-dev]
@@ -556,17 +545,9 @@ git:
   ubuntu: [git-core]
 glc:
   arch: [glc]
-  debian: |
-    #!/bin/bash
-    echo "This package must be compiled from source, see https://github.com/ienorand/glc"
   gentoo:
     portage:
       packages: [media-libs/quesoglc]
-  ubuntu: |
-    #!/bin/bash
-    yes | sudo apt-add-repository ppa:arand
-    sudo apt-get update
-    sudo apt-get install -y glc
 glut:
   arch: [freeglut]
   debian: [freeglut3-dev]
@@ -1722,17 +1703,6 @@ log4cxx:
   arch: [log4cxx]
   cygwin: [liblog4cxx-devel]
   debian:
-    lenny: |
-      if [ ! -f /opt/ros/lib/liblog4cxx.so.10 ] ; then
-        mkdir -p ~/ros/ros-deps
-        cd ~/ros/ros-deps
-        wget --tries=10 http://pr.willowgarage.com/downloads/apache-log4cxx-0.10.0-wg_patched.tar.gz
-        tar xzf apache-log4cxx-0.10.0-wg_patched.tar.gz
-        cd apache-log4cxx-0.10.0
-        ./configure --prefix=/opt/ros
-        make
-        sudo make install
-      fi
     sid: [liblog4cxx10-dev]
     squeeze: [liblog4cxx10-dev]
     wheezy: [liblog4cxx10-dev]
@@ -2186,12 +2156,6 @@ ttf-mscorefonts-installer:
   arch: [ttf-ms-fonts]
   debian: [ttf-mscorefonts-installer]
   macports:
-  ubuntu: |
-    #!/bin/sh
-    if [ ! -d /usr/share/doc/ttf-mscorefonts-installer ] ; then
-      echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
-      sudo apt-get -y --force-yes install ttf-mscorefonts-installer
-    fi
 ttf-sazanami-gothic:
   arch: [ttf-sazanami]
   debian: [ttf-sazanami-gothic]
