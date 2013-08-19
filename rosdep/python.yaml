@@ -55,9 +55,7 @@ python-bluez:
   ubuntu: [python-bluez]
 python-catkin-pkg:
   debian: [python-catkin-pkg]
-  fedora:
-    pip:
-      packages: [catkin-pkg]
+  fedora: [python-catkin_pkg]
   osx:
     pip:
       packages: [catkin-pkg]
@@ -391,14 +389,6 @@ python-wstool:
 python-yaml:
   arch: [python2-yaml]
   centos: [PyYAML]
-  cygwin: |
-    if [ ! -d /usr/lib/python2.5/site-packages/yaml/ ] ; then
-      mkdir -p ~/ros/ros-deps
-      cd ~/ros/ros-deps
-      wget --tries=10 http://pyyaml.org/download/pyyaml/PyYAML-3.09.tar.gz tar xzf PyYAML-3.09.tar.gz
-      cd PyYAML-3.09
-      python setup.py install
-    fi
   debian: [python-yaml]
   fedora:
     pip:
