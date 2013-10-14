@@ -1,1 +1,0 @@
-This is a folder for documentation for hydro packages.  For more information see: [The Get Involved Wiki Page](http://www.ros.org/wiki/Get%20Involved#Documenting_Your_.2A-ros-pkg_Repository_on_ROS.org)
