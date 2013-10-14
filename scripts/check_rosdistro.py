@@ -142,19 +142,22 @@ def main(fname):
             my_assert.clean = False
     my_assert.clean = True
 
-    # here be tests.
-    print_test("checking for trailing spaces...")
-    my_assert(no_trailing_spaces(buf))
-    print_test("checking for incorrect indentation...")
-    my_assert(correct_indent(buf))
-    print_test("checking for item order...")
-    my_assert(check_order(buf))
-    print_test("building yaml dict...")
     try:
         ydict = yaml.load(buf)
     except Exception as e:
         print_err("could not build the dict: %s" % (str(e)))
         my_assert(False)
+
+    if 'release-name' not in ydict and isinstance(ydict, dict) and 'fuerte' not in ydict.keys():
+        print_err("The file does not contain a 'release-name'. (Only files for Fuerte and older are supported by this script)")
+    else:
+        print_test("checking for trailing spaces...")
+        my_assert(no_trailing_spaces(buf))
+        print_test("checking for incorrect indentation...")
+        my_assert(correct_indent(buf))
+        print_test("checking for item order...")
+        my_assert(check_order(buf))
+        print_test("building yaml dict...")
 
     if not my_assert.clean:
         printc("there were errors, please correct the file", 'bright red')

@@ -14,6 +14,7 @@ paramiko:
   ubuntu: [python-paramiko]
 pyside-tools:
   debian: [pyside-tools]
+  fedora: [pyside-tools]
   ubuntu: [pyside-tools]
 python:
   arch: [python2]
@@ -30,6 +31,7 @@ python-argparse:
   debian: [python-argparse]
   fedora: [python]
   macports: [py27-argparse]
+  opensuse: [python-argparse]
   ubuntu:
     lucid: [python-argparse]
     maverick: [python-argparse]
@@ -46,6 +48,7 @@ python-avahi:
   ubuntu: [python-avahi]
 python-beautifulsoup:
   debian: [python-beautifulsoup]
+  fedora: [python-BeautifulSoup]
   ubuntu: [python-beautifulsoup]
 python-bluez:
   arch: [python-pybluez]
@@ -56,9 +59,7 @@ python-bluez:
   ubuntu: [python-bluez]
 python-catkin-pkg:
   debian: [python-catkin-pkg]
-  fedora:
-    pip:
-      packages: [catkin-pkg]
+  fedora: [python-catkin_pkg]
   osx:
     pip:
       packages: [catkin-pkg]
@@ -66,13 +67,28 @@ python-catkin-pkg:
 python-clearsilver:
   centos: [python-clearsilver]
   debian: [python-clearsilver]
+  fedora: [python-clearsilver]
   ubuntu: [python-clearsilver]
 python-couchdb:
   debian: [python-couchdb]
+  fedora: [python-couchdb]
   ubuntu: [python-couchdb]
 python-coverage:
   debian: [python-coverage]
   ubuntu: [python-coverage]
+python-cpplint:
+  debian:
+    pip:
+      packages: [cpplint]
+  fedora:
+    pip:
+      packages: [cpplint]
+  osx:
+    pip:
+      packages: [cpplint]
+  ubuntu:
+    pip:
+      packages: [cpplint]
 python-cwiid:
   arch: [cwiid]
   debian: [python-cwiid]
@@ -87,11 +103,16 @@ python-deap-pip:
     pip: [deap]
 python-docutils:
   debian: [python-docutils]
+  fedora: [python-docutils]
   ubuntu: [python-docutils]
 python-empy:
   debian: [python-empy]
   fedora: [python-empy]
+  opensuse: [python-empy]
   ubuntu: [python-empy]
+python-espeak:
+  debian: [python-espeak]
+  ubuntu: [python-espeak]
 python-gridfs:
   debian: [python-gridfs]
   ubuntu: [python-gridfs]
@@ -110,11 +131,15 @@ python-gtk2:
   ubuntu: [python-gtk2]
 python-httplib2:
   debian: [python-httplib2]
+  fedora: [python-httplib2]
   ubuntu: [python-httplib2]
 python-imaging:
   arch: [python-imaging]
   debian: [python-imaging]
-  fedora: [python-imaging]
+  fedora:
+    beefy: [python-imaging]
+    schrödinger’s: [python-pillow]
+    spherical: [python-imaging]
   freebsd: [py27-imaging]
   gentoo: [dev-python/imaging]
   macports: [py27-pil]
@@ -126,6 +151,7 @@ python-impacket:
   ubuntu: [python-impacket]
 python-kitchen:
   debian: [python-kitchen]
+  fedora: [python-kitchen]
   ubuntu: [python-kitchen]
 python-libpcap:
   debian: [python-libpcap]
@@ -142,9 +168,11 @@ python-matplotlib:
   ubuntu: [python-matplotlib]
 python-mechanize:
   debian: [python-mechanize]
+  fedora: [python-mechanize]
   ubuntu: [python-mechanize]
 python-mock:
   debian: [python-mock]
+  fedora: [python-mock]
   ubuntu: [python-mock]
 python-netifaces:
   arch: [python2-netifaces]
@@ -157,6 +185,7 @@ python-nose:
   arch: [python2-nose]
   debian: [python-nose]
   fedora: [python-nose]
+  opensuse: [python-nose]
   ubuntu: [python-nose]
 python-numpy:
   arch: [python2-numpy]
@@ -181,6 +210,7 @@ python-omniorb:
 python-opengl:
   debian: [python-opengl]
   fedora: [PyOpenGL]
+  opensuse: [python-opengl]
   ubuntu: [python-opengl]
 python-paramiko:
   arch: [python-paramiko]
@@ -200,10 +230,15 @@ python-pexpect:
   ubuntu: [python-pexpect]
 python-psutil:
   debian: [python-psutil]
+  fedora: [python-psutil]
   ubuntu: [python-psutil]
 python-psycopg2:
   ubuntu: [python-psycopg2]
 python-pyassimp:
+  osx:
+    lion:
+      homebrew:
+        packages: [pyassimp]
   ubuntu:
     lucid: []
     oneiric: []
@@ -223,6 +258,13 @@ python-pygame:
 python-pygraphviz:
   debian: [python-pygraphviz]
   ubuntu: [python-pygraphviz]
+python-pylint:
+  debian: [pylint]
+  fedora: [pylint]
+  osx:
+    pip:
+      packages: [pylint]
+  ubuntu: [pylint]
 python-pymodbus:
   debian:
     precise: [python-pymodbus]
@@ -233,6 +275,9 @@ python-pymongo:
   ubuntu: [python-pymongo]
 python-pymouse:
   debian:
+    pip:
+      packages: [pymouse]
+  fedora:
     pip:
       packages: [pymouse]
   osx:
@@ -262,6 +307,7 @@ python-qt-bindings:
     wheezy: [python-pyside, libpyside-dev, libshiboken-dev, shiboken, python-qt4, python-qt4-dev, python-sip-dev]
   fedora: [PyQt4, PyQt4-devel, sip-devel]
   gentoo: [PyQt4]
+  opensuse: [python-qt4-devel]
   rhel: [PyQt4, PyQt4-devel, sip-devel]
   ubuntu:
     lucid: [python-qt4, python-qt4-dev, python-sip-dev]
@@ -272,6 +318,7 @@ python-qt-bindings:
 python-qt-bindings-gl:
   debian: [python-qt4-gl]
   fedora: [PyQt4]
+  opensuse: [python-qt4-devel]
   ubuntu: [python-qt4-gl]
 python-qt-bindings-qwt5:
   debian: [python-qwt5-qt4]
@@ -295,22 +342,19 @@ python-redis:
   ubuntu: [python-redis]
 python-rosdep:
   debian: [python-rosdep]
-  fedora:
-    pip:
-      packages: [rosdep]
+  fedora: [python-rosdep]
   osx:
     pip:
       packages: [rosdep]
   ubuntu: [python-rosdep]
 python-rosinstall:
-  fedora:
-    pip:
-      packages: [rosinstall]
+  fedora: [python-rosinstall]
+  ubuntu: [python-rosinstall]
+python-rosinstall-generator:
+  ubuntu: [python-rosinstall-generator]
 python-rospkg:
   debian: [python-rospkg]
-  fedora:
-    pip:
-      packages: [rospkg]
+  fedora: [python-rospkg]
   ubuntu: [python-rospkg]
 python-scapy:
   debian: [python-scapy]
@@ -326,6 +370,7 @@ python-scipy:
   ubuntu: [python-scipy]
 python-serial:
   debian: [python-serial]
+  fedora: [pyserial]
   ubuntu: [python-serial]
 python-setuptools:
   arch: [python2-distribute]
@@ -339,6 +384,7 @@ python-sip:
   freebsd: [py27-sip]
   gentoo: [dev-python/sip]
   macports: [py27-sip]
+  opensuse: [python-sip-devel]
   osxbrew:
     homebrew:
       packages: [sip]
@@ -350,6 +396,7 @@ python-sphinx:
   fedora: [python-sphinx]
   freebsd: [py27-sphinx]
   macports: [py27-sphinx]
+  opensuse: [python-Sphinx]
   ubuntu: [python-sphinx]
 python-support:
   debian: [python-support]
@@ -364,9 +411,19 @@ python-sympy:
 python-tk:
   debian: [python-tk]
   ubuntu: [python-tk]
+python-twisted-bin:
+  debian: [python-twisted-bin]
+  ubuntu: [python-twisted-bin]
 python-twisted-core:
   debian: [python-twisted-core]
   ubuntu: [python-twisted-core]
+python-twisted-web:
+  debian: [python-twisted-web]
+  ubuntu: [python-twisted-web]
+python-twitter:
+  ubuntu: [python-twitter]
+python-urlgrabber:
+  ubuntu: [python-urlgrabber]
 python-usb:
   debian: [python-usb]
   ubuntu: [python-usb]
@@ -377,18 +434,8 @@ python-wstool:
 python-yaml:
   arch: [python2-yaml]
   centos: [PyYAML]
-  cygwin: |
-    if [ ! -d /usr/lib/python2.5/site-packages/yaml/ ] ; then
-      mkdir -p ~/ros/ros-deps
-      cd ~/ros/ros-deps
-      wget --tries=10 http://pyyaml.org/download/pyyaml/PyYAML-3.09.tar.gz tar xzf PyYAML-3.09.tar.gz
-      cd PyYAML-3.09
-      python setup.py install
-    fi
   debian: [python-yaml]
-  fedora:
-    pip:
-      packages: [PyYAML]
+  fedora: [PyYAML]
   freebsd: [py27-yaml]
   gentoo: [pyyaml]
   macports: [py27-yaml]
@@ -397,4 +444,5 @@ python-yaml:
   ubuntu: [python-yaml]
 python-zmq:
   debian: [python-zmq]
+  fedora: [python-zmq]
   ubuntu: [python-zmq]
