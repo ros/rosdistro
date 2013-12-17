@@ -1,6 +1,6 @@
 This repo maintains the lists of repositories defining ROS distributions.  
 
-It is the implementation of [REP 137](rosdistro_reformat)
+It is the implementation of [REP 137](http://ros.org/reps/rep-0137.html)
 
 How to submit pull requests
 ---------------------------
@@ -21,7 +21,7 @@ For Fuerte and older the ROS packages are maintained in the subfolder ``releases
 For Groovy and newer the ROS packages are maintained in the subfolder named after the ROS distribution.
 Mappings for dependencies are maintained in the ``rosdep`` subfolder.
 
-To create jobs on our build farm to build Debian sourcedeb and binarydeb packages add your git-buildpackage repository to the ``ROSDISTRO/release.yaml`` file (or ``releases/ROSDISTRO.yaml`` for Fuerte and older).
+To create jobs on our build farm to build Debian sourcedeb and binarydeb packages add your bloom (or git-buildpackage compatible) repository to the ``ROSDISTRO/release.yaml`` file (or ``releases/ROSDISTRO.yaml`` for Fuerte and older).
 Please keep the alphabetic order of the list.
 You can use the script ``scripts/add_release_repo.py`` to perform the insertion.
 
