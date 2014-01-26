@@ -23,6 +23,10 @@ def main(index_url, rosdistro_name):
         repo = distribution_file.repositories[repo_name]
         repos = [repo.release_repository, repo.source_repository, repo.doc_repository]
         for repo in [r for r in repos if r]:
+            if repo.url.startswith('file://'):
+                print()
+                print("Repository '%s' with url '%s' must not be a local 'file://' url" % (repo_name, repo.url), file=sys.stderr)
+                success = False
             if repo.type == 'git':
                 prefixes = ['http://github.com/', 'git@github.com:']
                 for prefix in prefixes:
