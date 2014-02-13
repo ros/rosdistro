@@ -154,6 +154,21 @@ def main(fname):
     print_test("building yaml dict...")
     try:
         ydict = yaml.load(buf)
+
+        # ensure that values don't contain whitespaces
+        def walk(node):
+            if isinstance(node, dict):
+                for key, value in node.items():
+                    walk(key)
+                    walk(value)
+            if isinstance(node, list):
+                for value in node:
+                    walk(value)
+            if isinstance(node, str) and re.search(r'\s', node):
+                    print_err("value '%s' must not contain whitespaces" % node)
+                    my_assert(False)
+        walk(ydict)
+
     except Exception as e:
         print_err("could not build the dict: %s" % (str(e)))
         my_assert(False)
