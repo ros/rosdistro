@@ -143,15 +143,23 @@ def main(fname):
     my_assert.clean = True
 
     # here be tests.
-    print_test("checking for trailing spaces...")
-    my_assert(no_trailing_spaces(buf))
-    print_test("checking for incorrect indentation...")
-    my_assert(correct_indent(buf))
-    print_test("checking for non-bracket package lists...")
-    my_assert(check_brackets(buf))
-    print_test("checking for item order...")
-    my_assert(check_order(buf))
-    print_test("building yaml dict...")
+    ydict = None
+    try:
+        ydict = yaml.load(buf)
+    except Exception:
+        pass
+    if ydict != {}:
+        print_test("checking for trailing spaces...")
+        my_assert(no_trailing_spaces(buf))
+        print_test("checking for incorrect indentation...")
+        my_assert(correct_indent(buf))
+        print_test("checking for non-bracket package lists...")
+        my_assert(check_brackets(buf))
+        print_test("checking for item order...")
+        my_assert(check_order(buf))
+        print_test("building yaml dict...")
+    else:
+        print_test("skipping file with empty dict contents...")
     try:
         ydict = yaml.load(buf)
 
