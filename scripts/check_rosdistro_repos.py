@@ -6,7 +6,7 @@ import argparse
 import subprocess
 import sys
 
-from rosdistro import get_doc_file, get_index, get_index_url, get_source_file
+from rosdistro import get_distribution_file, get_index, get_index_url
 
 
 def check_git_repo(url, version):
@@ -52,23 +52,22 @@ def check_svn_repo(url, version):
 
 def main(repo_type, rosdistro_name):
     index = get_index(get_index_url())
-    if repo_type == 'doc':
-        try:
-            distro_file = get_doc_file(index, rosdistro_name)
-        except RuntimeError as e:
-            print("Could not load doc file for distro '%s': %s" % (rosdistro_name, e), file=sys.stderr)
-            return False
-    if repo_type == 'source':
-        try:
-            distro_file = get_source_file(index, rosdistro_name)
-        except RuntimeError as e:
-            print("Could not load source file for distro '%s': %s" % (rosdistro_name, e), file=sys.stderr)
-            return False
+    try:
+        distribution_file = get_distribution_file(index, rosdistro_name)
+    except RuntimeError as e:
+        print("Could not load distribution file for distro '%s': %s" % (rosdistro_name, e), file=sys.stderr)
+        return False
 
-    for repo_name in sorted(distro_file.repositories.keys()):
+    for repo_name in sorted(distribution_file.repositories.keys()):
         sys.stdout.write('.')
         sys.stdout.flush()
-        repo = distro_file.repositories[repo_name]
+        repo = distribution_file.repositories[repo_name]
+        if repo_type == 'doc':
+            repo = repo.doc_repository
+        if repo_type == 'source':
+            repo = repo.source_repository
+        if not repo:
+            continue
         try:
             if (repo.type == 'git'):
                 check_git_repo(repo.url, repo.version)
