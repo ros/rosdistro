@@ -1,3 +1,7 @@
+ace:
+  arch: [ace]
+  debian: [libace-dev]
+  ubuntu: [libace-dev]
 alsa-oss:
   arch: [alsa-oss]
   debian: [alsa-oss]
@@ -59,6 +63,7 @@ arista:
 armadillo:
   arch: [armadillo]
   debian: [libarmadillo-dev]
+  fedora: [armadillo-devel]
   gentoo:
     portage:
       packages: [sci-libs/armadillo]
@@ -182,6 +187,7 @@ automake:
 autopoint:
   arch: [gettext]
   debian: [autopoint]
+  fedora: [gettext-devel]
   ubuntu: [autopoint]
 avahi-daemon:
   arch: [avahi]
@@ -233,7 +239,7 @@ beep:
 binutils:
   arch: [binutils]
   debian: [binutils-dev]
-  fedora: [binutils]
+  fedora: [binutils-devel]
   gentoo:
     portage:
       packages: [sys-devel/binutils]
@@ -382,6 +388,9 @@ collada-dom:
       packages: [media-libs/collada-dom]
   macports: [collada-dom]
   ubuntu: [collada-dom-dev]
+comedi:
+  fedora: [comedilib-devel]
+  ubuntu: [libcomedi-dev]
 coreutils:
   arch: [coreutils]
   debian: [coreutils]
@@ -481,15 +490,18 @@ eigen:
       packages: [libeigen3-dev]
 eigen2:
   arch: [eigen2]
+  fedora: [eigen2-devel]
   opensuse: [libeigen2-devel]
   ubuntu:
     apt:
       packages: [libeigen2-dev]
 eigen3:
+  fedora: [eigen3-devel]
   gentoo:
     portage:
       packages: [dev-cpp/eigen]
 emacs:
+  fedora: [emacs]
   ubuntu: [emacs]
 epydoc:
   arch: [epydoc]
@@ -531,7 +543,16 @@ ffmpeg:
     portage:
       packages: [media-plugins/ffmpeg]
   macports: [ffmpeg]
-  ubuntu: [ffmpeg, libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
+  ubuntu:
+    lucid: [ffmpeg, libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
+    maverick: [ffmpeg, libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
+    natty: [ffmpeg, libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
+    oneiric: [ffmpeg, libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
+    precise: [ffmpeg, libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
+    quantal: [ffmpeg, libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
+    raring: [ffmpeg, libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
+    saucy: [ffmpeg, libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
+    trusty: [libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
 ffmpeg2theora:
   arch: [ffmpeg2theora]
   debian: [ffmpeg2theora]
@@ -562,6 +583,7 @@ freeimage:
   rhel: [freeimage-devel]
   ubuntu: [libfreeimage-dev]
 freetype:
+  fedora: [freetype]
   macports: [freetype]
 ftdi-eeprom:
   arch: [ftdi_eeprom-git]
@@ -569,8 +591,10 @@ ftdi-eeprom:
   fedora: [libftdi-devel, libftdi-c++-devel]
   ubuntu: [ftdi-eeprom]
 g++-multilib:
+  fedora: [gcc-c++, glibc-devel, glibc-devel(x86-32), glibc-static, glibc-static(x86-32), libstdc++-devel, libstdc++-devel(x86-32), libstdc++-static, libstdc++-static(x86-32)]
   ubuntu: [g++-multilib]
 gawk:
+  fedora: [gawk]
   ubuntu: [gawk]
 gazebo:
   arch: [gazebo]
@@ -586,6 +610,9 @@ gcc-avr:
   fedora: [avr-gcc]
   gentoo: [cross-avr/gcc]
   ubuntu: [gcc-avr]
+gcc-multilib:
+  fedora: [gcc, glibc-devel, glibc-devel(x86-32), glibc-static, glibc-static(x86-32)]
+  ubuntu: [gcc-multilib]
 gccxml:
   arch: [gccxml-git]
   debian: [gccxml]
@@ -698,7 +725,9 @@ gstreamer0.10-plugins-ugly:
     precise: [gstreamer0.10-plugins-ugly]
     quantal: [gstreamer0.10-plugins-ugly]
     raring: [gstreamer0.10-plugins-ugly]
+    trusty: [gstreamer0.10-plugins-ugly]
 gstreamer0.10-pocketsphinx:
+  fedora: [pocketsphinx-plugin]
   ubuntu: [gstreamer0.10-pocketsphinx]
 gtest:
   arch: [gtest]
@@ -751,7 +780,7 @@ hddtemp:
 hdf5:
   arch: [hdf5]
   debian: [libhdf5-serial-dev]
-  fedora: [hdf5]
+  fedora: [hdf5-devel]
   gentoo: [sci-libs/hdf5]
   macports: [hdf5]
   ubuntu: [libhdf5-serial-dev]
@@ -769,6 +798,7 @@ hostname:
   fedora: [hostname]
   ubuntu: [hostname]
 i2c-tools:
+  fedora: [i2c-tools]
   opensuse: [i2c-tools]
 imagemagick:
   arch: [imagemagick]
@@ -794,6 +824,11 @@ ipmitool:
     portage:
       packages: [sys-apps/ipmitool]
   ubuntu: [ipmitool]
+jack:
+  arch: [jack]
+  debian: [libjack-jackd2-dev]
+  fedora: [jack-audio-connection-kit-devel]
+  ubuntu: [libjack-jackd2-dev]
 jasper:
   arch: [jasper]
   debian: [libjasper-dev]
@@ -810,7 +845,7 @@ java:
   gentoo: [dev-java/sun-jdk]
   ubuntu: [default-jdk]
 joystick:
-  arch: [joyutils]
+  arch: [linuxconsole]
   debian: [joystick]
   fedora:
     beefy: [joystick]
@@ -932,6 +967,10 @@ libcoin60-dev:
     portage:
       packages: [media-libs/coin]
   ubuntu: [libcoin60-dev]
+libcoin80-dev:
+  debian: [libcoin80-dev]
+  fedora: [Coin2-devel]
+  ubuntu: [libcoin80-dev]
 libdbus-dev:
   arch: [dbus-core]
   debian: [libdbus-1-dev]
@@ -985,7 +1024,7 @@ libexpat1-dev:
 libfftw3:
   arch: [fftw]
   debian: [libfftw3-3, libfftw3-dev]
-  fedora: [fftw]
+  fedora: [fftw, fftw-devel]
   gentoo:
     portage:
       packages: [sci-libs/fftw]
@@ -1240,7 +1279,7 @@ libleptonica-dev:
 libmagick:
   arch: [imagemagick]
   debian: [libmagick++-dev]
-  fedora: [ImageMagick-c++]
+  fedora: [ImageMagick-c++-devel]
   ubuntu: [libmagick++-dev]
 libmarble-dev:
   arch: [kdeedu-marble]
@@ -1349,6 +1388,7 @@ libois-dev:
       packages: [dev-games/ois]
   ubuntu: [libois-dev]
 libopencv-dev:
+  fedora: [opencv-devel]
   gentoo: [opencv]
   macports: [opencv]
   ubuntu:
@@ -1376,7 +1416,7 @@ libopenni2-dev:
 libopenscenegraph:
   arch: [openscenegraph]
   debian: [openscenegraph, libopenscenegraph-dev, libopenscenegraph80, libopenthreads-dev, libopenthreads14]
-  fedora: [OpenSceneGraph]
+  fedora: [OpenSceneGraph, OpenSceneGraph-devel, OpenThreads, OpenThreads-devel]
   gentoo:
     portage:
       packages: [dev-games/openscenegraph]
@@ -1440,11 +1480,13 @@ libpcsclite-dev:
   ubuntu: [libpcsclite-dev]
 libphonon:
   debian: [libphonon4]
+  fedora: [phonon]
   ubuntu:
     apt:
       packages: [libphonon4]
 libphonon-dev:
   debian: [libphonon-dev]
+  fedora: [phonon-devel]
   ubuntu:
     apt:
       packages: [libphonon-dev]
@@ -1571,6 +1613,7 @@ libqt4-opengl-dev:
 libqt4-sql-psql:
   arch: [qt4]
   debian: [libqt4-sql-psql]
+  fedora: [qt-postgresql]
   gentoo:
     portage:
       packages: [dev-qt/qtsql]
@@ -1596,6 +1639,14 @@ libqwt5-qt4-dev:
   ubuntu:
     apt:
       packages: [libqwt5-qt4-dev]
+libqwt6:
+  fedora: [qwt-devel]
+  ubuntu:
+    precise: [libqwt-dev]
+    quantal: [libqwt-dev]
+    raring: [libqwt-dev]
+    saucy: [libqwt-dev]
+    trusty: [libqwt-dev]
 libqwtplot3d-qt4-dev:
   arch: [qwtplot3d]
   debian:
@@ -1700,10 +1751,14 @@ libstdc++5:
 libswscale-dev:
   arch: [ffmpeg]
   debian: [libswscale-dev]
+  fedora: [ffmpeg-devel]
   gentoo:
     portage:
       packages: [media-video/ffmpeg]
   ubuntu: [libswscale-dev]
+libtesseract:
+  fedora: [tesseract-devel]
+  ubuntu: [libtesseract-dev]
 libtheora:
   arch: [libtheora]
   debian: [libtheora-dev]
@@ -1778,6 +1833,28 @@ libunittest++:
   ubuntu:
     apt:
       packages: [libunittest++-dev]
+libunwind:
+  fedora: [libunwind]
+  ubuntu:
+    precise: [libunwind7]
+    quantal: [libunwind8]
+    raring: [libunwind8]
+    saucy: [libunwind8]
+    trusty: [libunwind8]
+libunwind-dev:
+  fedora: [libunwind-devel]
+  ubuntu:
+    precise: [libunwind7-dev]
+    quantal: [libunwind8-dev]
+    raring: [libunwind8-dev]
+    saucy: [libunwind8-dev]
+    trusty: [libunwind8-dev]
+libusb:
+  arch: [libusb-compat]
+  debian: [libusb-0.1-4]
+  fedora: [libusb]
+  macports: [libusb]
+  ubuntu: [libusb-0.1-4]
 libusb-1.0:
   arch: [libusbx]
   debian: [libusb-1.0-0]
@@ -1812,6 +1889,7 @@ libv4l-dev:
   opensuse: [libv4l-devel]
   ubuntu: [libv4l-dev]
 libvlc:
+  fedora: [vlc-core]
   ubuntu: [libvlc5, vlc-nox]
 libvtk:
   arch: [vtk]
@@ -1877,11 +1955,12 @@ libxi-dev:
   ubuntu: [libxi-dev]
 libxinerama-dev:
   arch: [libxinerama]
+  fedora: [libXinerama-devel]
   ubuntu: [libxinerama-dev]
 libxml++-2.6:
   arch: [libxml++]
   debian: [libxml++2.6-2, libxml++2.6-dev]
-  fedora: [libxml++]
+  fedora: [libxml++, libxml++-devel]
   ubuntu: [libxml++2.6-2, libxml++2.6-dev]
 libxml2:
   arch: [libxml2]
@@ -1958,6 +2037,12 @@ lua-dev:
   fedora: [lua-devel]
   macports: [lua51]
   ubuntu: [liblua5.1-0-dev]
+lz4:
+  debian: [liblz4-dev]
+  fedora: [lz4-devel]
+  ubuntu:
+    saucy: [liblz4-dev]
+    trusty: [liblz4-dev]
 m4:
   arch: [m4]
   debian: [m4]
@@ -1969,6 +2054,8 @@ maven:
   debian: [maven]
   fedora: [maven]
   ubuntu: [maven]
+mayavi:
+  ubuntu: [mayavi2]
 mercurial:
   arch: [mercurial]
   debian: [mercurial]
@@ -1980,8 +2067,10 @@ mercurial:
   ubuntu: [mercurial]
 mesa-common-dev:
   arch: [mesa]
+  fedora: [mesa-libGL-devel, libdrm-devel, libX11-devel]
   ubuntu: [mesa-common-dev]
 meshlab:
+  fedora: [meshlab]
   ubuntu: [meshlab]
 mongodb-dev:
   arch: [mongodb]
@@ -2047,6 +2136,7 @@ omniidl:
     sid: [omniidl]
     squeeze: [omniidl]
     wheezy: [omniidl]
+  fedora: [omniORB-devel]
   ubuntu:
     lucid: [omniidl4]
     maverick: [omniidl4]
@@ -2082,6 +2172,7 @@ omniorb:
 omniorb4-idl:
   arch: [omniorb]
   debian: [omniorb-idl]
+  fedora: [omniORB-devel]
   ubuntu: [omniorb4-idl]
 opende:
   arch: [ode]
@@ -2139,11 +2230,19 @@ pkg-config:
   opensuse: [pkg-config]
   rhel: [pkgconfig]
   ubuntu: [pkg-config]
+portaudio:
+  arch: [portaudio]
+  debian: [libportaudio-dev]
+  fedora: [portaudio-devel]
+  ubuntu: [libportaudio-dev]
 procps:
   arch: [procps-ng]
   debian: [procps]
   fedora: [procps-ng]
   ubuntu: [procps]
+proj:
+  fedora: [proj-devel]
+  ubuntu: [libproj-dev]
 protobuf:
   arch: [protobuf]
   debian: [libprotobuf7]
@@ -2164,7 +2263,7 @@ ps-engine:
 pyqt4-dev-tools:
   arch: [python2-pyqt4]
   debian: [pyqt4-dev-tools]
-  fedora: [PyQT4-devel]
+  fedora: [PyQt4-devel]
   gentoo:
     portage:
       packages: [dev-python/PyQt4]
@@ -2305,6 +2404,9 @@ socat:
   arch: [socat]
   fedora: [socat]
   ubuntu: [socat]
+sox:
+  fedora: [sox]
+  ubuntu: [sox]
 spacenavd:
   arch: [spacenavd]
   debian: [spacenavd]
@@ -2313,6 +2415,7 @@ spacenavd:
 sqlite3:
   arch: [sqlite]
   debian: [sqlite3]
+  fedora: [sqlite]
   ubuntu: [sqlite3]
 subversion:
   arch: [subversion]
@@ -2349,6 +2452,7 @@ swi-prolog-clib:
 swi-prolog-http:
   arch: [swi-prolog]
   debian: [swi-prolog-http]
+  fedora: [pl]
   ubuntu:
     lucid: [swi-prolog-http]
     maverick: [swi-prolog]
@@ -2365,6 +2469,7 @@ swi-prolog-odbc:
 swi-prolog-semweb:
   arch: [swi-prolog]
   debian: [swi-prolog-semweb]
+  fedora: [pl]
   ubuntu:
     lucid: [swi-prolog-semweb]
     maverick: [swi-prolog]
@@ -2376,6 +2481,7 @@ swi-prolog-semweb:
 swi-prolog-sgml:
   arch: [swi-prolog]
   debian: [swi-prolog-sgml]
+  fedora: [pl]
   ubuntu:
     lucid: [swi-prolog-sgml]
     maverick: [swi-prolog]
@@ -2434,43 +2540,36 @@ tcsh:
   debian: [tcsh]
   fedora: [tcsh]
   ubuntu: [tcsh]
+tesseract-ocr:
+  fedora: [tesseract-devel]
+  ubuntu: [tesseract-ocr]
 texlive-fonts-extra:
   arch: [texlive-fontsextra]
   debian: [texlive-fonts-extra]
-  fedora:
-    schrödinger’s: [texlive-bbm, texlive-bbm-macros]
-    spherical: [texlive-bbm, texlive-bbm-macros]
+  fedora: [texlive-bbm, texlive-bbm-macros]
   macports: [texlive-fonts-extra]
   ubuntu: [texlive-fonts-extra]
 texlive-fonts-recommended:
   arch: [texlive-core]
   debian: [texlive-fonts-recommended]
-  fedora:
-    schrödinger’s: [texlive-times, texlive-helvetic]
-    spherical: [texlive-times, texlive-helvetic]
+  fedora: [texlive-times, texlive-helvetic]
   macports: [texlive-fonts-recommended]
   ubuntu: [texlive-fonts-recommended]
 texlive-latex-base:
   arch: [texlive-core]
   debian: [texlive-latex-base]
-  fedora:
-    schrödinger’s: [texlive-latex, texlive-parskip]
-    spherical: [texlive-latex, texlive-parskip]
+  fedora: [texlive-latex, texlive-parskip]
   macports: [texlive]
   ubuntu: [texlive-latex-base]
 texlive-latex-extra:
   arch: [texlive-latexextra]
   debian: [texlive-latex-extra]
-  fedora:
-    schrödinger’s: [texlive-titlesec, texlive-wrapfig, texlive-multirow, texlive-fancybox]
-    spherical: [texlive-titlesec, texlive-wrapfig, texlive-multirow, texlive-fancybox]
+  fedora: [texlive-titlesec, texlive-wrapfig, texlive-multirow, texlive-fancybox]
   ubuntu: [texlive-latex-extra]
 texlive-latex-recommended:
   arch: [texlive-core]
   debian: [texlive-latex-recommended]
-  fedora:
-    schrödinger’s: [texlive-framed, texlive-threeparttable, texlive-ec, texlive-mdwtools]
-    spherical: [texlive-framed, texlive-threeparttable, texlive-ec, texlive-mdwtools]
+  fedora: [texlive-framed, texlive-threeparttable, texlive-ec, texlive-mdwtools]
   macports: [texlive-latex-recommended]
   ubuntu: [texlive-latex-recommended]
 tinyxml:
@@ -2518,6 +2617,7 @@ udhcpc:
 unison:
   arch: [unison]
   debian: [unison]
+  fedora: [unison227]
   ubuntu:
     apt:
       packages: [unison]
@@ -2553,6 +2653,7 @@ uuid:
   rhel: [libuuid-devel]
   ubuntu: [uuid-dev]
 uvcdynctrl:
+  fedora: [uvcdynctrl]
   ubuntu: [uvcdynctrl]
 vlc:
   arch: [vlc]
@@ -2567,6 +2668,7 @@ wkhtmltopdf:
 wx-common:
   arch: [wxgtk]
   debian: [wx-common]
+  fedora: [wxGTK-devel]
   ubuntu: [wx-common]
 wxpython:
   arch: [wxpython]
