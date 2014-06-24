@@ -33,6 +33,7 @@ bison:
 boost:
   osx:
     homebrew:
+      options: [--with-python]
       packages: [boost]
 bullet:
   osx:
@@ -206,11 +207,25 @@ libpcap:
 libpcl-all:
   osx:
     homebrew:
-      packages: [pcl]
+      depends: [libpcl-all-dev]
 libpcl-all-dev:
   osx:
-    homebrew:
-      packages: [pcl]
+    leopard:
+      homebrew: [pcl]
+    lion:
+      homebrew: [pcl]
+    mavericks:
+      homebrew:
+        install_flags: [--HEAD]
+        packages: [pcl]
+    "mountain lion":
+      homebrew: [pcl]
+    snow:
+      homebrew: [pcl]
+    yosemite:
+      homebrew:
+        install_flags: [--HEAD]
+        packages: [pcl]
 libpgm:
   osx:
     homebrew:
