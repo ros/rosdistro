@@ -33,6 +33,7 @@ bison:
 boost:
   osx:
     homebrew:
+      options: [--with-python]
       packages: [boost]
 bullet:
   osx:
@@ -57,7 +58,6 @@ collada-dom:
 cppunit:
   osx:
     homebrew:
-      options: [--universal]
       packages: [cppunit]
 curl:
   osx:
@@ -107,7 +107,7 @@ gccxml:
 gfortran:
   osx:
     homebrew:
-      packages: [gfortran]
+      packages: [gcc]
 git:
   osx:
     homebrew:
@@ -123,7 +123,6 @@ graphviz:
 gtest:
   osx:
     homebrew:
-      options: [--universal]
       packages: [gtest]
 gtk2:
   osx:
@@ -141,6 +140,10 @@ jasper:
   osx:
     homebrew:
       packages: [jasper]
+libconsole-bridge-dev:
+  osx:
+    homebrew:
+      packages: [console_bridge]
 libdc1394-dev:
   osx:
     homebrew:
@@ -153,6 +156,10 @@ libflann-dev:
   osx:
     homebrew:
       packages: [flann]
+libftdi-dev:
+  osx:
+    homebrew:
+      packages: [libftdi0]
 libglew-dev:
   osx:
     homebrew:
@@ -185,6 +192,18 @@ libogre-dev:
   osx:
     homebrew:
       packages: [ogre]
+libopencv-dev:
+  osx:
+    homebrew:
+      packages: [opencv]
+libopenni-dev:
+  osx:
+    homebrew:
+      packages: [openni]
+libopenni-sensor-primesense-dev:
+  osx:
+    homebrew:
+      packages: [totakke/openni/sensor-kinect]
 libpcap:
   osx:
     homebrew:
@@ -192,11 +211,25 @@ libpcap:
 libpcl-all:
   osx:
     homebrew:
-      packages: [pcl]
+      depends: [libpcl-all-dev]
 libpcl-all-dev:
   osx:
-    homebrew:
-      packages: [pcl]
+    leopard:
+      homebrew: [pcl]
+    lion:
+      homebrew: [pcl]
+    mavericks:
+      homebrew:
+        install_flags: [--HEAD]
+        packages: [pcl]
+    "mountain lion":
+      homebrew: [pcl]
+    snow:
+      homebrew: [pcl]
+    yosemite:
+      homebrew:
+        install_flags: [--HEAD]
+        packages: [pcl]
 libpgm:
   osx:
     homebrew:
@@ -257,10 +290,30 @@ libtool:
   osx:
     homebrew:
       packages: []
+liburdfdom-dev:
+  osx:
+    homebrew:
+      packages: [urdfdom]
+liburdfdom-headers-dev:
+  osx:
+    homebrew:
+      packages: [urdfdom_headers]
+libusb:
+  osx:
+    homebrew:
+      packages: [libusb-compat]
+libusb-1.0:
+  osx:
+    homebrew:
+      packages: [libusb]
 libusb-1.0-dev:
   osx:
     homebrew:
       packages: [libusb]
+libusb-dev:
+  osx:
+    homebrew:
+      packages: [libusb-compat]
 libv4l-dev:
   osx:
     homebrew:
@@ -301,12 +354,15 @@ libxxf86vm:
 log4cxx:
   osx:
     homebrew:
-      options: [--universal]
       packages: [log4cxx]
 lua-dev:
   osx:
     homebrew:
       packages: [lua]
+lz4:
+  osx:
+    homebrew:
+      packages: [lz4]
 mercurial:
   osx:
     pip:
@@ -367,6 +423,14 @@ python-argparse:
   osx:
     pip:
       packages: [argparse]
+python-cairo:
+  osx:
+    homebrew:
+      packages: [py2cairo]
+python-coverage:
+  osx:
+    pip:
+      packages: [coverage]
 python-empy:
   osx:
     pip:
@@ -378,7 +442,7 @@ python-gtk2:
 python-imaging:
   osx:
     pip:
-      packages: [PIL]
+      packages: [Pillow]
 python-kitchen:
   osx:
     pip:
@@ -388,6 +452,10 @@ python-matplotlib:
     pip:
       depends: [pkg-config, freetype, libpng12-dev]
       packages: [matplotlib]
+python-mock:
+  osx:
+    pip:
+      packages: [mock]
 python-netifaces:
   osx:
     pip:
@@ -400,6 +468,14 @@ python-numpy:
   osx:
     pip:
       packages: [numpy]
+python-omniorb:
+  osx:
+    homebrew:
+      packages: [omniorb]
+python-opencv:
+  osx:
+    homebrew:
+      packages: [opencv]
 python-opengl:
   osx:
     pip:
@@ -470,6 +546,10 @@ rake:
   osx:
     homebrew:
       packages: []
+redis-server:
+  ox:
+    homebrew:
+      packages: [redis]
 ruby:
   osx:
     homebrew:
@@ -541,7 +621,6 @@ unzip:
 uuid:
   osx:
     homebrew:
-      options: [--universal]
       packages: [uuid]
 wxpython:
   osx:
@@ -554,7 +633,6 @@ wxwidgets:
 yaml:
   osx:
     homebrew:
-      options: [--universal]
       packages: [libyaml]
 yaml-cpp:
   osx:
