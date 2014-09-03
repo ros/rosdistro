@@ -1,34 +1,33 @@
 #!/usr/bin/env python
 
 
+from io import BytesIO
 import subprocess
 import yaml
 from yaml.composer import Composer
 from yaml.constructor import Constructor
 import pprint
 import re
+import sys
+
+import unidiff
 
 DIFF_TARGET = 'origin/master'
-FILE_TARGET = '../indigo/distribution.yaml'
+TARGET_FILES = ['hydro/distribution.yaml',
+                'indigo/distribution.yaml']
 
 
 def detect_lines(diffstr):
-    diff_nums = []
-    reexp = re.compile('@@(.*)@@')
-    matches = reexp.findall(diffstr)
-    for m in matches:
-        # print m
-        linepair = m.strip().split(' ')
-        new_lines = linepair[1].lstrip('+').split(',')
-        if len(new_lines) == 1:
-            diff_nums.append(int(new_lines[0]))
-            continue
-
-        start = int(new_lines[0])
-        end = start + int(new_lines[1])
-
-        diff_nums.extend(range(start, end))
-    return diff_nums
+    resultant_lines = {}
+    io = BytesIO(diffstr)
+    udiff = unidiff.parser.parse_unidiff(io)
+    for file in udiff:
+        target_lines = []
+        # if file.path in TARGET_FILES:
+        for hunk in file:
+            target_lines += range(hunk.target_start, hunk.target_start + hunk.target_length)
+        resultant_lines[file.path] = target_lines
+    return resultant_lines
 
 
 def check_git_remote_exists(url, version):
@@ -53,6 +52,7 @@ def check_source_repo_entry_for_errors(source):
         print("Cannot verify remote of type[%s] from line [%s] skipping."
               % (source['type'], source['__line__']))
         return None
+
     version = source['version'] if source['version'] else None
     if not check_git_remote_exists(source['url'], version):
         return ("Could not validate repository with url %s and version %s from"
@@ -67,25 +67,18 @@ def check_repo_for_errors(repo):
     if 'source' in repo:
         source_errors = check_source_repo_entry_for_errors(repo['source'])
         if source_errors:
-            errors.append("Could not validate source entry for repo %s with error %s" %
+            errors.append("Could not validate source entry for repo %s with error [[[%s]]]" %
                           (repo['repo'], source_errors))
     if 'doc' in repo:
         source_errors = check_source_repo_entry_for_errors(repo['doc'])
         if source_errors:
-            errors.append("Could not validate doc entry for repo %s with error %s" %
+            errors.append("Could not validate doc entry for repo %s with error [[[%s]]]" %
                           (repo['repo'], source_errors))
     return errors
 
 
-def main():
-    cmd = ('git diff --unified=0 %s' % DIFF_TARGET).split()
-    diff = subprocess.check_output(cmd)
-    print("output", diff)
-
-    diffed_lines = detect_lines(diff)
-    print("Diff lines %s" % diffed_lines)
-
-    d = open(FILE_TARGET).read()
+def load_yaml_with_lines(filename):
+    d = open(filename).read()
     loader = yaml.Loader(d)
 
     def compose_node(parent, index):
@@ -102,14 +95,15 @@ def main():
     loader.compose_node = compose_node
     loader.construct_mapping = construct_mapping
     data = loader.get_single_data()
+    return data
 
-    repos = data['repositories']
 
+def isolate_yaml_snippets_from_line_numbers(yaml_dict, line_numbers):
     changed_repos = {}
 
-    for dl in diffed_lines:
+    for dl in line_numbers:
         match = None
-        for name, values in repos.items():
+        for name, values in yaml_dict.items():
             if name == '__line__':
                 continue
             if not isinstance(values, dict):
@@ -123,14 +117,40 @@ def main():
                 match['repo'] = name
         if match:
             changed_repos[match['repo']] = match
+    return changed_repos
 
-    print("changed repos are:")
-    pprint.pprint(changed_repos)
+
+def main():
+    cmd = ('git diff --unified=0 %s' % DIFF_TARGET).split()
+    diff = subprocess.check_output(cmd)
+    # print("output", diff)
+
+    diffed_lines = detect_lines(diff)
+    # print("Diff lines %s" % diffed_lines)
 
     detected_errors = []
-    for n, r in changed_repos.items():
-        detected_errors.extend(check_repo_for_errors(r))
+
+    for path, lines in diffed_lines.items():
+        if path not in TARGET_FILES:
+            print("not verifying diff of file %s" % path)
+            continue
+
+        data = load_yaml_with_lines(path)
+
+        repos = data['repositories']
+
+        changed_repos = isolate_yaml_snippets_from_line_numbers(repos, lines)
+
+        # print("In file: %s Changed repos are:" % path)
+        # pprint.pprint(changed_repos)
+
+        for n, r in changed_repos.items():
+            detected_errors.extend(check_repo_for_errors(r))
     for e in detected_errors:
-        print(e)
+        print("ERROR: %s" % e)
+    if detected_errors:
+        sys.exit(1)
+    sys.exit(0)
+
 
 main()
