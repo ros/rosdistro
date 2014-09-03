@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
+
 
 from io import BytesIO
+import os
 import subprocess
 import yaml
 from yaml.composer import Composer
@@ -10,11 +13,23 @@ import pprint
 import sys
 import unittest
 
+import rosdistro
 import unidiff
 
 DIFF_TARGET = 'origin/master'
-TARGET_FILES = ['hydro/distribution.yaml',
-                'indigo/distribution.yaml']
+
+
+TARGET_FILE_BLACKLIST = []
+
+
+def get_all_distribution_files(url=None):
+    if not url:
+        url = rosdistro.get_index_url()
+    distribution_files = []
+    i = rosdistro.get_index(url)
+    for d in i.distributions:
+        distribution_files.append(rosdistro.get_distribution_file(i, d))
+    return distribution_files
 
 
 def detect_lines(diffstr):
@@ -134,7 +149,9 @@ def main():
     detected_errors = []
 
     for path, lines in diffed_lines.items():
-        if path not in TARGET_FILES:
+        directory = os.path.join(os.path.dirname(__file__), '..')
+        url = 'file://%s/index.yaml' % directory
+        if path not in get_all_distribution_files(url):
             print("not verifying diff of file %s" % path)
             continue
 
@@ -149,14 +166,15 @@ def main():
 
         for n, r in changed_repos.items():
             errors = check_repo_for_errors(r)
-            detected_errors.extend(["In file '''%s''': "
-                                    % path + e for e in errors])
+            detected_errors.extend(["In file '''%s''': " % path + e
+                                    for e in errors])
     for e in detected_errors:
-        print("ERROR: %s" % e)
+
+        print("ERROR: %s" % e, file=sys.stderr)
     return detected_errors
 
 
-class TestUruValidity(unittest.TestCase):
+class TestUrlValidity(unittest.TestCase):
 
     def test_function(self):
         detected_errors = main()
