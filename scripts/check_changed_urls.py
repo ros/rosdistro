@@ -7,7 +7,6 @@ import yaml
 from yaml.composer import Composer
 from yaml.constructor import Constructor
 import pprint
-import re
 import sys
 
 import unidiff
@@ -18,6 +17,8 @@ TARGET_FILES = ['hydro/distribution.yaml',
 
 
 def detect_lines(diffstr):
+    """Take a diff string and return a dict of
+    files with line numbers changed"""
     resultant_lines = {}
     io = BytesIO(diffstr)
     udiff = unidiff.parser.parse_unidiff(io)
@@ -25,7 +26,8 @@ def detect_lines(diffstr):
         target_lines = []
         # if file.path in TARGET_FILES:
         for hunk in file:
-            target_lines += range(hunk.target_start, hunk.target_start + hunk.target_length)
+            target_lines += range(hunk.target_start,
+                                  hunk.target_start + hunk.target_length)
         resultant_lines[file.path] = target_lines
     return resultant_lines
 
@@ -56,9 +58,9 @@ def check_source_repo_entry_for_errors(source):
     version = source['version'] if source['version'] else None
     if not check_git_remote_exists(source['url'], version):
         return ("Could not validate repository with url %s and version %s from"
-                " entry at line %s" % (source['url'],
-                                       version,
-                                       source['__line__']))
+                " entry at line '''%s'''" % (source['url'],
+                                             version,
+                                             source['__line__']))
     return None
 
 
@@ -145,7 +147,9 @@ def main():
         # pprint.pprint(changed_repos)
 
         for n, r in changed_repos.items():
-            detected_errors.extend(check_repo_for_errors(r))
+            errors = check_repo_for_errors(r)
+            detected_errors.extend(["In file '''%s''': "
+                                    % path + e for e in errors])
     for e in detected_errors:
         print("ERROR: %s" % e)
     if detected_errors:
