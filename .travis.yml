@@ -6,8 +6,10 @@ install:
   - easy_install -U pip
   - pip install PyYAML argparse
   - pip install rosdistro nose coverage
+  - pip install git+https://github.com/matiasb/python-unidiff.git
 # command to run tests
 script:
+  - scripts/check_changed_urls.py
   - nosetests -s
 notifications:
   email:
@@ -16,4 +18,3 @@ notifications:
 branches:
   only:
       - master
-
