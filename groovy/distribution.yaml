@@ -117,7 +117,7 @@ repositories:
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/AutonomyLab/ardrone_autonomy-release.git
-      version: 1.3.4-0
+      version: 1.3.7-0
     source:
       type: git
       url: https://github.com/AutonomyLab/ardrone_autonomy.git
@@ -204,7 +204,7 @@ repositories:
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/RethinkRobotics-release/baxter_common-release.git
-      version: 1.0.0-0
+      version: 1.0.1-0
     source:
       type: git
       url: https://github.com/RethinkRobotics/baxter_common.git
@@ -1005,7 +1005,7 @@ repositories:
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/ros-gbp/ecto-release.git
-      version: 0.6.4-0
+      version: 0.6.6-0
     source:
       type: git
       url: https://github.com/plasmodic/ecto.git
@@ -1060,7 +1060,7 @@ repositories:
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/ros-gbp/ecto_ros-release.git
-      version: 0.4.3-0
+      version: 0.4.4-0
     source:
       type: git
       url: https://github.com/plasmodic/ecto_ros.git
@@ -1238,11 +1238,6 @@ repositories:
     doc:
       type: git
       url: https://github.com/kth-ros-pkg/force_torque_tools.git
-      version: groovy
-  fovis:
-    doc:
-      type: git
-      url: https://github.com/srv/fovis.git
       version: groovy
   freenect_stack:
     doc:
@@ -1572,7 +1567,7 @@ repositories:
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/tork-a/hrpsys-release.git
-      version: 315.2.4-0
+      version: 315.2.5-0
     source:
       type: git
       url: https://github.com/start-jsk/hrpsys.git
@@ -1844,6 +1839,7 @@ repositories:
       - jsk_footstep_msgs
       - jsk_gui_msgs
       - jsk_hark_msgs
+      - jsk_tilt_laser
       - jsk_tools
       - jsk_topic_tools
       - laser_filters_jsk_patch
@@ -1860,13 +1856,38 @@ repositories:
       - sklearn
       - speech_recognition_msgs
       - stereo_synchronizer
+      - voice_text
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/tork-a/jsk_common-release.git
-      version: 1.0.35-0
+      version: 1.0.40-0
     source:
       type: git
       url: https://github.com/jsk-ros-pkg/jsk_common.git
+      version: master
+    status: developed
+  jsk_control:
+    doc:
+      type: git
+      url: https://github.com/jsk-ros-pkg/jsk_control.git
+      version: master
+    release:
+      packages:
+      - eus_nlopt
+      - eus_qp
+      - eus_qpoases
+      - joy_mouse
+      - jsk_footstep_controller
+      - jsk_footstep_planner
+      - jsk_ik_server
+      - jsk_teleop_joy
+      tags:
+        release: release/groovy/{package}/{version}
+      url: https://github.com/tork-a/jsk_control-release.git
+      version: 0.1.1-2
+    source:
+      type: git
+      url: https://github.com/jsk-ros-pkg/jsk_control.git
       version: master
     status: developed
   jsk_model_tools:
@@ -1944,7 +1965,7 @@ repositories:
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/tork-a/jsk_recognition-release.git
-      version: 0.1.15-0
+      version: 0.1.21-1
     source:
       type: git
       url: https://github.com/jsk-ros-pkg/jsk_recognition.git
@@ -1966,7 +1987,7 @@ repositories:
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/tork-a/jsk_roseus-release.git
-      version: 1.1.21-0
+      version: 1.1.22-0
     source:
       type: git
       url: https://github.com/jsk-ros-pkg/jsk_roseus.git
@@ -1987,7 +2008,7 @@ repositories:
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/tork-a/jsk_visualization-release.git
-      version: 1.0.7-0
+      version: 1.0.11-0
     source:
       type: git
       url: https://github.com/jsk-ros-pkg/jsk_visualization.git
@@ -2555,7 +2576,43 @@ repositories:
     doc:
       type: git
       url: https://github.com/ros-nao/nao_extras.git
+      version: groovy-devel
+  nao_interaction:
+    doc:
+      type: git
+      url: https://github.com/ros-nao/nao_interaction.git
       version: master
+    release:
+      packages:
+      - nao_audio
+      - nao_interaction
+      - nao_interaction_launchers
+      - nao_interaction_msgs
+      - nao_vision
+      tags:
+        release: release/groovy/{package}/{version}
+      url: https://github.com/ros-gbp/nao_interaction-release.git
+      version: 0.1.3-0
+    source:
+      type: git
+      url: https://github.com/ros-nao/nao_interaction.git
+      version: master
+    status: developed
+  nao_meshes:
+    doc:
+      type: git
+      url: https://github.com/ros-nao/nao_meshes.git
+      version: master
+    release:
+      tags:
+        release: release/groovy/{package}/{version}
+      url: https://github.com/ros-gbp/nao_meshes-release.git
+      version: 0.1.5-0
+    source:
+      type: git
+      url: https://github.com/ros-nao/nao_meshes.git
+      version: master
+    status: developed
   nao_robot:
     doc:
       type: git
@@ -2579,6 +2636,10 @@ repositories:
       version: master
     status: developed
   nao_sensors:
+    doc:
+      type: git
+      url: https://github.com/ros-nao/nao_sensors.git
+      version: master
     release:
       tags:
         release: release/groovy/{package}/{version}
@@ -2696,7 +2757,7 @@ repositories:
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/ros-gbp/object_recognition_core-release.git
-      version: 0.6.2-0
+      version: 0.6.3-0
     source:
       type: git
       url: https://github.com/wg-perception/object_recognition_core.git
@@ -2974,7 +3035,7 @@ repositories:
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/tork-a/openrtm_aist_core-release.git
-      version: 1.1.0-6
+      version: 1.1.0-12
     source:
       type: git
       url: https://github.com/start-jsk/openrtm_aist_core.git
@@ -3072,7 +3133,7 @@ repositories:
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/OSUrobotics/people-release.git
-      version: 1.0.6-0
+      version: 1.0.7-0
     source:
       type: git
       url: https://github.com/wg-perception/people.git
@@ -3418,7 +3479,7 @@ repositories:
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/wpi-rail-release/rail_maps-release.git
-      version: 0.2.3-0
+      version: 0.2.4-0
     source:
       type: git
       url: https://github.com/WPI-RAIL/rail_maps.git
@@ -4033,11 +4094,6 @@ repositories:
       type: svn
       url: https://code.ros.org/svn/ros/stacks/roslisp_support/trunk
       version: HEAD
-  rosmatlab:
-    doc:
-      type: git
-      url: https://github.com/tu-darmstadt-ros-pkg/rosmatlab.git
-      version: master
   rospack:
     doc:
       type: git
@@ -4047,7 +4103,7 @@ repositories:
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/ros-gbp/rospack-release.git
-      version: 2.1.23-0
+      version: 2.1.24-0
     source:
       type: git
       url: https://github.com/ros/rospack.git
@@ -4234,7 +4290,7 @@ repositories:
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/tork-a/rtmros_common-release.git
-      version: 1.2.1-0
+      version: 1.2.4-0
     source:
       type: git
       url: https://github.com/start-jsk/rtmros_common.git
@@ -4253,7 +4309,7 @@ repositories:
       tags:
         release: release/groovy/{package}/{version}
       url: https://github.com/tork-a/rtmros_hironx-release.git
-      version: 1.0.19-0
+      version: 1.0.23-2
     source:
       type: git
       url: https://github.com/start-jsk/rtmros_hironx.git
