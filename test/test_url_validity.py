@@ -15,6 +15,7 @@ import unittest
 
 import rosdistro
 import unidiff
+from urlparse import urlparse
 
 DIFF_TARGET = 'origin/master'
 
@@ -27,8 +28,9 @@ def get_all_distribution_files(url=None):
         url = rosdistro.get_index_url()
     distribution_files = []
     i = rosdistro.get_index(url)
-    for d in i.distributions:
-        distribution_files.append(rosdistro.get_distribution_file(i, d))
+    for d_name, d in i.distributions.items():
+        dpath = os.path.abspath(urlparse(d['distribution']).path)
+        distribution_files.append(dpath)
     return distribution_files
 
 
@@ -151,6 +153,7 @@ def main():
     for path, lines in diffed_lines.items():
         directory = os.path.join(os.path.dirname(__file__), '..')
         url = 'file://%s/index.yaml' % directory
+        path = os.path.abspath(path)
         if path not in get_all_distribution_files(url):
             print("not verifying diff of file %s" % path)
             continue
