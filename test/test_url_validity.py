@@ -18,6 +18,7 @@ import unidiff
 from urlparse import urlparse
 
 DIFF_TARGET = 'origin/master'
+EOL_DISTROS = ['fuerte', 'groovy']
 
 
 TARGET_FILE_BLACKLIST = []
@@ -31,6 +32,18 @@ def get_all_distribution_files(url=None):
     for d_name, d in i.distributions.items():
         dpath = os.path.abspath(urlparse(d['distribution']).path)
         distribution_files.append(dpath)
+    return distribution_files
+
+
+def get_eol_distribution_files(url=None):
+    if not url:
+        url = rosdistro.get_index_url()
+    distribution_files = []
+    i = rosdistro.get_index(url)
+    for d_name, d in i.distributions.items():
+        if d_name in EOL_DISTROS:
+            dpath = os.path.abspath(urlparse(d['distribution']).path)
+            distribution_files.append(dpath)
     return distribution_files
 
 
@@ -52,7 +65,7 @@ def detect_lines(diffstr):
 
 def check_git_remote_exists(url, version):
     """ Check if the remote exists and has the branch version """
-    cmd = ('git ls-remote %s --heads ./.' % url).split()
+    cmd = ('git ls-remote %s refs/heads/*' % url).split()
 
     try:
         output = subprocess.check_output(cmd)
@@ -94,6 +107,26 @@ def check_repo_for_errors(repo):
         if source_errors:
             errors.append("Could not validate doc entry for repo %s with error [[[%s]]]" %
                           (repo['repo'], source_errors))
+    return errors
+
+
+def detect_post_eol_release(n, repo, lines):
+    errors = []
+    if 'release' in repo:
+        release_element = repo['release']
+        start_line = release_element['__line__']
+        end_line = start_line
+        if 'tags' not in release_element:
+            print('Missing tags element in release section skipping')
+            return []
+        # There are 3 lines beyond the tags line. The tag contents as well as
+        # the url and version number
+        end_line = release_element['tags']['__line__'] + 3
+        matching_lines = [l for l in lines if l >= start_line and l <= end_line]
+        if matching_lines:
+            errors.append("There is a change to a release section of an EOLed "
+                          "distribution. Lines: %s" % matching_lines)
+
     return errors
 
 
@@ -157,7 +190,8 @@ def main():
         if path not in get_all_distribution_files(url):
             print("not verifying diff of file %s" % path)
             continue
-
+        eol_distro = True if path in get_eol_distribution_files(url)\
+            else False
         data = load_yaml_with_lines(path)
 
         repos = data['repositories']
@@ -171,6 +205,11 @@ def main():
             errors = check_repo_for_errors(r)
             detected_errors.extend(["In file '''%s''': " % path + e
                                     for e in errors])
+            if eol_distro:
+                errors = detect_post_eol_release(n, r, lines)
+                detected_errors.extend(["In file '''%s''': " % path + e
+                                        for e in errors])
+
     for e in detected_errors:
 
         print("ERROR: %s" % e, file=sys.stderr)
