@@ -18,33 +18,33 @@ import unidiff
 from urlparse import urlparse
 
 DIFF_TARGET = 'origin/master'
-EOL_DISTROS = ['fuerte', 'groovy']
+EOL_DISTROS = ['groovy']
 
 
 TARGET_FILE_BLACKLIST = []
 
 
-def get_all_distribution_files(url=None):
+def get_all_distribution_filenames(url=None):
     if not url:
         url = rosdistro.get_index_url()
-    distribution_files = []
+    distribution_filenames = []
     i = rosdistro.get_index(url)
-    for d_name, d in i.distributions.items():
+    for d in i.distributions.values():
         dpath = os.path.abspath(urlparse(d['distribution']).path)
-        distribution_files.append(dpath)
-    return distribution_files
+        distribution_filenames.append(dpath)
+    return distribution_filenames
 
 
-def get_eol_distribution_files(url=None):
+def get_eol_distribution_filenames(url=None):
     if not url:
         url = rosdistro.get_index_url()
-    distribution_files = []
+    distribution_filenames = []
     i = rosdistro.get_index(url)
     for d_name, d in i.distributions.items():
         if d_name in EOL_DISTROS:
             dpath = os.path.abspath(urlparse(d['distribution']).path)
-            distribution_files.append(dpath)
-    return distribution_files
+            distribution_filenames.append(dpath)
+    return distribution_filenames
 
 
 def detect_lines(diffstr):
@@ -187,10 +187,10 @@ def main():
         directory = os.path.join(os.path.dirname(__file__), '..')
         url = 'file://%s/index.yaml' % directory
         path = os.path.abspath(path)
-        if path not in get_all_distribution_files(url):
+        if path not in get_all_distribution_filenames(url):
             print("not verifying diff of file %s" % path)
             continue
-        eol_distro = True if path in get_eol_distribution_files(url)\
+        eol_distro = True if path in get_eol_distribution_filenames(url)\
             else False
         data = load_yaml_with_lines(path)
 
