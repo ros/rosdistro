@@ -126,6 +126,16 @@ def detect_post_eol_release(n, repo, lines):
         if matching_lines:
             errors.append("There is a change to a release section of an EOLed "
                           "distribution. Lines: %s" % matching_lines)
+    if 'doc' in repo:
+        doc_element = repo['doc']
+        start_line = doc_element['__line__']
+        end_line = start_line + 3
+        # There are 3 lines beyond the tags line. The tag contents as well as
+        # the url and version number
+        matching_lines = [l for l in lines if l >= start_line and l <= end_line]
+        if matching_lines:
+            errors.append("There is a change to a doc section of an EOLed "
+                          "distribution. Lines: %s" % matching_lines)
 
     return errors
 
