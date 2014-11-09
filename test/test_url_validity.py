@@ -63,8 +63,9 @@ def detect_lines(diffstr):
     return resultant_lines
 
 
-def check_git_remote_exists(url, version):
-    """ Check if the remote exists and has the branch version """
+def check_git_remote_exists(url, version, tags_valid=False):
+    """ Check if the remote exists and has the branch version.
+    If tags_valid is True query tags as well as branches """
     cmd = ('git ls-remote %s refs/heads/*' % url).split()
 
     try:
@@ -77,17 +78,30 @@ def check_git_remote_exists(url, version):
 
     if 'refs/heads/%s' % version in output:
         return True
+
+    # If tags are valid. query for all tags and test for version
+    if not tags_valid:
+        return False
+    cmd = ('git ls-remote %s refs/tags/*' % url).split()
+
+    try:
+        output = subprocess.check_output(cmd)
+    except:
+        return False
+
+    if 'refs/tags/%s' % version in output:
+        return True
     return False
 
 
-def check_source_repo_entry_for_errors(source):
+def check_source_repo_entry_for_errors(source, tags_valid=False):
     if source['type'] != 'git':
         print("Cannot verify remote of type[%s] from line [%s] skipping."
               % (source['type'], source['__line__']))
         return None
 
     version = source['version'] if source['version'] else None
-    if not check_git_remote_exists(source['url'], version):
+    if not check_git_remote_exists(source['url'], version, tags_valid):
         return ("Could not validate repository with url %s and version %s from"
                 " entry at line '''%s'''" % (source['url'],
                                              version,
@@ -103,7 +117,7 @@ def check_repo_for_errors(repo):
             errors.append("Could not validate source entry for repo %s with error [[[%s]]]" %
                           (repo['repo'], source_errors))
     if 'doc' in repo:
-        source_errors = check_source_repo_entry_for_errors(repo['doc'])
+        source_errors = check_source_repo_entry_for_errors(repo['doc'], tags_valid=True)
         if source_errors:
             errors.append("Could not validate doc entry for repo %s with error [[[%s]]]" %
                           (repo['repo'], source_errors))
