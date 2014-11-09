@@ -173,7 +173,7 @@ def isolate_yaml_snippets_from_line_numbers(yaml_dict, line_numbers):
                 print("not a dict %s %s" % (name, values))
                 continue
             # print("comparing to repo %s values %s" % (name, values))
-            if values['__line__'] < dl:
+            if values['__line__'] <= dl:
                 if match and match['__line__'] > values['__line__']:
                     continue
                 match = values
