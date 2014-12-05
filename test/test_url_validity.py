@@ -218,6 +218,8 @@ def main():
         data = load_yaml_with_lines(path)
 
         repos = data['repositories']
+        if not repos:
+            continue
 
         changed_repos = isolate_yaml_snippets_from_line_numbers(repos, lines)
 
