@@ -52,7 +52,7 @@ def detect_lines(diffstr):
     files with line numbers changed"""
     resultant_lines = {}
     io = BytesIO(diffstr)
-    udiff = unidiff.parser.parse_unidiff(io)
+    udiff = unidiff.PatchSet(io)
     for file in udiff:
         target_lines = []
         # if file.path in TARGET_FILES:
