@@ -3,7 +3,7 @@
 from __future__ import print_function
 
 
-from io import BytesIO
+from io import StringIO
 import os
 import subprocess
 import yaml
@@ -51,7 +51,9 @@ def detect_lines(diffstr):
     """Take a diff string and return a dict of
     files with line numbers changed"""
     resultant_lines = {}
-    io = BytesIO(diffstr)
+    # Force utf-8 re: https://github.com/ros/rosdistro/issues/6637
+    encoding = 'utf-8'
+    io = StringIO(unicode(diffstr, encoding))
     udiff = unidiff.PatchSet(io)
     for file in udiff:
         target_lines = []
