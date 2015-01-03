@@ -3,19 +3,24 @@
 from __future__ import print_function
 
 
-from io import StringIO
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from io import StringIO
 import os
 import subprocess
 import yaml
 from yaml.composer import Composer
 from yaml.constructor import Constructor
-import pprint
 import sys
 import unittest
 
 import rosdistro
 import unidiff
 from urlparse import urlparse
+
+# for commented debugging code below
+# import pprint
 
 DIFF_TARGET = 'origin/master'
 EOL_DISTROS = ['groovy']
