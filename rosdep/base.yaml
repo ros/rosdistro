@@ -265,6 +265,7 @@ bison:
   macports: [bison]
   ubuntu: [bison]
 blender:
+  fedora: [blender]
   ubuntu: [blender]
 bluez:
   arch: [bluez]
@@ -321,6 +322,9 @@ boost:
     utopic:
       apt:
         packages: [libboost-all-dev]
+    vivid:
+      apt:
+        packages: [libboost-all-dev]
 box2d-dev:
   arch: [box2d]
   debian: [libbox2d-dev]
@@ -354,6 +358,12 @@ bullet:
       apt:
         packages: [libbullet-dev]
     trusty_python3:
+      apt:
+        packages: [libbullet-dev]
+    utopic:
+      apt:
+        packages: [libbullet-dev]
+    vivid:
       apt:
         packages: [libbullet-dev]
 bzip2:
@@ -446,7 +456,7 @@ cppunit:
   rhel: [cppunit-devel]
   ubuntu: [libcppunit-dev]
 crypto++:
-  fedora: [cryptopp]
+  fedora: [cryptopp-devel]
   ubuntu: [libcrypto++-dev]
 curl:
   arch: [curl]
@@ -479,6 +489,7 @@ dfu-util:
   fedora: [dfu-util]
   ubuntu: [dfu-util]
 disper:
+  fedora: [disper]
   ubuntu: [disper]
 doxygen:
   arch: [doxygen]
@@ -632,7 +643,7 @@ ftdi-eeprom:
   fedora: [libftdi-devel, libftdi-c++-devel]
   ubuntu: [ftdi-eeprom]
 g++-multilib:
-  fedora: [gcc-c++, glibc-devel, glibc-devel(x86-32), glibc-static, glibc-static(x86-32), libstdc++-devel, libstdc++-devel(x86-32), libstdc++-static, libstdc++-static(x86-32)]
+  fedora: [gcc-c++, glibc-devel, 'glibc-devel(%{__isa_name}-32)', glibc-static, 'glibc-static(%{__isa_name}-32)', libstdc++-devel, 'libstdc++-devel(%{__isa_name}-32)', libstdc++-static, 'libstdc++-static(%{__isa_name}-32)']
   ubuntu: [g++-multilib]
 gawk:
   fedora: [gawk]
@@ -653,7 +664,7 @@ gcc-avr:
   gentoo: [cross-avr/gcc]
   ubuntu: [gcc-avr]
 gcc-multilib:
-  fedora: [gcc, glibc-devel, glibc-devel(x86-32), glibc-static, glibc-static(x86-32)]
+  fedora: [gcc, glibc-devel, 'glibc-devel(%{__isa_name}-32)', glibc-static, 'glibc-static(%{__isa_name}-32)']
   ubuntu: [gcc-multilib]
 gccxml:
   arch: [gccxml-git]
@@ -691,6 +702,7 @@ gifsicle:
       packages: [media-gfx/gifsicle]
   ubuntu: [gifsicle]
 gimp:
+  fedora: [gimp]
   ubuntu: [gimp]
 git:
   arch: [git]
@@ -702,6 +714,7 @@ git:
   opensuse: [git-core]
   ubuntu: [git-core]
 gitg:
+  fedora: [gitg]
   ubuntu: [gitg]
 glc:
   arch: [glc]
@@ -729,6 +742,7 @@ google-mock:
   gentoo: [dev-cpp/gmock]
   ubuntu: [google-mock]
 gperftools:
+  fedora: [gperftools, gperftools-devel]
   ubuntu: [ google-perftools, libgoogle-perftools-dev ]
 gradle:
   arch: [gradle]
@@ -895,7 +909,13 @@ jasper:
 java:
   arch: [jdk7-openjdk]
   debian: [openjdk-6-jdk]
-  fedora: [java-1.8.0-openjdk, java-1.7.0-openjdk]
+  fedora:
+    '21': [java-1.8.0-openjdk]
+    '22': [java-1.8.0-openjdk]
+    beefy: [java-1.7.0-openjdk]
+    heisenbug: [java-1.8.0-openjdk, java-1.7.0-openjdk]
+    schrödinger’s: [java-1.8.0-openjdk, java-1.7.0-openjdk]
+    spherical: [java-1.7.0-openjdk]
   freebsd: [openjdk6]
   gentoo: [dev-java/sun-jdk]
   ubuntu: [default-jdk]
@@ -903,6 +923,8 @@ joystick:
   arch: [linuxconsole]
   debian: [joystick]
   fedora:
+    '21': [linuxconsoletools]
+    '22': [linuxconsoletools]
     beefy: [joystick]
     heisenbug: [linuxconsoletools]
     schrödinger’s: [linuxconsoletools]
@@ -935,12 +957,14 @@ kgraphviewer:
       packages: [media-gfx/kgraphviewer]
   ubuntu: [kgraphviewer]
 language-pack-de:
+  fedora: [filesystem]
   ubuntu: [language-pack-de]
 language-pack-en:
+  fedora: [filesystem]
   ubuntu: [language-pack-en]
 lib32asound2:
   debian: [lib32asound2]
-  fedora: [alsa-lib(x86-32), alsa-lib]
+  fedora: ['alsa-lib(%{__isa_name}-32)', alsa-lib]
   ubuntu: [lib32asound2]
 libann-dev:
   arch: [ann]
@@ -1042,6 +1066,7 @@ libconsole-bridge-dev:
     saucy: [libconsole-bridge-dev]
     trusty: [libconsole-bridge-dev]
     utopic: [libconsole-bridge-dev]
+    vivid: [libconsole-bridge-dev]
 libdbus-dev:
   arch: [dbus-core]
   debian: [libdbus-1-dev]
@@ -1284,7 +1309,6 @@ libhal-dev:
   debian:
     apt:
       packages: [libhal-dev]
-  fedora: [hal-devel]
   ubuntu:
     apt:
       packages: [libhal-dev]
@@ -1414,10 +1438,12 @@ libmysqlclient-dev:
   arch: [mariadb]
   debian: [libmysqlclient-dev]
   fedora:
-    beefy: [mysql]
-    heisenbug: [mariadb]
-    schrödinger’s: [mariadb]
-    spherical: [mysql]
+    '21': [mariadb-devel]
+    '22': [mariadb-devel]
+    beefy: [mysql-devel]
+    heisenbug: [mariadb-devel]
+    schrödinger’s: [mariadb-devel]
+    spherical: [mysql-devel]
   gentoo:
     portage:
       packages: [dev-db/mariadb]
@@ -1503,6 +1529,7 @@ libopencv-dev:
     saucy: [libopencv-dev]
     trusty: [libopencv-dev]
     utopic: [libopencv-dev]
+    vivid: [libopencv-dev]
 libopenni-dev:
   arch: [openni]
   debian: [libopenni-dev]
@@ -1635,15 +1662,30 @@ libpopt-dev:
 libpq-dev:
   arch: [postgresql-libs]
   debian: [libpq-dev]
-  fedora: [derelict-postgresql-devel, postgresql-devel]
+  fedora:
+    '21': [derelict-PQ-devel, postgresql-devel]
+    '22': [derelict-PQ-devel, postgresql-devel]
+    beefy: [derelict-postgresql-devel, postgresql-devel]
+    heisenbug: [derelict-postgresql-devel, postgresql-devel]
+    schrödinger’s: [derelict-postgresql-devel, postgresql-devel]
+    spherical: [derelict-postgresql-devel, postgresql-devel]
   gentoo:
     portage:
       packages: [dev-libs/libpqxx]
   ubuntu: [libpq-dev]
 libpulse-dev:
+  fedora: [pulseaudio-libs-devel]
   ubuntu: [libpulse-dev]
 libqcustomplot-dev:
   ubuntu: [libqcustomplot-dev]
+libqd-dev:
+  debian: [libqd-dev]
+  fedora: [qd-devel]
+  gentoo:
+    portage:
+      packages: [sci-libs/qd]
+  macports: [qd]
+  ubuntu: [libqd-dev]
 libqglviewer-qt4:
   arch: [libqglviewer]
   debian: [libqglviewer-qt4-2]
@@ -1734,6 +1776,18 @@ libqt4-sql-psql:
       packages: [dev-qt/qtsql]
   macports: [qt4-mac]
   ubuntu: [libqt4-sql-psql]
+libqt5-core:
+  fedora: [qt5-qtbase]
+  ubuntu: [libqt5core5a]
+libqt5-gui:
+  fedora: [qt5-qtbase-gui]
+  ubuntu: [libqt5gui5]
+libqt5-network:
+  fedora: [qt5-qtbase]
+  ubuntu: [libqt5network5]
+libqt5-sql:
+  fedora: [qt5-qtbase]
+  ubuntu: [libqt5sql5]
 libqtgui4:
   arch: [qt4]
   debian: [libqtgui4]
@@ -1818,6 +1872,8 @@ libreadline-java:
       packages: [dev-java/libreadline-java]
   ubuntu: [libreadline-java]
 libsensors4-dev:
+  arch: [lm_sensors]
+  fedora: [lm_sensors-devel]
   ubuntu: [libsensors4-dev]
 libsimage-dev:
   arch: [simage]
@@ -1851,6 +1907,7 @@ libsqlite3-dev:
       packages: [dev-db/sqlite]
   ubuntu: [libsqlite3-dev]
 libsrtp0-dev:
+  fedora: [libsrtp-devel]
   ubuntu: [libsrtp0-dev]
 libssl-dev:
   arch: [openssl]
@@ -2004,6 +2061,8 @@ libusb-1.0:
   arch: [libusbx]
   debian: [libusb-1.0-0]
   fedora:
+    '21': [libusbx]
+    '22': [libusbx]
     beefy: [libusb1]
     heisenbug: [libusbx]
     schrödinger’s: [libusbx]
@@ -2015,6 +2074,8 @@ libusb-1.0-dev:
   arch: [libusbx]
   debian: [libusb-1.0-0-dev]
   fedora:
+    '21': [libusbx-devel]
+    '22': [libusbx-devel]
     beefy: [libusb1-devel]
     heisenbug: [libusbx-devel]
     schrödinger’s: [libusbx-devel]
@@ -2029,6 +2090,9 @@ libusb-dev:
   fedora: [libusb-devel]
   macports: [libusb]
   ubuntu: [libusb-dev]
+libuv-dev:
+  fedora: [libuv-devel]
+  ubuntu: [libuv-dev]
 libv4l-dev:
   arch: [v4l-utils]
   debian: [libv4l-dev]
@@ -2040,6 +2104,7 @@ libvlc:
   fedora: [vlc-core]
   ubuntu: [libvlc5, vlc-nox]
 libvpx-dev:
+  fedora: [libvpx-devel]
   ubuntu: [libvpx-dev]
 libvtk:
   arch: [vtk]
@@ -2213,6 +2278,7 @@ lz4:
     saucy: [liblz4-dev]
     trusty: [liblz4-dev]
     utopic: [liblz4-dev]
+    vivid: [liblz4-dev]
 m4:
   arch: [m4]
   debian: [m4]
@@ -2231,6 +2297,7 @@ mayavi:
   fedora: [Mayavi]
   ubuntu: [mayavi2]
 meld:
+  fedora: [meld]
   ubuntu: [meld]
 mercurial:
   arch: [mercurial]
@@ -2274,9 +2341,10 @@ mrpt:
     precise: [libmrpt-dev]
     quantal: [libmrpt-dev]
     raring: [libmrpt-dev, mrpt-apps]
-    saucy: [libmrpt-dev]
+    saucy: [libmrpt-dev, mrpt-apps]
     trusty: [libmrpt-dev]
     utopic: [libmrpt-dev]
+    vivid: [libmrpt-dev]
 muparser:
   fedora: [muParser-devel]
   ubuntu: [libmuparser-dev]
@@ -2396,6 +2464,7 @@ openni-dev:
   fedora: [openni-devel]
   ubuntu: [libopenni-dev]
 openssh-server:
+  fedora: [openssh-server]
   ubuntu: [openssh-server]
 osm2pgsql:
   fedora: [osm2pgsql]
@@ -2493,6 +2562,14 @@ qt4-qmake:
   opensuse: [libqt4-devel]
   rhel: [qt-devel]
   ubuntu: [qt4-qmake]
+qt5-qmake:
+  fedora: [qt5-qtbase-devel]
+  ubuntu: [qt5-qmake]
+qtmobility-dev:
+  arch: [qtmobility]
+  debian: [qtmobility-dev]
+  fedora: [qt-mobility-devel]
+  ubuntu: [qtmobility-dev]
 readline-dev:
   arch: [readline]
   debian: [libreadline-dev]
@@ -2762,6 +2839,7 @@ tcsh:
   fedora: [tcsh]
   ubuntu: [tcsh]
 terminator:
+  fedora: [terminator]
   ubuntu: [terminator]
 tesseract-ocr:
   fedora: [tesseract-devel]
@@ -2796,6 +2874,7 @@ texlive-latex-recommended:
   macports: [texlive-latex-recommended]
   ubuntu: [texlive-latex-recommended]
 texmaker:
+  fedora: [texmaker]
   ubuntu: [texmaker]
 tinyxml:
   arch: [tinyxml]
@@ -2814,6 +2893,7 @@ tix:
   fedora: [tix]
   ubuntu: [tix]
 tree:
+  fedora: [tree]
   ubuntu: [tree]
 ttf-kochi-gothic:
   arch: [ttf-togoshi-gothic]
@@ -2888,6 +2968,7 @@ v4l-utils:
   fedora: [v4l-utils]
   ubuntu: [v4l-utils]
 vim:
+  fedora: [vim-enhanced]
   ubuntu: [vim]
 vlc:
   arch: [vlc]
@@ -3049,6 +3130,7 @@ yaml-cpp:
     trusty: [libyaml-cpp-dev]
     trusty_python3: [libyaml-cpp-dev]
     utopic: [libyaml-cpp-dev]
+    vivid: [libyaml-cpp-dev]
 yasm:
   arch: [yasm]
   debian: [yasm]

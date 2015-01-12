@@ -3,19 +3,24 @@
 from __future__ import print_function
 
 
-from io import BytesIO
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from io import StringIO
 import os
 import subprocess
 import yaml
 from yaml.composer import Composer
 from yaml.constructor import Constructor
-import pprint
 import sys
 import unittest
 
 import rosdistro
 import unidiff
 from urlparse import urlparse
+
+# for commented debugging code below
+# import pprint
 
 DIFF_TARGET = 'origin/master'
 EOL_DISTROS = ['groovy']
@@ -51,8 +56,10 @@ def detect_lines(diffstr):
     """Take a diff string and return a dict of
     files with line numbers changed"""
     resultant_lines = {}
-    io = BytesIO(diffstr)
-    udiff = unidiff.parser.parse_unidiff(io)
+    # Force utf-8 re: https://github.com/ros/rosdistro/issues/6637
+    encoding = 'utf-8'
+    io = StringIO(unicode(diffstr, encoding))
+    udiff = unidiff.PatchSet(io)
     for file in udiff:
         target_lines = []
         # if file.path in TARGET_FILES:
