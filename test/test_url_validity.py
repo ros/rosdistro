@@ -56,10 +56,11 @@ def detect_lines(diffstr):
     """Take a diff string and return a dict of
     files with line numbers changed"""
     resultant_lines = {}
+    # diffstr is already utf-8 encoded
+    io = StringIO(diffstr)
     # Force utf-8 re: https://github.com/ros/rosdistro/issues/6637
     encoding = 'utf-8'
-    io = StringIO(unicode(diffstr, encoding))
-    udiff = unidiff.PatchSet(io)
+    udiff = unidiff.PatchSet(io, encoding)
     for file in udiff:
         target_lines = []
         # if file.path in TARGET_FILES:
