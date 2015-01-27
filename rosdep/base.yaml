@@ -623,7 +623,7 @@ flex:
   gentoo: [sys-devel/flex]
   macports: [flex]
   ubuntu: [flex]
-fltk:
+fltk:  # Consider using the libfltk-dev and fluid (fltk runtime) keys instead.
   arch: [fltk]
   debian: [libfltk1.1-dev]
   fedora: [fltk-devel, fltk-fluid]
@@ -632,6 +632,15 @@ fltk:
   macports: [fltk]
   opensuse: [fltk-devel]
   ubuntu: [fluid, libfltk1.1-dev]
+fluid:
+  arch: [fltk]
+  debian: [libfltk1.1-dev]
+  fedora: [fltk-fluid]
+  freebsd: [fltk]
+  gentoo: [=x11-libs/fltk-1*]
+  macports: [fltk]
+  opensuse: [fltk-devel]
+  ubuntu: [fluid]
 freeimage:
   arch: [freeimage]
   debian: [libfreeimage-dev]
@@ -1161,6 +1170,15 @@ libflann-dev:
       packages: [sci-libs/flann]
   macports: [flann]
   ubuntu: [libflann-dev]
+libfltk-dev:
+  arch: [fltk]
+  debian: [libfltk1.1-dev]
+  fedora: [fltk-devel]
+  freebsd: [fltk]
+  gentoo: [=x11-libs/fltk-1*]
+  macports: [fltk]
+  opensuse: [fltk-devel]
+  ubuntu: [libfltk1.1-dev]
 libfreenect-dev:
   arch: [libfreenect]
   debian: [libfreenect-dev]
@@ -1879,6 +1897,7 @@ libreadline-java:
   ubuntu: [libreadline-java]
 libsensors4-dev:
   arch: [lm_sensors]
+  debian: [libsensors4-dev]
   fedora: [lm_sensors-devel]
   ubuntu: [libsensors4-dev]
 libsimage-dev:
@@ -2272,7 +2291,13 @@ log4cxx:
 lua-dev:
   arch: [lua]
   debian: [liblua5.1-0-dev]
-  fedora: [lua-devel]
+  fedora:
+    '21': [compat-lua-devel]
+    '22': [compat-lua-devel]
+    beefy: [lua-devel]
+    heisenbug: [compat-lua-devel]
+    schrödinger’s: [lua-devel]
+    spherical: [lua-devel]
   macports: [lua51]
   ubuntu: [liblua5.1-0-dev]
 lz4:
@@ -2322,6 +2347,7 @@ meshlab:
   fedora: [meshlab]
   ubuntu: [meshlab]
 mongodb:
+  debian: [mongodb]
   fedora: [mongodb]
   ubuntu: [mongodb]
 mongodb-dev:
