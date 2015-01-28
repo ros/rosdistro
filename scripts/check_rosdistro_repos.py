@@ -3,9 +3,12 @@
 from __future__ import print_function
 
 import argparse
+import shutil
 import subprocess
 import sys
+import tempfile
 
+from catkin_pkg.packages import find_package_paths
 from rosdistro import get_distribution_file, get_index, get_index_url
 
 
@@ -50,7 +53,35 @@ def check_svn_repo(url, version):
         raise RuntimeError('not a valid svn repo url')
 
 
-def main(repo_type, rosdistro_name):
+def clone_git_repo(url, version, path):
+    cmd = ['git', 'clone', url, '-b', version, '-q']
+    try:
+        subprocess.check_call(cmd, cwd=path)
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError('not a valid git repo url')
+
+
+def clone_hg_repo(url, version, path):
+    cmd = ['hg', 'clone', url, '-q']
+    if version:
+        cmd.extend(['-b', version])
+    try:
+        subprocess.check_call(cmd, stderr=subprocess.STDOUT, cwd=path)
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError('not a valid hg repo url')
+
+
+def checkout_svn_repo(url, version, path):
+    cmd = ['svn', '--non-interactive', '--trust-server-cert', 'checkout', url, '-q']
+    if version:
+        cmd.extend(['-r', version])
+    try:
+        subprocess.check_call(cmd, stderr=subprocess.STDOUT, cwd=path)
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError('not a valid svn repo url')
+
+
+def main(repo_type, rosdistro_name, check_for_wet_packages=False):
     index = get_index(get_index_url())
     try:
         distribution_file = get_distribution_file(index, rosdistro_name)
@@ -78,9 +109,34 @@ def main(repo_type, rosdistro_name):
             else:
                 print()
                 print("Unknown type '%s' for repository '%s'" % (repo.type, repo.name), file=sys.stderr)
+                continue
         except RuntimeError as e:
             print()
             print("Could not fetch repository '%s': %s (%s) [%s]" % (repo.name, repo.url, repo.version, e), file=sys.stderr)
+            continue
+
+        if check_for_wet_packages:
+            path = tempfile.mkdtemp()
+            try:
+                if repo.type == 'git':
+                    clone_git_repo(repo.url, repo.version, path)
+                elif repo.type == 'hg':
+                    clone_hg_repo(repo.url, repo.version, path)
+                elif repo.type == 'svn':
+                    checkout_svn_repo(repo.url, repo.version, path)
+            except RuntimeError as e:
+                print()
+                print("Could not clone repository '%s': %s (%s) [%s]" % (repo.name, repo.url, repo.version, e), file=sys.stderr)
+                continue
+            else:
+                package_paths = find_package_paths(path)
+                if not package_paths:
+                    print()
+                    print("Repository '%s' (%s [%s]) does not contain any wet packages" % (repo.name, repo.url, repo.version), file=sys.stderr)
+                    continue
+            finally:
+                shutil.rmtree(path)
+
     print()
 
     return True
@@ -90,7 +146,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Checks whether the referenced branches for the doc/source repositories exist')
     parser.add_argument('repo_type', choices=['doc', 'source'], help='The repository type')
     parser.add_argument('rosdistro_name', help='The ROS distro name')
+    parser.add_argument('--check-for-wet-packages', action='store_true', help='Check if the repository contains wet packages rather then dry packages')
     args = parser.parse_args()
 
-    if not main(args.repo_type, args.rosdistro_name):
+    if not main(args.repo_type, args.rosdistro_name, args.check_for_wet_packages):
         sys.exit(1)
