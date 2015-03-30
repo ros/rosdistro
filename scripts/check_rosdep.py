@@ -62,7 +62,7 @@ def generic_parser(buf, cb):
         if re.search(r'^\s*#', l) is not None:
             continue
         try:
-            s = re.search(r'(?!' + indent_atom + ')(\w|\?)', l).start()
+            s = re.search(r'(?!' + indent_atom + ')[^\s]', l).start()
         except:
             print_err("line %u: %s" % (i, l))
             raise
@@ -120,7 +120,8 @@ def check_order(buf):
         m = re.match(r'^(?:' + indent_atom + r')*([^:]*):.*$', l)
         prev = st[lvl]
         try:
-            item = m.groups()[0]
+            # parse as yaml to parse `"foo bar"` as string 'foo bar' not string '"foo bar"'
+            item = yaml.load(m.groups()[0])
         except:
             print('woops line %d' % i)
             raise
@@ -164,6 +165,7 @@ def main(fname):
         ydict = yaml.load(buf)
 
         # ensure that values don't contain whitespaces
+        whitespace_whitelist = ["mountain lion"]
         def walk(node):
             if isinstance(node, dict):
                 for key, value in node.items():
@@ -172,7 +174,7 @@ def main(fname):
             if isinstance(node, list):
                 for value in node:
                     walk(value)
-            if isinstance(node, str) and re.search(r'\s', node):
+            if isinstance(node, str) and re.search(r'\s', node) and not node in whitespace_whitelist:
                     print_err("value '%s' must not contain whitespaces" % node)
                     my_assert(False)
         walk(ydict)
