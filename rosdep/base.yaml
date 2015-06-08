@@ -2,6 +2,8 @@ ace:
   arch: [ace]
   debian: [libace-dev]
   ubuntu: [libace-dev]
+acpi:
+  ubuntu: [acpi]
 alsa-oss:
   arch: [alsa-oss]
   debian: [alsa-oss]
@@ -518,7 +520,7 @@ dvipng:
 eclipse:
   arch: [eclipse, eclipse-rcp, eclipse-emf, eclipse-pde]
   debian: [eclipse, eclipse-rcp, eclipse-xsd, eclipse-pde]
-  fedora: [eclipse-pde,eclipse-emf]
+  fedora: [eclipse-pde, eclipse-emf]
   gentoo:
     portage:
       packages: [dev-java/ant-eclipse-ecj, dev-util/eclipse-sdk, dev-java/eclipse-ecj]
@@ -692,6 +694,9 @@ gazebo:
     raring: [gazebo]
     saucy: [gazebo2]
     trusty: [gazebo2]
+gazebo5:
+  arch: [gazebo]
+  ubuntu: [gazebo5]
 gcc-avr:
   arch: [avr-gcc]
   debian: [gcc-avr]
@@ -776,12 +781,16 @@ gnuplot:
   ubuntu: [gnuplot]
 google-mock:
   arch: [gmock]
-  fedora: [gmock]
+  debian: [google-mock]
+  fedora: [gmock-devel]
+  freebsd: [googlemock]
   gentoo: [dev-cpp/gmock]
+  opensuse: [gmock-devel]
+  rhel: [gmock-devel]
   ubuntu: [google-mock]
 gperftools:
   fedora: [gperftools, gperftools-devel]
-  ubuntu: [ google-perftools, libgoogle-perftools-dev ]
+  ubuntu: [google-perftools, libgoogle-perftools-dev]
 gradle:
   arch: [gradle]
   fedora: [gradle]
@@ -1048,6 +1057,14 @@ libasound2-dev:
   arch: [alsa-lib]
   fedora: [alsa-lib]
   ubuntu: [libasound2-dev]
+libav:
+  arch: [libav-git]
+  debian: [libav-tools]
+  fedora: []
+  gentoo:
+    portage:
+      packages: [media-video/libav]
+  ubuntu: [libav-tools]
 libavahi-client-dev:
   arch: [avahi]
   debian: [libavahi-client-dev]
@@ -1094,6 +1111,7 @@ libcegui-mk2-dev:
       packages: [dev-games/cegui]
   ubuntu: [libcegui-mk2-dev]
 libceres-dev:
+  fedora: [ceres-solver-devel]
   gentoo:
     portage:
       packages: [sci-libs/ceres-solver]
@@ -1195,9 +1213,9 @@ libflann:
       packages: [sci-libs/flann]
   macports: [flann]
   ubuntu:
-    precise:  [libflann1]
-    quantal:  [libflann1.7]
-    raring:  [libflann1.7]
+    precise: [libflann1]
+    quantal: [libflann1.7]
+    raring: [libflann1.7]
 libflann-dev:
   arch: [flann]
   debian: [libflann-dev]
@@ -1251,6 +1269,9 @@ libftgl-dev:
     portage:
       packages: [media-libs/ftgl]
   ubuntu: [libftgl-dev]
+libgazebo5-dev:
+  arch: [gazebo]
+  ubuntu: [libgazebo5-dev]
 libgflags-dev:
   fedora: [gflags-devel]
   gentoo:
@@ -1276,6 +1297,8 @@ libglew-dev:
     raring: [libglew-dev]
     saucy: [libglew-dev]
     trusty: [libglew-dev]
+    utopic: [libglew-dev]
+    vivid: [libglew-dev]
 libglib-dev:
   arch: [glib2]
   debian: [libglib2.0-dev]
@@ -1325,6 +1348,7 @@ libgphoto-dev:
     saucy: [libgphoto2-6-dev]
     trusty: [libgphoto2-dev]
     utopic: [libgphoto2-dev]
+    vivid: [libgphoto2-dev]
 libgps:
   arch: [gpsd]
   debian: [libgps-dev]
@@ -1389,6 +1413,8 @@ libhal-dev:
   ubuntu:
     apt:
       packages: [libhal-dev]
+libicu-dev:
+  ubuntu: [libicu-dev]
 libirrlicht-dev:
   arch: [irrlicht]
   debian: [libirrlicht-dev]
@@ -1543,14 +1569,14 @@ libnl-3:
   gentoo:
     portage:
       packages: [dev-libs/libnl]
-  ubuntu: [libnl-3-200]
+  ubuntu: [libnl-3-200, libnl-genl-3-200]
 libnl-3-dev:
   arch: [libnl]
   fedora: [libnl3-devel]
   gentoo:
     portage:
       packages: [dev-libs/libnl]
-  ubuntu: [libnl-3-dev]
+  ubuntu: [libnl-3-dev, libnl-genl-3-dev]
 libnl-dev:
   arch: [libnl1]
   debian: [libnl-dev]
@@ -1559,6 +1585,8 @@ libnl-dev:
     portage:
       packages: [dev-libs/libnl]
   ubuntu: [libnl-dev]
+libnss3-dev:
+  ubuntu: [libnss3-dev]
 libogg:
   arch: [libogg]
   debian: [libogg-dev]
@@ -1818,6 +1846,8 @@ libqglviewer-qt4:
     raring: [libqglviewer-qt4-2]
     saucy: [libqglviewer2]
     trusty: [libqglviewer2]
+    utopic: [libqglviewer2]
+    vivid: [libqglviewer2]
 libqglviewer-qt4-dev:
   arch: [libqglviewer]
   debian: [libqglviewer-qt4-dev]
@@ -1832,6 +1862,8 @@ libqglviewer-qt4-dev:
     raring: [libqglviewer-qt4-dev]
     saucy: [libqglviewer-dev]
     trusty: [libqglviewer-dev]
+    utopic: [libqglviewer-dev]
+    vivid: [libqglviewer-dev]
 libqhull:
   arch: [qhull]
   debian: [libqhull-dev]
@@ -2027,6 +2059,10 @@ libsqlite3-dev:
 libsrtp0-dev:
   fedora: [libsrtp-devel]
   ubuntu: [libsrtp0-dev]
+libssh2:
+  ubuntu: [libssh2-1]
+libssh2-dev:
+  ubuntu: [libssh2-1-dev]
 libssl-dev:
   arch: [openssl]
   debian: [libssl-dev]
@@ -2116,8 +2152,17 @@ libtool:
   opensuse: [libtool, libltdl3]
   rhel: [libtool, libtool-ltdl-devel]
   ubuntu:
-    apt:
-      packages: [libtool, libltdl-dev]
+    lucid: [libtool, libltdl-dev]
+    maverick: [libtool, libltdl-dev]
+    natty: [libtool, libltdl-dev]
+    oneiric: [libtool, libltdl-dev]
+    precise: [libtool, libltdl-dev]
+    quantal: [libtool, libltdl-dev]
+    raring: [libtool, libltdl-dev]
+    saucy: [libtool, libltdl-dev]
+    trusty: [libtool, libltdl-dev]
+    utopic: [libtool, libltdl-dev, libtool-bin]
+    vivid: [libtool, libltdl-dev, libtool-bin]
 libturbojpeg:
   fedora: [turbojpeg-devel]
   ubuntu: [libturbojpeg]
@@ -2172,6 +2217,9 @@ liburdfdom-headers-dev:
     trusty: [liburdfdom-headers-dev]
     utopic: [liburdfdom-headers-dev]
     vivid: [liburdfdom-headers-dev]
+liburdfdom-tools:
+  debian: [liburdfdom-tools]
+  ubuntu: [liburdfdom-tools]
 libusb:
   arch: [libusb-compat]
   debian: [libusb-0.1-4]
@@ -2282,6 +2330,12 @@ libx264-dev:
   debian: [libx264-dev]
   fedora: [x264-devel]
   ubuntu: [libx264-dev]
+libx52pro:
+  debian: [libx52pro0]
+  ubuntu: [libx52pro0]
+libx52pro-dev:
+  debian: [libx52pro-dev]
+  ubuntu: [libx52pro-dev]
 libxaw:
   arch: [libxaw]
   debian: [libxaw7-dev]
@@ -2455,7 +2509,18 @@ mongodb-dev:
   debian: [libmongo-client-dev, mongodb-dev]
   fedora: [libmongo-client-devel, mongodb-devel]
   macports: [mongodb]
-  ubuntu: [libmongo-client-dev, mongodb-dev]
+  ubuntu:
+    lucid: [libmongo-client-dev, mongodb-dev]
+    maverick: [libmongo-client-dev, mongodb-dev]
+    natty: [libmongo-client-dev, mongodb-dev]
+    oneiric: [libmongo-client-dev, mongodb-dev]
+    precise: [libmongo-client-dev, mongodb-dev]
+    quantal: [libmongo-client-dev, mongodb-dev]
+    raring: [libmongo-client-dev, mongodb-dev]
+    saucy: [libmongo-client-dev, mongodb-dev]
+    trusty: [libmongo-client-dev, mongodb-dev]
+    utopic: [libmongo-client-dev]
+    vivid: [libmongo-client-dev]
 mono-devel:
   debian: [mono-devel]
   fedora: [mono-devel]
@@ -2540,6 +2605,8 @@ omniidl:
     raring: [omniidl]
     saucy: [omniidl]
     trusty: [omniidl]
+    utopic: [omniidl]
+    vivid: [omniidl]
 omniorb:
   arch: [omniorb]
   debian:
@@ -2562,6 +2629,8 @@ omniorb:
     raring: [omniorb, omniidl, omniorb-nameserver, libomniorb4-dev]
     saucy: [omniorb, omniidl, omniorb-nameserver, libomniorb4-dev]
     trusty: [omniorb, omniidl, omniorb-nameserver, libomniorb4-dev]
+    utopic: [omniorb, omniidl, omniorb-nameserver, libomniorb4-dev]
+    vivid: [omniorb, omniidl, omniorb-nameserver, libomniorb4-dev]
 omniorb4-idl:
   arch: [omniorb]
   debian: [omniorb-idl]
@@ -2640,6 +2709,8 @@ postgresql-9.x-postgis:
     raring: [postgresql-9.1-postgis, postgresql-contrib-9.1, postgresql-server-dev-9.1]
     saucy: [postgresql-9.1-postgis, postgresql-contrib-9.1, postgresql-server-dev-9.1]
     trusty: [postgresql-9.3-postgis-2.1, postgresql-contrib-9.3, postgresql-server-dev-9.3]
+    utopic: [postgresql-9.4-postgis-2.1, postgresql-contrib-9.4, postgresql-server-dev-9.4]
+    vivid: [postgresql-9.4-postgis-2.1, postgresql-contrib-9.4, postgresql-server-dev-9.4]
 procps:
   arch: [procps-ng]
   debian: [procps]
@@ -2710,6 +2781,10 @@ readline-dev:
   debian: [libreadline-dev]
   fedora: [readline-devel]
   ubuntu: [libreadline-dev]
+recode:
+  arch: [recode]
+  fedora: [recode-devel]
+  ubuntu: [recode]
 recordmydesktop:
   arch: [recordmydesktop]
   debian: [recordmydesktop]
@@ -2809,6 +2884,12 @@ sdl-image:
   macports: [libsdl_image]
   opensuse: [SDL_image]
   ubuntu: [libsdl-image1.2-dev]
+sdl-mixer:
+  arch: [sdl_mixer]
+  debian: [libsdl-mixer1.2-dev]
+  fedora: [SDL_mixer-devel]
+  macports: [libsdl_mixer]
+  ubuntu: [libsdl-mixer1.2-dev]
 sdl-ttf:
   arch: [sdl_ttf]
   debian: [libsdl-ttf2.0-dev]
@@ -3110,6 +3191,11 @@ vlc:
   debian: [vlc]
   fedora: [vlc]
   ubuntu: [vlc]
+vrep:
+  ubuntu:
+    trusty:
+      source:
+        uri: 'https://raw.githubusercontent.com/peci1/vrep_ros_bridge/rdmanifest/vrep.rdmanifest'
 wkhtmltopdf:
   arch: [wkhtmltopdf]
   debian: [wkhtmltopdf]
