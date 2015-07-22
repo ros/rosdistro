@@ -3,6 +3,7 @@
 import yaml
 import argparse
 import re
+import io
 
 dont_bracket = ['uri', 'md5sum']
 
@@ -51,5 +52,5 @@ if __name__ == '__main__':
     for a in sorted(iny):
         buf += prn(iny[a], a, 0)
 
-    with open(args.outfile, 'w') as f:
+    with io.open(args.outfile, 'w', encoding='utf-8') as f:
         f.write(buf)
