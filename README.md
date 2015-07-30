@@ -7,6 +7,8 @@ It also the home of the rosdep rules.
 Guide to Contributing
 ---------------------
 
+[![Join the chat at https://gitter.im/ros/rosdistro](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ros/rosdistro?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Please see [CONTRIBUTING.md](CONTRIBUTING.md)
 
 A Quick Overview of How to Use this Repository
