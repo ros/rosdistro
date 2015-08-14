@@ -127,7 +127,7 @@ def check_order(buf):
             raise
         st[lvl] = item
         if item < prev:
-            print_err("list out of alphabetical order line %u" % (i+1))
+            print_err("list out of alphabetical order line %u.  '%s' should come before '%s'" % ((i+1), item, prev))
             return False
         return True
     fun.namestack = ['']
