@@ -23,7 +23,7 @@ from urlparse import urlparse
 # import pprint
 
 DIFF_TARGET = 'origin/master'
-EOL_DISTROS = ['groovy']
+EOL_DISTROS = ['groovy', 'hydro']
 
 
 TARGET_FILE_BLACKLIST = []
