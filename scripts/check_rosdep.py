@@ -177,7 +177,7 @@ def main(fname):
         ydict = yaml.load(buf)
 
         # ensure that values don't contain whitespaces
-        whitespace_whitelist = ["mountain lion"]
+        whitespace_whitelist = ["el capitan", "mountain lion"]
 
         def walk(node):
             if isinstance(node, dict):
