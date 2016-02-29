@@ -398,6 +398,11 @@ ca-certificates:
   debian: [ca-certificates]
   fedora: [ca-certificates]
   ubuntu: [ca-certificates]
+can-utils:
+  ubuntu:
+    trusty: [can-utils]
+    utopic: [can-utils]
+    vivid: [can-utils]
 catkin_pkg:
   gentoo:
     portage:
@@ -488,16 +493,16 @@ crypto++:
   ubuntu: [libcrypto++-dev]
 curl:
   arch: [curl]
-  debian: [libcurl4-openssl-dev]
-  fedora: [libcurl-devel]
+  debian: [libcurl4-openssl-dev, curl]
+  fedora: [libcurl-devel, curl]
   freebsd: [curl]
   gentoo:
     portage:
       packages: [net-misc/curl]
   macports: [curl]
-  opensuse: [libcurl-devel]
-  rhel: [libcurl-devel]
-  ubuntu: [libcurl4-openssl-dev]
+  opensuse: [libcurl-devel, curl]
+  rhel: [libcurl-devel, curl]
+  ubuntu: [libcurl4-openssl-dev, curl]
 cvs:
   arch: [cvs]
   fedora: [cvs]
@@ -505,6 +510,20 @@ cvs:
     portage:
       packages: [dev-vcs/cvs]
   ubuntu: [cvs]
+cwiid:
+  arch: [cwiid]
+  debian: [libcwiid1]
+  fedora: [cwiid]
+  gentoo: [app-misc/cwiid]
+  opensuse: [libcwiid1]
+  ubuntu: [libcwiid1]
+cwiid-dev:
+  arch: [cwiid]
+  debian: [libcwiid-dev]
+  fedora: [cwiid-devel]
+  gentoo: [app-misc/cwiid]
+  opensuse: [libcwiid-devel]
+  ubuntu: [libcwiid-dev]
 daemontools:
   arch: [daemontools]
   debian: [daemontools]
@@ -631,6 +650,8 @@ festival:
     portage:
       packages: [app-accessibility/festival]
   ubuntu: [festival, festvox-kallpc16k]
+festival-dev:
+  ubuntu: [festival-dev]
 ffmpeg:
   arch: [ffmpeg]
   debian: [ffmpeg, libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
@@ -760,6 +781,8 @@ gdal-bin:
   fedora: [gdal]
   gentoo: [sci-libs/gdal]
   ubuntu: [gdal-bin]
+geographiclib:
+  ubuntu: [libgeographiclib-dev]
 geos:
   fedora: [geos-devel]
   ubuntu: [libgeos-dev]
@@ -803,6 +826,8 @@ gitg:
   fedora: [gitg]
   gentoo: [dev-vcs/gitg]
   ubuntu: [gitg]
+gksu:
+  ubuntu: [gksu]
 glc:
   arch: [glc]
   gentoo:
@@ -892,12 +917,27 @@ gstreamer0.10-plugins-ugly:
 gstreamer0.10-pocketsphinx:
   fedora: [pocketsphinx-plugin]
   ubuntu: [gstreamer0.10-pocketsphinx]
+gstreamer1.0-libav:
+  debian: [gstreamer1.0-libav]
+  ubuntu: [gstreamer1.0-libav]
+gstreamer1.0-plugins-bad:
+  debian: [gstreamer1.0-plugins-bad]
+  ubuntu: [gstreamer1.0-plugins-bad]
+gstreamer1.0-plugins-base:
+  debian: [gstreamer1.0-plugins-base]
+  ubuntu: [gstreamer1.0-plugins-base]
 gstreamer1.0-plugins-good:
   debian: [gstreamer1.0-plugins-good]
   ubuntu: [gstreamer1.0-plugins-good]
 gstreamer1.0-plugins-ugly:
   debian: [gstreamer1.0-plugins-ugly]
   ubuntu: [gstreamer1.0-plugins-ugly]
+gstreamer1.0-tools:
+  debian: [gstreamer1.0-tools]
+  ubuntu: [gstreamer1.0-tools]
+gstreamer1.0-x:
+  debian: [gstreamer1.0-x]
+  ubuntu: [gstreamer1.0-x]
 gtest:
   arch: [gtest]
   debian: [libgtest-dev]
@@ -1241,10 +1281,21 @@ libdrm-dev:
     portage:
       packages: [x11-base/nouveau-drm]
   ubuntu: [libdrm-dev]
+libesd0-dev:
+  ubuntu: [libesd0-dev]
 libespeak-dev:
   debian: [libespeak-dev]
   fedora: [espeak-devel]
   ubuntu: [libespeak-dev]
+libestools-dev:
+  fedora: [festival-speechtools-devel]
+  ubuntu:
+    saucy: [libestools2.1-dev]
+    trusty: [libestools2.1-dev]
+    utopic: [libestools2.1-dev]
+    vivid: [libestools2.1-dev]
+    wily: [libestools-dev]
+    xenial: [libestools-dev]
 libev-dev:
   arch: [libev]
   debian: [libev-dev]
@@ -1342,6 +1393,10 @@ libgazebo5-dev:
   fedora: [gazebo-devel]
   gentoo: [sci-electronics/gazebo]
   ubuntu: [libgazebo5-dev]
+libgeographiclib-dev:
+  fedora: [geographiclib]
+  gentoo: [sci-geosciences/geographiclib]
+  ubuntu: [libgeographiclib-dev]
 libgeos++-dev:
   ubuntu: [libgeos++-dev]
 libgflags-dev:
@@ -1682,6 +1737,10 @@ libnl-dev:
     portage:
       packages: [dev-libs/libnl]
   ubuntu: [libnl-dev]
+libnlopt-dev:
+  ubuntu: [libnlopt-dev]
+libnlopt0:
+  ubuntu: [libnlopt0]
 libnss3-dev:
   fedora: [nss-devel]
   ubuntu: [libnss3-dev]
@@ -1843,6 +1902,8 @@ libphonon-dev:
   ubuntu:
     apt:
       packages: [libphonon-dev]
+libpng++-dev:
+  ubuntu: [libpng++-dev]
 libpng12-dev:
   arch: [libpng]
   debian: [libpng12-dev]
@@ -2269,7 +2330,7 @@ libtool:
     vivid: [libtool, libltdl-dev, libtool-bin]
 libturbojpeg:
   fedora: [turbojpeg-devel]
-  ubuntu: [libturbojpeg]
+  ubuntu: [libturbojpeg, libjpeg-turbo8-dev]
 libudev-dev:
   arch: [systemd]
   debian: [libudev-dev]
@@ -2324,6 +2385,7 @@ liburdfdom-headers-dev:
     utopic: [liburdfdom-headers-dev]
     vivid: [liburdfdom-headers-dev]
 liburdfdom-tools:
+  arch: [urdfdom]
   debian: [liburdfdom-tools]
   fedora: [urdfdom]
   ubuntu: [liburdfdom-tools]
@@ -2530,6 +2592,10 @@ libxxf86vm:
   opensuse: [xorg-x11-devel]
   rhel: [libXxf86vm-devel]
   ubuntu: [libxxf86vm-dev]
+libzmq3-dev:
+  ubuntu: [libzmq3-dev]
+libzmqpp3:
+  ubuntu: [libzmqpp3]
 linux-headers-generic:
   arch: [linux-headers]
   debian: [linux-headers-generic]
@@ -2638,6 +2704,15 @@ mpg123:
   debian: [mpg123]
   fedora: [mpg123-devel]
   ubuntu: [mpg123]
+mplayer:
+  arch: [mplayer]
+  debian:
+    jessie: [mplayer]
+    sid: [mplayer]
+    squeeze: [mplayer]
+    wheezy: [mplayer]
+  fedora: [mplayer]
+  ubuntu: [mplayer]
 mrpt:
   debian: [libmrpt-dev]
   fedora: [mrpt-devel]
@@ -2695,6 +2770,9 @@ nodejs:
   debian: [nodejs]
   fedora: [nodejs]
   ubuntu: [nodejs]
+npm:
+  debian: [npm]
+  ubuntu: [npm]
 nvidia-cg:
   arch: [nvidia-cg-toolkit]
   debian: [nvidia-cg-toolkit]
@@ -2787,6 +2865,8 @@ openni-dev:
   debian: [libopenni-dev]
   fedora: [openni-devel]
   ubuntu: [libopenni-dev]
+openssh-client:
+  ubuntu: [openssh-client]
 openssh-server:
   fedora: [openssh-server]
   ubuntu: [openssh-server]
@@ -2918,7 +2998,7 @@ python-sphinx:
   fedora: [python-sphinx]
   gentoo: [dev-python/sphinx]
 python-vtk:
-  fedora: [vtk-phython]
+  fedora: [vtk-python]
   gentoo: [dev-python/pyvtk]
 qhull-bin:
   arch: [qhull]
@@ -2998,6 +3078,8 @@ ruby:
     raring: [ruby1.9.1-dev, libruby1.9.1, ruby1.9.1]
     saucy: [ruby1.9.1-dev, libruby1.9.1, ruby1.9.1]
     trusty: [ruby1.9.1-dev, libruby1.9.1, ruby1.9.1]
+    utopic: [ruby1.9.1-dev, libruby1.9.1, ruby1.9.1]
+    vivid: [ruby1.9.1-dev, libruby1.9.1, ruby1.9.1]
 ruby-sass:
   fedora: [rubygem-sass]
   ubuntu: [ruby-sass]
@@ -3076,6 +3158,14 @@ sdl-ttf:
   debian: [libsdl-ttf2.0-dev]
   fedora: [SDL_ttf]
   ubuntu: [libsdl-ttf2.0-dev]
+sdl2:
+  debian: [libsdl2-dev]
+  fedora: [SDL2-devel]
+  ubuntu: [libsdl2-dev]
+sdl2-ttf:
+  debian: [libsdl2-ttf-dev]
+  fedora: [SDL2_ttf-devel]
+  ubuntu: [libsdl2-ttf-dev]
 sfml-dev:
   arch: [sfml]
   fedora: [SFML-devel]
@@ -3093,6 +3183,9 @@ socat:
   arch: [socat]
   fedora: [socat]
   ubuntu: [socat]
+sound-theme-freedesktop:
+  fedora: [sound-theme-freedesktop]
+  ubuntu: [sound-theme-freedesktop]
 sox:
   fedora: [sox]
   ubuntu: [sox]
@@ -3287,6 +3380,10 @@ texlive-latex-recommended:
 texmaker:
   fedora: [texmaker]
   ubuntu: [texmaker]
+time:
+  debian: [time]
+  fedora: [time]
+  ubuntu: [time]
 tinyxml:
   arch: [tinyxml]
   debian: [libtinyxml-dev]
@@ -3417,6 +3514,9 @@ wkhtmltopdf:
   debian: [wkhtmltopdf]
   fedora: [wkhtmltopdf]
   ubuntu: [wkhtmltopdf]
+workrave:
+  fedora: [workrave]
+  ubuntu: [workrave, workrave-data]
 wx-common:
   arch: [wxgtk]
   debian: [wx-common]
@@ -3522,6 +3622,8 @@ xulrunner-dev:
   debian: [libv8-dev]
   fedora: [libv8-devel, xulrunner-devel]
   ubuntu: [libv8-dev]
+xvfb:
+  ubuntu: [xvfb]
 xz-utils:
   arch: [xz]
   debian: [xz-utils]
