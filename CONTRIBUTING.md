@@ -26,8 +26,9 @@ rosdep rules contributions
 --------------------------
 
 This repository also holds the rosdep keys.
-There is a guide for submitting rosdep keys [here](http://docs.ros.org/independent/api/rosdep/html/contributing_rules.html). 
-
+There is a guide for submitting rosdep keys [here](http://docs.ros.org/independent/api/rosdep/html/contributing_rules.html).
+Updates to rosdep rules require the review of two people.
+This will usually means that it needs a +1, and then it can be merged by a different person.
 
 How to submit pull requests
 ---------------------------
