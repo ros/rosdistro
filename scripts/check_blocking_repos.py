@@ -161,7 +161,7 @@ unblocked_leaf_repos = unblocked_leaf_repos.difference(
     unblocked_blocking_repos)
 
 if len(blocked_repos.keys()) > 0:
-    print('The following repos cannot be released because of unreleased'
+    print('The following repos cannot be released because of unreleased '
           'dependencies:')
     for blocked_repo_name in sorted(blocked_repos.keys()):
         unreleased_repos = blocked_repos[blocked_repo_name]
