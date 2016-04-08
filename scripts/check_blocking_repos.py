@@ -85,6 +85,10 @@ if args.comparison:
 else:
     prev_distro_key = valid_distro_keys[i - 1]
 
+if prev_distro_key == distro_key:
+    print('It does not make sense to compare distro [%s] to itself.', file=sys.stderr)
+    exit(-1)
+
 cache = rosdistro.get_distribution_cache(index, distro_key)
 distro_file = cache.distribution_file
 
