@@ -30,6 +30,12 @@ parser.add_argument(
     metavar='depth', type=int,
     help='Maxmium depth to crawl the dependency tree')
 
+parser.add_argument(
+    '--comparison-rosdistro',
+    metavar='ROS_DISTRO',
+    dest='comparison',
+    help='The rosdistro with which to compare')
+
 args = parser.parse_args()
 
 distro_key = args.rosdistro
@@ -51,7 +57,14 @@ except ValueError:
 if i == 0:
     print('No previous distribution found.')
     exit(-1)
-prev_distro_key = valid_distro_keys[i - 1]
+
+if args.comparison:
+    if args.comparison not in valid_distro_keys:
+        print('Invalid rosdistro selected for comparison')
+        exit(-1)
+    prev_distro_key = args.comparison
+else:
+    prev_distro_key = valid_distro_keys[i - 1]
 
 cache = rosdistro.get_distribution_cache(index, distro_key)
 distro_file = cache.distribution_file
