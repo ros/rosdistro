@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
+
 import argparse
 
 import rosdistro
 from rosdistro.dependency_walker import DependencyWalker
-
+import sys
 
 def is_released(repo, dist_file):
     return repo in dist_file.repositories and \
@@ -52,15 +54,16 @@ if distro_key is None:
 try:
     i = valid_distro_keys.index(distro_key)
 except ValueError:
-    print('Distribution key not found in list of valid distributions.')
+    print('Distribution key not found in list of valid distributions.', file=sys.stderr)
     exit(-1)
-if i == 0:
-    print('No previous distribution found.')
+if i == 0 and not args.comparison:
+    print('No previous distribution found.', file=sys.stderr)
     exit(-1)
 
 if args.comparison:
     if args.comparison not in valid_distro_keys:
-        print('Invalid rosdistro selected for comparison')
+        print('Invalid rosdistro [%s] selected for comparison.' % args.comparison, file=sys.stderr)
+        print('Valid rosdistros are %s.' % valid_distro_keys, file=sys.stderr)
         exit(-1)
     prev_distro_key = args.comparison
 else:
