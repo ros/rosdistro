@@ -1,17 +1,13 @@
-This repo maintains the lists of repositories defining ROS distributions.  
+This repo maintains the lists of repositories defining ROS distributions.
 
-It is the implementation of [REP 141](http://ros.org/reps/rep-0141.html)
+It is the implementation of [REP 143](http://ros.org/reps/rep-0143.html)
 
-How to submit pull requests
----------------------------
+It also the home of the rosdep rules.
 
-When submitting pull requests it is expected that they pass the unit tests for formatting. 
-The unit tests enforce alphabetization of elements and a consistant formatting to keep merging as clean as possible. 
+Guide to Contributing
+---------------------
 
-To run the tests run ``nosetests`` in the root of the repository.  They require the rosdistro library, 
-available on Ubuntu with the ROS repositories as python-rosdistro or via pip as rosdistro.
-
-There is a tool ``rosdistro_reformat`` which will fix most formatting errors such as alphabetization and correct formatting.
+Please see [CONTRIBUTING.md](CONTRIBUTING.md)
 
 A Quick Overview of How to Use this Repository
 ----------------------------------------------
