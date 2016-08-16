@@ -41,7 +41,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 distro_key = args.rosdistro
-repo_names = args.repositories
+repo_names_argument = args.repositories
 prev_distro_key = None
 
 index = rosdistro.get_index(rosdistro.get_index_url())
@@ -101,16 +101,14 @@ prev_distro_file = prev_cache.distribution_file
 
 dependency_walker = DependencyWalker(prev_distribution)
 
-if repo_names is None:
+if repo_names_argument is None:
     # Check missing dependencies for packages that were in the previous
     # distribution that have not yet been released in the current distribution
     # Filter repos without a version or a release repository
-    keys = prev_distro_file.repositories.keys()
-    prev_repo_names = set(
-        repo for repo in keys if is_released(repo, prev_distro_file))
-else:
-    prev_repo_names = set(
-        repo for repo in repo_names if is_released(repo, prev_distro_file))
+    repo_names_argument = prev_distro_file.repositories.keys()
+
+prev_repo_names = set(
+    repo for repo in repo_names_argument if is_released(repo, prev_distro_file))
 
 keys = distro_file.repositories.keys()
 current_repo_names = set(
@@ -128,10 +126,9 @@ repo_names_set = prev_repo_names.difference(
     current_repo_names)
 
 if len(repo_names_set) == 0:
-    if repo_names is None:
-        print('Everything in {0} was released into the next {1}!'.format(
+    if repo_names_argument is None:
+        print('Everything in {0} was released into {1}!'.format(
             prev_distro_key, distro_key))
-        print('This was probably a bug.')
     else:
         print('All inputs are invalid or were already released in {0}.'.format(
             distro_key))
