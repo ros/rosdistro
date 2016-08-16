@@ -124,14 +124,13 @@ if len(eliminated_repositories) > 0:
 
 repo_names_set = prev_repo_names.difference(
     current_repo_names)
+invalid_names = set(repo_names_argument).difference(prev_repo_names)
 
 if len(repo_names_set) == 0:
-    if repo_names_argument is None:
-        print('Everything in {0} was released into {1}!'.format(
-            prev_distro_key, distro_key))
-    else:
-        print('All inputs are invalid or were already released in {0}.'.format(
-            distro_key))
+    print('All inputs are invalid or were already released in {0}.'.format(
+        distro_key))
+    if invalid_names:
+        print('Could no resolve: %s in %s' % (list(invalid_names), prev_distro_key))
     print('Exiting without checking any dependencies.')
     exit(0)
 
@@ -213,3 +212,8 @@ if len(unblocked_blocking_repos) > 0:
     print('The following repos can be released, and are blocking other repos:')
     print('\n'.join(
         sorted('\t{0}'.format(repo) for repo in unblocked_blocking_repos)))
+
+if len(invalid_names):
+    print('Could no resolve the following arguments in %s: ' % prev_distro_key)
+    print('\n'.join(
+        sorted('\t{0}'.format(repo) for repo in invalid_names)))
