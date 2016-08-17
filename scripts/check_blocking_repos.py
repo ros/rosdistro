@@ -8,10 +8,11 @@ import sys
 import rosdistro
 from rosdistro.dependency_walker import DependencyWalker
 
-def is_released(repo, dist_file):
-    return repo in dist_file.repositories and \
-        dist_file.repositories[repo].release_repository is not None and \
-        dist_file.repositories[repo].release_repository.version is not None
+
+def is_released(repository, dist_file):
+    return repository in dist_file.repositories and \
+        dist_file.repositories[repository].release_repository is not None and \
+        dist_file.repositories[repository].release_repository.version is not None
 
 
 parser = argparse.ArgumentParser(
@@ -73,10 +74,6 @@ if args.comparison:
 else:
     prev_distro_key = valid_distro_keys[i - 1]
 
-if i == 0 and not args.comparison:
-    print('No previous distribution found.', file=sys.stderr)
-    exit(-1)
-
 cache = rosdistro.get_distribution_cache(index, distro_key)
 distro_file = cache.distribution_file
 
@@ -117,7 +114,8 @@ if len(repo_names_set) == 0:
     print('All inputs are invalid or were already released in {0}.'.format(
         distro_key))
     if invalid_names:
-        print('Could no resolve: %s in %s' % (list(invalid_names), prev_distro_key))
+        print('Could no resolve: %s in %s' % (list(invalid_names), prev_distro_key), file=sys.stderr)
+        exit(1)
     print('Exiting without checking any dependencies.')
     exit(0)
 
@@ -201,6 +199,7 @@ if len(unblocked_blocking_repos) > 0:
         sorted('\t{0}'.format(repo) for repo in unblocked_blocking_repos)))
 
 if len(invalid_names):
-    print('Could no resolve the following arguments in %s: ' % prev_distro_key)
+    print('Could no resolve the following arguments in %s: ' % prev_distro_key, file=sys.stderr)
     print('\n'.join(
-        sorted('\t{0}'.format(repo) for repo in invalid_names)))
+        sorted('\t{0}'.format(repo) for repo in invalid_names)), file=sys.stderr)
+    exit(1)
