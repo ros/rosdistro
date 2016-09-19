@@ -1,0 +1,25 @@
+tracks:
+  indigo:
+    actions:
+    - bloom-export-upstream :{vcs_local_uri} :{vcs_type} --tag :{release_tag} --display-uri
+      :{vcs_uri} --name :{name} --output-dir :{archive_dir_path}
+    - git-bloom-import-upstream :{archive_path} :{patches} --release-version :{version}
+      --replace
+    - git-bloom-generate -y rosrelease :{ros_distro} --source upstream -i :{release_inc}
+    - git-bloom-generate -y rosdebian --prefix release/:{ros_distro} :{ros_distro}
+      -i :{release_inc} --os-name ubuntu
+    - git-bloom-generate -y rosdebian --prefix release/:{ros_distro} :{ros_distro}
+      -i :{release_inc} --os-name debian --os-not-required
+    - git-bloom-generate -y rosrpm --prefix release/:{ros_distro} :{ros_distro} -i
+      :{release_inc}
+    devel_branch: null
+    last_version: 0.1.0
+    name: aubo_robot
+    patches: null
+    release_inc: '2'
+    release_repo_url: null
+    release_tag: :{version}
+    ros_distro: indigo
+    vcs_type: git
+    vcs_uri: https://github.com/auboliuxin/aubo_robot.git
+    version: :{auto}
