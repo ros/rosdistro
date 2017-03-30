@@ -1,5 +1,8 @@
+from collections import OrderedDict
 import os
 
+from catkin_pkg.package import parse_package_string
+from ros_buildfarm.common import topological_order_packages
 from rosdistro import get_index
 from rosdistro.distribution_cache_generator import generate_distribution_cache
 
@@ -21,11 +24,24 @@ If this fails you can run 'rosdistro_build_cache index.yaml' to perform the same
         dist_names = [n for n in dist_names if n not in eol_distro_names]
 
         errors = []
+        caches = OrderedDict()
         for dist_name in dist_names:
             with Fold():
                 try:
-                    generate_distribution_cache(index, dist_name)
+                    cache = generate_distribution_cache(index, dist_name)
                 except RuntimeError as e:
                     errors.append(str(e))
+                caches[dist_name] = cache
+
+        # also check topological order to prevent circular dependencies
+        for dist_name, cache in caches.items():
+            pkgs = {}
+            for pkg_name, pkg_xml in cache.release_package_xmls.items():
+                pkgs[pkg_name] = parse_package_string(pkg_xml)
+            try:
+                topological_order_packages(pkgs)
+            except RuntimeError as e:
+                errors.append('%s: %s' % (dist_name, e))
+
         if errors:
             raise RuntimeError('\n'.join(errors))
