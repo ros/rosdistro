@@ -36,8 +36,10 @@ If this fails you can run 'rosdistro_build_cache index.yaml' to perform the same
         # also check topological order to prevent circular dependencies
         for dist_name, cache in caches.items():
             pkgs = {}
+            print("Parsing manifest files for '%s'" % dist_name)
             for pkg_name, pkg_xml in cache.release_package_xmls.items():
                 pkgs[pkg_name] = parse_package_string(pkg_xml)
+            print("Order all packages in '%s' topologically" % dist_name)
             try:
                 topological_order_packages(pkgs)
             except RuntimeError as e:
