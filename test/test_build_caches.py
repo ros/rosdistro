@@ -31,7 +31,8 @@ If this fails you can run 'rosdistro_build_cache index.yaml' to perform the same
                     cache = generate_distribution_cache(index, dist_name)
                 except RuntimeError as e:
                     errors.append(str(e))
-                caches[dist_name] = cache
+                else:
+                    caches[dist_name] = cache
 
         # also check topological order to prevent circular dependencies
         for dist_name, cache in caches.items():
