@@ -77,26 +77,33 @@ from rosdep2.sources_list import load_cached_sources_list, DataSourceMatcher, So
 from rosdep2.lookup import RosdepLookup
 from rosdep2.rospkg_loader import DEFAULT_VIEW_KEY
 
+from rosdep2.sources_list import *
 
-def main(infile):
+def create_default_sources():
+    sources = []
+    # get all rosdistro files
+    basedir = os.path.realpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
+    filepath = os.path.join(basedir, 'index.yaml')
+    with open(filepath) as f:
+        index = yaml.load(f.read())
+        for distro in index['distributions']:
+            distfile = 'file://'+basedir+'/'+distro+'/distribution.yaml'
+            print_test("loading %s" % (distfile))
+            rds = RosDistroSource(distro)
+            rosdep_data = get_gbprepo_as_rosdep_data(distro)
+            sources.append(CachedDataSource('yaml', distfile, [distro], rosdep_data))
+    for filename in os.listdir(os.path.join(basedir,'rosdep')):
+        if filename.endswith('yaml'):
+            filepath = os.path.join(basedir, 'rosdep', filename)
+            with open(filepath) as f:
+                rosdep_data = yaml.load(f.read())
+            tag = 'osx' if 'osx-' in filepath else ''
+            sources.append(CachedDataSource('yaml', 'flie:/'+filepath, [tag], rosdep_data))
+    return sources
+
+
+def check_duplicates(sources):
     ret = True
-    # surces
-    sources = load_cached_sources_list()
-    matcher = DataSourceMatcher.create_default()
-    sources = [x for x in sources if matcher.matches(x)]
-    print_test("default sources")
-    for source in sources:
-        print_test("- %s" % source.url)
-
-    # replace with infile
-    for filename in infile:
-        filepath = os.path.join(os.getcwd(), filename)
-        with open(filepath) as f:
-            rosdep_data = yaml.load(f.read())
-        model = CachedDataSource('yaml', 'flie:/'+filepath, [], rosdep_data)
-        # remove files with same filename
-        sources = [model if os.path.basename(filename) == os.path.basename(x.url) else x for x in sources]
-
     # output debug info
     print_test("checking sources")
     for source in sources:
@@ -121,6 +128,41 @@ def main(infile):
                 ret = False
             db_name_view[dep_name] = view_key
     return ret
+
+def main(infile):
+
+    # surces
+    sources = create_default_sources()
+    matcher = DataSourceMatcher.create_default()
+
+    print_test("default sources")
+    for source in sources:
+        print_test("- %s" % source.url)
+
+    # replace with infile
+    for filename in infile:
+        filepath = os.path.join(os.getcwd(), filename)
+        with open(filepath) as f:
+            rosdep_data = yaml.load(f.read())
+        # osx-homebrow uses xos tag
+        tag = 'osx' if 'osx-' in filepath else ''
+        model = CachedDataSource('yaml', 'flie:/'+filepath, [tag], rosdep_data)
+        # add sources if not exists
+        if not [x for x in sources if os.path.basename(filename) == os.path.basename(x.url)]:
+            sources.append(model)
+        else:
+            # remove files with same filename
+            sources = [model if os.path.basename(filename) == os.path.basename(x.url) else x for x in sources]
+
+    ret = True
+    for tag in [['indigo', 'ubuntu', 'trusty'],
+                ['jade', 'ubuntu', 'trusty'],
+                ['kinetic', 'ubuntu', 'xenial'],
+                ['lunar', 'ubuntu', 'xenial']]:
+        matcher.tags = tag
+        print_test('checking with %s'%(matcher.tags))
+        sources = [x for x in sources if matcher.matches(x)]
+        ret = ret & check_duplicates(sources)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Checks whether rosdep files contains duplicate ROS rules')
