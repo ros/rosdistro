@@ -35,6 +35,14 @@ For convenience in reviewing please link to the web listings of packages such as
 Please also briefly describe the package being added and what use case you want to use it for.
 It's valuable to have a record of the packages as submitted and their intended purpose for clarity in the future so that if there's a conflict there's information to fall back on instead of speculation about the original use cases.
 
+Guidelines for rosdep rules
+---------------------------
+
+ * Native packages are strongly preferred (They are required for packaging and have upgrade and conflict tracking.)
+ * Python packages should go in the python.yaml
+ * Homebrew into homebrew.yaml
+ * If a package is only available via pip use the `-pip` extension.
+
 How to submit pull requests
 ---------------------------
 
