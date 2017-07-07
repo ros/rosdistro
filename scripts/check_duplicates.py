@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # Copyright (c) 2017, Open Source Robotics Foundation
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
-# 
+#
 #     * Redistributions of source code must retain the above copyright
 #       notice, this list of conditions and the following disclaimer.
 #     * Redistributions in binary form must reproduce the above copyright
@@ -13,7 +13,7 @@
 #     * Neither the name of the Willow Garage, Inc. nor the names of its
 #       contributors may be used to endorse or promote products derived from
 #       this software without specific prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -120,7 +120,7 @@ def check_duplicates(sources):
     print_test("checking duplicates")
     view = lookup.get_rosdep_view(DEFAULT_VIEW_KEY, verbose=None) # to call init
     for view_key in lookup.rosdep_db.get_view_dependencies(DEFAULT_VIEW_KEY):
-        db_entry=lookup.rosdep_db.get_view_data(view_key)       
+        db_entry=lookup.rosdep_db.get_view_data(view_key)
         print_test("* %s" % view_key)
         for dep_name, dep_data in db_entry.rosdep_data.items():
             if dep_name in db_name_view:
