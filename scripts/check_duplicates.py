@@ -163,6 +163,7 @@ def main(infile):
         print_test('checking with %s'%(matcher.tags))
         sources = [x for x in sources if matcher.matches(x)]
         ret = ret & check_duplicates(sources)
+    return ret
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Checks whether rosdep files contains duplicate ROS rules')
