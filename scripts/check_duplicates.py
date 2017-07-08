@@ -125,13 +125,12 @@ def main(infile):
         print('checking with %s'%(matcher.tags))
         sources = [x for x in sources if matcher.matches(x)]
         ret = ret & check_duplicates(sources)
-    if ret:
-        return 0
-    else:
-        return -1
+    return ret
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Checks whether rosdep files contains duplicate ROS rules')
     parser.add_argument('infiles', nargs='*', help='input rosdep YAML file')
     args = parser.parse_args()
-    sys.exit(main(args.infiles))
+    if not main(args.infiles):
+        sys.exit(1)
+
