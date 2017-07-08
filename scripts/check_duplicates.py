@@ -60,7 +60,7 @@ def create_default_sources():
             with open(filepath) as f:
                 rosdep_data = yaml.load(f.read())
             tag = 'osx' if 'osx-' in filepath else ''
-            sources.append(CachedDataSource('yaml', 'flie:/'+filepath, [tag], rosdep_data))
+            sources.append(CachedDataSource('yaml', 'file:/'+filepath, [tag], rosdep_data))
     return sources
 
 
@@ -108,7 +108,7 @@ def main(infile):
             rosdep_data = yaml.load(f.read())
         # osx-homebrow uses xos tag
         tag = 'osx' if 'osx-' in filepath else ''
-        model = CachedDataSource('yaml', 'flie:/'+filepath, [tag], rosdep_data)
+        model = CachedDataSource('yaml', 'file:/'+filepath, [tag], rosdep_data)
         # add sources if not exists
         if not [x for x in sources if os.path.basename(filename) == os.path.basename(x.url)]:
             sources.append(model)
