@@ -26,6 +26,8 @@ import tempfile
 parser = argparse.ArgumentParser(description='Count packages in the rosdistro')
 parser.add_argument('--repo-location', metavar='Path to rosdistro', type=str,
                     help='The path to the rosdistro checkout')
+parser.add_argument('--output-file', metavar='Path to output file', type=str,
+                    help='The path to the output', default='output.csv')
 
 args = parser.parse_args()
 
@@ -34,7 +36,7 @@ args = parser.parse_args()
 valid_distros = ['groovy', 'hydro', 'indigo', 'jade', 'kinetic', 'lunar']
 
 FIRST_HASH = 'be9218681f14d0fac908da46902eb2f1dad084fa'
-OUTPUT_FILE = 'result.csv'
+OUTPUT_FILE = args.output_file
 
 
 def get_all_commits(repo_dir, first_hash):
