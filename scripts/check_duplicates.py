@@ -66,9 +66,9 @@ def create_default_sources():
 
 def check_duplicates(sources):
     # output debug info
-    print("checking sources")
+    print('checking sources')
     for source in sources:
-        print("- %s" % source.url)
+        print('- %s' % source.url)
 
     # create loopkup
     sources_loader = SourcesListLoader(sources)
@@ -78,7 +78,7 @@ def check_duplicates(sources):
     print("checking duplicates")
     db_name_view = {}
     has_duplicates = False
-    view = lookup.get_rosdep_view(DEFAULT_VIEW_KEY, verbose=None) # to call init
+    view = lookup.get_rosdep_view(DEFAULT_VIEW_KEY, verbose=None)  # to call init
     for view_key in lookup.rosdep_db.get_view_dependencies(DEFAULT_VIEW_KEY):
         db_entry = lookup.rosdep_db.get_view_data(view_key)
         print('* %s' % view_key)
