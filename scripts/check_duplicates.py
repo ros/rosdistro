@@ -44,7 +44,7 @@ def create_default_sources():
     basedir = os.path.realpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
     filepath = os.path.join(basedir, 'index.yaml')
     with open(filepath) as f:
-        content  = f.read()
+        content = f.read()
     index = yaml.load(content)
     for distro in index['distributions']:
         distfile = 'file://' + basedir + '/' + distro + '/distribution.yaml'
@@ -64,7 +64,7 @@ def create_default_sources():
     return sources
 
 
-def check_duplicates(sources):
+def check_duplicates(sources, os_name, os_codename):
     # output debug info
     print('checking sources')
     for source in sources:
@@ -83,6 +83,15 @@ def check_duplicates(sources):
         db_entry = lookup.rosdep_db.get_view_data(view_key)
         print('* %s' % view_key)
         for dep_name, dep_data in db_entry.rosdep_data.items():
+            # skip unknown os names
+            if os_name not in dep_data.keys():
+                continue
+            # skip unknown os codenames
+            if (
+                isinstance(dep_data[os_name], dict) and
+                os_codename not in dep_data[os_name].keys()
+            ):
+                continue
             if dep_name in db_name_view:
                 print('%s is multiply defined in\n\t%s and \n\t%s\n' %
                       (dep_name, db_name_view[dep_name], view_key))
@@ -123,7 +132,9 @@ def main(infile):
         matcher.tags = tag
         print('checking with %s' % matcher.tags)
         sources = [x for x in sources if matcher.matches(x)]
-        ret &= check_duplicates(sources)
+        os_name = tag[1]
+        os_codename = tag[2]
+        ret &= check_duplicates(sources, os_name, os_codename)
     return ret
 
 
@@ -133,4 +144,3 @@ if __name__ == '__main__':
     args = parser.parse_args()
     if not main(args.infiles):
         sys.exit(1)
-
