@@ -83,9 +83,10 @@ def check_duplicates(sources, os_name, os_codename):
         db_entry = lookup.rosdep_db.get_view_data(view_key)
         print('* %s' % view_key)
         for dep_name, dep_data in db_entry.rosdep_data.items():
-            if os_name not in dep_data.keys():  # if os key not found
+            # skip unknown os names
+            if os_name not in dep_data.keys():
                 continue
-            # if version is specified and no version found
+            # skip unknown os codenames
             if (
                 isinstance(dep_data[os_name], dict) and
                 os_codename not in dep_data[os_name].keys()
