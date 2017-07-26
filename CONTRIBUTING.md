@@ -38,10 +38,25 @@ It's valuable to have a record of the packages as submitted and their intended p
 Guidelines for rosdep rules
 ---------------------------
 
- * Native packages are strongly preferred (They are required for packaging and have upgrade and conflict tracking.)
- * Python packages should go in the python.yaml
- * Homebrew into homebrew.yaml
+ * Native packages are strongly preferred. (They are required for packaging and have upgrade and conflict tracking.)
+ * Please use the smallest notation possible.
+   For example if an ubuntu package is the same for all versions only write the generic ubuntu rule, don't call out the same package name for every version of ubuntu.
+   Similarly don't call out indirect dependencies or default options for packages.
+ * Python packages should go in the `python.yaml`.
+ * Homebrew into `osx-homebrew.yaml`.
  * If a package is only available via pip use the `-pip` extension.
+ * Supported Platforms
+   * Rules can be contributed for any platform.
+     However to be released they must be at least cover the supported platforms in REP 3: http://www.ros.org/reps/rep-0003.html So:
+    * Ubuntu and Debian are top priority.
+    * Fedora and Gentoo have packaging jobs and should be filled in if they are available.
+    * OSX is also nice to have.
+    * If specific versions are called out, there should be coverage of all versions currently targeted by supported ROS distros.
+     * If there's a new distro in prerelease adding a rule for it is fine.
+       However please don't target 'sid' as it's a rolling target and when the keys change our database gets out of date.
+  * Keep everything in alphabetical order for better merging.
+  * No trailing whitespace.
+   
 
 How to submit pull requests
 ---------------------------
