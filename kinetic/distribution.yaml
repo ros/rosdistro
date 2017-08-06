@@ -11,6 +11,23 @@ release_platforms:
   ubuntu:
   - xenial
 repositories:
+  Autoware:
+    doc:
+      type: git
+      url: https://github.com/CPFL/Autoware-Manuals.git
+      version: master
+    release:
+      packages:
+      - autoware_msgs
+      tags:
+        release: release/kinetic/{package}/{version}
+      url: https://github.com/CPFL/Autoware-release.git
+      version: 1.4.0-1
+    source:
+      type: git
+      url: https://github.com/CPFL/Autoware.git
+      version: develop
+    status: developed
   abb:
     doc:
       type: git
@@ -1020,6 +1037,30 @@ repositories:
       url: https://github.com/ipa320/cob_hand.git
       version: indigo_dev
     status: developed
+  cob_manipulation:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_manipulation.git
+      version: kinetic_release_candidate
+    release:
+      packages:
+      - cob_collision_monitor
+      - cob_grasp_generation
+      - cob_lookat_action
+      - cob_manipulation
+      - cob_moveit_bringup
+      - cob_moveit_interface
+      - cob_obstacle_distance_moveit
+      - cob_pick_place_action
+      tags:
+        release: release/kinetic/{package}/{version}
+      url: https://github.com/ipa320/cob_manipulation-release.git
+      version: 0.7.0-0
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_manipulation.git
+      version: kinetic_dev
+    status: maintained
   cob_navigation:
     doc:
       type: git
@@ -1068,6 +1109,49 @@ repositories:
       url: https://github.com/ipa320/cob_perception_common.git
       version: indigo_dev
     status: developed
+  cob_robots:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_robots.git
+      version: indigo_release_candidate
+    release:
+      packages:
+      - cob_bringup
+      - cob_default_robot_behavior
+      - cob_default_robot_config
+      - cob_hardware_config
+      - cob_moveit_config
+      - cob_robots
+      tags:
+        release: release/kinetic/{package}/{version}
+      url: https://github.com/ipa320/cob_robots-release.git
+      version: 0.6.7-1
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_robots.git
+      version: indigo_dev
+    status: maintained
+  cob_simulation:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_simulation.git
+      version: indigo_release_candidate
+    release:
+      packages:
+      - cob_bringup_sim
+      - cob_gazebo
+      - cob_gazebo_objects
+      - cob_gazebo_worlds
+      - cob_simulation
+      tags:
+        release: release/kinetic/{package}/{version}
+      url: https://github.com/ipa320/cob_simulation-release.git
+      version: 0.6.8-0
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_simulation.git
+      version: indigo_dev
+    status: maintained
   cob_substitute:
     doc:
       type: git
@@ -6714,7 +6798,7 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/ros-gbp/ros_control-release.git
-      version: 0.11.5-0
+      version: 0.12.0-0
     source:
       type: git
       url: https://github.com/ros-controls/ros_control.git
