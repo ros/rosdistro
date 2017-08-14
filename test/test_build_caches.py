@@ -1,4 +1,5 @@
 from collections import OrderedDict
+# import re
 import os
 
 from catkin_pkg.package import parse_package_string
@@ -39,7 +40,21 @@ If this fails you can run 'rosdistro_build_cache index.yaml' to perform the same
             pkgs = {}
             print("Parsing manifest files for '%s'" % dist_name)
             for pkg_name, pkg_xml in cache.release_package_xmls.items():
-                pkgs[pkg_name] = parse_package_string(pkg_xml)
+
+                # # Option 1 duplicate test for version
+                # pkgs[pkg_name] = parse_package_string(pkg_xml)
+                # if not re.match('^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$', pkgs[pkg_name].version):
+                #     errors.append('%s: %s' % (dist_name, 'Package "%s" does not follow the version conventions. It should not contain leading zeros (unless the number is 0).' % pkg_name))
+
+                # Option 2 test for specific catkin_pkg warning
+                warnings = []
+                pkgs[pkg_name] = parse_package_string(pkg_xml, warnings=warnings)
+                for warning in warnings:
+                    if 'version conventions' in warning:
+                        errors.append('%s: %s' % (dist_name, warning))
+                    else:
+                        print('WARNING: ' + warning)
+
             print("Order all packages in '%s' topologically" % dist_name)
             try:
                 topological_order_packages(pkgs)
