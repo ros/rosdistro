@@ -47,7 +47,6 @@ If this fails you can run 'rosdistro_build_cache index.yaml' to perform the same
                         errors.append('%s: %s' % (pkg_name, warning))
                     else:
                         print('%s: WARNING: %s' % (pkg_name, warning))
-
             print("Order all packages in '%s' topologically" % dist_name)
             try:
                 topological_order_packages(pkgs)
