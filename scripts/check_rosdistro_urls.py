@@ -21,9 +21,9 @@ def main(index_url, rosdistro_name):
         sys.stdout.write('.')
         sys.stdout.flush()
         repo = distribution_file.repositories[repo_name]
-        if repo.release_repository and repo.source_repository and repo.release_repository == repo.source_repository:
+        if repo.release_repository and repo.source_repository and repo.release_repository.url == repo.source_repository.url:
             print()
-            print("Repository '%s' has the same release repository '%s' and source repository '%s', they should be different" % (repo_name, repo.release_repository, repo.source_repository))
+            print("Repository '%s' has the same release repository '%s' and source repository '%s', they should be different" % (repo_name, repo.release_repository.url, repo.source_repository.url))
             success = False
         repos = [repo.release_repository, repo.source_repository, repo.doc_repository]
         for repo in [r for r in repos if r]:
