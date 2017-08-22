@@ -70,7 +70,7 @@ def check_duplicates(sources, os_name, os_codename):
     for source in sources:
         print('- %s' % source.url)
 
-    # create loopkup
+    # create lookup
     sources_loader = SourcesListLoader(sources)
     lookup = RosdepLookup.create_from_rospkg(sources_loader=sources_loader)
 
@@ -79,7 +79,7 @@ def check_duplicates(sources, os_name, os_codename):
     db_name_view = {}
     has_duplicates = False
     # to avoid merge views
-    #view = lookup.get_rosdep_view(DEFAULT_VIEW_KEY, verbose=None)  # to call init
+    # view = lookup.get_rosdep_view(DEFAULT_VIEW_KEY, verbose=None)  # to call init
     view = lookup._load_view_dependencies(DEFAULT_VIEW_KEY, lookup.loader)
     for view_key in lookup.rosdep_db.get_view_dependencies(DEFAULT_VIEW_KEY):
         db_entry = lookup.rosdep_db.get_view_data(view_key)
@@ -117,7 +117,7 @@ def main(infile):
         with open(filepath) as f:
             content = f.read()
         rosdep_data = yaml.load(content)
-        # osx-homebrow uses xos tag
+        # osx-homebrew uses osx tag
         tag = 'osx' if 'osx-' in filepath else ''
         model = CachedDataSource('yaml', 'file://' + filepath, [tag], rosdep_data)
         # add sources if not exists
@@ -143,7 +143,7 @@ def main(infile):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Checks whether rosdep files contains duplicate ROS rules')
+    parser = argparse.ArgumentParser(description='Checks whether rosdep files contain duplicate ROS rules')
     parser.add_argument('infiles', nargs='*', help='input rosdep YAML file')
     args = parser.parse_args()
     if not main(args.infiles):
