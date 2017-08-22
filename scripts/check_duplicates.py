@@ -91,6 +91,7 @@ def check_duplicates(sources, os_name, os_codename):
             # skip unknown os codenames
             if (
                 isinstance(dep_data[os_name], dict) and
+                'pip' not in dep_data[os_name].keys() and
                 os_codename not in dep_data[os_name].keys()
             ):
                 continue
@@ -130,13 +131,14 @@ def main(infile):
     for tag in [['indigo', 'ubuntu', 'trusty'],
                 ['jade', 'ubuntu', 'trusty'],
                 ['kinetic', 'ubuntu', 'xenial'],
-                ['lunar', 'ubuntu', 'xenial']]:
+                ['lunar', 'ubuntu', 'xenial'],
+                ['', 'osx', 'homebrew']]:
         matcher.tags = tag
         print('checking with %s' % matcher.tags)
-        sources = [x for x in sources if matcher.matches(x)]
         os_name = tag[1]
         os_codename = tag[2]
-        ret &= check_duplicates(sources, os_name, os_codename)
+        ret &= check_duplicates([x for x in sources if matcher.matches(x)],
+                                os_name, os_codename)
     return ret
 
 
