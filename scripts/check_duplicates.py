@@ -70,7 +70,7 @@ def check_duplicates(sources, os_name, os_codename):
     for source in sources:
         print('- %s' % source.url)
 
-    # create loopkup
+    # create lookup
     sources_loader = SourcesListLoader(sources)
     lookup = RosdepLookup.create_from_rospkg(sources_loader=sources_loader)
 
@@ -78,7 +78,8 @@ def check_duplicates(sources, os_name, os_codename):
     print("checking duplicates")
     db_name_view = {}
     has_duplicates = False
-    view = lookup.get_rosdep_view(DEFAULT_VIEW_KEY, verbose=None)  # to call init
+    # to avoid merge views
+    view = lookup._load_view_dependencies(DEFAULT_VIEW_KEY, lookup.loader)
     for view_key in lookup.rosdep_db.get_view_dependencies(DEFAULT_VIEW_KEY):
         db_entry = lookup.rosdep_db.get_view_data(view_key)
         print('* %s' % view_key)
@@ -89,12 +90,13 @@ def check_duplicates(sources, os_name, os_codename):
             # skip unknown os codenames
             if (
                 isinstance(dep_data[os_name], dict) and
+                'pip' not in dep_data[os_name].keys() and
                 os_codename not in dep_data[os_name].keys()
             ):
                 continue
             if dep_name in db_name_view:
-                print('%s is multiply defined in\n\t%s and \n\t%s\n' %
-                      (dep_name, db_name_view[dep_name], view_key))
+                print('%s (%s, %s) is multiply defined in\n\t%s and \n\t%s\n' %
+                      (dep_name, os_name, os_codename, db_name_view[dep_name], view_key))
                 has_duplicates = True
             db_name_view[dep_name] = view_key
     return not has_duplicates
@@ -114,7 +116,7 @@ def main(infile):
         with open(filepath) as f:
             content = f.read()
         rosdep_data = yaml.load(content)
-        # osx-homebrow uses xos tag
+        # osx-homebrew uses osx tag
         tag = 'osx' if 'osx-' in filepath else ''
         model = CachedDataSource('yaml', 'file://' + filepath, [tag], rosdep_data)
         # add sources if not exists
@@ -128,18 +130,19 @@ def main(infile):
     for tag in [['indigo', 'ubuntu', 'trusty'],
                 ['jade', 'ubuntu', 'trusty'],
                 ['kinetic', 'ubuntu', 'xenial'],
-                ['lunar', 'ubuntu', 'xenial']]:
+                ['lunar', 'ubuntu', 'xenial'],
+                ['', 'osx', 'homebrew']]:
         matcher.tags = tag
         print('checking with %s' % matcher.tags)
-        sources = [x for x in sources if matcher.matches(x)]
         os_name = tag[1]
         os_codename = tag[2]
-        ret &= check_duplicates(sources, os_name, os_codename)
+        ret &= check_duplicates([x for x in sources if matcher.matches(x)],
+                                os_name, os_codename)
     return ret
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Checks whether rosdep files contains duplicate ROS rules')
+    parser = argparse.ArgumentParser(description='Checks whether rosdep files contain duplicate ROS rules')
     parser.add_argument('infiles', nargs='*', help='input rosdep YAML file')
     args = parser.parse_args()
     if not main(args.infiles):
