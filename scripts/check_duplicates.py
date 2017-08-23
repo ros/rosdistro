@@ -79,7 +79,6 @@ def check_duplicates(sources, os_name, os_codename):
     db_name_view = {}
     has_duplicates = False
     # to avoid merge views
-    # view = lookup.get_rosdep_view(DEFAULT_VIEW_KEY, verbose=None)  # to call init
     view = lookup._load_view_dependencies(DEFAULT_VIEW_KEY, lookup.loader)
     for view_key in lookup.rosdep_db.get_view_dependencies(DEFAULT_VIEW_KEY):
         db_entry = lookup.rosdep_db.get_view_data(view_key)
