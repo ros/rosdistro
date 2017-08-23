@@ -95,7 +95,7 @@ def check_duplicates(sources, os_name, os_codename):
             ):
                 continue
             if dep_name in db_name_view:
-                print('%s (%s,%s) is multiply defined in\n\t%s and \n\t%s\n' %
+                print('%s (%s, %s) is multiply defined in\n\t%s and \n\t%s\n' %
                       (dep_name, os_name, os_codename, db_name_view[dep_name], view_key))
                 has_duplicates = True
             db_name_view[dep_name] = view_key
