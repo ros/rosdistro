@@ -9,21 +9,23 @@ except ImportError:
     from io import StringIO
 import os
 import subprocess
+import sys
+import unittest
+from urlparse import urlparse
+
+import rosdistro
+from scripts import eol_distro_names
+import unidiff
 import yaml
 from yaml.composer import Composer
 from yaml.constructor import Constructor
-import sys
-import unittest
 
-import rosdistro
-import unidiff
-from urlparse import urlparse
+from .fold_block import Fold
 
 # for commented debugging code below
 # import pprint
 
 DIFF_TARGET = 'origin/master'
-EOL_DISTROS = ['groovy', 'hydro']
 
 
 TARGET_FILE_BLACKLIST = []
@@ -47,7 +49,7 @@ def get_eol_distribution_filenames(url=None):
     distribution_filenames = []
     i = rosdistro.get_index(url)
     for d_name, d in i.distributions.items():
-        if d_name in EOL_DISTROS:
+        if d_name in eol_distro_names:
             for f in d['distribution']:
                 dpath = os.path.abspath(urlparse(f).path)
                 distribution_filenames.append(dpath)
@@ -222,28 +224,30 @@ def main():
         url = 'file://%s/index.yaml' % directory
         path = os.path.abspath(path)
         if path not in get_all_distribution_filenames(url):
-            print("not verifying diff of file %s" % path)
+            # print("not verifying diff of file %s" % path)
             continue
-        is_eol_distro = path in get_eol_distribution_filenames(url)
-        data = load_yaml_with_lines(path)
+        with Fold():
+            print("verifying diff of file '%s'" % path)
+            is_eol_distro = path in get_eol_distribution_filenames(url)
+            data = load_yaml_with_lines(path)
 
-        repos = data['repositories']
-        if not repos:
-            continue
+            repos = data['repositories']
+            if not repos:
+                continue
 
-        changed_repos = isolate_yaml_snippets_from_line_numbers(repos, lines)
+            changed_repos = isolate_yaml_snippets_from_line_numbers(repos, lines)
 
-        # print("In file: %s Changed repos are:" % path)
-        # pprint.pprint(changed_repos)
+            # print("In file: %s Changed repos are:" % path)
+            # pprint.pprint(changed_repos)
 
-        for n, r in changed_repos.items():
-            errors = check_repo_for_errors(r)
-            detected_errors.extend(["In file '''%s''': " % path + e
-                                    for e in errors])
-            if is_eol_distro:
-                errors = detect_post_eol_release(n, r, lines)
+            for n, r in changed_repos.items():
+                errors = check_repo_for_errors(r)
                 detected_errors.extend(["In file '''%s''': " % path + e
                                         for e in errors])
+                if is_eol_distro:
+                    errors = detect_post_eol_release(n, r, lines)
+                    detected_errors.extend(["In file '''%s''': " % path + e
+                                            for e in errors])
 
     for e in detected_errors:
 

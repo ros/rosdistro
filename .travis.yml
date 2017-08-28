@@ -8,11 +8,15 @@ sudo: false
 install:
   - easy_install -U pip
   - pip install PyYAML argparse
-  - pip install rosdistro nose coverage
+  - pip install catkin_pkg ros_buildfarm rosdistro nose coverage
+  - pip install yamllint
   - pip install unidiff
+  - pip install rosdep
 
 # command to run tests
-script: nosetests -s
+script:
+  - nosetests -s
+  - yamllint */
 
 notifications:
   email:
