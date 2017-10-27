@@ -4,10 +4,12 @@ ace:
   gentoo: [dev-libs/ace]
   ubuntu: [libace-dev]
 acpi:
+  debian: [acpi]
   fedora: [acpi]
   gentoo: [sys-power/acpi]
   ubuntu: [acpi]
 acpitool:
+  debian: [acpitool]
   fedora: [acpitool]
   gentoo: [sys-power/acpitool]
   ubuntu:
@@ -41,8 +43,10 @@ antlr:
   gentoo: [dev-java/antlr]
   ubuntu: [antlr, libantlr-dev]
 apache2-mpm-prefork:
-  debian: [apache2-mpm-prefork]
-  gentoo: [www-servers/apache]
+  debian:
+    jessie: [apache2-mpm-prefork]
+    wheezy: [apache2-mpm-prefork]
+  gentoo: ['www-servers/apache[apache2_mpms_prefork]']
   ubuntu: [apache2-mpm-prefork]
 apr:
   arch: [apr, apr-util]
@@ -66,7 +70,9 @@ arduino-core:
   ubuntu: [arduino-core]
 arista:
   arch: [arista-transcoder]
-  debian: [arista]
+  debian:
+    jessie: [arista]
+    wheezy: [arista]
   ubuntu: [arista]
 armadillo:
   arch: [armadillo]
@@ -82,11 +88,7 @@ asio:
   ubuntu: [libasio-dev]
 assimp:
   arch: [assimp]
-  debian:
-    jessie: [libassimp-dev]
-    sid: [libassimp-dev]
-    stretch: [libassimp-dev]
-    wheezy: [libassimp-dev]
+  debian: [libassimp-dev]
   fedora: [assimp]
   gentoo: [media-libs/assimp]
   macports: [assimp]
@@ -111,11 +113,7 @@ assimp:
     zesty: [libassimp-dev]
 assimp-dev:
   arch: [assimp]
-  debian:
-    jessie: [libassimp-dev]
-    sid: [libassimp-dev]
-    stretch: [libassimp-dev]
-    wheezy: [libassimp-dev]
+  debian: [libassimp-dev]
   fedora: [assimp-devel]
   gentoo: [media-libs/assimp]
   opensuse: [libassimp3]
@@ -169,6 +167,16 @@ autopoint:
   debian: [autopoint]
   fedora: [gettext-devel]
   ubuntu: [autopoint]
+autossh:
+  arch: [autossh]
+  debian: [autossh]
+  fedora: [autosss]
+  freebsd: [autossh]
+  gentoo: [net-misc/autossh]
+  macports: [autossh]
+  opensuse: [autossh]
+  rhel: [autossh]
+  ubuntu: [autossh]
 avahi-daemon:
   arch: [avahi]
   debian: [avahi-daemon]
@@ -189,6 +197,7 @@ avr-libc:
   ubuntu: [avr-libc]
 avrdude:
   arch: [avrdude]
+  debian: [avrdude]
   fedora: [avrdude]
   gentoo: [dev-embedded/avrdude]
   ubuntu: [avrdude]
@@ -237,6 +246,7 @@ bluez:
   rhel: [bluez-libs]
   ubuntu: [bluez]
 bluez-hcidump:
+  debian: [bluez-hcidump]
   fedora: [bluez-hcidump]
   gentoo: [net-wireless/bluez-hcidump]
   ubuntu:
@@ -248,8 +258,8 @@ boost:
   arch: [boost]
   cygwin: [libboost-devel, libboost1.40]
   debian:
+    buster: [libboost-all-dev]
     jessie: [libboost-all-dev]
-    sid: [libboost-all-dev]
     squeeze: [libboost1.42-all-dev]
     stretch: [libboost-all-dev]
     wheezy: [libboost-all-dev]
@@ -328,13 +338,13 @@ can-utils:
   debian: [can-utils]
   fedora: [can-utils]
   ubuntu: [can-utils]
-catkin_pkg:
-  gentoo: [dev-python/catkin_pkg]
 cdk:
+  debian: [libcdk5]
   fedora: [cdk]
   gentoo: [dev-libs/cdk]
   ubuntu: [libcdk5]
 cdk-dev:
+  debian: [libcdk5-dev]
   fedora: [cdk-devel]
   gentoo: [dev-libs/cdk]
   ubuntu: [libcdk5-dev]
@@ -344,13 +354,26 @@ cgal:
   fedora: [CGAL-devel]
   gentoo: [sci-mathematics/cgal]
   ubuntu: [libcgal-dev]
+cgal-qt5-dev:
+  arch: [cgal]
+  debian: [libcgal-qt5-dev]
+  fedora: [CGAL-devel]
+  gentoo: ['sci-mathematics/cgal[qt5]']
+  ubuntu: [libcgal-qt5-dev]
 checkinstall:
   arch: [checkinstall]
   debian: [checkinstall]
   ubuntu: [checkinstall]
 chromium-browser:
+  debian: [chromium]
   gentoo: [www-client/chromium]
   ubuntu: [chromium-browser]
+clang-format:
+  debian:
+    buster: [clang-format]
+    stretch: [clang-format]
+  ubuntu:
+    xenial: [clang-format]
 cmake:
   arch: [cmake]
   debian: [cmake]
@@ -363,17 +386,22 @@ cmake:
       packages: [cmake]
   ubuntu: [cmake]
 coinor-libcbc-dev:
+  debian: [coinor-libcbc-dev]
   gentoo: [sci-libs/coinor-cbc]
   ubuntu: [coinor-libcbc-dev]
 coinor-libcbc3:
+  debian: [coinor-libcbc3]
   ubuntu: [coinor-libcbc3]
 coinor-libcgl-dev:
+  debian: [coinor-libcgl-dev]
   gentoo: [sci-libs/coinor-cgl]
   ubuntu: [coinor-libcgl-dev]
 coinor-libclp-dev:
+  debian: [coinor-libclp-dev]
   gentoo: [sci-libs/coinor-clp]
   ubuntu: [coinor-libclp-dev]
 coinor-libcoinutils-dev:
+  debian: [coinor-libcoinutils-dev]
   gentoo: [sci-libs/coinor-utils]
   ubuntu: [coinor-libcoinutils-dev]
 coinor-libipopt-dev:
@@ -389,12 +417,15 @@ coinor-libosi-dev:
   ubuntu: [coinor-libosi-dev]
 collada-dom:
   arch: [collada-dom]
-  debian: [libcollada-dom2.4-dp-dev]
+  debian:
+    buster: [libcollada-dom2.4-dp-dev]
+    stretch: [libcollada-dom2.4-dp-dev]
   fedora: [collada-dom-devel]
   gentoo: [dev-libs/collada-dom]
   macports: [collada-dom]
   slackware: [collada-dom]
   ubuntu:
+    artful: [libcollada-dom2.4-dp-dev]
     lucid: [collada-dom-dev]
     maverick: [collada-dom-dev]
     natty: [collada-dom-dev]
@@ -411,6 +442,7 @@ collada-dom:
     yakkety: [libcollada-dom2.4-dp-dev]
     zesty: [libcollada-dom2.4-dp-dev]
 comedi:
+  debian: [libcomedi-dev]
   fedora: [comedilib-devel]
   ubuntu: [libcomedi-dev]
 coreutils:
@@ -425,6 +457,14 @@ couchdb:
   fedora: [couchdb]
   gentoo: [dev-db/couchdb]
   ubuntu: [couchdb]
+cppad:
+  debian: [cppad]
+  fedora: [cppad]
+  gentoo: [sci-libs/coinor-cppad]
+  ubuntu: [cppad]
+cppcheck:
+  debian: [cppcheck]
+  ubuntu: [cppcheck]
 cppunit:
   arch: [cppunit]
   debian: [libcppunit-dev]
@@ -436,7 +476,13 @@ cppunit:
   rhel: [cppunit-devel]
   slackware: [cppunit]
   ubuntu: [libcppunit-dev]
+cpuburn:
+  arch: [cpuburn]
+  debian: [cpuburn]
+  fedora: [cpuburn]
+  ubuntu: [cpuburn]
 crypto++:
+  debian: [libcrypto++-dev]
   fedora: [cryptopp-devel]
   gentoo: [dev-libs/crypto++]
   ubuntu: [libcrypto++-dev]
@@ -459,6 +505,7 @@ curlpp-dev:
   ubuntu: [libcurlpp-dev]
 cvs:
   arch: [cvs]
+  debian: [cvs]
   fedora: [cvs]
   gentoo: [dev-vcs/cvs]
   ubuntu: [cvs]
@@ -476,11 +523,6 @@ cwiid-dev:
   gentoo: [app-misc/cwiid]
   opensuse: [libcwiid-devel]
   ubuntu: [libcwiid-dev]
-cython:
-  debian: [cython]
-  fedora: [Cython]
-  gentoo: [dev-python/cython]
-  ubuntu: [cython]
 daemontools:
   arch: [daemontools]
   debian: [daemontools]
@@ -492,12 +534,14 @@ dfu-util:
   gentoo: [app-mobilephone/dfu-util]
   ubuntu: [dfu-util]
 disper:
+  debian: [disper]
   fedora: [disper]
   ubuntu: [disper]
 dkms:
   arch: [dkms]
   debian: [dkms]
   fedora: [dkms]
+  gentoo: [sys-kernel/dkms]
   opensuse: [dkms]
   ubuntu: [dkms]
 dnsmasq:
@@ -522,6 +566,7 @@ dpkg:
   ubuntu: [dpkg]
 dvipng:
   arch: [texlive-bin]
+  debian: [dvipng]
   fedora: [texlive-dvipng-bin]
   gentoo: [app-text/dvipng]
   ubuntu: [dvipng]
@@ -542,8 +587,8 @@ eclipse:
 eigen:
   arch: [eigen3]
   debian:
+    buster: [libeigen3-dev]
     jessie: [libeigen3-dev]
-    sid: [libeigen3-dev]
     stretch: [libeigen3-dev]
     wheezy: [libeigen3-dev]
   fedora: [eigen3-devel]
@@ -557,8 +602,11 @@ eigen:
   ubuntu: [libeigen3-dev]
 eigen2:
   arch: [eigen2]
+  debian:
+    jessie: [libeigen2-dev]
+    wheezy: [libeigen2-dev]
   fedora: [eigen2-devel]
-  gentoo: ['=dev-cpp/eigen-2*']
+  gentoo: ['dev-cpp/eigen:2']
   opensuse: [libeigen2-devel]
   ubuntu: [libeigen2-dev]
 emacs:
@@ -567,19 +615,18 @@ emacs:
   fedora: [emacs]
   gentoo: [virtual/emacs]
   ubuntu: [emacs]
+enblend:
+  debian: [enblend]
+  fedora: [enblend]
+  gentoo: [media-gfx/enblend]
+  ubuntu: [enblend]
 enet:
+  debian: [libenet-dev]
   fedora: [enet-devel]
   gentoo: [net-libs/enet]
   ubuntu: [libenet-dev]
-epydoc:
-  arch: [epydoc]
-  debian: [python-epydoc]
-  fedora: [epydoc]
-  freebsd: [epydoc]
-  gentoo: [dev-python/epydoc]
-  macports: [py27-epydoc]
-  ubuntu: [python-epydoc]
 espeak:
+  debian: [espeak]
   fedora: [espeak]
   gentoo: [app-accessibility/espeak]
   ubuntu: [espeak]
@@ -613,8 +660,8 @@ festival-dev:
 ffmpeg:
   arch: [ffmpeg]
   debian:
+    buster: [ffmpeg, libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
     jessie: [libav-tools, libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
-    sid: [ffmpeg, libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
     stretch: [ffmpeg, libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
     wheezy: [ffmpeg, libavcodec-dev, libavformat-dev, libavutil-dev, libswscale-dev]
   fedora: [ffmpeg-devel]
@@ -708,6 +755,7 @@ ftdi-eeprom:
   gentoo: [dev-embedded/ftdi_eeprom]
   ubuntu: [ftdi-eeprom]
 g++-multilib:
+  debian: [g++-multilib]
   fedora: [gcc-c++, glibc-devel, 'glibc-devel(%{__isa_name}-32)', glibc-static, 'glibc-static(%{__isa_name}-32)', libstdc++-devel, 'libstdc++-devel(%{__isa_name}-32)', libstdc++-static, 'libstdc++-static(%{__isa_name}-32)']
   gentoo: [sys-devel/multilib-gcc-wrapper]
   ubuntu: [g++-multilib]
@@ -724,7 +772,9 @@ gawk:
   ubuntu: [gawk]
 gazebo:
   arch: [gazebo]
-  debian: [gazebo7]
+  debian:
+    buster: [gazebo7]
+    stretch: [gazebo7]
   fedora: [gazebo-devel]
   gentoo: [sci-electronics/gazebo]
   slackware: [gazebo]
@@ -745,7 +795,9 @@ gazebo5:
   ubuntu: [gazebo5]
 gazebo7:
   arch: [gazebo]
-  debian: [gazebo7]
+  debian:
+    buster: [gazebo7]
+    stretch: [gazebo7]
   fedora: [gazebo]
   gentoo: ['=sci-electronics/gazebo-7*']
   slackware: [gazebo]
@@ -763,6 +815,7 @@ gcc-avr:
   gentoo: [sys-devel/crossdev]
   ubuntu: [gcc-avr]
 gcc-multilib:
+  debian: [gcc-multilib]
   fedora: [gcc, glibc-devel, 'glibc-devel(%{__isa_name}-32)', glibc-static, 'glibc-static(%{__isa_name}-32)']
   gentoo: [sys-devel/multilib-gcc-wrapper]
   ubuntu: [gcc-multilib]
@@ -776,15 +829,26 @@ gccxml:
   gentoo: [dev-cpp/gccxml]
   macports: [gccxml-devel]
   ubuntu: [gccxml]
+gcovr:
+  arch: [gcovr]
+  debian: [gcovr]
+  fedora: [gcovr]
+  gentoo: [dev-util/gcovr]
+  ubuntu: [gcovr]
 gdal-bin:
   debian: [gdal-bin]
   fedora: [gdal]
   gentoo: [sci-libs/gdal]
   ubuntu: [gdal-bin]
 geographiclib:
-  debian: [libgeographiclib-dev]
+  debian:
+    buster: [libgeographic-dev]
+    jessie: [libgeographic-dev]
+    stretch: [libgeographic-dev]
+    wheezy: [libgeographiclib-dev]
   fedora: [GeographicLib-devel]
   ubuntu:
+    artful: [libgeographic-dev]
     precise: [libgeographiclib-dev]
     quantal: [libgeographiclib-dev]
     raring: [libgeographiclib-dev]
@@ -794,12 +858,15 @@ geographiclib:
     vivid: [libgeographic-dev]
     wily: [libgeographic-dev]
     xenial: [libgeographic-dev]
+    yakkety: [libgeographic-dev]
+    zesty: [libgeographic-dev]
 geographiclib-tools:
   debian: [geographiclib-tools]
   fedora: [GeographicLib]
   ubuntu: [geographiclib-tools]
 geos:
   arch: [geos]
+  debian: [libgeos-dev]
   fedora: [geos-devel]
   gentoo: [sci-libs/geos]
   ubuntu: [libgeos-dev]
@@ -814,7 +881,7 @@ gfortran:
   arch: [gcc-fortran]
   debian: [gfortran]
   fedora: [gcc-fortran]
-  gentoo: [sys-devel/gcc]
+  gentoo: ['sys-devel/gcc[fortran]']
   ubuntu: [gfortran]
 gifsicle:
   arch: [gifsicle]
@@ -823,6 +890,7 @@ gifsicle:
   gentoo: [media-gfx/gifsicle]
   ubuntu: [gifsicle]
 gimp:
+  debian: [gimp]
   fedora: [gimp]
   gentoo: [media-gfx/gimp]
   ubuntu: [gimp]
@@ -836,10 +904,12 @@ git:
   opensuse: [git-core]
   ubuntu: [git-core]
 gitg:
+  debian: [gitg]
   fedora: [gitg]
   gentoo: [dev-vcs/gitg]
   ubuntu: [gitg]
 gksu:
+  debian: [gksu]
   gentoo: [x11-libs/gksu]
   ubuntu: [gksu]
 glc:
@@ -855,6 +925,7 @@ glut:
   ubuntu: [freeglut3-dev]
 gnuplot:
   arch: [gnuplot]
+  debian: [gnuplot]
   fedora: [gnuplot]
   gentoo: [sci-visualization/gnuplot]
   ubuntu: [gnuplot]
@@ -872,6 +943,7 @@ google-mock:
   rhel: [gmock-devel]
   ubuntu: [google-mock]
 gperftools:
+  debian: [google-perftools, libgoogle-perftools-dev]
   fedora: [gperftools, gperftools-devel]
   gentoo: [dev-util/gperf]
   ubuntu: [google-perftools, libgoogle-perftools-dev]
@@ -882,6 +954,10 @@ gpsd:
   ubuntu: [gpsd]
 gradle:
   arch: [gradle]
+  debian:
+    buster: [gradle]
+    jessie: [gradle]
+    stretch: [gradle]
   fedora: [gradle]
   gentoo: [dev-java/gradle-bin]
   ubuntu: [gradle]
@@ -904,17 +980,32 @@ graphviz:
   slackware: [graphviz]
   ubuntu: [graphviz]
 gringo:
+  debian: [gringo]
   fedora: [gringo]
   ubuntu: [gringo]
+gstreamer0.10-gconf:
+  debian:
+    jessie: [gstreamer0.10-gconf]
+  ubuntu:
+    precise: [gstreamer0.10-gconf]
+    trusty: [gstreamer0.10-gconf]
+    utopic: [gstreamer0.10-gconf]
+    vivid: [gstreamer0.10-gconf]
+    wily: [gstreamer0.10-gconf]
+    xenial: [gstreamer0.10-gconf]
 gstreamer0.10-plugins-good:
   arch: [gstreamer0.10-good-plugins]
-  debian: [gstreamer0.10-plugins-good]
+  debian:
+    jessie: [gstreamer0.10-plugins-good]
+    wheezy: [gstreamer0.10-plugins-good]
   fedora: [gstreamer-plugins-good]
   gentoo: ['media-libs/gst-plugins-good:0.10']
   ubuntu: [gstreamer0.10-plugins-good]
 gstreamer0.10-plugins-ugly:
   arch: [gstreamer0.10-ugly-plugins]
-  debian: [gstreamer0.10-plugins-ugly]
+  debian:
+    jessie: [gstreamer0.10-plugins-ugly]
+    wheezy: [gstreamer0.10-plugins-ugly]
   fedora: [gstreamer-plugins-ugly]
   gentoo: ['media-libs/gst-plugins-ugly:0.10']
   ubuntu:
@@ -931,7 +1022,10 @@ gstreamer0.10-plugins-ugly:
     vivid: [gstreamer0.10-plugins-ugly]
     wily: [gstreamer0.10-plugins-ugly]
 gstreamer0.10-pocketsphinx:
+  debian:
+    jessie: [gstreamer0.10-pocketsphinx]
   fedora: [pocketsphinx-plugin]
+  gentoo: [app-accessibility/pocketsphinx]
   ubuntu: [gstreamer0.10-pocketsphinx]
 gstreamer1.0:
   arch: [gstreamer]
@@ -943,6 +1037,7 @@ gstreamer1.0-libav:
   arch: [gst-libav]
   debian: [gstreamer1.0-libav]
   fedora: [gstreamer1-libav]
+  gentoo: ['media-plugins/gst-plugins-libav:1.0']
   ubuntu: [gstreamer1.0-libav]
 gstreamer1.0-plugins-bad:
   arch: [gst-plugins-bad]
@@ -971,11 +1066,13 @@ gstreamer1.0-plugins-ugly:
 gstreamer1.0-tools:
   debian: [gstreamer1.0-tools]
   fedora: [gstreamer1]
+  gentoo: ['media-libs/gstreamer:1.0']
   ubuntu: [gstreamer1.0-tools]
 gstreamer1.0-x:
   arch: [gstreamer]
   debian: [gstreamer1.0-x]
   fedora: [gstreamer1-plugins-base]
+  gentoo: ['media-libs/gst-plugins-base:1.0[X,pango]']
   ubuntu: [gstreamer1.0-x]
 gtest:
   arch: [gtest]
@@ -1047,6 +1144,11 @@ htop:
   fedora: [htop]
   gentoo: [sys-process/htop]
   ubuntu: [htop]
+hugin-tools:
+  debian: [hugin-tools]
+  fedora: [hugin-base]
+  gentoo: [media-gfx/hugin]
+  ubuntu: [hugin-tools]
 i2c-tools:
   debian: [i2c-tools]
   fedora: [i2c-tools]
@@ -1073,6 +1175,7 @@ intltool:
   opensuse: [intltool]
   ubuntu: [intltool]
 iperf:
+  debian: [iperf]
   fedora: [iperf]
   gentoo: [net-misc/iperf]
   ubuntu: [iperf]
@@ -1108,7 +1211,9 @@ jasper:
   ubuntu: [libjasper-dev]
 java:
   arch: [jdk7-openjdk]
-  debian: [openjdk-7-jdk]
+  debian:
+    jessie: [openjdk-7-jdk]
+    wheezy: [openjdk-7-jdk]
   fedora:
     '21': [java-1.8.0-openjdk]
     '22': [java-1.8.0-openjdk]
@@ -1124,19 +1229,20 @@ java:
 joystick:
   arch: [linuxconsole]
   debian: [joystick]
-  fedora:
-    '21': [linuxconsoletools]
-    '22': [linuxconsoletools]
-    '23': [linuxconsoletools]
-    '24': [linuxconsoletools]
-    beefy: [joystick]
-    heisenbug: [linuxconsoletools]
-    schrödinger’s: [linuxconsoletools]
-    spherical: [linuxconsoletools]
+  fedora: [linuxconsoletools]
   gentoo: [games-util/joystick]
   opensuse: [input-utils]
   rhel: [joystick]
   ubuntu: [joystick]
+jq:
+  debian: [jq]
+  fedora: [jq]
+  gentoo: [app-misc/jq]
+  ubuntu: [jq]
+julius-voxforge:
+  arch: [voxforge-am-julius]
+  fedora: [julius-voxforge]
+  ubuntu: [julius-voxforge]
 jython:
   arch: [jython]
   debian: [jython]
@@ -1206,12 +1312,13 @@ libargtable2-dev:
   arch: [argtable]
   debian: [libargtable2-dev]
   fedora: [argtable2-devel]
-  gentoo: [dev-libs/argtable]
+  gentoo: ['=dev-libs/argtable-2*']
   ubuntu: [libargtable2-dev]
 libaria:
   debian:
+    buster: [libaria-dev]
     jessie: [libaria-dev]
-    sid: [libaria-dev]
+    stretch: [libaria-dev]
     wheezy:
       source:
         md5sum: 589c387995beb951edd9c77f33cb2286
@@ -1229,6 +1336,7 @@ libaria:
     xenial: [libaria-dev]
 libasound2-dev:
   arch: [alsa-lib]
+  debian: [libasound2-dev]
   fedora: [alsa-lib]
   gentoo: [media-libs/alsa-lib]
   ubuntu: [libasound2-dev]
@@ -1251,6 +1359,7 @@ libavahi-core-dev:
   gentoo: [net-dns/avahi]
   ubuntu: [libavahi-core-dev]
 libbison-dev:
+  debian: [libbison-dev]
   fedora: [bison-devel]
   gentoo: [sys-devel/bison]
   ubuntu:
@@ -1272,15 +1381,21 @@ libbluetooth-dev:
   gentoo: [net-wireless/bluez-libs]
   ubuntu: [libbluetooth-dev]
 libboost-random:
+  debian:
+    jessie: [libboost-random1.55.0]
+    stretch: [libboost-random1.62.0]
+    wheezy: [libboost-random1.49.0]
   fedora: [boost-random]
   ubuntu:
     precise: [libboost-random1.46.1]
     trusty: [libboost-random1.54.0]
 libboost-random-dev:
+  debian: [libboost-random-dev]
   fedora: [boost-devel]
   ubuntu: [libboost-random-dev]
 libcairo2-dev:
   arch: [cairo]
+  debian: [libcairo2-dev]
   fedora: [cairo-devel]
   gentoo: [x11-libs/cairo]
   ubuntu: [libcairo2-dev]
@@ -1288,11 +1403,13 @@ libcap-dev:
   arch: [libcap]
   debian: [libcap-dev]
   fedora: [libcap-devel]
+  gentoo: [sys-libs/libcap]
   ubuntu: [libcap-dev]
 libcap2-bin:
   arch: [libcap]
+  debian: [libcap2-bin]
   fedora: [libcap]
-  gentoo: [sys-libs/libcap]
+  gentoo: ['=sys-libs/libcap-2*']
   ubuntu: [libcap2-bin]
 libccd-dev:
   arch: [libccd]
@@ -1307,27 +1424,34 @@ libcegui-mk2-dev:
   gentoo: [dev-games/cegui]
   ubuntu: [libcegui-mk2-dev]
 libceres-dev:
+  debian:
+    buster: [libceres-dev]
+    stretch: [libceres-dev]
   fedora: [ceres-solver-devel]
   gentoo: [sci-libs/ceres-solver]
   ubuntu: [libceres-dev]
 libcoin60-dev:
   arch: [coin]
-  debian: [libcoin60-dev]
+  debian:
+    wheezy: [libcoin60-dev]
   fedora: [Coin2-devel]
-  gentoo: [media-libs/coin]
+  gentoo: ['=media-libs/coin-3.1.3*']
   ubuntu: [libcoin60-dev]
 libcoin80-dev:
-  debian: [libcoin80-dev]
+  debian:
+    buster: [libcoin80-dev]
+    jessie: [libcoin80-dev]
+    stretch: [libcoin80-dev]
   fedora: [Coin2-devel]
   ubuntu: [libcoin80-dev]
 libconfig++-dev:
   debian: [libconfig++-dev]
-  gentoo: [dev-libs/libconfig]
+  gentoo: ['dev-libs/libconfig[cxx]']
   ubuntu: [libconfig++-dev]
 libconfig-dev:
   debian: [libconfig-dev]
   fedora: [libconfig-devel]
-  gentoo: [dev-libs/libconfig]
+  gentoo: ['dev-libs/libconfig[cxx]']
   ubuntu: [libconfig-dev]
 libconsole-bridge-dev:
   arch: [console-bridge]
@@ -1383,8 +1507,10 @@ libespeak-dev:
   ubuntu: [libespeak-dev]
 libestools-dev:
   debian:
+    buster: [libestools-dev]
     jessie: [libestools2.1-dev]
     stretch: [libestools-dev]
+    wheezy: [libestools2.1-dev]
   fedora: [festival-speechtools-devel]
   gentoo: [app-accessibility/festival]
   ubuntu:
@@ -1409,6 +1535,7 @@ libexpat1-dev:
 libfcl-dev:
   arch: [fcl]
   debian:
+    buster: [libfcl-dev]
     jessie: [libfcl-0.5-dev]
     stretch: [libfcl-dev]
   fedora: [fcl-devel]
@@ -1427,7 +1554,7 @@ libfftw3:
   arch: [fftw]
   debian: [libfftw3-3, libfftw3-dev]
   fedora: [fftw, fftw-devel]
-  gentoo: [sci-libs/fftw]
+  gentoo: ['sci-libs/fftw:3.0']
   ubuntu: [libfftw3-3, libfftw3-dev]
 libflann:
   arch: [flann]
@@ -1455,13 +1582,13 @@ libflann-dev:
 libfltk-dev:
   arch: [fltk]
   debian:
+    buster: [libfltk1.3-dev]
     jessie: [libfltk1.1-dev]
-    sid: [libfltk1.1-dev]
     stretch: [libfltk1.3-dev]
     wheezy: [libfltk1.1-dev]
   fedora: [fltk-devel]
   freebsd: [fltk]
-  gentoo: [=x11-libs/fltk-1*]
+  gentoo: [x11-libs/fltk]
   macports: [fltk]
   opensuse: [fltk-devel]
   slackware: [fltk]
@@ -1482,6 +1609,7 @@ libfltk-dev:
     yakkety: [libfltk1.3-dev]
     zesty: [libfltk1.3-dev]
 libfontconfig1-dev:
+  debian: [libfontconfig1-dev]
   fedora: [fontconfig-devel]
   gentoo: [media-libs/fontconfig]
   ubuntu: [libfontconfig1-dev]
@@ -1491,10 +1619,12 @@ libfreenect-dev:
   fedora: [libfreenect-devel]
   ubuntu: [libfreenect-dev]
 libfreetype6:
+  debian: [libfreetype6]
   fedora: [freetype-devel]
   gentoo: [media-libs/freetype]
   ubuntu: [libfreetype6]
 libfreetype6-dev:
+  debian: [libfreetype6-dev]
   gentoo: [media-libs/freetype]
   ubuntu: [libfreetype6-dev]
 libftdi-dev:
@@ -1505,10 +1635,12 @@ libftdi-dev:
   ubuntu: [libftdi-dev]
 libftdipp-dev:
   debian:
+    buster: [libftdipp1-dev]
     jessie: [libftdipp-dev]
     stretch: [libftdipp1-dev]
+    wheezy: [libftdipp-dev]
   fedora: [libftdi-c++-devel]
-  gentoo: [dev-embedded/libftdi]
+  gentoo: ['dev-embedded/libftdi[cxx]']
   ubuntu:
     precise: [libftdipp-dev]
     saucy: [libftdipp-dev]
@@ -1529,7 +1661,9 @@ libgazebo5-dev:
   ubuntu: [libgazebo5-dev]
 libgazebo7-dev:
   arch: [gazebo]
-  debian: [libgazebo7-dev]
+  debian:
+    buster: [libgazebo7-dev]
+    stretch: [libgazebo7-dev]
   fedora:
     '25': [gazebo-devel]
   gentoo: ['=sci-electronics/gazebo-7*']
@@ -1540,9 +1674,11 @@ libgconf2:
   arch: [gconf]
   debian: [libgconf-2-4]
   fedora: [GConf2]
-  gentoo: [gnome-base/gconf]
+  gentoo: ['gnome-base/gconf:2']
   ubuntu: [libgconf-2-4]
 libgeographiclib-dev:
+  debian:
+    wheezy: [libgeographiclib-dev]
   fedora: [geographiclib]
   gentoo: [sci-geosciences/geographiclib]
   ubuntu: [libgeographiclib-dev]
@@ -1562,7 +1698,7 @@ libgfortran3:
   arch: [gcc-libs]
   debian: [libgfortran3]
   fedora: [libgfortran]
-  gentoo: [sys-devel/gcc]
+  gentoo: ['sys-devel/gcc[fortran]']
   ubuntu: [libgfortran3]
 libgif-dev:
   debian: [libgif-dev]
@@ -1611,6 +1747,7 @@ libglw1-mesa:
   gentoo: [x11-libs/libGLw]
   ubuntu: [libglw1-mesa]
 libgmp:
+  debian: [libgmp-dev]
   fedora: [gmp-devel]
   gentoo: [dev-libs/gmp]
   ubuntu: [libgmp-dev]
@@ -1648,6 +1785,7 @@ libgps:
 libgsl:
   arch: [gsl]
   debian:
+    buster: [libgsl-dev]
     jessie: [libgsl0-dev]
     stretch: [libgsl-dev]
     wheezy: [libgsl0-dev]
@@ -1666,13 +1804,17 @@ libgsl:
     yakkety: [libgsl-dev]
 libgstreamer-plugins-base0.10-0:
   arch: [gstreamer0.10-base-plugins]
-  debian: [libgstreamer-plugins-base0.10-0]
+  debian:
+    jessie: [libgstreamer-plugins-base0.10-0]
+    wheezy: [libgstreamer-plugins-base0.10-0]
   fedora: [gstreamer-plugins-base]
   gentoo: ['media-libs/gst-plugins-base:0.10']
   ubuntu: [libgstreamer-plugins-base0.10-0]
 libgstreamer-plugins-base0.10-dev:
   arch: [gstreamer0.10-base-plugins]
-  debian: [libgstreamer-plugins-base0.10-dev]
+  debian:
+    jessie: [libgstreamer-plugins-base0.10-dev]
+    wheezy: [libgstreamer-plugins-base0.10-dev]
   fedora: [gstreamer-plugins-base-devel]
   gentoo: ['media-libs/gst-plugins-base:0.10']
   ubuntu: [libgstreamer-plugins-base0.10-dev]
@@ -1684,13 +1826,17 @@ libgstreamer-plugins-base1.0-dev:
   ubuntu: [libgstreamer-plugins-base1.0-dev]
 libgstreamer0.10-0:
   arch: [gstreamer0.10]
-  debian: [libgstreamer0.10-0]
+  debian:
+    jessie: [libgstreamer0.10-0]
+    wheezy: [libgstreamer0.10-0]
   fedora: [gstreamer]
   gentoo: ['media-libs/gstreamer:0.10']
   ubuntu: [libgstreamer0.10-0]
 libgstreamer0.10-dev:
   arch: [gstreamer0.10]
-  debian: [libgstreamer0.10-dev]
+  debian:
+    jessie: [libgstreamer0.10-dev]
+    wheezy: [libgstreamer0.10-dev]
   fedora: [gstreamer-devel]
   gentoo: ['media-libs/gstreamer:0.10']
   ubuntu: [libgstreamer0.10-dev]
@@ -1729,6 +1875,7 @@ libi2c-dev:
   gentoo: [sys-apps/i2c-tools]
   ubuntu: [libi2c-dev]
 libicu-dev:
+  debian: [libicu-dev]
   fedora: [libicu-devel]
   gentoo: [dev-libs/icu]
   ubuntu: [libicu-dev]
@@ -1743,7 +1890,11 @@ libiw-dev:
   fedora: [wireless-tools-devel]
   gentoo: [net-wireless/wireless-tools]
   ubuntu: [libiw-dev]
+libjack-dev:
+  debian: [libjack-dev]
+  ubuntu: [libjack-dev]
 libjackson-json-java:
+  debian: [libjackson-json-java]
   fedora: [jackson]
   gentoo: [dev-java/jackson]
   ubuntu: [libjackson-json-java]
@@ -1752,6 +1903,7 @@ libjansson-dev:
   gentoo: [dev-libs/jansson]
   ubuntu: [libjansson-dev]
 libjaxp1.3-java:
+  debian: [libjaxp1.3-java]
   ubuntu:
     precise: [libjaxp1.3-java]
     trusty: [libjaxp1.3-java]
@@ -1801,7 +1953,7 @@ libjson0-dev:
   arch: [json-c]
   debian: [libjson0-dev]
   fedora: [json-c-devel]
-  gentoo: [dev-libs/json-c]
+  gentoo: ['dev-libs/json-c:0']
   ubuntu: [libjson0-dev]
 libjsoncpp:
   debian: [libjsoncpp1]
@@ -1824,6 +1976,7 @@ libjsoncpp-dev:
   gentoo: [dev-libs/jsoncpp]
   ubuntu: [libjsoncpp-dev]
 libkdtree++-dev:
+  debian: [libkdtree++-dev]
   fedora: [libkdtree++-devel]
   ubuntu: [libkdtree++-dev]
 liblapack-dev:
@@ -1839,6 +1992,7 @@ libleptonica-dev:
   gentoo: [media-libs/leptonica]
   ubuntu: [libleptonica-dev]
 liblinear-dev:
+  debian: [liblinear-dev]
   fedora: [liblinear-devel]
   gentoo: [dev-libs/liblinear]
   ubuntu: [liblinear-dev]
@@ -1871,6 +2025,7 @@ libmicrohttpd:
   gentoo: [net-libs/libmicrohttpd]
   ubuntu: [libmicrohttpd-dev]
 libmodbus-dev:
+  debian: [libmodbus-dev]
   fedora: [libmodbus-devel]
   ubuntu: [libmodbus-dev]
 libmotif-dev:
@@ -1892,6 +2047,7 @@ libmpich-dev:
   ubuntu: [libmpich-dev]
 libmpich2-dev:
   debian: [libmpich2-dev]
+  gentoo: [sys-cluster/mpich2]
   ubuntu: [libmpich2-dev]
 libmysqlclient-dev:
   arch: [mariadb]
@@ -1928,13 +2084,13 @@ libnl-3:
   arch: [libnl]
   debian: [libnl-3-200, libnl-genl-3-200]
   fedora: [libnl3]
-  gentoo: [dev-libs/libnl]
+  gentoo: ['dev-libs/libnl:3']
   ubuntu: [libnl-3-200, libnl-genl-3-200]
 libnl-3-dev:
   arch: [libnl]
   debian: [libnl-3-dev, libnl-genl-3-dev]
   fedora: [libnl3-devel]
-  gentoo: [dev-libs/libnl]
+  gentoo: ['dev-libs/libnl:3']
   ubuntu: [libnl-3-dev, libnl-genl-3-dev]
 libnl-dev:
   arch: [libnl1]
@@ -1958,8 +2114,9 @@ libnotify:
   gentoo: [x11-libs/libnotify]
   ubuntu: [libnotify-dev]
 libnss3-dev:
+  debian: [libnss3-dev]
   fedora: [nss-devel]
-  gentoo: [dev-libs/nss]
+  gentoo: ['=dev-libs/nss-3*']
   ubuntu: [libnss3-dev]
 libogg:
   arch: [libogg]
@@ -1973,8 +2130,8 @@ libogg:
 libogre-dev:
   arch: [ogre-1.9]
   debian:
+    buster: [libogre-1.9-dev]
     jessie: [libogre-1.9-dev]
-    sid: [libogre-1.9-dev]
     stretch: [libogre-1.9-dev]
     wheezy: [libogre-dev]
   fedora: [ogre-devel]
@@ -2060,6 +2217,7 @@ libopenscenegraph:
 libopenvdb:
   arch: [openvdb]
   debian:
+    buster: [libopenvdb3.2]
     jessie: [libopenvdb2.3]
     stretch: [libopenvdb3.2]
   gentoo: [media-gfx/openvdb]
@@ -2081,7 +2239,7 @@ libosmesa6-dev:
   arch: [mesa]
   debian: [libosmesa6-dev]
   fedora: [mesa-libOSMesa-devel]
-  gentoo: [media-libs/mesa]
+  gentoo: ['media-libs/mesa[osmesa]']
   ubuntu: [libosmesa6-dev]
 libpcap:
   arch:
@@ -2151,11 +2309,13 @@ libphonon-dev:
   gentoo: [media-libs/phonon]
   ubuntu: [libphonon-dev]
 libpng++-dev:
+  debian: [libpng++-dev]
   gentoo: [dev-cpp/pngpp]
   ubuntu: [libpng++-dev]
 libpng-dev:
   arch: [libpng]
   debian:
+    buster: [libpng-dev]
     jessie: [libpng12-dev]
     stretch: [libpng-dev]
     wheezy: [libpng12-dev]
@@ -2180,7 +2340,7 @@ libpng12-dev:
   arch: [libpng]
   debian: [libpng12-dev]
   fedora: [libpng12-devel]
-  gentoo: [media-libs/libpng]
+  gentoo: ['media-libs/libpng:1.2']
   macports: [libpng]
   opensuse: [libpng12-devel]
   slackware: [libpng]
@@ -2219,9 +2379,15 @@ libpq-dev:
   gentoo: [dev-db/postgresql]
   ubuntu: [libpq-dev]
 libpqxx:
+  debian:
+    buster: [libpqxx-4.0v5]
+    jessie: [libpqxx-4.0]
+    stretch: [libpqxx-4.0v5]
+    wheezy: [libpqxx-3.1]
   fedora: [libpqxx]
   gentoo: [dev-libs/libpqxx]
   ubuntu:
+    artful: [libpqxx-4.0v5]
     lucid: [libpqxx-3.0]
     maverick: [libpqxx-3.0]
     natty: [libpqxx-3.0]
@@ -2233,10 +2399,16 @@ libpqxx:
     trusty: [libpqxx-4.0]
     utopic: [libpqxx-4.0]
     vivid: [libpqxx-4.0]
+    wily: [libpqxx-4.0]
+    xenial: [libpqxx-4.0]
+    yakkety: [libpqxx-4.0v5]
+    zesty: [libpqxx-4.0v5]
 libpqxx-dev:
+  debian: [libpqxx-dev]
   fedora: [libpqxx-devel]
   gentoo: [dev-libs/libpqxx]
   ubuntu:
+    artful: [libpqxx-dev]
     lucid: [libpqxx3-dev]
     maverick: [libpqxx3-dev]
     natty: [libpqxx3-dev]
@@ -2248,6 +2420,10 @@ libpqxx-dev:
     trusty: [libpqxx-dev]
     utopic: [libpqxx-dev]
     vivid: [libpqxx-dev]
+    wily: [libpqxx-dev]
+    xenial: [libpqxx-dev]
+    yakkety: [libpqxx-dev]
+    zesty: [libpqxx-dev]
 libpt-dev:
   debian: [libpt-dev]
   fedora: [ptlib-devel]
@@ -2259,6 +2435,10 @@ libpulse-dev:
   gentoo: [media-sound/pulseaudio]
   ubuntu: [libpulse-dev]
 libqcustomplot-dev:
+  debian:
+    buster: [libqcustomplot-dev]
+    jessie: [libqcustomplot-dev]
+    stretch: [libqcustomplot-dev]
   fedora: [qcustomplot-devel]
   gentoo: [dev-libs/qcustomplot]
   ubuntu: [libqcustomplot-dev]
@@ -2271,11 +2451,12 @@ libqd-dev:
 libqglviewer-qt4:
   arch: [libqglviewer-qt4]
   debian:
+    buster: [libqglviewer2-qt4]
     jessie: [libqglviewer2]
     stretch: [libqglviewer2-qt4]
     wheezy: [libqglviewer-qt4-2]
   fedora: [libQGLViewer]
-  gentoo: [x11-libs/libQGLViewer]
+  gentoo: ['x11-libs/libQGLViewer:0/qt4-2']
   macports: [libQGLViewer]
   ubuntu:
     lucid: [libqglviewer-qt4-2]
@@ -2296,11 +2477,12 @@ libqglviewer-qt4:
 libqglviewer-qt4-dev:
   arch: [libqglviewer-qt4]
   debian:
+    buster: [libqglviewer-dev-qt4]
     jessie: [libqglviewer-dev]
     stretch: [libqglviewer-dev-qt4]
     wheezy: [libqglviewer-qt4-dev]
   fedora: [libQGLViewer-devel]
-  gentoo: [x11-libs/libQGLViewer]
+  gentoo: ['x11-libs/libQGLViewer:0/qt4-2']
   ubuntu:
     lucid: [libqglviewer-qt4-dev]
     maverick: [libqglviewer-qt4-dev]
@@ -2377,6 +2559,14 @@ libqt4-sql-psql:
   gentoo: ['dev-qt/qtsql:4']
   macports: [qt4-mac]
   ubuntu: [libqt4-sql-psql]
+libqt5-concurrent:
+  arch:   [qt5-base]
+  debian: [libqt5concurrent5]
+  fedora: [qt5-qtbase]
+  gentoo: ['dev-qt/qtconcurrent:5']
+  opensuse: [libQt5Concurrent5]
+  slackware: [qt5]
+  ubuntu: [libqt5concurrent5]
 libqt5-core:
   arch:   [qt5-base]
   debian: [libqt5core5a]
@@ -2414,8 +2604,18 @@ libqt5-opengl-dev:
   gentoo: ['dev-qt/qtopengl:5']
   slackware: [qt5]
   ubuntu: [libqt5opengl5-dev]
+libqt5-printsupport:
+  arch:   [qt5-base]
+  debian: [libqt5printsupport5]
+  fedora: [qt5-qtbase]
+  gentoo: ['dev-qt/qtprintsupport:5']
+  ubuntu: [libqt5printsupport5]
 libqt5-sql:
   arch:   [qt5-base]
+  debian:
+    buster: [libqt5sql5]
+    jessie: [libqt5sql5]
+    stretch: [libqt5sql5]
   fedora: [qt5-qtbase]
   gentoo: ['dev-qt/qtsql:5']
   ubuntu: [libqt5sql5]
@@ -2444,6 +2644,7 @@ libqtgui4:
   gentoo: ['dev-qt/qtgui:4']
   ubuntu: [libqtgui4]
 libqtwebkit-dev:
+  debian: [libqtwebkit-dev]
   fedora: [qtwebkit-devel]
   gentoo: [dev-qt/qtwebkit]
   ubuntu: [libqtwebkit-dev]
@@ -2451,10 +2652,11 @@ libqwt5-qt4-dev:
   arch: [qwt5]
   debian: [libqwt5-qt4-dev]
   fedora: [qwt-devel]
-  gentoo: [x11-libs/qwt]
+  gentoo: ['x11-libs/qwt:5[qt4]']
   ubuntu: [libqwt5-qt4-dev]
 libqwt6:
   arch: [qwt]
+  debian: [libqwt-dev]
   fedora: [qwt-devel]
   gentoo: ['x11-libs/qwt:6']
   ubuntu:
@@ -2518,7 +2720,7 @@ libsensors4-dev:
   arch: [lm_sensors]
   debian: [libsensors4-dev]
   fedora: [lm_sensors-devel]
-  gentoo: [sys-apps/lm_sensors]
+  gentoo: ['sys-apps/lm_sensors:0']
   ubuntu: [libsensors4-dev]
 libserial-dev:
   debian: [libserial-dev]
@@ -2529,6 +2731,7 @@ libsimage-dev:
   gentoo: [media-libs/simage]
   ubuntu: [libsimage-dev]
 libsndfile1-dev:
+  debian: [libsndfile1-dev]
   fedora: [libsndfile-devel]
   gentoo: [media-libs/libsndfile]
   ubuntu: [libsndfile1-dev]
@@ -2548,17 +2751,20 @@ libsqlite3-dev:
   arch: [sqlite]
   debian: [libsqlite3-dev]
   fedora: [libsq3-devel]
-  gentoo: [dev-db/sqlite]
+  gentoo: ['dev-db/sqlite:3']
   ubuntu: [libsqlite3-dev]
 libsrtp0-dev:
+  debian: [libsrtp0-dev]
   fedora: [libsrtp-devel]
   gentoo: ['net-libs/libsrtp:0']
   ubuntu: [libsrtp0-dev]
 libssh2:
+  debian: [libssh2-1]
   fedora: [libssh2]
   gentoo: [net-libs/libssh2]
   ubuntu: [libssh2-1]
 libssh2-dev:
+  debian: [libssh2-1-dev]
   fedora: [libssh2-devel]
   gentoo: [net-libs/libssh2]
   ubuntu: [libssh2-1-dev]
@@ -2587,6 +2793,7 @@ libsvm3:
   gentoo: ['=sci-libs/libsvm-3*']
   ubuntu: [libsvm3]
 libsvn-dev:
+  debian: [libsvn-dev]
   fedora: [subversion-devel]
   ubuntu: [libsvn-dev]
 libswscale-dev:
@@ -2596,6 +2803,7 @@ libswscale-dev:
   gentoo: [virtual/ffmpeg]
   ubuntu: [libswscale-dev]
 libtesseract:
+  debian: [libtesseract-dev]
   fedora: [tesseract-devel]
   gentoo: [app-text/tesseract]
   ubuntu: [libtesseract-dev]
@@ -2613,8 +2821,8 @@ libtheora:
 libtiff-dev:
   arch: [libtiff]
   debian:
+    buster: [libtiff5-dev]
     jessie: [libtiff5-dev]
-    sid: [libtiff5-dev]
     stretch: [libtiff5-dev]
     wheezy: [libtiff5-alt-dev]
   fedora: [libtiff]
@@ -2651,9 +2859,9 @@ libtiff4-dev:
 libtool:
   arch: [libtool]
   debian:
+    buster: [libtool, libltdl-dev, libtool-bin]
     jessie: [libtool, libltdl-dev, libtool-bin]
     lenny: [libtool, libltdl3-dev]
-    sid: [libtool, libltdl-dev, libtool-bin]
     squeeze: [libtool, libltdl-dev]
     stretch: [libtool, libltdl-dev, libtool-bin]
     wheezy: [libtool, libltdl-dev]
@@ -2681,6 +2889,7 @@ libtool:
     yakkety: [libtool, libltdl-dev, libtool-bin]
     zesty: [libtool, libltdl-dev, libtool-bin]
 libttspico:
+  debian: [libttspico-dev, libttspico-data, libttspico-utils, libttspico0]
   ubuntu: [libttspico-dev, libttspico-data, libttspico-utils, libttspico0]
 libturbojpeg:
   arch: [libjpeg-turbo]
@@ -2703,6 +2912,11 @@ libunittest++:
   rhel: [unittest]
   ubuntu: [libunittest++-dev]
 libunwind:
+  debian:
+    buster: [libunwind8]
+    jessie: [libunwind8]
+    stretch: [libunwind8]
+    wheezy: [libunwind7]
   fedora: [libunwind]
   gentoo: [sys-libs/libunwind]
   ubuntu:
@@ -2712,6 +2926,11 @@ libunwind:
     saucy: [libunwind8]
     trusty: [libunwind8]
 libunwind-dev:
+  debian:
+    buster: [libunwind8-dev]
+    jessie: [libunwind8-dev]
+    stretch: [libunwind8-dev]
+    wheezy: [libunwind7-dev]
   fedora: [libunwind-devel]
   gentoo: [sys-libs/libunwind]
   ubuntu:
@@ -2741,6 +2960,7 @@ liburdfdom-tools:
   debian: [liburdfdom-tools]
   fedora: [urdfdom]
   gentoo: [dev-libs/urdfdom]
+  slackware: [urdfdom]
   ubuntu: [liburdfdom-tools]
 libusb:
   arch: [libusb-compat]
@@ -2790,6 +3010,10 @@ libusb-dev:
   macports: [libusb]
   ubuntu: [libusb-dev]
 libuv-dev:
+  debian:
+    buster: [libuv1-dev]
+    jessie: [libuv0.10-dev]
+    stretch: [libuv1-dev]
   fedora: [libuv-devel]
   gentoo: [dev-libs/libuv]
   ubuntu:
@@ -2823,18 +3047,19 @@ libvlc-dev:
   gentoo: [media-video/vlc]
   ubuntu: [libvlc-dev]
 libvpx-dev:
+  debian: [libvpx-dev]
   fedora: [libvpx-devel]
   gentoo: [media-libs/libvpx]
   ubuntu: [libvpx-dev]
 libvtk:
   arch: [vtk]
   debian:
+    buster: [libvtk6-dev]
     jessie: [libvtk5-dev]
-    sid: [libvtk6-dev]
     stretch: [libvtk6-dev]
     wheezy: [libvtk5-dev]
   fedora: [vtk-devel]
-  gentoo: [sci-libs/vtk]
+  gentoo: ['sci-libs/vtk[boost,python,qt5]']
   macports: [vtk-devel]
   opensuse: [vtk-devel]
   ubuntu:
@@ -2854,11 +3079,12 @@ libvtk:
 libvtk-java:
   arch: [vtk]
   debian:
+    buster: [libvtk6-java]
     jessie: [libvtk-java]
     stretch: [libvtk6-java]
     wheezy: [libvtk-java]
   fedora: [vtk-java]
-  gentoo: [sci-libs/vtk]
+  gentoo: ['sci-libs/vtk[java]']
   opensuse: [vtk-java]
   slackware: [VTK]
   ubuntu:
@@ -2877,12 +3103,12 @@ libvtk-java:
 libvtk-qt:
   arch: [vtk]
   debian:
+    buster: [libvtk6-qt-dev]
     jessie: [libvtk5-qt4-dev]
-    sid: [libvtk6-qt-dev]
     stretch: [libvtk6-qt-dev]
     wheezy: [libvtk5-qt4-dev]
   fedora: [vtk-qt]
-  gentoo: [sci-libs/vtk]
+  gentoo: ['sci-libs/vtk[qt5,rendering]']
   opensuse: [vtk-qt]
   slackware: [VTK]
   ubuntu:
@@ -2935,7 +3161,9 @@ libxaw:
   rhel: [libXaw-devel]
   ubuntu: [libxaw7-dev]
 libxenomai-dev:
-  debian: [libxenomai-dev]
+  debian:
+    jessie: [libxenomai-dev]
+    wheezy: [libxenomai-dev]
   ubuntu: [libxenomai-dev]
 libxext:
   arch: [libxext]
@@ -2948,6 +3176,7 @@ libxext:
   rhel: [libXext-devel]
   ubuntu: [libxext-dev]
 libxft-dev:
+  debian: [libxft-dev]
   gentoo: [x11-libs/libXft]
   ubuntu: [libxft-dev]
 libxi-dev:
@@ -2958,6 +3187,7 @@ libxi-dev:
   ubuntu: [libxi-dev]
 libxinerama-dev:
   arch: [libxinerama]
+  debian: [libxinerama-dev]
   fedora: [libXinerama-devel]
   gentoo: [x11-libs/libXinerama]
   ubuntu: [libxinerama-dev]
@@ -2965,7 +3195,7 @@ libxml++-2.6:
   arch: [libxml++]
   debian: [libxml++2.6-2, libxml++2.6-dev]
   fedora: [libxml++, libxml++-devel]
-  gentoo: [dev-cpp/libxmlpp]
+  gentoo: ['dev-cpp/libxmlpp:2.6']
   ubuntu:
     precise: [libxml++2.6-2, libxml++2.6-dev]
     saucy: [libxml++2.6-2, libxml++2.6-dev]
@@ -2984,6 +3214,9 @@ libxml2:
   opensuse: [libxml2-devel]
   rhel: [libxml2-devel]
   ubuntu: [libxml2-dev]
+libxml2-utils:
+  debian: [libxml2-utils]
+  ubuntu: [libxml2-utils]
 libxmu-dev:
   arch: [libxmu]
   debian: [libxmu-dev]
@@ -3009,7 +3242,7 @@ libxss1:
   arch: [libxss]
   debian: [libxss1]
   fedora: [libXScrnSaver]
-  gentoo: [x11-libs/libXt]
+  gentoo: [x11-libs/libXScrnSaver]
   ubuntu: [libxss1]
 libxt-dev:
   arch: [libxt]
@@ -3034,6 +3267,7 @@ libxxf86vm:
   rhel: [libXxf86vm-devel]
   ubuntu: [libxxf86vm-dev]
 libzmq3-dev:
+  debian: [libzmq3-dev]
   fedora: [zeromq3-devel]
   gentoo: [net-libs/cppzmq]
   ubuntu: [libzmq3-dev]
@@ -3060,14 +3294,20 @@ linux-kernel-headers:
   fedora: [kernel-headers]
   gentoo: [sys-kernel/linux-headers]
   ubuntu: [linux-libc-dev]
+lm-sensors:
+  arch: [lm_sensors]
+  debian: [lm-sensors]
+  fedora: [lm_sensors]
+  gentoo: [sys-apps/lm_sensors]
+  ubuntu: [lm-sensors]
 log4cxx:
   arch: [log4cxx]
   cygwin: [liblog4cxx-devel]
   debian:
+    buster: [liblog4cxx-dev]
     jessie: [liblog4cxx10-dev]
-    sid: [liblog4cxx10-dev]
     squeeze: [liblog4cxx10-dev]
-    stretch: [liblog4cxx10-dev]
+    stretch: [liblog4cxx-dev]
     wheezy: [liblog4cxx10-dev]
   fedora: [log4cxx-devel]
   freebsd: [log4cxx]
@@ -3075,7 +3315,7 @@ log4cxx:
   macports: [ros-log4cxx]
   opensuse: [liblog4cxx-devel]
   rhel: [log4cxx-devel]
-  slackware: [log4cxx]
+  slackware: [apache-log4cxx]
   ubuntu: [liblog4cxx10-dev]
 lttng-modules:
   arch: [lttng-modules]
@@ -3106,7 +3346,7 @@ lua-dev:
 lua5.2-dev:
   debian: [liblua5.2-dev]
   fedora: [lua]
-  gentoo: [dev-lang/lua]
+  gentoo: ['dev-lang/lua:5.2']
   ubuntu: [liblua5.2-dev]
 lz4:
   arch: [lz4]
@@ -3142,10 +3382,12 @@ maven:
   gentoo: [dev-java/maven-bin]
   ubuntu: [maven]
 mayavi:
+  debian: [mayavi2]
   fedora: [Mayavi]
   gentoo: [sci-visualization/mayavi]
   ubuntu: [mayavi2]
 meld:
+  debian: [meld]
   fedora: [meld]
   gentoo: [dev-util/meld]
   ubuntu: [meld]
@@ -3160,6 +3402,7 @@ mercurial:
   ubuntu: [mercurial]
 mesa-common-dev:
   arch: [mesa]
+  debian: [mesa-common-dev]
   fedora: [mesa-libGL-devel, libdrm-devel, libX11-devel]
   gentoo: [media-libs/mesa]
   ubuntu: [mesa-common-dev]
@@ -3211,17 +3454,14 @@ mpg123:
   ubuntu: [mpg123]
 mplayer:
   arch: [mplayer]
-  debian:
-    jessie: [mplayer]
-    sid: [mplayer]
-    squeeze: [mplayer]
-    wheezy: [mplayer]
+  debian: [mplayer]
   fedora: [mplayer]
   gentoo: [media-video/mplayer]
   ubuntu: [mplayer]
 mrpt:
   debian: [libmrpt-dev]
   fedora: [mrpt-devel]
+  gentoo: [sci-electronics/mrpt]
   ubuntu:
     oneiric: [libmrpt-dev]
     precise: [libmrpt-dev]
@@ -3254,6 +3494,12 @@ nasm:
   macports: [nasm]
   opensuse: [nasm]
   ubuntu: [nasm]
+nbtscan:
+  arch: [nbtscan]
+  debian: [nbtscan]
+  fedora: [nbtscan]
+  gentoo: [net-analyzer/nbtscan]
+  ubuntu: [nbtscan]
 net-tools:
   arch: [net-tools]
   debian: [net-tools]
@@ -3296,6 +3542,7 @@ nodejs-legacy:
 npm:
   debian: [npm]
   fedora: [npm]
+  gentoo: ['net-libs/nodejs[npm]']
   ubuntu: [npm]
 ntp:
   debian: [ntp]
@@ -3340,6 +3587,7 @@ opende:
   arch: [ode]
   debian: [libode-dev]
   fedora: [ode]
+  gentoo: [dev-games/ode]
   ubuntu: [libode-dev]
 opengl:
   arch: [mesa]
@@ -3356,7 +3604,8 @@ opengl:
   ubuntu: [libgl1-mesa-dev, libglu1-mesa-dev]
 openjdk-6-jdk:
   arch: [openjdk6]
-  debian: [openjdk-6-jdk]
+  debian:
+    wheezy: [openjdk-6-jdk]
   freebsd: [openjdk6]
   ubuntu: [openjdk-6-jdk]
 openmpi:
@@ -3374,10 +3623,12 @@ openni-dev:
   gentoo: [dev-libs/OpenNI]
   ubuntu: [libopenni-dev]
 openssh-client:
+  debian: [openssh-client]
   fedora: [openssh-clients]
   gentoo: [net-misc/openssh]
   ubuntu: [openssh-client]
 openssh-server:
+  debian: [openssh-server]
   fedora: [openssh-server]
   gentoo: [net-misc/openssh]
   ubuntu: [openssh-server]
@@ -3393,9 +3644,11 @@ osm2pgsql:
   gentoo: [sci-geosciences/osm2pgsql]
   ubuntu: [osm2pgsql]
 osmium:
+  debian: [libosmium-dev]
   fedora: [libosmium-devel]
   ubuntu: [libosmium-dev]
 pandoc:
+  debian: [pandoc]
   gentoo: [app-text/pandoc]
   ubuntu: [pandoc]
 pcre:
@@ -3414,11 +3667,15 @@ pcre-dev:
   rhel: [pcre-devel]
   ubuntu: [libpcre++-dev]
 phantomjs:
+  debian:
+    buster: [phantomjs]
+    stretch: [phantomjs]
   gentoo: [www-client/phantomjs]
   ubuntu: [phantomjs]
 php:
   arch: [php]
   debian:
+    buster: [php7.1]
     jessie: [php5]
     stretch: [php7.0]
   fedora: [php]
@@ -3448,7 +3705,11 @@ pkg-config:
     slackpkg:
       packages: [pkg-config]
   ubuntu: [pkg-config]
-pocketsphinx:
+pocketsphinx-bin:
+  debian:
+    buster: [pocketsphinx]
+    jessie: [pocketsphinx]
+    stretch: [pocketsphinx]
   fedora: [pocketsphinx]
   gentoo: [app-accessibility/pocketsphinx]
   ubuntu:
@@ -3463,6 +3724,12 @@ pocketsphinx:
     xenial: [pocketsphinx]
     yakkety: [pocketsphinx]
     zesty: [pocketsphinx]
+polyclipping-dev:
+  debian:
+    buster: [libpolyclipping-dev]
+    jessie: [libpolyclipping-dev]
+    stretch: [libpolyclipping-dev]
+  ubuntu: [libpolyclipping-dev]
 portaudio:
   arch: [portaudio]
   debian: [libportaudio-dev]
@@ -3470,19 +3737,22 @@ portaudio:
   gentoo: [media-libs/portaudio]
   ubuntu: [libportaudio-dev]
 portaudio19-dev:
-  debian: [libportaudio19-dev]
+  debian: [portaudio19-dev]
   fedora: [libportaudio-devel]
   gentoo: ['=media-libs/portaudio-19*']
-  ubuntu: [libportaudio19-dev]
+  ubuntu: [portaudio19-dev]
 postgresql:
+  debian: [postgresql, postgresql-contrib]
   fedora: [postgresql-server, postgresql-contrib]
   ubuntu: [postgresql, postgresql-contrib]
 postgresql-9.x-postgis:
   debian:
+    buster: [postgresql-9.6-postgis-2.3]
     jessie: [postgresql-9.4-postgis-2.1]
+    stretch: [postgresql-9.6-postgis-2.3]
     wheezy: [postgresql-9.4-postgis-2.1]
   fedora: [postgis]
-  gentoo: [dev-db/postgresql]
+  gentoo: [dev-db/postgis,'=dev-db/postgresql-9*']
   ubuntu:
     precise: [postgresql-9.1-postgis, postgresql-contrib-9.1, postgresql-server-dev-9.1]
     raring: [postgresql-9.1-postgis, postgresql-contrib-9.1, postgresql-server-dev-9.1]
@@ -3493,6 +3763,7 @@ postgresql-9.x-postgis:
     wily: [postgresql-9.4-postgis-2.1, postgresql-contrib-9.4, postgresql-server-dev-9.4]
     xenial: [postgresql-9.5-postgis-2.2, postgresql-contrib-9.5, postgresql-server-dev-9.5]
 postgresql-client:
+  debian: [postgresql-client]
   fedora: [postgresql-client]
   gentoo: [dev-db/postgresql]
   ubuntu: [postgresql-client]
@@ -3513,8 +3784,8 @@ proj:
 protobuf:
   arch: [protobuf]
   debian:
+    buster: [libprotobuf10]
     jessie: [libprotobuf9]
-    sid: [libprotobuf9]
     squeeze: [libprotobuf7]
     stretch: [libprotobuf10]
     wheezy: [libprotobuf7]
@@ -3549,62 +3820,15 @@ ps-engine:
   fedora: [openni-primesense]
   ubuntu: [ps-engine]
 pstoedit:
+  debian: [pstoedit]
   fedora: [pstoedit]
   gentoo: [media-gfx/pstoedit]
   ubuntu: [pstoedit]
-pyqt4-dev-tools:
-  arch: [python2-pyqt4]
-  debian: [pyqt4-dev-tools]
-  fedora: [PyQt4-devel]
-  gentoo: [dev-python/PyQt4]
-  ubuntu: [pyqt4-dev-tools]
-pyqt5-dev-tools:
-  debian: [pyqt5-dev-tools]
-  fedora: [python-qt5-devel]
-  gentoo: [dev-python/PyQt5]
-  ubuntu: [pyqt5-dev-tools]
-python-cairo:
-  fedora: [pycairo]
-  gentoo: [dev-python/pycairo]
-python-nose:
-  fedora: [python-nose]
-  gentoo: [dev-python/nose]
-python-opencv:
-  fedora: [opencv-python]
-  gentoo: [media-libs/opencv]
-  ubuntu: [python-opencv]
-python-pyaudio:
-  debian: [python-pyaudio]
-  fedora: [pyaudio]
-  gentoo: [dev-python/pyaudio]
-  ubuntu: [python-pyaudio]
-python-pydot:
-  fedora: [pydot]
-  gentoo: [media-gfx/pydot]
-python-pyftpdlib:
-  debian: [python-pyftpdlib]
-  gentoo: [dev-python/pyftpdlib]
-  ubuntu: [python-pyftpdlib]
-python-pygraphviz:
-  fedora: [python-pygraphviz]
-  gentoo: [dev-python/pygraphviz]
-  opensuse: [python-pygraphviz]
-python-qrencode:
-  debian: [python-qrencode]
-  gentoo: [media-gfx/qrencode-python]
-  ubuntu: [python-qrencode]
-python-sphinx:
-  fedora: [python-sphinx]
-  gentoo: [dev-python/sphinx]
-python-tornado:
-  arch: [python-tornado]
-  debian: [python-tornado]
-  fedora: [python-tornado]
-  gentoo: [www-servers/tornado]
-  ubuntu: [python-tornado]
-python-vtk:
-  fedora: [vtk-python]
-  gentoo: [dev-python/pyvtk]
+psutils:
+  debian: [psutils]
+  fedora: [psutils]
+  gentoo: [psutils]
+  ubuntu: [psutils]
 qhull-bin:
   arch: [qhull]
   debian: [qhull-bin]
@@ -3621,6 +3845,7 @@ qt4-dev-tools:
   arch: [qt4]
   debian: [qt4-dev-tools]
   fedora: [qt-devel]
+  gentoo: ['dev-qt/assistant:4','dev-qt/linguist:4','dev-qt/pixeltool:4']
   opensuse: [libqt4-devel-doc]
   ubuntu: [qt4-dev-tools]
 qt4-qmake:
@@ -3652,12 +3877,15 @@ qtmobility-dev:
   arch: [qtmobility]
   debian: [qtmobility-dev]
   fedora: [qt-mobility-devel]
+  gentoo: [dev-qt/qt-mobility]
   ubuntu: [qtmobility-dev]
 r-base:
+  debian: [r-base]
   fedora: [R]
   gentoo: [dev-lang/R]
   ubuntu: [r-base]
 r-base-dev:
+  debian: [r-base-dev]
   fedora: [R-devel]
   gentoo: [dev-lang/R]
   ubuntu: [r-base-dev]
@@ -3674,6 +3902,7 @@ readline-dev:
   ubuntu: [libreadline-dev]
 recode:
   arch: [recode]
+  debian: [recode]
   fedora: [recode-devel]
   gentoo: [app-text/recode]
   ubuntu: [recode]
@@ -3696,11 +3925,6 @@ rosemacs-el:
     lucid: [rosemacs-el]
     oneiric: [rosemacs-el]
     precise: [rosemacs-el]
-rpy2:
-  arch: [python-rpy2]
-  debian: [python-rpy2]
-  gentoo: ['=dev-python/rpy-2*']
-  ubuntu: [python-rpy2]
 rsync:
   arch: [rsync]
   debian: [rsync]
@@ -3734,8 +3958,7 @@ screen:
   ubuntu: [screen]
 sdformat:
   arch: [sdformat-hg]
-  debian:
-    sid: [libsdformat-dev]
+  debian: [libsdformat-dev]
   fedora: [sdformat-devel]
   gentoo: [dev-libs/sdformat]
   ubuntu:
@@ -3791,12 +4014,14 @@ sdl2-ttf:
   ubuntu: [libsdl2-ttf-dev]
 sfml-dev:
   arch: [sfml]
+  debian: [libsfml-dev]
   fedora: [SFML-devel]
   gentoo: [media-libs/libsfml]
   ubuntu: [libsfml-dev]
 sixad:
   ubuntu: [sixad]
 slime:
+  debian: [slime]
   fedora: [emacs-slime]
   gentoo: [app-emacs/slime]
   ubuntu: [slime]
@@ -3814,19 +4039,23 @@ smbclient:
   ubuntu: [smbclient]
 snappy:
   arch: [snappy]
+  debian: [libsnappy-dev]
   fedora: [snappy]
   gentoo: [app-arch/snappy]
   ubuntu: [libsnappy-dev]
 socat:
   arch: [socat]
+  debian: [socat]
   fedora: [socat]
   gentoo: [net-misc/socat]
   ubuntu: [socat]
 sound-theme-freedesktop:
+  debian: [sound-theme-freedesktop]
   fedora: [sound-theme-freedesktop]
   gentoo: [x11-themes/sound-theme-freedesktop]
   ubuntu: [sound-theme-freedesktop]
 sox:
+  debian: [sox]
   fedora: [sox]
   gentoo: [media-sound/sox]
   ubuntu: [sox]
@@ -3837,10 +4066,22 @@ spacenavd:
   gentoo: [app-misc/spacenavd]
   ubuntu: [spacenavd]
 sparsehash:
+  debian: [libsparsehash-dev]
   fedora: [sparsehash-devel]
   gentoo: [dev-cpp/sparsehash]
-  ubuntu: [sparsehash]
+  ubuntu:
+    artful: [libsparsehash-dev]
+    precise: [sparsehash]
+    saucy: [sparsehash]
+    trusty: [sparsehash]
+    utopic: [sparsehash]
+    vivid: [libsparsehash-dev]
+    wily: [libsparsehash-dev]
+    xenial: [libsparsehash-dev]
+    yakkety: [libsparsehash-dev]
+    zesty: [libsparsehash-dev]
 speex:
+  debian: [speex]
   fedora: [speex, speex-tools, speexdsp]
   gentoo: [media-libs/speex]
   ubuntu:
@@ -3856,14 +4097,17 @@ sqlite3:
   gentoo: ['=dev-db/sqlite-3*']
   ubuntu: [sqlite3]
 ssh-askpass:
+  debian: [ssh-askpass]
   fedora: [x11-ssh-askpass]
   gentoo: [net-misc/x11-ssh-askpass]
   ubuntu: [ssh-askpass]
 ssh-askpass-gnome:
+  debian: [ssh-askpass-gnome]
   fedora: [openssh-askpass]
   gentoo: [net-misc/ssh-askpass-fullscreen]
   ubuntu: [ssh-askpass-gnome]
 sshpass:
+  debian: [sshpass]
   fedora: [sshpass]
   gentoo: [net-misc/sshpass]
   ubuntu: [sshpass]
@@ -3897,9 +4141,10 @@ swi-prolog:
   ubuntu: [swi-prolog]
 swi-prolog-clib:
   arch: [swi-prolog]
-  debian: [swi-prolog-clib]
+  debian:
+    lenny: [swi-prolog-clib]
+    woody: [swi-prolog-clib]
   fedora: [pl-devel]
-  gentoo: [dev-lang/swi-prolog]
   ubuntu:
     lucid: [swi-prolog-clib]
     maverick: [swi-prolog]
@@ -3910,9 +4155,9 @@ swi-prolog-clib:
     raring: [swi-prolog]
 swi-prolog-http:
   arch: [swi-prolog]
-  debian: [swi-prolog-http]
+  debian:
+    lenny: [swi-prolog-http]
   fedora: [pl]
-  gentoo: [dev-lang/swi-prolog]
   ubuntu:
     lucid: [swi-prolog-http]
     maverick: [swi-prolog]
@@ -3924,18 +4169,17 @@ swi-prolog-http:
 swi-prolog-java:
   debian: [swi-prolog-java]
   fedora: [pl-jpl]
+  gentoo: ['dev-lang/swi-prolog[java]']
   ubuntu: [swi-prolog-java]
 swi-prolog-odbc:
   arch: [swi-prolog]
   debian: [swi-prolog-odbc]
   fedora: [pl-odbc]
-  gentoo: [dev-lang/swi-prolog]
+  gentoo: ['dev-lang/swi-prolog[odbc]']
   ubuntu: [swi-prolog-odbc]
 swi-prolog-semweb:
   arch: [swi-prolog]
-  debian: [swi-prolog-semweb]
   fedora: [pl]
-  gentoo: [dev-lang/swi-prolog]
   ubuntu:
     lucid: [swi-prolog-semweb]
     maverick: [swi-prolog]
@@ -3946,7 +4190,8 @@ swi-prolog-semweb:
     raring: [swi-prolog]
 swi-prolog-sgml:
   arch: [swi-prolog]
-  debian: [swi-prolog-sgml]
+  debian:
+    lenny: [swi-prolog-sgml]
   fedora: [pl]
   ubuntu:
     lucid: [swi-prolog-sgml]
@@ -3958,9 +4203,9 @@ swi-prolog-sgml:
     raring: [swi-prolog]
 swi-prolog-xpce:
   arch: [swi-prolog]
-  debian: [swi-prolog-xpce]
+  debian:
+    woody: [swi-prolog-xpce]
   fedora: [pl-xpce]
-  gentoo: [dev-lang/swi-prolog]
   ubuntu:
     lucid: [swi-prolog-xpce]
     maverick: [swi-prolog]
@@ -3970,6 +4215,7 @@ swi-prolog-xpce:
     quantal: [swi-prolog]
     raring: [swi-prolog]
 swig:
+  debian: [swig]
   fedora: [swig]
   gentoo: [dev-lang/swig]
   ubuntu: [swig]
@@ -3993,6 +4239,7 @@ tango-icon-theme:
   slackware: [tango-icon-theme]
   ubuntu: [tango-icon-theme]
 tap-plugins:
+  debian: [tap-plugins]
   fedora: [ladspa-tap-plugins]
   gentoo: [media-plugins/tap-plugins]
   ubuntu:
@@ -4026,10 +4273,12 @@ tcsh:
   gentoo: [app-shells/tcsh]
   ubuntu: [tcsh]
 terminator:
+  debian: [terminator]
   fedora: [terminator]
   gentoo: [x11-terms/terminator]
   ubuntu: [terminator]
 tesseract-ocr:
+  debian: [tesseract-ocr]
   fedora: [tesseract-devel]
   gentoo: [app-text/tesseract]
   ubuntu: [tesseract-ocr]
@@ -4048,6 +4297,7 @@ texlive-fonts-recommended:
   macports: [texlive-fonts-recommended]
   ubuntu: [texlive-fonts-recommended]
 texlive-full:
+  debian: [texlive-full]
   gentoo: [app-text/texlive]
   ubuntu: [texlive-full]
 texlive-latex-base:
@@ -4071,13 +4321,10 @@ texlive-latex-recommended:
   macports: [texlive-latex-recommended]
   ubuntu: [texlive-latex-recommended]
 texmaker:
+  debian: [texmaker]
   fedora: [texmaker]
   gentoo: [app-office/texmaker]
   ubuntu: [texmaker]
-tilestache:
-  debian: [tilestache]
-  fedora: [python-tilestache]
-  ubuntu: [tilestache]
 time:
   arch: [time]
   debian: [time]
@@ -4099,6 +4346,7 @@ tinyxml2:
   debian: [libtinyxml2-dev]
   fedora: [tinyxml2-devel]
   gentoo: [dev-libs/tinyxml2]
+  opensuse: [tinyxml2-devel]
   ubuntu: [libtinyxml2-dev]
 tix:
   arch: [tix]
@@ -4107,9 +4355,11 @@ tix:
   gentoo: [dev-tcltk/tix]
   ubuntu: [tix]
 tmux:
+  debian: [tmux]
   gentoo: [app-misc/tmux]
   ubuntu: [tmux]
 tree:
+  debian: [tree]
   fedora: [tree]
   gentoo: [app-text/tree]
   ubuntu: [tree]
@@ -4144,6 +4394,11 @@ udhcpc:
   arch: [udhcp]
   debian: [udhcpc]
   ubuntu: [udhcpc]
+uncrustify:
+  debian: [uncrustify]
+  fedora: [uncrustify]
+  gentoo: [uncrustify]
+  ubuntu: [uncrustify]
 unison:
   arch: [unison]
   debian: [unison]
@@ -4154,7 +4409,7 @@ unison-gui:
   arch: [unison]
   debian: [unison-gtk]
   fedora: [unison240-gtk]
-  gentoo: [net-misc/unison]
+  gentoo: ['net-misc/unison[gtk]']
   ubuntu: [unison-gtk]
 unoconv:
   arch: [unoconv]
@@ -4195,6 +4450,7 @@ uuid:
       packages: [util-linux]
   ubuntu: [uuid-dev]
 uvcdynctrl:
+  debian: [uvcdynctrl]
   fedora: [uvcdynctrl]
   ubuntu: [uvcdynctrl]
 v4l-utils:
@@ -4209,6 +4465,7 @@ valgrind:
   gentoo: [dev-util/valgrind]
   ubuntu: [valgrind]
 vim:
+  debian: [vim]
   fedora: [vim-enhanced]
   gentoo: [app-editors/vim]
   ubuntu: [vim]
@@ -4239,6 +4496,7 @@ wkhtmltopdf:
   gentoo: [media-gfx/wkhtmltopdf]
   ubuntu: [wkhtmltopdf]
 workrave:
+  debian: [workrave]
   fedora: [workrave]
   gentoo: [app-misc/workrave]
   ubuntu: [workrave, workrave-data]
@@ -4248,41 +4506,10 @@ wx-common:
   fedora: [wxGTK-devel]
   gentoo: [x11-libs/wxGTK]
   ubuntu: [wx-common]
-wxpython:
-  arch: [wxpython]
-  centos: [wxPython-devel]
-  debian:
-    jessie: [python-wxgtk3.0]
-    sid: [python-wxgtk3.0]
-    squeeze: [python-wxgtk2.8]
-    stretch: [python-wxgtk3.0]
-    wheezy: [python-wxgtk2.8]
-  fedora: [wxPython-devel]
-  freebsd: [py27-wxPython]
-  gentoo: [dev-python/wxpython]
-  macports: [py27-wxpython, py27-gobject, py27-gtk, py27-cairo]
-  opensuse: [python-wxGTK]
-  rhel: [wxPython-devel]
-  ubuntu:
-    lucid: [python-wxgtk2.8]
-    maverick: [python-wxgtk2.8]
-    natty: [python-wxgtk2.8]
-    oneiric: [python-wxgtk2.8]
-    precise: [python-wxgtk2.8]
-    quantal: [python-wxgtk2.8]
-    raring: [python-wxgtk2.8]
-    saucy: [python-wxgtk2.8]
-    trusty: [python-wxgtk2.8]
-    trusty_python3: [python-wxgtk2.8]
-    utopic: [python-wxgtk2.8]
-    vivid: [python-wxgtk2.8]
-    wily: [python-wxgtk2.8]
-    xenial: [python-wxgtk3.0]
-    yakkety: [python-wxgtk3.0]
-    zesty: [python-wxgtk3.0]
 wxwidgets:
   arch: [wxgtk]
   debian:
+    buster: [libwxgtk3.0-dev]
     jessie: [libwxgtk3.0-dev]
     stretch: [libwxgtk3.0-dev]
     wheezy: [libwxgtk2.8-dev]
@@ -4331,6 +4558,7 @@ xdotool:
   ubuntu: [xdotool]
 xerces:
   arch: [xerces-c]
+  debian: [libxerces-c-dev]
   fedora: [xerces-c]
   gentoo: [dev-libs/xerces-c]
   ubuntu: [libxerces-c2-dev]
@@ -4345,11 +4573,13 @@ xfont-server:
 xfonts-100dpi:
   debian: [xfonts-100dpi]
   fedora: [xorg-x11-fonts-100dpi]
+  gentoo: [media-fonts/font-adobe-100dpi, media-fonts/font-bh-100dpi, media-fonts/font-bh-lucidatypewriter-100dpi, media-fonts/font-bitstream-100dpi]
   macports:
   ubuntu: [xfonts-100dpi]
 xfonts-75dpi:
   debian: [xfonts-75dpi]
   fedora: [xorg-x11-fonts-100dpi]
+  gentoo: [media-fonts/font-adobe-75dpi, media-fonts/font-bh-75dpi, media-fonts/font-bh-lucidatypewriter-75dpi, media-fonts/font-bitstream-75dpi]
   macports:
   ubuntu: [xfonts-75dpi]
 xpath-perl:
@@ -4393,6 +4623,7 @@ xvfb:
   arch: [xorg-server-xvfb]
   debian: [xvfb]
   fedora: [xorg-x11-server-Xvfb]
+  gentoo: [x11-misc/xvfb-run]
   ubuntu: [xvfb]
 xz-utils:
   arch: [xz]
@@ -4410,8 +4641,8 @@ yaml:
 yaml-cpp:
   arch: [yaml-cpp]
   debian:
+    buster: [libyaml-cpp-dev]
     jessie: [libyaml-cpp-dev]
-    sid: [libyaml-cpp-dev]
     squeeze:
       source:
         md5sum: f7fb81fd4a2fbd5022daa7686e816359
@@ -4453,6 +4684,12 @@ zbar:
   fedora: [zbar-devel]
   gentoo: [media-gfx/zbar]
   ubuntu: [libzbar-dev]
+zeromq3:
+  arch: [zeromq3]
+  debian: [libzmq3-dev]
+  fedora: [zeromq3]
+  gentoo: [zeromq]
+  ubuntu: [libzmq3-dev]
 zlib:
   arch: [zlib]
   cygwin: [zlib]

@@ -194,24 +194,6 @@ repositories:
       type: git
       url: https://github.com/auboliuxin/aubo_robot.git
       version: jade-devel
-    release:
-      packages:
-      - aubo_control
-      - aubo_description
-      - aubo_driver
-      - aubo_gazebo
-      - aubo_i5_moveit_config
-      - aubo_kinematics
-      - aubo_msgs
-      - aubo_new_driver
-      - aubo_panel
-      - aubo_robot
-      - aubo_trajectory
-      - aubo_trajectory_filters
-      tags:
-        release: release/jade/{package}/{version}
-      url: https://github.com/auboliuxin/aubo_robot-release.git
-      version: 0.3.16-0
     source:
       type: git
       url: https://github.com/auboliuxin/aubo_robot.git
@@ -328,7 +310,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/ros/bond_core.git
-      version: master
+      version: groovy-devel
     release:
       packages:
       - bond
@@ -344,7 +326,7 @@ repositories:
       test_pull_requests: true
       type: git
       url: https://github.com/ros/bond_core.git
-      version: master
+      version: groovy-devel
     status: maintained
   bta_ros:
     doc:
@@ -401,6 +383,24 @@ repositories:
       url: https://github.com/ros-perception/camera_info_manager_py.git
       version: master
     status: maintained
+  camera_umd:
+    doc:
+      type: git
+      url: https://github.com/ros-drivers/camera_umd.git
+      version: master
+    release:
+      packages:
+      - camera_umd
+      - jpeg_streamer
+      - uvc_camera
+      tags:
+        release: release/jade/{package}/{version}
+      url: https://github.com/ros-drivers-gbp/camera_umd-release.git
+      version: 0.2.5-0
+    source:
+      type: git
+      url: https://github.com/ros-drivers/camera_umd.git
+      version: master
   carl_estop:
     doc:
       type: git
@@ -780,7 +780,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/ros-gbp/diagnostics-release.git
-      version: 1.9.0-0
+      version: 1.9.2-0
     source:
       type: git
       url: https://github.com/ros/diagnostics.git
@@ -1100,6 +1100,23 @@ repositories:
       url: https://github.com/ros/executive_smach.git
       version: indigo-devel
     status: maintained
+  executive_smach_visualization:
+    doc:
+      type: git
+      url: https://github.com/ros-visualization/executive_smach_visualization.git
+      version: indigo-devel
+    release:
+      packages:
+      - executive_smach_visualization
+      - smach_viewer
+      tags:
+        release: release/jade/{package}/{version}
+      url: https://github.com/jbohren/executive_smach_visualization-release.git
+      version: 2.0.1-0
+    source:
+      type: git
+      url: https://github.com/ros-visualization/executive_smach_visualization.git
+      version: indigo-devel
   fanuc:
     doc:
       type: git
@@ -1267,7 +1284,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/fzi-forschungszentrum-informatik/fzi_icl_can-release.git
-      version: 1.0.9-0
+      version: 1.0.10-0
     source:
       type: git
       url: https://github.com/fzi-forschungszentrum-informatik/fzi_icl_can.git
@@ -1288,7 +1305,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/fzi-forschungszentrum-informatik/fzi_icl_core-release.git
-      version: 1.0.4-1
+      version: 1.0.6-0
     source:
       type: git
       url: https://github.com/fzi-forschungszentrum-informatik/fzi_icl_core.git
@@ -1466,7 +1483,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/ros-gbp/geometry-release.git
-      version: 1.11.8-0
+      version: 1.11.9-0
     source:
       test_pull_requests: true
       type: git
@@ -1495,7 +1512,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/ros-gbp/geometry2-release.git
-      version: 0.5.15-0
+      version: 0.5.16-0
     source:
       test_pull_requests: true
       type: git
@@ -1612,11 +1629,13 @@ repositories:
       packages:
       - grid_map
       - grid_map_core
+      - grid_map_costmap_2d
       - grid_map_cv
       - grid_map_demos
       - grid_map_filters
       - grid_map_loader
       - grid_map_msgs
+      - grid_map_octomap
       - grid_map_pcl
       - grid_map_ros
       - grid_map_rviz_plugin
@@ -1624,7 +1643,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/ethz-asl/grid_map-release.git
-      version: 1.4.2-0
+      version: 1.5.2-0
     source:
       test_pull_requests: true
       type: git
@@ -1896,7 +1915,11 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/tork-a/hrpsys-release.git
-      version: 315.10.1-0
+      version: 315.14.0-0
+    source:
+      type: git
+      url: https://github.com/fkanehiro/hrpsys-base.git
+      version: master
     status: developed
   humanoid_msgs:
     doc:
@@ -2104,6 +2127,11 @@ repositories:
       type: git
       url: https://github.com/innokrobotics/innok_heros_driver.git
       version: jade
+    release:
+      tags:
+        release: release/jade/{package}/{version}
+      url: https://github.com/innokrobotics/innok_heros_driver-release.git
+      version: 1.0.3-1
     source:
       type: git
       url: https://github.com/innokrobotics/innok_heros_driver.git
@@ -2220,6 +2248,7 @@ repositories:
       - ffha
       - jsk_3rdparty
       - julius
+      - julius_ros
       - libcmt
       - libsiftfast
       - lpg_planner
@@ -2235,7 +2264,11 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/tork-a/jsk_3rdparty-release.git
-      version: 2.0.20-0
+      version: 2.1.4-0
+    source:
+      type: git
+      url: https://github.com/jsk-ros-pkg/jsk_3rdparty.git
+      version: master
     status: developed
   jsk_common:
     doc:
@@ -2257,7 +2290,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/tork-a/jsk_common-release.git
-      version: 2.2.2-0
+      version: 2.2.5-0
     source:
       test_commits: false
       type: git
@@ -2280,7 +2313,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/tork-a/jsk_common_msgs-release.git
-      version: 4.1.1-0
+      version: 4.2.0-0
     source:
       type: git
       url: https://github.com/jsk-ros-pkg/jsk_common_msgs.git
@@ -2335,6 +2368,10 @@ repositories:
       version: 0.1.10-0
     status: developed
   jsk_pr2eus:
+    doc:
+      type: git
+      url: https://github.com/jsk-ros-pkg/jsk_pr2eus.git
+      version: master
     release:
       packages:
       - jsk_pr2eus
@@ -2344,7 +2381,11 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/tork-a/jsk_pr2eus-release.git
-      version: 0.3.10-0
+      version: 0.3.11-0
+    source:
+      type: git
+      url: https://github.com/jsk-ros-pkg/jsk_pr2eus.git
+      version: master
     status: developed
   jsk_recognition:
     doc:
@@ -2365,7 +2406,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/tork-a/jsk_recognition-release.git
-      version: 1.1.0-0
+      version: 1.1.2-0
     source:
       type: git
       url: https://github.com/jsk-ros-pkg/jsk_recognition.git
@@ -2386,7 +2427,11 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/tork-a/jsk_roseus-release.git
-      version: 1.6.1-0
+      version: 1.6.2-0
+    source:
+      type: git
+      url: https://github.com/jsk-ros-pkg/jsk_roseus.git
+      version: master
     status: developed
   jsk_visualization:
     release:
@@ -2660,6 +2705,23 @@ repositories:
       url: https://github.com/ktossell/libuvc-release.git
       version: 0.0.5-1
     status: unmaintained
+  libuvc_ros:
+    doc:
+      type: git
+      url: https://github.com/ros-drivers/libuvc_ros.git
+      version: master
+    release:
+      packages:
+      - libuvc_camera
+      - libuvc_ros
+      tags:
+        release: release/jade/{package}/{version}
+      url: https://github.com/ros-drivers-gbp/libuvc_ros-release.git
+      version: 0.0.9-0
+    source:
+      type: git
+      url: https://github.com/ros-drivers/libuvc_ros.git
+      version: master
   lms1xx:
     doc:
       type: git
@@ -2821,7 +2883,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/swri-robotics/marti_common.git
-      version: jade-devel
+      version: master
     release:
       packages:
       - marti_data_structures
@@ -2833,6 +2895,7 @@ repositories:
       - swri_opencv_util
       - swri_prefix_tools
       - swri_roscpp
+      - swri_rospy
       - swri_route_util
       - swri_serial_util
       - swri_string_util
@@ -2842,11 +2905,11 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/swri-robotics-gbp/marti_common-release.git
-      version: 0.1.7-0
+      version: 0.3.0-0
     source:
       type: git
       url: https://github.com/swri-robotics/marti_common.git
-      version: jade-devel
+      version: master
     status: developed
   marti_messages:
     doc:
@@ -3517,7 +3580,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/code-iai-release/nav_pcontroller-release.git
-      version: 0.1.2-0
+      version: 0.1.4-0
     source:
       type: git
       url: https://github.com/code-iai/nav_pcontroller.git
@@ -3734,6 +3797,24 @@ repositories:
       url: https://github.com/ros/nodelet_core.git
       version: indigo-devel
     status: maintained
+  novatel_gps_driver:
+    doc:
+      type: git
+      url: https://github.com/swri-robotics/novatel_gps_driver.git
+      version: master
+    release:
+      packages:
+      - novatel_gps_driver
+      - novatel_gps_msgs
+      tags:
+        release: release/jade/{package}/{version}
+      url: https://github.com/swri-robotics-gbp/novatel_gps_driver-release.git
+      version: 3.3.0-0
+    source:
+      type: git
+      url: https://github.com/swri-robotics/novatel_gps_driver.git
+      version: master
+    status: developed
   novatel_span_driver:
     doc:
       type: git
@@ -4042,7 +4123,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/ros-perception/opencv_apps-release.git
-      version: 1.11.15-0
+      version: 1.12.0-0
     source:
       type: git
       url: https://github.com/ros-perception/opencv_apps.git
@@ -4216,12 +4297,27 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/allenh1/p2os-release.git
-      version: 2.0.5-0
+      version: 2.1.0-0
     source:
       type: git
       url: https://github.com/allenh1/p2os.git
       version: master
     status: developed
+  parameter_pa:
+    doc:
+      type: git
+      url: https://github.com/peterweissig/ros_parameter.git
+      version: master
+    release:
+      tags:
+        release: release/jade/{package}/{version}
+      url: https://github.com/peterweissig/ros_parameter-release.git
+      version: 1.0.2-0
+    source:
+      type: git
+      url: https://github.com/peterweissig/ros_parameter.git
+      version: master
+    status: maintained
   parrot_arsdk:
     release:
       tags:
@@ -4237,6 +4333,16 @@ repositories:
     doc:
       type: git
       url: https://github.com/davidbsp/patrolling_sim.git
+      version: master
+    status: maintained
+  pcdfilter_pa:
+    doc:
+      type: git
+      url: https://github.com/peterweissig/ros_pcdfilter.git
+      version: master
+    source:
+      type: git
+      url: https://github.com/peterweissig/ros_pcdfilter.git
       version: master
     status: maintained
   pcl_conversions:
@@ -4421,7 +4527,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/ros-drivers-gbp/phidgets_drivers-release.git
-      version: 0.7.2-0
+      version: 0.7.3-0
     source:
       test_pull_requests: true
       type: git
@@ -4472,7 +4578,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/facontidavide/plotjuggler-release.git
-      version: 1.0.7-0
+      version: 1.2.1-0
     source:
       type: git
       url: https://github.com/facontidavide/PlotJuggler.git
@@ -4754,7 +4860,8 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/yotabits/python-pathtools-release.git
-      version: 0.1.2-0
+      version: 0.1.2-1
+    status: maintained
   python-watchdog:
     release:
       tags:
@@ -5173,7 +5280,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/ros/robot_model.git
-      version: indigo-devel
+      version: jade-devel
     release:
       packages:
       - joint_state_publisher
@@ -5188,7 +5295,7 @@ repositories:
       test_pull_requests: true
       type: git
       url: https://github.com/ros/robot_model.git
-      version: indigo-devel
+      version: jade-devel
     status: maintained
   robot_pose_publisher:
     doc:
@@ -5380,11 +5487,11 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/ros-industrial-release/ros_canopen-release.git
-      version: 0.7.5-0
+      version: 0.7.6-0
     source:
       type: git
       url: https://github.com/ros-industrial/ros_canopen.git
-      version: jade-devel
+      version: jade
     status: maintained
   ros_comm:
     doc:
@@ -5591,7 +5698,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/facontidavide/ros_type_introspection-release.git
-      version: 0.5.1-0
+      version: 0.9.0-0
     source:
       type: git
       url: https://github.com/facontidavide/ros_type_introspection.git
@@ -5784,7 +5891,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/ros-gbp/roslisp-release.git
-      version: 1.9.20-0
+      version: 1.9.21-0
     source:
       type: git
       url: https://github.com/ros/roslisp.git
@@ -5809,7 +5916,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/ros-gbp/roslisp_common-release.git
-      version: 0.2.8-0
+      version: 0.2.9-0
     source:
       type: git
       url: https://github.com/ros/roslisp_common.git
@@ -6662,7 +6769,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/orocos-gbp/rtt_geometry-release.git
-      version: 2.8.1-0
+      version: 2.8.1-1
     source:
       type: git
       url: https://github.com/orocos/rtt_geometry.git
@@ -6720,7 +6827,7 @@ repositories:
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/ros-gbp/rviz-release.git
-      version: 1.11.16-0
+      version: 1.11.18-0
     source:
       type: git
       url: https://github.com/ros-visualization/rviz.git
@@ -7272,11 +7379,6 @@ repositories:
       type: git
       url: https://github.com/OSLL/tiny-slam-ros-cpp.git
       version: master
-    release:
-      tags:
-        release: release/jade/{package}/{version}
-      url: https://github.com/OSLL/tiny-slam-ros-release.git
-      version: 0.1.2-3
     source:
       type: git
       url: https://github.com/OSLL/tiny-slam-ros-cpp.git
@@ -7362,8 +7464,9 @@ repositories:
   ublox:
     doc:
       type: git
-      url: https://github.com/tu-darmstadt-ros-pkg/ublox.git
-      version: catkin
+      url: https://github.com/KumarRobotics/ublox.git
+      version: master
+    status: maintained
   ueye:
     doc:
       type: hg
@@ -7470,10 +7573,13 @@ repositories:
       url: https://github.com/ros/urdf_tutorial.git
       version: master
     release:
+      packages:
+      - urdf_sim_tutorial
+      - urdf_tutorial
       tags:
         release: release/jade/{package}/{version}
       url: https://github.com/ros-gbp/urdf_tutorial-release.git
-      version: 0.2.5-0
+      version: 0.3.0-0
     source:
       type: git
       url: https://github.com/ros/urdf_tutorial.git

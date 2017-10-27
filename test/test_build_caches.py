@@ -39,7 +39,14 @@ If this fails you can run 'rosdistro_build_cache index.yaml' to perform the same
             pkgs = {}
             print("Parsing manifest files for '%s'" % dist_name)
             for pkg_name, pkg_xml in cache.release_package_xmls.items():
-                pkgs[pkg_name] = parse_package_string(pkg_xml)
+                # Collect parsing warnings and fail if version convention are not respected
+                warnings = []
+                pkgs[pkg_name] = parse_package_string(pkg_xml, warnings=warnings)
+                for warning in warnings:
+                    if 'version conventions' in warning:
+                        errors.append('%s: %s' % (pkg_name, warning))
+                    else:
+                        print('%s: WARNING: %s' % (pkg_name, warning))
             print("Order all packages in '%s' topologically" % dist_name)
             try:
                 topological_order_packages(pkgs)
