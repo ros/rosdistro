@@ -12,7 +12,7 @@ def test():
 
     with Fold() as fold:
         print("""Running 'scripts/check_rosdep.py' on all '*.yaml' in the 'rosdep' directory.
-If this fails you can run 'scripts/clean_rosdep.py' to help cleanup.
+If this fails you can run 'scripts/clean_rosdep_yaml.py' to help cleanup.
 """)
 
         for f in sorted(files):
