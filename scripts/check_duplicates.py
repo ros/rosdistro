@@ -51,15 +51,16 @@ def create_default_sources():
         print('loading %s' % distfile)
         try:
             rds = RosDistroSource(distro)
-            rosdep_data = get_gbprepo_as_rosdep_data(distro)
-            sources.append(CachedDataSource('yaml', distfile, [distro], rosdep_data))
         except KeyError:
-            # When first adding the ROS distro to the repository, it won't yet
-            # exist so what RosDistroSource fetches from github will not contain
-            # it, and will throw a KeyError trying to index it.  If we see that
-            # KeyError, just ignore it and don't add the distro to the list of
-            # sources.
-            pass
+            # When first adding a ROS distro to the repository, it won't yet
+            # exist at the URL that RosDistroSource fetches from github.  When
+            # trying to index it, RosDistroSource will throw a KeyError.  If we
+            # see that KeyError, just ignore it and don't add the distro to the
+            # list of sources.
+            continue
+
+        rosdep_data = get_gbprepo_as_rosdep_data(distro)
+        sources.append(CachedDataSource('yaml', distfile, [distro], rosdep_data))
 
     for filename in os.listdir(os.path.join(basedir, 'rosdep')):
         if not filename.endswith('yaml'):
