@@ -78,7 +78,7 @@ def generic_parser(buf, cb):
             if int(s / ilen) > strlvl:
                 continue
             stringblock = False
-        lvl = s / ilen
+        lvl = int(s / ilen)
         opts = {'lvl': lvl, 's': s}
         if not cb(i, l, opts):
             clean = False
