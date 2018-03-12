@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import os
 
 from scripts.check_rosdep import main as check_rosdep
