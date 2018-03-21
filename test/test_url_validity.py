@@ -16,12 +16,11 @@ from yaml.composer import Composer
 from yaml.constructor import Constructor
 
 from .fold_block import Fold
-from .cidiff import compute_unified_diff, detect_lines
+from .cidiff import compute_unified_diff, detect_lines, DIFF_TARGET
 
 # for commented debugging code below
 # import pprint
 
-DIFF_TARGET = 'origin/master'
 
 
 TARGET_FILE_BLACKLIST = []

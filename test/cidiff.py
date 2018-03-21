@@ -5,6 +5,7 @@ except ImportError:
 import subprocess
 import unidiff
 
+DIFF_TARGET = 'origin/master'
 
 def compute_unified_diff(target):
     cmd = ('git diff --unified=0 %s' % target).split()
