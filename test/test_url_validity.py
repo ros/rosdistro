@@ -3,10 +3,6 @@
 from __future__ import print_function
 from . import hook_permissions
 
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from io import StringIO
 import os
 import subprocess
 import sys
@@ -15,12 +11,12 @@ from urlparse import urlparse
 
 import rosdistro
 from scripts import eol_distro_names
-import unidiff
 import yaml
 from yaml.composer import Composer
 from yaml.constructor import Constructor
 
 from .fold_block import Fold
+from .cidiff import compute_unified_diff, detect_lines
 
 # for commented debugging code below
 # import pprint
@@ -54,25 +50,6 @@ def get_eol_distribution_filenames(url=None):
                 dpath = os.path.abspath(urlparse(f).path)
                 distribution_filenames.append(dpath)
     return distribution_filenames
-
-
-def detect_lines(diffstr):
-    """Take a diff string and return a dict of
-    files with line numbers changed"""
-    resultant_lines = {}
-    # diffstr is already utf-8 encoded
-    io = StringIO(diffstr)
-    # Force utf-8 re: https://github.com/ros/rosdistro/issues/6637
-    encoding = 'utf-8'
-    udiff = unidiff.PatchSet(io, encoding)
-    for file in udiff:
-        target_lines = []
-        # if file.path in TARGET_FILES:
-        for hunk in file:
-            target_lines += range(hunk.target_start,
-                                  hunk.target_start + hunk.target_length)
-        resultant_lines[file.path] = target_lines
-    return resultant_lines
 
 
 def check_git_remote_exists(url, version, tags_valid=False):
@@ -229,12 +206,11 @@ def isolate_yaml_snippets_from_line_numbers(yaml_dict, line_numbers):
 
 
 def main():
-    cmd = ('git diff --unified=0 %s' % DIFF_TARGET).split()
-    diff = subprocess.check_output(cmd)
+    diff = compute_unified_diff(DIFF_TARGET)
     # print("output", diff)
 
     diffed_lines = detect_lines(diff)
-    # print("Diff lines %s" % diffed_lines)
+    print("Diff lines %s" % diffed_lines)
 
     detected_errors = []
 
@@ -243,7 +219,7 @@ def main():
         url = 'file://%s/index.yaml' % directory
         path = os.path.abspath(path)
         if path not in get_all_distribution_filenames(url):
-            # print("not verifying diff of file %s" % path)
+            print("not verifying diff of file %s" % path)
             continue
         with Fold():
             print("verifying diff of file '%s'" % path)
