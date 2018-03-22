@@ -29,3 +29,11 @@ def detect_lines(diffstr):
                                   hunk.target_start + hunk.target_length)
         resultant_lines[filename.path] = target_lines
     return resultant_lines
+
+
+def list_changed_files():
+    diff = compute_unified_diff(DIFF_TARGET)
+    # print("output", diff)
+
+    diffed_lines = detect_lines(diff)
+    return diffed_lines.keys()
