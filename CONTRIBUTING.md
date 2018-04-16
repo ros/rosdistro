@@ -65,6 +65,16 @@ When submitting pull requests it is expected that they pass the unit tests for f
 The unit tests enforce alphabetization of elements and a consistant formatting to keep merging as clean as possible. 
 
 To run the tests run ``nosetests`` in the root of the repository.
-They require the rosdistro library, available on Ubuntu with the ROS repositories as python-rosdistro or via pip as rosdistro.
+These tests require several dependencies that can be installed either from the ROS repositories or via pip(list built based on the content of [.travis.yaml](https://github.com/ros/rosdistro/blob/master/.travis.yml):
+
+|   Dependency   |            Ubuntu package         |   Pip package  |
+| :------------: | --------------------------------- | -------------- |
+| catkin_pkg     | python-catkin-pkg                 | catkin_pkg     |
+| github         | python-github                     | PyGithub       |
+| nose           | python-nose                       | nose           |
+| rosdistro      | python-rosdistro                  | rosdistro      |
+| ros_buildfarm  | python-ros-buildfarm              | ros_buildfarm  |
+| unidiff        | python-unidiff (Zesty and higher) | unidiff        |
+| yamllint       | yamllint                          | yamllint       |
 
 There is a tool ``rosdistro_reformat`` which will fix most formatting errors such as alphabetization and correct formatting.
