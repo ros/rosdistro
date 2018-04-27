@@ -506,35 +506,25 @@ repositories:
       url: https://github.com/orbbec/ros_astra_launch.git
       version: master
     status: developed
-  astuff_pacmod:
-    doc:
-      depends:
-      - astuff_sensor_msgs
-      type: git
-      url: https://github.com/astuff/ros_pacmod.git
-      version: release
-    source:
-      type: git
-      url: https://github.com/astuff/ros_pacmod.git
-      version: release
-    status: maintained
-  astuff_pacmod_game_control:
-    doc:
-      depends:
-      - astuff_sensor_msgs
-      type: git
-      url: https://github.com/astuff/pacmod_game_control.git
-      version: release
-    source:
-      type: git
-      url: https://github.com/astuff/pacmod_game_control.git
-      version: release
-    status: developed
   astuff_sensor_msgs:
     doc:
       type: git
       url: https://github.com/astuff/astuff_sensor_msgs.git
       version: release
+    release:
+      packages:
+      - astuff_sensor_msgs
+      - delphi_esr_msgs
+      - delphi_srr_msgs
+      - ibeo_msgs
+      - kartech_linear_actuator_msgs
+      - mobileye_560_660_msgs
+      - neobotix_usboard_msgs
+      - pacmod_msgs
+      tags:
+        release: release/kinetic/{package}/{version}
+      url: https://github.com/astuff/astuff_sensor_msgs-release.git
+      version: 2.0.1-0
     source:
       type: git
       url: https://github.com/astuff/astuff_sensor_msgs.git
@@ -962,6 +952,21 @@ repositories:
         release: release/kinetic/{package}/{version}
       url: https://github.com/ros-gbp/cartographer-release.git
       version: 0.2.0-2
+    status: developed
+  cartographer_ros:
+    doc:
+      type: git
+      url: https://github.com/googlecartographer/cartographer_ros.git
+      version: 0.2.0
+    release:
+      packages:
+      - cartographer_ros
+      - cartographer_ros_msgs
+      - cartographer_rviz
+      tags:
+        release: release/kinetic/{package}/{version}
+      url: https://github.com/ros-gbp/cartographer_ros-release.git
+      version: 0.2.0-0
     status: developed
   catch_ros:
     doc:
@@ -1732,7 +1737,7 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/leggedrobotics/darknet_ros-release.git
-      version: 1.1.2-0
+      version: 1.1.3-0
     source:
       test_pull_requests: true
       type: git
@@ -5088,7 +5093,7 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/at-wat/mcl_3dl-release.git
-      version: 0.1.0-0
+      version: 0.1.1-0
     source:
       type: git
       url: https://github.com/at-wat/mcl_3dl.git
@@ -6041,6 +6046,11 @@ repositories:
       type: git
       url: https://github.com/astuff/network_interface.git
       version: release
+    release:
+      tags:
+        release: release/kinetic/{package}/{version}
+      url: https://github.com/astuff/network_interface-release.git
+      version: 2.0.0-0
     source:
       type: git
       url: https://github.com/astuff/network_interface.git
@@ -6730,6 +6740,36 @@ repositories:
       url: https://github.com/ros-industrial-consortium/packml.git
       version: kinetic-devel
     status: developed
+  pacmod:
+    doc:
+      type: git
+      url: https://github.com/astuff/pacmod.git
+      version: release
+    release:
+      tags:
+        release: release/kinetic/{package}/{version}
+      url: https://github.com/astuff/pacmod-release.git
+      version: 2.0.2-0
+    source:
+      type: git
+      url: https://github.com/astuff/pacmod.git
+      version: release
+    status: maintained
+  pacmod_game_control:
+    doc:
+      type: git
+      url: https://github.com/astuff/pacmod_game_control.git
+      version: release
+    release:
+      tags:
+        release: release/kinetic/{package}/{version}
+      url: https://github.com/astuff/pacmod_game_control-release.git
+      version: 2.0.0-0
+    source:
+      type: git
+      url: https://github.com/astuff/pacmod_game_control.git
+      version: release
+    status: developed
   parameter_pa:
     doc:
       type: git
@@ -7311,26 +7351,29 @@ repositories:
   pr2_navigation:
     doc:
       type: git
-      url: https://github.com/pr2/pr2_navigation.git
-      version: hydro-devel
+      url: https://github.com/PR2-prime/pr2_navigation.git
+      version: kinetic-devel
     release:
       packages:
       - laser_tilt_controller_filter
       - pr2_move_base
+      - pr2_navigation
       - pr2_navigation_config
       - pr2_navigation_global
       - pr2_navigation_local
+      - pr2_navigation_perception
       - pr2_navigation_self_filter
       - pr2_navigation_slam
       - pr2_navigation_teleop
+      - semantic_point_annotator
       tags:
         release: release/kinetic/{package}/{version}
-      url: https://github.com/pr2-gbp/pr2_navigation-release.git
-      version: 0.1.27-0
+      url: https://github.com/PR2-prime/pr2_navigation-release.git
+      version: 0.1.28-0
     source:
       type: git
-      url: https://github.com/pr2/pr2_navigation.git
-      version: hydro-devel
+      url: https://github.com/PR2-prime/pr2_navigation.git
+      version: kinetic-devel
     status: unmaintained
   pr2_power_drivers:
     doc:
@@ -8213,6 +8256,7 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/clearpath-gbp/ridgeback_simulator-release.git
+      version: 0.0.3-0
     source:
       type: git
       url: https://github.com/ridgeback/ridgeback_simulator.git
@@ -9000,7 +9044,7 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/ros-gbp/ros_control-release.git
-      version: 0.13.2-0
+      version: 0.13.3-0
     source:
       type: git
       url: https://github.com/ros-controls/ros_control.git
@@ -10621,6 +10665,20 @@ repositories:
       url: https://github.com/fzi-forschungszentrum-informatik/schunk_svh_driver.git
       version: master
     status: developed
+  scratch4robots:
+    doc:
+      type: git
+      url: https://github.com/JdeRobot/Scratch4Robots.git
+      version: master
+    release:
+      tags:
+        release: release/kinetic/{package}/{version}
+      url: https://github.com/JdeRobot/Scratch4Robots-release.git
+      version: 0.0.1-0
+    source:
+      type: git
+      url: https://github.com/JdeRobot/Scratch4Robots.git
+      version: master
   segway_rmp:
     doc:
       type: git
@@ -10702,7 +10760,7 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/SICKAG/sick_scan-release.git
-      version: 0.0.11-0
+      version: 0.0.12-0
     source:
       type: git
       url: https://github.com/SICKAG/sick_scan.git
