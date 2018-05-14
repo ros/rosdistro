@@ -1230,10 +1230,13 @@ python-github-pip:
       packages: [PyGithub]
 python-gitlab:
   debian:
+    '*': [python-gitlab]
+    stretch:
+      pip:
+        packages: [python-gitlab]
     jessie:
       pip:
         packages: [python-gitlab]
-    buster: [python-gitlab]
   ubuntu:
     '*': [python-gitlab]
     artful:
@@ -4088,10 +4091,24 @@ python3-flake8:
   ubuntu: [python3-flake8]
 python3-gitlab:
   debian:
-    buster: [python3-gitlab]
+    '*': [python3-gitlab]
+    jessie:
+      pip:
+        package: [python-gitlab]
+    stretch:
+      pip:
+        package: [python-gitlab]
   ubuntu:
-    bionic: [python3-gitlab]
-    cosmic: [python3-gitlab]
+    '*': [python3-gitlab]
+    artful:
+      pip:
+        package: [python-gitlab]
+    trusty:
+      pip:
+        package: [python-gitlab]
+    xenial:
+      pip:
+        package: [python-gitlab]
 python3-nose:
   debian: [python3-nose]
   gentoo: [dev-python/nose]
