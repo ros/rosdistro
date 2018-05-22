@@ -64,5 +64,5 @@ if __name__ == '__main__':
     for a in sorted(iny):
         buf += prn(iny[a], a, 0)
 
-    with io.open(args.outfile, 'w', encoding='utf-8') as f:
-        f.write(buf)
+    with io.open(args.outfile, 'wb') as f:
+        f.write(buf.encode('utf-8'))
