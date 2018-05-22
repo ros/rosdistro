@@ -21,6 +21,18 @@ def quote_if_necessary(s):
     return re.search('{a: (.*)}\n', yaml.dump({'a': s})).group(1)
 
 def prn(n, nm, lvl):
+    if nm == '*':
+        # quote wildcard keys
+        nm = "'*'"
+    else:
+        # quote numeric keys
+        try:
+            nm_int = int(nm)
+        except ValueError:
+            pass
+        else:
+            if str(nm_int) == nm:
+                nm = "'%d'" % nm_int
     pad = '  ' * lvl
     if isinstance(n, list):
         return "%s%s: [%s]\n" % (pad, nm, ', '.join(quote_if_necessary(n)))
