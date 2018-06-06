@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 
 next_block_id = 1

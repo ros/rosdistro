@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 
 from rosdistro.verify import verify_files_identical
