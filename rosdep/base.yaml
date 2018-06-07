@@ -511,7 +511,7 @@ crypto++:
   ubuntu: [libcrypto++-dev]
 curl:
   arch: [curl]
-  debian: [libcurl4-openssl-dev, curl]
+  debian: [libcurl-dev, curl]
   fedora: [libcurl-devel, curl]
   freebsd: [curl]
   gentoo: [net-misc/curl]
@@ -521,7 +521,7 @@ curl:
   slackware:
     slackpkg:
       packages: [curl]
-  ubuntu: [libcurl4-openssl-dev, curl]
+  ubuntu: [libcurl-dev, curl]
 curlpp-dev:
   debian: [libcurlpp-dev]
   fedora: [curlpp-devel]
@@ -1913,15 +1913,10 @@ libgphoto-dev:
   fedora: [libgphoto2-devel]
   gentoo: [media-gfx/gphoto2]
   ubuntu:
-    lucid: [libgphoto2-dev]
+    '*': [libgphoto2-dev]
     precise: [libgphoto2-2-dev]
     raring: [libgphoto2-2-dev]
     saucy: [libgphoto2-6-dev]
-    trusty: [libgphoto2-dev]
-    utopic: [libgphoto2-dev]
-    vivid: [libgphoto2-dev]
-    wily: [libgphoto2-dev]
-    xenial: [libgphoto2-dev]
 libgps:
   arch: [gpsd]
   debian: [libgps-dev]
@@ -4095,10 +4090,10 @@ postgresql:
   ubuntu: [postgresql, postgresql-contrib]
 postgresql-9.x-postgis:
   debian:
-    buster: [postgresql-9.6-postgis-2.3]
-    jessie: [postgresql-9.4-postgis-2.1]
-    stretch: [postgresql-9.6-postgis-2.3]
-    wheezy: [postgresql-9.4-postgis-2.1]
+    buster: [postgresql-9.6-postgis-2.3, postgresql-contrib, postgresql-server-dev-all]
+    jessie: [postgresql-9.4-postgis-2.1, postgresql-contrib, postgresql-server-dev-all]
+    stretch: [postgresql-9.6-postgis-2.3, postgresql-contrib, postgresql-server-dev-all]
+    wheezy: [postgresql-9.4-postgis-2.1, postgresql-contrib, postgresql-server-dev-all]
   fedora: [postgis]
   gentoo: [dev-db/postgis, =dev-db/postgresql-9*]
   ubuntu:
@@ -4115,6 +4110,18 @@ postgresql-client:
   fedora: [postgresql-client]
   gentoo: [dev-db/postgresql]
   ubuntu: [postgresql-client]
+postgresql-postgis:
+  debian:
+    buster: [postgresql-9.6-postgis-2.3, postgresql-contrib, postgresql-server-dev-all]
+    jessie: [postgresql-9.4-postgis-2.1, postgresql-contrib, postgresql-server-dev-all]
+    stretch: [postgresql-9.6-postgis-2.3, postgresql-contrib, postgresql-server-dev-all]
+  fedora: [postgis]
+  gentoo: [dev-db/postgis,'=dev-db/postgresql-9*']
+  ubuntu:
+    artful: [postgresql-9.6-postgis-2.3, postgresql-contrib, postgresql-server-dev-all]
+    bionic: [postgresql-10-postgis-2.4, postgresql-contrib, postgresql-server-dev-all]
+    trusty: [postgresql-9.3-postgis-2.1, postgresql-contrib, postgresql-server-dev-all]
+    xenial: [postgresql-9.5-postgis-2.2, postgresql-contrib, postgresql-server-dev-all]
 procps:
   arch: [procps-ng]
   debian: [procps]
