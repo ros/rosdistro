@@ -177,12 +177,14 @@ def load_yaml_with_lines(filename):
         node.__line__ = line + 1
         return node
 
-    def construct_mapping(node, deep=False):
-        mapping = Constructor.construct_mapping(loader, node, deep=deep)
+    construct_mapping = loader.construct_mapping
+
+    def custom_construct_mapping(node, deep=False):
+        mapping = construct_mapping(node, deep=deep)
         mapping['__line__'] = node.__line__
         return mapping
     loader.compose_node = compose_node
-    loader.construct_mapping = construct_mapping
+    loader.construct_mapping = custom_construct_mapping
     data = loader.get_single_data()
     return data
 
