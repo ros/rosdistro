@@ -389,8 +389,7 @@ clang-format:
     buster: [clang-format]
     stretch: [clang-format]
   gentoo: [sys-devel/clang]
-  ubuntu:
-    xenial: [clang-format]
+  ubuntu: [clang-format]
 cmake:
   arch: [cmake]
   debian: [cmake]
@@ -551,6 +550,9 @@ daemontools:
   debian: [daemontools]
   gentoo: [virtual/daemontools]
   ubuntu: [daemontools]
+debtree:
+  debian: [debtree]
+  ubuntu: [debtree]
 devscripts:
   debian: [devscripts]
   fedora: [devscripts]
@@ -1837,6 +1839,12 @@ libglew-dev:
     xenial: [libglew-dev]
     yakkety: [libglew-dev]
     zesty: [libglew-dev]
+libglfw3-dev:
+  debian: [libglfw3-dev]
+  gentoo: [media-libs/glfw]
+  ubuntu:
+    '*': [libglfw3-dev]
+    trusty: null
 libglib-dev:
   arch: [glib2]
   debian: [libglib2.0-dev]
@@ -1907,15 +1915,10 @@ libgphoto-dev:
   fedora: [libgphoto2-devel]
   gentoo: [media-gfx/gphoto2]
   ubuntu:
-    lucid: [libgphoto2-dev]
+    '*': [libgphoto2-dev]
     precise: [libgphoto2-2-dev]
     raring: [libgphoto2-2-dev]
     saucy: [libgphoto2-6-dev]
-    trusty: [libgphoto2-dev]
-    utopic: [libgphoto2-dev]
-    vivid: [libgphoto2-dev]
-    wily: [libgphoto2-dev]
-    xenial: [libgphoto2-dev]
 libgps:
   arch: [gpsd]
   debian: [libgps-dev]
@@ -2381,6 +2384,10 @@ libopenscenegraph:
   fedora: [OpenSceneGraph, OpenSceneGraph-devel, OpenThreads, OpenThreads-devel]
   gentoo: [dev-games/openscenegraph]
   ubuntu: [openscenegraph, libopenscenegraph-dev]
+libopensplice67:
+  ubuntu:
+    bionic: [libopensplice67]
+    xenial: [libopensplice67]
 libopenvdb:
   arch: [openvdb]
   debian:
@@ -3108,11 +3115,25 @@ libttspico:
   ubuntu: [libttspico-dev, libttspico-data, libttspico-utils, libttspico0]
 libturbojpeg:
   arch: [libjpeg-turbo]
-  debian: [libturbojpeg1, libturbojpeg1-dev]
+  debian:
+    '*': [libturbojpeg0-dev]
+    jessie: [libturbojpeg1-dev]
   fedora: [turbojpeg-devel]
   freebsd: [libjpeg-turbo]
   gentoo: [media-libs/libjpeg-turbo]
-  ubuntu: [libturbojpeg, libjpeg-turbo8-dev]
+  ubuntu:
+    '*': [libturbojpeg0-dev]
+    precise: [libturbojpeg, libjpeg-turbo8-dev]
+    quantal: [libturbojpeg, libjpeg-turbo8-dev]
+    raring: [libturbojpeg, libjpeg-turbo8-dev]
+    saucy: [libturbojpeg, libjpeg-turbo8-dev]
+    trusty: [libturbojpeg, libjpeg-turbo8-dev]
+    utopic: [libturbojpeg, libjpeg-turbo8-dev]
+    vivid: [libturbojpeg, libjpeg-turbo8-dev]
+    wily: [libturbojpeg, libjpeg-turbo8-dev]
+    xenial: [libturbojpeg, libjpeg-turbo8-dev]
+    yakkety: [libturbojpeg, libjpeg-turbo8-dev]
+    zesty: [libturbojpeg, libjpeg-turbo8-dev]
 libudev-dev:
   arch: [systemd]
   debian: [libudev-dev]
@@ -3189,14 +3210,8 @@ libusb-1.0:
   arch: [libusbx]
   debian: [libusb-1.0-0]
   fedora:
-    '21': [libusbx]
-    '22': [libusbx]
-    '23': [libusbx]
-    '24': [libusbx]
+    '*': [libusbx]
     beefy: [libusb1]
-    heisenbug: [libusbx]
-    schrödinger’s: [libusbx]
-    spherical: [libusbx]
   gentoo: ['virtual/libusb:1']
   opensuse: [libusb-1_0-0]
   ubuntu: [libusb-1.0-0]
@@ -3204,18 +3219,8 @@ libusb-1.0-dev:
   arch: [libusbx]
   debian: [libusb-1.0-0-dev]
   fedora:
-    '21': [libusbx-devel]
-    '22': [libusbx-devel]
-    '23': [libusbx-devel]
-    '24': [libusbx-devel]
-    '25': [libusbx-devel]
-    '26': [libusbx-devel]
-    '27': [libusbx-devel]
-    '28': [libusbx-devel]
+    '*': [libusbx-devel]
     beefy: [libusb1-devel]
-    heisenbug: [libusbx-devel]
-    schrödinger’s: [libusbx-devel]
-    spherical: [libusbx-devel]
   gentoo: ['virtual/libusb:1']
   macports: [libusb]
   opensuse: [libusb-1_0-devel]
@@ -3850,6 +3855,11 @@ netpbm:
   macports: [netpbm]
   opensuse: [netpbm]
   ubuntu: [libnetpbm10-dev]
+network-manager:
+  debian: [network-manager]
+  fedora: [NetworkManager]
+  gentoo: [net-misc/networkmanager]
+  ubuntu: [network-manager]
 nite-dev:
   arch: [primesense-nite]
   debian: [nite-dev]
@@ -4067,6 +4077,11 @@ polyclipping-dev:
     jessie: [libpolyclipping-dev]
     stretch: [libpolyclipping-dev]
   ubuntu: [libpolyclipping-dev]
+poppler-utils:
+  debian: [poppler-utils]
+  fedora: [poppler-utils]
+  gentoo: [app-text/poppler]
+  ubuntu: [poppler-utils]
 portaudio:
   arch: [portaudio]
   debian: [libportaudio-dev]
@@ -4084,10 +4099,10 @@ postgresql:
   ubuntu: [postgresql, postgresql-contrib]
 postgresql-9.x-postgis:
   debian:
-    buster: [postgresql-9.6-postgis-2.3]
-    jessie: [postgresql-9.4-postgis-2.1]
-    stretch: [postgresql-9.6-postgis-2.3]
-    wheezy: [postgresql-9.4-postgis-2.1]
+    buster: [postgresql-9.6-postgis-2.3, postgresql-contrib, postgresql-server-dev-all]
+    jessie: [postgresql-9.4-postgis-2.1, postgresql-contrib, postgresql-server-dev-all]
+    stretch: [postgresql-9.6-postgis-2.3, postgresql-contrib, postgresql-server-dev-all]
+    wheezy: [postgresql-9.4-postgis-2.1, postgresql-contrib, postgresql-server-dev-all]
   fedora: [postgis]
   gentoo: [dev-db/postgis, =dev-db/postgresql-9*]
   ubuntu:
@@ -4104,6 +4119,18 @@ postgresql-client:
   fedora: [postgresql-client]
   gentoo: [dev-db/postgresql]
   ubuntu: [postgresql-client]
+postgresql-postgis:
+  debian:
+    buster: [postgresql-9.6-postgis-2.3, postgresql-contrib, postgresql-server-dev-all]
+    jessie: [postgresql-9.4-postgis-2.1, postgresql-contrib, postgresql-server-dev-all]
+    stretch: [postgresql-9.6-postgis-2.3, postgresql-contrib, postgresql-server-dev-all]
+  fedora: [postgis]
+  gentoo: [dev-db/postgis,'=dev-db/postgresql-9*']
+  ubuntu:
+    artful: [postgresql-9.6-postgis-2.3, postgresql-contrib, postgresql-server-dev-all]
+    bionic: [postgresql-10-postgis-2.4, postgresql-contrib, postgresql-server-dev-all]
+    trusty: [postgresql-9.3-postgis-2.1, postgresql-contrib, postgresql-server-dev-all]
+    xenial: [postgresql-9.5-postgis-2.2, postgresql-contrib, postgresql-server-dev-all]
 procps:
   arch: [procps-ng]
   debian: [procps]
@@ -4277,6 +4304,10 @@ rsync:
   gentoo: [net-misc/rsync]
   opensuse: [rsync]
   ubuntu: [rsync]
+rti-connext-dds-5.3.1:
+  ubuntu:
+    bionic: [rti-connext-dds-5.3.1]
+    xenial: [rti-connext-dds-5.3.1]
 rtmidi:
   debian: [librtmidi-dev]
   fedora: [rtmidi-devel]
@@ -4750,6 +4781,12 @@ ttf-sazanami-mincho:
   fedora: [sazanami-mincho-fonts]
   gentoo: [media-fonts/sazanami]
   ubuntu: [ttf-sazanami-mincho]
+udev:
+  arch: [systemd]
+  debian: [udev]
+  fedora: [systemd-udev]
+  gentoo: [sys-fs/udev]
+  ubuntu: [udev]
 udhcpc:
   arch: [udhcp]
   debian: [udhcpc]
