@@ -11,7 +11,10 @@ import os
 import subprocess
 import sys
 import unittest
-from urlparse import urlparse
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse
 
 import rosdistro
 from scripts import eol_distro_names
