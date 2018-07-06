@@ -82,7 +82,7 @@ def check_git_remote_exists(url, version, tags_valid=False):
     cmd = ('git ls-remote %s refs/heads/*' % url).split()
 
     try:
-        output = subprocess.check_output(cmd)
+        output = subprocess.check_output(cmd).decode('utf-8')
     except:
         return False
     if not version:
@@ -98,7 +98,7 @@ def check_git_remote_exists(url, version, tags_valid=False):
     cmd = ('git ls-remote %s refs/tags/*' % url).split()
 
     try:
-        output = subprocess.check_output(cmd)
+        output = subprocess.check_output(cmd).decode('utf-8')
     except:
         return False
 
