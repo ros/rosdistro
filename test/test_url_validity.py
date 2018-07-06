@@ -11,7 +11,10 @@ import os
 import subprocess
 import sys
 import unittest
-from urlparse import urlparse
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse
 
 import rosdistro
 from scripts import eol_distro_names
@@ -60,11 +63,9 @@ def detect_lines(diffstr):
     """Take a diff string and return a dict of
     files with line numbers changed"""
     resultant_lines = {}
-    # diffstr is already utf-8 encoded
+    # diffstr is already decoded
     io = StringIO(diffstr)
-    # Force utf-8 re: https://github.com/ros/rosdistro/issues/6637
-    encoding = 'utf-8'
-    udiff = unidiff.PatchSet(io, encoding)
+    udiff = unidiff.PatchSet(io)
     for file in udiff:
         target_lines = []
         # if file.path in TARGET_FILES:
@@ -232,7 +233,7 @@ def isolate_yaml_snippets_from_line_numbers(yaml_dict, line_numbers):
 
 def main():
     cmd = ('git diff --unified=0 %s' % DIFF_TARGET).split()
-    diff = subprocess.check_output(cmd)
+    diff = subprocess.check_output(cmd).decode('utf-8')
     # print("output", diff)
 
     diffed_lines = detect_lines(diff)
