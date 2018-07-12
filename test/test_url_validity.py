@@ -11,7 +11,10 @@ import os
 import subprocess
 import sys
 import unittest
-from urlparse import urlparse
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse
 
 import rosdistro
 from scripts import eol_distro_names
@@ -60,11 +63,9 @@ def detect_lines(diffstr):
     """Take a diff string and return a dict of
     files with line numbers changed"""
     resultant_lines = {}
-    # diffstr is already utf-8 encoded
+    # diffstr is already decoded
     io = StringIO(diffstr)
-    # Force utf-8 re: https://github.com/ros/rosdistro/issues/6637
-    encoding = 'utf-8'
-    udiff = unidiff.PatchSet(io, encoding)
+    udiff = unidiff.PatchSet(io)
     for file in udiff:
         target_lines = []
         # if file.path in TARGET_FILES:
@@ -81,7 +82,7 @@ def check_git_remote_exists(url, version, tags_valid=False):
     cmd = ('git ls-remote %s refs/heads/*' % url).split()
 
     try:
-        output = subprocess.check_output(cmd)
+        output = subprocess.check_output(cmd).decode('utf-8')
     except:
         return False
     if not version:
@@ -97,7 +98,7 @@ def check_git_remote_exists(url, version, tags_valid=False):
     cmd = ('git ls-remote %s refs/tags/*' % url).split()
 
     try:
-        output = subprocess.check_output(cmd)
+        output = subprocess.check_output(cmd).decode('utf-8')
     except:
         return False
 
@@ -196,12 +197,14 @@ def load_yaml_with_lines(filename):
         node.__line__ = line + 1
         return node
 
-    def construct_mapping(node, deep=False):
-        mapping = Constructor.construct_mapping(loader, node, deep=deep)
+    construct_mapping = loader.construct_mapping
+
+    def custom_construct_mapping(node, deep=False):
+        mapping = construct_mapping(node, deep=deep)
         mapping['__line__'] = node.__line__
         return mapping
     loader.compose_node = compose_node
-    loader.construct_mapping = construct_mapping
+    loader.construct_mapping = custom_construct_mapping
     data = loader.get_single_data()
     return data
 
@@ -230,7 +233,7 @@ def isolate_yaml_snippets_from_line_numbers(yaml_dict, line_numbers):
 
 def main():
     cmd = ('git diff --unified=0 %s' % DIFF_TARGET).split()
-    diff = subprocess.check_output(cmd)
+    diff = subprocess.check_output(cmd).decode('utf-8')
     # print("output", diff)
 
     diffed_lines = detect_lines(diff)
