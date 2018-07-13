@@ -78,7 +78,7 @@ def generic_parser(buf, cb):
             if int(s / ilen) > strlvl:
                 continue
             stringblock = False
-        lvl = s / ilen
+        lvl = int(s / ilen)
         opts = {'lvl': lvl, 's': s}
         if not cb(i, l, opts):
             clean = False
@@ -113,6 +113,8 @@ def check_brackets(buf):
     def fun(i, l, o):
         m = re.match(r'^(?:' + indent_atom + r')*([^:]*):\s*(\w.*)$', l)
         if m is not None and m.groups()[0] not in excepts:
+            if m.groups()[1] == 'null':
+                return True
             print_err("list not in square brackets line %u" % (i+1))
             return False
         return True
