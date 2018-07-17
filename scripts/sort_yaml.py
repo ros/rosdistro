@@ -13,7 +13,8 @@ def sort_yaml(yaml_file):
         print('This script does not support the new rosdistro yaml files', file=sys.stderr)
         sys.exit(1)
     sort_yaml_data(data)
-    yaml.dump(data, file(yaml_file, 'w'), default_flow_style=False)
+    with open(yaml_file, 'w') as out_file:
+        yaml.dump(data, out_file, default_flow_style=False)
 
 
 def sort_yaml_data(data):
