@@ -21,11 +21,11 @@ def translate(distro, translate_dir):
 
         path = os.path.join(translate_dir, "%s.rosinstall" % item.name)
         with open(path, 'w+') as f:
-            print "writing to %s" % path
+            print("writing to %s" % path)
             yaml.safe_dump(rosinstall, f, default_flow_style=False)
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
-        print "Use %s distro install_folder" % sys.argv[0]
+        print("Use %s distro install_folder" % sys.argv[0])
         sys.exit()
     translate(sys.argv[1], sys.argv[2])

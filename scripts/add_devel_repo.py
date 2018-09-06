@@ -52,7 +52,8 @@ def add_devel_repository_fuerte(yaml_file, data, name, vcs_type, url, version):
     values['version'] = version
     data['repositories'][name] = values
     sort_yaml_data(data)
-    yaml.dump(data, file(yaml_file, 'w'), default_flow_style=False)
+    with open(yaml_file, 'w') as out_file:
+        yaml.dump(data, out_file, default_flow_style=False)
 
 
 if __name__ == "__main__":
