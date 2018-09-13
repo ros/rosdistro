@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from __future__ import print_function
-
+from . import hook_permissions
 
 try:
     from cStringIO import StringIO
@@ -9,21 +9,26 @@ except ImportError:
     from io import StringIO
 import os
 import subprocess
+import sys
+import unittest
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse
+
+import rosdistro
+from scripts import eol_distro_names
+import unidiff
 import yaml
 from yaml.composer import Composer
 from yaml.constructor import Constructor
-import sys
-import unittest
 
-import rosdistro
-import unidiff
-from urlparse import urlparse
+from .fold_block import Fold
 
 # for commented debugging code below
 # import pprint
 
 DIFF_TARGET = 'origin/master'
-EOL_DISTROS = ['groovy', 'hydro']
 
 
 TARGET_FILE_BLACKLIST = []
@@ -47,7 +52,7 @@ def get_eol_distribution_filenames(url=None):
     distribution_filenames = []
     i = rosdistro.get_index(url)
     for d_name, d in i.distributions.items():
-        if d_name in EOL_DISTROS:
+        if d_name in eol_distro_names:
             for f in d['distribution']:
                 dpath = os.path.abspath(urlparse(f).path)
                 distribution_filenames.append(dpath)
@@ -58,11 +63,9 @@ def detect_lines(diffstr):
     """Take a diff string and return a dict of
     files with line numbers changed"""
     resultant_lines = {}
-    # diffstr is already utf-8 encoded
+    # diffstr is already decoded
     io = StringIO(diffstr)
-    # Force utf-8 re: https://github.com/ros/rosdistro/issues/6637
-    encoding = 'utf-8'
-    udiff = unidiff.PatchSet(io, encoding)
+    udiff = unidiff.PatchSet(io)
     for file in udiff:
         target_lines = []
         # if file.path in TARGET_FILES:
@@ -79,7 +82,7 @@ def check_git_remote_exists(url, version, tags_valid=False):
     cmd = ('git ls-remote %s refs/heads/*' % url).split()
 
     try:
-        output = subprocess.check_output(cmd)
+        output = subprocess.check_output(cmd).decode('utf-8')
     except:
         return False
     if not version:
@@ -95,7 +98,7 @@ def check_git_remote_exists(url, version, tags_valid=False):
     cmd = ('git ls-remote %s refs/tags/*' % url).split()
 
     try:
-        output = subprocess.check_output(cmd)
+        output = subprocess.check_output(cmd).decode('utf-8')
     except:
         return False
 
@@ -105,17 +108,36 @@ def check_git_remote_exists(url, version, tags_valid=False):
 
 
 def check_source_repo_entry_for_errors(source, tags_valid=False):
+    errors = []
     if source['type'] != 'git':
-        print("Cannot verify remote of type[%s] from line [%s] skipping."
+        print('Cannot verify remote of type[%s] from line [%s] skipping.'
               % (source['type'], source['__line__']))
         return None
 
     version = source['version'] if source['version'] else None
     if not check_git_remote_exists(source['url'], version, tags_valid):
-        return ("Could not validate repository with url %s and version %s from"
-                " entry at line '''%s'''" % (source['url'],
-                                             version,
-                                             source['__line__']))
+        errors.append(
+            'Could not validate repository with url %s and version %s from'
+            ' entry at line %s'
+            % (source['url'], version, source['__line__']))
+    test_pr = source['test_pull_requests'] if 'test_pull_requests' in source else None
+    if test_pr:
+        parsedurl = urlparse(source['url'])
+        if 'github.com' in parsedurl.netloc:
+            user = os.path.dirname(parsedurl.path).lstrip('/')
+            repo, _ = os.path.splitext(os.path.basename(parsedurl.path))
+            hook_errors = []
+            rosghprb_token = os.getenv('ROSGHPRB_TOKEN', None)
+            if not rosghprb_token:
+                print('No ROSGHPRB_TOKEN set, continuing without checking hooks')
+            else:
+                hooks_valid = hook_permissions.check_hooks_on_repo(user, repo, hook_errors, hook_user='ros-pull-request-builder', callback_url='http://build.ros.org/ghprbhook/', token=rosghprb_token)
+                if not hooks_valid:
+                    errors += hook_errors
+        else:
+            errors.append('Pull Request builds only supported on GitHub right now. Cannot do pull request against %s' % parsedurl.netloc)
+    if errors:
+        return(" ".join(errors))
     return None
 
 
@@ -124,12 +146,12 @@ def check_repo_for_errors(repo):
     if 'source' in repo:
         source_errors = check_source_repo_entry_for_errors(repo['source'])
         if source_errors:
-            errors.append("Could not validate source entry for repo %s with error [[[%s]]]" %
+            errors.append('Could not validate source entry for repo %s with error [[[%s]]]' %
                           (repo['repo'], source_errors))
     if 'doc' in repo:
         source_errors = check_source_repo_entry_for_errors(repo['doc'], tags_valid=True)
         if source_errors:
-            errors.append("Could not validate doc entry for repo %s with error [[[%s]]]" %
+            errors.append('Could not validate doc entry for repo %s with error [[[%s]]]' %
                           (repo['repo'], source_errors))
     return errors
 
@@ -148,8 +170,8 @@ def detect_post_eol_release(n, repo, lines):
         end_line = release_element['tags']['__line__'] + 3
         matching_lines = [l for l in lines if l >= start_line and l <= end_line]
         if matching_lines:
-            errors.append("There is a change to a release section of an EOLed "
-                          "distribution. Lines: %s" % matching_lines)
+            errors.append('There is a change to a release section of an EOLed '
+                          'distribution. Lines: %s' % matching_lines)
     if 'doc' in repo:
         doc_element = repo['doc']
         start_line = doc_element['__line__']
@@ -158,8 +180,8 @@ def detect_post_eol_release(n, repo, lines):
         # the url and version number
         matching_lines = [l for l in lines if l >= start_line and l <= end_line]
         if matching_lines:
-            errors.append("There is a change to a doc section of an EOLed "
-                          "distribution. Lines: %s" % matching_lines)
+            errors.append('There is a change to a doc section of an EOLed '
+                          'distribution. Lines: %s' % matching_lines)
 
     return errors
 
@@ -175,12 +197,14 @@ def load_yaml_with_lines(filename):
         node.__line__ = line + 1
         return node
 
-    def construct_mapping(node, deep=False):
-        mapping = Constructor.construct_mapping(loader, node, deep=deep)
+    construct_mapping = loader.construct_mapping
+
+    def custom_construct_mapping(node, deep=False):
+        mapping = construct_mapping(node, deep=deep)
         mapping['__line__'] = node.__line__
         return mapping
     loader.compose_node = compose_node
-    loader.construct_mapping = construct_mapping
+    loader.construct_mapping = custom_construct_mapping
     data = loader.get_single_data()
     return data
 
@@ -209,7 +233,7 @@ def isolate_yaml_snippets_from_line_numbers(yaml_dict, line_numbers):
 
 def main():
     cmd = ('git diff --unified=0 %s' % DIFF_TARGET).split()
-    diff = subprocess.check_output(cmd)
+    diff = subprocess.check_output(cmd).decode('utf-8')
     # print("output", diff)
 
     diffed_lines = detect_lines(diff)
@@ -222,28 +246,30 @@ def main():
         url = 'file://%s/index.yaml' % directory
         path = os.path.abspath(path)
         if path not in get_all_distribution_filenames(url):
-            print("not verifying diff of file %s" % path)
+            # print("not verifying diff of file %s" % path)
             continue
-        is_eol_distro = path in get_eol_distribution_filenames(url)
-        data = load_yaml_with_lines(path)
+        with Fold():
+            print("verifying diff of file '%s'" % path)
+            is_eol_distro = path in get_eol_distribution_filenames(url)
+            data = load_yaml_with_lines(path)
 
-        repos = data['repositories']
-        if not repos:
-            continue
+            repos = data['repositories']
+            if not repos:
+                continue
 
-        changed_repos = isolate_yaml_snippets_from_line_numbers(repos, lines)
+            changed_repos = isolate_yaml_snippets_from_line_numbers(repos, lines)
 
-        # print("In file: %s Changed repos are:" % path)
-        # pprint.pprint(changed_repos)
+            # print("In file: %s Changed repos are:" % path)
+            # pprint.pprint(changed_repos)
 
-        for n, r in changed_repos.items():
-            errors = check_repo_for_errors(r)
-            detected_errors.extend(["In file '''%s''': " % path + e
-                                    for e in errors])
-            if is_eol_distro:
-                errors = detect_post_eol_release(n, r, lines)
+            for n, r in changed_repos.items():
+                errors = check_repo_for_errors(r)
                 detected_errors.extend(["In file '''%s''': " % path + e
                                         for e in errors])
+                if is_eol_distro:
+                    errors = detect_post_eol_release(n, r, lines)
+                    detected_errors.extend(["In file '''%s''': " % path + e
+                                            for e in errors])
 
     for e in detected_errors:
 

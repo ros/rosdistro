@@ -1,1 +1,1 @@
-eol_distro_names = ['groovy', 'hydro']
+eol_distro_names = ['groovy', 'hydro', 'jade']

@@ -113,6 +113,8 @@ def check_brackets(buf):
     def fun(i, l, o):
         m = re.match(r'^(?:' + indent_atom + r')*([^:]*):\s*(\w.*)$', l)
         if m is not None and m.groups()[0] not in excepts:
+            if m.groups()[1] == 'null':
+                return True
             print_err("list not in square brackets line %u" % (i+1))
             return False
         return True
