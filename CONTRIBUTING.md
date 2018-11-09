@@ -30,7 +30,7 @@ There is a guide for submitting rosdep keys [here](http://docs.ros.org/independe
 Updates to rosdep rules require the review of two people.
 This will usually means that it needs a +1, and then it can be merged by a different person.
 
-For convenience in reviewing please link to the web listings of packages such as on http://packages.ubuntu.com, http://packages.debian.org, and https://admin.fedoraproject.org/pkgdb/packages/ or if a pip package pypi.python.org.
+For convenience in reviewing please link to the web listings of packages such as on http://packages.ubuntu.com, http://packages.debian.org, and https://apps.fedoraproject.org/packages or if a pip package pypi.python.org.
 
 Please also briefly describe the package being added and what use case you want to use it for.
 It's valuable to have a record of the packages as submitted and their intended purpose for clarity in the future so that if there's a conflict there's information to fall back on instead of speculation about the original use cases.
