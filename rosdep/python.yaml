@@ -1735,7 +1735,10 @@ python-hypothesis:
 python-imaging:
   alpine: [py-imaging]
   arch: [python2-pillow]
-  debian: [python-imaging]
+  debian:
+    '*': [python-pil]
+    jessie:  [python-imaging]
+    stretch: [python-imaging]
   fedora:
     '21': [python-pillow, python-pillow-qt]
     '22': [python-pillow, python-pillow-qt]
@@ -1761,8 +1764,8 @@ python-imaging:
     slackpkg:
       packages: [python-pillow]
   ubuntu:
+    '*': [python-pil]
     artful: [python-imaging]
-    bionic: [python-pil]
     lucid: [python-imaging]
     maverick: [python-imaging]
     natty: [python-imaging]
