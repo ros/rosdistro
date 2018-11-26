@@ -3,6 +3,12 @@ ace:
   debian: [libace-dev]
   gentoo: [dev-libs/ace]
   ubuntu: [libace-dev]
+ack-grep:
+  arch: [ack]
+  debian: [ack-grep]
+  fedora: [ack]
+  gentoo: [sys-apps/ack]
+  ubuntu: [ack-grep]
 acpi:
   debian: [acpi]
   fedora: [acpi]
@@ -398,8 +404,16 @@ clang-format:
   debian:
     buster: [clang-format]
     stretch: [clang-format]
+  fedora: [clang]
   gentoo: [sys-devel/clang]
   ubuntu: [clang-format]
+clang-tidy:
+  debian:
+    buster: [clang-tidy]
+    stretch: [clang-tidy]
+  ubuntu:
+    '*': [clang-tidy]
+    trusty: null
 cmake:
   alpine: [cmake]
   arch: [cmake]
@@ -561,6 +575,10 @@ daemontools:
   debian: [daemontools]
   gentoo: [virtual/daemontools]
   ubuntu: [daemontools]
+debhelper:
+  debian: [debhelper]
+  fedora: [debhelper]
+  ubuntu: [debhelper]
 debtree:
   debian: [debtree]
   ubuntu: [debtree]
@@ -605,6 +623,10 @@ dpkg:
   fedora: [dpkg]
   gentoo: [app-arch/dpkg]
   ubuntu: [dpkg]
+dpkg-dev:
+  debian: [dpkg-dev]
+  fedora: [dpkg-dev]
+  ubuntu: [dpkg-dev]
 dvipng:
   arch: [texlive-bin]
   debian: [dvipng]
@@ -1285,7 +1307,9 @@ jack:
   ubuntu: [libjack-jackd2-dev]
 jasper:
   arch: [jasper]
-  debian: [libjasper-dev]
+  debian:
+    jessie: [libjasper-dev]
+    wheezy: [libjasper-dev]
   fedora: [jasper-devel]
   freebsd: [jasper]
   gentoo: [media-libs/jasper]
@@ -1294,7 +1318,21 @@ jasper:
   slackware:
     slackpkg:
       packages: [jasper]
-  ubuntu: [libjasper-dev]
+  ubuntu:
+    lucid: [libjasper-dev]
+    maverick: [libjasper-dev]
+    natty: [libjasper-dev]
+    oneiric: [libjasper-dev]
+    precise: [libjasper-dev]
+    quantal: [libjasper-dev]
+    raring: [libjasper-dev]
+    saucy: [libjasper-dev]
+    trusty: [libjasper-dev]
+    utopic: [libjasper-dev]
+    vivid: [libjasper-dev]
+    wily: [libjasper-dev]
+    xenial: [libjasper-dev]
+    yakkety: [libjasper-dev]
 java:
   arch: [jdk7-openjdk]
   debian:
@@ -1520,7 +1558,7 @@ libceres-dev:
     buster: [libceres-dev]
     stretch: [libceres-dev]
   fedora: [ceres-solver-devel]
-  gentoo: [sci-libs/ceres-solver]
+  gentoo: ['sci-libs/ceres-solver[sparse,lapack]']
   ubuntu: [libceres-dev]
 libcoin60-dev:
   arch: [coin]
@@ -1591,6 +1629,14 @@ libdevil-dev:
   fedora: [DevIL-devel]
   gentoo: [media-libs/devil]
   ubuntu: [libdevil-dev]
+libdlib-dev:
+  debian: [libdlib-dev]
+  gentoo:
+    portage:
+      packages: [sci-libs/dlib]
+  ubuntu:
+    '*': [libdlib-dev]
+    trusty: null
 libdmtx-dev:
   arch: [libdmtx]
   debian: [libdmtx-dev]
@@ -1643,6 +1689,12 @@ libev-dev:
   fedora: [libev-devel]
   gentoo: [dev-libs/libev]
   ubuntu: [libev-dev]
+libevdev-dev:
+  arch: [libevdev]
+  debian: [libevdev-dev]
+  fedora: [libevdev-devel]
+  gentoo: [dev-libs/libevdev]
+  ubuntu: [libevdev-dev]
 libexpat1-dev:
   arch: [expat]
   debian: [libexpat1-dev]
@@ -1746,6 +1798,7 @@ libfreetype6:
   ubuntu: [libfreetype6]
 libfreetype6-dev:
   debian: [libfreetype6-dev]
+  fedora: [freetype-devel]
   gentoo: [media-libs/freetype]
   ubuntu: [libfreetype6-dev]
 libftdi-dev:
@@ -1806,6 +1859,10 @@ libgconf2:
   fedora: [GConf2]
   gentoo: ['gnome-base/gconf:2']
   ubuntu: [libgconf-2-4]
+libgdal-dev:
+  debian: [libgdal-dev]
+  opensuse: [gdal]
+  ubuntu: [libgdal-dev]
 libgeographiclib-dev:
   debian:
     wheezy: [libgeographiclib-dev]
@@ -2221,6 +2278,10 @@ libmodbus-dev:
   debian: [libmodbus-dev]
   fedora: [libmodbus-devel]
   ubuntu: [libmodbus-dev]
+libmongoclient-dev:
+  debian: [libmongoclient-dev]
+  fedora: [mongo-cxx-driver]
+  ubuntu: [libmongoclient-dev]
 libmotif-dev:
   arch: [lesstif]
   debian: [libmotif-dev]
@@ -2396,7 +2457,7 @@ libopenni-dev:
   arch: [openni]
   debian: [libopenni-dev]
   fedora: [openni-devel]
-  gentoo: [dev-libs/OpenNi]
+  gentoo: [dev-libs/OpenNI]
   ubuntu: [libopenni-dev]
 libopenni-nite-dev:
   arch: [primesense-nite]
@@ -2439,6 +2500,8 @@ libopenvdb:
     stretch: [libopenvdb3.2]
   gentoo: [media-gfx/openvdb]
   ubuntu:
+    artful: [libopenvdb3.2]
+    bionic: [libopenvdb5.0]
     saucy: [libopenvdb1.1]
     trusty: [libopenvdb2.1]
     utopic: [libopenvdb2.3]
@@ -2995,6 +3058,16 @@ libsoqt4-dev:
   fedora: [SoQt-devel]
   gentoo: [media-libs/SoQt]
   ubuntu: [libsoqt4-dev]
+libspatialite:
+  arch: [libspatialite]
+  debian:
+    '*': [libsqlite3-mod-spatialite]
+    jessie: [libspatialite5]
+  fedora: [libspatialite]
+  gentoo: ['dev-db/spatialite:0']
+  ubuntu:
+    '*': [libsqlite3-mod-spatialite]
+    trusty: [libspatialite5]
 libspnav-dev:
   arch: [libspnav]
   debian: [libspnav-dev]
@@ -3018,11 +3091,13 @@ libssh-dev:
   gentoo: [net-libs/libssh]
   ubuntu: [libssh-dev]
 libssh2:
+  arch: [libssh2]
   debian: [libssh2-1]
   fedora: [libssh2]
   gentoo: [net-libs/libssh2]
   ubuntu: [libssh2-1]
 libssh2-dev:
+  arch: [libssh2]
   debian: [libssh2-1-dev]
   fedora: [libssh2-devel]
   gentoo: [net-libs/libssh2]
@@ -3579,6 +3654,14 @@ libzmq3-dev:
 libzmqpp3:
   gentoo: [net-libs/cppzmq]
   ubuntu: [libzmqpp3]
+libzstd-dev:
+  arch: [zstd]
+  debian: [libzstd-dev]
+  fedora: [libzstd-devel]
+  gentoo: [app-arch/zstd]
+  ubuntu:
+    '*': [libzstd-dev]
+    xenial: [libzstd1-dev]
 linphone:
   debian: [linphone]
   fedora: [linphone]
@@ -3704,6 +3787,10 @@ mapnik-utils:
   debian: [mapnik-utils]
   fedora: [mapnik-utils]
   ubuntu: [mapnik-utils]
+matio:
+  debian: [libmatio-dev]
+  fedora: [matio-devel]
+  ubuntu: [libmatio-dev]
 maven:
   arch: [maven]
   debian: [maven]
@@ -3982,6 +4069,12 @@ ocl-icd-opencl-dev:
   debian: [ocl-icd-opencl-dev]
   gentoo: [virtual/opencl]
   ubuntu: [ocl-icd-opencl-dev]
+odb:
+  debian: [odb]
+  fedora: [odb]
+  ubuntu:
+    '*': [odb]
+    trusty: null
 omniidl:
   arch: [omniorb]
   debian: [omniidl, omniorb-idl]
@@ -4322,6 +4415,13 @@ qtbase5-dev:
   opensuse: [libqt5-qtbase-common-devel, libqt5-qtbase-devel]
   slackware: [qt5]
   ubuntu: [qtbase5-dev]
+qtdeclarative5-dev:
+  arch: [qt5-declarative]
+  debian: [qtdeclarative5-dev]
+  fedora: [qt5-qtdeclarative-devel]
+  freebsd: [qt5-qml, qt5-quick]
+  gentoo: ['dev-qt/qtdeclarative:5']
+  ubuntu: [qtdeclarative5-dev]
 qtmobility-dev:
   arch: [qtmobility]
   debian: [qtmobility-dev]
@@ -4421,11 +4521,15 @@ sdformat:
   fedora: [sdformat-devel]
   gentoo: [dev-libs/sdformat]
   ubuntu:
+    artful: [libsdformat6-dev]
+    bionic: [libsdformat6-dev]
+    cosmic: [libsdformat6-dev]
     precise: [sdformat]
     quantal: [sdformat]
     raring: [sdformat]
     saucy: [libsdformat-dev]
     trusty: [libsdformat-dev]
+    xenial: [libsdformat4-dev]
 sdl:
   arch: [sdl]
   debian: [libsdl1.2-dev]
@@ -4913,6 +5017,12 @@ unzip:
     slackpkg:
       packages: [infozip]
   ubuntu: [unzip]
+usbutils:
+  debian: [usbutils]
+  fedora: [usbutils]
+  gentoo: [sys-apps/usbutils]
+  macports: [usbutils]
+  ubuntu: [usbutils]
 uuid:
   arch: [util-linux]
   debian: [uuid-dev]
