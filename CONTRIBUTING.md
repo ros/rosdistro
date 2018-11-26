@@ -56,7 +56,26 @@ Guidelines for rosdep rules
        However please don't target 'sid' as it's a rolling target and when the keys change our database gets out of date.
   * Keep everything in alphabetical order for better merging.
   * No trailing whitespace.
-   
+
+### Python 3 rules
+
+When adding rules for python 3 packages, create a separate entry prefixed with `python3-` rather than `python`
+For example:
+
+```yaml
+python-foobar:
+  debian: [python-foobar]
+  fedora: [python2-foobar]
+  ubuntu: [python-foobar]
+...
+python3-foobar:
+  debian: [python3-foobar]
+  fedora: [python3-foobar]
+  ubuntu: [python3-foobar]
+```
+
+You may see existing rules that use `_python3`-suffixed distribution codenames.
+These were trialed as a possible style of Python 3 rules and should not be used for newly added definitions.
 
 How to submit pull requests
 ---------------------------
