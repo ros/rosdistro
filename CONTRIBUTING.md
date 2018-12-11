@@ -30,7 +30,7 @@ There is a guide for submitting rosdep keys [here](http://docs.ros.org/independe
 Updates to rosdep rules require the review of two people.
 This will usually means that it needs a +1, and then it can be merged by a different person.
 
-For convenience in reviewing please link to the web listings of packages such as on http://packages.ubuntu.com, http://packages.debian.org, and https://admin.fedoraproject.org/pkgdb/packages/ or if a pip package pypi.python.org.
+For convenience in reviewing please link to the web listings of packages such as on http://packages.ubuntu.com, http://packages.debian.org, and https://apps.fedoraproject.org/packages or if a pip package pypi.python.org.
 
 Please also briefly describe the package being added and what use case you want to use it for.
 It's valuable to have a record of the packages as submitted and their intended purpose for clarity in the future so that if there's a conflict there's information to fall back on instead of speculation about the original use cases.
@@ -56,7 +56,26 @@ Guidelines for rosdep rules
        However please don't target 'sid' as it's a rolling target and when the keys change our database gets out of date.
   * Keep everything in alphabetical order for better merging.
   * No trailing whitespace.
-   
+
+### Python 3 rules
+
+When adding rules for python 3 packages, create a separate entry prefixed with `python3-` rather than `python`
+For example:
+
+```yaml
+python-foobar:
+  debian: [python-foobar]
+  fedora: [python2-foobar]
+  ubuntu: [python-foobar]
+...
+python3-foobar:
+  debian: [python3-foobar]
+  fedora: [python3-foobar]
+  ubuntu: [python3-foobar]
+```
+
+You may see existing rules that use `_python3`-suffixed distribution codenames.
+These were trialed as a possible style of Python 3 rules and should not be used for newly added definitions.
 
 How to submit pull requests
 ---------------------------

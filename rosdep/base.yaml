@@ -3,6 +3,12 @@ ace:
   debian: [libace-dev]
   gentoo: [dev-libs/ace]
   ubuntu: [libace-dev]
+ack-grep:
+  arch: [ack]
+  debian: [ack-grep]
+  fedora: [ack]
+  gentoo: [sys-apps/ack]
+  ubuntu: [ack-grep]
 acpi:
   debian: [acpi]
   fedora: [acpi]
@@ -398,6 +404,7 @@ clang-format:
   debian:
     buster: [clang-format]
     stretch: [clang-format]
+  fedora: [clang]
   gentoo: [sys-devel/clang]
   ubuntu: [clang-format]
 clang-tidy:
@@ -1551,7 +1558,7 @@ libceres-dev:
     buster: [libceres-dev]
     stretch: [libceres-dev]
   fedora: [ceres-solver-devel]
-  gentoo: [sci-libs/ceres-solver]
+  gentoo: ['sci-libs/ceres-solver[sparse,lapack]']
   ubuntu: [libceres-dev]
 libcoin60-dev:
   arch: [coin]
@@ -1622,6 +1629,14 @@ libdevil-dev:
   fedora: [DevIL-devel]
   gentoo: [media-libs/devil]
   ubuntu: [libdevil-dev]
+libdlib-dev:
+  debian: [libdlib-dev]
+  gentoo:
+    portage:
+      packages: [sci-libs/dlib]
+  ubuntu:
+    '*': [libdlib-dev]
+    trusty: null
 libdmtx-dev:
   arch: [libdmtx]
   debian: [libdmtx-dev]
@@ -1674,6 +1689,12 @@ libev-dev:
   fedora: [libev-devel]
   gentoo: [dev-libs/libev]
   ubuntu: [libev-dev]
+libevdev-dev:
+  arch: [libevdev]
+  debian: [libevdev-dev]
+  fedora: [libevdev-devel]
+  gentoo: [dev-libs/libevdev]
+  ubuntu: [libevdev-dev]
 libexpat1-dev:
   arch: [expat]
   debian: [libexpat1-dev]
@@ -1777,6 +1798,7 @@ libfreetype6:
   ubuntu: [libfreetype6]
 libfreetype6-dev:
   debian: [libfreetype6-dev]
+  fedora: [freetype-devel]
   gentoo: [media-libs/freetype]
   ubuntu: [libfreetype6-dev]
 libftdi-dev:
@@ -1837,6 +1859,10 @@ libgconf2:
   fedora: [GConf2]
   gentoo: ['gnome-base/gconf:2']
   ubuntu: [libgconf-2-4]
+libgdal-dev:
+  debian: [libgdal-dev]
+  opensuse: [gdal]
+  ubuntu: [libgdal-dev]
 libgeographiclib-dev:
   debian:
     wheezy: [libgeographiclib-dev]
@@ -2431,7 +2457,7 @@ libopenni-dev:
   arch: [openni]
   debian: [libopenni-dev]
   fedora: [openni-devel]
-  gentoo: [dev-libs/OpenNi]
+  gentoo: [dev-libs/OpenNI]
   ubuntu: [libopenni-dev]
 libopenni-nite-dev:
   arch: [primesense-nite]
@@ -2466,6 +2492,11 @@ libopensplice67:
   ubuntu:
     bionic: [libopensplice67]
     xenial: [libopensplice67]
+libopensplice69:
+  gentoo: [=sci-libs/opensplice-6.9.*]
+  ubuntu:
+    bionic: [libopensplice69]
+    xenial: [libopensplice69]
 libopenvdb:
   arch: [openvdb]
   debian:
@@ -2474,6 +2505,8 @@ libopenvdb:
     stretch: [libopenvdb3.2]
   gentoo: [media-gfx/openvdb]
   ubuntu:
+    artful: [libopenvdb3.2]
+    bionic: [libopenvdb5.0]
     saucy: [libopenvdb1.1]
     trusty: [libopenvdb2.1]
     utopic: [libopenvdb2.3]
@@ -2654,6 +2687,7 @@ libpqxx:
   gentoo: [dev-libs/libpqxx]
   ubuntu:
     artful: [libpqxx-4.0v5]
+    bionic: [libpqxx-4.0v5]
     lucid: [libpqxx-3.0]
     maverick: [libpqxx-3.0]
     natty: [libpqxx-3.0]
@@ -2675,6 +2709,7 @@ libpqxx-dev:
   gentoo: [dev-libs/libpqxx]
   ubuntu:
     artful: [libpqxx-dev]
+    bionic: [libpqxx-dev]
     lucid: [libpqxx3-dev]
     maverick: [libpqxx3-dev]
     natty: [libpqxx3-dev]
@@ -2948,16 +2983,7 @@ libqwt6:
   debian: [libqwt-dev]
   fedora: [qwt-devel]
   gentoo: ['x11-libs/qwt:6']
-  ubuntu:
-    precise: [libqwt-dev]
-    quantal: [libqwt-dev]
-    raring: [libqwt-dev]
-    saucy: [libqwt-dev]
-    trusty: [libqwt-dev]
-    utopic: [libqwt-dev]
-    vivid: [libqwt-dev]
-    wily: [libqwt-qt5-dev]
-    xenial: [libqwt-qt5-dev]
+  ubuntu: [libqwt-dev]
 libqwtplot3d-qt4-dev:
   arch: [qwtplot3d]
   debian: [libqwtplot3d-qt4-dev]
@@ -3030,6 +3056,16 @@ libsoqt4-dev:
   fedora: [SoQt-devel]
   gentoo: [media-libs/SoQt]
   ubuntu: [libsoqt4-dev]
+libspatialite:
+  arch: [libspatialite]
+  debian:
+    '*': [libsqlite3-mod-spatialite]
+    jessie: [libspatialite5]
+  fedora: [libspatialite]
+  gentoo: ['dev-db/spatialite:0']
+  ubuntu:
+    '*': [libsqlite3-mod-spatialite]
+    trusty: [libspatialite5]
 libspnav-dev:
   arch: [libspnav]
   debian: [libspnav-dev]
@@ -3053,11 +3089,13 @@ libssh-dev:
   gentoo: [net-libs/libssh]
   ubuntu: [libssh-dev]
 libssh2:
+  arch: [libssh2]
   debian: [libssh2-1]
   fedora: [libssh2]
   gentoo: [net-libs/libssh2]
   ubuntu: [libssh2-1]
 libssh2-dev:
+  arch: [libssh2]
   debian: [libssh2-1-dev]
   fedora: [libssh2-devel]
   gentoo: [net-libs/libssh2]
@@ -3097,6 +3135,11 @@ libswscale-dev:
   fedora: [ffmpeg-devel]
   gentoo: [virtual/ffmpeg]
   ubuntu: [libswscale-dev]
+libsystemd-dev:
+  debian: [libsystemd-dev]
+  ubuntu:
+    '*': [libsystemd-dev]
+    trusty: null
 libtclap-dev:
   arch: [tclap]
   debian: [libtclap-dev]
@@ -3257,6 +3300,7 @@ libunwind-dev:
   fedora: [libunwind-devel]
   gentoo: [sys-libs/libunwind]
   ubuntu:
+    '*': [libunwind-dev]
     precise: [libunwind7-dev]
     quantal: [libunwind8-dev]
     raring: [libunwind8-dev]
@@ -3378,6 +3422,7 @@ libvtk:
   macports: [vtk-devel]
   opensuse: [vtk-devel]
   ubuntu:
+    '*': [libvtk6-dev]
     lucid: [libvtk5-dev]
     maverick: [libvtk5-dev]
     natty: [libvtk5-dev]
@@ -3390,7 +3435,6 @@ libvtk:
     utopic: [libvtk5-dev]
     vivid: [libvtk5-dev]
     wily: [libvtk5-dev]
-    xenial: [libvtk6-dev]
 libvtk-java:
   arch: [vtk]
   debian:
@@ -3404,8 +3448,7 @@ libvtk-java:
   opensuse: [vtk-java]
   slackware: [VTK]
   ubuntu:
-    artful: [libvtk6-java]
-    bionic: [libvtk6-java]
+    '*': [libvtk6-java]
     lucid: [libvtk-java]
     precise: [libvtk-java]
     quantal: [libvtk-java]
@@ -3416,8 +3459,6 @@ libvtk-java:
     vivid: [libvtk-java]
     wily: [libvtk-java]
     xenial: [libvtk-java]
-    yakkety: [libvtk6-java]
-    zesty: [libvtk6-java]
 libvtk-qt:
   arch: [vtk]
   debian:
@@ -3431,8 +3472,7 @@ libvtk-qt:
   opensuse: [vtk-qt]
   slackware: [VTK]
   ubuntu:
-    artful: [libvtk6-qt-dev]
-    bionic: [libvtk6-qt-dev]
+    '*': [libvtk6-qt-dev]
     lucid: [libvtk5-qt4-dev]
     maverick: [libvtk5-qt4-dev]
     natty: [libvtk5-qt4-dev]
@@ -3445,9 +3485,6 @@ libvtk-qt:
     utopic: [libvtk5-qt4-dev]
     vivid: [libvtk5-qt4-dev]
     wily: [libvtk5-qt4-dev]
-    xenial: [libvtk6-qt-dev]
-    yakkety: [libvtk6-qt-dev]
-    zesty: [libvtk6-qt-dev]
 libvulkan-dev:
   debian: [libvulkan-dev]
   fedora: [vulkan-devel]
@@ -3614,6 +3651,14 @@ libzmq3-dev:
 libzmqpp3:
   gentoo: [net-libs/cppzmq]
   ubuntu: [libzmqpp3]
+libzstd-dev:
+  arch: [zstd]
+  debian: [libzstd-dev]
+  fedora: [libzstd-devel]
+  gentoo: [app-arch/zstd]
+  ubuntu:
+    '*': [libzstd-dev]
+    xenial: [libzstd1-dev]
 linphone:
   debian: [linphone]
   fedora: [linphone]
@@ -3739,6 +3784,10 @@ mapnik-utils:
   debian: [mapnik-utils]
   fedora: [mapnik-utils]
   ubuntu: [mapnik-utils]
+matio:
+  debian: [libmatio-dev]
+  fedora: [matio-devel]
+  ubuntu: [libmatio-dev]
 maven:
   arch: [maven]
   debian: [maven]
@@ -3895,6 +3944,11 @@ mono-devel:
   fedora: [mono-devel]
   gentoo: [dev-lang/mono]
   ubuntu: [mono-devel]
+mosquitto:
+  arch: [mosquitto]
+  debian: [mosquitto]
+  fedora: [mosquitto]
+  ubuntu: [mosquitto]
 mpg123:
   arch: [mpg123]
   debian: [mpg123]
@@ -4017,6 +4071,12 @@ ocl-icd-opencl-dev:
   debian: [ocl-icd-opencl-dev]
   gentoo: [virtual/opencl]
   ubuntu: [ocl-icd-opencl-dev]
+odb:
+  debian: [odb]
+  fedora: [odb]
+  ubuntu:
+    '*': [odb]
+    trusty: null
 omniidl:
   arch: [omniorb]
   debian: [omniidl, omniorb-idl]
@@ -4357,6 +4417,13 @@ qtbase5-dev:
   opensuse: [libqt5-qtbase-common-devel, libqt5-qtbase-devel]
   slackware: [qt5]
   ubuntu: [qtbase5-dev]
+qtdeclarative5-dev:
+  arch: [qt5-declarative]
+  debian: [qtdeclarative5-dev]
+  fedora: [qt5-qtdeclarative-devel]
+  freebsd: [qt5-qml, qt5-quick]
+  gentoo: ['dev-qt/qtdeclarative:5']
+  ubuntu: [qtdeclarative5-dev]
 qtmobility-dev:
   arch: [qtmobility]
   debian: [qtmobility-dev]
@@ -4952,6 +5019,12 @@ unzip:
     slackpkg:
       packages: [infozip]
   ubuntu: [unzip]
+usbutils:
+  debian: [usbutils]
+  fedora: [usbutils]
+  gentoo: [sys-apps/usbutils]
+  macports: [usbutils]
+  ubuntu: [usbutils]
 uuid:
   arch: [util-linux]
   debian: [uuid-dev]
