@@ -567,6 +567,10 @@ repositories:
       version: 0.0.3-0
   ati_force_torque:
     doc:
+      depends:
+      - force_torque_sensor
+      - iirob_filters
+      - ipr_extern
       type: git
       url: https://github.com/KITrobotics/ati_force_torque.git
       version: kinetic-devel
@@ -2959,6 +2963,8 @@ repositories:
     status: maintained
   force_torque_sensor:
     doc:
+      depends:
+      - iirob_filters
       type: git
       url: https://github.com/KITrobotics/force_torque_sensor.git
       version: kinetic-devel
@@ -4552,6 +4558,15 @@ repositories:
       type: git
       url: https://github.com/KITrobotics/ipr_extern.git
       version: kinetic-devel
+    release:
+      packages:
+      - libmodbus
+      - libreflexxestype2
+      - ros_reflexxes
+      tags:
+        release: release/kinetic/{package}/{version}
+      url: https://github.com/KITrobotics/ipr_extern-release.git
+      version: 0.8.8-0
   ira_laser_tools:
     doc:
       type: git
