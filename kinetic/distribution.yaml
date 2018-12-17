@@ -567,9 +567,17 @@ repositories:
       version: 0.0.3-0
   ati_force_torque:
     doc:
+      depends:
+      - force_torque_sensor
+      - iirob_filters
       type: git
       url: https://github.com/KITrobotics/ati_force_torque.git
       version: kinetic-devel
+    release:
+      tags:
+        release: release/kinetic/{package}/{version}
+      url: https://github.com/KITrobotics/ati_force_torque-release.git
+      version: 1.0.1-0
     source:
       type: git
       url: https://github.com/KITrobotics/ati_force_torque.git
@@ -840,7 +848,7 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/BehaviorTree/behaviortree_cpp-release.git
-      version: 2.4.1-0
+      version: 2.4.4-0
     source:
       test_pull_requests: true
       type: git
@@ -2257,8 +2265,9 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/ct2034/dockeros-release.git
-      version: 1.0.2-0
+      version: 1.0.3-0
     source:
+      test_pull_requests: true
       type: git
       url: https://github.com/ct2034/dockeROS.git
       version: master
@@ -2904,6 +2913,21 @@ repositories:
       url: https://github.com/yujinrobot-release/flatbuffers-release.git
       version: 1.1.0-0
     status: maintained
+  flir_boson_usb:
+    doc:
+      type: git
+      url: https://github.com/astuff/flir_boson_usb.git
+      version: master
+    release:
+      tags:
+        release: release/kinetic/{package}/{version}
+      url: https://github.com/astuff/flir_boson_usb-release.git
+      version: 1.0.0-0
+    source:
+      type: git
+      url: https://github.com/astuff/flir_boson_usb.git
+      version: master
+    status: developed
   flir_camera_driver:
     doc:
       type: git
@@ -2959,6 +2983,8 @@ repositories:
     status: maintained
   force_torque_sensor:
     doc:
+      depends:
+      - iirob_filters
       type: git
       url: https://github.com/KITrobotics/force_torque_sensor.git
       version: kinetic-devel
@@ -5820,7 +5846,7 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/swri-robotics-gbp/marti_common-release.git
-      version: 2.7.0-0
+      version: 2.7.1-0
     source:
       type: git
       url: https://github.com/swri-robotics/marti_common.git
@@ -5883,7 +5909,7 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/mavlink/mavlink-gbp-release.git
-      version: 2018.11.11-0
+      version: 2018.12.12-0
     source:
       type: git
       url: https://github.com/mavlink/mavlink-gbp-release.git
@@ -5974,6 +6000,27 @@ repositories:
       url: https://github.com/ros/media_export.git
       version: indigo-devel
     status: maintained
+  melfa_robot:
+    doc:
+      type: git
+      url: https://github.com/tork-a/melfa_robot.git
+      version: master
+    release:
+      packages:
+      - melfa_description
+      - melfa_driver
+      - melfa_robot
+      - rv4fl_moveit_config
+      - rv7fl_moveit_config
+      tags:
+        release: release/kinetic/{package}/{version}
+      url: https://github.com/tork-a/melfa_robot-release.git
+      version: 0.0.3-0
+    source:
+      type: git
+      url: https://github.com/tork-a/melfa_robot.git
+      version: master
+    status: developed
   message_generation:
     doc:
       type: git
@@ -6582,7 +6629,7 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/fkie-release/multimaster_fkie-release.git
-      version: 0.8.4-0
+      version: 0.8.5-0
     source:
       type: git
       url: https://github.com/fkie/multimaster_fkie.git
@@ -8012,7 +8059,7 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/astuff/pacmod_game_control-release.git
-      version: 2.2.0-0
+      version: 2.3.0-0
     source:
       type: git
       url: https://github.com/astuff/pacmod_game_control.git
@@ -10906,7 +10953,7 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/RobotWebTools-release/rosbridge_suite-release.git
-      version: 0.9.0-0
+      version: 0.10.0-0
     source:
       type: git
       url: https://github.com/RobotWebTools/rosbridge_suite.git
@@ -11571,7 +11618,7 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/anybotics/rqt_multiplot_plugin-release.git
-      version: 0.0.8-0
+      version: 0.0.10-0
     source:
       type: git
       url: https://github.com/anybotics/rqt_multiplot_plugin.git
@@ -14137,6 +14184,7 @@ repositories:
       - uuv_gazebo_plugins
       - uuv_gazebo_ros_plugins
       - uuv_gazebo_ros_plugins_msgs
+      - uuv_gazebo_worlds
       - uuv_sensor_ros_plugins
       - uuv_sensor_ros_plugins_msgs
       - uuv_simulator
@@ -14149,7 +14197,7 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/uuvsimulator/uuv_simulator-release.git
-      version: 0.6.2-0
+      version: 0.6.3-0
     source:
       type: git
       url: https://github.com/uuvsimulator/uuv_simulator.git
@@ -14272,7 +14320,7 @@ repositories:
       tags:
         release: release/kinetic/{package}/{version}
       url: https://github.com/ros-drivers/video_stream_opencv-release.git
-      version: 1.1.4-0
+      version: 1.1.5-0
     source:
       type: git
       url: https://github.com/ros-drivers/video_stream_opencv.git
