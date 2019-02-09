@@ -10,6 +10,7 @@ except ImportError:
 import os
 import subprocess
 import sys
+import tempfile
 import unittest
 try:
     from urllib.parse import urlparse
@@ -76,7 +77,7 @@ def detect_lines(diffstr):
     return resultant_lines
 
 
-def check_git_remote_exists(url, version, tags_valid=False):
+def check_git_remote_exists(url, version, tags_valid=False, commits_valid=False):
     """ Check if the remote exists and has the branch version.
     If tags_valid is True query tags as well as branches """
     cmd = ('git ls-remote %s refs/heads/*' % url).split()
@@ -104,10 +105,23 @@ def check_git_remote_exists(url, version, tags_valid=False):
 
     if 'refs/tags/%s' % version in output:
         return True
+
+    # If commits are valid. query for all commits and test for version
+    if not commits_valid:
+        return False
+
+    try:
+        tmpdir = tempfile.mkdtemp()
+        subprocess.check_call('git clone %s %s/git-repo' % ( url, tmpdir ), shell=True)
+        subprocess.check_call('git -C %s/git-repo branch -r --contains %s' % ( tmpdir, version ), shell=True)
+        return True
+    except:
+        return False
+
     return False
 
 
-def check_source_repo_entry_for_errors(source, tags_valid=False):
+def check_source_repo_entry_for_errors(source, tags_valid=False, commits_valid=False):
     errors = []
     if source['type'] != 'git':
         print('Cannot verify remote of type[%s] from line [%s] skipping.'
@@ -115,7 +129,7 @@ def check_source_repo_entry_for_errors(source, tags_valid=False):
         return None
 
     version = source['version'] if source['version'] else None
-    if not check_git_remote_exists(source['url'], version, tags_valid):
+    if not check_git_remote_exists(source['url'], version, tags_valid, commits_valid):
         errors.append(
             'Could not validate repository with url %s and version %s from'
             ' entry at line %s'
@@ -144,12 +158,12 @@ def check_source_repo_entry_for_errors(source, tags_valid=False):
 def check_repo_for_errors(repo):
     errors = []
     if 'source' in repo:
-        source_errors = check_source_repo_entry_for_errors(repo['source'])
+        source_errors = check_source_repo_entry_for_errors(repo['source'], tags_valid=True, commits_valid=True)
         if source_errors:
             errors.append('Could not validate source entry for repo %s with error [[[%s]]]' %
                           (repo['repo'], source_errors))
     if 'doc' in repo:
-        source_errors = check_source_repo_entry_for_errors(repo['doc'], tags_valid=True)
+        source_errors = check_source_repo_entry_for_errors(repo['doc'], tags_valid=True, commits_valid=True)
         if source_errors:
             errors.append('Could not validate doc entry for repo %s with error [[[%s]]]' %
                           (repo['repo'], source_errors))
