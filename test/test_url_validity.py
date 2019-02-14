@@ -3,10 +3,7 @@
 from __future__ import print_function
 from . import hook_permissions
 
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from io import StringIO
+from io import StringIO
 import os
 import subprocess
 import sys
