@@ -10,6 +10,7 @@ except ImportError:
 import os
 import subprocess
 import sys
+import tempfile
 import unittest
 try:
     from urllib.parse import urlparse
@@ -76,38 +77,64 @@ def detect_lines(diffstr):
     return resultant_lines
 
 
-def check_git_remote_exists(url, version, tags_valid=False):
+def check_git_remote_exists(url, version, tags_valid=False, commits_valid=False):
     """ Check if the remote exists and has the branch version.
     If tags_valid is True query tags as well as branches """
-    cmd = ('git ls-remote %s refs/heads/*' % url).split()
 
-    try:
-        output = subprocess.check_output(cmd).decode('utf-8')
-    except:
-        return False
-    if not version:
-        # If the above passed assume the default exists
-        return True
+    # Check for tags first as they take priority.
+    # From Cloudbees Support:
+    #  >the way git plugin handles this conflict, a tag/sha1 is always preferred to branch as this is the way most user use an existing job to trigger a release build.
+    #  Catching the corner case to #20286
 
-    if 'refs/heads/%s' % version in output:
-        return True
-
-    # If tags are valid. query for all tags and test for version
-    if not tags_valid:
-        return False
+    tag_match = False
     cmd = ('git ls-remote %s refs/tags/*' % url).split()
 
     try:
         output = subprocess.check_output(cmd).decode('utf-8')
-    except:
-        return False
+    except subprocess.CalledProcessError as ex:
+        return (False, 'subprocess call %s failed: %s' % (cmd, ex))
 
     if 'refs/tags/%s' % version in output:
-        return True
-    return False
+        tag_match = True
+    
+    if tag_match:
+        if tags_valid:
+            return (True, '')
+        else:
+            error_str = 'Tags are not valid, but a tag %s was found. ' % version
+            error_str += 'Re: https://github.com/ros/rosdistro/pull/20286'
+            return (False, error_str)
 
+    branch_match = False
+    # check for branch name
+    cmd = ('git ls-remote %s refs/heads/*' % url).split()
 
-def check_source_repo_entry_for_errors(source, tags_valid=False):
+    try:
+        output = subprocess.check_output(cmd).decode('utf-8')
+    except subprocess.CalledProcessError as ex:
+        return (False, 'subprocess call %s failed: %s' % (cmd, ex))
+    if not version:
+        # If the above passed assume the default exists
+        return (True, '')
+
+    if 'refs/heads/%s' % version in output:
+        return (True, '')
+
+    if commits_valid:
+        try:
+            tmpdir = tempfile.mkdtemp()
+            subprocess.check_call('git clone %s %s/git-repo' % (url, tmpdir), shell=True)
+            # When a commit id is not found it results in a non-zero exit and the message
+            # 'error: malformed object name...'.
+            subprocess.check_call('git -C %s/git-repo branch -r --contains %s' % (tmpdir, version), shell=True)
+            return (True, '')
+        except:
+            return (False, 'No commit found matching %s' % version)
+    
+    return (False, 'No branch found matching %s' % version)
+    
+
+def check_source_repo_entry_for_errors(source, tags_valid=False, commits_valid=False):
     errors = []
     if source['type'] != 'git':
         print('Cannot verify remote of type[%s] from line [%s] skipping.'
@@ -115,11 +142,12 @@ def check_source_repo_entry_for_errors(source, tags_valid=False):
         return None
 
     version = source['version'] if source['version'] else None
-    if not check_git_remote_exists(source['url'], version, tags_valid):
+    (remote_exists, error_reason) = check_git_remote_exists(source['url'], version, tags_valid, commits_valid)
+    if not remote_exists:
         errors.append(
             'Could not validate repository with url %s and version %s from'
-            ' entry at line %s'
-            % (source['url'], version, source['__line__']))
+            ' entry at line %s. Error reason: %s'
+            % (source['url'], version, source['__line__'], error_reason))
     test_pr = source['test_pull_requests'] if 'test_pull_requests' in source else None
     if test_pr:
         parsedurl = urlparse(source['url'])
@@ -144,12 +172,17 @@ def check_source_repo_entry_for_errors(source, tags_valid=False):
 def check_repo_for_errors(repo):
     errors = []
     if 'source' in repo:
-        source_errors = check_source_repo_entry_for_errors(repo['source'])
+        source = repo['source']
+        test_prs = source['test_pull_requests'] if 'test_pull_requests' in source else None
+        test_commits = source['test_commits'] if 'test_commits' in source else None
+        # Allow tags in source entries if test_commits and test_pull_requests are both explicitly false.
+        tags_and_commits_valid = True if test_prs is False and test_commits is False else False
+        source_errors = check_source_repo_entry_for_errors(repo['source'], tags_and_commits_valid, tags_and_commits_valid)
         if source_errors:
             errors.append('Could not validate source entry for repo %s with error [[[%s]]]' %
                           (repo['repo'], source_errors))
     if 'doc' in repo:
-        source_errors = check_source_repo_entry_for_errors(repo['doc'], tags_valid=True)
+        source_errors = check_source_repo_entry_for_errors(repo['doc'], tags_valid=True, commits_valid=True)
         if source_errors:
             errors.append('Could not validate doc entry for repo %s with error [[[%s]]]' %
                           (repo['repo'], source_errors))
