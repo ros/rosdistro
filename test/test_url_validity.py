@@ -160,7 +160,12 @@ def check_source_repo_entry_for_errors(source, tags_valid=False):
 def check_repo_for_errors(repo):
     errors = []
     if 'source' in repo:
-        source_errors = check_source_repo_entry_for_errors(repo['source'])
+        source = repo['source']
+        test_prs = source['test_pull_requests'] if 'test_pull_requests' in source else None
+        test_commits = source['test_commits'] if 'test_commits' in source else None
+        # Allow tags in source entries if test_commits and test_pull_requests are both explicitly false.
+        tags_valid = True if test_prs is False and test_commits is False else False
+        source_errors = check_source_repo_entry_for_errors(repo['source'], tags_valid)
         if source_errors:
             errors.append('Could not validate source entry for repo %s with error [[[%s]]]' %
                           (repo['repo'], source_errors))
