@@ -8,6 +8,7 @@ try:
 except ImportError:
     from io import StringIO
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -130,6 +131,9 @@ def check_git_remote_exists(url, version, tags_valid=False, commits_valid=False)
             return (True, '')
         except:
             return (False, 'No commit found matching %s' % version)
+        finally:
+            shutil.rmtree(tmpdir)
+
     
     return (False, 'No branch found matching %s' % version)
     
