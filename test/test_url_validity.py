@@ -92,11 +92,11 @@ def check_git_remote_exists(url, version, tags_valid=False, commits_valid=False)
     cmd = ('git ls-remote %s refs/tags/*' % url).split()
 
     try:
-        output = subprocess.check_output(cmd).decode('utf-8')
+        tag_list = subprocess.check_output(cmd).decode('utf-8')
     except subprocess.CalledProcessError as ex:
         return (False, 'subprocess call %s failed: %s' % (cmd, ex))
 
-    if 'refs/tags/%s' % version in output:
+    if 'refs/tags/%s' % version in tag_list:
         tag_match = True
     
     if tag_match:
@@ -111,32 +111,40 @@ def check_git_remote_exists(url, version, tags_valid=False, commits_valid=False)
     # check for branch name
     cmd = ('git ls-remote %s refs/heads/*' % url).split()
 
-    try:
-        output = subprocess.check_output(cmd).decode('utf-8')
-    except subprocess.CalledProcessError as ex:
-        return (False, 'subprocess call %s failed: %s' % (cmd, ex))
-    if not version:
-        # If the above passed assume the default exists
-        return (True, '')
-
-    if 'refs/heads/%s' % version in output:
-        return (True, '')
-
-    # Only try to match a full length git commit id.
-    if commits_valid and re.match('[0-9a-f]{40}', version):
+    commit_match = False
+    # Only try to match a full length git commit id as this is an expensive operation
+    if re.match('[0-9a-f]{40}', version):
         try:
             tmpdir = tempfile.mkdtemp()
             subprocess.check_call('git clone %s %s/git-repo' % (url, tmpdir), shell=True)
             # When a commit id is not found it results in a non-zero exit and the message
             # 'error: malformed object name...'.
             subprocess.check_call('git -C %s/git-repo branch -r --contains %s' % (tmpdir, version), shell=True)
-            return (True, '')
+            commit_match = True
         except:
-            return (False, 'No commit found matching %s' % version)
+            pass #return (False, 'No commit found matching %s' % version)
         finally:
             shutil.rmtree(tmpdir)
 
-    
+    if commit_match:
+        if commits_valid:
+            return (True, '')
+        else:
+            error_str = 'Commits are not valid, but a commit %s was found. ' % version
+            error_str += 'Re: https://github.com/ros/rosdistro/pull/20286'
+            return (False, error_str)
+
+    # Commits take priority only check for the branch after checking for tags and commits first
+    try:
+        branch_list = subprocess.check_output(cmd).decode('utf-8')
+    except subprocess.CalledProcessError as ex:
+        return (False, 'subprocess call %s failed: %s' % (cmd, ex))
+    if not version:
+        # If the above passed assume the default exists
+        return (True, '')
+
+    if 'refs/heads/%s' % version in branch_list:
+        return (True, '')
     return (False, 'No branch found matching %s' % version)
     
 
