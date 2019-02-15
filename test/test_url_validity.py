@@ -8,6 +8,7 @@ try:
 except ImportError:
     from io import StringIO
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -121,7 +122,8 @@ def check_git_remote_exists(url, version, tags_valid=False, commits_valid=False)
     if 'refs/heads/%s' % version in output:
         return (True, '')
 
-    if commits_valid:
+    # Only try to match a full length git commit id.
+    if commits_valid and re.match('[0-9a-f]{40}', version):
         try:
             tmpdir = tempfile.mkdtemp()
             subprocess.check_call('git clone %s %s/git-repo' % (url, tmpdir), shell=True)
