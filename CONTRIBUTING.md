@@ -20,7 +20,15 @@ If you just want to submit for documentation indexing only [this tutorial](http:
 Continuous Integration Indexing
 -------------------------------
 
-If you would like to index your package for continuous integration tests you can add a source entry in the same way as the documentation index. 
+If you would like to index your package for continuous integration tests you can add a source entry in the same way as the documentation index.
+
+The `version` field is required to be a branch name. This is due to the Jenkins Git Plugin that will always trigger if a repository has changed. After querying Cloudbees support they replied with:
+
+> The git plugin is configured to build for a tag / sha1 will always trigger a build.
+
+As such the CI on this repository will enforce that the source version is a branch to not cause continuous triggering of builds.
+Also of note is that a tag has priority over a branch with the same name so a tag with the same name as the branch cannot exist either.
+
 
 rosdep rules contributions
 --------------------------
