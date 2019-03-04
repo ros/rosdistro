@@ -93,7 +93,8 @@ def check_git_remote_exists(url, version, tags_valid=False, commits_valid=False)
     except subprocess.CalledProcessError as ex:
         return (False, 'subprocess call %s failed: %s' % (cmd, ex))
 
-    if 'refs/tags/%s' % version in tag_list:
+    tags = [t for _, t in (l.split(None, 1) for l in tag_list.splitlines())]
+    if 'refs/tags/%s' % version in tags:
         tag_match = True
     
     if tag_match:
