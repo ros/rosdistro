@@ -105,3 +105,5 @@ These tests require several dependencies that can be installed either from the R
 | yamllint       | yamllint                          | yamllint       |
 
 There is a tool ``rosdistro_reformat`` which will fix most formatting errors such as alphabetization and correct formatting.
+
+Note: There's a [known issue](https://github.com/disqus/nose-unittest/issues/2) discovered [here](https://github.com/ros/rosdistro/issues/16336) that most tests won't run if you have the python package `nose-unitttest` installed. 
