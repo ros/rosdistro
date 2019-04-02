@@ -20,7 +20,15 @@ If you just want to submit for documentation indexing only [this tutorial](http:
 Continuous Integration Indexing
 -------------------------------
 
-If you would like to index your package for continuous integration tests you can add a source entry in the same way as the documentation index. 
+If you would like to index your package for continuous integration tests you can add a source entry in the same way as the documentation index.
+
+The `version` field is required to be a branch name. This is due to the Jenkins Git Plugin that will always trigger if a repository has changed. After querying Cloudbees support they replied with:
+
+> The git plugin is configured to build for a tag / sha1 will always trigger a build.
+
+As such the CI on this repository will enforce that the source version is a branch to not cause continuous triggering of builds.
+Also of note is that a tag has priority over a branch with the same name so a tag with the same name as the branch cannot exist either.
+
 
 rosdep rules contributions
 --------------------------
@@ -30,7 +38,7 @@ There is a guide for submitting rosdep keys [here](http://docs.ros.org/independe
 Updates to rosdep rules require the review of two people.
 This will usually means that it needs a +1, and then it can be merged by a different person.
 
-For convenience in reviewing please link to the web listings of packages such as on http://packages.ubuntu.com, http://packages.debian.org, and https://admin.fedoraproject.org/pkgdb/packages/ or if a pip package pypi.python.org.
+For convenience in reviewing please link to the web listings of packages such as on http://packages.ubuntu.com, http://packages.debian.org, and https://apps.fedoraproject.org/packages or if a pip package pypi.python.org.
 
 Please also briefly describe the package being added and what use case you want to use it for.
 It's valuable to have a record of the packages as submitted and their intended purpose for clarity in the future so that if there's a conflict there's information to fall back on instead of speculation about the original use cases.
@@ -56,7 +64,26 @@ Guidelines for rosdep rules
        However please don't target 'sid' as it's a rolling target and when the keys change our database gets out of date.
   * Keep everything in alphabetical order for better merging.
   * No trailing whitespace.
-   
+
+### Python 3 rules
+
+When adding rules for python 3 packages, create a separate entry prefixed with `python3-` rather than `python`
+For example:
+
+```yaml
+python-foobar:
+  debian: [python-foobar]
+  fedora: [python2-foobar]
+  ubuntu: [python-foobar]
+...
+python3-foobar:
+  debian: [python3-foobar]
+  fedora: [python3-foobar]
+  ubuntu: [python3-foobar]
+```
+
+You may see existing rules that use `_python3`-suffixed distribution codenames.
+These were trialed as a possible style of Python 3 rules and should not be used for newly added definitions.
 
 How to submit pull requests
 ---------------------------
@@ -78,3 +105,5 @@ These tests require several dependencies that can be installed either from the R
 | yamllint       | yamllint                          | yamllint       |
 
 There is a tool ``rosdistro_reformat`` which will fix most formatting errors such as alphabetization and correct formatting.
+
+Note: There's a [known issue](https://github.com/disqus/nose-unittest/issues/2) discovered [here](https://github.com/ros/rosdistro/issues/16336) that most tests won't run if you have the python package `nose-unitttest` installed. 
