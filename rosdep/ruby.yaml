@@ -2,17 +2,20 @@ bundler:
   arch: [ruby-bundler]
   debian: [bundler]
   fedora: [rubygem-bundler]
+  gentoo: [dev-ruby/bundler]
   ubuntu: [bundler]
 facets:
   arch: [ruby-facets]
   debian: [ruby-facets]
   fedora: [rubygem-facets]
+  gentoo: [dev-ruby/facets]
   osx:
     macports: [rb-facets]
   ubuntu: [ruby-facets]
 flexmock:
   debian: [ruby-flexmock]
   fedora: [rubygem-flexmock]
+  gentoo: [dev-ruby/flexmock]
   osx:
     macports: [rb-flexmock]
   ubuntu: [ruby-flexmock]
@@ -20,8 +23,11 @@ hoe:
   arch: [ruby-hoe]
   debian: [ruby-hoe]
   fedora: [rubygem-hoe]
+  gentoo: [dev-ruby/hoe]
   ubuntu: [ruby-hoe]
 jekyll:
+  debian: [jekyll]
+  gentoo: [www-apps/jekyll]
   ubuntu:
     precise:
       gem:
@@ -31,6 +37,7 @@ nokogiri:
   arch: [ruby-nokogiri]
   debian: [ruby-nokogiri]
   fedora: [rubygem-nokogiri]
+  gentoo: [dev-ruby/nokogiri]
   osx:
     macports: [rb-nokogiri]
   ubuntu: [ruby-nokogiri]
@@ -38,27 +45,32 @@ rake:
   arch: [ruby]
   debian: [rake]
   fedora: [rubygem-rake, rubygem-rake-compiler]
+  gentoo: [dev-ruby/rake]
   macports: [rb-rake]
   ubuntu: [rake]
 rake-compiler:
   arch: [ruby-rake-compiler]
   debian: [rake-compiler]
   fedora: [rubygem-rake-compiler]
+  gentoo: [dev-ruby/rake-compiler]
   ubuntu: [rake-compiler]
 rdoc:
   arch: [ruby]
   debian: [ruby]
   fedora: [rubygem-rdoc]
+  gentoo: [dev-ruby/rdoc]
   ubuntu: [ruby]
 ruby:
   arch: [ruby]
-  debian: [ruby, ruby-dev]
+  debian:
+    '*': [ruby]
+    jessie: [ruby, ruby-dev]
+    stretch: [ruby, ruby-dev]
   fedora: [ruby, ruby-devel, openssl-devel, rubygems]
-  gentoo:
-    portage:
-      packages: [dev-lang/ruby]
+  gentoo: [dev-lang/ruby]
   macports: [ruby]
   ubuntu:
+    '*': [ruby]
     lucid: [ruby1.8-dev, libopenssl-ruby1.8, rubygems1.8]
     maverick: [ruby1.8-dev, libruby1.8, rubygems1.8]
     natty: [ruby1.8-dev, libruby1.8, rubygems1.8]
@@ -74,9 +86,17 @@ ruby:
     xenial: [ruby, ruby-dev]
     yakkety: [ruby, ruby-dev]
     zesty: [ruby, ruby-dev]
+ruby-dev:
+  arch: [ruby]
+  debian: [ruby-dev]
+  fedora: [ruby-devel, openssl-devel, rubygems]
+  gentoo: [dev-lang/ruby]
+  macports: [ruby]
+  ubuntu: [ruby-dev]
 ruby-sass:
   debian: [ruby-sass]
   fedora: [rubygem-sass]
+  gentoo: [dev-ruby/sass]
   ubuntu: [ruby-sass]
 ruby1.9.3:
   ubuntu:

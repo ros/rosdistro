@@ -31,9 +31,9 @@ codeCodes = {
 def printc(text, color):
     """Print in color."""
     if sys.stdout.isatty():
-        print "\033["+codeCodes[color]+"m"+text+"\033[0m"
+        print("\033["+codeCodes[color]+"m"+text+"\033[0m")
     else:
-        print text
+        print(text)
 
 def print_test(msg):
     printc(msg, 'yellow')
