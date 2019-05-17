@@ -65,6 +65,47 @@ Guidelines for rosdep rules
   * Keep everything in alphabetical order for better merging.
   * No trailing whitespace.
 
+### Expected Rosdep Sources
+
+Keys in the rosdep database are required to come from packages contained in the following repositories only.
+
+#### Ubuntu
+
+* Ubuntu Repositories: Main Universe or Multiverse
+* ROS Sources: https://wiki.ros.org/Installation/Ubuntu/Sources
+
+#### Debian
+
+* Debian Repositories: Main Universe or Multiverse
+* ROS Sources: https://wiki.ros.org/Installation/Ubuntu/Sources
+
+#### Fedora
+
+TODO
+
+#### RHEL
+
+TODO
+
+#### MacOS
+
+TODO
+
+#### Gentoo
+
+TODO
+
+#### Alpine
+
+TODO
+
+#### pip
+
+For pip installers they are expected to be in the main pypi index.
+
+#### 
+
+
 ### Python 3 rules
 
 When adding rules for python 3 packages, create a separate entry prefixed with `python3-` rather than `python`
