@@ -81,11 +81,12 @@ Keys in the rosdep database are required to come from packages contained in the 
 
 #### Fedora
 
-TODO
+* Fedora Project Repositories: release and updates
 
-#### RHEL
+#### RHEL/CentOS
 
-TODO
+* CentOS Repositories: base, extras, centos-sclo-rh and updates
+* Fedora Project Repositories: epel
 
 #### MacOS
 
