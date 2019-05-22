@@ -96,9 +96,9 @@ TODO
 
 TODO
 
-#### Alpine
+#### Alpine Linux
 
-* Alpine requires the [`edge`](https://wiki.alpinelinux.org/wiki/Edge#Upgrading_to_Edge) release and [`testing`](https://wiki.alpinelinux.org/wiki/Aports_tree#testing) aports branch.
+* Alpine Linux requires the [`edge`](https://wiki.alpinelinux.org/wiki/Edge#Upgrading_to_Edge) release and [`testing`](https://wiki.alpinelinux.org/wiki/Aports_tree#testing) aports branch.
 
 #### pip
 
