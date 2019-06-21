@@ -71,21 +71,21 @@ Keys in the rosdep database are required to come from packages contained in the 
 
 #### Ubuntu
 
-* Ubuntu Repositories: Main Universe or Multiverse
+* Ubuntu Repositories: Main, Universe, or Multiverse
 * ROS Sources: https://wiki.ros.org/Installation/Ubuntu/Sources
 
 #### Debian
 
-* Debian Repositories: Main Universe or Multiverse
+* Debian Repositories: Main, Universe, or Multiverse
 * ROS Sources: https://wiki.ros.org/Installation/Ubuntu/Sources
 
 #### Fedora
 
-* Fedora Project Repositories: release and updates
+* Fedora Project Repositories: release or updates
 
 #### RHEL/CentOS
 
-* CentOS Repositories: base, extras, centos-sclo-rh and updates
+* CentOS Repositories: base, extras, centos-sclo-rh, or updates
 * Fedora Project Repositories: epel
 
 #### MacOS
