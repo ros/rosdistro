@@ -100,7 +100,7 @@ TODO
 If the ebuild you are referencing is not in either of those locations, please
 file a PR into ROS-Overlay to add it and any needed dependencies to the tree.
 
-#### Archlinux
+#### Arch Linux
 
 Packages must be in the official Archlinux core, extra, or community repositories at the time they are contributed.
 
