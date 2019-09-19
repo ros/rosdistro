@@ -10,6 +10,25 @@ release_platforms:
   ubuntu:
   - bionic
 repositories:
+  abb:
+    release:
+      packages:
+      - abb
+      - abb_driver
+      - abb_irb2400_moveit_config
+      - abb_irb2400_moveit_plugins
+      - abb_irb2400_support
+      - abb_irb4400_support
+      - abb_irb5400_support
+      - abb_irb6600_support
+      - abb_irb6640_moveit_config
+      - abb_irb6640_support
+      - abb_resources
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-industrial-release/abb-release.git
+      version: 1.3.1-1
+    status: maintained
   abseil_cpp:
     doc:
       type: git
@@ -19,11 +38,12 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/Eurecat/abseil_cpp-release.git
-      version: 0.2.3-1
+      version: 0.4.2-1
     source:
       type: git
       url: https://github.com/Eurecat/abseil-cpp.git
       version: master
+    status: developed
   acado:
     doc:
       type: git
@@ -57,17 +77,17 @@ repositories:
     doc:
       type: git
       url: https://github.com/ros/actionlib.git
-      version: indigo-devel
+      version: melodic-devel
     release:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/actionlib-release.git
-      version: 1.11.13-0
+      version: 1.12.0-1
     source:
       test_pull_requests: true
       type: git
       url: https://github.com/ros/actionlib.git
-      version: indigo-devel
+      version: melodic-devel
     status: maintained
   adi_driver:
     doc:
@@ -93,7 +113,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ubi-agni-gbp/agni_tf_tools-release.git
-      version: 0.1.1-1
+      version: 0.1.2-1
     source:
       type: git
       url: https://github.com/ubi-agni/agni_tf_tools.git
@@ -130,6 +150,32 @@ repositories:
       url: https://github.com/pr2/app_manager.git
       version: kinetic-devel
     status: unmaintained
+  apriltag:
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/AprilRobotics/apriltag-release.git
+      version: 3.1.1-1
+    source:
+      type: git
+      url: https://github.com/aprilrobotics/apriltag.git
+      version: master
+    status: maintained
+  apriltag_ros:
+    doc:
+      type: git
+      url: https://github.com/AprilRobotics/apriltag_ros.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/AprilRobotics/apriltag_ros-release.git
+      version: 3.1.0-1
+    source:
+      type: git
+      url: https://github.com/AprilRobotics/apriltag_ros.git
+      version: master
+    status: maintained
   ar_track_alvar:
     doc:
       type: git
@@ -170,6 +216,13 @@ repositories:
       url: https://github.com/vanadiumlabs/arbotix_ros.git
       version: indigo-devel
     status: maintained
+  ariles_ros:
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/asherikov/ariles-release.git
+      version: 1.1.5-1
+    status: developed
   astuff_sensor_msgs:
     doc:
       type: git
@@ -270,6 +323,45 @@ repositories:
       url: https://github.com/astuff/automotive_autonomy_msgs.git
       version: master
     status: developed
+  autoware_msgs:
+    doc:
+      type: git
+      url: https://gitlab.com/autowarefoundation/autoware.ai/messages.git
+      version: master
+    release:
+      packages:
+      - autoware_can_msgs
+      - autoware_config_msgs
+      - autoware_external_msgs
+      - autoware_map_msgs
+      - autoware_msgs
+      - autoware_system_msgs
+      - tablet_socket_msgs
+      - vector_map_msgs
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://gitlab.com/autowarefoundation/autoware.ai-ros-releases/messages-release.git
+      version: 1.12.0-1
+    source:
+      type: git
+      url: https://gitlab.com/autowarefoundation/autoware.ai/messages.git
+      version: master
+    status: developed
+  avt_vimba_camera:
+    doc:
+      type: git
+      url: https://github.com/astuff/avt_vimba_camera.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/astuff/avt_vimba_camera-release.git
+      version: 0.0.11-1
+    source:
+      type: git
+      url: https://github.com/astuff/avt_vimba_camera.git
+      version: master
+    status: maintained
   aws_common:
     doc:
       type: git
@@ -279,7 +371,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/aws-gbp/aws_common-release.git
-      version: 2.0.0-2
+      version: 2.1.0-1
     source:
       type: git
       url: https://github.com/aws-robotics/utils-common.git
@@ -294,7 +386,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/aws-gbp/aws_ros1_common-release.git
-      version: 2.0.0-0
+      version: 2.0.1-1
     source:
       type: git
       url: https://github.com/aws-robotics/utils-ros1.git
@@ -312,6 +404,17 @@ repositories:
         release: release/melodic/{package}/{version}
       url: https://github.com/squarerobot/bagger-release.git
       version: 0.1.3-0
+  basler_tof:
+    doc:
+      type: git
+      url: https://github.com/uos/basler_tof.git
+      version: melodic
+    source:
+      test_commits: false
+      type: git
+      url: https://github.com/uos/basler_tof.git
+      version: melodic
+    status: developed
   behaviortree_cpp:
     doc:
       type: git
@@ -339,7 +442,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/BehaviorTree/behaviortree_cpp_v3-release.git
-      version: 3.0.6-0
+      version: 3.0.7-0
     source:
       type: git
       url: https://github.com/BehaviorTree/BehaviorTree.CPP.git
@@ -496,6 +599,16 @@ repositories:
       url: https://github.com/ros-gbp/cartographer_ros-release.git
       version: 1.0.0-1
     status: developed
+  caster:
+    doc:
+      type: git
+      url: https://github.com/I-Quotient-Robotics/caster.git
+      version: master
+    source:
+      type: git
+      url: https://github.com/I-Quotient-Robotics/caster.git
+      version: master
+    status: developed
   catch_ros:
     doc:
       type: git
@@ -528,20 +641,35 @@ repositories:
       url: https://github.com/ros/catkin.git
       version: kinetic-devel
     status: maintained
-  catkin_virtualenv:
+  catkin_pip:
     doc:
       type: git
-      url: https://github.com/locusrobotics/catkin_virtualenv.git
+      url: https://github.com/pyros-dev/catkin_pip.git
       version: devel
     release:
       tags:
         release: release/melodic/{package}/{version}
+      url: https://github.com/pyros-dev/catkin_pip-release.git
+      version: 0.2.3-1
+    source:
+      type: git
+      url: https://github.com/pyros-dev/catkin_pip.git
+      version: devel
+    status: maintained
+  catkin_virtualenv:
+    doc:
+      type: git
+      url: https://github.com/locusrobotics/catkin_virtualenv.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
       url: https://github.com/locusrobotics/catkin_virtualenv-release.git
-      version: 0.4.0-0
+      version: 0.5.1-1
     source:
       type: git
       url: https://github.com/locusrobotics/catkin_virtualenv.git
-      version: devel
+      version: master
     status: maintained
   class_loader:
     doc:
@@ -568,10 +696,12 @@ repositories:
       packages:
       - cloudwatch_logs_common
       - cloudwatch_metrics_common
+      - dataflow_lite
+      - file_management
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/aws-gbp/cloudwatch_common-release.git
-      version: 1.0.1-0
+      version: 1.1.0-1
     source:
       type: git
       url: https://github.com/aws-robotics/cloudwatch-common.git
@@ -586,7 +716,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/aws-gbp/cloudwatch_logger-release.git
-      version: 2.0.0-1
+      version: 2.2.1-1
     source:
       type: git
       url: https://github.com/aws-robotics/cloudwatchlogs-ros1.git
@@ -601,7 +731,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/aws-gbp/cloudwatch_metrics_collector-release.git
-      version: 2.0.0-0
+      version: 2.1.1-1
     source:
       type: git
       url: https://github.com/aws-robotics/cloudwatchmetrics-ros1.git
@@ -623,11 +753,88 @@ repositories:
       url: https://github.com/ros/cmake_modules.git
       version: 0.4-devel
     status: maintained
+  cnn_bridge:
+    doc:
+      type: git
+      url: https://github.com/wew84/cnn_bridge.git
+      version: 0.8.4
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/wew84/cnn_bridge-release.git
+      version: 0.8.5-1
+    source:
+      type: git
+      url: https://github.com/wew84/cnn_bridge.git
+      version: 0.8.4
+    status: developed
+  cob_android:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_android.git
+      version: indigo_release_candidate
+    release:
+      packages:
+      - cob_android
+      - cob_android_msgs
+      - cob_android_resource_server
+      - cob_android_script_server
+      - cob_android_settings
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ipa320/cob_android-release.git
+      version: 0.1.6-1
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_android.git
+      version: indigo_dev
+    status: maintained
+  cob_calibration_data:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_calibration_data.git
+      version: indigo_release_candidate
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ipa320/cob_calibration_data-release.git
+      version: 0.6.12-1
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_calibration_data.git
+      version: indigo_dev
+    status: maintained
+  cob_command_tools:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_command_tools.git
+      version: indigo_release_candidate
+    release:
+      packages:
+      - cob_command_gui
+      - cob_command_tools
+      - cob_dashboard
+      - cob_helper_tools
+      - cob_interactive_teleop
+      - cob_monitoring
+      - cob_script_server
+      - cob_teleop
+      - generic_throttle
+      - service_tools
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ipa320/cob_command_tools-release.git
+      version: 0.6.14-1
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_command_tools.git
+      version: indigo_dev
+    status: maintained
   cob_common:
     doc:
       type: git
       url: https://github.com/ipa320/cob_common.git
-      version: indigo_release_candidate
+      version: kinetic_release_candidate
     release:
       packages:
       - cob_actions
@@ -639,10 +846,238 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ipa320/cob_common-release.git
-      version: 0.6.10-0
+      version: 0.7.0-1
     source:
       type: git
       url: https://github.com/ipa320/cob_common.git
+      version: kinetic_dev
+    status: maintained
+  cob_control:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_control.git
+      version: melodic_release_candidate
+    release:
+      packages:
+      - cob_base_controller_utils
+      - cob_base_velocity_smoother
+      - cob_cartesian_controller
+      - cob_collision_velocity_filter
+      - cob_control
+      - cob_control_mode_adapter
+      - cob_control_msgs
+      - cob_footprint_observer
+      - cob_frame_tracker
+      - cob_model_identifier
+      - cob_obstacle_distance
+      - cob_omni_drive_controller
+      - cob_trajectory_controller
+      - cob_tricycle_controller
+      - cob_twist_controller
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ipa320/cob_control-release.git
+      version: 0.8.0-1
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_control.git
+      version: melodic_dev
+    status: maintained
+  cob_driver:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_driver.git
+      version: kinetic_release_candidate
+    release:
+      packages:
+      - cob_base_drive_chain
+      - cob_bms_driver
+      - cob_camera_sensors
+      - cob_canopen_motor
+      - cob_driver
+      - cob_elmo_homing
+      - cob_generic_can
+      - cob_light
+      - cob_mimic
+      - cob_phidget_em_state
+      - cob_phidget_power_state
+      - cob_phidgets
+      - cob_relayboard
+      - cob_scan_unifier
+      - cob_sick_lms1xx
+      - cob_sick_s300
+      - cob_sound
+      - cob_undercarriage_ctrl
+      - cob_utilities
+      - cob_voltage_control
+      - laser_scan_densifier
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ipa320/cob_driver-release.git
+      version: 0.7.0-1
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_driver.git
+      version: kinetic_dev
+    status: maintained
+  cob_environments:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_environments.git
+      version: indigo_release_candidate
+    release:
+      packages:
+      - cob_default_env_config
+      - cob_environments
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ipa320/cob_environments-release.git
+      version: 0.6.10-1
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_environments.git
+      version: indigo_dev
+    status: maintained
+  cob_extern:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_extern.git
+      version: indigo_release_candidate
+    release:
+      packages:
+      - cob_extern
+      - libdlib
+      - libntcan
+      - libpcan
+      - libphidgets
+      - opengm
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ipa320/cob_extern-release.git
+      version: 0.6.13-1
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_extern.git
+      version: indigo_dev
+    status: maintained
+  cob_gazebo_plugins:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_gazebo_plugins.git
+      version: kinetic_release_candidate
+    release:
+      packages:
+      - cob_gazebo_plugins
+      - cob_gazebo_ros_control
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ipa320/cob_gazebo_plugins-release.git
+      version: 0.7.3-1
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_gazebo_plugins.git
+      version: kinetic_dev
+    status: maintained
+  cob_hand:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_hand.git
+      version: indigo_release_candidate
+    release:
+      packages:
+      - cob_hand
+      - cob_hand_bridge
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ipa320/cob_hand-release.git
+      version: 0.6.6-1
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_hand.git
+      version: indigo_dev
+    status: maintained
+  cob_navigation:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_navigation.git
+      version: indigo_release_candidate
+    release:
+      packages:
+      - cob_linear_nav
+      - cob_map_accessibility_analysis
+      - cob_mapping_slam
+      - cob_navigation
+      - cob_navigation_config
+      - cob_navigation_global
+      - cob_navigation_local
+      - cob_navigation_slam
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ipa320/cob_navigation-release.git
+      version: 0.6.8-1
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_navigation.git
+      version: indigo_dev
+    status: maintained
+  cob_perception_common:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_perception_common.git
+      version: indigo_release_candidate
+    release:
+      packages:
+      - cob_3d_mapping_msgs
+      - cob_cam3d_throttle
+      - cob_image_flip
+      - cob_object_detection_msgs
+      - cob_object_detection_visualizer
+      - cob_perception_common
+      - cob_perception_msgs
+      - cob_vision_utils
+      - ipa_3d_fov_visualization
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ipa320/cob_perception_common-release.git
+      version: 0.6.14-1
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_perception_common.git
+      version: indigo_dev
+    status: maintained
+  cob_substitute:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_substitute.git
+      version: indigo_release_candidate
+    release:
+      packages:
+      - cob_docker_control
+      - cob_reflector_referencing
+      - cob_safety_controller
+      - cob_substitute
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ipa320/cob_substitute-release.git
+      version: 0.6.8-1
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_substitute.git
+      version: indigo_dev
+    status: maintained
+  cob_supported_robots:
+    doc:
+      type: git
+      url: https://github.com/ipa320/cob_supported_robots.git
+      version: indigo_release_candidate
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ipa320/cob_supported_robots-release.git
+      version: 0.6.12-1
+    source:
+      type: git
+      url: https://github.com/ipa320/cob_supported_robots.git
       version: indigo_dev
     status: maintained
   code_coverage:
@@ -654,7 +1089,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/mikeferguson/code_coverage-gbp.git
-      version: 0.2.3-0
+      version: 0.2.4-1
     source:
       type: git
       url: https://github.com/mikeferguson/code_coverage.git
@@ -669,7 +1104,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/yoshito-n-students/codec_image_transport-release.git
-      version: 0.0.2-0
+      version: 0.0.4-0
     source:
       type: git
       url: https://github.com/yoshito-n-students/codec_image_transport.git
@@ -795,11 +1230,54 @@ repositories:
       url: https://github.com/rst-tu-dortmund/costmap_converter.git
       version: master
     status: developed
+  cpr_multimaster_tools:
+    doc:
+      type: git
+      url: https://github.com/clearpathrobotics/cpr_multimaster_tools.git
+      version: kinetic-devel
+    release:
+      packages:
+      - clock_relay
+      - cpr_multimaster_tools
+      - message_relay
+      - multimaster_launch
+      - multimaster_msgs
+      - tf2_relay
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/clearpath-gbp/cpr_multimaster_tools-release.git
+      version: 0.0.2-1
+    source:
+      type: git
+      url: https://github.com/clearpathrobotics/cpr_multimaster_tools.git
+      version: kinetic-devel
+    status: maintained
+  crane_x7:
+    doc:
+      type: git
+      url: https://github.com/rt-net/crane_x7_ros.git
+      version: master
+    status: developed
   crazyflie:
     doc:
       type: git
       url: https://github.com/whoenig/crazyflie_ros.git
       version: master
+  cv_camera:
+    doc:
+      type: git
+      url: https://github.com/OTL/cv_camera.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/OTL/cv_camera-release.git
+      version: 0.4.0-1
+    source:
+      type: git
+      url: https://github.com/OTL/cv_camera.git
+      version: master
+    status: maintained
   dataspeed_can:
     doc:
       type: hg
@@ -854,7 +1332,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/DataspeedInc-release/dataspeed_ulc_ros-release.git
-      version: 0.0.3-0
+      version: 0.0.4-1
     source:
       type: git
       url: https://bitbucket.org/DataspeedInc/dataspeed_ulc_ros.git
@@ -862,9 +1340,9 @@ repositories:
     status: developed
   dbw_fca_ros:
     doc:
-      type: hg
-      url: https://bitbucket.org/DataspeedInc/dbw_fca_ros
-      version: default
+      type: git
+      url: https://bitbucket.org/DataspeedInc/dbw_fca_ros.git
+      version: master
     release:
       packages:
       - dbw_fca
@@ -875,11 +1353,11 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/DataspeedInc-release/dbw_fca_ros-release.git
-      version: 1.0.1-0
+      version: 1.0.6-1
     source:
-      type: hg
-      url: https://bitbucket.org/DataspeedInc/dbw_fca_ros
-      version: default
+      type: git
+      url: https://bitbucket.org/DataspeedInc/dbw_fca_ros.git
+      version: master
     status: maintained
   dbw_mkz_ros:
     doc:
@@ -897,24 +1375,65 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/DataspeedInc-release/dbw_mkz_ros-release.git
-      version: 1.1.1-0
+      version: 1.2.3-1
     source:
       type: hg
       url: https://bitbucket.org/dataspeedinc/dbw_mkz_ros
       version: default
     status: developed
+  ddynamic_reconfigure:
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/pal-gbp/ddynamic_reconfigure.git
+      version: 0.2.0-0
   ddynamic_reconfigure_python:
     release:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/pal-gbp/ddynamic_reconfigure_python-release.git
       version: 0.0.1-0
+  depthcloud_encoder:
+    doc:
+      type: git
+      url: https://github.com/RobotWebTools/depthcloud_encoder.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/RobotWebTools-release/depthcloud_encoder-release.git
+      version: 0.1.1-1
+    source:
+      type: git
+      url: https://github.com/RobotWebTools/depthcloud_encoder.git
+      version: master
+    status: maintained
   depthimage_to_laserscan:
     release:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/depthimage_to_laserscan-release.git
       version: 1.0.8-0
+  desistek_saga:
+    doc:
+      type: git
+      url: https://github.com/uuvsimulator/desistek_saga.git
+      version: master
+    release:
+      packages:
+      - desistek_saga_control
+      - desistek_saga_description
+      - desistek_saga_gazebo
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/uuvsimulator/desistek_saga-release.git
+      version: 0.3.2-0
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/uuvsimulator/desistek_saga.git
+      version: master
+    status: developed
   diagnostics:
     doc:
       type: git
@@ -939,6 +1458,44 @@ repositories:
       url: https://github.com/ros/diagnostics.git
       version: indigo-devel
     status: maintained
+  distance_map:
+    release:
+      packages:
+      - distance_map
+      - distance_map_core
+      - distance_map_deadreck
+      - distance_map_msgs
+      - distance_map_node
+      - distance_map_opencv
+      - distance_map_rviz
+      - distance_map_tools
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/artivis/distance_map-release.git
+      version: 0.1.0-1
+    source:
+      type: git
+      url: https://github.com/artivis/distance_map.git
+      version: master
+    status: maintained
+  driver_common:
+    doc:
+      type: git
+      url: https://github.com/ros-drivers/driver_common.git
+      version: indigo-devel
+    release:
+      packages:
+      - driver_base
+      - driver_common
+      - timestamp_tools
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-gbp/driver_common-release.git
+      version: 1.6.8-0
+    source:
+      type: git
+      url: https://github.com/ros-drivers/driver_common.git
+      version: indigo-devel
   dynamic_reconfigure:
     doc:
       type: git
@@ -1018,11 +1575,31 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ROBOTIS-GIT-release/DynamixelSDK-release.git
-      version: 3.7.0-0
+      version: 3.7.21-1
     source:
       type: git
       url: https://github.com/ROBOTIS-GIT/DynamixelSDK.git
       version: melodic-devel
+    status: developed
+  eca_a9:
+    doc:
+      type: git
+      url: https://github.com/uuvsimulator/eca_a9.git
+      version: master
+    release:
+      packages:
+      - eca_a9_control
+      - eca_a9_description
+      - eca_a9_gazebo
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/uuvsimulator/eca_a9-release.git
+      version: 0.1.6-0
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/uuvsimulator/eca_a9.git
+      version: master
     status: developed
   ecl_core:
     doc:
@@ -1137,7 +1714,11 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/yujinrobot-release/ecl_tools-release.git
-      version: 0.61.7-0
+      version: 0.61.8-1
+    source:
+      type: git
+      url: https://github.com/stonier/ecl_tools.git
+      version: release/0.61-melodic
     status: maintained
   eigen_stl_containers:
     doc:
@@ -1163,7 +1744,11 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ipab-slmc/eigenpy_catkin-release.git
-      version: 1.5.0-1
+      version: 1.5.1-2
+    source:
+      type: git
+      url: https://github.com/stack-of-tasks/eigenpy.git
+      version: master
     status: developed
   eml:
     release:
@@ -1182,6 +1767,21 @@ repositories:
       url: https://github.com/ensenso/ros_driver.git
       version: master
     status: developed
+  epos2_motor_controller:
+    doc:
+      type: git
+      url: https://github.com/uos/epos2_motor_controller.git
+      version: 1.0.0
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/uos-gbp/epos2_motor_controller-release.git
+      version: 1.0.0-4
+    source:
+      type: git
+      url: https://github.com/uos/epos2_motor_controller.git
+      version: master
+    status: maintained
   ethercat_grant:
     doc:
       type: git
@@ -1276,6 +1876,26 @@ repositories:
         release: release/melodic/{package}/{version}
       url: https://github.com/wxmerkt/exotica_val_description-release.git
       version: 1.0.0-1
+  eyantra_drone:
+    doc:
+      type: git
+      url: https://github.com/simmubhangu/eyantra_drone.git
+      version: master
+    source:
+      type: git
+      url: https://github.com/simmubhangu/eyantra_drone.git
+      version: master
+    status: developed
+  eyeware-ros:
+    doc:
+      type: git
+      url: https://github.com/eyeware/eyeware-ros.git
+      version: master
+    source:
+      type: git
+      url: https://github.com/eyeware/eyeware-ros.git
+      version: master
+    status: maintained
   fanuc_post_processor:
     doc:
       type: git
@@ -1297,7 +1917,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/wxmerkt/fcl_catkin-release.git
-      version: 0.5.96-0
+      version: 0.5.99-1
     status: developed
   fetch_gazebo:
     release:
@@ -1309,7 +1929,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/fetchrobotics-gbp/fetch_gazebo-release.git
-      version: 0.9.0-0
+      version: 0.9.2-1
     source:
       test_pull_requests: true
       type: git
@@ -1364,7 +1984,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/fetchrobotics-gbp/fetch_robots-release.git
-      version: 0.8.6-0
+      version: 0.8.8-1
     source:
       test_pull_requests: true
       type: git
@@ -1385,15 +2005,31 @@ repositories:
       - fetch_maps
       - fetch_moveit_config
       - fetch_navigation
+      - fetch_ros
       - fetch_teleop
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/fetchrobotics-gbp/fetch_ros-release.git
-      version: 0.8.0-0
+      version: 0.8.2-1
     source:
       test_pull_requests: true
       type: git
       url: https://github.com/fetchrobotics/fetch_ros.git
+      version: melodic-devel
+    status: maintained
+  fetch_simple_linear_controller:
+    doc:
+      type: git
+      url: https://github.com/GT-RAIL/fetch_simple_linear_controller.git
+      version: melodic-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/gt-rail-release/fetch_simple_linear_controller-release.git
+      version: 0.0.1-1
+    source:
+      type: git
+      url: https://github.com/GT-RAIL/fetch_simple_linear_controller.git
       version: melodic-devel
     status: maintained
   fetch_tools:
@@ -1412,6 +2048,26 @@ repositories:
       url: https://github.com/fetchrobotics/fetch_tools.git
       version: melodic-devel
     status: maintained
+  fiducials:
+    doc:
+      type: git
+      url: https://github.com/UbiquityRobotics/fiducials.git
+      version: kinetic-devel
+    release:
+      packages:
+      - aruco_detect
+      - fiducial_msgs
+      - fiducial_slam
+      - fiducials
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/UbiquityRobotics-release/fiducials-release.git
+      version: 0.11.0-1
+    source:
+      type: git
+      url: https://github.com/UbiquityRobotics/fiducials.git
+      version: kinetic-devel
+    status: developed
   filters:
     doc:
       type: git
@@ -1452,7 +2108,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/fkie-release/message_filters-release.git
-      version: 1.0.0-0
+      version: 1.0.1-1
     source:
       type: git
       url: https://github.com/fkie/message_filters.git
@@ -1495,7 +2151,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/FlexBE/flexbe_behavior_engine-release.git
-      version: 1.1.1-0
+      version: 1.2.2-1
     source:
       type: git
       url: https://github.com/team-vigir/flexbe_behavior_engine.git
@@ -1524,7 +2180,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/astuff/flir_boson_usb-release.git
-      version: 1.2.0-0
+      version: 1.2.1-1
     source:
       type: git
       url: https://github.com/astuff/flir_boson_usb.git
@@ -1570,11 +2226,18 @@ repositories:
       version: melodic-devel
     release:
       packages:
+      - franka_control
       - franka_description
+      - franka_example_controllers
+      - franka_gripper
+      - franka_hw
+      - franka_msgs
+      - franka_ros
+      - franka_visualization
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/frankaemika/franka_ros-release.git
-      version: 0.6.0-0
+      version: 0.6.0-1
     source:
       type: git
       url: https://github.com/frankaemika/franka_ros.git
@@ -1607,7 +2270,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/ros/gencpp.git
-      version: indigo-devel
+      version: kinetic-devel
     release:
       tags:
         release: release/melodic/{package}/{version}
@@ -1616,7 +2279,7 @@ repositories:
     source:
       type: git
       url: https://github.com/ros/gencpp.git
-      version: indigo-devel
+      version: kinetic-devel
     status: maintained
   generic_control_toolbox:
     doc:
@@ -1663,7 +2326,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/ros/genmsg.git
-      version: indigo-devel
+      version: kinetic-devel
     release:
       tags:
         release: release/melodic/{package}/{version}
@@ -1672,7 +2335,7 @@ repositories:
     source:
       type: git
       url: https://github.com/ros/genmsg.git
-      version: indigo-devel
+      version: kinetic-devel
     status: maintained
   gennodejs:
     doc:
@@ -1952,7 +2615,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/aws-gbp/h264_encoder_core-release.git
-      version: 2.0.0-0
+      version: 2.0.1-1
     source:
       type: git
       url: https://github.com/aws-robotics/kinesisvideo-encoder-common.git
@@ -1967,12 +2630,27 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/aws-gbp/h264_video_encoder-release.git
-      version: 1.1.1-0
+      version: 1.1.4-1
     source:
       type: git
       url: https://github.com/aws-robotics/kinesisvideo-encoder-ros1.git
       version: master
     status: maintained
+  haros_catkin:
+    doc:
+      type: git
+      url: https://github.com/rosin-project/haros_catkin.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/rosin-project/haros_catkin-release.git
+      version: 0.1.1-1
+    source:
+      type: git
+      url: https://github.com/rosin-project/haros_catkin.git
+      version: master
+    status: developed
   health_metric_collector:
     doc:
       type: git
@@ -1982,7 +2660,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/aws-gbp/health_metric_collector-release.git
-      version: 2.0.0-0
+      version: 2.0.1-1
     source:
       type: git
       url: https://github.com/aws-robotics/health-metrics-collector-ros1.git
@@ -1999,11 +2677,18 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/HebiRobotics/hebi_cpp_api_ros-release.git
-      version: 2.0.2-0
+      version: 2.1.0-1
     source:
       type: git
       url: https://github.com/HebiRobotics/hebi_cpp_api_ros.git
       version: master
+    status: developed
+  hebi_description:
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/HebiRobotics/hebi_description-release.git
+      version: 0.1.0-1
     status: developed
   hector_gazebo:
     doc:
@@ -2066,6 +2751,33 @@ repositories:
       url: https://github.com/humanoid-path-planner/hpp-fcl.git
       version: devel
     status: developed
+  husky:
+    doc:
+      type: git
+      url: https://github.com/husky/husky.git
+      version: melodic-devel
+    release:
+      packages:
+      - husky_base
+      - husky_bringup
+      - husky_control
+      - husky_description
+      - husky_desktop
+      - husky_gazebo
+      - husky_msgs
+      - husky_navigation
+      - husky_robot
+      - husky_simulator
+      - husky_viz
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/clearpath-gbp/husky-release.git
+      version: 0.4.0-1
+    source:
+      type: git
+      url: https://github.com/husky/husky.git
+      version: melodic-devel
+    status: maintained
   ibeo_core:
     doc:
       type: git
@@ -2177,11 +2889,12 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/image_pipeline-release.git
-      version: 1.12.23-0
+      version: 1.13.0-1
     source:
       type: git
       url: https://github.com/ros-perception/image_pipeline.git
       version: indigo
+    status: developed
   image_transport_plugins:
     doc:
       type: git
@@ -2254,7 +2967,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/uos-gbp/imu_tools-release.git
-      version: 1.2.0-0
+      version: 1.2.1-1
     source:
       test_pull_requests: true
       type: git
@@ -2285,6 +2998,12 @@ repositories:
       url: https://github.com/ros-industrial/industrial_core.git
       version: kinetic
     status: developed
+  industrial_robot_angle_conversions:
+    doc:
+      type: git
+      url: https://gitlab.com/InstitutMaupertuis/industrial_robot_angle_conversions.git
+      version: melodic
+    status: maintained
   interactive_marker_proxy:
     doc:
       type: git
@@ -2299,6 +3018,21 @@ repositories:
       type: git
       url: https://github.com/RobotWebTools/interactive_marker_proxy.git
       version: master
+    status: maintained
+  interactive_marker_twist_server:
+    doc:
+      type: git
+      url: https://github.com/ros-visualization/interactive_marker_twist_server.git
+      version: kinetic-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-gbp/interactive_marker_twist_server-release.git
+      version: 1.2.0-0
+    source:
+      type: git
+      url: https://github.com/ros-visualization/interactive_marker_twist_server.git
+      version: kinetic-devel
     status: maintained
   interactive_markers:
     doc:
@@ -2347,6 +3081,63 @@ repositories:
       url: https://github.com/ros-gbp/ivcon-release.git
       version: 0.1.7-0
     status: unmaintained
+  jackal:
+    doc:
+      type: git
+      url: https://github.com/jackal/jackal.git
+      version: kinetic-devel
+    release:
+      packages:
+      - jackal_control
+      - jackal_description
+      - jackal_msgs
+      - jackal_navigation
+      - jackal_tutorials
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/clearpath-gbp/jackal-release.git
+      version: 0.6.3-1
+    source:
+      type: git
+      url: https://github.com/jackal/jackal.git
+      version: kinetic-devel
+    status: maintained
+  jackal_desktop:
+    doc:
+      type: git
+      url: https://github.com/jackal/jackal_desktop.git
+      version: kinetic-devel
+    release:
+      packages:
+      - jackal_desktop
+      - jackal_viz
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/clearpath-gbp/jackal_desktop-release.git
+      version: 0.3.2-1
+    source:
+      type: git
+      url: https://github.com/jackal/jackal_desktop.git
+      version: kinetic-devel
+    status: maintained
+  jackal_simulator:
+    doc:
+      type: git
+      url: https://github.com/jackal/jackal_simulator.git
+      version: kinetic-devel
+    release:
+      packages:
+      - jackal_gazebo
+      - jackal_simulator
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/clearpath-gbp/jackal_simulator-release.git
+      version: 0.3.0-1
+    source:
+      type: git
+      url: https://github.com/jackal/jackal_simulator.git
+      version: kinetic-devel
+    status: maintained
   joint_state_publisher:
     doc:
       type: git
@@ -2363,6 +3154,21 @@ repositories:
       url: https://github.com/ros/joint_state_publisher.git
       version: kinetic-devel
     status: maintained
+  jointstick:
+    doc:
+      type: git
+      url: https://github.com/gstavrinos/jointstick.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/gstavrinos/jointstick-release.git
+      version: 0.9.1-2
+    source:
+      type: git
+      url: https://github.com/gstavrinos/jointstick.git
+      version: master
+    status: maintained
   joystick_drivers:
     doc:
       type: git
@@ -2378,7 +3184,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/joystick_drivers-release.git
-      version: 1.12.0-0
+      version: 1.13.0-1
     source:
       type: git
       url: https://github.com/ros-drivers/joystick_drivers.git
@@ -2418,7 +3224,11 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/tork-a/jsk_3rdparty-release.git
-      version: 2.1.11-0
+      version: 2.1.13-1
+    source:
+      type: git
+      url: https://github.com/jsk-ros-pkg/jsk_3rdparty.git
+      version: master
     status: developed
   jsk_common:
     doc:
@@ -2595,7 +3405,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/aws-gbp/kinesis_manager-release.git
-      version: 2.0.0-0
+      version: 2.0.1-1
     source:
       type: git
       url: https://github.com/aws-robotics/kinesisvideo-common.git
@@ -2613,7 +3423,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/aws-gbp/kinesis_video_streamer-release.git
-      version: 2.0.1-0
+      version: 2.0.2-1
     source:
       type: git
       url: https://github.com/aws-robotics/kinesisvideo-ros1.git
@@ -2671,7 +3481,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/laser_assembler-release.git
-      version: 1.7.6-0
+      version: 1.7.7-2
     source:
       type: git
       url: https://github.com/ros-perception/laser_assembler.git
@@ -2704,7 +3514,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/laser_filters-release.git
-      version: 1.8.6-0
+      version: 1.8.7-1
     source:
       type: git
       url: https://github.com/ros-perception/laser_filters.git
@@ -2755,6 +3565,26 @@ repositories:
       url: https://github.com/ros-perception/laser_proc.git
       version: melodic-devel
     status: maintained
+  lauv_gazebo:
+    doc:
+      type: git
+      url: https://github.com/uuvsimulator/lauv_gazebo.git
+      version: master
+    release:
+      packages:
+      - lauv_control
+      - lauv_description
+      - lauv_gazebo
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/uuvsimulator/lauv_gazebo-release.git
+      version: 0.1.6-0
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/uuvsimulator/lauv_gazebo.git
+      version: master
+    status: developed
   leap_motion:
     doc:
       type: git
@@ -2771,6 +3601,21 @@ repositories:
       version: hydro
     status: developed
     status_description: Slow development
+  lex_common:
+    doc:
+      type: git
+      url: https://github.com/aws-robotics/lex-common.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/aws-gbp/lex_common-release.git
+      version: 1.0.0-1
+    source:
+      type: git
+      url: https://github.com/aws-robotics/lex-common.git
+      version: master
+    status: maintained
   lex_node:
     doc:
       type: git
@@ -2783,7 +3628,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/aws-gbp/lex_node-release.git
-      version: 2.0.0-0
+      version: 2.0.1-1
     source:
       type: git
       url: https://github.com/aws-robotics/lex-ros1.git
@@ -2800,6 +3645,37 @@ repositories:
       url: https://github.com/lgsvl/lgsvl_msgs.git
       version: melodic-devel
     status: maintained
+  libcreate:
+    doc:
+      type: git
+      url: https://github.com/AutonomyLab/libcreate.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/AutonomyLab/libcreate-release.git
+      version: 2.0.0-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/AutonomyLab/libcreate.git
+      version: master
+  libfranka:
+    doc:
+      type: git
+      url: https://github.com/frankaemika/libfranka-release.git
+      version: release/melodic/libfranka
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/frankaemika/libfranka-release.git
+      version: 0.7.1-1
+    source:
+      test_commits: false
+      type: git
+      url: https://github.com/frankaemika/libfranka.git
+      version: master
+    status: developed
   libg2o:
     release:
       tags:
@@ -2807,6 +3683,15 @@ repositories:
       url: https://github.com/ros-gbp/libg2o-release.git
       version: 2018.3.25-0
     status: maintained
+  libsick_ldmrs:
+    doc:
+      type: git
+      url: https://github.com/SICKAG/libsick_ldmrs.git
+      version: master
+    source:
+      type: git
+      url: https://github.com/SICKAG/libsick_ldmrs.git
+      version: master
   libuvc:
     doc:
       type: git
@@ -2863,10 +3748,24 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/pr2-gbp/linux_networking-release.git
-      version: 1.0.15-0
+      version: 1.0.13-2
     source:
       type: git
       url: https://github.com/pr2/linux_networking.git
+      version: melodic-devel
+  lms1xx:
+    doc:
+      type: git
+      url: https://github.com/clearpathrobotics/lms1xx.git
+      version: melodic-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/clearpath-gbp/lms1xx-release.git
+      version: 0.2.0-1
+    source:
+      type: git
+      url: https://github.com/clearpathrobotics/lms1xx.git
       version: melodic-devel
     status: maintained
   lusb:
@@ -2915,7 +3814,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/swri-robotics-gbp/mapviz-release.git
-      version: 1.1.0-0
+      version: 1.2.0-1
     source:
       type: git
       url: https://github.com/swri-robotics/mapviz.git
@@ -2968,7 +3867,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/swri-robotics-gbp/marti_common-release.git
-      version: 2.8.0-0
+      version: 2.10.0-1
     source:
       type: git
       url: https://github.com/swri-robotics/marti_common.git
@@ -3025,7 +3924,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/mavlink/mavlink-gbp-release.git
-      version: 2019.3.3-0
+      version: 2019.9.9-1
     source:
       type: git
       url: https://github.com/mavlink/mavlink-gbp-release.git
@@ -3046,7 +3945,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/mavlink/mavros-release.git
-      version: 0.29.2-0
+      version: 0.32.2-1
     source:
       test_pull_requests: true
       type: git
@@ -3062,7 +3961,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/at-wat/mcl_3dl-release.git
-      version: 0.1.4-0
+      version: 0.1.5-1
     source:
       type: git
       url: https://github.com/at-wat/mcl_3dl.git
@@ -3137,7 +4036,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/ros/message_runtime.git
-      version: groovy-devel
+      version: kinetic-devel
     release:
       tags:
         release: release/melodic/{package}/{version}
@@ -3146,7 +4045,7 @@ repositories:
     source:
       type: git
       url: https://github.com/ros/message_runtime.git
-      version: groovy-devel
+      version: kinetic-devel
     status: maintained
   metapackages:
     doc:
@@ -3173,6 +4072,36 @@ repositories:
       url: https://github.com/ros/metapackages.git
       version: melodic-devel
     status: maintained
+  microstrain_3dmgx2_imu:
+    doc:
+      type: git
+      url: https://github.com/ros-drivers/microstrain_3dmgx2_imu.git
+      version: indigo-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-gbp/microstrain_3dmgx2_imu-release.git
+      version: 1.5.13-1
+    source:
+      type: git
+      url: https://github.com/ros-drivers/microstrain_3dmgx2_imu.git
+      version: indigo-devel
+    status: maintained
+  microstrain_mips:
+    doc:
+      type: git
+      url: https://github.com/ros-drivers/microstrain_mips.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-drivers-gbp/microstrain_mips-release.git
+      version: 0.0.3-1
+    source:
+      type: git
+      url: https://github.com/ros-drivers/microstrain_mips.git
+      version: master
+    status: developed
   mir_robot:
     doc:
       type: git
@@ -3191,7 +4120,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/uos-gbp/mir_robot-release.git
-      version: 1.0.3-0
+      version: 1.0.4-1
     source:
       test_pull_requests: true
       type: git
@@ -3207,13 +4136,17 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/astuff/ml_classifiers-release.git
-      version: 0.4.1-0
+      version: 1.0.1-1
     source:
       type: git
       url: https://github.com/astuff/ml_classifiers.git
       version: master
     status: maintained
   mongodb_store:
+    doc:
+      type: git
+      url: https://github.com/strands-project/mongodb_store.git
+      version: melodic-devel
     release:
       packages:
       - mongodb_log
@@ -3222,7 +4155,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/strands-project-releases/mongodb_store.git
-      version: 0.5.0-5
+      version: 0.5.1-2
     source:
       type: git
       url: https://github.com/strands-project/mongodb_store.git
@@ -3246,7 +4179,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/uos-gbp/move_base_flex-release.git
-      version: 0.2.3-0
+      version: 0.2.4-1
     source:
       type: git
       url: https://github.com/magazino/move_base_flex.git
@@ -3289,7 +4222,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/moveit-release.git
-      version: 1.0.1-0
+      version: 1.0.2-1
     source:
       type: git
       url: https://github.com/ros-planning/moveit.git
@@ -3349,7 +4282,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/PickNikRobotics/moveit_sim_controller-release.git
-      version: 0.1.0-0
+      version: 0.2.0-1
     source:
       type: git
       url: https://github.com/PickNikRobotics/moveit_sim_controller.git
@@ -3395,7 +4328,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/mrpt-ros-pkg-release/mrpt1-release.git
-      version: 1.5.7-6
+      version: 1.5.8-0
     source:
       type: git
       url: https://github.com/mrpt/mrpt.git
@@ -3454,7 +4387,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/mrpt-ros-pkg-release/mrpt_navigation-release.git
-      version: 0.1.22-0
+      version: 0.1.24-0
     source:
       type: git
       url: https://github.com/mrpt-ros-pkg/mrpt_navigation.git
@@ -3486,10 +4419,26 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/mrpt-ros-pkg-release/mrpt_slam-release.git
-      version: 0.1.8-0
+      version: 0.1.9-0
     source:
       type: git
       url: https://github.com/mrpt-ros-pkg/mrpt_slam.git
+      version: master
+    status: maintained
+  multi_object_tracking_lidar:
+    doc:
+      type: git
+      url: https://github.com/praveen-palanisamy/multiple-object-tracking-lidar.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/praveen-palanisamy/multi_object_tracking_lidar-release.git
+      version: 1.0.1-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/praveen-palanisamy/multiple-object-tracking-lidar.git
       version: master
     status: maintained
   multimaster_fkie:
@@ -3508,11 +4457,33 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/fkie-release/multimaster_fkie-release.git
-      version: 0.8.10-0
+      version: 0.8.12-0
     source:
       type: git
       url: https://github.com/fkie/multimaster_fkie.git
       version: melodic-devel
+    status: maintained
+  multisense_ros:
+    doc:
+      type: hg
+      url: https://bitbucket.org/crl/multisense_ros
+      version: default
+    release:
+      packages:
+      - multisense
+      - multisense_bringup
+      - multisense_cal_check
+      - multisense_description
+      - multisense_lib
+      - multisense_ros
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/carnegieroboticsllc/multisense_ros-release.git
+      version: 4.0.2-0
+    source:
+      type: hg
+      url: https://bitbucket.org/crl/multisense_ros
+      version: default
     status: maintained
   mvsim:
     doc:
@@ -3523,7 +4494,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ual-arm-ros-pkg-release/mvsim-release.git
-      version: 0.2.0-0
+      version: 0.2.1-0
     source:
       test_pull_requests: true
       type: git
@@ -3657,6 +4628,33 @@ repositories:
       url: https://github.com/ros-planning/navigation_msgs.git
       version: jade-devel
     status: maintained
+  neonavigation:
+    doc:
+      type: git
+      url: https://github.com/at-wat/neonavigation.git
+      version: master
+    release:
+      packages:
+      - costmap_cspace
+      - joystick_interrupt
+      - map_organizer
+      - neonavigation
+      - neonavigation_common
+      - neonavigation_launch
+      - obj_to_pointcloud
+      - planner_cspace
+      - safety_limiter
+      - track_odometry
+      - trajectory_tracker
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/at-wat/neonavigation-release.git
+      version: 0.4.3-1
+    source:
+      type: git
+      url: https://github.com/at-wat/neonavigation.git
+      version: master
+    status: developed
   neonavigation_msgs:
     doc:
       type: git
@@ -3705,7 +4703,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/nerian-vision/nerian_stereo-release.git
-      version: 3.3.2-0
+      version: 3.5.0-1
     source:
       type: git
       url: https://github.com/nerian-vision/nerian_stereo.git
@@ -3725,6 +4723,36 @@ repositories:
       type: git
       url: https://github.com/astuff/network_interface.git
       version: release
+    status: developed
+  nmea_comms:
+    doc:
+      type: git
+      url: https://github.com/ros-drivers/nmea_comms.git
+      version: jade-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-drivers-gbp/nmea_comms-release.git
+      version: 1.2.0-0
+    source:
+      type: git
+      url: https://github.com/ros-drivers/nmea_comms.git
+      version: jade-devel
+    status: maintained
+  nmea_gps_plugin:
+    doc:
+      type: git
+      url: https://github.com/OUXT-Polaris/nmea_gps_plugin.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/OUXT-Polaris/nmea_gps_plugin-release.git
+      version: 0.0.2-1
+    source:
+      type: git
+      url: https://github.com/OUXT-Polaris/nmea_gps_plugin.git
+      version: master
     status: developed
   nmea_msgs:
     doc:
@@ -3756,6 +4784,21 @@ repositories:
       url: https://github.com/ros-drivers/nmea_navsat_driver.git
       version: melodic-devel
     status: maintained
+  nmea_to_geopose:
+    doc:
+      type: git
+      url: https://github.com/OUXT-Polaris/nmea_to_geopose.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/OUXT-Polaris/nmea_to_geopose-release.git
+      version: 0.0.1-1
+    source:
+      type: git
+      url: https://github.com/OUXT-Polaris/nmea_to_geopose.git
+      version: master
+    status: developed
   nodelet_core:
     doc:
       type: git
@@ -3776,6 +4819,22 @@ repositories:
       url: https://github.com/ros/nodelet_core.git
       version: indigo-devel
     status: maintained
+  nonpersistent_voxel_layer:
+    doc:
+      type: git
+      url: https://github.com/SteveMacenski/nonpersistent_voxel_layer.git
+      version: melodic-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/SteveMacenski/nonpersistent_voxel_layer-release.git
+      version: 1.2.3-2
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/SteveMacenski/nonpersistent_voxel_layer.git
+      version: melodic-devel
+    status: maintained
   novatel_gps_driver:
     doc:
       type: git
@@ -3788,7 +4847,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/swri-robotics-gbp/novatel_gps_driver-release.git
-      version: 3.7.0-0
+      version: 3.9.0-1
     source:
       type: git
       url: https://github.com/swri-robotics/novatel_gps_driver.git
@@ -3810,6 +4869,21 @@ repositories:
     source:
       type: git
       url: https://github.com/ros-drivers/novatel_span_driver.git
+      version: master
+    status: maintained
+  ntpd_driver:
+    doc:
+      type: git
+      url: https://github.com/vooon/ntpd_driver.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/vooon/ntpd_driver-release.git
+      version: 1.2.0-1
+    source:
+      type: git
+      url: https://github.com/vooon/ntpd_driver.git
       version: master
     status: maintained
   object_recognition_msgs:
@@ -3890,6 +4964,21 @@ repositories:
       url: https://github.com/OctoMap/octomap_ros.git
       version: melodic-devel
     status: unmaintained
+  octomap_rviz_plugins:
+    doc:
+      type: git
+      url: https://github.com/OctoMap/octomap_rviz_plugins.git
+      version: kinetic-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-gbp/octomap_rviz_plugins-release.git
+      version: 0.2.2-1
+    source:
+      type: git
+      url: https://github.com/OctoMap/octomap_rviz_plugins.git
+      version: kinetic-devel
+    status: maintained
   odva_ethernetip:
     doc:
       type: git
@@ -3899,7 +4988,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-drivers-gbp/odva_ethernetip-release.git
-      version: 0.1.3-0
+      version: 0.1.4-0
     source:
       type: git
       url: https://github.com/ros-drivers/odva_ethernetip.git
@@ -3910,7 +4999,32 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/ompl-release.git
-      version: 1.4.2-0
+      version: 1.4.2-2
+  omron_os32c_driver:
+    doc:
+      type: git
+      url: https://github.com/ros-drivers/omron.git
+      version: kinetic-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-drivers-gbp/omron-release.git
+      version: 1.0.0-0
+    source:
+      type: git
+      url: https://github.com/ros-drivers/omron.git
+      version: kinetic-devel
+    status: maintained
+  omronsentech_camera:
+    doc:
+      type: git
+      url: https://github.com/ose-support-ros/omronsentech_camera.git
+      version: master
+    source:
+      type: git
+      url: https://github.com/ose-support-ros/omronsentech_camera.git
+      version: master
+    status: developed
   open_karto:
     doc:
       type: git
@@ -3922,6 +5036,7 @@ repositories:
       url: https://github.com/ros-gbp/open_karto-release.git
       version: 1.2.0-0
     source:
+      test_pull_requests: true
       type: git
       url: https://github.com/ros-perception/open_karto.git
       version: melodic-devel
@@ -4028,7 +5143,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-perception/opencv_apps-release.git
-      version: 2.0.0-0
+      version: 2.0.1-1
     source:
       type: git
       url: https://github.com/ros-perception/opencv_apps.git
@@ -4104,6 +5219,22 @@ repositories:
       url: https://github.com/tork-a/openrtm_aist_python-release.git
       version: 1.1.0-0
     status: maintained
+  openslam_gmapping:
+    doc:
+      type: git
+      url: https://github.com/ros-perception/openslam_gmapping.git
+      version: melodic-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-gbp/openslam_gmapping-release.git
+      version: 0.2.1-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/ros-perception/openslam_gmapping.git
+      version: melodic-devel
+    status: unmaintained
   optpp_catkin:
     release:
       tags:
@@ -4235,7 +5366,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/panda_moveit_config-release.git
-      version: 0.7.1-0
+      version: 0.7.2-1
     source:
       type: git
       url: https://github.com/ros-planning/panda_moveit_config.git
@@ -4272,7 +5403,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/wg-perception/people.git
-      version: kinetic
+      version: melodic
     release:
       packages:
       - face_detector
@@ -4284,11 +5415,11 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/OSUrobotics/people-release.git
-      version: 1.1.2-0
+      version: 1.2.0-1
     source:
       type: git
       url: https://github.com/wg-perception/people.git
-      version: kinetic
+      version: melodic
     status: maintained
   pepperl_fuchs:
     doc:
@@ -4322,7 +5453,7 @@ repositories:
       url: https://github.com/ros-gbp/perception_pcl-release.git
       version: 1.6.2-0
     source:
-      test_commits: false
+      test_pull_requests: true
       type: git
       url: https://github.com/ros-perception/perception_pcl.git
       version: melodic-devel
@@ -4358,7 +5489,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-drivers-gbp/phidgets_drivers-release.git
-      version: 0.7.7-0
+      version: 0.7.9-1
     source:
       test_pull_requests: true
       type: git
@@ -4374,7 +5505,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/bosch-ros-pkg/photo-release.git
-      version: 1.0.2-0
+      version: 1.0.3-1
     source:
       test_pull_requests: true
       type: git
@@ -4400,7 +5531,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/PilzDE/pilz_industrial_motion.git
-      version: kinetic-devel
+      version: melodic-devel
     release:
       packages:
       - pilz_extensions
@@ -4412,17 +5543,17 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/PilzDE/pilz_industrial_motion-release.git
-      version: 0.4.2-0
+      version: 0.4.7-1
     source:
       type: git
       url: https://github.com/PilzDE/pilz_industrial_motion.git
-      version: kinetic-devel
+      version: melodic-devel
     status: developed
   pilz_robots:
     doc:
       type: git
       url: https://github.com/PilzDE/pilz_robots.git
-      version: kinetic-devel
+      version: melodic-devel
     release:
       packages:
       - pilz_control
@@ -4436,7 +5567,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/PilzDE/pilz_robots-release.git
-      version: 0.5.2-0
+      version: 0.5.8-1
     source:
       type: git
       url: https://github.com/PilzDE/pilz_robots.git
@@ -4451,12 +5582,22 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ipab-slmc/pinocchio_catkin-release.git
-      version: 2.0.0-0
+      version: 2.1.3-1
     source:
       type: git
       url: https://github.com/stack-of-tasks/pinocchio.git
       version: devel
     status: developed
+  pipeline_planner:
+    doc:
+      type: git
+      url: https://github.com/SeaosRobotics/pipeline_planner_open.git
+      version: master
+    source:
+      type: git
+      url: https://github.com/SeaosRobotics/pipeline_planner_open.git
+      version: master
+    status: maintained
   plotjuggler:
     doc:
       type: git
@@ -4466,7 +5607,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/facontidavide/plotjuggler-release.git
-      version: 2.1.9-0
+      version: 2.3.0-1
     source:
       type: git
       url: https://github.com/facontidavide/PlotJuggler.git
@@ -4497,7 +5638,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/pointcloud_to_laserscan-release.git
-      version: 1.4.0-0
+      version: 1.4.1-1
     source:
       test_pull_requests: true
       type: git
@@ -4524,7 +5665,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/fetchrobotics-gbp/power_msgs-release.git
-      version: 0.3.0-0
+      version: 0.4.0-1
     source:
       test_pull_requests: true
       type: git
@@ -4565,7 +5706,11 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/pr2-gbp/pr2_common-release.git
-      version: 1.12.3-0
+      version: 1.12.4-1
+    source:
+      type: git
+      url: https://github.com/pr2/pr2_common.git
+      version: melodic-devel
     status: unmaintained
   pr2_common_actions:
     doc:
@@ -4606,7 +5751,11 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/pr2-gbp/pr2_controllers-release.git
-      version: 1.10.15-1
+      version: 1.10.17-1
+    source:
+      type: git
+      url: https://github.com/pr2/pr2_controllers.git
+      version: melodic-devel
     status: unmaintained
   pr2_ethercat_drivers:
     doc:
@@ -4621,7 +5770,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/pr2-gbp/pr2_ethercat_drivers-release.git
-      version: 1.8.18-0
+      version: 1.8.19-1
     source:
       type: git
       url: https://github.com/pr2/pr2_ethercat_drivers.git
@@ -4690,6 +5839,26 @@ repositories:
       url: https://github.com/pr2-gbp/pr2_power_drivers-release.git
       version: 1.1.7-0
     status: unmaintained
+  pr2_simulator:
+    doc:
+      type: git
+      url: https://github.com/PR2/pr2_simulator.git
+      version: kinetic-devel
+    release:
+      packages:
+      - pr2_controller_configuration_gazebo
+      - pr2_gazebo
+      - pr2_gazebo_plugins
+      - pr2_simulator
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/pr2-gbp/pr2_simulator-release.git
+      version: 2.0.14-0
+    source:
+      type: git
+      url: https://github.com/PR2/pr2_simulator.git
+      version: kinetic-devel
+    status: unmaintained
   prbt_grippers:
     doc:
       type: git
@@ -4702,12 +5871,42 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/PilzDE/prbt_grippers-release.git
-      version: 0.0.1-0
+      version: 0.0.4-1
     source:
       type: git
       url: https://github.com/PilzDE/prbt_grippers.git
       version: kinetic-devel
     status: developed
+  prosilica_driver:
+    doc:
+      type: git
+      url: https://github.com/ros-drivers/prosilica_driver.git
+      version: hydro-devel
+    release:
+      packages:
+      - prosilica_camera
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-drivers-gbp/prosilica_driver-release.git
+      version: 1.9.4-1
+    source:
+      type: git
+      url: https://github.com/ros-drivers/prosilica_driver.git
+      version: hydro-devel
+  prosilica_gige_sdk:
+    doc:
+      type: git
+      url: https://github.com/ros-drivers/prosilica_gige_sdk.git
+      version: hydro-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-drivers-gbp/prosilica_gige_sdk-release.git
+      version: 1.26.3-1
+    source:
+      type: git
+      url: https://github.com/ros-drivers/prosilica_gige_sdk.git
+      version: hydro-devel
   py_trees:
     doc:
       type: git
@@ -4769,6 +5968,36 @@ repositories:
       url: https://github.com/ipab-slmc/pybind11_catkin.git
       version: master
     status: developed
+  pyros_test:
+    doc:
+      type: git
+      url: https://github.com/asmodehn/pyros-test.git
+      version: devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/pyros-dev/pyros-test-release.git
+      version: 0.0.6-1
+    source:
+      type: git
+      url: https://github.com/asmodehn/pyros-test.git
+      version: devel
+    status: maintained
+  pyros_utils:
+    doc:
+      type: git
+      url: https://github.com/asmodehn/pyros-utils.git
+      version: devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/pyros-dev/pyros-utils-release.git
+      version: 0.1.4-1
+    source:
+      type: git
+      url: https://github.com/asmodehn/pyros-utils.git
+      version: devel
+    status: maintained
   python_qt_binding:
     doc:
       type: git
@@ -4868,6 +6097,21 @@ repositories:
       url: https://bitbucket.org/qbrobotics/qbmove-ros.git
       version: production-melodic
     status: developed
+  qpoases_vendor:
+    doc:
+      type: git
+      url: https://gitlab.com/autowarefoundation/autoware.ai/qpoases_vendor.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://gitlab.com/autowarefoundation/autoware.ai-ros-releases/qpoases_vendor-release.git
+      version: 3.2.0-2
+    source:
+      type: git
+      url: https://gitlab.com/autowarefoundation/autoware.ai/qpoases_vendor.git
+      version: master
+    status: maintained
   qt_gui_core:
     doc:
       type: git
@@ -4909,6 +6153,21 @@ repositories:
       url: https://github.com/swri-robotics-gbp/qt_metapackages-release.git
       version: 1.0.1-0
     status: developed
+  quaternion_operation:
+    doc:
+      type: git
+      url: https://github.com/OUXT-Polaris/quaternion_operation.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/OUXT-Polaris/quaternion_operation-release.git
+      version: 0.0.3-2
+    source:
+      type: git
+      url: https://github.com/OUXT-Polaris/quaternion_operation.git
+      version: master
+    status: developed
   qwt_dependency:
     doc:
       type: git
@@ -4945,11 +6204,42 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/gt-rail-release/rail_manipulation_msgs-release.git
-      version: 0.0.12-0
+      version: 0.0.14-1
     source:
       test_pull_requests: true
       type: git
       url: https://github.com/GT-RAIL/rail_manipulation_msgs.git
+      version: melodic-devel
+    status: maintained
+  rail_mesh_icp:
+    doc:
+      type: git
+      url: https://github.com/GT-RAIL/rail_mesh_icp.git
+      version: melodic-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/gt-rail-release/rail_mesh_icp-release.git
+      version: 0.0.3-1
+    source:
+      type: git
+      url: https://github.com/GT-RAIL/rail_mesh_icp.git
+      version: melodic-devel
+    status: maintained
+  rail_segmentation:
+    doc:
+      type: git
+      url: https://github.com/GT-RAIL/rail_segmentation.git
+      version: melodic-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/gt-rail-release/rail_segmentation.git
+      version: 0.1.15-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/GT-RAIL/rail_segmentation.git
       version: melodic-devel
     status: maintained
   random_numbers:
@@ -4993,6 +6283,21 @@ repositories:
       url: https://github.com/roboception/rc_cloud_accumulator.git
       version: master
     status: developed
+  rc_common_msgs:
+    doc:
+      type: git
+      url: https://github.com/roboception/rc_common_msgs.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/roboception-gbp/rc_common_msgs-release.git
+      version: 0.3.0-1
+    source:
+      type: git
+      url: https://github.com/roboception/rc_common_msgs.git
+      version: master
+    status: developed
   rc_dynamics_api:
     doc:
       type: git
@@ -5002,7 +6307,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/roboception-gbp/rc_dynamics_api-release.git
-      version: 0.7.1-0
+      version: 0.10.0-1
     source:
       test_pull_requests: true
       type: git
@@ -5018,7 +6323,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/roboception-gbp/rc_genicam_api-release.git
-      version: 2.1.0-0
+      version: 2.2.2-1
     source:
       test_pull_requests: true
       type: git
@@ -5033,17 +6338,59 @@ repositories:
     release:
       packages:
       - rc_hand_eye_calibration_client
+      - rc_pick_client
+      - rc_roi_manager_gui
+      - rc_tagdetect_client
       - rc_visard
       - rc_visard_description
       - rc_visard_driver
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/roboception-gbp/rc_visard-release.git
-      version: 2.5.0-0
+      version: 2.7.0-1
     source:
       test_pull_requests: true
       type: git
       url: https://github.com/roboception/rc_visard_ros.git
+      version: master
+    status: developed
+  rcdiscover:
+    doc:
+      type: git
+      url: https://github.com/roboception/rcdiscover.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/roboception-gbp/rcdiscover-release.git
+      version: 1.0.0-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/roboception/rcdiscover.git
+      version: master
+    status: developed
+  rdl:
+    doc:
+      type: git
+      url: https://gitlab.com/jlack/rdl.git
+      version: master
+    release:
+      packages:
+      - rdl
+      - rdl_benchmark
+      - rdl_cmake
+      - rdl_dynamics
+      - rdl_msgs
+      - rdl_ros_tools
+      - rdl_urdfreader
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://gitlab.com/jlack/rdl_release.git
+      version: 3.2.0-1
+    source:
+      type: git
+      url: https://gitlab.com/jlack/rdl.git
       version: master
     status: developed
   realtime_tools:
@@ -5055,7 +6402,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/realtime_tools-release.git
-      version: 1.13.1-0
+      version: 1.15.0-1
     source:
       type: git
       url: https://github.com/ros-controls/realtime_tools.git
@@ -5070,13 +6417,29 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/resource_retriever-release.git
-      version: 1.12.4-0
+      version: 1.12.5-1
     source:
       test_pull_requests: true
       type: git
       url: https://github.com/ros/resource_retriever.git
       version: kinetic-devel
     status: maintained
+  rexrov2:
+    release:
+      packages:
+      - rexrov2_control
+      - rexrov2_description
+      - rexrov2_gazebo
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/uuvsimulator/rexrov2-release.git
+      version: 0.1.3-0
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/uuvsimulator/rexrov2.git
+      version: master
+    status: developed
   rgbd_launch:
     doc:
       type: git
@@ -5092,6 +6455,76 @@ repositories:
       url: https://github.com/ros-drivers/rgbd_launch.git
       version: jade-devel
     status: maintained
+  ridgeback:
+    doc:
+      type: git
+      url: https://github.com/ridgeback/ridgeback.git
+      version: kinetic-devel
+    release:
+      packages:
+      - ridgeback_control
+      - ridgeback_description
+      - ridgeback_msgs
+      - ridgeback_navigation
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/clearpath-gbp/ridgeback-release.git
+      version: 0.2.2-2
+    source:
+      type: git
+      url: https://github.com/ridgeback/ridgeback.git
+      version: kinetic-devel
+    status: maintained
+  ridgeback_desktop:
+    doc:
+      type: git
+      url: https://github.com/ridgeback/ridgeback_desktop.git
+      version: kinetic-devel
+    release:
+      packages:
+      - ridgeback_desktop
+      - ridgeback_viz
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/clearpath-gbp/ridgeback_desktop-release.git
+      version: 0.1.1-1
+    source:
+      type: git
+      url: https://github.com/ridgeback/ridgeback_desktop.git
+      version: kinetic-devel
+  ridgeback_simulator:
+    doc:
+      type: git
+      url: https://github.com/ridgeback/ridgeback_simulator.git
+      version: melodic-devel
+    release:
+      packages:
+      - mecanum_gazebo_plugin
+      - ridgeback_gazebo
+      - ridgeback_gazebo_plugins
+      - ridgeback_simulator
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/clearpath-gbp/ridgeback_simulator-release.git
+      version: 0.1.0-1
+    source:
+      type: git
+      url: https://github.com/ridgeback/ridgeback_simulator.git
+      version: melodic-devel
+    status: maintained
+  rj-ros-common:
+    release:
+      packages:
+      - parameter_assertions
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/RoboJackets/rj-ros-common-release.git
+      version: 0.1.0-1
+    source:
+      type: git
+      url: https://github.com/RoboJackets/rj-ros-common.git
+      version: master
+    status: developed
   robosense:
     doc:
       type: git
@@ -5131,6 +6564,21 @@ repositories:
       test_pull_requests: true
       type: git
       url: https://github.com/snt-robotics/robot_activity.git
+      version: master
+    status: developed
+  robot_body_filter:
+    doc:
+      type: git
+      url: https://github.com/peci1/robot_body_filter.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/peci1/robot_body_filter-release.git
+      version: 1.1.4-1
+    source:
+      type: git
+      url: https://github.com/peci1/robot_body_filter.git
       version: master
     status: developed
   robot_calibration:
@@ -5180,7 +6628,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/cra-ros-pkg/robot_localization-release.git
-      version: 2.6.4-0
+      version: 2.6.5-1
     source:
       test_pull_requests: true
       type: git
@@ -5223,6 +6671,32 @@ repositories:
       url: https://github.com/locusrobotics/robot_navigation.git
       version: tf2
     status: developed
+  robot_one:
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/AlexanderSilvaB/robot-one-ros-release.git
+      version: 0.1.1-1
+    source:
+      type: git
+      url: https://github.com/AlexanderSilvaB/Robot-One-ROS.git
+      version: master
+    status: developed
+  robot_pose_ekf:
+    doc:
+      type: git
+      url: https://github.com/ros-planning/robot_pose_ekf.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-gbp/robot_pose_ekf-release.git
+      version: 1.14.5-0
+    source:
+      type: git
+      url: https://github.com/ros-planning/robot_pose_ekf.git
+      version: master
+    status: unmaintained
   robot_self_filter:
     doc:
       type: git
@@ -5238,17 +6712,17 @@ repositories:
     doc:
       type: git
       url: https://github.com/ros/robot_state_publisher.git
-      version: kinetic-devel
+      version: melodic-devel
     release:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/robot_state_publisher-release.git
-      version: 1.13.6-0
+      version: 1.14.0-1
     source:
       test_pull_requests: true
       type: git
       url: https://github.com/ros/robot_state_publisher.git
-      version: kinetic-devel
+      version: melodic-devel
     status: maintained
   robot_upstart:
     doc:
@@ -5281,6 +6755,64 @@ repositories:
       url: https://github.com/ROBOTIS-GIT/robotis_manipulator.git
       version: melodic-devel
     status: developed
+  rocon_msgs:
+    doc:
+      type: git
+      url: https://github.com/robotics-in-concert/rocon_msgs.git
+      version: release/0.9-melodic
+    release:
+      packages:
+      - concert_msgs
+      - concert_service_msgs
+      - concert_workflow_engine_msgs
+      - gateway_msgs
+      - rocon_app_manager_msgs
+      - rocon_device_msgs
+      - rocon_interaction_msgs
+      - rocon_msgs
+      - rocon_service_pair_msgs
+      - rocon_std_msgs
+      - rocon_tutorial_msgs
+      - scheduler_msgs
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/yujinrobot-release/rocon_msgs-release.git
+      version: 0.9.0-0
+    source:
+      type: git
+      url: https://github.com/robotics-in-concert/rocon_msgs.git
+      version: release/0.9-melodic
+    status: maintained
+  rocon_tools:
+    doc:
+      type: git
+      url: https://github.com/robotics-in-concert/rocon_tools.git
+      version: release/0.3-melodic
+    release:
+      packages:
+      - rocon_bubble_icons
+      - rocon_console
+      - rocon_ebnf
+      - rocon_icons
+      - rocon_interactions
+      - rocon_launch
+      - rocon_master_info
+      - rocon_python_comms
+      - rocon_python_redis
+      - rocon_python_utils
+      - rocon_python_wifi
+      - rocon_semantic_version
+      - rocon_tools
+      - rocon_uri
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/yujinrobot-release/rocon_tools-release.git
+      version: 0.3.2-0
+    source:
+      type: git
+      url: https://github.com/robotics-in-concert/rocon_tools.git
+      version: release/0.3-melodic
+    status: maintained
   ros:
     doc:
       type: git
@@ -5327,7 +6859,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-industrial-release/ros_canopen-release.git
-      version: 0.8.0-0
+      version: 0.8.1-1
     source:
       type: git
       url: https://github.com/ros-industrial/ros_canopen.git
@@ -5374,7 +6906,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/ros/ros_comm_msgs.git
-      version: indigo-devel
+      version: kinetic-devel
     release:
       packages:
       - rosgraph_msgs
@@ -5386,7 +6918,7 @@ repositories:
     source:
       type: git
       url: https://github.com/ros/ros_comm_msgs.git
-      version: indigo-devel
+      version: kinetic-devel
     status: maintained
   ros_control:
     doc:
@@ -5424,7 +6956,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/PickNikRobotics/ros_control_boilerplate-release.git
-      version: 0.4.1-0
+      version: 0.5.0-1
     source:
       type: git
       url: https://github.com/PickNikRobotics/ros_control_boilerplate.git
@@ -5505,7 +7037,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/aws-gbp/ros_monitoring_msgs-release.git
-      version: 1.0.0-0
+      version: 1.0.1-1
     source:
       type: git
       url: https://github.com/aws-robotics/monitoringmessages-ros1.git
@@ -5526,6 +7058,33 @@ repositories:
       url: https://github.com/machinekoder/ros_pytest.git
       version: melodic-devel
     status: developed
+  ros_realtime:
+    doc:
+      type: git
+      url: https://github.com/ros/ros_realtime.git
+      version: hydro-devel
+    release:
+      packages:
+      - allocators
+      - lockfree
+      - ros_realtime
+      - rosatomic
+      - rosrt
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-gbp/ros_realtime-release.git
+      version: 1.0.25-0
+    source:
+      type: git
+      url: https://github.com/ros/ros_realtime.git
+      version: hydro-devel
+    status: unmaintained
+  ros_robodk_post_processors:
+    doc:
+      type: git
+      url: https://gitlab.com/InstitutMaupertuis/ros_robodk_post_processors.git
+      version: melodic
+    status: maintained
   ros_tutorials:
     doc:
       type: git
@@ -5556,7 +7115,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/facontidavide/ros_type_introspection-release.git
-      version: 1.3.1-0
+      version: 1.3.3-1
     source:
       type: git
       url: https://github.com/facontidavide/ros_type_introspection.git
@@ -5571,7 +7130,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/gt-rail-release/rosauth-release.git
-      version: 0.1.7-2
+      version: 1.0.1-0
     source:
       type: git
       url: https://github.com/GT-RAIL/rosauth.git
@@ -5583,6 +7142,21 @@ repositories:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/rosbag_migration_rule-release.git
       version: 1.0.0-0
+    status: maintained
+  rosbag_pandas:
+    doc:
+      type: git
+      url: https://github.com/eurogroep/rosbag_pandas.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/eurogroep/rosbag_pandas-release.git
+      version: 0.5.3-0
+    source:
+      type: git
+      url: https://github.com/eurogroep/rosbag_pandas.git
+      version: master
     status: maintained
   rosbash_params:
     doc:
@@ -5614,7 +7188,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/RobotWebTools-release/rosbridge_suite-release.git
-      version: 0.11.0-0
+      version: 0.11.3-1
     source:
       type: git
       url: https://github.com/RobotWebTools/rosbridge_suite.git
@@ -5716,7 +7290,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/xqms/rosfmt-release.git
-      version: 6.0.0-0
+      version: 6.1.0-1
     source:
       test_pull_requests: true
       type: git
@@ -5772,7 +7346,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/roslisp_common-release.git
-      version: 0.2.10-0
+      version: 0.2.12-1
     source:
       type: git
       url: https://github.com/ros/roslisp_common.git
@@ -5792,7 +7366,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/xqms/rosmon-release.git
-      version: 2.0.2-0
+      version: 2.1.1-1
     source:
       test_pull_requests: true
       type: git
@@ -5803,7 +7377,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/ros/rospack.git
-      version: lunar-devel
+      version: melodic-devel
     release:
       tags:
         release: release/melodic/{package}/{version}
@@ -5813,7 +7387,22 @@ repositories:
       test_pull_requests: true
       type: git
       url: https://github.com/ros/rospack.git
-      version: lunar-devel
+      version: melodic-devel
+    status: maintained
+  rosparam_handler:
+    doc:
+      type: git
+      url: https://github.com/cbandera/rosparam_handler.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/cbandera/rosparam_handler-release.git
+      version: 0.1.4-1
+    source:
+      type: git
+      url: https://github.com/cbandera/rosparam_handler.git
+      version: master
     status: maintained
   rosparam_shortcuts:
     doc:
@@ -5824,7 +7413,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/PickNikRobotics/rosparam_shortcuts-release.git
-      version: 0.2.1-0
+      version: 0.3.2-1
     source:
       type: git
       url: https://github.com/PickNikRobotics/rosparam_shortcuts.git
@@ -5886,6 +7475,32 @@ repositories:
       type: git
       url: https://github.com/ros-drivers/rosserial.git
       version: melodic-devel
+    status: maintained
+  rostate_machine:
+    doc:
+      type: git
+      url: https://github.com/OUXT-Polaris/rostate_machine.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/OUXT-Polaris/rostate_machine-release.git
+      version: 0.0.2-3
+    source:
+      type: git
+      url: https://github.com/OUXT-Polaris/rostate_machine.git
+      version: master
+    status: developed
+  rosthrottle:
+    doc:
+      type: git
+      url: https://github.com/UTNuclearRoboticsPublic/rosthrottle.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/UTNuclearRoboticsPublic/rosthrottle-release.git
+      version: 1.2.0-3
     status: maintained
   roswww:
     doc:
@@ -5978,6 +7593,12 @@ repositories:
       url: https://github.com/ros-visualization/rqt_action.git
       version: master
     status: maintained
+  rqt_app_example:
+    doc:
+      type: git
+      url: https://gitlab.com/InstitutMaupertuis/rqt_app_example.git
+      version: melodic
+    status: maintained
   rqt_bag:
     doc:
       type: git
@@ -6046,6 +7667,21 @@ repositories:
       type: git
       url: https://github.com/ros-visualization/rqt_dep.git
       version: master
+    status: maintained
+  rqt_ez_publisher:
+    doc:
+      type: git
+      url: https://github.com/OTL/rqt_ez_publisher.git
+      version: melodic-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/OTL/rqt_ez_publisher-release.git
+      version: 0.5.0-1
+    source:
+      type: git
+      url: https://github.com/OTL/rqt_ez_publisher.git
+      version: melodic-devel
     status: maintained
   rqt_graph:
     doc:
@@ -6288,7 +7924,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/rqt_robot_monitor-release.git
-      version: 0.5.8-0
+      version: 0.5.9-1
     source:
       type: git
       url: https://github.com/ros-visualization/rqt_robot_monitor.git
@@ -6470,7 +8106,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/introlab/rtabmap-release.git
-      version: 0.17.6-0
+      version: 0.19.3-2
     source:
       type: git
       url: https://github.com/introlab/rtabmap.git
@@ -6485,11 +8121,56 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/introlab/rtabmap_ros-release.git
-      version: 0.17.6-0
+      version: 0.19.3-1
     source:
       type: git
       url: https://github.com/introlab/rtabmap_ros.git
       version: melodic-devel
+    status: maintained
+  rtctree:
+    doc:
+      type: git
+      url: https://github.com/tork-a/rtctree-release.git
+      version: release/hydro/rtctree
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/tork-a/rtctree-release.git
+      version: 3.0.1-0
+    source:
+      type: git
+      url: https://github.com/gbiggs/rtctree.git
+      version: master
+    status: maintained
+  rtshell:
+    doc:
+      type: git
+      url: https://github.com/gbiggs/rtshell.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/tork-a/rtshell-release.git
+      version: 3.0.1-1
+    source:
+      type: git
+      url: https://github.com/gbiggs/rtshell.git
+      version: master
+    status: maintained
+  rtsprofile:
+    doc:
+      type: git
+      url: https://github.com/gbiggs/rtsprofile.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/tork-a/rtsprofile-release.git
+      version: 2.0.0-1
+    source:
+      type: git
+      url: https://github.com/gbiggs/rtsprofile.git
+      version: master
     status: maintained
   rviz:
     doc:
@@ -6516,12 +8197,27 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/PickNikRobotics/rviz_visual_tools-release.git
-      version: 3.7.0-0
+      version: 3.8.0-4
     source:
       type: git
       url: https://github.com/PickNikRobotics/rviz_visual_tools.git
       version: melodic-devel
     status: developed
+  rxcpp_vendor:
+    doc:
+      type: git
+      url: https://github.com/rosin-project/rxcpp_vendor.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/rosin-project/rxcpp_vendor-release.git
+      version: 4.1.0-1
+    source:
+      type: git
+      url: https://github.com/rosin-project/rxcpp_vendor.git
+      version: master
+    status: maintained
   sainsmart_relay_usb:
     doc:
       type: hg
@@ -6540,16 +8236,16 @@ repositories:
   sbg_driver:
     doc:
       type: git
-      url: https://github.com/ENSTABretagneRobotics/sbg_ros_driver.git
+      url: https://github.com/SBG-Systems/sbg_ros_driver.git
       version: master
     release:
       tags:
         release: release/melodic/{package}/{version}
-      url: https://github.com/ENSTABretagneRobotics/sbg_ros_driver-release.git
+      url: https://github.com/SBG-Systems/sbg_ros_driver-release.git
       version: 1.1.7-0
     source:
       type: git
-      url: https://github.com/ENSTABretagneRobotics/sbg_ros_driver.git
+      url: https://github.com/SBG-Systems/sbg_ros_driver.git
       version: master
     status: developed
   sbpl:
@@ -6562,18 +8258,44 @@ repositories:
     doc:
       type: git
       url: https://github.com/ipa320/schunk_modular_robotics.git
-      version: melodic_release_candidate
+      version: indigo_dev
     release:
       packages:
       - schunk_description
+      - schunk_libm5api
+      - schunk_modular_robotics
+      - schunk_powercube_chain
+      - schunk_sdh
+      - schunk_simulated_tactile_sensors
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ipa320/schunk_modular_robotics-release.git
-      version: 0.6.12-0
+      version: 0.6.13-2
     source:
       type: git
       url: https://github.com/ipa320/schunk_modular_robotics.git
       version: indigo_dev
+    status: developed
+  sciurus17:
+    doc:
+      type: git
+      url: https://github.com/rt-net/sciurus17_ros.git
+      version: master
+    status: developed
+  sdhlibrary_cpp:
+    doc:
+      type: git
+      url: https://github.com/ipab-slmc/SDHLibrary-CPP.git
+      version: master
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ipab-slmc/SDHLibrary-CPP-release.git
+      version: 0.2.10-1
+    source:
+      type: git
+      url: https://github.com/ipab-slmc/SDHLibrary-CPP.git
+      version: master
     status: maintained
   serial:
     release:
@@ -6587,6 +8309,16 @@ repositories:
       url: https://github.com/wjwwood/serial.git
       version: master
     status: maintained
+  sick_ldmrs_laser:
+    doc:
+      type: git
+      url: https://github.com/SICKAG/sick_ldmrs_laser.git
+      version: melodic
+    source:
+      test_commits: false
+      type: git
+      url: https://github.com/SICKAG/sick_ldmrs_laser.git
+      version: melodic
   sick_safetyscanners:
     doc:
       type: git
@@ -6596,7 +8328,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/SICKAG/sick_safetyscanners-release.git
-      version: 1.0.2-0
+      version: 1.0.3-1
     source:
       type: git
       url: https://github.com/SICKAG/sick_safetyscanners.git
@@ -6611,7 +8343,11 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/SICKAG/sick_scan-release.git
-      version: 0.0.16-0
+      version: 1.3.22-1
+    source:
+      type: git
+      url: https://github.com/SICKAG/sick_scan.git
+      version: master
     status: developed
   sick_tim:
     doc:
@@ -6622,13 +8358,19 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/uos-gbp/sick_tim-release.git
-      version: 0.0.15-0
+      version: 0.0.16-1
     source:
       test_pull_requests: true
       type: git
       url: https://github.com/uos/sick_tim.git
       version: melodic
     status: developed
+  simple_desktop_launcher:
+    doc:
+      type: git
+      url: https://gitlab.com/InstitutMaupertuis/simple_desktop_launcher.git
+      version: melodic
+    status: maintained
   simple_grasping:
     doc:
       type: git
@@ -6644,6 +8386,31 @@ repositories:
       url: https://github.com/mikeferguson/simple_grasping.git
       version: master
     status: maintained
+  simple_rviz_plugin:
+    doc:
+      type: git
+      url: https://gitlab.com/InstitutMaupertuis/simple_rviz_plugin.git
+      version: melodic
+    status: maintained
+  slam_gmapping:
+    doc:
+      type: git
+      url: https://github.com/ros-perception/slam_gmapping.git
+      version: melodic-devel
+    release:
+      packages:
+      - gmapping
+      - slam_gmapping
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-gbp/slam_gmapping-release.git
+      version: 1.4.0-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/ros-perception/slam_gmapping.git
+      version: melodic-devel
+    status: unmaintained
   slam_karto:
     doc:
       type: git
@@ -6657,6 +8424,22 @@ repositories:
     source:
       type: git
       url: https://github.com/ros-perception/slam_karto.git
+      version: melodic-devel
+    status: maintained
+  slam_toolbox:
+    doc:
+      type: git
+      url: https://github.com/SteveMacenski/slam_toolbox.git
+      version: melodic-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/SteveMacenski/slam_toolbox-release.git
+      version: 1.1.1-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/SteveMacenski/slam_toolbox.git
       version: melodic-devel
     status: maintained
   soem:
@@ -6695,6 +8478,22 @@ repositories:
     source:
       type: git
       url: https://github.com/ros-perception/sparse_bundle_adjustment.git
+      version: melodic-devel
+    status: maintained
+  spatio_temporal_voxel_layer:
+    doc:
+      type: git
+      url: https://github.com/SteveMacenski/spatio_temporal_voxel_layer.git
+      version: melodic-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/SteveMacenski/spatio_temporal_voxel_layer-release.git
+      version: 1.3.5-2
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/SteveMacenski/spatio_temporal_voxel_layer.git
       version: melodic-devel
     status: maintained
   srdfdom:
@@ -6793,7 +8592,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/ros/std_msgs.git
-      version: groovy-devel
+      version: kinetic-devel
     release:
       tags:
         release: release/melodic/{package}/{version}
@@ -6802,7 +8601,7 @@ repositories:
     source:
       type: git
       url: https://github.com/ros/std_msgs.git
-      version: groovy-devel
+      version: kinetic-devel
     status: maintained
   swri_console:
     doc:
@@ -6838,7 +8637,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/rst-tu-dortmund/teb_local_planner-release.git
-      version: 0.8.1-0
+      version: 0.8.2-1
     source:
       test_pull_requests: true
       type: git
@@ -6854,7 +8653,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/rst-tu-dortmund/teb_local_planner_tutorials-release.git
-      version: 0.2.3-0
+      version: 0.2.4-1
     source:
       test_pull_requests: true
       type: git
@@ -6943,6 +8742,28 @@ repositories:
       url: https://github.com/tradr-project/tensorflow_ros_cpp.git
       version: master
     status: maintained
+  teraranger:
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/Terabee/teraranger-release.git
+      version: 2.1.0-1
+    source:
+      type: git
+      url: https://github.com/Terabee/teraranger.git
+      version: master
+    status: maintained
+  teraranger_array:
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/Terabee/teraranger_array-release.git
+      version: 2.0.0-1
+    source:
+      type: git
+      url: https://github.com/Terabee/teraranger_array.git
+      version: master
+    status: maintained
   tf2_web_republisher:
     doc:
       type: git
@@ -6979,6 +8800,29 @@ repositories:
       url: https://gitlab.com/InstitutMaupertuis/topics_rviz_plugin.git
       version: melodic
     status: maintained
+  toposens:
+    doc:
+      type: git
+      url: https://gitlab.com/toposens/public/ros-packages.git
+      version: master
+    release:
+      packages:
+      - toposens
+      - toposens_description
+      - toposens_driver
+      - toposens_markers
+      - toposens_msgs
+      - toposens_pointcloud
+      - toposens_sync
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://gitlab.com/toposens/public/toposens-release.git
+      version: 1.2.3-1
+    source:
+      type: git
+      url: https://gitlab.com/toposens/public/ros-packages.git
+      version: master
+    status: developed
   towr:
     doc:
       type: git
@@ -6991,7 +8835,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ethz-adrl/towr-release.git
-      version: 1.4.0-0
+      version: 1.4.1-0
     source:
       test_pull_requests: true
       type: git
@@ -7043,7 +8887,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/aws-gbp/tts-release.git
-      version: 1.0.1-0
+      version: 1.0.2-1
     source:
       type: git
       url: https://github.com/aws-robotics/tts-ros1.git
@@ -7066,7 +8910,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ROBOTIS-GIT-release/turtlebot3-release.git
-      version: 1.2.0-0
+      version: 1.2.2-1
     source:
       type: git
       url: https://github.com/ROBOTIS-GIT/turtlebot3.git
@@ -7289,6 +9133,42 @@ repositories:
       url: https://github.com/ros-teleop/twist_mux_msgs.git
       version: melodic-devel
     status: maintained
+  uav_testing:
+    doc:
+      type: git
+      url: https://github.com/osrf/uav_testing.git
+      version: master
+    release:
+      packages:
+      - ksql_airport
+      - mcmillan_airfield
+      - sand_island
+      - yosemite_valley
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-gbp/uav_testing-release.git
+      version: 0.0.1-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/osrf/uav_testing.git
+      version: master
+    status: maintained
+  um6:
+    doc:
+      type: git
+      url: https://github.com/ros-drivers/um6.git
+      version: indigo-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-drivers-gbp/um6-release.git
+      version: 1.1.2-1
+    source:
+      type: git
+      url: https://github.com/ros-drivers/um6.git
+      version: indigo-devel
+    status: maintained
   um7:
     doc:
       type: git
@@ -7448,7 +9328,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/seqsense/urg_stamped-release.git
-      version: 0.0.2-0
+      version: 0.0.3-1
     source:
       type: git
       url: https://github.com/seqsense/urg_stamped.git
@@ -7518,7 +9398,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/uuvsimulator/uuv_simulator-release.git
-      version: 0.6.10-0
+      version: 0.6.13-0
     source:
       type: git
       url: https://github.com/uuvsimulator/uuv_simulator.git
@@ -7650,6 +9530,35 @@ repositories:
       url: https://github.com/ros-perception/vision_opencv.git
       version: melodic
     status: maintained
+  vision_visp:
+    doc:
+      type: git
+      url: https://github.com/lagadic/vision_visp.git
+      version: melodic
+    release:
+      packages:
+      - vision_visp
+      - visp_auto_tracker
+      - visp_bridge
+      - visp_camera_calibration
+      - visp_hand2eye_calibration
+      - visp_tracker
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/lagadic/vision_visp-release.git
+      version: 0.11.1-1
+    source:
+      type: git
+      url: https://github.com/lagadic/vision_visp.git
+      version: melodic-devel
+    status: maintained
+  visp:
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/lagadic/visp-release.git
+      version: 3.2.0-1
+    status: maintained
   visualization_tutorials:
     doc:
       type: git
@@ -7672,6 +9581,21 @@ repositories:
       type: git
       url: https://github.com/ros-visualization/visualization_tutorials.git
       version: kinetic-devel
+    status: maintained
+  volksbot_driver:
+    doc:
+      type: git
+      url: https://github.com/uos/volksbot_driver.git
+      version: melodic
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/uos-gbp/volksbot_driver-release.git
+      version: 1.0.0-3
+    source:
+      type: git
+      url: https://github.com/uos/volksbot_driver.git
+      version: melodic
     status: maintained
   vrpn:
     doc:
@@ -7715,10 +9639,12 @@ repositories:
       - vrx_gazebo
       - wamv_description
       - wamv_gazebo
+      - wave_gazebo
+      - wave_gazebo_plugins
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/vrx-release.git
-      version: 1.0.1-0
+      version: 1.2.2-1
     source:
       type: hg
       url: https://bitbucket.org/osrf/vrx
@@ -7728,16 +9654,86 @@ repositories:
     doc:
       type: git
       url: https://github.com/ros-planning/warehouse_ros.git
-      version: jade-devel
+      version: kinetic-devel
     release:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/ros-gbp/warehouse_ros-release.git
-      version: 0.9.2-0
+      version: 0.9.3-1
     source:
       type: git
       url: https://github.com/ros-planning/warehouse_ros.git
-      version: jade-devel
+      version: kinetic-devel
+    status: maintained
+  warehouse_ros_mongo:
+    doc:
+      type: git
+      url: https://github.com/ros-planning/warehouse_ros_mongo.git
+      version: melodic-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-gbp/warehouse_ros_mongo-release.git
+      version: 0.9.0-1
+    source:
+      type: git
+      url: https://github.com/ros-planning/warehouse_ros_mongo.git
+      version: melodic-devel
+    status: maintained
+  warthog:
+    doc:
+      type: git
+      url: https://github.com/warthog-cpr/warthog.git
+      version: kinetic-devel
+    release:
+      packages:
+      - warthog_control
+      - warthog_description
+      - warthog_msgs
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/clearpath-gbp/warthog-release.git
+      version: 0.1.1-2
+    source:
+      type: git
+      url: https://github.com/warthog-cpr/warthog.git
+      version: kinetic-devel
+    status: maintained
+  warthog_desktop:
+    doc:
+      type: git
+      url: https://github.com/warthog-cpr/warthog_desktop.git
+      version: indigo-devel
+    release:
+      packages:
+      - warthog_desktop
+      - warthog_viz
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/clearpath-gbp/warthog_desktop-release.git
+      version: 0.0.1-1
+    source:
+      type: git
+      url: https://github.com/warthog-cpr/warthog_desktop.git
+      version: indigo-devel
+    status: maintained
+  warthog_simulator:
+    doc:
+      type: git
+      url: https://github.com/warthog-cpr/warthog_simulator.git
+      version: melodic-devel
+    release:
+      packages:
+      - warthog_gazebo
+      - warthog_simulator
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/clearpath-gbp/warthog_simulator-release.git
+      version: 0.2.0-1
+    source:
+      type: git
+      url: https://github.com/warthog-cpr/warthog_simulator.git
+      version: melodic-devel
     status: maintained
   web_video_server:
     doc:
@@ -7748,7 +9744,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/RobotWebTools-release/web_video_server-release.git
-      version: 0.2.0-0
+      version: 0.2.1-1
     source:
       type: git
       url: https://github.com/RobotWebTools/web_video_server.git
@@ -7769,6 +9765,21 @@ repositories:
       url: https://github.com/ros-visualization/webkit_dependency.git
       version: kinetic-devel
     status: maintained
+  webots_ros:
+    doc:
+      type: git
+      url: https://github.com/cyberbotics/webots_ros.git
+      version: melodic
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/cyberbotics/webots_ros-release.git
+      version: 2.0.5-1
+    source:
+      type: git
+      url: https://github.com/cyberbotics/webots_ros.git
+      version: melodic
+    status: developed
   webrtc_ros:
     release:
       packages:
@@ -7783,6 +9794,38 @@ repositories:
       url: https://github.com/RobotWebTools/webrtc_ros.git
       version: develop
     status: developed
+  wge100_driver:
+    doc:
+      type: git
+      url: https://github.com/ros-drivers/wge100_driver.git
+      version: kinetic-devel
+    release:
+      packages:
+      - wge100_camera
+      - wge100_camera_firmware
+      - wge100_driver
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-drivers-gbp/wge100_driver-release.git
+      version: 1.8.2-1
+    source:
+      type: git
+      url: https://github.com/ros-drivers/wge100_driver.git
+      version: kinetic-devel
+  wifi_ddwrt:
+    doc:
+      type: git
+      url: https://github.com/ros-drivers/wifi_ddwrt.git
+      version: hydro-devel
+    release:
+      tags:
+        release: release/melodic/{package}/{version}
+      url: https://github.com/ros-gbp/wifi_ddwrt-release.git
+      version: 0.2.0-0
+    source:
+      type: git
+      url: https://github.com/ros-drivers/wifi_ddwrt.git
+      version: hydro-devel
   willow_maps:
     doc:
       type: git
@@ -7834,6 +9877,16 @@ repositories:
       url: https://github.com/ros/xacro.git
       version: melodic-devel
     status: maintained
+  xaxxon_openlidar:
+    doc:
+      type: git
+      url: https://github.com/xaxxontech/xaxxon_openlidar.git
+      version: master
+    source:
+      type: git
+      url: https://github.com/xaxxontech/xaxxon_openlidar.git
+      version: master
+    status: maintained
   xpp:
     doc:
       type: git
@@ -7851,7 +9904,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/leggedrobotics/xpp-release.git
-      version: 1.0.9-0
+      version: 1.0.10-0
     source:
       test_pull_requests: true
       type: git
@@ -7906,7 +9959,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/openspur/yp-spur-release.git
-      version: 1.15.3-0
+      version: 1.16.0-1
     source:
       type: git
       url: https://github.com/openspur/yp-spur.git
@@ -7921,7 +9974,7 @@ repositories:
       tags:
         release: release/melodic/{package}/{version}
       url: https://github.com/openspur/ypspur_ros-release.git
-      version: 0.2.0-0
+      version: 0.3.0-1
     source:
       type: git
       url: https://github.com/openspur/ypspur_ros.git
@@ -7975,6 +10028,16 @@ repositories:
       type: git
       url: https://github.com/stonier/zeroconf_msgs.git
       version: indigo
+    status: maintained
+  zivid_camera:
+    doc:
+      type: git
+      url: https://github.com/zivid/zivid-ros.git
+      version: master
+    source:
+      type: git
+      url: https://github.com/zivid/zivid-ros.git
+      version: master
     status: maintained
 type: distribution
 version: 2
