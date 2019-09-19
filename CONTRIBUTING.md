@@ -38,7 +38,7 @@ There is a guide for submitting rosdep keys [here](http://docs.ros.org/independe
 Updates to rosdep rules require the review of two people.
 This will usually means that it needs a +1, and then it can be merged by a different person.
 
-For convenience in reviewing please link to the web listings of packages such as on http://packages.ubuntu.com, http://packages.debian.org, and https://apps.fedoraproject.org/packages or if a pip package pypi.python.org.
+For convenience in reviewing, please comment in the PR with links to the web listings of packages such as on http://packages.ubuntu.com, http://packages.debian.org, and https://apps.fedoraproject.org/packages or if a pip package pypi.python.org.
 
 Please also briefly describe the package being added and what use case you want to use it for.
 It's valuable to have a record of the packages as submitted and their intended purpose for clarity in the future so that if there's a conflict there's information to fall back on instead of speculation about the original use cases.
@@ -64,6 +64,59 @@ Guidelines for rosdep rules
        However please don't target 'sid' as it's a rolling target and when the keys change our database gets out of date.
   * Keep everything in alphabetical order for better merging.
   * No trailing whitespace.
+
+### Expected Rosdep Sources
+
+Keys in the rosdep database are required to come from packages contained in the following repositories only.
+
+#### Ubuntu
+
+* Ubuntu Repositories: Main, Universe, or Multiverse
+* ROS Sources: https://wiki.ros.org/Installation/Ubuntu/Sources
+
+#### Debian
+
+* Debian Repositories: Main, Universe, or Multiverse
+* ROS Sources: https://wiki.ros.org/Installation/Ubuntu/Sources
+
+#### Fedora
+
+* Fedora Project Repositories: release or updates
+
+#### RHEL/CentOS
+
+* CentOS Repositories: base, extras, centos-sclo-rh, or updates
+* Fedora Project Repositories: epel
+
+#### MacOS
+
+TODO
+
+#### Gentoo
+
+* Gentoo Portage Repository (e.g. `rsync://rsync.us.gentoo.org/gentoo-portage`)
+* ROS-Overlay: `https://github.com/ros/ros-overlay`
+
+If the ebuild you are referencing is not in either of those locations, please
+file a PR into ROS-Overlay to add it and any needed dependencies to the tree.
+
+#### Arch Linux
+
+Packages must be in the official Archlinux core, extra, or community repositories at the time they are contributed.
+
+Packages in the AUR may not be added directly.
+Work has been proposed to add a separate installer for AUR packages [ros-infrastructure/rosdep#560](https://github.com/ros-infrastructure/rosdep/issues/560).
+
+#### Alpine Linux
+
+* Alpine Linux requires the [`edge`](https://wiki.alpinelinux.org/wiki/Edge#Upgrading_to_Edge) release and [`testing`](https://wiki.alpinelinux.org/wiki/Aports_tree#testing) aports branch.
+
+#### pip
+
+For pip installers they are expected to be in the main pypi index.
+
+#### 
+
 
 ### Python 3 rules
 
