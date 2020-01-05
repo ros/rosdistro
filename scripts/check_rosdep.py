@@ -113,6 +113,8 @@ def check_brackets(buf):
     def fun(i, l, o):
         m = re.match(r'^(?:' + indent_atom + r')*([^:]*):\s*(\w.*)$', l)
         if m is not None and m.groups()[0] not in excepts:
+            if m.groups()[1] == 'null':
+                return True
             print_err("list not in square brackets line %u" % (i+1))
             return False
         return True
@@ -133,7 +135,7 @@ def check_order(buf):
         prev = st[lvl]
         try:
             # parse as yaml to parse `"foo bar"` as string 'foo bar' not string '"foo bar"'
-            item = yaml.load(m.groups()[0])
+            item = yaml.safe_load(m.groups()[0])
         except:
             print('woops line %d' % i)
             raise
@@ -158,7 +160,7 @@ def main(fname):
     # here be tests.
     ydict = None
     try:
-        ydict = yaml.load(buf)
+        ydict = yaml.safe_load(buf)
     except Exception:
         pass
     if ydict != {}:
@@ -174,7 +176,7 @@ def main(fname):
     else:
         print_test("skipping file with empty dict contents...")
     try:
-        ydict = yaml.load(buf)
+        ydict = yaml.safe_load(buf)
 
         # ensure that values don't contain whitespaces
         whitespace_whitelist = ["el capitan", "mountain lion"]

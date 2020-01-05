@@ -14,7 +14,7 @@ class Fold(object):
         if os.environ.get('TRAVIS') == 'true':
             if msg:
                 msg += ', '
-            msg += "see folded block '%s' for details" % self.get_block_name()
+            msg += "see folded block '%s' above for details" % self.get_block_name()
         return msg
 
     def get_block_name(self):

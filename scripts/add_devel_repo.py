@@ -9,7 +9,7 @@ from sort_yaml import sort_yaml_data
 
 
 def add_devel_repository(yaml_file, name, vcs_type, url, version=None):
-    data = yaml.load(open(yaml_file, 'r'))
+    data = yaml.safe_load(open(yaml_file, 'r'))
     if data['type'] == 'gbp':
         add_devel_repository_fuerte(yaml_file, data, name, vcs_type, url, version)
         return
@@ -52,7 +52,8 @@ def add_devel_repository_fuerte(yaml_file, data, name, vcs_type, url, version):
     values['version'] = version
     data['repositories'][name] = values
     sort_yaml_data(data)
-    yaml.dump(data, file(yaml_file, 'w'), default_flow_style=False)
+    with open(yaml_file, 'w') as out_file:
+        yaml.dump(data, out_file, default_flow_style=False)
 
 
 if __name__ == "__main__":
