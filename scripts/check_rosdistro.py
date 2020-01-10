@@ -143,7 +143,7 @@ def main(fname):
     my_assert.clean = True
 
     try:
-        ydict = yaml.load(buf)
+        ydict = yaml.safe_load(buf)
     except Exception as e:
         print_err("could not build the dict: %s" % (str(e)))
         my_assert(False)
