@@ -6,9 +6,9 @@ release_platforms:
   debian:
   - buster
   fedora:
-  - '30'
+  - '32'
   ubuntu:
-  - bionic
+  - focal
 repositories:
   actionlib:
     source:
@@ -31,11 +31,20 @@ repositories:
       url: https://github.com/ros/bond_core.git
       version: kinetic-devel
   catkin:
+    doc:
+      type: git
+      url: https://github.com/ros/catkin.git
+      version: noetic-devel
+    release:
+      tags:
+        release: release/noetic/{package}/{version}
+      url: https://github.com/ros-gbp/catkin-release.git
+      version: 0.8.0-1
     source:
       test_pull_requests: true
       type: git
       url: https://github.com/ros/catkin.git
-      version: kinetic-devel
+      version: noetic-devel
     status: maintained
   class_loader:
     source:
@@ -45,6 +54,15 @@ repositories:
       version: melodic-devel
     status: maintained
   cmake_modules:
+    doc:
+      type: git
+      url: https://github.com/ros/cmake_modules.git
+      version: 0.5-devel
+    release:
+      tags:
+        release: release/noetic/{package}/{version}
+      url: https://github.com/ros-gbp/cmake_modules-release.git
+      version: 0.5.0-1
     source:
       test_pull_requests: true
       type: git
@@ -92,26 +110,63 @@ repositories:
       version: master
     status: maintained
   gencpp:
+    doc:
+      type: git
+      url: https://github.com/ros/gencpp.git
+      version: kinetic-devel
+    release:
+      tags:
+        release: release/noetic/{package}/{version}
+      url: https://github.com/ros-gbp/gencpp-release.git
+      version: 0.6.3-1
     source:
       type: git
       url: https://github.com/ros/gencpp.git
       version: kinetic-devel
     status: maintained
   geneus:
+    doc:
+      type: git
+      url: https://github.com/jsk-ros-pkg/geneus.git
+      version: master
+    release:
+      tags:
+        release: release/noetic/{package}/{version}
+      url: https://github.com/tork-a/geneus-release.git
+      version: 3.0.0-1
     source:
       type: git
       url: https://github.com/jsk-ros-pkg/geneus.git
       version: master
     status: maintained
   genlisp:
+    doc:
+      type: git
+      url: https://github.com/ros/genlisp.git
+      version: kinetic-devel
+    release:
+      tags:
+        release: release/noetic/{package}/{version}
+      url: https://github.com/ros-gbp/genlisp-release.git
+      version: 0.4.18-1
     source:
       test_pull_requests: true
       type: git
       url: https://github.com/ros/genlisp.git
-      version: groovy-devel
+      version: kinetic-devel
     status: maintained
   genmsg:
+    doc:
+      type: git
+      url: https://github.com/ros/genmsg.git
+      version: kinetic-devel
+    release:
+      tags:
+        release: release/noetic/{package}/{version}
+      url: https://github.com/ros-gbp/genmsg-release.git
+      version: 0.5.14-1
     source:
+      test_pull_requests: true
       type: git
       url: https://github.com/ros/genmsg.git
       version: kinetic-devel
@@ -123,6 +178,15 @@ repositories:
       version: kinetic-devel
     status: maintained
   genpy:
+    doc:
+      type: git
+      url: https://github.com/ros/genpy.git
+      version: kinetic-devel
+    release:
+      tags:
+        release: release/noetic/{package}/{version}
+      url: https://github.com/ros-gbp/genpy-release.git
+      version: 0.6.10-1
     source:
       test_pull_requests: true
       type: git
@@ -180,6 +244,15 @@ repositories:
       version: kinetic-devel
     status: maintained
   message_runtime:
+    doc:
+      type: git
+      url: https://github.com/ros/message_runtime.git
+      version: kinetic-devel
+    release:
+      tags:
+        release: release/noetic/{package}/{version}
+      url: https://github.com/ros-gbp/message_runtime-release.git
+      version: 0.4.13-1
     source:
       type: git
       url: https://github.com/ros/message_runtime.git
@@ -200,8 +273,8 @@ repositories:
   orocos_kinematics_dynamics:
     source:
       type: git
-      url: https://github.com/tfoote/orocos_kinematics_dynamics.git
-      version: python3_support
+      url: https://github.com/orocos/orocos_kinematics_dynamics.git
+      version: master
     status: maintained
   pcl_msgs:
     source:
@@ -284,10 +357,19 @@ repositories:
       version: kinetic-devel
     status: maintained
   ros_environment:
+    doc:
+      type: git
+      url: https://github.com/ros/ros_environment.git
+      version: noetic
+    release:
+      tags:
+        release: release/noetic/{package}/{version}
+      url: https://github.com/ros-gbp/ros_environment-release.git
+      version: 1.3.0-1
     source:
       type: git
       url: https://github.com/ros/ros_environment.git
-      version: melodic
+      version: noetic
     status: maintained
   ros_tutorials:
     source:
@@ -297,6 +379,11 @@ repositories:
       version: melodic-devel
     status: maintained
   rosbag_migration_rule:
+    release:
+      tags:
+        release: release/noetic/{package}/{version}
+      url: https://github.com/ros-gbp/rosbag_migration_rule-release.git
+      version: 1.0.1-1
     source:
       type: git
       url: https://github.com/ros/rosbag_migration_rule.git
@@ -317,11 +404,32 @@ repositories:
       version: kinetic-devel
     status: maintained
   roscpp_core:
+    doc:
+      type: git
+      url: https://github.com/ros/roscpp_core.git
+      version: noetic-devel
+    release:
+      packages:
+      - cpp_common
+      - roscpp_core
+      - roscpp_serialization
+      - roscpp_traits
+      - rostime
+      tags:
+        release: release/noetic/{package}/{version}
+      url: https://github.com/ros-gbp/roscpp_core-release.git
+      version: 0.7.1-1
     source:
       test_pull_requests: true
       type: git
       url: https://github.com/ros/roscpp_core.git
-      version: kinetic-devel
+      version: noetic-devel
+    status: maintained
+  roslint:
+    source:
+      type: git
+      url: https://github.com/ros/roslint.git
+      version: master
     status: maintained
   roslisp:
     source:
@@ -330,6 +438,15 @@ repositories:
       version: master
     status: maintained
   rospack:
+    doc:
+      type: git
+      url: https://github.com/ros/rospack.git
+      version: melodic-devel
+    release:
+      tags:
+        release: release/noetic/{package}/{version}
+      url: https://github.com/ros-gbp/rospack-release.git
+      version: 2.5.5-1
     source:
       test_pull_requests: true
       type: git
@@ -456,6 +573,12 @@ repositories:
       type: git
       url: https://github.com/ros-visualization/webkit_dependency.git
       version: kinetic-devel
+    status: maintained
+  xacro:
+    source:
+      type: git
+      url: https://github.com/ros/xacro.git
+      version: noetic-devel
     status: maintained
 type: distribution
 version: 2
