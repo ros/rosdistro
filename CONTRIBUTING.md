@@ -141,7 +141,9 @@ python3-foobar:
 ```
 
 You may see existing rules that use `_python3`-suffixed distribution codenames.
-These were trialed as a possible style of Python 3 rules and should not be used for newly added definitions.
+These were trialed as a possible style of Python 3 rules and should not be used.
+The guidance above should be followed for new rules.
+Additionally, if you rely on a dependency that uses `_python3`-suffixed codenames, add a new rule for it that follows the guidance above.
 
 How to submit pull requests
 ---------------------------
