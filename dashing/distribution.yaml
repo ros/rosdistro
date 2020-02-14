@@ -33,7 +33,6 @@ repositories:
       - point_cloud_fusion
       - ray_ground_classifier
       - ray_ground_classifier_nodes
-      - serial_driver
       - velodyne_driver
       - velodyne_node
       - voxel_grid
@@ -92,8 +91,9 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/ament_cmake-release.git
-      version: 0.7.3-1
+      version: 0.7.4-1
     source:
+      test_abi: true
       type: git
       url: https://github.com/ament/ament_cmake.git
       version: dashing
@@ -201,6 +201,24 @@ repositories:
       url: https://github.com/ament/ament_package.git
       version: dashing
     status: developed
+  ament_virtualenv:
+    doc:
+      type: git
+      url: https://github.com/esol-community/ament_virtualenv.git
+      version: master
+    release:
+      packages:
+      - ament_cmake_virtualenv
+      - ament_virtualenv
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/esol-community/ament_virtualenv-release.git
+      version: 0.0.5-5
+    source:
+      type: git
+      url: https://github.com/esol-community/ament_virtualenv.git
+      version: master
+    status: developed
   angles:
     doc:
       type: git
@@ -210,7 +228,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/angles-release.git
-      version: 1.12.1-1
+      version: 1.12.2-1
     source:
       test_pull_requests: true
       type: git
@@ -254,9 +272,10 @@ repositories:
     doc:
       type: git
       url: https://github.com/astuff/astuff_sensor_msgs.git
-      version: dashing-devel
+      version: master
     release:
       packages:
+      - astuff_sensor_msgs
       - delphi_esr_msgs
       - delphi_mrr_msgs
       - delphi_srr_msgs
@@ -270,11 +289,11 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/astuff/astuff_sensor_msgs-release.git
-      version: 3.0.0-2
+      version: 3.0.1-1
     source:
       type: git
       url: https://github.com/astuff/astuff_sensor_msgs.git
-      version: dashing-devel
+      version: master
     status: developed
   async_web_server_cpp:
     release:
@@ -287,19 +306,20 @@ repositories:
     doc:
       type: git
       url: https://github.com/astuff/automotive_autonomy_msgs.git
-      version: dashing-devel
+      version: master
     release:
       packages:
+      - automotive_autonomy_msgs
       - automotive_navigation_msgs
       - automotive_platform_msgs
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/astuff/automotive_autonomy_msgs-release.git
-      version: 3.0.0-1
+      version: 3.0.3-1
     source:
       type: git
       url: https://github.com/astuff/automotive_autonomy_msgs.git
-      version: dashing-devel
+      version: master
     status: developed
   aws_common:
     doc:
@@ -341,16 +361,16 @@ repositories:
     doc:
       type: git
       url: https://github.com/BehaviorTree/BehaviorTree.CPP.git
-      version: ros2-dev
+      version: ros2-devel
     release:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/BehaviorTree/behaviortree_cpp_v3-release.git
-      version: 3.0.9-1
+      version: 3.1.1-1
     source:
       type: git
       url: https://github.com/BehaviorTree/BehaviorTree.CPP.git
-      version: ros2-dev
+      version: ros2-devel
     status: developed
   cartographer:
     doc:
@@ -416,7 +436,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/aws-gbp/cloudwatch_common-release.git
-      version: 1.1.1-0
+      version: 1.1.2-1
     source:
       type: git
       url: https://github.com/aws-robotics/cloudwatch-common.git
@@ -507,12 +527,31 @@ repositories:
       url: https://github.com/ros-controls/control_msgs.git
       version: crystal-devel
     status: maintained
+  costmap_converter:
+    doc:
+      type: git
+      url: https://github.com/rst-tu-dortmund/costmap_converter.git
+      version: ros2
+    release:
+      packages:
+      - costmap_converter
+      - costmap_converter_msgs
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/rst-tu-dortmund/costmap_converter-ros2-release.git
+      version: 0.1.0-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/rst-tu-dortmund/costmap_converter.git
+      version: ros2
+    status: developed
   cross_compile:
     release:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros-tooling/cross_compile-release.git
-      version: 0.1.1-1
+      version: 0.2.0-1
     source:
       type: git
       url: https://github.com/ros-tooling/cross_compile.git
@@ -523,13 +562,13 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/cyclonedds-release.git
-      version: 0.1.0-1
+      version: 0.1.0-3
     source:
       test_commits: false
       test_pull_requests: false
       type: git
       url: https://github.com/eclipse-cyclonedds/cyclonedds.git
-      version: 1c8c2944ff60544da38fefda5b4e80270e7fec48
+      version: 76fa68808682a15dd8aff26da20622ac574fa1a1
     status: developed
   demos:
     doc:
@@ -574,7 +613,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/depthimage_to_laserscan-release.git
-      version: 2.2.2-1
+      version: 2.2.5-1
     source:
       test_pull_requests: true
       type: git
@@ -600,6 +639,22 @@ repositories:
       url: https://github.com/ros/diagnostics.git
       version: dashing
     status: developed
+  dolly:
+    release:
+      packages:
+      - dolly
+      - dolly_follow
+      - dolly_gazebo
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/chapulina/dolly-release.git
+      version: 0.1.1-2
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/chapulina/dolly.git
+      version: dashing
+    status: maintained
   dynamixel_sdk:
     doc:
       type: git
@@ -652,10 +707,9 @@ repositories:
       url: https://github.com/yujinrobot-release/ecl_core-release.git
       version: 1.0.4-1
     source:
-      test_pull_requests: true
       type: git
       url: https://github.com/stonier/ecl_core.git
-      version: devel
+      version: release/1.0.x
     status: maintained
   ecl_lite:
     doc:
@@ -818,7 +872,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/boschresearch/fmi_adapter_ros2-release.git
-      version: 0.1.5-1
+      version: 0.1.7-1
     source:
       type: git
       url: https://github.com/boschresearch/fmi_adapter_ros2.git
@@ -829,7 +883,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/boschresearch/fmilibrary_vendor-release.git
-      version: 0.1.0-1
+      version: 0.2.0-1
   foonathan_memory_vendor:
     release:
       tags:
@@ -901,7 +955,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/geometry2-release.git
-      version: 0.11.5-1
+      version: 0.11.6-1
     source:
       test_pull_requests: true
       type: git
@@ -942,6 +996,16 @@ repositories:
       url: https://github.com/swri-robotics/gps_umd.git
       version: dashing-devel
     status: maintained
+  gtsam:
+    doc:
+      type: git
+      url: https://github.com/borglab/gtsam.git
+      version: develop
+    source:
+      type: git
+      url: https://github.com/borglab/gtsam.git
+      version: develop
+    status: maintained
   h264_encoder_core:
     doc:
       type: git
@@ -951,7 +1015,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/aws-gbp/h264_encoder_core-release.git
-      version: 2.0.2-1
+      version: 2.0.3-1
     source:
       type: git
       url: https://github.com/aws-robotics/kinesisvideo-encoder-common.git
@@ -1104,7 +1168,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/aws-gbp/kinesis_video_streamer-release.git
-      version: 3.0.0-2
+      version: 3.1.0-1
     source:
       type: git
       url: https://github.com/aws-robotics/kinesisvideo-ros2.git
@@ -1204,7 +1268,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/aws-gbp/lex_node-release.git
-      version: 3.0.0-1
+      version: 3.1.0-1
     source:
       type: git
       url: https://github.com/aws-robotics/lex-ros2.git
@@ -1234,10 +1298,40 @@ repositories:
       url: https://github.com/ros2-gbp/libyaml_vendor-release.git
       version: 1.0.0-1
     source:
+      test_abi: true
       type: git
       url: https://github.com/ros2/libyaml_vendor.git
       version: dashing
     status: maintained
+  marti_common:
+    doc:
+      type: git
+      url: https://github.com/swri-robotics/marti_common.git
+      version: dashing-devel
+    release:
+      packages:
+      - swri_console_util
+      - swri_dbw_interface
+      - swri_geometry_util
+      - swri_image_util
+      - swri_math_util
+      - swri_opencv_util
+      - swri_prefix_tools
+      - swri_roscpp
+      - swri_route_util
+      - swri_serial_util
+      - swri_system_util
+      - swri_transform_util
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/swri-robotics-gbp/marti_common-release.git
+      version: 3.0.3-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/swri-robotics/marti_common.git
+      version: dashing-devel
+    status: developed
   marti_messages:
     doc:
       type: git
@@ -1270,7 +1364,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/ros2_message_filters-release.git
-      version: 3.1.2-1
+      version: 3.1.3-1
     source:
       test_pull_requests: true
       type: git
@@ -1370,6 +1464,41 @@ repositories:
       url: https://github.com/ros-drivers/nmea_msgs.git
       version: ros2
     status: maintained
+  nonpersistent_voxel_layer:
+    doc:
+      type: git
+      url: https://github.com/SteveMacenski/nonpersistent_voxel_layer.git
+      version: dashing-devel
+    release:
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/SteveMacenski/nonpersistent_voxel_layer-release.git
+      version: 2.0.2-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/SteveMacenski/nonpersistent_voxel_layer.git
+      version: dashing-devel
+    status: maintained
+  novatel_gps_driver:
+    doc:
+      type: git
+      url: https://github.com/swri-robotics/novatel_gps_driver.git
+      version: dashing-devel
+    release:
+      packages:
+      - novatel_gps_driver
+      - novatel_gps_msgs
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/swri-robotics-gbp/novatel_gps_driver-release.git
+      version: 4.0.2-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/swri-robotics/novatel_gps_driver.git
+      version: dashing-devel
+    status: developed
   object_msgs:
     doc:
       type: git
@@ -1384,6 +1513,25 @@ repositories:
       type: git
       url: https://github.com/intel/ros2_object_msgs.git
       version: master
+    status: maintained
+  octomap:
+    doc:
+      type: git
+      url: https://github.com/octomap/octomap.git
+      version: v1.9.1
+    release:
+      packages:
+      - dynamic_edt_3d
+      - octomap
+      - octovis
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/ros-gbp/octomap-release.git
+      version: 1.9.3-1
+    source:
+      type: git
+      url: https://github.com/octomap/octomap.git
+      version: devel
     status: maintained
   ompl:
     release:
@@ -1402,7 +1550,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/orocos_kinematics_dynamics-release.git
-      version: 3.2.0-1
+      version: 3.2.1-1
     source:
       test_pull_requests: true
       type: git
@@ -1443,21 +1591,20 @@ repositories:
       url: https://github.com/osrf/osrf_testing_tools_cpp.git
       version: dashing
     status: developed
-  pcl_conversions:
+  pacmod3:
     doc:
       type: git
-      url: https://github.com/ros2/pcl_conversions.git
-      version: dashing
+      url: https://github.com/astuff/pacmod3.git
+      version: dashing-devel
     release:
       tags:
         release: release/dashing/{package}/{version}
-      url: https://github.com/ros2-gbp/pcl_conversions-release.git
-      version: 2.0.0-1
+      url: https://github.com/astuff/pacmod3-release.git
+      version: 1.3.1-1
     source:
-      test_pull_requests: true
       type: git
-      url: https://github.com/ros2/pcl_conversions.git
-      version: dashing
+      url: https://github.com/astuff/pacmod3.git
+      version: dashing-devel
     status: developed
   pcl_msgs:
     doc:
@@ -1490,6 +1637,57 @@ repositories:
       type: git
       url: https://github.com/wg-perception/people.git
       version: ros2
+    status: maintained
+  perception_pcl:
+    doc:
+      type: git
+      url: https://github.com/ros-perception/perception_pcl.git
+      version: dashing-devel
+    release:
+      packages:
+      - pcl_conversions
+      - perception_pcl
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/ros2-gbp/perception_pcl-release.git
+      version: 2.0.0-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/ros-perception/perception_pcl.git
+      version: dashing-devel
+    status: developed
+  phidgets_drivers:
+    doc:
+      type: git
+      url: https://github.com/ros-drivers/phidgets_drivers.git
+      version: dashing
+    release:
+      packages:
+      - libphidget22
+      - phidgets_accelerometer
+      - phidgets_analog_inputs
+      - phidgets_api
+      - phidgets_digital_inputs
+      - phidgets_digital_outputs
+      - phidgets_drivers
+      - phidgets_gyroscope
+      - phidgets_high_speed_encoder
+      - phidgets_ik
+      - phidgets_magnetometer
+      - phidgets_motors
+      - phidgets_msgs
+      - phidgets_spatial
+      - phidgets_temperature
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/ros2-gbp/phidgets_drivers-release.git
+      version: 2.0.1-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/ros-drivers/phidgets_drivers.git
+      version: dashing
     status: maintained
   pluginlib:
     doc:
@@ -1524,7 +1722,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/PX4/px4_msgs2-release.git
-      version: 2.0.0-2
+      version: 2.0.1-1
     status: developed
   py_trees:
     doc:
@@ -1599,10 +1797,9 @@ repositories:
       url: https://github.com/stonier/py_trees_ros_tutorials-release.git
       version: 1.0.5-1
     source:
-      test_pull_requests: true
       type: git
       url: https://github.com/splintered-reality/py_trees_ros_tutorials.git
-      version: devel
+      version: release/1.0.x
     status: developed
   py_trees_ros_viewer:
     doc:
@@ -1672,8 +1869,9 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/rcl-release.git
-      version: 0.7.7-1
+      version: 0.7.8-1
     source:
+      test_abi: true
       test_pull_requests: true
       type: git
       url: https://github.com/ros2/rcl.git
@@ -1736,8 +1934,9 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/rclcpp-release.git
-      version: 0.7.11-1
+      version: 0.7.12-1
     source:
+      test_abi: true
       test_pull_requests: true
       type: git
       url: https://github.com/ros2/rclcpp.git
@@ -1752,8 +1951,9 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/rclpy-release.git
-      version: 0.7.8-1
+      version: 0.7.10-1
     source:
+      test_abi: true
       test_pull_requests: true
       type: git
       url: https://github.com/ros2/rclpy.git
@@ -1784,7 +1984,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/rcutils-release.git
-      version: 0.7.3-1
+      version: 0.7.5-1
     source:
       test_pull_requests: true
       type: git
@@ -1837,7 +2037,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/resource_retriever-release.git
-      version: 2.1.0-2
+      version: 2.1.2-1
     source:
       test_pull_requests: true
       type: git
@@ -1875,7 +2075,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/rmw_connext-release.git
-      version: 0.7.3-1
+      version: 0.7.4-1
     source:
       test_pull_requests: true
       type: git
@@ -1890,13 +2090,12 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/rmw_cyclonedds-release.git
-      version: 0.4.0-1
+      version: 0.4.2-1
     source:
-      test_commits: false
-      test_pull_requests: false
+      test_pull_requests: true
       type: git
       url: https://github.com/atolab/rmw_cyclonedds.git
-      version: 888235e96edfa9ca49a5e074407a98ed72843e65
+      version: master
     status: developed
   rmw_fastrtps:
     doc:
@@ -1927,7 +2126,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/rmw_implementation-release.git
-      version: 0.7.1-2
+      version: 0.7.2-1
     source:
       test_pull_requests: true
       type: git
@@ -1952,6 +2151,22 @@ repositories:
       url: https://github.com/ros2/rmw_opensplice.git
       version: dashing
     status: developed
+  robot_localization:
+    doc:
+      type: git
+      url: https://github.com/cra-ros-pkg/robot_localization.git
+      version: dashing-devel
+    release:
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/cra-ros-pkg/robot_localization-release.git
+      version: 3.0.1-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/cra-ros-pkg/robot_localization.git
+      version: dashing-devel
+    status: maintained
   robot_state_publisher:
     doc:
       type: git
@@ -1961,7 +2176,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/robot_state_publisher-release.git
-      version: 2.2.4-1
+      version: 2.2.5-1
     source:
       test_pull_requests: true
       type: git
@@ -1977,11 +2192,52 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/ros1_bridge-release.git
-      version: 0.7.3-1
+      version: 0.7.4-1
     source:
       test_commits: false
       type: git
       url: https://github.com/ros2/ros1_bridge.git
+      version: dashing
+    status: developed
+  ros2_control:
+    doc:
+      type: git
+      url: https://github.com/ros-controls/ros2_control.git
+      version: dashing
+    release:
+      packages:
+      - controller_interface
+      - controller_manager
+      - controller_parameter_server
+      - hardware_interface
+      - ros2_control
+      - test_robot_hardware
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/ros2-gbp/ros2_control-release.git
+      version: 0.0.1-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/ros-controls/ros2_control.git
+      version: master
+    status: developed
+  ros2_controllers:
+    doc:
+      type: git
+      url: https://github.com/ros-controls/ros2_controllers.git
+      version: dashing
+    release:
+      packages:
+      - ros_controllers
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/ros2-gbp/ros2_controllers-release.git
+      version: 0.0.1-2
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/ros-controls/ros2_controllers.git
       version: dashing
     status: developed
   ros2_intel_realsense:
@@ -2021,6 +2277,25 @@ repositories:
       url: https://github.com/intel/ros2_object_analytics.git
       version: master
     status: maintained
+  ros2_ouster_driver:
+    doc:
+      type: git
+      url: https://github.com/SteveMacenski/ros2_ouster_drivers.git
+      version: dashing-devel
+    release:
+      packages:
+      - ouster_msgs
+      - ros2_ouster
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/SteveMacenski/ros2_ouster_drivers-release.git
+      version: 0.0.2-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/SteveMacenski/ros2_ouster_drivers.git
+      version: dashing-devel
+    status: developed
   ros2_tracing:
     doc:
       type: git
@@ -2066,12 +2341,25 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/ros2cli-release.git
-      version: 0.7.7-1
+      version: 0.7.9-1
     source:
       test_pull_requests: true
       type: git
       url: https://github.com/ros2/ros2cli.git
       version: dashing
+    status: developed
+  ros_canopen:
+    release:
+      packages:
+      - can_msgs
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/ros-industrial-release/ros_canopen-release.git
+      version: 2.0.0-1
+    source:
+      type: git
+      url: https://github.com/ros-industrial/ros_canopen.git
+      version: dashing-devel
     status: developed
   ros_environment:
     release:
@@ -2227,7 +2515,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/rosidl-release.git
-      version: 0.7.7-1
+      version: 0.7.8-1
     source:
       test_pull_requests: true
       type: git
@@ -2284,7 +2572,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/rosidl_python-release.git
-      version: 0.7.9-1
+      version: 0.7.10-1
     source:
       test_pull_requests: true
       type: git
@@ -2323,7 +2611,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/rosidl_typesupport_connext-release.git
-      version: 0.7.2-1
+      version: 0.7.3-1
     source:
       type: git
       url: https://github.com/ros2/rosidl_typesupport_connext.git
@@ -2405,6 +2693,21 @@ repositories:
       url: https://github.com/ros-visualization/rqt_action.git
       version: crystal-devel
     status: maintained
+  rqt_common_plugins:
+    doc:
+      type: git
+      url: https://github.com/ros-visualization/rqt_common_plugins.git
+      version: dashing-devel
+    release:
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/ros2-gbp/rqt_common_plugins-release.git
+      version: 1.0.0-1
+    source:
+      type: git
+      url: https://github.com/ros-visualization/rqt_common_plugins.git
+      version: dashing-devel
+    status: maintained
   rqt_console:
     doc:
       type: git
@@ -2414,7 +2717,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/rqt_console-release.git
-      version: 1.1.0-1
+      version: 1.1.1-1
     source:
       type: git
       url: https://github.com/ros-visualization/rqt_console.git
@@ -2429,7 +2732,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/rqt_graph-release.git
-      version: 1.0.2-1
+      version: 1.0.4-1
     source:
       test_pull_requests: true
       type: git
@@ -2445,7 +2748,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/rqt_image_view-release.git
-      version: 1.0.2-1
+      version: 1.0.4-1
     source:
       test_pull_requests: true
       type: git
@@ -2528,6 +2831,21 @@ repositories:
       url: https://github.com/ros-visualization/rqt_reconfigure.git
       version: dashing
     status: maintained
+  rqt_robot_steering:
+    doc:
+      type: git
+      url: https://github.com/ros-visualization/rqt_robot_steering.git
+      version: dashing-devel
+    release:
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/ros2-gbp/rqt_robot_steering-release.git
+      version: 1.0.0-1
+    source:
+      type: git
+      url: https://github.com/ros-visualization/rqt_robot_steering.git
+      version: dashing-devel
+    status: maintained
   rqt_service_caller:
     doc:
       type: git
@@ -2592,7 +2910,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/ros-visualization/rqt_topic.git
-      version: crystal-devel
+      version: dashing-devel
     release:
       tags:
         release: release/dashing/{package}/{version}
@@ -2601,7 +2919,7 @@ repositories:
     source:
       type: git
       url: https://github.com/ros-visualization/rqt_topic.git
-      version: crystal-devel
+      version: dashing-devel
     status: maintained
   rviz:
     doc:
@@ -2621,7 +2939,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/rviz-release.git
-      version: 6.1.4-1
+      version: 6.1.5-1
     source:
       test_pull_requests: true
       type: git
@@ -2650,6 +2968,17 @@ repositories:
       url: https://github.com/SteveMacenski/slam_toolbox.git
       version: dashing-devel
     status: developed
+  slide_show:
+    release:
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/ros2-gbp/slide_show-release.git
+      version: 0.1.0-1
+    source:
+      type: git
+      url: https://github.com/ros2/slide_show.git
+      version: master
+    status: developed
   sophus:
     release:
       tags:
@@ -2657,6 +2986,22 @@ repositories:
       url: https://github.com/yujinrobot-release/sophus-release.git
       version: 1.0.2-0
     status: maintained
+  spatio_temporal_voxel_layer:
+    doc:
+      type: git
+      url: https://github.com/SteveMacenski/spatio_temporal_voxel_layer.git
+      version: dashing-devel
+    release:
+      tags:
+        release: release/dashing/{package}/{version}
+      url: https://github.com/SteveMacenski/spatio_temporal_voxel_layer-release.git
+      version: 2.0.2-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/SteveMacenski/spatio_temporal_voxel_layer.git
+      version: dashing-devel
+    status: developed
   sros2:
     doc:
       type: git
@@ -2684,7 +3029,11 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/microROS/system_modes-release.git
-      version: 0.1.4-1
+      version: 0.2.0-2
+    source:
+      type: git
+      url: https://github.com/microROS/system_modes.git
+      version: master
     status: developed
   teleop_tools:
     doc:
@@ -2701,7 +3050,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros-gbp/teleop_tools-release.git
-      version: 1.0.1-0
+      version: 1.0.2-1
     source:
       type: git
       url: https://github.com/ros-teleop/teleop_tools.git
@@ -2833,11 +3182,12 @@ repositories:
       version: master
     release:
       packages:
+      - serial_driver
       - udp_driver
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros-drivers-gbp/transport_drivers-release.git
-      version: 0.0.3-1
+      version: 0.0.4-3
     source:
       type: git
       url: https://github.com/ros-drivers/transport_drivers.git
@@ -2855,7 +3205,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/aws-gbp/tts-release.git
-      version: 2.0.1-1
+      version: 2.0.2-1
     source:
       type: git
       url: https://github.com/aws-robotics/tts-ros2.git
@@ -2928,6 +3278,7 @@ repositories:
       url: https://github.com/ros2-gbp/ros_tutorials-release.git
       version: 1.0.1-1
     source:
+      test_abi: true
       test_pull_requests: true
       type: git
       url: https://github.com/ros/ros_tutorials.git
@@ -3039,7 +3390,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/variants-release.git
-      version: 0.7.2-1
+      version: 0.7.3-1
     source:
       test_pull_requests: true
       type: git
@@ -3059,7 +3410,7 @@ repositories:
       tags:
         release: release/dashing/{package}/{version}
       url: https://github.com/ros2-gbp/vision_opencv-release.git
-      version: 2.1.2-1
+      version: 2.1.4-1
     source:
       test_pull_requests: true
       type: git

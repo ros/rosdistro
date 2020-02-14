@@ -226,6 +226,14 @@ beep:
   fedora: [beep]
   gentoo: [app-misc/beep]
   ubuntu: [beep]
+benchmark:
+  debian:
+    '*': [libbenchmark-dev]
+    stretch: null
+  fedora: [google-benchmark]
+  ubuntu:
+    '*': [libbenchmark-dev]
+    xenial: null
 binutils:
   arch: [binutils]
   debian: [binutils-dev]
@@ -571,6 +579,11 @@ debhelper:
 debtree:
   debian: [debtree]
   ubuntu: [debtree]
+devilspie2:
+  arch: [devilspie2]
+  debian: [devilspie2]
+  gentoo: [x11-misc/devilspie2]
+  ubuntu: [devilspie2]
 devscripts:
   debian: [devscripts]
   fedora: [devscripts]
@@ -793,6 +806,12 @@ fluid:
   macports: [fltk]
   opensuse: [fltk-devel]
   ubuntu: [fluid]
+fmt:
+  arch: [fmt]
+  debian: [libfmt-dev]
+  fedora: [fmt-devel]
+  gentoo: [dev-libs/libfmt]
+  ubuntu: [libfmt-dev]
 fping:
   arch: [fping]
   debian: [fping]
@@ -1377,6 +1396,7 @@ jasper:
 java:
   arch: [jdk7-openjdk]
   debian:
+    '*': [default-jdk]
     jessie: [openjdk-7-jdk]
     wheezy: [openjdk-7-jdk]
   fedora:
@@ -1549,13 +1569,84 @@ libbluetooth-dev:
   fedora: [bluez-libs-devel]
   gentoo: [net-wireless/bluez-libs]
   ubuntu: [libbluetooth-dev]
+libboost-atomic:
+  debian:
+    buster: [libboost-atomic1.67.0]
+    stretch: [libboost-atomic1.62.0]
+  fedora: [boost-atomic]
+  ubuntu:
+    bionic: [libboost-atomic1.65.1]
+    eoan: [libboost-atomic1.67.0]
+    focal: [libboost-atomic1.67.0]
+    xenial: [libboost-atomic1.58.0]
+libboost-atomic-dev:
+  debian: [libboost-atomic-dev]
+  fedora: [boost-devel]
+  ubuntu: [libboost-atomic-dev]
+libboost-chrono:
+  debian:
+    buster: [libboost-chrono1.67.0]
+    stretch: [libboost-chrono1.62.0]
+  fedora: [boost-chrono]
+  ubuntu:
+    bionic: [libboost-chrono1.65.1]
+    eoan: [libboost-chrono1.67.0]
+    focal: [libboost-chrono1.67.0]
+    xenial: [libboost-chrono1.58.0]
+libboost-chrono-dev:
+  debian: [libboost-chrono-dev]
+  fedora: [boost-devel]
+  ubuntu: [libboost-chrono-dev]
+libboost-date-time:
+  debian:
+    buster: [libboost-date-time1.67.0]
+    stretch: [libboost-date-time1.62.0]
+  fedora: [boost-date-time]
+  ubuntu:
+    bionic: [libboost-date-time1.65.1]
+    eoan: [libboost-date-time1.67.0]
+    focal: [libboost-date-time1.67.0]
+    xenial: [libboost-date-time1.58.0]
+libboost-date-time-dev:
+  debian: [libboost-date-time-dev]
+  fedora: [boost-devel]
+  ubuntu: [libboost-date-time-dev]
+libboost-dev:
+  debian: [libboost-dev]
+  fedora: [boost-devel]
+  ubuntu: [libboost-dev]
+libboost-filesystem:
+  debian:
+    buster: [libboost-filesystem1.67.0]
+    stretch: [libboost-filesystem1.62.0]
+  fedora: [boost-filesystem]
+  ubuntu:
+    bionic: [libboost-filesystem1.65.1]
+    eoan: [libboost-filesystem1.67.0]
+    focal: [libboost-filesystem1.67.0]
+    xenial: [libboost-filesystem1.58.0]
 libboost-filesystem-dev:
   debian: [libboost-filesystem-dev]
-  fedora: [boost-fileystem]
+  fedora: [boost-devel]
   gentoo: ['dev-libs/boost[python]']
   ubuntu: [libboost-filesystem-dev]
+libboost-iostreams:
+  debian:
+    buster: [libboost-iostreams1.67.0]
+    stretch: [libboost-iostreams1.62.0]
+  fedora: [boost-iostreams]
+  ubuntu:
+    bionic: [libboost-iostreams1.65.1]
+    eoan: [libboost-iostreams1.67.0]
+    focal: [libboost-iostreams1.67.0]
+    xenial: [libboost-iostreams1.58.0]
+libboost-iostreams-dev:
+  debian: [libboost-iostreams-dev]
+  fedora: [boost-devel]
+  ubuntu: [libboost-iostreams-dev]
 libboost-program-options:
   debian:
+    buster: [libboost-program-options1.67.0]
     jessie: [libboost-program-options1.55.0]
     stretch: [libboost-program-options1.62.0]
   fedora: [boost-program-options]
@@ -1563,6 +1654,7 @@ libboost-program-options:
     bionic: [libboost-program-options1.65.1]
     disco: [libboost-program-options1.67.0]
     eoan: [libboost-program-options1.67.0]
+    focal: [libboost-program-options1.67.0]
     trusty: [libboost-program-options1.55.0]
     xenial: [libboost-program-options1.58.0]
 libboost-program-options-dev:
@@ -1577,6 +1669,7 @@ libboost-python:
   ubuntu: [libboost-python-dev]
 libboost-random:
   debian:
+    buster: [libboost-random1.67.0]
     jessie: [libboost-random1.55.0]
     stretch: [libboost-random1.62.0]
     wheezy: [libboost-random1.49.0]
@@ -1585,16 +1678,60 @@ libboost-random:
     bionic: [libboost-random1.65.1]
     disco: [libboost-random1.67.0]
     eoan: [libboost-random1.67.0]
+    focal: [libboost-random1.67.0]
     precise: [libboost-random1.46.1]
     trusty: [libboost-random1.54.0]
+    xenial: [libboost-random1.58.0]
 libboost-random-dev:
   debian: [libboost-random-dev]
   fedora: [boost-devel]
   ubuntu: [libboost-random-dev]
+libboost-regex:
+  debian:
+    buster: [libboost-regex1.67.0]
+    stretch: [libboost-regex1.62.0]
+  fedora: [boost-regex]
+  ubuntu:
+    bionic: [libboost-regex1.65.1]
+    eoan: [libboost-regex1.67.0]
+    focal: [libboost-regex1.67.0]
+    xenial: [libboost-regex1.58.0]
+libboost-regex-dev:
+  debian: [libboost-regex-dev]
+  fedora: [boost-devel]
+  ubuntu: [libboost-regex-dev]
+libboost-system:
+  debian:
+    buster: [libboost-system1.67.0]
+    stretch: [libboost-system1.62.0]
+  fedora: [boost-system]
+  ubuntu:
+    bionic: [libboost-system1.65.1]
+    disco: [libboost-system1.67.0]
+    eoan: [libboost-system1.67.0]
+    focal: [libboost-system1.67.0]
+    trusty: [libboost-system1.55.0]
+    xenial: [libboost-system1.58.0]
 libboost-system-dev:
   debian: [libboost-system-dev]
-  fedora: [boost-system]
+  fedora: [boost-devel]
   ubuntu: [libboost-system-dev]
+libboost-thread:
+  debian:
+    buster: [libboost-thread1.67.0]
+    stretch: [libboost-thread1.62.0]
+  fedora: [boost-thread]
+  ubuntu:
+    bionic: [libboost-thread1.65.1]
+    disco: [libboost-thread1.67.0]
+    eoan: [libboost-thread1.67.0]
+    focal: [libboost-thread1.67.0]
+    trusty: [libboost-thread1.55.0]
+    xenial: [libboost-thread1.58.0]
+libboost-thread-dev:
+  debian: [libboost-thread-dev]
+  fedora: [boost-devel]
+  ubuntu: [libboost-thread-dev]
 libcairo2-dev:
   arch: [cairo]
   debian: [libcairo2-dev]
@@ -1621,6 +1758,12 @@ libccd-dev:
   gentoo: [sci-libs/libccd]
   openembedded: [libccd@meta-ros]
   ubuntu: [libccd-dev]
+libcdd-dev:
+  arch: [cddlib]
+  debian: [libcdd-dev]
+  fedora: [cddlib]
+  gentoo: [sci-libs/cddlib]
+  ubuntu: [libcdd-dev]
 libcegui-mk2-dev:
   arch: [cegui]
   debian: [libcegui-mk2-dev]
@@ -1915,6 +2058,12 @@ libftdi-dev:
   fedora: [libftdi-devel]
   gentoo: [dev-embedded/libftdi]
   ubuntu: [libftdi-dev]
+libftdi1-dev:
+  arch: [libftdi]
+  debian: [libftdi1-dev]
+  fedora: [libftdi-devel]
+  gentoo: [dev-embedded/libftdi]
+  ubuntu: [libftdi1-dev]
 libftdipp-dev:
   debian:
     buster: [libftdipp1-dev]
@@ -2072,6 +2221,7 @@ libgomp1:
   gentoo: [sys-libs/gcc]
   ubuntu: [libgomp1]
 libgoogle-glog-dev:
+  arch: [google-glog]
   debian: [libgoogle-glog-dev]
   fedora: [glog-devel]
   gentoo: [dev-cpp/glog]
@@ -2091,8 +2241,7 @@ libgpgme-dev:
   openembedded: [gpgme@openembedded-core]
   rhel: [gpgme-devel]
   ubuntu:
-    artful: [libgpgme-dev]
-    bionic: [libgpgme-dev]
+    '*': [libgpgme-dev]
     lucid: [libgpgme11-dev]
     maverick: [libgpgme11-dev]
     oneiric: [libgpgme11-dev]
@@ -2106,8 +2255,6 @@ libgpgme-dev:
     vivid: [libgpgme11-dev]
     wily: [libgpgme11-dev]
     xenial: [libgpgme11-dev]
-    yakkety: [libgpgme-dev]
-    zesty: [libgpgme-dev]
 libgphoto-dev:
   arch: [libgphoto2]
   debian: [libgphoto2-dev]
@@ -2342,6 +2489,10 @@ libkdtree++-dev:
   debian: [libkdtree++-dev]
   fedora: [libkdtree++-devel]
   ubuntu: [libkdtree++-dev]
+libkml-dev:
+  arch: [libkml]
+  debian: [libkml-dev]
+  ubuntu: [libkml-dev]
 liblapack-dev:
   arch: [lapack]
   debian: [liblapack-dev]
@@ -2525,6 +2676,38 @@ libogg:
   rhel: [libogg-devel]
   slackware: [libogg]
   ubuntu: [libogg-dev]
+libogre:
+  arch: [ogre-1.9]
+  debian:
+    buster: [libogre-1.9.0v5]
+    jessie: [libogre-1.9.0]
+    stretch: [libogre-1.9.0v5]
+    wheezy: [libogre-dev]
+  fedora: [ogre-devel]
+  freebsd: [ogre3d]
+  gentoo: [dev-games/ogre]
+  macports: [ogre]
+  opensuse: [ogre-devel]
+  rhel: [ogre-devel]
+  slackware: [ogre]
+  ubuntu:
+    artful: [libogre-1.9-dev]
+    bionic: [libogre-1.9.0v5]
+    lucid: [libogre-dev]
+    maverick: [libogre-dev]
+    natty: [libogre-dev]
+    oneiric: [libogre-dev]
+    precise: [libogre-dev]
+    quantal: [libogre-dev]
+    raring: [libogre-dev]
+    saucy: [libogre-1.8-dev]
+    trusty: [libogre-1.8-dev]
+    utopic: [libogre-1.9-dev]
+    vivid: [libogre-1.9-dev]
+    wily: [libogre-1.9-dev]
+    xenial: [libogre-1.9.0v5]
+    yakkety: [libogre-1.9-dev]
+    zesty: [libogre-1.9-dev]
 libogre-dev:
   arch: [ogre-1.9]
   debian:
@@ -3053,6 +3236,9 @@ libqt5-gui:
   rhel: [qt5-qtbase-gui]
   slackware: [qt5]
   ubuntu: [libqt5gui5]
+libqt5-multimedia:
+  debian: [libqt5multimedia5]
+  ubuntu: [libqt5multimedia5]
 libqt5-network:
   arch: [qt5-base]
   debian: [libqt5network5]
@@ -3086,6 +3272,12 @@ libqt5-printsupport:
   freebsd: [qt5-printsupport]
   gentoo: ['dev-qt/qtprintsupport:5']
   ubuntu: [libqt5printsupport5]
+libqt5-qml:
+  debian: [libqt5qml5]
+  ubuntu: [libqt5qml5]
+libqt5-quick:
+  debian: [libqt5quick5]
+  ubuntu: [libqt5quick5]
 libqt5-serialport:
   arch: [qt5-serialport]
   debian: [libqt5serialport5]
@@ -3121,6 +3313,9 @@ libqt5-widgets:
   rhel: [qt5-qtbase]
   slackware: [qt5]
   ubuntu: [libqt5widgets5]
+libqt5-xml:
+  debian: [libqt5xml5]
+  ubuntu: [libqt5xml5]
 libqt5multimedia5-plugins:
   arch: [qt5-multimedia]
   debian: [libqt5multimedia5-plugins]
@@ -3489,6 +3684,10 @@ libunwind:
   fedora: [libunwind]
   gentoo: [sys-libs/libunwind]
   ubuntu:
+    bionic: [libunwind8]
+    cosmic: [libunwind8]
+    disco: [libunwind8]
+    eoan: [libunwind8]
     precise: [libunwind7]
     quantal: [libunwind8]
     raring: [libunwind8]
@@ -3947,11 +4146,7 @@ log4cxx:
   rhel: [log4cxx-devel]
   slackware: [apache-log4cxx]
   ubuntu:
-    artful: [liblog4cxx-dev]
-    bionic: [liblog4cxx-dev]
-    cosmic: [liblog4cxx-dev]
-    disco: [liblog4cxx-dev]
-    eoan: [liblog4cxx-dev]
+    '*': [liblog4cxx-dev]
     lucid: [liblog4cxx10-dev]
     maverick: [liblog4cxx10-dev]
     natty: [liblog4cxx10-dev]
@@ -3994,6 +4189,7 @@ lua-dev:
   macports: [lua51]
   ubuntu: [liblua5.1-0-dev]
 lua5.2-dev:
+  arch: [lua52]
   debian: [liblua5.2-dev]
   fedora: [lua]
   gentoo: ['dev-lang/lua:5.2']
@@ -4009,17 +4205,7 @@ lz4:
   openembedded: [lz4@openembedded-core]
   opensuse: [lz4]
   slackware: [lz4]
-  ubuntu:
-    artful: [liblz4-dev]
-    bionic: [liblz4-dev]
-    saucy: [liblz4-dev]
-    trusty: [liblz4-dev]
-    utopic: [liblz4-dev]
-    vivid: [liblz4-dev]
-    wily: [liblz4-dev]
-    xenial: [liblz4-dev]
-    yakkety: [liblz4-dev]
-    zesty: [liblz4-dev]
+  ubuntu: [liblz4-dev]
 m4:
   arch: [m4]
   debian: [m4]
@@ -4358,6 +4544,11 @@ omniorb:
   gentoo: [net-misc/omniORB]
   macports: [omniORB]
   ubuntu: [omniorb, omniidl, omniorb-idl, omniorb-nameserver, libomniorb4-dev]
+opencl-headers:
+  arch: [opencl-headers]
+  debian: [opencl-headers]
+  fedora: [opencl-headers]
+  ubuntu: [opencl-headers]
 opende:
   arch: [ode]
   debian: [libode-dev]
@@ -4398,6 +4589,11 @@ openni-dev:
   fedora: [openni-devel]
   gentoo: [dev-libs/OpenNI]
   ubuntu: [libopenni-dev]
+openocd:
+  debian: [openocd]
+  fedora: [openocd]
+  gentoo: [openocd]
+  ubuntu: [openocd]
 opensplice:
   gentoo: [sci-libs/opensplice]
 openssh-client:
@@ -4700,6 +4896,10 @@ qt4-qmake:
   opensuse: [libqt4-devel]
   rhel: [qt-devel]
   ubuntu: [qt4-qmake]
+qt5-image-formats-plugins:
+  arch: [qt5-imageformats]
+  debian: [qt5-image-formats-plugins]
+  ubuntu: [qt5-image-formats-plugins]
 qt5-qmake:
   arch: [qt5-base]
   debian: [qt5-qmake]
@@ -4804,9 +5004,14 @@ rsync:
   gentoo: [net-misc/rsync]
   opensuse: [rsync]
   ubuntu: [rsync]
+rsyslog:
+  debian: [rsyslog]
+  fedora: [rsyslog]
+  ubuntu: [rsyslog]
 rti-connext-dds-5.3.1:
   ubuntu:
     bionic: [rti-connext-dds-5.3.1]
+    focal: [rti-connext-dds-5.3.1]
     xenial: [rti-connext-dds-5.3.1]
 rtmidi:
   debian: [librtmidi-dev]
@@ -4982,6 +5187,8 @@ spdlog:
   debian: [libspdlog-dev]
   fedora: [spdlog-devel]
   gentoo: [dev-libs/spdlog]
+  rhel:
+    '7': [spdlog-devel]
   ubuntu: [libspdlog-dev]
 speech-dispatcher:
   debian: [speech-dispatcher]
@@ -5441,6 +5648,11 @@ wget:
   macports: [wget]
   opensuse: [wget]
   ubuntu: [wget]
+wireless-tools:
+  debian: [wireless-tools]
+  fedora: [wireless-tools]
+  gentoo: [net-wireless/wireless-tools]
+  ubuntu: [wireless-tools]
 wkhtmltopdf:
   arch: [wkhtmltopdf]
   debian: [wkhtmltopdf]
