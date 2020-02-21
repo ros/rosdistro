@@ -120,9 +120,6 @@ Work has been proposed to add a separate installer for AUR packages [ros-infrast
 
 For pip installers they are expected to be in the main pypi index.
 
-#### 
-
-
 ### Python 3 rules
 
 When adding rules for python 3 packages, create a separate entry prefixed with `python3-` rather than `python`
