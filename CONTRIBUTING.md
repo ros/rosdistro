@@ -156,11 +156,11 @@ These tests require several dependencies that can be installed either from the R
 
 |   Dependency   |            Ubuntu package         |   Pip package  |
 | :------------: | --------------------------------- | -------------- |
-| catkin_pkg     | python-catkin-pkg                 | catkin_pkg     |
+| catkin_pkg     | python-catkin-pkg                 | catkin-pkg     |
 | github         | python-github                     | PyGithub       |
 | nose           | python-nose                       | nose           |
 | rosdistro      | python-rosdistro                  | rosdistro      |
-| ros_buildfarm  | python-ros-buildfarm              | ros_buildfarm  |
+| ros_buildfarm  | python-ros-buildfarm              | ros-buildfarm  |
 | unidiff        | python-unidiff (Zesty and higher) | unidiff        |
 | yamllint       | yamllint                          | yamllint       |
 
