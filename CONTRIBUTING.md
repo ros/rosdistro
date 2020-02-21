@@ -52,7 +52,6 @@ Guidelines for rosdep rules
    Similarly don't call out indirect dependencies or default options for packages.
  * Python packages should go in the `python.yaml`.
  * Homebrew into `osx-homebrew.yaml`.
- * If a package is only available via pip use the `-pip` extension.
  * Supported Platforms
    * Rules can be contributed for any platform.
      However to be released they must be at least cover the supported platforms in REP 3: http://www.ros.org/reps/rep-0003.html So:
@@ -118,9 +117,11 @@ Work has been proposed to add a separate installer for AUR packages [ros-infrast
 
 #### pip
 
-For pip installers they are expected to be in the main pypi index.
+For pip installers they are expected to be in the main PyPI index https://pypi.org/.
 
-### Python 3 rules
+### Python rules
+
+#### Python 3
 
 When adding rules for python 3 packages, create a separate entry prefixed with `python3-` rather than `python`
 For example:
@@ -141,6 +142,23 @@ You may see existing rules that use `_python3`-suffixed distribution codenames.
 These were trialed as a possible style of Python 3 rules and should not be used.
 The guidance above should be followed for new rules.
 Additionally, if you rely on a dependency that uses `_python3`-suffixed codenames, add a new rule for it that follows the guidance above.
+
+#### pip
+
+Python packages, which are only available on pip, should use the `-pip` extension. Also the `python-`/`python3-` prefix needs to be used.
+For example:
+
+```yaml
+python-foobar-pip:
+  ubuntu:
+    pip:
+      packages: [foobar]
+...
+python3-foobar-pip:
+  ubuntu:
+    pip:
+      packages: [foobar]
+```
 
 How to submit pull requests
 ---------------------------
