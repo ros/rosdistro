@@ -381,6 +381,11 @@ chrony:
   gentoo: [net-misc/chrony]
   opensuse: [chrony]
   ubuntu: [chrony]
+clang:
+  debian: [clang]
+  fedora: [clang]
+  gentoo: [sys-devel/clang]
+  ubuntu: [clang]
 clang-format:
   debian:
     buster: [clang-format]
@@ -663,6 +668,10 @@ eclipse:
     precise: [eclipse, eclipse-platform, eclipse-rcp, eclipse-emf, eclipse-xsd, eclipse-pde]
     quantal: [eclipse, eclipse-platform, eclipse-rcp, eclipse-emf, eclipse-xsd, eclipse-pde]
     raring: [eclipse, eclipse-platform, eclipse-rcp, eclipse-emf, eclipse-xsd, eclipse-pde]
+ed:
+  debian: [ed]
+  fedora: [ed]
+  ubuntu: [ed]
 eigen:
   alpine: [eigen-dev]
   arch: [eigen3]
@@ -784,6 +793,7 @@ fltk:  # Consider using the libfltk-dev and fluid (fltk runtime) keys instead.
   ubuntu:
     artful: [fluid, libfltk1.3-dev]
     bionic: [fluid, libfltk1.3-dev]
+    focal: [fluid, libfltk1.3-dev]
     lucid: [fluid, libfltk1.1-dev]
     maverick: [fluid, libfltk1.1-dev]
     natty: [fluid, libfltk1.1-dev]
@@ -847,6 +857,10 @@ fxload:
   debian: [fxload]
   fedora: [fxload]
   ubuntu: [fxload]
+g++-5-arm-linux-gnueabihf:
+  ubuntu: [g++-5-arm-linux-gnueabihf]
+g++-5-multilib:
+  ubuntu: [g++-5-multilib]
 g++-multilib:
   debian: [g++-multilib]
   fedora: [gcc-c++, glibc-devel, 'glibc-devel(%{__isa_name}-32)', glibc-static, 'glibc-static(%{__isa_name}-32)', libstdc++-devel, 'libstdc++-devel(%{__isa_name}-32)', libstdc++-static, 'libstdc++-static(%{__isa_name}-32)']
@@ -1577,7 +1591,7 @@ libboost-atomic:
   ubuntu:
     bionic: [libboost-atomic1.65.1]
     eoan: [libboost-atomic1.67.0]
-    focal: [libboost-atomic1.67.0]
+    focal: [libboost-atomic1.71.0]
     xenial: [libboost-atomic1.58.0]
 libboost-atomic-dev:
   debian: [libboost-atomic-dev]
@@ -1591,7 +1605,7 @@ libboost-chrono:
   ubuntu:
     bionic: [libboost-chrono1.65.1]
     eoan: [libboost-chrono1.67.0]
-    focal: [libboost-chrono1.67.0]
+    focal: [libboost-chrono1.71.0]
     xenial: [libboost-chrono1.58.0]
 libboost-chrono-dev:
   debian: [libboost-chrono-dev]
@@ -1605,7 +1619,7 @@ libboost-date-time:
   ubuntu:
     bionic: [libboost-date-time1.65.1]
     eoan: [libboost-date-time1.67.0]
-    focal: [libboost-date-time1.67.0]
+    focal: [libboost-date-time1.71.0]
     xenial: [libboost-date-time1.58.0]
 libboost-date-time-dev:
   debian: [libboost-date-time-dev]
@@ -1623,7 +1637,7 @@ libboost-filesystem:
   ubuntu:
     bionic: [libboost-filesystem1.65.1]
     eoan: [libboost-filesystem1.67.0]
-    focal: [libboost-filesystem1.67.0]
+    focal: [libboost-filesystem1.71.0]
     xenial: [libboost-filesystem1.58.0]
 libboost-filesystem-dev:
   debian: [libboost-filesystem-dev]
@@ -1638,7 +1652,7 @@ libboost-iostreams:
   ubuntu:
     bionic: [libboost-iostreams1.65.1]
     eoan: [libboost-iostreams1.67.0]
-    focal: [libboost-iostreams1.67.0]
+    focal: [libboost-iostreams1.71.0]
     xenial: [libboost-iostreams1.58.0]
 libboost-iostreams-dev:
   debian: [libboost-iostreams-dev]
@@ -1654,7 +1668,7 @@ libboost-program-options:
     bionic: [libboost-program-options1.65.1]
     disco: [libboost-program-options1.67.0]
     eoan: [libboost-program-options1.67.0]
-    focal: [libboost-program-options1.67.0]
+    focal: [libboost-program-options1.71.0]
     trusty: [libboost-program-options1.55.0]
     xenial: [libboost-program-options1.58.0]
 libboost-program-options-dev:
@@ -1663,6 +1677,20 @@ libboost-program-options-dev:
   openembedded: [boost@openembedded-core]
   ubuntu: [libboost-program-options-dev]
 libboost-python:
+  alpine: [boost-python2]
+  debian:
+    buster: [libboost-python1.67.0]
+    jessie: [libboost-python1.55.0]
+    stretch: [libboost-python1.62.0]
+  fedora: [boost-python2-devel, boost-python3-devel]
+  ubuntu:
+    bionic: [libboost-python1.65.1]
+    disco: [libboost-python1.67.0]
+    eoan: [libboost-python1.67.0]
+    focal: [libboost-python1.71.0]
+    trusty: [libboost-python-1.54.0]
+    xenial: [libboost-python-1.58.0]
+libboost-python-dev:
   alpine: [boost-python2]
   debian: [libboost-python-dev]
   fedora: [boost-python2-devel]
@@ -1678,7 +1706,7 @@ libboost-random:
     bionic: [libboost-random1.65.1]
     disco: [libboost-random1.67.0]
     eoan: [libboost-random1.67.0]
-    focal: [libboost-random1.67.0]
+    focal: [libboost-random1.71.0]
     precise: [libboost-random1.46.1]
     trusty: [libboost-random1.54.0]
     xenial: [libboost-random1.58.0]
@@ -1694,7 +1722,7 @@ libboost-regex:
   ubuntu:
     bionic: [libboost-regex1.65.1]
     eoan: [libboost-regex1.67.0]
-    focal: [libboost-regex1.67.0]
+    focal: [libboost-regex1.71.0]
     xenial: [libboost-regex1.58.0]
 libboost-regex-dev:
   debian: [libboost-regex-dev]
@@ -1709,7 +1737,7 @@ libboost-system:
     bionic: [libboost-system1.65.1]
     disco: [libboost-system1.67.0]
     eoan: [libboost-system1.67.0]
-    focal: [libboost-system1.67.0]
+    focal: [libboost-system1.71.0]
     trusty: [libboost-system1.55.0]
     xenial: [libboost-system1.58.0]
 libboost-system-dev:
@@ -1725,12 +1753,13 @@ libboost-thread:
     bionic: [libboost-thread1.65.1]
     disco: [libboost-thread1.67.0]
     eoan: [libboost-thread1.67.0]
-    focal: [libboost-thread1.67.0]
+    focal: [libboost-thread1.71.0]
     trusty: [libboost-thread1.55.0]
     xenial: [libboost-thread1.58.0]
 libboost-thread-dev:
   debian: [libboost-thread-dev]
   fedora: [boost-devel]
+  gentoo: ['dev-libs/boost[threads]']
   ubuntu: [libboost-thread-dev]
 libcairo2-dev:
   arch: [cairo]
@@ -2010,6 +2039,7 @@ libfltk-dev:
   ubuntu:
     artful: [libfltk1.3-dev]
     bionic: [libfltk1.3-dev]
+    focal: [libfltk1.3-dev]
     lucid: [libfltk1.1-dev]
     maverick: [libfltk1.1-dev]
     natty: [libfltk1.1-dev]
@@ -2430,6 +2460,7 @@ libjpeg:
   ubuntu:
     artful: [libjpeg-dev]
     bionic: [libjpeg-dev]
+    focal: [libjpeg-dev]
     lucid: [libjpeg62-dev]
     maverick: [libjpeg62-dev]
     natty: [libjpeg62-dev]
@@ -2676,6 +2707,38 @@ libogg:
   rhel: [libogg-devel]
   slackware: [libogg]
   ubuntu: [libogg-dev]
+libogre:
+  arch: [ogre-1.9]
+  debian:
+    buster: [libogre-1.9.0v5]
+    jessie: [libogre-1.9.0]
+    stretch: [libogre-1.9.0v5]
+    wheezy: [libogre-dev]
+  fedora: [ogre-devel]
+  freebsd: [ogre3d]
+  gentoo: [dev-games/ogre]
+  macports: [ogre]
+  opensuse: [ogre-devel]
+  rhel: [ogre-devel]
+  slackware: [ogre]
+  ubuntu:
+    artful: [libogre-1.9-dev]
+    bionic: [libogre-1.9.0v5]
+    lucid: [libogre-dev]
+    maverick: [libogre-dev]
+    natty: [libogre-dev]
+    oneiric: [libogre-dev]
+    precise: [libogre-dev]
+    quantal: [libogre-dev]
+    raring: [libogre-dev]
+    saucy: [libogre-1.8-dev]
+    trusty: [libogre-1.8-dev]
+    utopic: [libogre-1.9-dev]
+    vivid: [libogre-1.9-dev]
+    wily: [libogre-1.9-dev]
+    xenial: [libogre-1.9.0v5]
+    yakkety: [libogre-1.9-dev]
+    zesty: [libogre-1.9-dev]
 libogre-dev:
   arch: [ogre-1.9]
   debian:
@@ -2815,6 +2878,34 @@ libopenvdb-dev:
   fedora: [openvdb-devel]
   gentoo: [media-gfx/openvdb]
   ubuntu: [libopenvdb-dev, libilmbase-dev]
+liborocos-bfl:
+  debian:
+    '*': [liborocos-bfl0.8]
+    'stretch': null
+  fedora: [orocos-bfl]
+  ubuntu:
+    '*': [liborocos-bfl0.8]
+    'bionic': null
+    'xenial': null
+liborocos-bfl-dev:
+  debian: [liborocos-bfl-dev]
+  fedora: [orocos-bfl-devel]
+  ubuntu: [liborocos-bfl-dev]
+liborocos-kdl:
+  debian:
+    '*': [liborocos-kdl1.4]
+    'stretch': [liborocos-kdl1.3]
+  fedora: [orocos-kdl]
+  gentoo: [sci-libs/orocos_kdl]
+  ubuntu:
+    '*': [liborocos-kdl1.4]
+    'bionic': [liborocos-kdl1.3]
+    'xenial': [liborocos-kdl1.3]
+liborocos-kdl-dev:
+  debian: [liborocos-kdl-dev]
+  fedora: [orocos-kdl-devel]
+  gentoo: [sci-libs/orocos_kdl]
+  ubuntu: [liborocos-kdl-dev]
 libosmesa6-dev:
   arch: [mesa]
   debian: [libosmesa6-dev]
@@ -3408,6 +3499,9 @@ libsoqt4-dev:
   fedora: [SoQt-devel]
   gentoo: [media-libs/SoQt]
   ubuntu: [libsoqt4-dev]
+libspatialindex-dev:
+  debian: [libspatialindex-dev]
+  ubuntu: [libspatialindex-dev]
 libspatialite:
   arch: [libspatialite]
   debian:
@@ -3588,6 +3682,7 @@ libtool:
   ubuntu:
     artful: [libtool, libltdl-dev, libtool-bin]
     bionic: [libtool, libltdl-dev, libtool-bin]
+    focal: [libtool, libltdl-dev, libtool-bin]
     lucid: [libtool, libltdl-dev]
     maverick: [libtool, libltdl-dev]
     natty: [libtool, libltdl-dev]
@@ -4383,6 +4478,9 @@ msgpack:
   fedora: [msgpack-devel]
   gentoo: [dev-libs/msgpack]
   ubuntu: [libmsgpack-dev]
+multistrap:
+  debian: [multistrap]
+  ubuntu: [multistrap]
 muparser:
   debian: [libmuparser-dev]
   fedora: [muParser-devel]
@@ -4929,6 +5027,15 @@ r-base-dev:
   fedora: [R-devel]
   gentoo: [dev-lang/R]
   ubuntu: [r-base-dev]
+range-v3:
+  debian:
+    '*': [librange-v3-dev]
+    stretch: null
+  fedora: [range-v3]
+  gentoo: [dev-cpp/range-v3]
+  ubuntu:
+    '*': [librange-v3-dev]
+    xenial: null
 rapidjson-dev:
   debian: [rapidjson-dev]
   fedora: [rapidjson]
