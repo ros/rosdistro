@@ -154,6 +154,19 @@ gunicorn:
   fedora: [python-gunicorn]
   gentoo: [www-servers/gunicorn]
   ubuntu: [gunicorn]
+gym-pip:
+  debian:
+    pip:
+      packages: [gym]
+  fedora:
+    pip:
+      packages: [gym]
+  osx:
+    pip:
+      packages: [gym]
+  ubuntu:
+    pip:
+      packages: [gym]
 imgaug-pip:
   debian:
     pip:
@@ -831,6 +844,8 @@ python-catkin-pkg:
   osx:
     pip:
       packages: [catkin-pkg]
+  rhel:
+    '7': [python2-catkin_pkg]
   slackware:
     pip:
       packages: [catkin-pkg]
@@ -1436,6 +1451,23 @@ python-fastdtw-pip:
   ubuntu:
     pip:
       packages: [python-fastdtw]
+python-fcl-pip:
+  debian:
+    pip:
+      depends: [libfcl-dev]
+      packages: [python-fcl]
+  fedora:
+    pip:
+      depends: [libfcl-dev]
+      packages: [python-fcl]
+  osx:
+    pip:
+      depends: [libfcl-dev]
+      packages: [python-fcl]
+  ubuntu:
+    pip:
+      depends: [libfcl-dev]
+      packages: [python-fcl]
 python-fcn-pip:
   debian:
     pip:
@@ -2174,6 +2206,9 @@ python-kitchen:
     pip:
       packages: [kitchen]
   ubuntu: [python-kitchen]
+python-kml:
+  debian: [python-kml]
+  ubuntu: [python-kml]
 python-kombu:
   debian: [python-kombu]
   fedora: [python-kombu]
@@ -2861,6 +2896,15 @@ python-pcapy:
   fedora: [pcapy]
   gentoo: [dev-python/pcapy]
   ubuntu: [python-pcapy]
+python-pcg-gazebo-pip:
+  debian:
+    pip:
+      depends: [libspatialindex-dev, geos, pybind11-dev]
+      packages: [pcg-gazebo]
+  ubuntu:
+    pip:
+      depends: [libspatialindex-dev, geos, pybind11-dev]
+      packages: [pcg-gazebo]
 python-pep8:
   arch: [python2-pep8]
   debian: [pep8]
@@ -3041,6 +3085,7 @@ python-psutil:
   osx:
     pip:
       packages: [psutil]
+  rhel: [python2-psutil]
   slackware: [psutil]
   ubuntu:
     artful: [python-psutil]
@@ -3332,6 +3377,8 @@ python-pyproj:
   osx:
     pip:
       packages: [pyproj]
+  rhel:
+    '7': [pyproj]
   ubuntu: [python-pyproj]
 python-pyqrcode:
   arch: [python2-qrcode]
@@ -4274,6 +4321,8 @@ python-sphinx:
   osx:
     pip:
       packages: [Sphinx]
+  rhel:
+    '7': [python-sphinx]
   ubuntu:
     '*': [python-sphinx]
     trusty_python3: [python3-sphinx]
@@ -4441,6 +4490,19 @@ python-telegram-bot:
   ubuntu:
     pip:
       packages: [python-telegram-bot]
+python-tensorboardX-pip:
+  debian:
+    pip:
+      packages: [tensorboardX]
+  fedora:
+    pip:
+      packages: [tensorboardX]
+  osx:
+    pip:
+      packages: [tensorboardX]
+  ubuntu:
+    pip:
+      packages: [tensorboardX]
 python-tensorflow-gpu-pip:
   debian:
     pip:
@@ -4820,6 +4882,8 @@ python-virtualenv:
   debian: [python-virtualenv]
   fedora: [python-virtualenv]
   gentoo: [dev-python/virtualenv]
+  rhel:
+    '7': [python-virtualenv]
   ubuntu: [python-virtualenv]
 python-visual:
   debian: [python-visual]
@@ -5077,6 +5141,10 @@ python3-asyncssh:
   debian: [python3-asyncssh]
   fedora: [python3-asyncssh]
   ubuntu: [python3-asyncssh]
+python3-autobahn:
+  debian: [python3-autobahn]
+  fedora: [python3-autobahn]
+  ubuntu: [python3-autobahn]
 python3-babeltrace:
   debian: [python3-babeltrace]
   ubuntu: [python3-babeltrace]
@@ -5111,6 +5179,7 @@ python3-bson:
   osx:
     pip:
       packages: [bson]
+  rhel: ['python%{python3_pkgversion}-bson']
   ubuntu: [python3-bson]
 python3-cairo:
   arch: [python-cairo]
@@ -5176,6 +5245,15 @@ python3-dev:
   openembedded: [python3@openembedded-core]
   rhel: ['python%{python3_pkgversion}-devel']
   ubuntu: [python3-dev]
+python3-distutils:
+  debian:
+    '*': [python3-distutils]
+    stretch: null
+  fedora: [python3]
+  gentoo: [dev-lang/python]
+  ubuntu:
+    '*': [python3-distutils]
+    xenial: null
 python3-django:
   debian: [python3-django]
   fedora: [python3-django]
@@ -5197,6 +5275,8 @@ python3-docker:
   arch: [python-docker]
   debian: [python3-docker]
   fedora: [python3-docker]
+  rhel:
+    '7': ['python%{python3_pkgversion}-docker']
   ubuntu: [python3-docker]
 python3-empy:
   alpine: [py3-empy]
@@ -5224,6 +5304,7 @@ python3-flake8:
 python3-future:
   debian: [python3-future]
   fedora: [python3-future]
+  rhel: ['python%{python3_pkgversion}-future']
   ubuntu: [python3-future]
 python3-gitlab:
   debian:
@@ -5262,10 +5343,22 @@ python3-ifcfg:
   rhel: ['python%{python3_pkgversion}-ifcfg']
   ubuntu:
     bionic: [python3-ifcfg]
+    focal: [python3-ifcfg]
 python3-imageio:
   debian: [python3-imageio]
   gentoo: [dev-python/imageio]
   ubuntu: [python3-imageio]
+python3-kitchen:
+  arch: [python-kitchen]
+  debian: [python3-kitchen]
+  fedora: [python3-kitchen]
+  gentoo: [dev-python/kitchen]
+  osx:
+    pip:
+      packages: [kitchen]
+  ubuntu:
+    '*': [python3-kitchen]
+    xenial: null
 python3-lark-parser:
   debian:
     buster: [python3-lark-parser]
@@ -5278,6 +5371,7 @@ python3-lark-parser:
   rhel: ['python%{python3_pkgversion}-lark-parser']
   ubuntu:
     bionic: [python3-lark-parser]
+    focal: [python3-lark]
     xenial: [python3-lark-parser]
 python3-lttng:
   debian: [python3-lttng]
@@ -5288,6 +5382,9 @@ python3-lxml:
   freebsd: [py36-lxml]
   gentoo: [dev-python/lxml]
   openembedded: [python3-lxml@meta-python]
+  osx:
+    pip:
+      packages: [lxml]
   rhel: ['python%{python3_pkgversion}-lxml']
   ubuntu: [python3-lxml]
 python3-matplotlib:
@@ -5363,6 +5460,8 @@ python3-packaging:
   debian: [python3-packaging]
   fedora: [python3-packaging]
   gentoo: [dev-python/packaging]
+  rhel:
+    '7': ['python%{python3_pkgversion}-packaging']
   ubuntu: [python3-packaging]
 python3-pandas:
   debian: [python3-pandas]
@@ -5374,6 +5473,15 @@ python3-paramiko:
   fedora: [python3-paramiko]
   gentoo: [dev-python/paramiko]
   ubuntu: [python3-paramiko]
+python3-pcg-gazebo-pip:
+  debian:
+    pip:
+      depends: [libspatialindex-dev, geos, pybind11-dev]
+      packages: [pcg-gazebo]
+  ubuntu:
+    pip:
+      depends: [libspatialindex-dev, geos, pybind11-dev]
+      packages: [pcg-gazebo]
 python3-pep8:
   alpine: [py3-pycodestyle]
   debian:
@@ -5483,6 +5591,15 @@ python3-pygraphviz:
   rhel: ['python%{python3_pkgversion}-pygraphviz']
   slackware: [pygraphviz]
   ubuntu: [python3-pygraphviz]
+python3-pykdl:
+  debian:
+    '*': [python3-pykdl]
+    'bionic': null
+    'xenial': null
+  ubuntu:
+    '*': [python3-pykdl]
+    'bionic': null
+    'xenial': null
 python3-pyparsing:
   arch: [python-pyparsing]
   debian: [python3-pyparsing]
@@ -5521,13 +5638,25 @@ python3-pytest-timeout:
 python3-qt5-bindings:
   alpine: [py3-qt5, py3-sip, py-sip, py-sip-dev]
   arch: [python-pyqt5]
-  debian: [pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-sip-dev, qtbase5-dev]
+  debian:
+    '*': [libpyside2-dev, libshiboken2-dev, pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-pyside2.qtsvg, python3-sip-dev, qtbase5-dev, shiboken2]
+    jessie: [pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-sip-dev, qtbase5-dev]
+    stretch: [pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-sip-dev, qtbase5-dev]
   fedora: [python3-qt5-devel, sip]
   gentoo: [dev-python/PyQt5]
   opensuse: [python3-qt5]
   rhel: ['python%{python3_pkgversion}-qt5-devel']
   slackware: [python3-PyQt5]
-  ubuntu: [pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-sip-dev]
+  ubuntu:
+    '*': [libpyside2-dev, libshiboken2-dev, pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-pyside2.qtsvg, python3-sip-dev, shiboken2]
+    artful: [pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-sip-dev]
+    bionic: [pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-sip-dev]
+    cosmic: [pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-sip-dev]
+    disco: [pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-sip-dev]
+    eoan: [pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-sip-dev]
+    xenial: [pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-sip-dev]
+    yakkety: [pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-sip-dev]
+    zesty: [pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-sip-dev]
 python3-qt5-bindings-gl:
   debian: [python3-pyqt5.qtopengl]
   fedora: [python3-qt5]
@@ -5538,6 +5667,25 @@ python3-qt5-bindings-webkit:
   fedora: [python3-qt5-webkit]
   gentoo: ['dev-python/PyQt5[webkit]']
   ubuntu: [python3-pyqt5.qtwebkit]
+python3-rafcon-pip:
+  debian:
+    pip:
+      packages: [rafcon]
+  fedora:
+    pip:
+      packages: [rafcon]
+  ubuntu:
+    pip:
+      packages: [rafcon]
+python3-retrying:
+  arch: [python-retrying]
+  debian: [python3-retrying]
+  fedora: [python3-retrying]
+  gentoo: [retrying]
+  osx:
+    pip:
+      packages: [retrying]
+  ubuntu: [python3-retrying]
 python3-rosdep:
   alpine: [py3-rosdep]
   debian: [python3-rosdep]
@@ -5610,6 +5758,10 @@ python3-scp:
   debian: [python3-scp]
   fedora: [python3-scp]
   ubuntu: [python3-scp]
+python3-serial:
+  debian: [python3-serial]
+  fedora: [python3-pyserial]
+  ubuntu: [python3-serial]
 python3-setuptools:
   debian: [python3-setuptools]
   fedora: [python3-setuptools]
@@ -5634,6 +5786,19 @@ python3-sphinx-rtd-theme:
 python3-sqlalchemy:
   debian: [python3-sqlalchemy]
   ubuntu: [python3-sqlalchemy]
+python3-tensorboardX-pip:
+  debian:
+    pip:
+      packages: [tensorboardX]
+  fedora:
+    pip:
+      packages: [tensorboardX]
+  osx:
+    pip:
+      packages: [tensorboardX]
+  ubuntu:
+    pip:
+      packages: [tensorboardX]
 python3-termcolor:
   debian: [python3-termcolor]
   fedora: [python3-termcolor]
@@ -5651,6 +5816,7 @@ python3-tornado:
   osx:
     pip:
       packages: [tornado]
+  rhel: ['python%{python3_pkgversion}-tornado']
   ubuntu: [python3-tornado]
 python3-twisted:
   arch: [python-twisted]
@@ -5678,7 +5844,15 @@ python3-websocket:
   debian: [python3-websocket]
   fedora: [python3-websocket-client]
   gentoo: [dev-python/websocket-client]
+  rhel: ['python%{python3_pkgversion}-websocket-client']
   ubuntu: [python3-websocket]
+python3-west-pip:
+  debian:
+    pip:
+      packages: [west]
+  ubuntu:
+    pip:
+      packages: [west]
 python3-yaml:
   alpine: [py3-yaml]
   debian: [python3-yaml]
