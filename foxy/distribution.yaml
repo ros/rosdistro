@@ -6,6 +6,38 @@ release_platforms:
   ubuntu:
   - focal
 repositories:
+  ament_cmake:
+    release:
+      packages:
+      - ament_cmake
+      - ament_cmake_auto
+      - ament_cmake_core
+      - ament_cmake_export_definitions
+      - ament_cmake_export_dependencies
+      - ament_cmake_export_include_directories
+      - ament_cmake_export_interfaces
+      - ament_cmake_export_libraries
+      - ament_cmake_export_link_flags
+      - ament_cmake_gmock
+      - ament_cmake_gtest
+      - ament_cmake_include_directories
+      - ament_cmake_libraries
+      - ament_cmake_nose
+      - ament_cmake_pytest
+      - ament_cmake_python
+      - ament_cmake_target_dependencies
+      - ament_cmake_test
+      - ament_cmake_version
+      tags:
+        release: release/foxy/{package}/{version}
+      url: https://github.com/ros2-gbp/ament_cmake-release.git
+      version: 0.8.1-3
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/ament/ament_cmake.git
+      version: master
+    status: developed
   ament_package:
     doc:
       type: git
@@ -22,5 +54,30 @@ repositories:
       url: https://github.com/ament/ament_package.git
       version: master
     status: developed
+  googletest:
+    release:
+      packages:
+      - gmock_vendor
+      - gtest_vendor
+      tags:
+        release: release/foxy/{package}/{version}
+      url: https://github.com/ros2-gbp/googletest-release.git
+      version: 1.8.9000-1
+    source:
+      type: git
+      url: https://github.com/ament/googletest.git
+      version: ros2
+    status: maintained
+  ros_workspace:
+    release:
+      tags:
+        release: release/foxy/{package}/{version}
+      url: https://github.com/ros2-gbp/ros_workspace-release.git
+      version: 0.8.0-3
+    source:
+      type: git
+      url: https://github.com/ros2/ros_workspace.git
+      version: latest
+    status: maintained
 type: distribution
 version: 2
