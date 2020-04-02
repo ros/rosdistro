@@ -18,15 +18,17 @@ Distro packaging links:
 
 ## Links to Distribution Packages
 
-  Debian: https://packages.debian.org/
-    - REQUIRED
-  Ubuntu: https://packages.ubuntu.com/
-    - REQUIRED
-  Fedora: https://apps.fedoraproject.org/packages/
-    - If AVAILABLE
-  Arch: https://www.archlinux.org/packages/
-    - IF AVAILABLE
-  Gentoo: https://packages.gentoo.org/packages/
-    - IF AVAILABLE
-  macOS: https://formulae.brew.sh/
-    - IF AVAILABLE
+<!-- Replace the REQUIRED areas and state not available for IF AVAILABLE -->
+
+- Debian: https://packages.debian.org/
+  - REQUIRED
+-  Ubuntu: https://packages.ubuntu.com/
+   - REQUIRED
+- Fedora: https://apps.fedoraproject.org/packages/
+  - IF AVAILABLE
+- Arch: https://www.archlinux.org/packages/
+  - IF AVAILABLE
+- Gentoo: https://packages.gentoo.org/packages/
+  - IF AVAILABLE
+- macOS: https://formulae.brew.sh/
+  - IF AVAILABLE
