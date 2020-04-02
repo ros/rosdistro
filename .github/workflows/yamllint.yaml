@@ -1,4 +1,4 @@
-name: Nosetests
+name: Yaml Linting
 on: [push]
 
 jobs:
@@ -7,23 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [2.7, 3.8]
+        python-version: [3.8]
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Fetch master (to enable diff)
-      run: |
-        git fetch origin master
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip setuptools wheel
-        pip install PyYAML argparse
-        pip install catkin-pkg ros-buildfarm rosdistro nose coverage
-        pip install unidiff
-        pip install rosdep
-        pip install PyGithub
-    - name: Run Nose Tests
-      run: nosetests -s
+        pip install yamllint
+    - name: Run yamllint
+      run: yamllint */
