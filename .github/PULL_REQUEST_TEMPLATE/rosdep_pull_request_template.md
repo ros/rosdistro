@@ -22,7 +22,7 @@ Distro packaging links:
     - REQUIRED
   Ubuntu: https://packages.ubuntu.com/
     - REQUIRED
-  Fedora: https://apps.fedoraproject.org/
+  Fedora: https://apps.fedoraproject.org/packages/
     - If AVAILABLE
   Arch: https://www.archlinux.org/packages/
     - IF AVAILABLE
