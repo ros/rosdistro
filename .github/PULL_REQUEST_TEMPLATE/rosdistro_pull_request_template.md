@@ -1,6 +1,6 @@
 <!--- Templated for adding a package to be indexed in a rosdistro: http://wiki.ros.org/rosdistro/Tutorials/Indexing%20Your%20ROS%20Repository%20for%20Documentation%20Generation -->
 
-# Please Add This Package to be indexed in the rosdisro.
+# Please Add This Package to be indexed in the rosdistro.
 
 ROSDISTRO NAME
 
