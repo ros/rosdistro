@@ -22,7 +22,7 @@ Distro packaging links:
 
 - Debian: https://packages.debian.org/
   - REQUIRED
--  Ubuntu: https://packages.ubuntu.com/
+- Ubuntu: https://packages.ubuntu.com/
    - REQUIRED
 - Fedora: https://apps.fedoraproject.org/packages/
   - IF AVAILABLE
