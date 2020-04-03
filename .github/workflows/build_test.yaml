@@ -16,7 +16,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Fetch master (to enable diff)
       run: |
-        git fetch origin master
+        git fetch --no-tags --depth=1 origin master
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip setuptools wheel
