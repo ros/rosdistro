@@ -30,7 +30,7 @@ from .fold_block import Fold
 
 UPSTREAM_NAME = 'unittest_upstream_comparision'
 DIFF_BRANCH = 'master'
-DIFF_REPO = 'git@github.com:ros/rosdistro.git'
+DIFF_REPO = 'https://github.com/ros/rosdistro.git'
 
 
 TARGET_FILE_BLACKLIST = []

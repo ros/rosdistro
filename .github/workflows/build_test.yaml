@@ -16,7 +16,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Fetch upstream (to enable diff)
       run: |
-        git remote add unittest_upstream_comparision git@github.com:ros/rosdistro.git || git remote set-url unittest_upstream_comparision git@github.com:ros/rosdistro.git
+        git remote add unittest_upstream_comparision https://github.com/ros/rosdistro.git || git remote set-url unittest_upstream_comparision https://github.com/ros/rosdistro.git
         git fetch --no-tags --depth=1 unittest_upstream_comparision master
     - name: Install Dependencies
       run: |
