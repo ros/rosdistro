@@ -25,7 +25,7 @@ The token only needs public repository access and must belong to a member of the
 
 ```
 GITHUB_TOKEN={token with public repository access}
-export GITHUB_ORG GITHUB_TOKEN
+export GITHUB_TOKEN
 ```
 
 ## Script arguments
@@ -34,6 +34,7 @@ The migration script has several named arguments, all of which are required.
 `--dest DEST_ROSDISTRO`: The rosdistro which will receive the newly bloomed repositories.
 `--source SOURCE_ROSDISTRO`: The rosdistro to take release repositories from for migration.
 `--source-ref GIT_COMMIT_ID_OR_REF`: The migration may be attempted multiple times. Each attempt must specify ref or commit to start from so that future changes to the source distribution do not unintentionally affect migration. This also enables platform migration without changing the rosdistro name.
+`--release-org GITHUB_ORG`: A GitHub organization for storing release repositories. If the repository does not exist in this organization a new repository will be created.
 
 ### Creating a new rosdistro from an existing one
 
