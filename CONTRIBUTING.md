@@ -85,6 +85,7 @@ Keys in the rosdep database are required to come from packages contained in the 
 #### RHEL/CentOS
 
 * CentOS Repositories: base, extras, centos-sclo-rh, or updates
+  * Additionally, for CentOS 8+: AppStream or PowerTools
 * Fedora Project Repositories: epel
 
 #### MacOS
