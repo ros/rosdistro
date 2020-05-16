@@ -63,6 +63,7 @@ Guidelines for rosdep rules
        However please don't target 'sid' as it's a rolling target and when the keys change our database gets out of date.
   * Keep everything in alphabetical order for better merging.
   * No trailing whitespace.
+  * No blank line.
 
 ### Expected Rosdep Sources
 
