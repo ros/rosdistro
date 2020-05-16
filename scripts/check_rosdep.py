@@ -61,7 +61,7 @@ def no_blank_lines(buf):
     clean = True
     for i, l in enumerate(buf.split('\n')[:-1]):
         if re.match(r'^\s*$', l):
-            print_err("empty line %u" % (i+1))
+            print_err("blank line %u" % (i+1))
             clean = False
     return clean
 
