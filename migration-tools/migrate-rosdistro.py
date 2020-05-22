@@ -192,6 +192,7 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         ver, _inc = release_spec.version.split('-')
         release_spec.version = '-'.join([ver, new_release_track_inc])
         repositories_bloomed.append(repo_name)
+        subprocess.check_call(['git', 'push', 'origin', 'master'])
     except (subprocess.CalledProcessError, ValueError) as e:
         repositories_with_errors.append((repo_name, e))
     os.chdir(workdir)
