@@ -152,7 +152,7 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
                     config = get_patch_config(newref)
                     config['parent'] = config['parent'].replace(args.source, args.dest)
                     set_patch_config(newref, config)
-            write_tracks_file(tracks, 'Copy {args.source} track to {args.dest} with clone.py.')
+            write_tracks_file(tracks, f'Copy {args.source} track to {args.dest} with migrate-rosdistro.py.')
         else:
             dest_track = tracks['tracks'][args.dest]
 
