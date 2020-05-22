@@ -109,8 +109,6 @@ os.chdir(workdir)
 os.environ['ROSDISTRO_INDEX_URL'] = rosdistro_index_url
 
 for repo_name in sorted(new_repositories + repositories_to_retry):
-    if repo_name != 'gazebo_ros_pkgs':
-        continue
     try:
         release_spec = dest_distribution.repositories[repo_name].release_repository
         print('Adding repo:', repo_name)
