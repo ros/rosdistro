@@ -81,7 +81,11 @@ repositories_to_retry = []
 for repo_name, repo_data in sorted(source_distribution.repositories.items()):
     if repo_name not in dest_distribution.repositories:
         new_repositories.append(repo_name)
-        dest_distribution.repositories[repo_name] = copy.deepcopy(repo_data)
+        dest_repo_data = copy.deepcopy(repo_data)
+        release_tag = dest_repo_data.release_repository.tags['release']
+        release_tag = release_tag.replace(args.source,args.dest)
+        dest_repo_data.release_repository.tags['release'] = release_tag
+        dest_distribution.repositories[repo_name] = dest_repo_data
     elif dest_distribution.repositories[repo_name].release_repository.version is None:
         dest_distribution.repositories[repo_name].release_repository.version = repo_data.release_repository.version
         repositories_to_retry.append(repo_name)
@@ -109,8 +113,6 @@ os.chdir(workdir)
 os.environ['ROSDISTRO_INDEX_URL'] = rosdistro_index_url
 
 for repo_name in sorted(new_repositories + repositories_to_retry):
-    if repo_name != 'gazebo_ros_pkgs':
-        continue
     try:
         release_spec = dest_distribution.repositories[repo_name].release_repository
         print('Adding repo:', repo_name)
@@ -150,7 +152,7 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
                     config = get_patch_config(newref)
                     config['parent'] = config['parent'].replace(args.source, args.dest)
                     set_patch_config(newref, config)
-            write_tracks_file(tracks, 'Copy {args.source} track to {args.dest} with clone.py.')
+            write_tracks_file(tracks, f'Copy {args.source} track to {args.dest} with migrate-rosdistro.py.')
         else:
             dest_track = tracks['tracks'][args.dest]
 
@@ -194,6 +196,7 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         ver, _inc = release_spec.version.split('-')
         release_spec.version = '-'.join([ver, new_release_track_inc])
         repositories_bloomed.append(repo_name)
+        subprocess.check_call(['git', 'push', 'origin', 'master'])
     except (subprocess.CalledProcessError, ValueError) as e:
         repositories_with_errors.append((repo_name, e))
     os.chdir(workdir)
