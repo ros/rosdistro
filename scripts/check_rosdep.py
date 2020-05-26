@@ -57,6 +57,15 @@ def no_trailing_spaces(buf):
     return clean
 
 
+def no_blank_lines(buf):
+    clean = True
+    for i, l in enumerate(buf.split('\n')[:-1]):
+        if re.match(r'^\s*$', l):
+            print_err("blank line %u" % (i+1))
+            clean = False
+    return clean
+
+
 def generic_parser(buf, cb):
     ilen = len(indent_atom)
     stringblock = False
@@ -166,6 +175,8 @@ def main(fname):
     if ydict != {}:
         print_test("checking for trailing spaces...")
         my_assert(no_trailing_spaces(buf))
+        print_test("checking for blank lines...")
+        my_assert(no_blank_lines(buf))
         print_test("checking for incorrect indentation...")
         my_assert(correct_indent(buf))
         print_test("checking for non-bracket package lists...")
