@@ -63,6 +63,7 @@ Guidelines for rosdep rules
        However please don't target 'sid' as it's a rolling target and when the keys change our database gets out of date.
   * Keep everything in alphabetical order for better merging.
   * No trailing whitespace.
+  * No blank lines.
 
 ### Expected Rosdep Sources
 
@@ -85,6 +86,7 @@ Keys in the rosdep database are required to come from packages contained in the 
 #### RHEL/CentOS
 
 * CentOS Repositories: base, extras, centos-sclo-rh, or updates
+  * Additionally, for CentOS 8+: AppStream or PowerTools
 * Fedora Project Repositories: epel
 
 #### MacOS
