@@ -31,9 +31,9 @@ codeCodes = {
 def printc(text, color):
     """Print in color."""
     if sys.stdout.isatty():
-        print "\033["+codeCodes[color]+"m"+text+"\033[0m"
+        print("\033["+codeCodes[color]+"m"+text+"\033[0m")
     else:
-        print text
+        print(text)
 
 def print_test(msg):
     printc(msg, 'yellow')
@@ -126,7 +126,7 @@ def check_order(buf):
             raise
         st[lvl] = item
         if item < prev:
-            print_err("list out of order line %u" % (i+1))
+            print_err("list out of alphabetical order line %u" % (i+1))
             return False
         return True
     fun.namestack = ['']
@@ -143,7 +143,7 @@ def main(fname):
     my_assert.clean = True
 
     try:
-        ydict = yaml.load(buf)
+        ydict = yaml.safe_load(buf)
     except Exception as e:
         print_err("could not build the dict: %s" % (str(e)))
         my_assert(False)

@@ -1,0 +1,6 @@
+# This step won't be necessary once we move to distros which were never in the old format. 
+git filter-branch --tree-filter 'test -f releases/groovy.yaml && mkdir -p groovy && mv releases/groovy.yaml groovy || echo "nothing to do"' -- --all
+
+git filter-branch --subdirectory-filter groovy -- --all
+
+gitstats . outputdir
