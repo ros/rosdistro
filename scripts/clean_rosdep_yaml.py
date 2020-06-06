@@ -21,6 +21,18 @@ def quote_if_necessary(s):
     return re.search('{a: (.*)}\n', yaml.dump({'a': s})).group(1)
 
 def prn(n, nm, lvl):
+    if nm == '*':
+        # quote wildcard keys
+        nm = "'*'"
+    else:
+        # quote numeric keys
+        try:
+            nm_int = int(nm)
+        except ValueError:
+            pass
+        else:
+            if str(nm_int) == nm:
+                nm = "'%d'" % nm_int
     pad = '  ' * lvl
     if isinstance(n, list):
         return "%s%s: [%s]\n" % (pad, nm, ', '.join(quote_if_necessary(n)))
@@ -46,11 +58,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     with open(args.infile) as f:
-        iny = yaml.load(f.read())
+        iny = yaml.safe_load(f.read())
 
     buf = ''
     for a in sorted(iny):
         buf += prn(iny[a], a, 0)
 
-    with io.open(args.outfile, 'w', encoding='utf-8') as f:
-        f.write(buf)
+    with io.open(args.outfile, 'wb') as f:
+        f.write(buf.encode('utf-8'))
