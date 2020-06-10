@@ -320,6 +320,12 @@ bullet:
   ubuntu:
     '*': [libbullet-dev]
     trusty_python3: [libbullet-dev]
+bullet-extras:
+  arch: [bullet]
+  debian: [libbullet-extras-dev]
+  fedora: [bullet-extras]
+  gentoo: [sci-physics/bullet]
+  ubuntu: [libbullet-extras-dev]
 bzip2:
   alpine: [bzip2-dev]
   arch: [bzip2]
@@ -1024,20 +1030,7 @@ geographiclib:
     wheezy: [libgeographiclib-dev]
   fedora: [GeographicLib-devel]
   openembedded: [geographiclib@meta-ros]
-  ubuntu:
-    artful: [libgeographic-dev]
-    bionic: [libgeographic-dev]
-    precise: [libgeographiclib-dev]
-    quantal: [libgeographiclib-dev]
-    raring: [libgeographiclib-dev]
-    saucy: [libgeographiclib-dev]
-    trusty: [libgeographiclib-dev]
-    utopic: [libgeographiclib-dev]
-    vivid: [libgeographic-dev]
-    wily: [libgeographic-dev]
-    xenial: [libgeographic-dev]
-    yakkety: [libgeographic-dev]
-    zesty: [libgeographic-dev]
+  ubuntu: [libgeographic-dev]
 geographiclib-tools:
   debian: [geographiclib-tools]
   fedora: [GeographicLib]
@@ -1088,6 +1081,10 @@ gitg:
   fedora: [gitg]
   gentoo: [dev-vcs/gitg]
   ubuntu: [gitg]
+gitk:
+  debian: [gitk]
+  fedora: [gitk]
+  ubuntu: [gitk]
 gksu:
   debian: [gksu]
   gentoo: [x11-libs/gksu]
@@ -1971,12 +1968,7 @@ libcpprest-dev:
     buster: [libcpprest-dev]
     stretch: [libcpprest-dev]
   fedora: [cpprest-devel]
-  ubuntu:
-    artful: [libcpprest-dev]
-    bionic: [libcpprest-dev]
-    xenial: [libcpprest-dev]
-    yakkety: [libcpprest-dev]
-    zesty: [libcpprest-dev]
+  ubuntu: [libcpprest-dev]
 libcunit-dev:
   arch: [cunit]
   debian: [libcunit1-dev]
@@ -2764,15 +2756,7 @@ libmpich2-dev:
 libmysqlclient-dev:
   arch: [mariadb]
   debian: [libmysqlclient-dev]
-  fedora:
-    '21': [mariadb-devel]
-    '22': [mariadb-devel]
-    '23': [mariadb-devel]
-    '24': [mariadb-devel]
-    beefy: [mysql-devel]
-    heisenbug: [mariadb-devel]
-    schrödinger’s: [mariadb-devel]
-    spherical: [mysql-devel]
+  fedora: [mariadb-devel]
   gentoo: [virtual/libmysqlclient]
   macports: [mysql5]
   opensuse: [libmysqlclient-devel]
@@ -2801,7 +2785,7 @@ libncurses-dev:
   fedora: [ncurses-devel]
   gentoo: [sys-libs/ncurses]
   macports: [ncurses]
-  rhel: [nucrses-devel]
+  rhel: [ncurses-devel]
   ubuntu: [libncurses5-dev]
 libneon27-gnutls-dev:
   debian: [libneon27-gnutls-dev]
@@ -3033,6 +3017,7 @@ libopenvdb:
   ubuntu:
     artful: [libopenvdb3.2]
     bionic: [libopenvdb5.0]
+    focal: [libopenvdb6.2]
     saucy: [libopenvdb1.1]
     trusty: [libopenvdb2.1]
     utopic: [libopenvdb2.3]
@@ -3405,7 +3390,8 @@ libqt4:
   gentoo: ['dev-qt/qtcore:4']
   macports: [qt4-mac]
   opensuse: [libqt4]
-  rhel: [qt]
+  rhel:
+    '7': [qt]
   ubuntu: [libqt4-dbus, libqt4-network, libqt4-script, libqt4-test, libqt4-xml, libqtcore4]
 libqt4-dev:
   arch: [qt4]
@@ -3415,14 +3401,16 @@ libqt4-dev:
   gentoo: ['dev-qt/qtcore:4']
   macports: [qt4-mac]
   opensuse: [libqt4-devel]
-  rhel: [qt-devel]
+  rhel:
+    '7': [qt-devel]
   ubuntu: [libqt4-dev]
 libqt4-opengl:
   arch: [qt4]
   debian: [libqt4-opengl]
   fedora: [qt]
   gentoo: ['dev-qt/qtopengl:4']
-  rhel: [qt]
+  rhel:
+    '7': [qt]
   ubuntu: [libqt4-opengl]
 libqt4-opengl-dev:
   arch: [qt4]
@@ -3431,7 +3419,8 @@ libqt4-opengl-dev:
   gentoo: ['dev-qt/qtopengl:4']
   macports: [qt4-mac]
   opensuse: [libqt4-devel]
-  rhel: [qt-devel]
+  rhel:
+    '7': [qt-devel]
   ubuntu: [libqt4-opengl-dev]
 libqt4-sql-psql:
   arch: [qt4]
@@ -3922,7 +3911,7 @@ libunittest++:
   fedora: [unittest]
   gentoo: [dev-libs/unittest++]
   macports: [unittest-cpp]
-  rhel: [unittest]
+  rhel: [unittest-cpp-devel]
   ubuntu: [libunittest++-dev]
 libunwind:
   debian:
@@ -3997,9 +3986,7 @@ libusb:
 libusb-1.0:
   arch: [libusbx]
   debian: [libusb-1.0-0]
-  fedora:
-    '*': [libusbx]
-    beefy: [libusb1]
+  fedora: [libusbx]
   gentoo: ['virtual/libusb:1']
   opensuse: [libusb-1_0-0]
   rhel: [libusbx]
@@ -4007,9 +3994,7 @@ libusb-1.0:
 libusb-1.0-dev:
   arch: [libusbx]
   debian: [libusb-1.0-0-dev]
-  fedora:
-    '*': [libusbx-devel]
-    beefy: [libusb1-devel]
+  fedora: [libusbx-devel]
   gentoo: ['virtual/libusb:1']
   macports: [libusb]
   openembedded: [libusb1@openembedded-core]
@@ -4452,15 +4437,7 @@ lttng-tools:
 lua-dev:
   arch: [lua]
   debian: [liblua5.1-0-dev]
-  fedora:
-    '21': [compat-lua-devel]
-    '22': [compat-lua-devel]
-    '23': [compat-lua-devel]
-    '24': [compat-lua-devel]
-    beefy: [lua-devel]
-    heisenbug: [compat-lua-devel]
-    schrödinger’s: [lua-devel]
-    spherical: [lua-devel]
+  fedora: [compat-lua-devel]
   gentoo: [dev-lang/lua]
   macports: [lua51]
   ubuntu: [liblua5.1-0-dev]
@@ -5219,7 +5196,8 @@ qt4-qmake:
   gentoo: ['dev-qt/qtcore:4']
   macports: [qt4-mac]
   opensuse: [libqt4-devel]
-  rhel: [qt-devel]
+  rhel:
+    '7': [qt-devel]
   ubuntu: [qt4-qmake]
 qt5-image-formats-plugins:
   arch: [qt5-imageformats]
@@ -5707,6 +5685,8 @@ tango-icon-theme:
   macports: [tango-icon-theme]
   mandrake: [tango-icon-theme]
   opensuse: [tango-icon-theme]
+  rhel:
+    '7': [tango-icon-theme]
   slackware: [tango-icon-theme]
   ubuntu: [tango-icon-theme]
 tap-plugins:
