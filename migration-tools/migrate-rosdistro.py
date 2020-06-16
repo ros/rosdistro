@@ -2,6 +2,7 @@ import argparse
 import copy
 import os
 import os.path
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -134,6 +135,14 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         subprocess.check_call(['git', 'remote', 'add', 'origin', new_release_repo_url])
 
         if args.source != args.dest:
+            # Copy a bloom .ignored file from source to target distro.
+            if os.path.isfile(f'{args.source}.ignored'):
+                shutil.copyfile(f'{args.source}.ignored', f'{args.dest}.ignored')
+                with open('.git/rosdistromigratecommitmsg', 'w') as f:
+                    f.write(f'Propagate {args.source} ignore file to {args.dest}.')
+                subprocess.check_call(['git', 'add', f'{args.dest}.ignored'])
+                subprocess.check_call(['git', 'commit', '-F', '.git/rosdistromigratecommitmsg'])
+
             # Copy the source track to the new destination.
             dest_track = copy.deepcopy(tracks['tracks'][args.source])
             dest_track['ros_distro'] = args.dest
