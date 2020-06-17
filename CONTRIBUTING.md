@@ -142,6 +142,7 @@ python3-foobar:
 
 You may see existing rules that use `_python3`-suffixed distribution codenames.
 These were trialed as a possible style of Python 3 rules and should not be used.
+`_python3`-suffixed keys may be removed when the platform they're targeting reaches end of life.
 The guidance above should be followed for new rules.
 Additionally, if you rely on a dependency that uses `_python3`-suffixed codenames, add a new rule for it that follows the guidance above.
 
