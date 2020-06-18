@@ -18,7 +18,7 @@ from rosdistro.writer import yaml_from_distribution_file
 
 # These functions are adapted from Bloom's internal 'get_tracks_dict_raw' and
 # 'write_tracks_dict_raw' functions.  We cannot use them directly since they
-# make assertions about the release repository that are not true during the
+# make assumptions about the release repository that are not true during the
 # manipulation of the release repository for this script.
 def read_tracks_file():
     return yaml.safe_load(show('master', 'tracks.yaml'))
@@ -61,7 +61,7 @@ if len(index_yaml['distributions'][args.source]['distribution']) != 1 or \
         len(index_yaml['distributions'][args.dest]['distribution']) != 1:
             raise RuntimeError('Both source and destination distributions must have a single distribution file.')
 
-# There is a possibility that the source_ref has different a distribution file
+# There is a possibility that the source_ref has a different distribution file
 # layout. Check that they match.
 source_ref_index_yaml = yaml.safe_load(show(args.source_ref, 'index-v4.yaml'))
 if source_ref_index_yaml['distributions'][args.source]['distribution'] != \
