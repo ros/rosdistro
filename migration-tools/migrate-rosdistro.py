@@ -2,6 +2,7 @@ import argparse
 import copy
 import os
 import os.path
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -17,7 +18,7 @@ from rosdistro.writer import yaml_from_distribution_file
 
 # These functions are adapted from Bloom's internal 'get_tracks_dict_raw' and
 # 'write_tracks_dict_raw' functions.  We cannot use them directly since they
-# make assertions about the release repository that are not true during the
+# make assumptions about the release repository that are not true during the
 # manipulation of the release repository for this script.
 def read_tracks_file():
     return yaml.safe_load(show('master', 'tracks.yaml'))
@@ -60,7 +61,7 @@ if len(index_yaml['distributions'][args.source]['distribution']) != 1 or \
         len(index_yaml['distributions'][args.dest]['distribution']) != 1:
             raise RuntimeError('Both source and destination distributions must have a single distribution file.')
 
-# There is a possibility that the source_ref has different a distribution file
+# There is a possibility that the source_ref has a different distribution file
 # layout. Check that they match.
 source_ref_index_yaml = yaml.safe_load(show(args.source_ref, 'index-v4.yaml'))
 if source_ref_index_yaml['distributions'][args.source]['distribution'] != \
@@ -80,13 +81,15 @@ new_repositories = []
 repositories_to_retry = []
 for repo_name, repo_data in sorted(source_distribution.repositories.items()):
     if repo_name not in dest_distribution.repositories:
-        new_repositories.append(repo_name)
         dest_repo_data = copy.deepcopy(repo_data)
-        release_tag = dest_repo_data.release_repository.tags['release']
-        release_tag = release_tag.replace(args.source,args.dest)
-        dest_repo_data.release_repository.tags['release'] = release_tag
+        if dest_repo_data.release_repository:
+            new_repositories.append(repo_name)
+            release_tag = dest_repo_data.release_repository.tags['release']
+            release_tag = release_tag.replace(args.source,args.dest)
+            dest_repo_data.release_repository.tags['release'] = release_tag
         dest_distribution.repositories[repo_name] = dest_repo_data
-    elif dest_distribution.repositories[repo_name].release_repository.version is None:
+    elif dest_distribution.repositories[repo_name].release_repository is not None and \
+            dest_distribution.repositories[repo_name].release_repository.version is None:
         dest_distribution.repositories[repo_name].release_repository.version = repo_data.release_repository.version
         repositories_to_retry.append(repo_name)
     else:
@@ -132,6 +135,14 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         subprocess.check_call(['git', 'remote', 'add', 'origin', new_release_repo_url])
 
         if args.source != args.dest:
+            # Copy a bloom .ignored file from source to target distro.
+            if os.path.isfile(f'{args.source}.ignored'):
+                shutil.copyfile(f'{args.source}.ignored', f'{args.dest}.ignored')
+                with open('.git/rosdistromigratecommitmsg', 'w') as f:
+                    f.write(f'Propagate {args.source} ignore file to {args.dest}.')
+                subprocess.check_call(['git', 'add', f'{args.dest}.ignored'])
+                subprocess.check_call(['git', 'commit', '-F', '.git/rosdistromigratecommitmsg'])
+
             # Copy the source track to the new destination.
             dest_track = copy.deepcopy(tracks['tracks'][args.source])
             dest_track['ros_distro'] = args.dest
