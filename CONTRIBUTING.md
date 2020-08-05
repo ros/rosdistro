@@ -148,18 +148,20 @@ Additionally, if you rely on a dependency that uses `_python3`-suffixed codename
 
 #### pip
 
-Python packages, which are only available on [PyPI](https://pypi.org/) should use the `-pip` extension to avoid colliding with future keys from package managers.
+Python packages, which are only available on [PyPI](https://pypi.org/), should use the prefix `python3-` and suffix `-pip` to avoid colliding with future keys from package managers.
 
 For example:
 
 ```yaml
-foobar-pip:
+python3-foobar-pip:
   ubuntu:
     pip:
       packages: [foobar]
 ```
 
-Some existing rules are duplicated with `python-` or `python3-` prefixes, but this is no longer recommended.
+Some existing rules do not have `python-` or `python3-` prefixes, but this is no longer recommended.
+If the package ever becomes available in Debian or Ubuntu, the `python3-` prefix makes sure the `pip` key is next to it alphabetically.
+The `-pip` key should be removed When the package becomes available on all platforms, and all existing users of the `-pip` key should migrate to the new key.
 
 How to submit pull requests
 ---------------------------
