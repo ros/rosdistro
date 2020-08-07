@@ -42,9 +42,9 @@
 # In its default configuration, it will also download https://github.com/ros2/ros2/blob/master/ros2.repos
 # in order to determine the "core" ROS 2 packages.  After finding the core packages,
 # it will then go to the release repository for each package, and check to ensure that
-# the devel_branch is the same as the branch listed on the rosdistro source entry.  If
-# they are different, it will open a pull request against the release distribution to synchronize
-# them, and link that pull request to https://github.com/ros2/ros2/issues/963 .
+# the devel_branch is the same as the branch listed on the rosdistro source entry.
+# If they are different, it will open a pull request against the release
+# distribution to synchronize them.
 # Note that this program can produce false positives in corner cases, which is why it
 # opens pull requests and doesn't directly push to the repositories.  The pull requests it
 # generates should be carefully reviewed before merging.
@@ -208,8 +208,6 @@ def main():
                 continue
 
             gh_body = """This PR from an automated script updates the devel_branch for {ros_distro} to match the source branch as specified in https://github.com/ros/rosdistro/{ros_distro}/distribution.yaml .
-
-Links to https://github.com/ros2/ros2/issues/963 .
 """.format(ros_distro=ros_distro)
             commit_message = """Change the devel_branch for {ros_distro}.
 
