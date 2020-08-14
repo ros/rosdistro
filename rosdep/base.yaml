@@ -110,6 +110,7 @@ asio:
   rhel: [asio-devel]
   ubuntu: [libasio-dev]
 assimp:
+  alpine: [assimp]
   arch: [assimp]
   debian: [libassimp-dev]
   fedora: [assimp]
@@ -127,6 +128,7 @@ assimp:
     oneiric: [assimp-dev]
     trusty_python3: [libassimp-dev]
 assimp-dev:
+  alpine: [assimp-dev]
   arch: [assimp]
   debian: [libassimp-dev]
   fedora: [assimp-devel]
@@ -233,7 +235,10 @@ benchmark:
   debian:
     '*': [libbenchmark-dev]
     stretch: null
-  fedora: [google-benchmark]
+  fedora: [google-benchmark-devel]
+  rhel:
+    '*': [google-benchmark-devel]
+    '7': null
   ubuntu:
     '*': [libbenchmark-dev]
     xenial: null
@@ -308,6 +313,7 @@ box2d-dev:
   fedora: [Box2D-devel]
   ubuntu: [libbox2d-dev]
 bullet:
+  alpine: [bullet-dev]
   arch: [bullet]
   debian: [libbullet-dev]
   fedora: [bullet-devel]
@@ -401,6 +407,7 @@ clang:
   gentoo: [sys-devel/clang]
   ubuntu: [clang]
 clang-format:
+  alpine: [clang]
   debian:
     buster: [clang-format]
     stretch: [clang-format]
@@ -412,6 +419,7 @@ clang-format:
   rhel: [clang]
   ubuntu: [clang-format]
 clang-tidy:
+  alpine: [clang-extra-tools]
   debian:
     buster: [clang-tidy]
     stretch: [clang-tidy]
@@ -443,30 +451,37 @@ cmake:
   ubuntu: [cmake]
 coinor-libcbc-dev:
   debian: [coinor-libcbc-dev]
+  fedora: [coin-or-Cbc-devel]
   gentoo: [sci-libs/coinor-cbc]
   ubuntu: [coinor-libcbc-dev]
 coinor-libcbc3:
   debian: [coinor-libcbc3]
+  fedora: [coin-or-Cbc]
   ubuntu: [coinor-libcbc3]
 coinor-libcgl-dev:
   debian: [coinor-libcgl-dev]
+  fedora: [coin-or-Cgl-devel]
   gentoo: [sci-libs/coinor-cgl]
   ubuntu: [coinor-libcgl-dev]
 coinor-libclp-dev:
   debian: [coinor-libclp-dev]
+  fedora: [coin-or-Clp-devel]
   gentoo: [sci-libs/coinor-clp]
   ubuntu: [coinor-libclp-dev]
 coinor-libcoinutils-dev:
   debian: [coinor-libcoinutils-dev]
+  fedora: [coin-or-CoinUtils-devel]
   gentoo: [sci-libs/coinor-utils]
+  rhel:
+    '7': [coin-or-CoinUtils-devel]
   ubuntu: [coinor-libcoinutils-dev]
 coinor-libipopt-dev:
   arch: [coinor-all]
   debian: [coinor-libipopt-dev]
-  fedora: [coin-or-CoinUtils-devel]
+  fedora: [coin-or-Ipopt-devel]
   gentoo: [sci-libs/ipopt]
   rhel:
-    '7': [coin-or-CoinUtils-devel]
+    '7': [coin-or-Ipopt-devel]
   ubuntu: [coinor-libipopt-dev]
 coinor-libosi-dev:
   debian: [coinor-libosi-dev]
@@ -486,8 +501,7 @@ collada-dom:
   openembedded: [collada-dom@meta-ros]
   slackware: [collada-dom]
   ubuntu:
-    artful: [libcollada-dom2.4-dp-dev]
-    bionic: [libcollada-dom2.4-dp-dev]
+    '*': [libcollada-dom2.4-dp-dev]
     lucid: [collada-dom-dev]
     maverick: [collada-dom-dev]
     natty: [collada-dom-dev]
@@ -500,9 +514,15 @@ collada-dom:
     utopic: [collada-dom-dev]
     vivid: [collada-dom-dev]
     wily: [collada-dom-dev]
-    xenial: [libcollada-dom2.4-dp-dev]
-    yakkety: [libcollada-dom2.4-dp-dev]
-    zesty: [libcollada-dom2.4-dp-dev]
+collectd:
+  debian: [collectd]
+  fedora: [collectd]
+  gentoo: [app-metrics/collectd]
+  ubuntu: [collectd]
+collectd-utils:
+  debian: [collectd-utils]
+  fedora: [collectd-utils]
+  ubuntu: [collectd-utils]
 comedi:
   debian: [libcomedi-dev]
   fedora: [comedilib-devel]
@@ -1066,6 +1086,7 @@ gimp:
   gentoo: [media-gfx/gimp]
   ubuntu: [gimp]
 git:
+  alpine: [git]
   arch: [git]
   debian: [git]
   fedora: [git]
@@ -1329,6 +1350,8 @@ gtk3:
     slackpkg:
       packages: [gtk+3]
   ubuntu: [libgtk-3-dev]
+gurumdds-2.6:
+  ubuntu: [gurumdds-2.6]
 gv:
   arch: [gv]
   debian: [gv]
@@ -1391,6 +1414,86 @@ ifstat:
   fedora: [ifstat]
   gentoo: [net-analyzer/ifstat]
   ubuntu: [ifstat]
+ignition-citadel:
+  debian:
+    buster: [ignition-citadel]
+  ubuntu:
+    focal: [ignition-citadel]
+ignition-cmake2:
+  debian:
+    buster: [libignition-cmake2-dev]
+  ubuntu:
+    focal: [libignition-cmake2-dev]
+ignition-common3:
+  debian:
+    buster: [libignition-common3-dev]
+  ubuntu:
+    focal: [libignition-common3-dev]
+ignition-fuel-tools4:
+  debian:
+    buster: [libignition-fuel-tools4-dev]
+  ubuntu:
+    focal: [libignition-fuel-tools4-dev]
+ignition-gazebo3:
+  debian:
+    buster: [libignition-gazebo3-dev]
+  ubuntu:
+    focal: [libignition-gazebo3-dev]
+ignition-gui3:
+  debian:
+    buster: [libignition-gui3-dev]
+  ubuntu:
+    focal: [libignition-gui3-dev]
+ignition-launch2:
+  debian:
+    buster: [libignition-launch2-dev]
+  ubuntu:
+    focal: [libignition-launch2-dev]
+ignition-math6:
+  debian:
+    buster: [libignition-math6-dev]
+  ubuntu:
+    focal: [libignition-math6-dev]
+ignition-math6-eigen3:
+  debian:
+    buster: [libignition-math6-eigen3-dev]
+  ubuntu:
+    focal: [libignition-math6-eigen3-dev]
+ignition-msgs5:
+  debian:
+    buster: [libignition-msgs5-dev]
+  ubuntu:
+    focal: [libignition-msgs5-dev]
+ignition-physics2:
+  debian:
+    buster: [libignition-physics2-dev]
+  ubuntu:
+    focal: [libignition-physics2-dev]
+ignition-plugin:
+  debian:
+    buster: [libignition-plugin-dev]
+  ubuntu:
+    focal: [libignition-plugin-dev]
+ignition-rendering3:
+  debian:
+    buster: [libignition-rendering3-dev]
+  ubuntu:
+    focal: [libignition-rendering3-dev]
+ignition-sensors3:
+  debian:
+    buster: [libignition-sensors3-dev]
+  ubuntu:
+    focal: [libignition-sensors3-dev]
+ignition-tools:
+  debian:
+    buster: [libignition-tools-dev]
+  ubuntu:
+    focal: [libignition-tools-dev]
+ignition-transport8:
+  debian:
+    buster: [libignition-transport8-dev]
+  ubuntu:
+    focal: [libignition-transport8-dev]
 imagemagick:
   arch: [imagemagick]
   debian: [imagemagick]
@@ -1427,6 +1530,10 @@ iputils-ping:
   debian: [iputils-ping]
   fedora: [iputils]
   ubuntu: [iputils-ping]
+iwyu:
+  debian: [iwyu]
+  fedora: [iwyu]
+  ubuntu: [iwyu]
 jack:
   arch: [jack]
   debian: [libjack-jackd2-dev]
@@ -1463,6 +1570,7 @@ jasper:
     xenial: [libjasper-dev]
     yakkety: [libjasper-dev]
 java:
+  alpine: [openjdk8-jre]
   arch: [jdk7-openjdk]
   debian:
     '*': [default-jdk]
@@ -1734,6 +1842,24 @@ libboost-iostreams-dev:
   gentoo: [dev-libs/boost]
   rhel: [boost-devel]
   ubuntu: [libboost-iostreams-dev]
+libboost-math:
+  debian:
+    buster: [libboost-math1.67.0]
+    stretch: [libboost-math1.62.0]
+  fedora: [boost-math]
+  gentoo: [dev-libs/boost]
+  rhel: [boost-math]
+  ubuntu:
+    bionic: [libboost-math1.65.1]
+    eoan: [libboost-math1.67.0]
+    focal: [libboost-math1.71.0]
+    xenial: [libboost-math1.58.0]
+libboost-math-dev:
+  debian: [libboost-math-dev]
+  fedora: [boost-devel]
+  gentoo: [dev-libs/boost]
+  rhel: [boost-devel]
+  ubuntu: [libboost-math-dev]
 libboost-program-options:
   debian:
     buster: [libboost-program-options1.67.0]
@@ -1816,6 +1942,24 @@ libboost-regex-dev:
   gentoo: [dev-libs/boost]
   rhel: [boost-devel]
   ubuntu: [libboost-regex-dev]
+libboost-serialization:
+  debian:
+    buster: [libboost-serialization1.67.0]
+    stretch: [libboost-serialization1.62.0]
+  fedora: [boost-serialization]
+  gentoo: [dev-libs/boost]
+  rhel: [boost-serialization]
+  ubuntu:
+    bionic: [libboost-serialization1.65.1]
+    eoan: [libboost-serialization1.67.0]
+    focal: [libboost-serialization1.71.0]
+    xenial: [libboost-serialization1.58.0]
+libboost-serialization-dev:
+  debian: [libboost-serialization-dev]
+  fedora: [boost-devel]
+  gentoo: [dev-libs/boost]
+  rhel: [boost-devel]
+  ubuntu: [libboost-serialization-dev]
 libboost-system:
   debian:
     buster: [libboost-system1.67.0]
@@ -1855,6 +1999,24 @@ libboost-thread-dev:
   gentoo: ['dev-libs/boost[threads]']
   rhel: [boost-devel]
   ubuntu: [libboost-thread-dev]
+libboost-timer:
+  debian:
+    buster: [libboost-timer1.67.0]
+    stretch: [libboost-timer1.62.0]
+  fedora: [boost-timer]
+  gentoo: [dev-libs/boost]
+  rhel: [boost-timer]
+  ubuntu:
+    bionic: [libboost-timer1.65.1]
+    eoan: [libboost-timer1.67.0]
+    focal: [libboost-timer1.71.0]
+    xenial: [libboost-timer1.58.0]
+libboost-timer-dev:
+  debian: [libboost-timer-dev]
+  fedora: [boost-devel]
+  gentoo: [dev-libs/boost]
+  rhel: [boost-devel]
+  ubuntu: [libboost-timer-dev]
 libcairo2-dev:
   arch: [cairo]
   debian: [libcairo2-dev]
@@ -1970,6 +2132,7 @@ libcpprest-dev:
   fedora: [cpprest-devel]
   ubuntu: [libcpprest-dev]
 libcunit-dev:
+  alpine: [cunit-dev]
   arch: [cunit]
   debian: [libcunit1-dev]
   fedora: [CUnit-devel]
@@ -2531,6 +2694,61 @@ libicu-dev:
   fedora: [libicu-devel]
   gentoo: [dev-libs/icu]
   ubuntu: [libicu-dev]
+libignition-common3:
+  debian:
+    buster: [libignition-common3]
+  ubuntu:
+    focal: [libignition-common3]
+libignition-fuel-tools4:
+  debian:
+    buster: [libignition-fuel-tools4]
+  ubuntu:
+    focal: [libignition-fuel-tools4]
+libignition-gazebo3:
+  debian:
+    buster: [libignition-gazebo3]
+  ubuntu:
+    focal: [libignition-gazebo3]
+libignition-gui3:
+  debian:
+    buster: [libignition-gui3]
+  ubuntu:
+    focal: [libignition-gui3]
+libignition-launch2:
+  debian:
+    buster: [libignition-launch2]
+  ubuntu:
+    focal: [libignition-launch2]
+libignition-math6:
+  debian:
+    buster: [libignition-math6]
+  ubuntu:
+    focal: [libignition-math6]
+libignition-msgs5:
+  debian:
+    buster: [libignition-msgs5]
+  ubuntu:
+    focal: [libignition-msgs5]
+libignition-physics2:
+  debian:
+    buster: [libignition-physics2]
+  ubuntu:
+    focal: [libignition-physics2]
+libignition-rendering3:
+  debian:
+    buster: [libignition-rendering3]
+  ubuntu:
+    focal: [libignition-rendering3]
+libignition-sensors3:
+  debian:
+    buster: [libignition-sensors3]
+  ubuntu:
+    focal: [libignition-sensors3]
+libignition-transport8:
+  debian:
+    buster: [libignition-transport8]
+  ubuntu:
+    focal: [libignition-transport8]
 libimage-exiftool-perl:
   arch: [perl-image-exiftool]
   debian: [libimage-exiftool-perl]
@@ -2658,6 +2876,18 @@ liblapack-dev:
 liblapacke-dev:
   debian: [liblapacke-dev]
   ubuntu: [liblapacke-dev]
+liblcm:
+  debian: [liblcm1]
+  fedora: [liblcm]
+  ubuntu:
+    '*': [liblcm1]
+    'xenial': null
+liblcm-dev:
+  debian: [liblcm-dev]
+  fedora: [liblcm-devel]
+  ubuntu:
+    '*': [liblcm-dev]
+    'xenial': null
 libleptonica-dev:
   arch: [leptonica]
   debian: [libleptonica-dev]
@@ -2910,6 +3140,11 @@ libois-dev:
   fedora: [ois-devel]
   gentoo: [dev-games/ois]
   ubuntu: [libois-dev]
+libomp-dev:
+  arch: [openmp]
+  debian: [libomp-dev]
+  fedora: [libomp-devel]
+  ubuntu: [libomp-dev]
 libopal-dev:
   debian: [libopal-dev]
   fedora: [opal-devel]
@@ -3217,7 +3452,7 @@ libpq-dev:
   ubuntu: [libpq-dev]
 libpqxx:
   debian:
-    buster: [libpqxx-4.0v5]
+    buster: [libpqxx-6.2]
     jessie: [libpqxx-4.0]
     stretch: [libpqxx-4.0v5]
     wheezy: [libpqxx-3.1]
@@ -3226,6 +3461,7 @@ libpqxx:
   ubuntu:
     artful: [libpqxx-4.0v5]
     bionic: [libpqxx-4.0v5]
+    focal: [libpqxx-6.4]
     lucid: [libpqxx-3.0]
     maverick: [libpqxx-3.0]
     natty: [libpqxx-3.0]
@@ -3245,24 +3481,7 @@ libpqxx-dev:
   debian: [libpqxx-dev]
   fedora: [libpqxx-devel]
   gentoo: [dev-libs/libpqxx]
-  ubuntu:
-    artful: [libpqxx-dev]
-    bionic: [libpqxx-dev]
-    lucid: [libpqxx3-dev]
-    maverick: [libpqxx3-dev]
-    natty: [libpqxx3-dev]
-    oneiric: [libpqxx3-dev]
-    precise: [libpqxx3-dev]
-    quantal: [libpqxx3-dev]
-    raring: [libpqxx3-dev]
-    saucy: [libpqxx3-dev]
-    trusty: [libpqxx-dev]
-    utopic: [libpqxx-dev]
-    vivid: [libpqxx-dev]
-    wily: [libpqxx-dev]
-    xenial: [libpqxx-dev]
-    yakkety: [libpqxx-dev]
-    zesty: [libpqxx-dev]
+  ubuntu: [libpqxx-dev]
 libprocps-dev:
   debian: [libprocps-dev]
   ubuntu: [libprocps-dev]
@@ -3434,6 +3653,7 @@ libqt5-concurrent:
   slackware: [qt5]
   ubuntu: [libqt5concurrent5]
 libqt5-core:
+  alpine: [qt5-qtbase]
   arch: [qt5-base]
   debian: [libqt5core5a]
   fedora: [qt5-qtbase]
@@ -3448,6 +3668,7 @@ libqt5-gstreamer-dev:
   debian: [libqt5gstreamer-dev]
   ubuntu: [libqt5gstreamer-dev]
 libqt5-gui:
+  alpine: [qt5-qtbase]
   arch: [qt5-base]
   debian: [libqt5gui5]
   fedora: [qt5-qtbase-gui]
@@ -3469,6 +3690,7 @@ libqt5-network:
   gentoo: ['dev-qt/qtnetwork:5']
   ubuntu: [libqt5network5]
 libqt5-opengl:
+  alpine: [qt5-qtbase-dev]
   arch: [qt5-base]
   debian: [libqt5opengl5]
   fedora: [qt5-qtbase]
@@ -3689,6 +3911,7 @@ libspnav-dev:
   gentoo: [dev-libs/libspnav]
   ubuntu: [libspnav-dev]
 libsqlite3-dev:
+  alpine: [sqlite-dev]
   arch: [sqlite]
   debian: [libsqlite3-dev]
   fedora: [libsq3-devel]
@@ -4163,6 +4386,7 @@ libwebsocketpp-dev:
   gentoo: [websocketpp]
   ubuntu: [libwebsocketpp-dev]
 libx11:
+  alpine: [libx11]
   arch: [libx11]
   debian: [libx11-dev]
   fedora: [libX11]
@@ -4170,6 +4394,7 @@ libx11:
   macports: [xorg-libX11]
   ubuntu: [libx11-dev]
 libx11-dev:
+  alpine: [libx11-dev]
   arch: [libx11]
   debian: [libx11-dev]
   fedora: [libX11-devel]
@@ -4183,6 +4408,7 @@ libx264-dev:
   gentoo: [media-libs/x264]
   ubuntu: [libx264-dev]
 libxaw:
+  alpine: [libxaw-dev]
   arch: [libxaw]
   debian: [libxaw7-dev]
   fedora: [libXaw-devel]
@@ -4248,6 +4474,7 @@ libxml2:
   rhel: [libxml2-devel]
   ubuntu: [libxml2-dev]
 libxml2-utils:
+  alpine: [libxml2-utils]
   debian: [libxml2-utils]
   fedora: [libxml2]
   gentoo: [dev-libs/libxml2]
@@ -4272,6 +4499,7 @@ libxmu-dev:
   rhel: [libXmu-devel]
   ubuntu: [libxmu-dev]
 libxrandr:
+  alpine: [libxrandr-dev]
   arch: [libxrandr]
   debian: [libxrandr-dev]
   fedora: [libXrandr-devel]
@@ -4323,10 +4551,10 @@ libzip-dev:
 libzmq3-dev:
   arch: [zeromq]
   debian: [libzmq3-dev]
-  fedora: [zeromq-devel]
+  fedora: [cppzmq-devel]
   gentoo: [net-libs/cppzmq]
   openembedded: [zeromq@meta-oe]
-  rhel: [zeromq-devel]
+  rhel: [cppzmq-devel]
   ubuntu: [libzmq3-dev]
 libzmqpp-dev:
   ubuntu: [libzmqpp-dev]
@@ -4334,6 +4562,7 @@ libzmqpp3:
   gentoo: [net-libs/cppzmq]
   ubuntu: [libzmqpp3]
 libzstd-dev:
+  alpine: [zstd-dev]
   arch: [zstd]
   debian: [libzstd-dev]
   fedora: [libzstd-devel]
@@ -4473,6 +4702,7 @@ matio:
   fedora: [matio-devel]
   ubuntu: [libmatio-dev]
 maven:
+  alpine: [maven]
   arch: [maven]
   debian: [maven]
   fedora: [maven]
@@ -4821,6 +5051,7 @@ opende:
   gentoo: [dev-games/ode]
   ubuntu: [libode-dev]
 opengl:
+  alpine: [mesa-dev]
   arch: [mesa]
   debian: [libgl1-mesa-dev, libglu1-mesa-dev]
   fedora: [mesa-libGL-devel, mesa-libGLU-devel]
@@ -4872,6 +5103,7 @@ openssh-server:
   gentoo: [net-misc/openssh]
   ubuntu: [openssh-server]
 openssl:
+  alpine: [openssl]
   arch: [openssl]
   debian: [openssl]
   fedora: [openssl]
@@ -4900,6 +5132,7 @@ pandoc:
   rhel: [pandoc]
   ubuntu: [pandoc]
 pcre:
+  alpine: [pcre-dev]
   arch: [pcre]
   debian: [libpcre3-dev]
   fedora: [pcre-devel]
@@ -5045,6 +5278,7 @@ postgresql-postgis:
   ubuntu:
     artful: [postgresql-9.6-postgis-2.3, postgresql-contrib, postgresql-server-dev-all]
     bionic: [postgresql-10-postgis-2.4, postgresql-contrib, postgresql-server-dev-all]
+    focal: [postgresql-12-postgis-3, postgresql-contrib, postgresql-server-dev-all]
     trusty: [postgresql-9.3-postgis-2.1, postgresql-contrib, postgresql-server-dev-all]
     xenial: [postgresql-9.5-postgis-2.2, postgresql-contrib, postgresql-server-dev-all]
 potrace:
@@ -5200,6 +5434,7 @@ qt5-image-formats-plugins:
   debian: [qt5-image-formats-plugins]
   ubuntu: [qt5-image-formats-plugins]
 qt5-qmake:
+  alpine: [qt5-qtbase-dev]
   arch: [qt5-base]
   debian: [qt5-qmake]
   fedora: [qt5-qtbase-devel]
@@ -5368,6 +5603,7 @@ sdformat:
     artful: [libsdformat6-dev]
     bionic: [libsdformat6-dev]
     cosmic: [libsdformat6-dev]
+    focal: [libsdformat9-dev]
     precise: [sdformat]
     quantal: [sdformat]
     raring: [sdformat]
@@ -5505,6 +5741,7 @@ sparsehash:
     yakkety: [libsparsehash-dev]
     zesty: [libsparsehash-dev]
 spdlog:
+  alpine: [spdlog-dev]
   debian: [libspdlog-dev]
   fedora: [spdlog-devel]
   gentoo: [dev-libs/spdlog]
