@@ -1,15 +1,18 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
+
 import argparse
+import sys
 
 import rosdistro
 from rosdistro.dependency_walker import DependencyWalker
 
 
-def is_released(repo, dist_file):
-    return repo in dist_file.repositories and \
-        dist_file.repositories[repo].release_repository is not None and \
-        dist_file.repositories[repo].release_repository.version is not None
+def is_released(repository, dist_file):
+    return repository in dist_file.repositories and \
+        dist_file.repositories[repository].release_repository is not None and \
+        dist_file.repositories[repository].release_repository.version is not None
 
 
 parser = argparse.ArgumentParser(
@@ -30,10 +33,16 @@ parser.add_argument(
     metavar='depth', type=int,
     help='Maxmium depth to crawl the dependency tree')
 
+parser.add_argument(
+    '--comparison-rosdistro',
+    metavar='ROS_DISTRO',
+    dest='comparison',
+    help='The rosdistro with which to compare')
+
 args = parser.parse_args()
 
 distro_key = args.rosdistro
-repo_names = args.repositories
+repo_names_argument = args.repositories
 prev_distro_key = None
 
 index = rosdistro.get_index(rosdistro.get_index_url())
@@ -46,12 +55,24 @@ if distro_key is None:
 try:
     i = valid_distro_keys.index(distro_key)
 except ValueError:
-    print('Distribution key not found in list of valid distributions.')
+    print('Distribution key (%s) not found in list of valid distributions.' % distro_key, file=sys.stderr)
+    print('Valid rosdistros are %s.' % valid_distro_keys, file=sys.stderr)
     exit(-1)
-if i == 0:
-    print('No previous distribution found.')
+if i == 0 and not args.comparison:
+    print('No previous distribution found.', file=sys.stderr)
     exit(-1)
-prev_distro_key = valid_distro_keys[i - 1]
+
+if args.comparison:
+    valid_comparison_keys = valid_distro_keys[:]
+    valid_comparison_keys.remove(distro_key)
+    if args.comparison not in valid_comparison_keys:
+        print('Invalid rosdistro [%s] selected for comparison to [%s].' % (args.comparison, distro_key),
+              file=sys.stderr)
+        print('Valid rosdistros are %s.' % valid_comparison_keys, file=sys.stderr)
+        exit(-1)
+    prev_distro_key = args.comparison
+else:
+    prev_distro_key = valid_distro_keys[i - 1]
 
 cache = rosdistro.get_distribution_cache(index, distro_key)
 distro_file = cache.distribution_file
@@ -64,16 +85,14 @@ prev_distro_file = prev_cache.distribution_file
 
 dependency_walker = DependencyWalker(prev_distribution)
 
-if repo_names is None:
+if repo_names_argument is None:
     # Check missing dependencies for packages that were in the previous
     # distribution that have not yet been released in the current distribution
     # Filter repos without a version or a release repository
-    keys = prev_distro_file.repositories.keys()
-    prev_repo_names = set(
-        repo for repo in keys if is_released(repo, prev_distro_file))
-else:
-    prev_repo_names = set(
-        repo for repo in repo_names if is_released(repo, prev_distro_file))
+    repo_names_argument = prev_distro_file.repositories.keys()
+
+prev_repo_names = set(
+    repo for repo in repo_names_argument if is_released(repo, prev_distro_file))
 
 keys = distro_file.repositories.keys()
 current_repo_names = set(
@@ -89,15 +108,14 @@ if len(eliminated_repositories) > 0:
 
 repo_names_set = prev_repo_names.difference(
     current_repo_names)
+invalid_names = set(repo_names_argument).difference(prev_repo_names)
 
 if len(repo_names_set) == 0:
-    if repo_names is None:
-        print('Everything in {0} was released into the next {1}!'.format(
-            prev_distro_key, distro_key))
-        print('This was probably a bug.')
-    else:
-        print('All inputs are invalid or were already released in {0}.'.format(
-            distro_key))
+    print('All inputs are invalid or were already released in {0}.'.format(
+        distro_key))
+    if invalid_names:
+        print('Could no resolve: %s in %s' % (list(invalid_names), prev_distro_key), file=sys.stderr)
+        exit(1)
     print('Exiting without checking any dependencies.')
     exit(0)
 
@@ -179,3 +197,9 @@ if len(unblocked_blocking_repos) > 0:
     print('The following repos can be released, and are blocking other repos:')
     print('\n'.join(
         sorted('\t{0}'.format(repo) for repo in unblocked_blocking_repos)))
+
+if len(invalid_names):
+    print('Could no resolve the following arguments in %s: ' % prev_distro_key, file=sys.stderr)
+    print('\n'.join(
+        sorted('\t{0}'.format(repo) for repo in invalid_names)), file=sys.stderr)
+    exit(1)
