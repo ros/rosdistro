@@ -8,3 +8,8 @@ Guide to Contributing
 ---------------------
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md)
+
+Review guidelines
+-----------------
+
+Please see the [review guidelines](REVIEW_GUIDELINES.md) to look at the criteria to get a pull request merged into this repository.
