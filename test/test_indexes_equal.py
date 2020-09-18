@@ -37,7 +37,7 @@ INDEX_V4_YAML = os.path.normpath(os.path.join(
     os.path.dirname(os.path.abspath(__file__)), '..', 'index-v4.yaml'))
 
 
-def test_build_caches():
+def test_indexes_equal():
     with Fold():
         print('Checking that the index.yaml and index-v4.yaml files contain '
               'the same information expect additional metadata in the v4.')
