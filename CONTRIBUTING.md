@@ -28,6 +28,7 @@ Additionally, it may be necessary to determine build failures, these jobs are lo
 * [ROS Buildfarm](http://build.ros.org/)
 
 If a package continuously fails to build, the ROS Boss for that distribution may choose to revert the pull request that introduced it.
+Or they may take [other actions](https://github.com/ros-infrastructure/ros_buildfarm/blob/master/doc/ongoing_operations.rst) to avoid repeated failures.
 
 Documentation Indexing
 ----------------------
