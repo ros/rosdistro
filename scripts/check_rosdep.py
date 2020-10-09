@@ -57,6 +57,15 @@ def no_trailing_spaces(buf):
     return clean
 
 
+def no_blank_lines(buf):
+    clean = True
+    for i, l in enumerate(buf.split('\n')[:-1]):
+        if re.match(r'^\s*$', l):
+            print_err("blank line %u" % (i+1))
+            clean = False
+    return clean
+
+
 def generic_parser(buf, cb):
     ilen = len(indent_atom)
     stringblock = False
@@ -135,7 +144,7 @@ def check_order(buf):
         prev = st[lvl]
         try:
             # parse as yaml to parse `"foo bar"` as string 'foo bar' not string '"foo bar"'
-            item = yaml.load(m.groups()[0])
+            item = yaml.safe_load(m.groups()[0])
         except:
             print('woops line %d' % i)
             raise
@@ -160,12 +169,14 @@ def main(fname):
     # here be tests.
     ydict = None
     try:
-        ydict = yaml.load(buf)
+        ydict = yaml.safe_load(buf)
     except Exception:
         pass
     if ydict != {}:
         print_test("checking for trailing spaces...")
         my_assert(no_trailing_spaces(buf))
+        print_test("checking for blank lines...")
+        my_assert(no_blank_lines(buf))
         print_test("checking for incorrect indentation...")
         my_assert(correct_indent(buf))
         print_test("checking for non-bracket package lists...")
@@ -176,7 +187,7 @@ def main(fname):
     else:
         print_test("skipping file with empty dict contents...")
     try:
-        ydict = yaml.load(buf)
+        ydict = yaml.safe_load(buf)
 
         # ensure that values don't contain whitespaces
         whitespace_whitelist = ["el capitan", "mountain lion"]
