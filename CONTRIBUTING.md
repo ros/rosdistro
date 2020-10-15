@@ -11,6 +11,24 @@ Bloom is a tool which will help you do the release as well as open a pull-reques
 It will also assist adding documentation and source entries.
 There are [several helpful tutorials](http://wiki.ros.org/bloom/Tutorials) which provide instructions on how to do things like [make a first release](http://wiki.ros.org/bloom/Tutorials/FirstTimeRelease). 
 
+### Guidelines for Package Naming
+
+When releasing a new package into a distribution, please follow the naming guidelines set out in the [ROS REP 144: ROS Package Naming](https://www.ros.org/reps/rep-0144.html).
+
+### Binary Release Follow-up
+
+Once a `ros/rosdisto` pull request is merged, the package will be built in the ROS build farm.
+It is important that the author follow up to verify that the package has successfully built for a particular distribution.
+This can be checked via both the distribution status page:
+* For a ROS Distribution, use `repositories.ros.org/status_page/`, for example [ROS packages for Melodic](http://repositories.ros.org/status_page/ros_melodic_default.html).
+* For a ROS 2 Distribution, use `repo.ros2.org/status_page/`, for example [ROS packages for Foxy](http://repo.ros2.org/status_page/ros_foxy_default.html).
+
+Additionally, it may be necessary to determine build failures, these jobs are located at:
+* [ROS 2 Buildfarm](http://build.ros2.org/)
+* [ROS Buildfarm](http://build.ros.org/)
+
+If a package continuously fails to build, the ROS Boss for that distribution may choose to revert the pull request that introduced it.
+Or they may take [other actions](https://github.com/ros-infrastructure/ros_buildfarm/blob/master/doc/ongoing_operations.rst) to avoid repeated failures.
 
 Documentation Indexing
 ----------------------
@@ -63,6 +81,7 @@ Guidelines for rosdep rules
        However please don't target 'sid' as it's a rolling target and when the keys change our database gets out of date.
   * Keep everything in alphabetical order for better merging.
   * No trailing whitespace.
+  * No blank lines.
 
 ### Expected Rosdep Sources
 
@@ -85,6 +104,7 @@ Keys in the rosdep database are required to come from packages contained in the 
 #### RHEL/CentOS
 
 * CentOS Repositories: base, extras, centos-sclo-rh, or updates
+  * Additionally, for CentOS 8+: AppStream or PowerTools
 * Fedora Project Repositories: epel
 
 #### MacOS
@@ -140,25 +160,26 @@ python3-foobar:
 
 You may see existing rules that use `_python3`-suffixed distribution codenames.
 These were trialed as a possible style of Python 3 rules and should not be used.
+`_python3`-suffixed keys may be removed when the platform they're targeting reaches end of life.
 The guidance above should be followed for new rules.
 Additionally, if you rely on a dependency that uses `_python3`-suffixed codenames, add a new rule for it that follows the guidance above.
 
 #### pip
 
-Python packages, which are only available on pip, should use the `-pip` extension. Also the `python-`/`python3-` prefix needs to be used.
+Python packages, which are only available on [PyPI](https://pypi.org/), should use the prefix `python3-` and suffix `-pip` to avoid colliding with future keys from package managers.
+
 For example:
 
 ```yaml
-python-foobar-pip:
-  ubuntu:
-    pip:
-      packages: [foobar]
-...
 python3-foobar-pip:
   ubuntu:
     pip:
       packages: [foobar]
 ```
+
+Some existing rules do not have `python-` or `python3-` prefixes, but this is no longer recommended.
+If the package ever becomes available in Debian or Ubuntu, the `python3-` prefix ensures that the `pip` key is next to it alphabetically.
+The `-pip` key should be removed when the package becomes available on all platforms, and all existing users of the `-pip` key should migrate to the new key.
 
 How to submit pull requests
 ---------------------------
