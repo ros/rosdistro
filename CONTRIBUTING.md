@@ -94,8 +94,8 @@ Keys in the rosdep database are required to come from packages contained in the 
 
 #### Debian
 
-* Debian Repositories: Main, Universe, or Multiverse
-* ROS Sources: https://wiki.ros.org/Installation/Ubuntu/Sources
+* Debian Repositories: Main, Contrib, or Non-Free
+* ROS Sources: The Ubuntu guide also works for currently supported Debian distributions: https://wiki.ros.org/Installation/Ubuntu/Sources
 
 #### Fedora
 
