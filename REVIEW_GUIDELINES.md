@@ -38,20 +38,22 @@ There are a few different types of pull requests that are opened against this re
 1.  A new binary package in a ROS distribution.  An example of this kind of PR is [25857](https://github.com/ros/rosdistro/pull/25857).  An entry is considered a new binary package if it has a `release` field.  These PRs should generally have been opened via bloom; if they aren’t, the reviewer will ask why the submitter hasn't used bloom.  There are two sub-categories of this kind of PR:
     1.  If the package has been released into a prior ROS distribution, then the reviewer will ensure that the URLs to the doc, release, and source entries are the same as in the previous releases (this will be checked either by looking for the package in a previous distros distribution.yaml file, or by looking at the release repository for a branch named release/{distro}).  If the URLs are different, then the reviewer will ask the submitter why the URLs are different and whether it can be combined into the original one.
     1.  For packages that are brand-new to the ROS ecosystem, some due diligence will be done on the source and release repositories:
-        * The source repository should have a top-level LICENSE file, and the license should be one of the open-source ones listed in [https://opensource.org/licenses](https://opensource.org/licenses) (preferably one of the "Popular licenses").  If the repository is under multiple licenses, then it is encouraged (but not required) to have one LICENSE.<name> file per license.
-        * The license should be reflected in the package.xml file of all sub-packages in the repository.
-        * Both the source and release repositories should be publicly accessible.
-        * The source repository should generally contain one or more ROS packages (ROS packages are ones that have a package.xml and use either catkin or ament build helpers).  Packages that are not ROS packages can be accepted, but they should be rare and require special handling in the release repository.
+        * There must be a LICENSE file. Either each package in the repository should have a LICENSE file, or the source repository should have a top-level LICENSE file. If the repository is under multiple licenses, then it is encouraged (but not required) to have one LICENSE.<name> file per license.
+        * The license should be one of the open-source ones listed in [https://opensource.org/licenses](https://opensource.org/licenses) (preferably one of the "Popular licenses").
+        * The license must be reflected in the package.xml file of all sub-packages in the repository.
+        * The source repository must be publicly accessible.
+        * The source repository should contain one or more ROS packages (meaning they have a `package.xml` in the source repository). Packages that are not ROS packages can be accepted, but they are rare and require special handling in the release repository.
 
     Once the above criteria are satisfied, and the ROS distribution isn't in a "sync freeze", then the PR will be merged.
 
 1.  A new source or documentation package in a ROS distribution.  An example of this kind of PR is [26383](https://github.com/ros/rosdistro/pull/26383).  An entry is considered a source or documentation package if it has a `source` or `doc` field (or both), but no `release` field.  These PRs need not have been opened with bloom.  There are two sub-categories of this kind of PR:
     1.  If the package has been released into a prior ROS distribution, then the reviewer will ensure that the URLs to the doc and source entries are the same as in the previous releases (this will be checked either by looking for the package in a previous distros distribution.yaml file, or by looking at the release repository for a branch named release/{distro}).  If the URLs are different, then the reviewer will ask the submitter why they URLs are different and whether it can be combined into the original one.
     1.  For packages that are brand-new to the ROS ecosystem, some due diligence will be done on the source repository:
-        * The source repository should have a top-level LICENSE file, and the license should be one of the open-source ones listed in [https://opensource.org/licenses](https://opensource.org/licenses) (preferably one of the "Popular licenses").  If the repository is under multiple licenses, then it is encouraged (but not required) to have one LICENSE.<name> file per license.
-        * The license should be reflected in the package.xml file of all sub-packages in the repository.
-        * The source repository should be publicly accessible.
-        * The source repository should generally contain one or more ROS packages (ROS packages are ones that have a package.xml and use either catkin or ament build helpers).  Packages that are not ROS packages can be accepted, but they should be rare and require special handling in the release repository.
+        * There must be a LICENSE file. Either each package in the repository should have a LICENSE file, or the source repository should have a top-level LICENSE file. If the repository is under multiple licenses, then it is encouraged (but not required) to have one LICENSE.<name> file per license.
+        * The license should be one of the open-source ones listed in [https://opensource.org/licenses](https://opensource.org/licenses) (preferably one of the "Popular licenses").
+        * The license must be reflected in the package.xml file of all sub-packages in the repository.
+        * The source repository must be publicly accessible.
+        * The source repository should contain one or more ROS packages (meaning they have a `package.xml` in the source repository). Packages that are not ROS packages can be accepted, but they are rare and require special handling in the release repository.
 
     Once the above criteria are satisfied, and the ROS distribution isn’t in a "sync freeze", then the PR will be merged.
 
