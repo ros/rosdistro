@@ -54,6 +54,7 @@ There are a few different types of pull requests that are opened against this re
         * The license must be reflected in the package.xml file of all sub-packages in the repository.
         * The source repository must be publicly accessible.
         * The source repository should contain one or more ROS packages (meaning they have a `package.xml` in the source repository). Packages that are not ROS packages can be accepted, but they are rare and require special handling in the release repository.
+        * All the package names should be compliant with [REP 144](https://ros.org/reps/rep-0144.html).
 
     Once the above criteria are satisfied, and the ROS distribution isn’t in a "sync freeze", then the PR will be merged.
 
