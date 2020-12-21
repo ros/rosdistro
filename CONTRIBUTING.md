@@ -185,7 +185,7 @@ How to submit pull requests
 ---------------------------
 
 When submitting pull requests it is expected that they pass the unit tests for formatting. 
-The unit tests enforce alphabetization of elements and a consistant formatting to keep merging as clean as possible. 
+The unit tests enforce alphabetization of elements and a consistent formatting to keep merging as clean as possible. 
 
 To run the tests run ``nosetests`` in the root of the repository.
 These tests require several dependencies that can be installed either from the ROS repositories or via pip(list built based on the content of [.travis.yaml](https://github.com/ros/rosdistro/blob/master/.travis.yml):
