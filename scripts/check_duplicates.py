@@ -45,20 +45,30 @@ def create_default_sources():
     filepath = os.path.join(basedir, 'index.yaml')
     with open(filepath) as f:
         content = f.read()
-    index = yaml.load(content)
+    index = yaml.safe_load(content)
     for distro in index['distributions']:
         distfile = 'file://' + basedir + '/' + distro + '/distribution.yaml'
         print('loading %s' % distfile)
-        rds = RosDistroSource(distro)
+        try:
+            rds = RosDistroSource(distro)
+        except KeyError:
+            # When first adding a ROS distro to the repository, it won't yet
+            # exist at the URL that RosDistroSource fetches from github.  When
+            # trying to index it, RosDistroSource will throw a KeyError.  If we
+            # see that KeyError, just ignore it and don't add the distro to the
+            # list of sources.
+            continue
+
         rosdep_data = get_gbprepo_as_rosdep_data(distro)
         sources.append(CachedDataSource('yaml', distfile, [distro], rosdep_data))
+
     for filename in os.listdir(os.path.join(basedir, 'rosdep')):
         if not filename.endswith('yaml'):
             continue
         filepath = os.path.join(basedir, 'rosdep', filename)
         with open(filepath) as f:
             content = f.read()
-        rosdep_data = yaml.load(content)
+        rosdep_data = yaml.safe_load(content)
         tag = 'osx' if 'osx-' in filepath else ''
         sources.append(CachedDataSource('yaml', 'file://' + filepath, [tag], rosdep_data))
     return sources
@@ -115,7 +125,7 @@ def main(infile):
         filepath = os.path.join(os.getcwd(), filename)
         with open(filepath) as f:
             content = f.read()
-        rosdep_data = yaml.load(content)
+        rosdep_data = yaml.safe_load(content)
         # osx-homebrew uses osx tag
         tag = 'osx' if 'osx-' in filepath else ''
         model = CachedDataSource('yaml', 'file://' + filepath, [tag], rosdep_data)

@@ -26,4 +26,4 @@ If this fails you can run 'scripts/check_rosdistro_urls.py file://`pwd`/%s %s' t
             if not check_rosdistro_urls(index_url, distro_name):
                 failed_distros.append(distro_name)
                 fold_blocks.append(fold.get_block_name())
-    assert not failed_distros, "There were problems with urls in the distribution files for these distros: %s, see folded blocks for details: %s" % (failed_distros, fold_blocks)
+    assert not failed_distros, "There were problems with urls in the distribution files for these distros: %s, see folded blocks above for details: %s" % (failed_distros, fold_blocks)
