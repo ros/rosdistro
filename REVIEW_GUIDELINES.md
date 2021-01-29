@@ -77,4 +77,6 @@ There are a few different types of pull requests that are opened against this re
 
 1.  Changes to the rosdistro code. These pull requests change any of the scripts or tests that are housed in the rosdistro repositories.  They will be reviewed as any other code change in the ROS ecosystem.
 
+1.  Maintainership changes. In an open source ecosystem it is necessary to change maintainership of packages from time to time. In optimal situations the current maintainer can designate their successor and officially hand off maintainership. If the maintainer is no longer able to do the necessary work a request can be made of the rosdistro release manager to take over maintenance. The manager will review each request on a case by case basis. If you see a change of maintainership please hold it for review by the release manager.
+
 1.  Miscellaneous. Any other pull requests adding or modifying documentation, or anything else will be reviewed as any other code change in the ROS ecosystem.
