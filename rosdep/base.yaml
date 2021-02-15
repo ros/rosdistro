@@ -161,6 +161,12 @@ assimp-dev:
     maverick: [assimp-dev]
     oneiric: [assimp-dev]
     trusty_python3: [libassimp-dev]
+at-spi2-core:
+  arch: [at-spi2-core]
+  debian: [at-spi2-core]
+  fedora: [at-spi2-core]
+  gentoo: [at-spi2-core]
+  ubuntu: [at-spi2-core]
 atlas:
   arch: [atlas-lapack]
   debian: [libatlas-base-dev]
@@ -1368,6 +1374,15 @@ gstreamer1.0-alsa:
   openembedded: [gstreamer1.0-plugins-base@openembedded-core]
   rhel: [gstreamer1-plugins-base]
   ubuntu: [gstreamer1.0-alsa]
+gstreamer1.0-gl:
+  arch: [gst-plugins-base]
+  debian:
+    '*': [gstreamer1.0-gl]
+    stretch: null
+  fedora: [gstreamer1-plugins-base]
+  ubuntu:
+    '*': [gstreamer1.0-gl]
+    xenial: null
 gstreamer1.0-libav:
   arch: [gst-libav]
   debian: [gstreamer1.0-libav]
@@ -1699,6 +1714,7 @@ java:
   fedora: [java]
   freebsd: [openjdk6]
   gentoo: [virtual/jdk]
+  rhel: [java]
   ubuntu: [default-jdk]
 joystick:
   arch: [linuxconsole]
@@ -2026,6 +2042,9 @@ libboost-python:
   fedora: [boost-python2-devel, boost-python3-devel]
   gentoo: ['dev-libs/boost[python]']
   openembedded: [boost@openembedded-core]
+  rhel:
+    '*': [boost-python3]
+    '7': [boost-python, 'boost-python%{python3_pkgversion}']
   ubuntu:
     bionic: [libboost-python1.65.1]
     disco: [libboost-python1.67.0]
@@ -2039,6 +2058,9 @@ libboost-python-dev:
   fedora: [boost-python2-devel]
   gentoo: ['dev-libs/boost[python]']
   openembedded: [boost@openembedded-core]
+  rhel:
+    '*': [boost-python3-devel]
+    '7': [boost-devel, 'boost-python%{python3_pkgversion}-devel']
   ubuntu: [libboost-python-dev]
 libboost-random:
   debian:
@@ -2982,6 +3004,7 @@ libjpeg:
   macports: [jpeg]
   openembedded: [jpeg@openembedded-core]
   opensuse: [libjpeg62-devel]
+  rhel: [libjpeg-turbo-devel]
   slackware: [libjpeg-turbo]
   ubuntu:
     artful: [libjpeg-dev]
@@ -4366,6 +4389,7 @@ libudev-dev:
   fedora: [libudev-devel]
   gentoo: [virtual/libudev]
   openembedded: [udev@openembedded-core]
+  rhel: [libudev-devel]
   ubuntu: [libudev-dev]
 libunittest++:
   arch: [unittestpp]
@@ -4532,7 +4556,7 @@ libvpx-dev:
 libvtk:
   arch: [vtk]
   debian:
-    buster: [libvtk6-dev]
+    buster: [libvtk7-dev]
     jessie: [libvtk5-dev]
     stretch: [libvtk6-dev]
     wheezy: [libvtk5-dev]
@@ -4542,7 +4566,9 @@ libvtk:
   macports: [vtk-devel]
   opensuse: [vtk-devel]
   ubuntu:
-    '*': [libvtk6-dev]
+    '*': [libvtk7-dev]
+    artful: [libvtk6-dev]
+    bionic: [libvtk6-dev]
     lucid: [libvtk5-dev]
     maverick: [libvtk5-dev]
     natty: [libvtk5-dev]
@@ -4555,10 +4581,13 @@ libvtk:
     utopic: [libvtk5-dev]
     vivid: [libvtk5-dev]
     wily: [libvtk5-dev]
+    xenial: [libvtk6-dev]
+    yakkety: [libvtk6-dev]
+    zesty: [libvtk6-dev]
 libvtk-java:
   arch: [vtk]
   debian:
-    buster: [libvtk6-java]
+    buster: [libvtk7-java]
     jessie: [libvtk-java]
     stretch: [libvtk6-java]
     wheezy: [libvtk-java]
@@ -4568,7 +4597,9 @@ libvtk-java:
   opensuse: [vtk-java]
   slackware: [VTK]
   ubuntu:
-    '*': [libvtk6-java]
+    '*': [libvtk7-java]
+    artful: [libvtk6-java]
+    bionic: [libvtk6-java]
     lucid: [libvtk-java]
     precise: [libvtk-java]
     quantal: [libvtk-java]
@@ -4579,10 +4610,12 @@ libvtk-java:
     vivid: [libvtk-java]
     wily: [libvtk-java]
     xenial: [libvtk-java]
+    yakkety: [libvtk6-java]
+    zesty: [libvtk6-java]
 libvtk-qt:
   arch: [vtk]
   debian:
-    buster: [libvtk6-qt-dev]
+    buster: [libvtk7-qt-dev]
     jessie: [libvtk5-qt4-dev]
     stretch: [libvtk6-qt-dev]
     wheezy: [libvtk5-qt4-dev]
@@ -4592,7 +4625,9 @@ libvtk-qt:
   opensuse: [vtk-qt]
   slackware: [VTK]
   ubuntu:
-    '*': [libvtk6-qt-dev]
+    '*': [libvtk7-qt-dev]
+    artful: [libvtk6-qt-dev]
+    bionic: [libvtk6-qt-dev]
     lucid: [libvtk5-qt4-dev]
     maverick: [libvtk5-qt4-dev]
     natty: [libvtk5-qt4-dev]
@@ -4605,6 +4640,9 @@ libvtk-qt:
     utopic: [libvtk5-qt4-dev]
     vivid: [libvtk5-qt4-dev]
     wily: [libvtk5-qt4-dev]
+    xenial: [libvtk6-qt-dev]
+    yakkety: [libvtk6-qt-dev]
+    zesty: [libvtk6-qt-dev]
 libvulkan-dev:
   debian: [libvulkan-dev]
   fedora: [vulkan-devel]
@@ -4985,6 +5023,7 @@ maven:
   debian: [maven]
   fedora: [maven]
   gentoo: [dev-java/maven-bin]
+  rhel: [maven]
   ubuntu: [maven]
 mayavi:
   debian: [mayavi2]
@@ -5706,6 +5745,9 @@ qml-module-qtquick-layouts:
 qml-module-qtquick-templates2:
   debian: [qml-module-qtquick-templates2]
   ubuntu: [qml-module-qtquick-templates2]
+qml-module-qtquick-window2:
+  debian: [qml-module-qtquick-window2]
+  ubuntu: [qml-module-qtquick-window2]
 qml-module-qtquick2:
   debian: [qml-module-qtquick2]
   ubuntu: [qml-module-qtquick2]
@@ -5915,6 +5957,8 @@ sdformat:
   debian: [libsdformat-dev]
   fedora: [sdformat-devel]
   gentoo: [dev-libs/sdformat]
+  rhel:
+    '7': [sdformat-devel]
   ubuntu:
     artful: [libsdformat6-dev]
     bionic: [libsdformat6-dev]
@@ -6593,6 +6637,9 @@ wx-common:
   fedora: [wxGTK3-devel]
   gentoo: [x11-libs/wxGTK]
   openembedded: [wxwidgets@meta-ros-common]
+  rhel:
+    '*': [wxGTK3-devel]
+    '7': [wxGTK-devel]
   ubuntu: [wx-common]
 wxwidgets:
   arch: [wxgtk]
