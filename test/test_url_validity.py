@@ -1,5 +1,32 @@
 #!/usr/bin/env python
 
+# Copyright (c) 2017, Open Source Robotics Foundation
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above copyright
+#       notice, this list of conditions and the following disclaimer in the
+#       documentation and/or other materials provided with the distribution.
+#     * Neither the name of the Willow Garage, Inc. nor the names of its
+#       contributors may be used to endorse or promote products derived from
+#       this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
 from __future__ import print_function
 from . import hook_permissions
 
@@ -28,7 +55,9 @@ from .fold_block import Fold
 # for commented debugging code below
 # import pprint
 
-DIFF_TARGET = 'origin/master'
+UPSTREAM_NAME = 'unittest_upstream_comparision'
+DIFF_BRANCH = 'master'
+DIFF_REPO = 'https://github.com/ros/rosdistro.git'
 
 
 TARGET_FILE_BLACKLIST = []
@@ -277,14 +306,36 @@ def isolate_yaml_snippets_from_line_numbers(yaml_dict, line_numbers):
 
 
 def main():
-    cmd = ('git diff --unified=0 %s' % DIFF_TARGET).split()
-    diff = subprocess.check_output(cmd).decode('utf-8')
+    detected_errors = []
+
+    # See if UPSTREAM_NAME remote is available and use it as it's expected to be setup by CI
+    # Otherwise fall back to origin/master
+    try:
+        cmd = ('git config --get remote.%s.url' % UPSTREAM_NAME).split()
+        try:
+            remote_url = subprocess.check_output(cmd).decode('utf-8').strip()
+            # Remote exists
+            # Check url
+            if remote_url != DIFF_REPO:
+                detected_errors.append('%s remote url [%s] is different than %s' % (UPSTREAM_NAME, remote_url, DIFF_REPO))
+                return detected_errors
+
+            target_branch = '%s/%s' % (UPSTREAM_NAME, DIFF_BRANCH)
+        except subprocess.CalledProcessError:
+            # No remote so fall back to origin/master
+            print('WARNING: No remote %s detected, falling back to origin master. Make sure it is up to date.' % UPSTREAM_NAME)
+            target_branch = 'origin/master'
+
+        cmd = ('git diff --unified=0 %s' % target_branch).split()
+        diff = subprocess.check_output(cmd).decode('utf-8')
+    except subprocess.CalledProcessError as ex:
+        detected_errors.append('%s' % ex)
+        return detected_errors
     # print("output", diff)
 
     diffed_lines = detect_lines(diff)
     # print("Diff lines %s" % diffed_lines)
 
-    detected_errors = []
 
     for path, lines in diffed_lines.items():
         directory = os.path.join(os.path.dirname(__file__), '..')
