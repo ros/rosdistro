@@ -31,7 +31,7 @@ Distro packaging links:
   - REQUIRED
 - Ubuntu: https://packages.ubuntu.com/
    - REQUIRED
-- Fedora: https://src.fedoraproject.org/
+- Fedora: https://src.fedoraproject.org/browse/projects/
   - IF AVAILABLE
 - Arch: https://www.archlinux.org/packages/
   - IF AVAILABLE
