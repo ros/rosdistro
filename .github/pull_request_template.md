@@ -31,13 +31,15 @@ Distro packaging links:
   - REQUIRED
 - Ubuntu: https://packages.ubuntu.com/
    - REQUIRED
-- Fedora: https://apps.fedoraproject.org/packages/
+- Fedora: https://src.fedoraproject.org/browse/projects/
   - IF AVAILABLE
 - Arch: https://www.archlinux.org/packages/
   - IF AVAILABLE
-- Gentoo: https://packages.gentoo.org/packages/
+- Gentoo: https://packages.gentoo.org/
   - IF AVAILABLE
 - macOS: https://formulae.brew.sh/
+  - IF AVAILABLE
+- Alpine: https://pkgs.alpinelinux.org/packages
   - IF AVAILABLE
 
 
