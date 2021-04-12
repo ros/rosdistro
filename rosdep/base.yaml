@@ -3,12 +3,24 @@ ace:
   debian: [libace-dev]
   gentoo: [dev-libs/ace]
   ubuntu: [libace-dev]
+ack:
+  debian: [ack]
+  ubuntu:
+    '*': [ack]
+    xenial: null
 ack-grep:
   arch: [ack]
   debian: [ack-grep]
   fedora: [ack]
   gentoo: [sys-apps/ack]
   ubuntu: [ack-grep]
+acl:
+  arch: [acl]
+  debian: [acl, libacl1-dev]
+  fedora: [acl, libacl-devel]
+  gentoo: [sys-apps/acl]
+  rhel: [acl, libacl-devel]
+  ubuntu: [acl, libacl1-dev]
 acpi:
   debian: [acpi]
   fedora: [acpi]
@@ -269,9 +281,7 @@ benchmark:
     stretch: null
   fedora: [google-benchmark-devel]
   openembedded: [google-benchmark@meta-ros2]
-  rhel:
-    '*': [google-benchmark-devel]
-    '7': null
+  rhel: [google-benchmark-devel]
   ubuntu:
     '*': [libbenchmark-dev]
     xenial: null
@@ -289,6 +299,7 @@ bison:
   gentoo: [sys-devel/bison]
   macports: [bison]
   openembedded: [bison@openembedded-core]
+  rhel: [bison]
   ubuntu: [bison]
 blender:
   arch: [blender]
@@ -451,6 +462,7 @@ clang:
 clang-format:
   alpine: [clang]
   debian:
+    bullseye: [clang-format]
     buster: [clang-format]
     stretch: [clang-format]
   fedora: [clang]
@@ -463,6 +475,7 @@ clang-format:
 clang-tidy:
   alpine: [clang-extra-tools]
   debian:
+    bullseye: [clang-tidy]
     buster: [clang-tidy]
     stretch: [clang-tidy]
   fedora: [clang-tools-extra]
@@ -768,6 +781,7 @@ eigen:
   alpine: [eigen-dev]
   arch: [eigen3]
   debian:
+    bullseye: [libeigen3-dev]
     buster: [libeigen3-dev]
     jessie: [libeigen3-dev]
     stretch: [libeigen3-dev]
@@ -1221,6 +1235,9 @@ glut:
   openembedded: [freeglut@meta-oe]
   rhel: [freeglut-devel]
   ubuntu: [freeglut3-dev]
+gnat:
+  debian: [gnat]
+  ubuntu: [gnat]
 gnuplot:
   arch: [gnuplot]
   debian: [gnuplot]
@@ -1284,6 +1301,9 @@ gphoto2:
   fedora: [gphoto2]
   gentoo: [media-gfx/gphoto2]
   ubuntu: [gphoto2]
+gprbuild:
+  debian: [gprbuild]
+  ubuntu: [gprbuild]
 gpsd:
   debian: [gpsd]
   fedora: [gpsd]
@@ -1856,6 +1876,12 @@ libasound2-dev:
   gentoo: [media-libs/alsa-lib]
   openembedded: [alsa-lib@openembedded-core]
   ubuntu: [libasound2-dev]
+libatomic:
+  arch: [gcc-libs]
+  debian: [libatomic1]
+  fedora: [libatomic]
+  rhel: [libatomic]
+  ubuntu: [libatomic1]
 libav:
   arch: [libav-git]
   debian: [libav-tools]
@@ -1909,6 +1935,7 @@ libbluetooth:
   debian: [libbluetooth3]
   fedora: [bluez-libs]
   gentoo: [net-wireless/bluez-libs]
+  rhel: [bluez-libs]
   ubuntu: [libbluetooth3]
 libbluetooth-dev:
   arch: [bluez]
@@ -2298,8 +2325,7 @@ libceres-dev:
   fedora: [ceres-solver-devel]
   gentoo: ['sci-libs/ceres-solver[sparse,lapack]']
   openembedded: [ceres-solver@meta-oe]
-  rhel:
-    '7': [ceres-solver-devel]
+  rhel: [ceres-solver-devel]
   ubuntu: [libceres-dev]
 libcgroup-dev:
   debian: [libcgroup-dev]
@@ -2321,11 +2347,14 @@ libcoin60-dev:
   ubuntu: [libcoin60-dev]
 libcoin80-dev:
   debian:
-    buster: [libcoin80-dev]
+    '*': [libcoin-dev]
     jessie: [libcoin80-dev]
     stretch: [libcoin80-dev]
   fedora: [Coin2-devel]
-  ubuntu: [libcoin80-dev]
+  ubuntu:
+    '*': [libcoin-dev]
+    bionic: [libcoin80-dev]
+    xenial: [libcoin80-dev]
 libconfig++-dev:
   debian: [libconfig++-dev]
   gentoo: ['dev-libs/libconfig[cxx]']
@@ -4249,10 +4278,11 @@ libspatialite:
     trusty: [libspatialite5]
 libspnav-dev:
   arch: [libspnav]
-  debian: [libspnav-dev]
-  fedora: [libspnav-devel]
+  debian: [libspnav-dev, libx11-dev]
+  fedora: [libspnav-devel, libX11-devel]
   gentoo: [dev-libs/libspnav]
-  ubuntu: [libspnav-dev]
+  rhel: [libspnav-devel, libX11-devel]
+  ubuntu: [libspnav-dev, libx11-dev]
 libsqlite3-dev:
   alpine: [sqlite-dev]
   arch: [sqlite]
@@ -5037,6 +5067,7 @@ log4cxx:
   arch: [log4cxx]
   cygwin: [liblog4cxx-devel]
   debian:
+    bullseye: [liblog4cxx-dev]
     buster: [liblog4cxx-dev]
     jessie: [liblog4cxx10-dev]
     squeeze: [liblog4cxx10-dev]
@@ -5712,7 +5743,7 @@ postgresql-postgis:
     jessie: [postgresql-9.4-postgis-2.1, postgresql-contrib, postgresql-server-dev-all]
     stretch: [postgresql-9.6-postgis-2.3, postgresql-contrib, postgresql-server-dev-all]
   fedora: [postgis]
-  gentoo: [dev-db/postgis,'=dev-db/postgresql-9*']
+  gentoo: [dev-db/postgis, '=dev-db/postgresql-9*']
   ubuntu:
     artful: [postgresql-9.6-postgis-2.3, postgresql-contrib, postgresql-server-dev-all]
     bionic: [postgresql-10-postgis-2.4, postgresql-contrib, postgresql-server-dev-all]
@@ -5947,6 +5978,9 @@ qtmultimedia5-dev:
   gentoo: ['dev-qt/qtmultimedia:5']
   openembedded: [qtmultimedia@meta-qt5]
   ubuntu: [qtmultimedia5-dev]
+qtpositioning5-dev:
+  debian: [qtpositioning5-dev]
+  ubuntu: [qtpositioning5-dev]
 qttools5-dev:
   debian: [qttools5-dev]
   fedora: [qt5-qttools-devel]
@@ -6200,6 +6234,7 @@ spacenavd:
   debian: [spacenavd]
   fedora: [spacenavd]
   gentoo: [app-misc/spacenavd]
+  rhel: [spacenavd]
   ubuntu: [spacenavd]
 sparsehash:
   debian: [libsparsehash-dev]
@@ -6651,6 +6686,13 @@ usbutils:
     homebrew:
       packages: [mikhailai/misc/usbutils]
   ubuntu: [usbutils]
+util-linux:
+  arch: [util-linux]
+  debian: [util-linux]
+  fedora: [util-linux]
+  gentoo: [util-linux]
+  macports: [util-linux]
+  ubuntu: [util-linux]
 uuid:
   alpine: [util-linux-dev]
   arch: [util-linux]
