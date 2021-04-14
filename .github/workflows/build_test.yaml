@@ -1,0 +1,48 @@
+name: Validate rosdistro
+on: [push, pull_request]
+
+jobs:
+  nosetests:
+    name: Nosetests
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        python-version: [3.8]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Fetch upstream (to enable diff)
+      run: |
+        git remote add unittest_upstream_comparision https://github.com/ros/rosdistro.git || git remote set-url unittest_upstream_comparision https://github.com/ros/rosdistro.git
+        git fetch --no-tags --depth=1 unittest_upstream_comparision master
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip setuptools wheel
+        pip install PyYAML argparse
+        pip install catkin-pkg ros-buildfarm rosdistro nose coverage
+        pip install unidiff
+        pip install rosdep
+        pip install PyGithub
+    - name: Run Nose Tests
+      run: nosetests -s
+  yamllint:
+    name: Yaml Linting
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        python-version: [3.8]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip setuptools wheel
+        pip install yamllint
+    - name: Run yamllint
+      run: yamllint */

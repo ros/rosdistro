@@ -11,7 +11,11 @@ facets:
   gentoo: [dev-ruby/facets]
   osx:
     macports: [rb-facets]
-  ubuntu: [ruby-facets]
+  ubuntu:
+    '*':
+      gem: [facets]
+    bionic: [ruby-facets]
+    xenial: [ruby-facets]
 flexmock:
   debian: [ruby-flexmock]
   fedora: [rubygem-flexmock]
@@ -33,6 +37,11 @@ jekyll:
       gem:
         depends: [ruby1.9.3]
         packages: [jekyll]
+metaruby:
+  debian:
+    gem: [metaruby]
+  ubuntu:
+    gem: [metaruby]
 nokogiri:
   arch: [ruby-nokogiri]
   debian: [ruby-nokogiri]
@@ -62,11 +71,15 @@ rdoc:
   ubuntu: [ruby]
 ruby:
   arch: [ruby]
-  debian: [ruby, ruby-dev]
+  debian:
+    '*': [ruby]
+    jessie: [ruby, ruby-dev]
+    stretch: [ruby, ruby-dev]
   fedora: [ruby, ruby-devel, openssl-devel, rubygems]
   gentoo: [dev-lang/ruby]
   macports: [ruby]
   ubuntu:
+    '*': [ruby]
     lucid: [ruby1.8-dev, libopenssl-ruby1.8, rubygems1.8]
     maverick: [ruby1.8-dev, libruby1.8, rubygems1.8]
     natty: [ruby1.8-dev, libruby1.8, rubygems1.8]
@@ -82,6 +95,23 @@ ruby:
     xenial: [ruby, ruby-dev]
     yakkety: [ruby, ruby-dev]
     zesty: [ruby, ruby-dev]
+ruby-backports:
+  debian: [ruby-backports]
+  gentoo: [dev-ruby/backports]
+  ubuntu: [ruby-backports]
+ruby-dev:
+  arch: [ruby]
+  debian: [ruby-dev]
+  fedora: [ruby-devel, openssl-devel, rubygems]
+  gentoo: [dev-lang/ruby]
+  macports: [ruby]
+  ubuntu: [ruby-dev]
+ruby-ronn:
+  arch: [ruby-ronn]
+  debian: [ruby-ronn]
+  fedora: [rubygem-ronn]
+  gentoo: [app-text/ronn]
+  ubuntu: [ruby-ronn]
 ruby-sass:
   debian: [ruby-sass]
   fedora: [rubygem-sass]
@@ -90,3 +120,8 @@ ruby-sass:
 ruby1.9.3:
   ubuntu:
     precise: [ruby1.9.3]
+utilrb:
+  debian:
+    gem: [utilrb]
+  ubuntu:
+    gem: [utilrb]
