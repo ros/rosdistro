@@ -177,7 +177,7 @@ python3-foobar-pip:
       packages: [foobar]
 ```
 
-In constrast to normal python entries, which are often different for python 2 and 3, pip entries for python 2 and 3 are almost always identical.
+In contrast to normal python entries, which are often different for python 2 and 3, pip entries for python 2 and 3 are almost always identical.
 Hence no new entry would be needed. Though this would leave us with a mess of `python3-*`, `python-*-pip` and `python3-*-pip` entries.
 To prevent this, the `python3-*-pip` entry should be mapped to the legacy `python-*-pip` entry by using yaml anchors and aliases.
 (Preferably this was the other way around. So the `python3-*-pip` entry containing the contents and the anchor and the legacy `python-*-pip` entry being aliased to it.
