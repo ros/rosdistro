@@ -195,6 +195,8 @@ python3-foobar-pip: *migrate_eol_2025_04_30_python3_foobar_pip # Alias
 
 The anchor/alias should be formatted as `migrate_eol_<YYYY>_<MM>_<DD>_<NEW_KEY_UNDERSCORED>`.
 
+The EOL date of the entry should match the EOL date of the longest supported current platform.
+
 Some existing rules do not have `python-` or `python3-` prefixes, but this is no longer recommended.
 If the package ever becomes available in Debian or Ubuntu, the `python3-` prefix ensures that the `pip` key is next to it alphabetically.
 The `-pip` key should be removed when the package becomes available on all platforms, and all existing users of the `-pip` key should migrate to the new key.
