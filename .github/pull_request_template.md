@@ -41,7 +41,8 @@ Distro packaging links:
   - IF AVAILABLE
 - Alpine: https://pkgs.alpinelinux.org/packages
   - IF AVAILABLE
-
+- NixOS/nixpkgs: https://search.nixos.org/packages
+  - OPTIONAL
 
 
 <!-- DOC_INDEX_TEMPLATE: add package to rosdistro for documentation indexing -->

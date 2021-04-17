@@ -76,6 +76,7 @@ Guidelines for rosdep rules
     * Ubuntu and Debian are top priority.
     * Fedora and Gentoo have packaging jobs and should be filled in if they are available.
     * OSX is also nice to have.
+    * NixOS is not required, but may be added if desired
     * If specific versions are called out, there should be coverage of all versions currently targeted by supported ROS distros.
      * If there's a new distro in prerelease adding a rule for it is fine.
        However please don't target 'sid' as it's a rolling target and when the keys change our database gets out of date.
@@ -134,6 +135,11 @@ Work has been proposed to add a separate installer for AUR packages [ros-infrast
 
 * FreeBSD project pkg repository: main or quarterly
 * A database of FreeBSD packages is available at https://freshports.org
+
+#### NixOS/nixpkgs
+
+* [NixOS unstable channel](https://github.com/NixOS/nixpkgs/tree/nixos-unstable), search available at https://search.nixos.org/packages
+* [nix-ros-overlay](https://github.com/lopsided98/nix-ros-overlay)
 
 #### pip
 
