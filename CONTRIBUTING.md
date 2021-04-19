@@ -135,6 +135,11 @@ Work has been proposed to add a separate installer for AUR packages [ros-infrast
 * FreeBSD project pkg repository: main or quarterly
 * A database of FreeBSD packages is available at https://freshports.org
 
+#### openSUSE
+
+* openSUSE Repositories: Pool and Updates
+* You can search for packages on https://software.opensuse.org
+
 #### pip
 
 For pip installers they are expected to be in the main PyPI index https://pypi.org/.
