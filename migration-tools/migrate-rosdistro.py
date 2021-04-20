@@ -116,6 +116,9 @@ os.chdir(workdir)
 os.environ['ROSDISTRO_INDEX_URL'] = rosdistro_index_url
 os.environ['BLOOM_SKIP_ROSDEP_UPDATE'] = '1'
 
+# This call to update rosdep is critical because we're setting
+# ROSDISTRO_INDEX_URL above and also suppressing the automatic
+# update in Bloom itself.
 subprocess.check_call(['rosdep', 'update'])
 
 for repo_name in sorted(new_repositories + repositories_to_retry):
