@@ -114,6 +114,9 @@ repositories_with_errors = []
 workdir = tempfile.mkdtemp()
 os.chdir(workdir)
 os.environ['ROSDISTRO_INDEX_URL'] = rosdistro_index_url
+os.environ['BLOOM_SKIP_ROSDEP_UPDATE'] = '1'
+
+subprocess.check_call(['rosdep', 'update'])
 
 for repo_name in sorted(new_repositories + repositories_to_retry):
     try:
