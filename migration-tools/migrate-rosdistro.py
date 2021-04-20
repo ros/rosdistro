@@ -127,6 +127,9 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         os.chdir(release_repo)
         tracks = read_tracks_file()
 
+        if not tracks['tracks'].get(args.source):
+            raise ValueError('Repository has not been released.')
+
         if release_repo not in org_release_repos:
             release_org.create_repo(release_repo)
         new_release_repo_url = f'https://github.com/{args.release_org}/{release_repo}.git'
