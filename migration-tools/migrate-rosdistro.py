@@ -114,6 +114,12 @@ repositories_with_errors = []
 workdir = tempfile.mkdtemp()
 os.chdir(workdir)
 os.environ['ROSDISTRO_INDEX_URL'] = rosdistro_index_url
+os.environ['BLOOM_SKIP_ROSDEP_UPDATE'] = '1'
+
+# This call to update rosdep is critical because we're setting
+# ROSDISTRO_INDEX_URL above and also suppressing the automatic
+# update in Bloom itself.
+subprocess.check_call(['rosdep', 'update'])
 
 for repo_name in sorted(new_repositories + repositories_to_retry):
     try:
@@ -123,9 +129,12 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
             raise ValueError('This script can only handle git repositories.')
         remote_url = release_spec.url
         release_repo = remote_url.split('/')[-1][:-4]
-        subprocess.call(['git', 'clone', remote_url])
+        subprocess.check_call(['git', 'clone', remote_url])
         os.chdir(release_repo)
         tracks = read_tracks_file()
+
+        if not tracks['tracks'].get(args.source):
+            raise ValueError('Repository has not been released.')
 
         if release_repo not in org_release_repos:
             release_org.create_repo(release_repo)
