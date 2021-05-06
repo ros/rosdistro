@@ -141,6 +141,11 @@ Work has been proposed to add a separate installer for AUR packages [ros-infrast
 * [NixOS unstable channel](https://github.com/NixOS/nixpkgs/tree/nixos-unstable), search available at https://search.nixos.org/packages
 * [nix-ros-overlay](https://github.com/lopsided98/nix-ros-overlay)
 
+#### openSUSE
+
+* openSUSE Repositories: Pool and Updates
+* You can search for packages on https://software.opensuse.org
+
 #### pip
 
 For pip installers they are expected to be in the main PyPI index https://pypi.org/.
