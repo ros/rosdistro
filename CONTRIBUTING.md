@@ -76,6 +76,7 @@ Guidelines for rosdep rules
     * Ubuntu and Debian are top priority.
     * Fedora and Gentoo have packaging jobs and should be filled in if they are available.
     * OSX is also nice to have.
+    * NixOS is not required, but may be added if desired
     * If specific versions are called out, there should be coverage of all versions currently targeted by supported ROS distros.
      * If there's a new distro in prerelease adding a rule for it is fine.
        However please don't target 'sid' as it's a rolling target and when the keys change our database gets out of date.
@@ -135,6 +136,16 @@ Work has been proposed to add a separate installer for AUR packages [ros-infrast
 * FreeBSD project pkg repository: main or quarterly
 * A database of FreeBSD packages is available at https://freshports.org
 
+#### NixOS/nixpkgs
+
+* [NixOS unstable channel](https://github.com/NixOS/nixpkgs/tree/nixos-unstable), search available at https://search.nixos.org/packages
+* [nix-ros-overlay](https://github.com/lopsided98/nix-ros-overlay)
+
+#### openSUSE
+
+* openSUSE Repositories: Pool and Updates
+* You can search for packages on https://software.opensuse.org
+
 #### pip
 
 For pip installers they are expected to be in the main PyPI index https://pypi.org/.
@@ -176,6 +187,26 @@ python3-foobar-pip:
     pip:
       packages: [foobar]
 ```
+
+In contrast to normal python entries, which are often different for python 2 and 3, pip entries for python 2 and 3 are almost always identical.
+Hence no new entry would be needed. Though this would leave us with a mess of `python3-*`, `python-*-pip` and `python3-*-pip` entries.
+To prevent this, the `python3-*-pip` entry should be mapped to the legacy `python-*-pip` entry by using yaml anchors and aliases.
+(Preferably this was the other way around. So the `python3-*-pip` entry containing the contents and the anchor and the legacy `python-*-pip` entry being aliased to it.
+Though the anchor should be defined before the anchor is used and `python3-` entries come after `python-` entries in alphabetical order.)
+
+For example:
+
+```yaml
+python-foobar-pip: &migrate_eol_2025_04_30_python3_foobar_pip # Anchor
+  ubuntu:
+    pip:
+      packages: [foobar]
+python3-foobar-pip: *migrate_eol_2025_04_30_python3_foobar_pip # Alias
+```
+
+The anchor/alias should be formatted as `migrate_eol_<YYYY>_<MM>_<DD>_<NEW_KEY_UNDERSCORED>`.
+
+The EOL date of the entry should match the EOL date of the longest supported current platform.
 
 Some existing rules do not have `python-` or `python3-` prefixes, but this is no longer recommended.
 If the package ever becomes available in Debian or Ubuntu, the `python3-` prefix ensures that the `pip` key is next to it alphabetically.
