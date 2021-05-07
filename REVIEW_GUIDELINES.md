@@ -60,7 +60,7 @@ There are a few different types of pull requests that are opened against this re
 
 1.  A new rosdep key.  An example of this kind of PR is [25995](https://github.com/ros/rosdistro/pull/25995). These pull requests should conform to the standards documented at [CONTRIBUTING.md#rosdep-rules-contributions](CONTRIBUTING.md#rosdep-rules-contributions). Some rules in addition to contributing guidelines:
     * A pull request to update rosdep should never change the name of existing keys.
-    * When adding a new key, Ubuntu and Debian are required, Fedora and Gentoo are encouraged if the package also exists on those two Linux distributions.
+    * When adding a new key, Ubuntu and Debian are required, Fedora, Gentoo, and openSUSE are encouraged if the package also exists on those Linux distributions.
     * If a package was added to e.g. Ubuntu Focal but isn’t available in Bionic or Xenial, the key should look like:
     ```
     mykey:
