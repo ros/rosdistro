@@ -76,21 +76,18 @@ def enumerate_rpm_packages(base_url, os_name, os_code_name, os_arch):
     primary_xml_url = os.path.join(base_url, primary_xml_name)
     print('Reading RPM primary metadata from ' + primary_xml_url)
     with open_gz_url(primary_xml_url) as f:
-        tree = iter(ElementTree.iterparse(f, events=('start', 'end')))
-        event, root = next(tree)
-        if root.tag != '{http://linux.duke.edu/metadata/common}metadata':
-            raise RuntimeError('Invalid root element in primary metadata: ' + root.tag)
-        for event, pkg in tree:
+        tree = ElementTree.iterparse(f)
+        for event, element in tree:
             if (
-                pkg.tag != '{http://linux.duke.edu/metadata/common}package' or
-                pkg.attrib.get('type', '') != 'rpm'
+                element.tag != '{http://linux.duke.edu/metadata/common}package' or
+                element.attrib.get('type', '') != 'rpm'
             ):
-                root.clear()
                 continue
             pkg_name = None
             pkg_version = None
             pkg_src_name = None
-            for pkg_child in pkg:
+            pkg_provs = []
+            for pkg_child in element:
                 if pkg_child.tag == '{http://linux.duke.edu/metadata/common}name':
                     pkg_name = pkg_child.text
                 elif pkg_child.tag == '{http://linux.duke.edu/metadata/common}version':
@@ -105,7 +102,8 @@ def enumerate_rpm_packages(base_url, os_name, os_code_name, os_arch):
                 elif pkg_child.tag == '{http://linux.duke.edu/metadata/common}format':
                     for format_child in pkg_child:
                         if format_child.tag == '{http://linux.duke.edu/metadata/rpm}sourcerpm':
-                            pkg_src_name = format_child.text
+                            if format_child.text:
+                                pkg_src_name = '-'.join(format_child.text.split('-')[:-2])
                         if format_child.tag != '{http://linux.duke.edu/metadata/rpm}provides':
                             continue
                         for provides in format_child:
@@ -124,11 +122,11 @@ def enumerate_rpm_packages(base_url, os_name, os_code_name, os_arch):
                                     prov_rel = provides.attrib.get('rel')
                                     if prov_rel:
                                         prov_version = prov_version + '-' + prov_rel
-                            yield PackageEntry(
-                                provides.attrib['name'], prov_version, pkg_src_name, pkg_name)
-            if pkg_name:
-                yield PackageEntry(pkg_name, pkg_version, pkg_src_name)
-            root.clear()
+                            pkg_provs.append((provides.attrib['name'], prov_version))
+            yield PackageEntry(pkg_name, pkg_version, pkg_src_name)
+            for prov_name, prov_version in pkg_provs:
+                yield PackageEntry(prov_name, prov_version, pkg_src_name, pkg_name)
+            element.clear()
 
 
 def rpm_base_url(base_url):
