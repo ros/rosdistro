@@ -68,7 +68,8 @@ def enumerate_deb_packages(base_url, comp, os_code_name, os_arch):
                             comp, 'binary-' + os_arch, 'Packages.gz')
     print('Reading debian package metadata from ' + pkgs_url)
     for block in enumerate_blocks(pkgs_url):
-        yield PackageEntry(block['Package'], block['Version'],
+        pkg_url = os.path.join(base_url, block['Filename'])
+        yield PackageEntry(block['Package'], block['Version'], pkg_url,
                            block.get('Source', block['Package']))
 
 

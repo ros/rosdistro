@@ -71,10 +71,13 @@ def open_gz_url(url, retry=2, retry_period=1, timeout=10):
 
 class PackageEntry(str):
 
-    def __new__(cls, name, version, source_name=None, binary_name=None):
+    __slots__ = ('name', 'version', 'url', 'source_name', 'binary_name')
+
+    def __new__(cls, name, version, url, source_name=None, binary_name=None):
         obj = str.__new__(cls, name)
         obj.name = obj
         obj.version = version
+        obj.url = url
         obj.source_name = obj if source_name is None else source_name
         obj.binary_name = obj if binary_name is None else binary_name
         return obj

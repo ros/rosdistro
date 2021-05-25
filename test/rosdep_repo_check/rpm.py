@@ -86,6 +86,7 @@ def enumerate_rpm_packages(base_url, os_name, os_code_name, os_arch):
             pkg_name = None
             pkg_version = None
             pkg_src_name = None
+            pkg_url = None
             pkg_provs = []
             for pkg_child in element:
                 if pkg_child.tag == '{http://linux.duke.edu/metadata/common}name':
@@ -99,6 +100,10 @@ def enumerate_rpm_packages(base_url, os_name, os_code_name, os_arch):
                         pkg_rel = pkg_child.attrib.get('rel')
                         if pkg_rel:
                             pkg_version = pkg_version + '-' + pkg_rel
+                elif pkg_child.tag == '{http://linux.duke.edu/metadata/common}location':
+                    pkg_href = pkg_child.attrib.get('href')
+                    if pkg_href:
+                        pkg_url = os.path.join(base_url, pkg_href)
                 elif pkg_child.tag == '{http://linux.duke.edu/metadata/common}format':
                     for format_child in pkg_child:
                         if format_child.tag == '{http://linux.duke.edu/metadata/rpm}sourcerpm':
@@ -123,9 +128,9 @@ def enumerate_rpm_packages(base_url, os_name, os_code_name, os_arch):
                                     if prov_rel:
                                         prov_version = prov_version + '-' + prov_rel
                             pkg_provs.append((provides.attrib['name'], prov_version))
-            yield PackageEntry(pkg_name, pkg_version, pkg_src_name)
+            yield PackageEntry(pkg_name, pkg_version, pkg_url, pkg_src_name)
             for prov_name, prov_version in pkg_provs:
-                yield PackageEntry(prov_name, prov_version, pkg_src_name, pkg_name)
+                yield PackageEntry(prov_name, prov_version, pkg_url, pkg_src_name, pkg_name)
             element.clear()
 
 
