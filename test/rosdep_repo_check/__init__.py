@@ -133,7 +133,7 @@ def summarize_broken_packages(broken):
     # Group and sort by os, version, arch, key
     grouped = {}
 
-    for os_name, os_ver, os_arch, key, package in broken:
+    for os_name, os_ver, os_arch, key, package, _ in broken:
         platform = '%s %s on %s' % (os_name, os_ver, os_arch)
         if platform not in grouped:
             grouped[platform] = set()

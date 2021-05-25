@@ -96,7 +96,7 @@ class TestRosdepRepositoryCheck(unittest.TestCase):
         for path, data in self._isolated_data.items():
             print("Verifying the following rosdep rules in '%s':" % path)
             results = verify_rules(self._config, data, self._full_data[path])
-            for os_name, os_ver, os_arch, key, package in results:
+            for os_name, os_ver, os_arch, key, package, _ in results:
                 broken = True
                 print(
                     '\n::error file=%s,line=%d::'

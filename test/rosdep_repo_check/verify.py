@@ -28,11 +28,8 @@
 from . import find_package
 
 
-def verify_rules(config, rules_to_check, all_rules):
+def verify_rules(config, rules_to_check, all_rules, include_found=False):
     for key, rules in rules_to_check.items():
-        if key == '__line__':
-            continue
-        # print("Verifying rosdep key '%s'" % key)
         for os_name, os_rules in rules.items():
             if os_name not in config['package_sources']:
                 continue
@@ -45,10 +42,9 @@ def verify_rules(config, rules_to_check, all_rules):
                 if '*' in os_rules:
                     for os_ver in config['supported_versions'].get(os_name, ()):
                         if os_ver not in all_rules[key][os_name]:
-                            packages_to_check.setdefault(os_ver, os_rules.get('*') or [])
+                            packages_to_check.setdefault(os_ver, os_rules['*'])
+                    del packages_to_check['*']
             for os_ver, packages in packages_to_check.items():
-                if os_ver == '__line__' or os_ver == '*':
-                    continue
                 if os_ver not in config['supported_versions'].get(os_name, ()):
                     continue
                 for package in packages or []:
@@ -57,5 +53,5 @@ def verify_rules(config, rules_to_check, all_rules):
                         package = package.replace(needle, haystack)
                     for os_arch in config['supported_arches'][os_name]:
                         res = find_package(config, package, os_name, os_ver, os_arch)
-                        if not res:
-                            yield (os_name, os_ver, os_arch, key, package)
+                        if not res or include_found:
+                            yield (os_name, os_ver, os_arch, key, package, res)
