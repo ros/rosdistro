@@ -24,6 +24,12 @@ package_sources:
     - !deb_base_url http://archive.ubuntu.com/ubuntu multiverse
     - !deb_base_url http://repos.ros.org/repos/ros_bootstrap main
 
+package_dashboards:
+  - pattern: !regular_expression .*//dl.fedoraproject.org/pub/.*
+    url: https://src.fedoraproject.org/rpms/{source_name}#bodhi_updates
+  - pattern: !regular_expression .*//archive.ubuntu.com/ubuntu/.*
+    url: https://packages.ubuntu.com/{os_code_name}/{binary_name}
+
 supported_versions:
   fedora:
     - '32'

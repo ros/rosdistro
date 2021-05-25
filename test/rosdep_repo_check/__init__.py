@@ -161,3 +161,21 @@ def find_package(config, pkg_name, os_name, os_code_name, os_arch):
                     p for p in source.enumerate_packages(os_name, os_code_name, os_arch)
                     if p == pkg_name]:
                 return p
+
+
+def get_package_link(config, pkg, os_name, os_code_name, os_arch):
+    for dashboard in config.get('package_dashboards', ()):
+        if dashboard['pattern'].match(pkg.url):
+            return dashboard['url'].format_map({
+                'binary_name': pkg.binary_name,
+                'name': pkg.name,
+                'os_arch': os_arch,
+                'os_code_name': os_code_name,
+                'os_name': os_name,
+                'source_name': pkg.source_name,
+                'url': pkg.url,
+                'version': pkg.version,
+            })
+
+    # No configured dashboard - fall back to package URL
+    return pkg.url
