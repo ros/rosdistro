@@ -34,6 +34,7 @@ import unidiff
 import unittest
 import yaml
 
+from . import get_package_link
 from .config import load_config
 from .suggest import make_suggestion
 from .verify import verify_rules
@@ -96,15 +97,24 @@ class TestRosdepRepositoryCheck(unittest.TestCase):
 
         for path, data in self._isolated_data.items():
             print("Verifying the following rosdep rules in '%s':" % path)
-            results = verify_rules(self._config, data, self._full_data[path])
-            for os_name, os_ver, os_arch, key, package, _ in results:
-                broken = True
-                print(
-                    '\n::error file=%s,line=%d::'
-                    "Package '%s' could not be found for %s %s on %s" % (
-                        path, getattr(os_ver, '__line__', os_name.__line__),
-                        package, os_name, os_ver, os_arch),
-                    file=sys.stderr)
+            results = verify_rules(
+                self._config, data, self._full_data[path], include_found=True)
+            for os_name, os_ver, os_arch, key, package, provider in results:
+                if not provider:
+                    broken = True
+                    print(
+                        '\n::error file=%s,line=%d::'
+                        "Package '%s' could not be found for %s %s on %s" % (
+                            path, getattr(os_ver, '__line__', os_name.__line__),
+                            package, os_name, os_ver, os_arch),
+                        file=sys.stderr)
+                else:
+                    provider_url = get_package_link(
+                        self._config, provider, os_name, os_ver, os_arch)
+                    print(
+                        "Package '%s' for %s %s on %s was found: %s" % (
+                            package, os_name, os_ver, os_arch, provider_url),
+                        file=sys.stderr)
 
         assert not broken, 'New rules contain packages not present in repositories'
 
@@ -148,8 +158,13 @@ class TestRosdepRepositoryCheck(unittest.TestCase):
                     print('Looking for suggestions for %s on %s' % (key, missing_os))
                     suggestion = make_suggestion(self._config, key, missing_os)
                     if suggestion:
+                        suggestion_url = get_package_link(
+                            self._config, suggestion, missing_os,
+                            self._config['supported_versions'][missing_os][-1],
+                            self._config['supported_arches'][missing_os][0])
                         print(
                             '\n::warning file=%s,line=%d::'
-                            "Key '%s' might be satisifed by %s package named '%s'" % (
-                                path, key.__line__, key, missing_os, suggestion.binary_name),
+                            "Key '%s' might be satisifed by %s package named '%s': %s" % (
+                                path, key.__line__, key, missing_os, suggestion.binary_name,
+                                suggestion_url),
                             file=sys.stderr)
