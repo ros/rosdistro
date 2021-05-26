@@ -118,30 +118,6 @@ class TestRosdepRepositoryCheck(unittest.TestCase):
 
         assert not broken, 'New rules contain packages not present in repositories'
 
-    def test_eol_versions(self):
-        excess = False
-
-        for path, data in self._isolated_data.items():
-            print("Checking for EOL rules in '%s':" % path)
-            for key, rules in data.items():
-                for os_name, os_rules in rules.items():
-                    if os_name not in self._config['supported_versions'] or os_name == 'ubuntu':
-                        continue
-                    if not isinstance(os_rules, dict):
-                        continue
-                    if 'pip' in os_rules:
-                        continue
-                    versions = set(v for v in os_rules.keys() if v != '*')
-                    versions.difference_update(self._config['supported_versions'][os_name])
-                    for version in versions:
-                        excess = True
-                        print(
-                            '\n::error file=%s,line=%d::'
-                            "New rules contain unsupported %s version '%s'" % (
-                                path, version.__line__, os_name, version), file=sys.stderr)
-
-        assert not excess, 'New rules contain unsupported OS versions'
-
     def test_suggest_by_name(self):
         for path, data in self._isolated_data.items():
             print("Looking for name-based suggestions in '%s':" % path)
