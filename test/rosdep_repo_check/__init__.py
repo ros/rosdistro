@@ -230,7 +230,7 @@ def find_package(config, pkg_name, os_name, os_code_name, os_arch):
         if not sources:
             print('WARNING: No sources for %s %s' % (os_name, os_code_name), file=sys.stderr)
         for source in sources:
-            for p in source.enumerate_packages(os_name, os_code_name, os_arch:
+            for p in source.enumerate_packages(os_name, os_code_name, os_arch):
                 if p == pkg_name:
                     return p
 
