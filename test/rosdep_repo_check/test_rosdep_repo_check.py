@@ -57,11 +57,11 @@ def detect_lines(diffstr):
 
 
 def get_changed_line_numbers():
-    base_ref = 'HEAD^'
+    base_ref = ''
     GITHUB_BASE_REF = os.environ.get('GITHUB_BASE_REF')
     if GITHUB_BASE_REF:
-        base_ref = 'remotes/origin/' + GITHUB_BASE_REF
-    cmd = 'git diff --unified=0 %s... -- rosdep' % (base_ref,)
+        base_ref = 'remotes/origin/' + GITHUB_BASE_REF + '...'
+    cmd = 'git diff --unified=0 %s -- rosdep' % (base_ref,)
     print("Detecting changed rules with '%s'" % (cmd,))
     diff = subprocess.check_output(cmd.split()).decode('utf-8')
     return detect_lines(diff)
