@@ -34,6 +34,7 @@ from . import RepositoryCacheCollection
 
 
 def replace_tokens(string, os_name, os_code_name, os_arch):
+    """Replace RPM-specific tokens in the repository base URL."""
     for key, value in {
         '$basearch': os_arch,
         '$distname': os_name,
@@ -44,6 +45,7 @@ def replace_tokens(string, os_name, os_code_name, os_arch):
 
 
 def get_primary_name(repomd_url):
+    """Get the URL of the 'primary' metadata from the 'repo' metadata."""
     print('Reading RPM repository metadata from ' + repomd_url)
     with open_gz_url(repomd_url) as f:
         tree = iter(ElementTree.iterparse(f, events=('start', 'end')))
@@ -70,6 +72,16 @@ def get_primary_name(repomd_url):
 
 
 def enumerate_rpm_packages(base_url, os_name, os_code_name, os_arch):
+    """
+    Enumerate packages in an RPM repository.
+
+    :param base_url: the RPM repository base URL.
+    :param os_name: the name of the OS associated with the repository.
+    :param os_code_name: the OS version associated with the repository.
+    :param os_arch: the system architecture associated with the repository.
+
+    :returns: an enumeration of package entries.
+    """
     base_url = replace_tokens(base_url, os_name, os_code_name, os_arch)
     repomd_url = os.path.join(base_url, 'repodata', 'repomd.xml')
     primary_xml_name = get_primary_name(repomd_url)
@@ -135,6 +147,13 @@ def enumerate_rpm_packages(base_url, os_name, os_code_name, os_arch):
 
 
 def rpm_base_url(base_url):
+    """
+    Create an enumerable cache for an RPM repository.
+
+    :param base_url: the URL of the RPM repository.
+
+    :returns: an enumerable repository cache instance.
+    """
     return RepositoryCacheCollection(
         lambda os_name, os_code_name, os_arch:
             enumerate_rpm_packages(base_url, os_name, os_code_name, os_arch))

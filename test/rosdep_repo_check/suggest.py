@@ -29,6 +29,16 @@ from . import find_package
 
 
 def make_suggestion(config, key, os_name):
+    """
+    Attempt to find packages which may satisfy a key based on the name.
+
+    This function uses heuristics to suggest OS packages which may satisfy a
+    key. Many of the heuristics do not apply to all platforms.
+
+    :param config: the parsed YAML configuration.
+    :param key: the name of the unsatisifed key.
+    :param os_name: the name of the OS associated with the package.
+    """
     os_version = config['supported_versions'][os_name][-1]
     os_arch = config['supported_arches'][os_name][0]
     # 1) Check for verbatim key

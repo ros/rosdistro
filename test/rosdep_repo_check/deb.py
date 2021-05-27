@@ -33,6 +33,13 @@ from . import RepositoryCacheCollection
 
 
 def enumerate_blocks(url):
+    """
+    Enumerate blocks of mapped data from a URL to a text file.
+
+    :param url: the URL of the text file.
+
+    :returns: an enumeration of mappings.
+    """
     block = {}
     key = None
     with open_gz_url(url) as f:
@@ -64,6 +71,16 @@ def enumerate_blocks(url):
 
 
 def enumerate_deb_packages(base_url, comp, os_code_name, os_arch):
+    """
+    Enumerate debian packages in a repository.
+
+    :param base_url: the debian repository base URL.
+    :param comp: the component of the repository to enumerate.
+    :param os_code_name: the OS version associated with the repository.
+    :param os_arch: the system architecture associated with the repository.
+
+    :returns: an enumeration of package entries.
+    """
     pkgs_url = os.path.join(base_url, 'dists', os_code_name,
                             comp, 'binary-' + os_arch, 'Packages.gz')
     print('Reading debian package metadata from ' + pkgs_url)
@@ -74,6 +91,13 @@ def enumerate_deb_packages(base_url, comp, os_code_name, os_arch):
 
 
 def deb_base_url(base_url, comp):
+    """
+    Create an enumerable cache for a debian repository.
+
+    :param base_url: the URL of the debian repository.
+
+    :returns: an enumerable repository cache instance.
+    """
     return RepositoryCacheCollection(
         lambda os_name, os_code_name, os_arch:
             enumerate_deb_packages(base_url, comp, os_code_name, os_arch))

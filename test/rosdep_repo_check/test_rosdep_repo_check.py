@@ -43,8 +43,7 @@ from .yaml import isolate_yaml_snippets_from_line_numbers
 
 
 def detect_lines(diffstr):
-    """Take a diff string and return a dict of
-    files with line numbers changed"""
+    """Take a diff string and return a dict of files with line numbers changed."""
     resultant_lines = {}
     # diffstr is already decoded
     io = StringIO(diffstr)

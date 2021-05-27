@@ -29,6 +29,25 @@ from . import find_package
 
 
 def verify_rules(config, rules_to_check, all_rules, include_found=False):
+    """
+    Verify rosdep rules for supported platforms.
+
+    For all platforms supported in the YAML configuration, verify that the
+    repositories contain the packages listed in the rosdep rules.
+
+    :param config: the parsed YAML configuration.
+    :param rules_to_check: rosdep rules to be checked.
+    :param all_rules: full rosdep rules to check for individual version rules.
+    :param include_found: in addition to missing rules, also yield those found.
+
+    :returns: a tuple of:
+        - OS name
+        - OS version
+        - OS architecture
+        - rosdep key
+        - package name
+        - corresponding package entry, if found
+    """
     for key, rules in rules_to_check.items():
         for os_name, os_rules in rules.items():
             if os_name not in config['package_sources']:

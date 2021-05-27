@@ -29,6 +29,13 @@ import yaml
 
 
 class AnnotatedSafeLoader(yaml.SafeLoader):
+    """
+    YAML loader that adds '__line__' attributes to some of the parsed data.
+
+    This extension of the PyYAML SafeLoader replaces some basic types with
+    derived types that include a '__line__' attribute to determine where
+    the deserialized data can be found in the YAML file it was parsed from.
+    """
 
     class AnnotatedDict(dict):
 
@@ -86,6 +93,7 @@ AnnotatedSafeLoader.add_constructor(
 
 
 def merge_dict(base, to_add):
+    """Merge two mappings, overwriting the first mapping with data from the second."""
     for k, v in to_add.items():
         if isinstance(v, dict) and isinstance(base.get(k), dict):
             merge_dict(base[k], v)
@@ -94,12 +102,21 @@ def merge_dict(base, to_add):
 
 
 def isolate_yaml_snippets_from_line_numbers(yaml_dict, line_numbers):
+    """
+    Create a mapping that contains data parsed from particular lines of the source file.
+
+    This function preserves the ancestry of a nested mapping even if those lines are not
+    specifically requested.
+
+    :param yaml_dict: a mapping parsed using the AnnotatedSafeLoader.
+    :param line_numbers: a collection of line numbers to include in the isolated snippets.
+
+    :returns: a subset of the original data based on the given line numbers.
+    """
     matches = {}
 
     for dl in line_numbers:
         for name, values in reversed(yaml_dict.items()):
-            if name == '__line__':
-                continue
             if isinstance(values, AnnotatedSafeLoader.AnnotatedDict):
                 if values.__line__ <= dl:
                     merge_dict(matches,
