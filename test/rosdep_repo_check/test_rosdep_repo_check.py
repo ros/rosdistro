@@ -45,12 +45,10 @@ from .yaml import isolate_yaml_snippets_from_line_numbers
 def detect_lines(diffstr):
     """Take a diff string and return a dict of files with line numbers changed."""
     resultant_lines = {}
-    # diffstr is already decoded
     io = StringIO(diffstr)
     udiff = unidiff.PatchSet(io)
     for file in udiff:
         target_lines = []
-        # if file.path in TARGET_FILES:
         for hunk in file:
             target_lines += range(hunk.target_start,
                                   hunk.target_start + hunk.target_length)
