@@ -1,0 +1,64 @@
+---
+package_sources:
+  fedora:
+    - !rpm_base_url https://dl.fedoraproject.org/pub/$distname/linux/releases/$releasever/Everything/$basearch/os/
+    - !rpm_base_url https://dl.fedoraproject.org/pub/$distname/linux/updates/$releasever/Everything/$basearch/
+    - !rpm_base_url https://download1.rpmfusion.org/free/$distname/releases/$releasever/Everything/$basearch/os/
+  rhel:
+    - '7':
+      - !rpm_base_url https://dl.fedoraproject.org/pub/epel/$releasever/$basearch/
+      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/os/$basearch/
+      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/updates/$basearch/
+      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/extras/$basearch/
+      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/sclo/$basearch/rh/
+      '8':
+      - !rpm_base_url https://dl.fedoraproject.org/pub/epel/$releasever/Everything/$basearch/
+      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/BaseOS/$basearch/os/
+      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/AppStream/$basearch/os/
+      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/PowerTools/$basearch/os/
+      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/extras/$basearch/os/
+    - !rpm_base_url https://download1.rpmfusion.org/free/el/updates/$releasever/$basearch/
+  ubuntu:
+    - !deb_base_url http://archive.ubuntu.com/ubuntu main
+    - !deb_base_url http://archive.ubuntu.com/ubuntu universe
+    - !deb_base_url http://archive.ubuntu.com/ubuntu multiverse
+    - !deb_base_url http://repos.ros.org/repos/ros_bootstrap main
+
+package_dashboards:
+  - pattern: !regular_expression .*//dl.fedoraproject.org/pub/.*
+    url: https://src.fedoraproject.org/rpms/{source_name}#bodhi_updates
+  - pattern: !regular_expression .*//archive.ubuntu.com/ubuntu/.*
+    url: https://packages.ubuntu.com/{os_code_name}/{binary_name}
+
+supported_versions:
+  fedora:
+    - '33'
+    - '34'
+  rhel:
+    - '7'
+    - '8'
+  ubuntu:
+    - bionic
+    - focal
+
+supported_arches:
+  fedora:
+    - x86_64
+  rhel:
+    - x86_64
+  ubuntu:
+    - amd64
+
+name_replacements:
+  fedora:
+    '32':
+      '%{__isa_name}': 'x86'
+    '33':
+      '%{__isa_name}': 'x86'
+  rhel:
+    '7':
+      '%{__isa_name}': 'x86'
+      '%{python3_pkgversion}': '36'
+    '8':
+      '%{__isa_name}': 'x86'
+      '%{python3_pkgversion}': '3'
