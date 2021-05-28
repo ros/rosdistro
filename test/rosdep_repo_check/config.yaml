@@ -1,5 +1,10 @@
 ---
 package_sources:
+  debian:
+    - !deb_base_url http://deb.debian.org/debian main
+    - !deb_base_url http://deb.debian.org/debian contrib
+    - !deb_base_url http://deb.debian.org/debian non-free
+    - !deb_base_url http://repos.ros.org/repos/ros_bootstrap main
   fedora:
     - !rpm_base_url https://dl.fedoraproject.org/pub/$distname/linux/releases/$releasever/Everything/$basearch/os/
     - !rpm_base_url https://dl.fedoraproject.org/pub/$distname/linux/updates/$releasever/Everything/$basearch/
@@ -25,12 +30,17 @@ package_sources:
     - !deb_base_url http://repos.ros.org/repos/ros_bootstrap main
 
 package_dashboards:
+  - pattern: !regular_expression .*//deb.debian.org/debian/.*
+    url: https://packages.debian.org/{os_code_name}/{binary_name}
   - pattern: !regular_expression .*//dl.fedoraproject.org/pub/.*
     url: https://src.fedoraproject.org/rpms/{source_name}#bodhi_updates
   - pattern: !regular_expression .*//archive.ubuntu.com/ubuntu/.*
     url: https://packages.ubuntu.com/{os_code_name}/{binary_name}
 
 supported_versions:
+  debian:
+    - stretch
+    - buster
   fedora:
     - '33'
     - '34'
@@ -42,6 +52,8 @@ supported_versions:
     - focal
 
 supported_arches:
+  debian:
+    - amd64
   fedora:
     - x86_64
   rhel:
