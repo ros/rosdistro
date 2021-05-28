@@ -22,5 +22,5 @@ Platform checks can be added by updating [config.yaml](./config.yaml).
 
 * `package_sources` contains a set of repository base urls for each operating system distribution
 * `package_dashboards` contains an optional list of matching repository url patterns and template urls which can be used to extract and compose web links to packages in the matching distributions. This configuration is optional and may be omitted where appropriate.
-* `supported_versions` lists of operating system versions or codenames that checks should be checked with the package sources
-* `supported_architectures` lists of operating system architectures that checks should be checked with the package sources. Although rosdep is expected to work across architectures repositories are only checked on amd64/x86_64 to save time. If a distribution has a radically different set of packages for different architectures checks for additional architectures can be added.
+* `supported_versions` lists of operating system versions or codenames to run package presence checks for. The last version listed will be used to generate suggestions if there is no definition for that operating system.
+* `supported_architectures` lists of operating system architectures to run package presence checks for. Although rosdep is expected to work across architectures repositories are only checked on amd64/x86_64 to save time. If a distribution has a radically different set of packages for different architectures checks for additional architectures can be added.
