@@ -9,6 +9,11 @@ package_sources:
     - !rpm_base_url https://dl.fedoraproject.org/pub/$distname/linux/releases/$releasever/Everything/$basearch/os/
     - !rpm_base_url https://dl.fedoraproject.org/pub/$distname/linux/updates/$releasever/Everything/$basearch/
     - !rpm_base_url https://download1.rpmfusion.org/free/$distname/releases/$releasever/Everything/$basearch/os/
+  opensuse:
+    - !rpm_base_url http://download.opensuse.org/distribution/leap/$releasever/repo/oss/
+    - !rpm_base_url http://download.opensuse.org/distribution/leap/$releasever/repo/non-oss/
+    - !rpm_base_url http://download.opensuse.org/update/leap/$releasever/oss/
+    - !rpm_base_url http://download.opensuse.org/update/leap/$releasever/non-oss/
   rhel:
     - '7':
       - !rpm_base_url https://dl.fedoraproject.org/pub/epel/$releasever/$basearch/
@@ -34,6 +39,8 @@ package_dashboards:
     url: https://packages.debian.org/{os_code_name}/{binary_name}
   - pattern: !regular_expression .*//dl.fedoraproject.org/pub/.*
     url: https://src.fedoraproject.org/rpms/{source_name}#bodhi_updates
+  - pattern: !regular_expression .*//download.opensuse.org/.*
+    url: https://software.opensuse.org/package/{source_name}
   - pattern: !regular_expression .*//archive.ubuntu.com/ubuntu/.*
     url: https://packages.ubuntu.com/{os_code_name}/{binary_name}
 
@@ -44,6 +51,8 @@ supported_versions:
   fedora:
     - '33'
     - '34'
+  opensuse:
+    - '15.2'
   rhel:
     - '7'
     - '8'
@@ -55,6 +64,8 @@ supported_arches:
   debian:
     - amd64
   fedora:
+    - x86_64
+  opensuse:
     - x86_64
   rhel:
     - x86_64
