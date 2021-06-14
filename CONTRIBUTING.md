@@ -11,6 +11,10 @@ Bloom is a tool which will help you do the release as well as open a pull-reques
 It will also assist adding documentation and source entries.
 There are [several helpful tutorials](http://wiki.ros.org/bloom/Tutorials) which provide instructions on how to do things like [make a first release](http://wiki.ros.org/bloom/Tutorials/FirstTimeRelease). 
 
+Once you have made a release make sure that you are subscribed to the appropriate subcategory of our [Release management Category](https://discourse.ros.org/c/release/16) for the appropriate distros.
+This is our primary method of communications with maintainers and is where the ROS Boss will coordinate releases.
+It is expected that all maintainers are watching those categories to allow us to coordinate.
+
 ### Guidelines for Package Naming
 
 When releasing a new package into a distribution, please follow the naming guidelines set out in the [ROS REP 144: ROS Package Naming](https://www.ros.org/reps/rep-0144.html).
