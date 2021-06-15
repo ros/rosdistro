@@ -65,7 +65,7 @@ Manual review is required for the latter two.
 But in general if you want to do this without being disruptive you need to adjust paths to avoid installation collisions.
 Change all namespaces to avoid symbol collisions. And change header paths to not collide with the system ones if you export the include directories.
 
-Embedding a copy inside your package, potentially a statically linking a version into your executables is also a potential way to do it as well.
+Embedding a copy inside your package, potentially statically linking a version into your executables is also a potential way to do it as well.
 It’s going to require a non-trivial amount of engineering and modifications to make this possible and most people decide it’s not worth it.
 
 In many situations a common approach for this is to not actually release it onto the public distro and distribute it separately through a side channel.
