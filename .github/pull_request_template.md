@@ -25,7 +25,8 @@ Distro packaging links:
 
 ## Links to Distribution Packages
 
-<!-- Replace the REQUIRED areas and state not available for IF AVAILABLE -->
+<!-- Replace the REQUIRED areas and state not available for IF AVAILABLE 
+More info at https://github.com/ros/rosdistro/blob/master/CONTRIBUTING.md#guidelines-for-rosdep-rules -->
 
 - Debian: https://packages.debian.org/
   - REQUIRED
