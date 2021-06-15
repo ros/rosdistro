@@ -46,7 +46,7 @@ Additionally, it may be necessary to determine build failures, these jobs are lo
 If a package continuously fails to build, the ROS Boss for that distribution may choose to revert the pull request that introduced it.
 Or they may take [other actions](https://github.com/ros-infrastructure/ros_buildfarm/blob/master/doc/ongoing_operations.rst) to avoid repeated failures.
 
-### Releasing third party packages into a ROS distribution
+### Releasing third party system packages into a ROS distribution
 
 In general you should not override or replace system dependencies from the system distribution with a package in the ROS distribution.
 This is part of the software engineering process of maintaining the distribution that all developers can rely on specific versions of software to be available and remain consistent withing the distribution.
