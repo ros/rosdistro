@@ -46,6 +46,37 @@ Additionally, it may be necessary to determine build failures, these jobs are lo
 If a package continuously fails to build, the ROS Boss for that distribution may choose to revert the pull request that introduced it.
 Or they may take [other actions](https://github.com/ros-infrastructure/ros_buildfarm/blob/master/doc/ongoing_operations.rst) to avoid repeated failures.
 
+### Releasing third party packages into a ROS distribution
+
+In general you should not override or replace system dependencies from the system distribution with a package in the ROS distribution.
+This is part of the software engineering process of maintaining the distribution that all developers can rely on specific versions of software to be available and remain consistent withing the distribution.
+If you need newer versions of underlying libraries the you should either target newer versions with the minimum version available or if that’s not available help and encourage the upstream process to move forward to at least your minimum version for the next release of the distribution.
+
+Obviously this is a slow process and doesn’t fix things immediately for a short term there are workarounds, however if you want to release packages which build on the workarounds you must make sure not to break other users who are expecting the system version.
+
+To release a ROS package which will overlay a system dependency it must:
+
+* Install side by side with the system one, with a different name.
+* Not cause compile errors for any packages including downstream ones
+* Not cause linking errors or crashes at runtime for yours or any downstream packages, including ones that use the system version on any of our target platforms.
+
+The release pipeline will only catch the first issue automatically.
+Manual review is required for the latter two.
+But in general if you want to do this without being disruptive you need to adjust paths to avoid installation collisions.
+Change all namespaces to avoid symbol collisions. And change header paths to not collide with the system ones if you export the include directories.
+
+Embedding a copy inside your package, potentially a statically linking a version into your executables is also a potential way to do it as well.
+It’s going to require a non-trivial amount of engineering and modifications to make this possible and most people decide it’s not worth it.
+
+In many situations a common approach for this is to not actually release it onto the public distro and distribute it separately through a side channel.
+This will allow people to opt into the potentially disruptive change.
+An example of this is Ubuntu’s PPAs or just instructions for end users to compile from source.
+
+In the case that a package is released into a ROS distribution that is then later available in upstream system distributions when the ROS distribution rolls forward the ROS packages should be removed in favor of relying on the system version.
+To provide a gentle transition a placeholder package can be provided which will just depend on the rosdep key but this should be considered a deprecated package and dependent packages should switch to use the rosdep key.
+This transitional package is likely something that should be scoped to be released into rolling only and not be in a subsequent released distribution.
+It is up to the judgement of the ROS Distro's release manager to make an exception.
+
 Documentation Indexing
 ----------------------
 
