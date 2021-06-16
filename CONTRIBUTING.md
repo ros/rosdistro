@@ -1,7 +1,7 @@
 
 This repository acts as an index for the ROS distributions.
-If you would like to add a package to the index you can either index it for just documentation, for binary builds or continuous integration tests. 
-This repository also holds the rosdep rules. 
+If you would like to add a package to the index you can either index it for just documentation, for binary builds or continuous integration tests.
+This repository also holds the rosdep rules.
 
 Binary Releases
 ---------------
@@ -9,7 +9,7 @@ Binary Releases
 If you would like to add a package for binary release please see the [Bloom documentation](http://wiki.ros.org/bloom).
 Bloom is a tool which will help you do the release as well as open a pull-request for you.
 It will also assist adding documentation and source entries.
-There are [several helpful tutorials](http://wiki.ros.org/bloom/Tutorials) which provide instructions on how to do things like [make a first release](http://wiki.ros.org/bloom/Tutorials/FirstTimeRelease). 
+There are [several helpful tutorials](http://wiki.ros.org/bloom/Tutorials) which provide instructions on how to do things like [make a first release](http://wiki.ros.org/bloom/Tutorials/FirstTimeRelease).
 
 Once you have made a release make sure that you are subscribed to the appropriate subcategory of our [Release management Category](https://discourse.ros.org/c/release/16) for the appropriate distros.
 This is our primary method of communications with maintainers and is where the ROS Boss will coordinate releases.
@@ -18,6 +18,18 @@ It is expected that all maintainers are watching those categories to allow us to
 ### Guidelines for Package Naming
 
 When releasing a new package into a distribution, please follow the naming guidelines set out in the [ROS REP 144: ROS Package Naming](https://www.ros.org/reps/rep-0144.html).
+
+### Guidelines for Package Contents
+
+When releasing a new package into a ROS distribution, the reviewers will check that the package has the following characteristics:
+
+* The source repository must be publicly accessible.
+* The license should be one of the open-source ones listed in [https://opensource.org/licenses](https://opensource.org/licenses) (preferably one of the "Popular licenses").
+* The license must be reflected in the `package.xml` file of all sub-packages in the repository.
+* A LICENSE file exists in the source repository.  This is because the short identifiers in the `package.xml` file aren't specific enough to unambiguously identify the license.
+* The source repository should contain one or more ROS packages (meaning they have a `package.xml` in the source repository). Packages that are not ROS packages can be accepted, but they are rare and require special handling in the release repository.
+
+For review simplicity, these rules apply to all packages, even ones that have previously been released into ROS 1 or ROS 2 distributions.
 
 ### Binary Release Follow-up
 
@@ -37,7 +49,7 @@ Or they may take [other actions](https://github.com/ros-infrastructure/ros_build
 Documentation Indexing
 ----------------------
 
-If you just want to submit for documentation indexing only [this tutorial](http://wiki.ros.org/rosdistro/Tutorials/Indexing%20Your%20ROS%20Repository%20for%20Documentation%20Generation) will get you going. 
+If you just want to submit for documentation indexing only [this tutorial](http://wiki.ros.org/rosdistro/Tutorials/Indexing%20Your%20ROS%20Repository%20for%20Documentation%20Generation) will get you going.
 
 Continuous Integration Indexing
 -------------------------------
@@ -219,8 +231,8 @@ The `-pip` key should be removed when the package becomes available on all platf
 How to submit pull requests
 ---------------------------
 
-When submitting pull requests it is expected that they pass the unit tests for formatting. 
-The unit tests enforce alphabetization of elements and a consistent formatting to keep merging as clean as possible. 
+When submitting pull requests it is expected that they pass the unit tests for formatting.
+The unit tests enforce alphabetization of elements and a consistent formatting to keep merging as clean as possible.
 
 To run the tests run ``nosetests`` in the root of the repository.
 These tests require several dependencies that can be installed either from the ROS repositories or via pip(list built based on the content of [.travis.yaml](https://github.com/ros/rosdistro/blob/master/.travis.yml):
@@ -237,4 +249,4 @@ These tests require several dependencies that can be installed either from the R
 
 There is a tool ``rosdistro_reformat`` which will fix most formatting errors such as alphabetization and correct formatting.
 
-Note: There's a [known issue](https://github.com/disqus/nose-unittest/issues/2) discovered [here](https://github.com/ros/rosdistro/issues/16336) that most tests won't run if you have the python package `nose-unitttest` installed. 
+Note: There's a [known issue](https://github.com/disqus/nose-unittest/issues/2) discovered [here](https://github.com/ros/rosdistro/issues/16336) that most tests won't run if you have the python package `nose-unitttest` installed.
