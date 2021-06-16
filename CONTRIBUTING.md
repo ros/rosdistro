@@ -25,8 +25,8 @@ When releasing a new package into a ROS distribution, the reviewers will check t
 
 * The source repository must be publicly accessible.
 * The license should be one of the open-source ones listed in [https://opensource.org/licenses](https://opensource.org/licenses) (preferably one of the "Popular licenses").
-* The license must be reflected in the package.xml file of all sub-packages in the repository.
-* A LICENSE file exists in the source repository.  This is because the short identifiers in the package.xml file aren't specific enough to unambiguously identify the license.
+* The license must be reflected in the `package.xml` file of all sub-packages in the repository.
+* A LICENSE file exists in the source repository.  This is because the short identifiers in the `package.xml` file aren't specific enough to unambiguously identify the license.
 * The source repository should contain one or more ROS packages (meaning they have a `package.xml` in the source repository). Packages that are not ROS packages can be accepted, but they are rare and require special handling in the release repository.
 
 For review simplicity, these rules apply to all packages, even ones that have previously been released into ROS 1 or ROS 2 distributions.
