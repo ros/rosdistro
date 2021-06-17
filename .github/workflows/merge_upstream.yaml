@@ -20,7 +20,7 @@ jobs:
       - name: Create upstream merge branch
         id: create
         run: |
-          branch=merge-upstream-$(date '+%Y-%m-%d')
+          branch=merge-upstream-$(date '+%Y-%m-%d-%H-%M-%S')
           echo "::set-output name=branch::${branch}"
           git config --global user.email 'github-actions[bot]'
           git config --global user.name '41898282+github-actions[bot]@users.noreply.github.com'
@@ -30,6 +30,7 @@ jobs:
         run: git remote remove upstream # avoid to open PR in upstream repo
       - name: Create PR
         run: |
+          git push origin ${{ steps.create.outputs.branch }}
           gh pr create \
             --repo ${GITHUB_REPOSITORY} \
             --base alpine-custom-apk \
