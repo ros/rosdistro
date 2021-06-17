@@ -125,7 +125,7 @@ If the ebuild you are referencing is not in either of those locations, please
 file a PR into ROS-Overlay to add it and any needed dependencies to the tree.
 
 Note that `pip` cannot be used to install system packages on Gentoo.
-If the package is not present in the Gentoo package repository, please create an issue on the https://github.com/ros/ros-overlay repository so that it may be created at a later date, omit the key from the new rosdep rule, and link the created issue in the PR which is adding the rule.
+If the package is not present in the Gentoo package repository, please create an issue on the https://github.com/ros/ros-overlay repository so that it may be created at a later date, omit the key from the new rosdep rule, and link the created issue in the PR which is adding the rule. [Here's a simple example](https://github.com/ros/ros-overlay/issues/1019).
 
 #### Arch Linux
 
