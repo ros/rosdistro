@@ -136,6 +136,9 @@ TODO
 If the ebuild you are referencing is not in either of those locations, please
 file a PR into ROS-Overlay to add it and any needed dependencies to the tree.
 
+Note that `pip` cannot be used to install system packages on Gentoo.
+If the package is not present in the Gentoo package repository, please create an issue on the https://github.com/ros/ros-overlay repository so that it may be created at a later date, omit the key from the new rosdep rule, and link the created issue in the PR which is adding the rule. [Here's a simple example](https://github.com/ros/ros-overlay/issues/1019).
+
 #### Arch Linux
 
 Packages must be in the official Archlinux core, extra, or community repositories at the time they are contributed.
@@ -227,6 +230,9 @@ The EOL date of the entry should match the EOL date of the longest supported cur
 Some existing rules do not have `python-` or `python3-` prefixes, but this is no longer recommended.
 If the package ever becomes available in Debian or Ubuntu, the `python3-` prefix ensures that the `pip` key is next to it alphabetically.
 The `-pip` key should be removed when the package becomes available on all platforms, and all existing users of the `-pip` key should migrate to the new key.
+
+As a reminder `pip` rules should not be used on Gentoo.
+See above for the Gentoo specific guidelines.
 
 How to submit pull requests
 ---------------------------
