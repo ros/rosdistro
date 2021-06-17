@@ -19,6 +19,8 @@ jobs:
           git fetch upstream
       - name: Create upstream merge branch
         run: |
+          git config --global user.email 'github-actions[bot]'
+          git config --global user.name '41898282+github-actions[bot]@users.noreply.github.com'
           git checkout -b merge-upstream-$(date '+%Y-%m-%d')
           git merge --no-ff --no-edit upstream/master
       - name: pull-request
