@@ -18,15 +18,19 @@ jobs:
           git remote add upstream https://github.com/ros/rosdistro.git
           git fetch upstream
       - name: Create upstream merge branch
+        id: create
         run: |
+          branch=merge-upstream-$(date '+%Y-%m-%d')
+          echo "::set-output name=branch::${branch}"
           git config --global user.email 'github-actions[bot]'
           git config --global user.name '41898282+github-actions[bot]@users.noreply.github.com'
-          git checkout -b merge-upstream-$(date '+%Y-%m-%d')
+          git checkout -b ${branch}
           git merge --no-ff --no-edit upstream/master
       - name: pull-request
         uses: repo-sync/pull-request@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: ${{ steps.create.outputs.branch }}
           destination_branch: alpine-custom-apk
           pr_title: Merge upstream
           pr_body: "close #${{ github.event.issue.number }}"
