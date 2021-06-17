@@ -26,11 +26,13 @@ jobs:
           git config --global user.name '41898282+github-actions[bot]@users.noreply.github.com'
           git checkout -b ${branch}
           git merge --no-ff --no-edit upstream/master
+      - name: Remove upstream remote
+        run: git remote remove upstream # avoid to open PR in upstream repo
       - name: pull-request
         uses: repo-sync/pull-request@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           source_branch: ${{ steps.create.outputs.branch }}
-          destination_branch: alpine-ros:alpine-custom-apk
+          destination_branch: alpine-custom-apk
           pr_title: Merge upstream
           pr_body: "close #${{ github.event.issue.number }}"
