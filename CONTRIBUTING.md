@@ -76,7 +76,8 @@ This will allow people to opt into the potentially disruptive change.
 An example of this is Ubuntu’s PPAs or just instructions for end users to compile from source.
 
 In the case that a package is released into a ROS distribution that is then later available in upstream system distributions when the ROS distribution rolls forward the ROS packages should be removed in favor of relying on the system version.
-To provide a gentle transition a placeholder package can be provided which will just depend on the rosdep key but this should be considered a deprecated package and dependent packages should switch to use the rosdep key.
+To provide a gentle transition, a placeholder package can be provided that only depends on the rosdep key.
+This should be considered a deprecated package and dependent packages should switch to use the rosdep key.
 This transitional package is likely something that should be scoped to be released into rolling only and not be in a subsequent released distribution.
 It is up to the judgement of the ROS Distro's release manager to make an exception.
 
