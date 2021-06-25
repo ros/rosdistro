@@ -1,76 +1,76 @@
 ---
 package_sources:
   debian:
-    - !deb_base_url http://deb.debian.org/debian main
-    - !deb_base_url http://deb.debian.org/debian contrib
-    - !deb_base_url http://deb.debian.org/debian non-free
-    - !deb_base_url http://repos.ros.org/repos/ros_bootstrap main
+  - !deb_base_url http://deb.debian.org/debian main
+  - !deb_base_url http://deb.debian.org/debian contrib
+  - !deb_base_url http://deb.debian.org/debian non-free
+  - !deb_base_url http://repos.ros.org/repos/ros_bootstrap main
   fedora:
-    - !rpm_base_url https://dl.fedoraproject.org/pub/$distname/linux/releases/$releasever/Everything/$basearch/os/
-    - !rpm_base_url https://dl.fedoraproject.org/pub/$distname/linux/updates/$releasever/Everything/$basearch/
-    - !rpm_base_url https://download1.rpmfusion.org/free/$distname/releases/$releasever/Everything/$basearch/os/
+  - !rpm_base_url https://dl.fedoraproject.org/pub/$distname/linux/releases/$releasever/Everything/$basearch/os/
+  - !rpm_base_url https://dl.fedoraproject.org/pub/$distname/linux/updates/$releasever/Everything/$basearch/
+  - !rpm_base_url https://download1.rpmfusion.org/free/$distname/releases/$releasever/Everything/$basearch/os/
   opensuse:
-    - !rpm_base_url http://download.opensuse.org/distribution/leap/$releasever/repo/oss/
-    - !rpm_base_url http://download.opensuse.org/distribution/leap/$releasever/repo/non-oss/
-    - !rpm_base_url http://download.opensuse.org/update/leap/$releasever/oss/
-    - !rpm_base_url http://download.opensuse.org/update/leap/$releasever/non-oss/
+  - !rpm_base_url http://download.opensuse.org/distribution/leap/$releasever/repo/oss/
+  - !rpm_base_url http://download.opensuse.org/distribution/leap/$releasever/repo/non-oss/
+  - !rpm_base_url http://download.opensuse.org/update/leap/$releasever/oss/
+  - !rpm_base_url http://download.opensuse.org/update/leap/$releasever/non-oss/
   rhel:
-    - '7':
-      - !rpm_base_url https://dl.fedoraproject.org/pub/epel/$releasever/$basearch/
-      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/os/$basearch/
-      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/updates/$basearch/
-      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/extras/$basearch/
-      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/sclo/$basearch/rh/
-      '8':
-      - !rpm_base_url https://dl.fedoraproject.org/pub/epel/$releasever/Everything/$basearch/
-      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/BaseOS/$basearch/os/
-      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/AppStream/$basearch/os/
-      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/PowerTools/$basearch/os/
-      - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/extras/$basearch/os/
-    - !rpm_base_url https://download1.rpmfusion.org/free/el/updates/$releasever/$basearch/
+  - '7':
+    - !rpm_base_url https://dl.fedoraproject.org/pub/epel/$releasever/$basearch/
+    - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/os/$basearch/
+    - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/updates/$basearch/
+    - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/extras/$basearch/
+    - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/sclo/$basearch/rh/
+    '8':
+    - !rpm_base_url https://dl.fedoraproject.org/pub/epel/$releasever/Everything/$basearch/
+    - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/BaseOS/$basearch/os/
+    - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/AppStream/$basearch/os/
+    - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/PowerTools/$basearch/os/
+    - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/extras/$basearch/os/
+  - !rpm_base_url https://download1.rpmfusion.org/free/el/updates/$releasever/$basearch/
   ubuntu:
-    - !deb_base_url http://archive.ubuntu.com/ubuntu main
-    - !deb_base_url http://archive.ubuntu.com/ubuntu universe
-    - !deb_base_url http://archive.ubuntu.com/ubuntu multiverse
-    - !deb_base_url http://repos.ros.org/repos/ros_bootstrap main
+  - !deb_base_url http://archive.ubuntu.com/ubuntu main
+  - !deb_base_url http://archive.ubuntu.com/ubuntu universe
+  - !deb_base_url http://archive.ubuntu.com/ubuntu multiverse
+  - !deb_base_url http://repos.ros.org/repos/ros_bootstrap main
 
 package_dashboards:
-  - pattern: !regular_expression .*//deb.debian.org/debian/.*
-    url: https://packages.debian.org/{os_code_name}/{binary_name}
-  - pattern: !regular_expression .*//dl.fedoraproject.org/pub/.*
-    url: https://src.fedoraproject.org/rpms/{source_name}#bodhi_updates
-  - pattern: !regular_expression .*//download.opensuse.org/.*
-    url: https://software.opensuse.org/package/{source_name}
-  - pattern: !regular_expression .*//archive.ubuntu.com/ubuntu/.*
-    url: https://packages.ubuntu.com/{os_code_name}/{binary_name}
+- pattern: !regular_expression .*//deb.debian.org/debian/.*
+  url: https://packages.debian.org/{os_code_name}/{binary_name}
+- pattern: !regular_expression .*//dl.fedoraproject.org/pub/.*
+  url: https://src.fedoraproject.org/rpms/{source_name}#bodhi_updates
+- pattern: !regular_expression .*//download.opensuse.org/.*
+  url: https://software.opensuse.org/package/{source_name}
+- pattern: !regular_expression .*//archive.ubuntu.com/ubuntu/.*
+  url: https://packages.ubuntu.com/{os_code_name}/{binary_name}
 
 supported_versions:
   debian:
-    - stretch
-    - buster
+  - stretch
+  - buster
   fedora:
-    - '33'
-    - '34'
+  - '33'
+  - '34'
   opensuse:
-    - '15.2'
+  - '15.2'
   rhel:
-    - '7'
-    - '8'
+  - '7'
+  - '8'
   ubuntu:
-    - bionic
-    - focal
+  - bionic
+  - focal
 
 supported_arches:
   debian:
-    - amd64
+  - amd64
   fedora:
-    - x86_64
+  - x86_64
   opensuse:
-    - x86_64
+  - x86_64
   rhel:
-    - x86_64
+  - x86_64
   ubuntu:
-    - amd64
+  - amd64
 
 name_replacements:
   fedora:
