@@ -1029,7 +1029,7 @@ python-chainer-mask-rcnn-pip:
     pip:
       depends: [cython, python-numpy]
       packages: [chainer-mask-rcnn]
-python-chainer-pip:
+python-chainer-pip: &migrate_eol_2025_04_30_python3_chainer_pip
   debian:
     pip:
       packages: [chainer]
@@ -5961,6 +5961,7 @@ python3-cffi:
   nixos: [python3Packages.cffi]
   rhel: ['python%{python3_pkgversion}-cffi']
   ubuntu: [python3-cffi]
+python3-chainer-pip: *migrate_eol_2025_04_30_python3_chainer_pip
 python3-cherrypy3:
   debian: [python3-cherrypy3]
   ubuntu: [python3-cherrypy3]
