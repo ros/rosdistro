@@ -252,8 +252,9 @@ def get_package_link(config, pkg, os_name, os_code_name, os_arch):
     :returns: a URL to a dashboard or package file.
     """
     for dashboard in config.get('package_dashboards', ()):
-        if dashboard['pattern'].match(pkg.url):
-            return dashboard['url'].format_map({
+        match = dashboard['pattern'].match(pkg.url)
+        if match:
+            return match.expand(dashboard['url']).format_map({
                 'binary_name': pkg.binary_name,
                 'name': pkg.name,
                 'os_arch': os_arch,
