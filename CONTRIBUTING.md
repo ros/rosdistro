@@ -55,7 +55,7 @@ If you need newer versions of underlying libraries the you should either target 
 Obviously this is a slow process and doesn’t fix things immediately.
 There are workarounds such as embedding copies of the libraries into your package or making another package with the newer library version.
 This usually can be made to work well in your local development environment.
-However if you want to release this style of workarounds you must make sure not to break other users who are expecting the system version either in downstream packages or elsewhere on the system.
+However if you want to release this style of workarounds into a ROS distribution you must make sure not to break other users who are expecting the system version either in downstream packages or elsewhere on the system.
 
 To release a ROS package which will overlay a system dependency it must:
 
