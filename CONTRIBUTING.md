@@ -65,8 +65,10 @@ To release a ROS package which will overlay a system dependency it must:
 
 The release pipeline will only catch the first issue automatically.
 Manual review is required for the latter two.
-But in general if you want to do this without being disruptive you need to adjust paths to avoid installation collisions.
-Change all namespaces to avoid symbol collisions. And change header paths to not collide with the system ones if you export the include directories.
+But in general if you want to do this without being disruptive you need to:
+1. Adjust paths to avoid installation collisions.
+2. Change all namespaces to avoid symbol collisions
+3. Change header paths to not collide with the system ones if you export the include directories
 
 Embedding a copy inside your package, potentially statically linking a version into your executables is also a potential way to do it as well.
 It’s going to require a non-trivial amount of engineering and modifications to make this possible and most people decide it’s not worth it.
