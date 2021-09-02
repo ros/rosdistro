@@ -52,7 +52,7 @@ In general you should not override or replace system dependencies from the syste
 This is part of the software engineering process of maintaining the distribution that all developers can rely on specific versions of software to be available and remain consistent within the distribution.
 If you need newer versions of underlying libraries the you should either target newer versions with the minimum version available or if that’s not available help and encourage the upstream process to move forward to at least your minimum version for the next release of the distribution.
 
-Obviously this is a slow process and doesn’t fix things immediately for a short term.
+Obviously this is a slow process and doesn’t fix things immediately.
 There are workarounds such as embedding copies of the libraries into your package or making another package with the newer library version.
 This usually can be made to work well in your local development environment.
 However if you want to release this style of workarounds you must make sure not to break other users who are expecting the system version either in downstream packages or elsewhere on the system.
