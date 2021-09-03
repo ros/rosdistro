@@ -68,7 +68,7 @@ def get_changed_line_numbers():
         remote_url = subprocess.check_output(cmd.split()).decode('utf-8').strip()
         # Remote exists
         # Check url
-        assert remote_url != DIFF_REPO, \
+        assert remote_url == DIFF_REPO, \
             '%s remote url [%s] is different than %s' % (UPSTREAM_NAME, remote_url, DIFF_REPO)
         base_ref = '%s/%s' % (UPSTREAM_NAME, DIFF_BRANCH)
     except subprocess.CalledProcessError:
