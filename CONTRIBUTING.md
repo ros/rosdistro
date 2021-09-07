@@ -50,7 +50,7 @@ Or they may take [other actions](https://github.com/ros-infrastructure/ros_build
 
 In general you should not override or replace system dependencies from the system distribution with a package in the ROS distribution.
 This is part of the software engineering process of maintaining the distribution that all developers can rely on specific versions of software to be available and remain consistent within the distribution.
-If you truly need a newer versions of underlying libraries then you can consider targeting a newer ROS distributionthat targets a newer platform which hopefully will have a higher version of your necessary dependency.
+If you truly need newer versions of underlying libraries then you can consider targeting a newer ROS distributionthat targets a newer platform which hopefully will have a higher version of your necessary dependency.
 If the necessary version of your dependency isn't available even on the latest platforms, please reach out and encourage the upstream operating systems to move forward to at least your minimum version for the next release of the upstream distributions.
 By doing this you will make sure that it's available for everyone in the future.
 
