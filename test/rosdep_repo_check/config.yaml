@@ -1,5 +1,9 @@
 ---
 package_sources:
+  alpine:
+  - !apk_base_url https://dl-cdn.alpinelinux.org/alpine/$releasever/main
+  - !apk_base_url https://dl-cdn.alpinelinux.org/alpine/$releasever/community
+  - !apk_base_url https://dl-cdn.alpinelinux.org/alpine/$releasever/testing
   debian:
   - !deb_base_url http://deb.debian.org/debian main
   - !deb_base_url http://deb.debian.org/debian contrib
@@ -43,8 +47,12 @@ package_dashboards:
   url: https://software.opensuse.org/package/{source_name}
 - pattern: !regular_expression .*//archive.ubuntu.com/ubuntu/.*
   url: https://packages.ubuntu.com/{os_code_name}/{binary_name}
+- pattern: !regular_expression .*//dl-cdn.alpinelinux.org/alpine/[^/]+/([^/]+)/.*
+  url: https://pkgs.alpinelinux.org/package/{os_code_name}/\1/{os_arch}/{binary_name}
 
 supported_versions:
+  alpine:
+  - edge
   debian:
   - buster
   fedora:
@@ -60,6 +68,8 @@ supported_versions:
   - focal
 
 supported_arches:
+  alpine:
+  - x86_64
   debian:
   - amd64
   fedora:
