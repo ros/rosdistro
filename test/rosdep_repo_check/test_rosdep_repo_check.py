@@ -57,10 +57,25 @@ def detect_lines(diffstr):
 
 
 def get_changed_line_numbers():
-    base_ref = ''
-    GITHUB_BASE_REF = os.environ.get('GITHUB_BASE_REF')
-    if GITHUB_BASE_REF:
-        base_ref = 'remotes/origin/' + GITHUB_BASE_REF + '...'
+    UPSTREAM_NAME = 'unittest_upstream_comparision'
+    DIFF_BRANCH = 'master'
+    DIFF_REPO = 'https://github.com/ros/rosdistro.git'
+
+    # See if UPSTREAM_NAME remote is available and use it as it's expected to be setup by CI
+    # Otherwise fall back to origin/master
+    cmd = 'git config --get remote.%s.url' % UPSTREAM_NAME
+    try:
+        remote_url = subprocess.check_output(cmd.split()).decode('utf-8').strip()
+        # Remote exists
+        # Check url
+        assert remote_url == DIFF_REPO, \
+            '%s remote url [%s] is different than %s' % (UPSTREAM_NAME, remote_url, DIFF_REPO)
+        base_ref = '%s/%s' % (UPSTREAM_NAME, DIFF_BRANCH)
+    except subprocess.CalledProcessError:
+        # No remote so fall back to origin/master
+        print('WARNING: No remote %s detected, falling back to origin master. Make sure it is up to date.' % UPSTREAM_NAME, file=sys.stderr)
+        base_ref = 'origin/master'
+
     cmd = 'git diff --unified=0 %s -- rosdep' % (base_ref,)
     print("Detecting changed rules with '%s'" % (cmd,))
     diff = subprocess.check_output(cmd.split()).decode('utf-8')
@@ -76,6 +91,10 @@ class TestRosdepRepositoryCheck(unittest.TestCase):
         cls._full_data = {}
         cls._isolated_data = {}
         cls._repo_root = os.path.join(os.path.dirname(__file__), '..', '..')
+
+        # For clarity in the logs, show as 'skipped' rather than 'passed'
+        if not cls._changed_lines:
+            raise unittest.SkipTest('No rosdep changes were detected')
 
         for path in ('rosdep/base.yaml', 'rosdep/python.yaml'):
             if path not in cls._changed_lines:
