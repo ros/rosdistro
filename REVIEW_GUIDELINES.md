@@ -46,8 +46,6 @@ There are a few different types of pull requests that are opened against this re
 
     Once the above criteria are satisfied, and the ROS distribution isn't in a "sync freeze", then the PR will be merged.
 
-1.  A new source or documentation package in a ROS distribution.  An example of this kind of PR is [26383](https://github.com/ros/rosdistro/pull/26383).  An entry is considered a source or documentation package if it has a `source` or `doc` field (or both), but no `release` field.  These PRs need not have been opened with bloom.  The reviewer is to see the bullet above for binary packages; the same rules apply here, except this kind of PRs will not have a release repository.
-
 1.  A new rosdep key.  An example of this kind of PR is [25995](https://github.com/ros/rosdistro/pull/25995). These pull requests should conform to the standards documented at [CONTRIBUTING.md#rosdep-rules-contributions](CONTRIBUTING.md#rosdep-rules-contributions). Some rules in addition to contributing guidelines:
     * A pull request to update rosdep should never change the name of existing keys.
     * When adding a new key, Ubuntu and Debian are required, Fedora, Gentoo, and openSUSE are encouraged if the package also exists on those Linux distributions.
