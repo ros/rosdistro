@@ -2495,14 +2495,6 @@ python-levenshtein:
   ubuntu: [python-levenshtein]
 python3-pylibdmtx:
   debian: [python3-pylibdmtx]
-  ubuntu:
-    "*": [python3-pylibdmtx]
-    focal: null
-    bionic: null
-python-pylibdmtx-pip: &migrate_eol_2025_04_30_python3_pylibdmtx_pip
-  debian:
-    pip:
-      packages: [pylibdmtx]
   fedora:
     pip:
       packages: [pylibdmtx]
@@ -2510,9 +2502,14 @@ python-pylibdmtx-pip: &migrate_eol_2025_04_30_python3_pylibdmtx_pip
     pip:
       packages: [pylibdmtx]
   ubuntu:
-    pip:
-      packages: [pylibdmtx]
-python3-pylibdmtx-pip: *migrate_eol_2025_04_30_python3_pylibdmtx_pip
+    "*":
+      packages: [python3-pylibdmtx]
+    focal:
+      pip:
+        packages: [pylibdmtx]
+    bionic:
+      pip:
+        packages: [pylibdmtx]
 python-libpcap:
   debian: [python-libpcap]
   fedora: [pylibpcap]
