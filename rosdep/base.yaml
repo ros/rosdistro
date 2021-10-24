@@ -269,6 +269,7 @@ avr-libc:
   debian: [avr-libc]
   fedora: [avr-libc]
   gentoo: [dev-embedded/avr-libc]
+  nixos: [avrlibc]
   ubuntu: [avr-libc]
 avrdude:
   arch: [avrdude]
@@ -312,6 +313,7 @@ benchmark:
     '*': [libbenchmark-dev]
     stretch: null
   fedora: [google-benchmark-devel]
+  nixos: [gbenchmark]
   openembedded: [google-benchmark@meta-ros2]
   rhel: [google-benchmark-devel]
   ubuntu:
@@ -380,7 +382,7 @@ boost:
   macports: [boost]
   nixos: [boost]
   openembedded: [boost@openembedded-core]
-  opensuse: [libboost_headers1_66_0-devel, libboost_system1_66_0-devel, libboost_thread1_66_0-devel, libboost_chrono1_66_0-devel, libboost_date_time1_66_0-devel, libboost_serialization1_66_0-devel, libboost_filesystem1_66_0-devel, libboost_program_options1_66_0-devel, libboost_signals1_66_0-devel, libboost_regex1_66_0-devel]
+  opensuse: [libboost_atomic1_66_0-devel, libboost_headers1_66_0-devel, libboost_system1_66_0-devel, libboost_thread1_66_0-devel, libboost_chrono1_66_0-devel, libboost_date_time1_66_0-devel, libboost_serialization1_66_0-devel, libboost_filesystem1_66_0-devel, libboost_program_options1_66_0-devel, libboost_python-py2_7-1_66_0-devel, libboost_python-py3-1_66_0-devel, libboost_signals1_66_0-devel, libboost_regex1_66_0-devel, libboost_iostreams1_66_0-devel]
   rhel: [boost-devel, 'boost-python%{python3_pkgversion}-devel']
   slackware:
     slackpkg:
@@ -723,6 +725,7 @@ curl:
 curlpp-dev:
   debian: [libcurlpp-dev]
   fedora: [curlpp-devel]
+  nixos: [curlpp]
   openembedded: [curlpp@meta-networking]
   ubuntu: [libcurlpp-dev]
 cvs:
@@ -851,6 +854,17 @@ dvipng:
   gentoo: [app-text/dvipng]
   opensuse: [texlive-dvipng-bin]
   ubuntu: [dvipng]
+e2fsprogs:
+  alpine: [e2fsprogs]
+  arch: [e2fsprogs]
+  debian: [e2fsprogs]
+  fedora: [e2fsprogs]
+  gentoo: [sys-fs/e2fsprogs]
+  macports: [e2fsprogs]
+  nixos: [e2fsprogs]
+  opensuse: [e2fsprogs]
+  rhel: [e2fsprogs]
+  ubuntu: [e2fsprogs]
 eclipse:
   arch: [eclipse, eclipse-rcp, eclipse-emf, eclipse-pde]
   debian: [eclipse, eclipse-rcp, eclipse-xsd, eclipse-pde]
@@ -2404,6 +2418,14 @@ libboost-math-dev:
   opensuse: [libboost_math1_66_0-devel]
   rhel: [boost-devel]
   ubuntu: [libboost-math-dev]
+libboost-numpy-dev:
+  debian: [libboost-numpy-dev]
+  fedora: [boost-devel]
+  gentoo: [dev-libs/boost]
+  nixos: [boost]
+  opensuse: [libboost_numpy-py2_7-1_66_0, libboost_numpy-py3-1_66_0]
+  rhel: [boost-devel]
+  ubuntu: [libboost-numpy-dev]
 libboost-program-options:
   debian:
     buster: [libboost-program-options1.67.0]
@@ -3761,6 +3783,13 @@ libmlpack-dev:
   debian: [libmlpack-dev]
   fedora: [mlpack-devel]
   ubuntu: [libmlpack-dev]
+libmnl-dev:
+  alpine: [libmnl-dev]
+  debian: [libmnl-dev]
+  fedora: [libmnl-devel]
+  opensuse: [libmnl-devel]
+  rhel: [libmnl-devel]
+  ubuntu: [libmnl-dev]
 libmockito-java:
   arch: [mockito]
   debian: [libmockito-java]
@@ -4904,6 +4933,7 @@ libspnav-dev:
   debian: [libspnav-dev, libx11-dev]
   fedora: [libspnav-devel, libX11-devel]
   gentoo: [dev-libs/libspnav]
+  nixos: [libspnav]
   rhel: [libspnav-devel, libX11-devel]
   ubuntu: [libspnav-dev, libx11-dev]
 libsqlite3-dev:
@@ -5278,6 +5308,7 @@ libuvc-dev:
     '*': [libuvc-dev]
     stretch: null
   gentoo: [media-libs/libuvc]
+  nixos: [libuvc]
   ubuntu:
     '*': [libuvc-dev]
     xenial: null
@@ -5430,6 +5461,7 @@ libvulkan-dev:
   debian: [libvulkan-dev]
   fedora: [vulkan-devel]
   gentoo: [media-libs/vulkan-loader]
+  nixos: [vulkan-loader]
   openembedded: [vulkan-headers@openembedded-core]
   rhel:
     '7': [vulkan-devel]
@@ -5454,6 +5486,16 @@ libwebsocketpp-dev:
   openembedded: [websocketpp@meta-oe]
   rhel: [websocketpp-devel]
   ubuntu: [libwebsocketpp-dev]
+libwebsockets-dev:
+  alpine: [libwebsockets-dev]
+  arch: [libwebsockets]
+  debian: [libwebsockets-dev]
+  fedora: [libwebsockets-devel]
+  gentoo: [net-libs/libwebsockets]
+  nixos: [libwebsockets]
+  opensuse: [libwebsockets-devel]
+  rhel: [libwebsockets-devel]
+  ubuntu: [libwebsockets-dev]
 libx11:
   alpine: [libx11]
   arch: [libx11]
@@ -6780,6 +6822,7 @@ qttools5-dev:
 qttools5-dev-tools:
   debian: [qttools5-dev-tools]
   fedora: [qt5-qttools-devel]
+  nixos: [qt5.qttools.dev]
   openembedded: [qttools@meta-qt5]
   rhel: [qt5-qttools-devel]
   ubuntu: [qttools5-dev-tools]
