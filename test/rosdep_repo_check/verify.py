@@ -56,9 +56,6 @@ def verify_rules(config, rules_to_check, all_rules, include_found=False):
             if not isinstance(os_rules, dict):
                 for os_ver in config['supported_versions'].get(os_name, ()):
                     packages_to_check[os_ver] = os_rules
-            elif 'pip' in os_rules:
-                # Only the platform default package managers are supported
-                continue
             else:
                 packages_to_check = os_rules
                 if '*' in os_rules:
@@ -69,6 +66,9 @@ def verify_rules(config, rules_to_check, all_rules, include_found=False):
             for os_ver, packages in packages_to_check.items():
                 if os_ver not in config['supported_versions'].get(os_name, ()):
                     continue
+                if isinstance(packages, dict) and \
+                        tuple(packages.keys()) == ('packages',):
+                    packages = packages['packages']
                 if not isinstance(packages, list):
                     # Probably a dict specifying the key type, which is not
                     # currently supported
