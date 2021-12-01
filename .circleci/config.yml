@@ -1,0 +1,42 @@
+version: 2.1
+
+workflows:
+  sync_with_upstream:
+    jobs:
+      - merge_and_push
+      - update_rosdistro_cache
+
+jobs:
+  merge_and_push:
+    docker:
+      - image: ubuntu:focal
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            apt update -y
+            apt install git -y
+      - run:
+          name: Sync with the upstream repo and push
+          command: |
+            git remote add upstream https://github.com/ros/rosdistro
+            git pull upstream master --commit
+            git push origin cmr
+
+  update_rosdistro_cache:
+    docker:
+      - image: ubuntu:focal
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            apt update -y
+            apt install python3-rosdistro curl -y
+      - run:
+          name: Publish the updated cache
+          command: |
+            rosdistro_build_cache --include-source ./index.yaml
+            ./push_cache.sh $GITHUB_BOT_TOKEN ./rolling-cache.yaml.gz
+  
