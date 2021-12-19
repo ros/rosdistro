@@ -208,6 +208,31 @@ Work has been proposed to add a separate installer for AUR packages [ros-infrast
 
 For pip installers they are expected to be in the main PyPI index https://pypi.org/.
 
+### pkg-config rules
+
+For packages that contain a [pkg-config file](https://linux.die.net/man/1/pkg-config) (\*.pc) the pkg-config name must be used as rosdep key.
+This pkg-config name is set by the developers of a library or component and will be the same across distributions.
+Commonly, the very same key will be used in CMake's [`FindPkgConfig`](https://cmake.org/cmake/help/latest/module/FindPkgConfig.html) to query this dependency.
+
+Example:
+
+The Eigen3 [upstream repo](https://gitlab.com/libeigen/eigen) contains the pkg-config file [`eigen3.pc`](https://gitlab.com/libeigen/eigen/-/blob/master/eigen3.pc.in). Hence, on all systems that have Eigen3 installed, one can query information about Eigen3 using the `eigen3` key:
+```
+pkg-config --modversion eigen3
+```
+
+Querying a package that contains this pkg-config file can then be easily done by searching for the `eigen3.pc` file and should only provide a single package per distribution.
+
+Example:
+
+Searching for exact file name matches for `eigen3.pc` at https://packages.ubuntu.com (`Search the contents of packages` -> `packages that contain files named like this`) will return `libeigen3-dev` https://packages.ubuntu.com/search?suite=focal&arch=any&mode=exactfilename&searchon=contents&keywords=eigen3.pc.
+
+While this process might be automated in the future, for now the index should match this mapping of "pkg-config name" key to the "package name of the package that contains this pkg-config file":
+```yaml
+eigen3:
+  ubuntu: [libeigen3-dev]
+```
+
 ### Python rules
 
 #### Python 3
