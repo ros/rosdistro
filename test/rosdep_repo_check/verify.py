@@ -66,6 +66,13 @@ def verify_rules(config, rules_to_check, all_rules, include_found=False):
             for os_ver, packages in packages_to_check.items():
                 if os_ver not in config['supported_versions'].get(os_name, ()):
                     continue
+                if isinstance(packages, dict) and \
+                        tuple(packages.keys()) == ('packages',):
+                    packages = packages['packages']
+                if not isinstance(packages, list):
+                    # Probably a dict specifying the key type, which is not
+                    # currently supported
+                    continue
                 for package in packages or []:
                     for needle, haystack in config['name_replacements'].get(
                             os_name, {}).get(os_ver, {}).items():
