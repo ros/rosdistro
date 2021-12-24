@@ -117,7 +117,7 @@ def enumerate_apk_packages(base_url, os_name, os_code_name, os_arch):
                 if 'p' in index_entry:
                     for d in parse_deps(index_entry['p']):
                         if d.type is None:
-                            yield PackageEntry(d.name, pkg_version, pkg_url, source_name=source_name)
+                            yield PackageEntry(d.name, pkg_version, pkg_url, source_name=source_name, binary_name=pkg_name)
 
 
 def apk_base_url(base_url):
