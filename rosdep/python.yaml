@@ -1750,13 +1750,6 @@ python-flask-cors-pip:
   ubuntu:
     pip:
       packages: [flask-cors]
-python-flask-jwt-extended-pip: &migrate_eol_2025_04_30_python3_flask_jwt_extended_pip
-  debian:
-    pip:
-      packages: [flask-jwt-extended]
-  ubuntu:
-    pip:
-      packages: [flask-jwt-extended]
 python-flask-restful:
   debian: [python-flask-restful]
   fedora: [python-flask-restful]
@@ -5532,13 +5525,6 @@ python-watchdog:
     xenial: [python-watchdog]
     yakkety: [python-watchdog]
     zesty: [python-watchdog]
-python-webargs-pip: &migrate_eol_2025_04_30_python3_webargs_pip
-  debian:
-    pip:
-      packages: [webargs]
-  ubuntu:
-    pip:
-      packages: [webargs]
 python-webob:
   debian: [python-webob]
   fedora: [python-webob]
@@ -6529,7 +6515,21 @@ python3-flask-cors:
   ubuntu:
     '*': [python3-flask-cors]
     bionic: null
-python3-flask-jwt-extended-pip: *migrate_eol_2025_04_30_python3_flask_jwt_extended_pip
+python3-flask-jwt-extended:
+  debian:
+    bullseye: [python3-python-flask-jwt-extended]
+    pip:
+      packages: [flask-jwt-extended]
+    sid: [python3-python-flask-jwt-extended]
+  freebsd: [py-flask-jwt-extended]
+  nixos: [python39Packages.flask-jwt-extended]
+  opensuse: [python-flask-jwt-extended]
+  ubuntu:
+    focal: [python3-python-flask-jwt-extended]
+    hirsuite: [python3-python-flask-jwt-extended] 
+    impish: [python3-python-flask-jwt-extended]
+    pip:
+      packages: [flask-jwt-extended]
 python3-flask-restplus-pip:
   ubuntu:
     pip:
@@ -8534,7 +8534,18 @@ python3-weasyprint-pip:
   ubuntu:
     pip:
       packages: [weasyprint]
-python3-webargs-pip: *migrate_eol_2025_04_30_python3_webargs_pip
+python3-webargs:
+  arch: [python-webargs]
+  debian: 
+    pip:
+      packages: [webargs]
+    sid: [python3-webargs]
+  nixos: [python39Packages.webargs]
+  opensuse: [python-webargs]
+  ubuntu:
+    impish: [python3-webargs]
+    pip:
+      packages: [webargs]
 python3-websocket:
   debian: [python3-websocket]
   fedora: [python3-websocket-client]
