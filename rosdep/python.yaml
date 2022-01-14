@@ -266,6 +266,13 @@ mercurial:
   osx:
     pip:
       packages: [mercurial]
+meson:
+  alpine: [meson]
+  debian: [meson]
+  fedora: [meson]
+  opensuse: [meson]
+  rhel: [meson]
+  ubuntu: [meson]
 nuitka:
   debian: [nuitka]
   ubuntu: [nuitka]
@@ -1374,6 +1381,7 @@ python-cvxopt:
   ubuntu:
     '*': null
     bionic: [python-cvxopt]
+    xenial: [python-cvxopt]
 python-cvxpy-pip: &migrate_eol_2025_04_30_python3_cvxpy_pip
   debian:
     pip:
@@ -2082,9 +2090,7 @@ python-googleapi:
     utopic: [python-googleapi]
     vivid: [python-googleapi]
     wily: [python-googleapi]
-    wily_python3: [python3-googleapi]
     xenial: [python-googleapi]
-    xenial_python3: [python3-googleapi]
 python-gpiozero:
   debian:
     buster: [python-gpiozero]
@@ -2671,7 +2677,8 @@ python-lxml:
     '*': null
     '3.8': [py2-lxml]
   arch: [python2-lxml]
-  debian: [python-lxml]
+  debian:
+    buster: [python-lxml]
   fedora: [python-lxml]
   freebsd: [py27-lxml]
   gentoo: [dev-python/lxml]
@@ -2684,7 +2691,10 @@ python-lxml:
   rhel:
     '*': [python2-lxml]
     '7': [python-lxml]
-  ubuntu: [python-lxml]
+  ubuntu:
+    bionic: [python-lxml]
+    focal: [python-lxml]
+    xenial: [python-lxml]
 python-lzf-pip:
   debian:
     pip:
@@ -3041,7 +3051,8 @@ python-numpy:
     '*': null
     '3.8': [py2-numpy, py-numpy-dev]
   arch: [python2-numpy]
-  debian: [python-numpy]
+  debian:
+    buster: [python-numpy]
   fedora: [numpy]
   freebsd: [py27-numpy]
   gentoo: [dev-python/numpy]
@@ -3055,25 +3066,9 @@ python-numpy:
   rhel: [python2-numpy]
   slackware: [numpy]
   ubuntu:
-    artful: [python-numpy]
     bionic: [python-numpy]
     focal: [python-numpy]
-    lucid: [python-numpy]
-    maverick: [python-numpy]
-    natty: [python-numpy]
-    oneiric: [python-numpy]
-    precise: [python-numpy]
-    quantal: [python-numpy]
-    raring: [python-numpy]
-    saucy: [python-numpy]
-    trusty: [python-numpy]
-    trusty_python3: [python3-numpy]
-    utopic: [python-numpy]
-    vivid: [python-numpy]
-    wily: [python-numpy]
     xenial: [python-numpy]
-    yakkety: [python-numpy]
-    zesty: [python-numpy]
 python-numpy-quaternion-pip:
   debian:
     pip:
@@ -3462,7 +3457,7 @@ python-planar-pip:
   ubuntu:
     pip:
       packages: [planar]
-python-ply:
+python-ply-pip:
   '*':
     pip:
       packages: [ply]
@@ -6764,6 +6759,8 @@ python3-google-cloud-storage-pip: *migrate_eol_2025_04_30_python3_google_cloud_s
 python3-google-cloud-texttospeech-pip: *migrate_eol_2025_04_30_python3_google_cloud_texttospeech_pip
 python3-googleapi:
   debian: [python3-googleapi]
+  fedora: [python3-google-api-client]
+  gentoo: [dev-python/google-api-python-client]
   ubuntu: [python3-googleapi]
 python3-gpiozero:
   debian: [python3-gpiozero]
@@ -7108,6 +7105,16 @@ python3-meshio:
   arch: [python-meshio]
   debian: [python3-meshio]
   ubuntu: [python3-meshio]
+python3-meson-pip:
+  debian:
+    pip:
+      packages: [meson]
+  fedora:
+    pip:
+      packages: [meson]
+  ubuntu:
+    pip:
+      packages: [meson]
 python3-mlflow:
   debian:
     pip:
@@ -7280,12 +7287,7 @@ python3-opencv:
   nixos: [python3Packages.opencv3]
   openembedded: [opencv@meta-oe]
   opensuse: [python3-opencv]
-  ubuntu:
-    bionic: [python3-opencv]
-    cosmic: [python3-opencv]
-    disco: [python3-opencv]
-    eoan: [python3-opencv]
-    focal: [python3-opencv]
+  ubuntu: [python3-opencv]
 python3-opengl:
   alpine:
     '*': [py3-opengl]
@@ -7421,6 +7423,16 @@ python3-pkg-resources:
   opensuse: [python3-setuptools]
   rhel: ['python%{python3_pkgversion}-setuptools']
   ubuntu: [python3-pkg-resources]
+python3-ply:
+  arch: [python-ply]
+  debian: [python3-ply]
+  fedora: [python3-ply]
+  gentoo: [dev-python/ply]
+  opensuse: [python3-ply]
+  rhel:
+    '*': [python3-ply]
+    '7': null
+  ubuntu: [python3-ply]
 python3-pqdict-pip:
   debian:
     pip:
@@ -8591,6 +8603,17 @@ python3-twisted:
     '*': ['python%{python3_pkgversion}-twisted']
     '7': null
   ubuntu: [python3-twisted]
+python3-tz:
+  alpine: [py3-tz]
+  arch: [python-pytz]
+  debian: [python3-tz]
+  fedora: [python3-pytz]
+  gentoo: [dev-python/pytz]
+  nixos: [python39Packages.pytz]
+  rhel:
+    '*': [python3-pytz]
+    '7': null
+  ubuntu: [python3-tz]
 python3-ubjson:
   debian: [python3-ubjson]
   ubuntu:
