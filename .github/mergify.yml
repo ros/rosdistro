@@ -1,11 +1,11 @@
 pull_request_rules:
-  - name: Comment on changes to EOL folders
+  - name: Comment on EOL label
     conditions:
       - label=end-of-life
     actions:
       comment:
         message: This pull request changes files for a ROS distribution that is no longer supported (see https://docs.ros.org/) and the distribution will not have any future syncs to include this change.
-  - name: Close on changes only to EOL folders
+  - name: Close on EOL label and no active labels
     conditions:
       - and:
         - label=end-of-life
