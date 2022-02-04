@@ -128,7 +128,9 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         if release_spec.type != 'git':
             raise ValueError('This script can only handle git repositories.')
         remote_url = release_spec.url
-        release_repo = remote_url.split('/')[-1][:-4]
+        release_repo = remote_url.split('/')[-1]
+        if release_repo.endswith('.git'):
+            release_repo = release_repo[:-4]
         subprocess.check_call(['git', 'clone', remote_url])
         os.chdir(release_repo)
         tracks = read_tracks_file()
