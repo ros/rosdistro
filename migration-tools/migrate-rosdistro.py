@@ -197,7 +197,18 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
             write_tracks_file(tracks, f'Update {args.dest} track to release exactly last-released tag.')
 
         # Update release increment for the upcoming release.
-        release_inc = str(int(source_inc) + 1)
+        # We increment whichever is greater between the source distribution's
+        # release increment and the release increment in the bloom track since
+        # there may be releases that were not committed to the source
+        # distribution.
+        # This heuristic does not fully cover situations where the version in
+        # the source distribution and the version in the release track differ.
+        # In that case it is still possible for this tool to overwrite a
+        # release increment if the greatest increment of the source version is
+        # not in the source distribution and does not match the version
+        # currently in the release track.
+        release_inc = str(max(int(source_inc), int(dest_track['release_inc'])) + 1)
+
         # Bloom will not run with multiple remotes.
         subprocess.check_call(['git', 'remote', 'remove', 'oldorigin'])
         subprocess.check_call(['git', 'bloom-release', '--non-interactive', '--release-increment', release_inc, '--unsafe', args.dest], env=os.environ)
