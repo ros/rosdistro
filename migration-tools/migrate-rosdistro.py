@@ -183,10 +183,12 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         # interactivity and :{auto} may result in a previously unreleased tag
         # on the development branch being released for the first time.
         if dest_track['version'] in [':{ask}', ':{auto}']:
-            # Override the version for this release to guarantee the same version is released.
+            # Override the version for this release to guarantee the same version from our
+            # source distribution is released.
             dest_track['version_saved'] = dest_track['version']
-            dest_track['version'] = dest_track['last_version']
-            write_tracks_file(tracks, f'Update {args.dest} track to release exactly last-released version.')
+            source_version, source_inc = source_distribution.repositories[repo_name].release_repository.version.split('-')
+            dest_track['version'] = source_version
+            write_tracks_file(tracks, f'Update {args.dest} track to release the same version as the source distribution.')
 
         if dest_track['release_tag'] == ':{ask}' and 'last_release' in dest_track:
             # Override the version for this release to guarantee the same version is released.
@@ -194,9 +196,22 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
             dest_track['release_tag'] = dest_track['last_release']
             write_tracks_file(tracks, f'Update {args.dest} track to release exactly last-released tag.')
 
+        # Update release increment for the upcoming release.
+        # We increment whichever is greater between the source distribution's
+        # release increment and the release increment in the bloom track since
+        # there may be releases that were not committed to the source
+        # distribution.
+        # This heuristic does not fully cover situations where the version in
+        # the source distribution and the version in the release track differ.
+        # In that case it is still possible for this tool to overwrite a
+        # release increment if the greatest increment of the source version is
+        # not in the source distribution and does not match the version
+        # currently in the release track.
+        release_inc = str(max(int(source_inc), int(dest_track['release_inc'])) + 1)
+
         # Bloom will not run with multiple remotes.
         subprocess.check_call(['git', 'remote', 'remove', 'oldorigin'])
-        subprocess.check_call(['git', 'bloom-release', '--non-interactive', '--unsafe', args.dest], env=os.environ)
+        subprocess.check_call(['git', 'bloom-release', '--non-interactive', '--release-increment', release_inc, '--unsafe', args.dest], env=os.environ)
         subprocess.check_call(['git', 'push', 'origin', '--all', '--force'])
         subprocess.check_call(['git', 'push', 'origin', '--tags', '--force'])
         subprocess.check_call(['git', 'checkout', 'master'])
