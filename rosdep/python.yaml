@@ -3693,7 +3693,15 @@ python-pymavlink:
       packages: [pymavlink]
 python-pymodbus:
   debian: [python-pymodbus]
-  ubuntu: [python-pymodbus]
+  ubuntu:
+    bionic: [python-pymodbus]
+python-pymodbus-pip: &migrate_eol_2027_04_30_python3_pymodbus_pip
+  debian:
+    pip:
+      packages: [pymodbus]
+  ubuntu:
+    pip:
+      packages: [pymodbus]
 python-pymongo:
   arch: [python2-pymongo]
   debian: [python-pymongo]
@@ -7578,6 +7586,7 @@ python3-pymodbus:
   ubuntu:
     '*': [python3-pymodbus]
     xenial: null
+python3-pymodbus-pip: *migrate_eol_2027_04_30_python3_pymodbus_pip
 python3-pymongo:
   arch: [python-pymongo]
   debian: [python3-pymongo]
