@@ -869,12 +869,7 @@ ed:
 eigen:
   alpine: [eigen-dev]
   arch: [eigen3]
-  debian:
-    bullseye: [libeigen3-dev]
-    buster: [libeigen3-dev]
-    jessie: [libeigen3-dev]
-    stretch: [libeigen3-dev]
-    wheezy: [libeigen3-dev]
+  debian: [libeigen3-dev]
   fedora: [eigen3-devel]
   freebsd: [eigen]
   gentoo: [dev-cpp/eigen]
@@ -1388,6 +1383,17 @@ gnat:
   debian: [gnat]
   nixos: [gnat]
   ubuntu: [gnat]
+gnome-terminal:
+  alpine: [gnome-terminal]
+  arch: [gnome-terminal]
+  debian: [gnome-terminal]
+  fedora: [gnome-terminal]
+  freebsd: [gnome-terminal]
+  gentoo: [x11-terms/gnome-terminal]
+  nixos: [gnome.gnome-terminal]
+  opensuse: [gnome-terminal]
+  rhel: [gnome-terminal]
+  ubuntu: [gnome-terminal]
 gnuplot:
   arch: [gnuplot]
   debian: [gnuplot]
@@ -1581,6 +1587,7 @@ gstreamer1.0-gl:
     stretch: null
   fedora: [gstreamer1-plugins-base]
   nixos: [gst_all_1.gst-plugins-base]
+  rhel: [gstreamer1-plugins-base]
   ubuntu:
     '*': [gstreamer1.0-gl]
     xenial: null
@@ -1603,6 +1610,7 @@ gstreamer1.0-plugins-bad:
   nixos: [gst_all_1.gst-plugins-bad]
   openembedded: [gstreamer1.0-plugins-bad@openembedded-core]
   opensuse: [gstreamer-plugins-bad]
+  rhel: [gstreamer1-plugins-bad-free]
   ubuntu: [gstreamer1.0-plugins-bad]
 gstreamer1.0-plugins-base:
   alpine: [gst-plugins-base]
@@ -1613,6 +1621,7 @@ gstreamer1.0-plugins-base:
   nixos: [gst_all_1.gst-plugins-base]
   openembedded: [gstreamer1.0-plugins-base@openembedded-core]
   opensuse: [gstreamer-plugins-base]
+  rhel: [gstreamer1-plugins-base]
   ubuntu: [gstreamer1.0-plugins-base, libgstreamer-plugins-base1.0-0, gir1.2-gst-plugins-base-1.0]
 gstreamer1.0-plugins-good:
   alpine: [gst-plugins-good]
@@ -1811,6 +1820,7 @@ ignition-cmake2:
   nixos: [ignition.cmake2]
   ubuntu:
     focal: [libignition-cmake2-dev]
+    jammy: [libignition-cmake2-dev]
 ignition-common3:
   debian:
     buster: [libignition-common3-dev]
@@ -1909,12 +1919,14 @@ ignition-math6:
   nixos: [ignition.math6]
   ubuntu:
     focal: [libignition-math6-dev]
+    jammy: [libignition-math6-dev]
 ignition-math6-eigen3:
   debian:
     buster: [libignition-math6-eigen3-dev]
   nixos: [ignition.math6]
   ubuntu:
     focal: [libignition-math6-eigen3-dev]
+    jammy: [libignition-math6-eigen3-dev]
 ignition-msgs5:
   debian:
     buster: [libignition-msgs5-dev]
@@ -2201,6 +2213,20 @@ lib32asound2:
   fedora: ['alsa-lib(%{__isa_name}-32)', alsa-lib]
   gentoo: [media-libs/alsa-lib]
   ubuntu: [lib32asound2]
+libabsl-dev:
+  arch: [abseil-cpp]
+  debian:
+    '*': [libabsl-dev]
+    buster: null
+  fedora: [abseil-cpp-devel]
+  gentoo: [dev-cpp/abseil-cpp]
+  rhel:
+    '*': [abseil-cpp-devel]
+    '7': null
+  ubuntu:
+    '*': [libabsl-dev]
+    bionic: null
+    focal: null
 libalglib-dev:
   debian: [libalglib-dev]
   fedora: [alglib-devel]
@@ -2789,9 +2815,7 @@ libcereal-dev:
   gentoo: [dev-libs/cereal]
   ubuntu: [libcereal-dev]
 libceres-dev:
-  debian:
-    buster: [libceres-dev]
-    stretch: [libceres-dev]
+  debian: [libceres-dev]
   fedora: [ceres-solver-devel]
   gentoo: ['sci-libs/ceres-solver[sparse,lapack]']
   nixos: [ceres-solver]
@@ -3032,10 +3056,7 @@ libext2fs-dev:
   ubuntu: [libext2fs-dev]
 libfcl-dev:
   arch: [fcl]
-  debian:
-    buster: [libfcl-dev]
-    jessie: [libfcl-0.5-dev]
-    stretch: [libfcl-dev]
+  debian: [libfcl-dev]
   fedora: [fcl-devel]
   gentoo: [sci-libs/fcl]
   nixos: [fcl]
@@ -3387,11 +3408,7 @@ libgoogle-glog-dev:
 libgpgme-dev:
   alpine: [gpgme-dev]
   arch: [gpgme]
-  debian:
-    buster: [libgpgme-dev]
-    jessie: [libgpgme11-dev]
-    stretch: [libgpgme-dev]
-    wheezy: [libgpgme11-dev]
+  debian: [libgpgme-dev]
   fedora: [gpgme-devel]
   freebsd: [gpgme]
   gentoo: [app-crypt/gpgme]
@@ -3489,6 +3506,7 @@ libgstreamer-plugins-base1.0-dev:
   nixos: [gst_all_1.gst-plugins-base]
   openembedded: [gstreamer1.0-plugins-base@openembedded-core]
   opensuse: [gstreamer-plugins-base-devel]
+  rhel: [gstreamer1-plugins-base-devel]
   ubuntu: [libgstreamer-plugins-base1.0-dev]
 libgstreamer0.10-0:
   arch: [gstreamer0.10]
@@ -3513,6 +3531,7 @@ libgstreamer1.0-dev:
   nixos: [gst_all_1.gstreamer]
   openembedded: [gstreamer1.0@openembedded-core]
   opensuse: [gstreamer-devel]
+  rhel: [gstreamer1-devel]
   ubuntu: [libgstreamer1.0-dev]
 libgstrtspserver-1.0-0:
   debian: [libgstrtspserver-1.0-0]
@@ -3730,11 +3749,7 @@ libjaxp1.3-java:
 libjpeg:
   alpine: [libjpeg-turbo-dev]
   arch: [libjpeg-turbo]
-  debian:
-    buster: [libjpeg-dev]
-    jessie: [libjpeg62-turbo-dev]
-    stretch: [libjpeg-dev]
-    wheezy: [libjpeg8-dev]
+  debian: [libjpeg-dev]
   fedora: [libjpeg-turbo-devel]
   freebsd: [libjpeg-turbo]
   gentoo: [virtual/jpeg]
@@ -3744,26 +3759,7 @@ libjpeg:
   opensuse: [libjpeg8-devel]
   rhel: [libjpeg-turbo-devel]
   slackware: [libjpeg-turbo]
-  ubuntu:
-    artful: [libjpeg-dev]
-    bionic: [libjpeg-dev]
-    focal: [libjpeg-dev]
-    lucid: [libjpeg62-dev]
-    maverick: [libjpeg62-dev]
-    natty: [libjpeg62-dev]
-    oneiric: [libjpeg62-dev]
-    precise: [libjpeg-dev]
-    quantal: [libjpeg-dev]
-    raring: [libjpeg-dev]
-    saucy: [libjpeg-dev]
-    trusty: [libjpeg-dev]
-    trusty_python3: [libjpeg-dev]
-    utopic: [libjpeg-dev]
-    vivid: [libjpeg-dev]
-    wily: [libjpeg-dev]
-    xenial: [libjpeg-dev]
-    yakkety: [libjpeg-dev]
-    zesty: [libjpeg-dev]
+  ubuntu: [libjpeg-dev]
 libjson-glib:
   arch: [json-glib]
   debian: [libjson-glib-dev]
@@ -3811,6 +3807,24 @@ libjsoncpp-dev:
   opensuse: [jsoncpp-devel]
   rhel: [jsoncpp-devel]
   ubuntu: [libjsoncpp-dev]
+libjsonrpccpp-client0:
+  debian: [libjsonrpccpp-client0]
+  ubuntu: [libjsonrpccpp-client0]
+libjsonrpccpp-common0:
+  debian: [libjsonrpccpp-common0]
+  ubuntu: [libjsonrpccpp-common0]
+libjsonrpccpp-dev:
+  debian: [libjsonrpccpp-dev]
+  ubuntu: [libjsonrpccpp-dev]
+libjsonrpccpp-server0:
+  debian: [libjsonrpccpp-server0]
+  ubuntu: [libjsonrpccpp-server0]
+libjsonrpccpp-stub0:
+  debian: [libjsonrpccpp-stub0]
+  ubuntu: [libjsonrpccpp-stub0]
+libjsonrpccpp-tools:
+  debian: [libjsonrpccpp-tools]
+  ubuntu: [libjsonrpccpp-tools]
 libkdtree++-dev:
   debian: [libkdtree++-dev]
   fedora: [libkdtree++-devel]
@@ -4425,11 +4439,7 @@ libpng++-dev:
 libpng-dev:
   alpine: [libpng-dev]
   arch: [libpng]
-  debian:
-    buster: [libpng-dev]
-    jessie: [libpng12-dev]
-    stretch: [libpng-dev]
-    wheezy: [libpng12-dev]
+  debian: [libpng-dev]
   fedora: [libpng-devel]
   freebsd: [png]
   gentoo: [media-libs/libpng]
@@ -6365,6 +6375,7 @@ nlohmann-json-dev:
     bionic: [nlohmann-json-dev]
     focal: [nlohmann-json3-dev]
     groovy: [nlohmann-json3-dev]
+    jammy: [nlohmann-json3-dev]
     xenial: null
 nmap:
   archlinux: [nmap]
@@ -6755,11 +6766,8 @@ protobuf:
   alpine: [protobuf-dev]
   arch: [protobuf]
   debian:
+    bullseye: [libprotobuf23]
     buster: [libprotobuf17]
-    jessie: [libprotobuf9]
-    squeeze: [libprotobuf7]
-    stretch: [libprotobuf10]
-    wheezy: [libprotobuf7]
   fedora: [protobuf]
   freebsd: [protobuf]
   gentoo: [dev-libs/protobuf]
@@ -6770,20 +6778,10 @@ protobuf:
   rhel: [protobuf]
   slackware: [protobuf]
   ubuntu:
-    artful: [libprotobuf10]
     bionic: [libprotobuf10]
-    cosmic: [libprotobuf10]
     focal: [libprotobuf17]
-    precise: [libprotobuf7]
-    raring: [libprotobuf7]
-    saucy: [libprotobuf7]
-    trusty: [libprotobuf8]
-    utopic: [libprotobuf8]
-    vivid: [libprotobuf9]
-    wily: [libprotobuf9v5]
+    jammy: [libprotobuf23]
     xenial: [libprotobuf9v5]
-    yakkety: [libprotobuf10]
-    zesty: [libprotobuf10]
 protobuf-dev:
   alpine: [protobuf-dev]
   arch: [protobuf]
@@ -6831,6 +6829,9 @@ pybind11-dev:
   debian: [pybind11-dev]
   fedora: [pybind11-devel]
   nixos: [pybind11]
+  rhel:
+    '*': [pybind11-devel]
+    '7': null
   ubuntu: [pybind11-dev]
 python-dev:
   debian: [python-dev]
@@ -7072,6 +7073,11 @@ rti-connext-dds-5.3.1:
     bionic: [rti-connext-dds-5.3.1]
     focal: [rti-connext-dds-5.3.1]
     xenial: [rti-connext-dds-5.3.1]
+rti-connext-dds-6.0.1:
+  nixos: []
+  ubuntu:
+    focal: [rti-connext-dds-6.0.1]
+    jammy: [rti-connext-dds-6.0.1]
 rtmidi:
   debian: [librtmidi-dev]
   fedora: [rtmidi-devel]
@@ -7962,10 +7968,8 @@ wx-common:
 wxwidgets:
   arch: [wxgtk]
   debian:
+    '*': [libwxgtk3.0-gtk3-dev]
     buster: [libwxgtk3.0-dev]
-    jessie: [libwxgtk3.0-dev]
-    stretch: [libwxgtk3.0-dev]
-    wheezy: [libwxgtk2.8-dev]
   fedora: [wxGTK3-devel]
   freebsd: [wxgtk2]
   gentoo: [x11-libs/wxGTK]
@@ -7977,24 +7981,9 @@ wxwidgets:
     '*': [wxGTK3-devel]
     '7': [wxGTK-devel]
   ubuntu:
-    artful: [libwxgtk3.0-dev]
+    '*': [libwxgtk3.0-gtk3-dev]
     bionic: [libwxgtk3.0-dev]
-    focal: [libwxgtk3.0-gtk3-dev]
-    lucid: [libwxgtk2.8-dev]
-    maverick: [libwxgtk2.8-dev]
-    natty: [libwxgtk2.8-dev]
-    oneiric: [libwxgtk2.8-dev]
-    precise: [libwxgtk2.8-dev]
-    quantal: [libwxgtk2.8-dev]
-    raring: [libwxgtk2.8-dev]
-    saucy: [libwxgtk2.8-dev]
-    trusty: [libwxgtk2.8-dev]
-    utopic: [libwxgtk2.8-dev]
-    vivid: [libwxgtk2.8-dev]
-    wily: [libwxgtk2.8-dev]
     xenial: [libwxgtk3.0-dev]
-    yakkety: [libwxgtk3.0-dev]
-    zesty: [libwxgtk3.0-dev]
 x11proto-dri2-dev:
   arch: [dri2proto]
   debian: [x11proto-dri2-dev]
@@ -8129,12 +8118,16 @@ yaml-cpp:
   slackware: [yaml-cpp]
   ubuntu: [libyaml-cpp-dev]
 yamllint:
+  alpine: [yamllint]
   arch: [yamllint]
-  debian:
-    buster: [yamllint]
-    stretch: [yamllint]
+  debian: [yamllint]
   fedora: [yamllint]
   gentoo: [dev-util/yamllint]
+  nixos: [yamllint]
+  osx:
+    homebrew:
+      packages: [yamllint]
+  rhel: [yamllint]
   ubuntu: [yamllint]
 yasm:
   arch: [yasm]
@@ -8150,6 +8143,7 @@ zbar:
   gentoo: [media-gfx/zbar]
   nixos: [zbar]
   openembedded: [zbar@meta-oe]
+  rhel: [zbar-devel]
   ubuntu: [libzbar-dev]
 zenity:
   arch: [zenity]

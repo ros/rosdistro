@@ -3789,7 +3789,15 @@ python-pymavlink:
       packages: [pymavlink]
 python-pymodbus:
   debian: [python-pymodbus]
-  ubuntu: [python-pymodbus]
+  ubuntu:
+    bionic: [python-pymodbus]
+python-pymodbus-pip: &migrate_eol_2027_04_30_python3_pymodbus_pip
+  debian:
+    pip:
+      packages: [pymodbus]
+  ubuntu:
+    pip:
+      packages: [pymodbus]
 python-pymongo:
   arch: [python2-pymongo]
   debian: [python-pymongo]
@@ -6652,6 +6660,20 @@ python3-flask-cors:
   ubuntu:
     '*': [python3-flask-cors]
     bionic: null
+python3-flask-jwt-extended:
+  debian:
+    '*': [python3-python-flask-jwt-extended]
+    buster:
+      pip:
+        packages: [flask-jwt-extended]
+  freebsd: [py-flask-jwt-extended]
+  nixos: [python39Packages.flask-jwt-extended]
+  opensuse: [python-flask-jwt-extended]
+  ubuntu:
+    '*': [python3-python-flask-jwt-extended]
+    bionic:
+      pip:
+        packages: [flask-jwt-extended]
 python3-flask-restplus-pip:
   ubuntu:
     pip:
@@ -6683,6 +6705,14 @@ python3-gdal:
     '7': null
   ubuntu: [python3-gdal]
 python3-gdown-pip: *migrate_eol_2025_04_30_python3_gdown_pip
+python3-geographiclib:
+  arch: [python-geographiclib]
+  debian: [python3-geographiclib]
+  fedora: [python3-GeographicLib]
+  gentoo: [sci-geosciences/GeographicLib]
+  nixos: [python3Packages.geographiclib]
+  opensuse: [python3-geographiclib]
+  ubuntu: [python3-geographiclib]
 python3-geomag-pip:
   debian:
     pip:
@@ -6710,6 +6740,14 @@ python3-gi:
   nixos: [python3Packages.pygobject3]
   openembedded: [python3-pygobject@openembedded-core]
   ubuntu: [python3-gi]
+python3-gi-cairo:
+  arch: [python-gobject]
+  debian: [python3-gi-cairo]
+  fedora: [python3-gobject]
+  gentoo: [dev-python/pygobject]
+  nixos: [python3Packages.pygobject3]
+  opensuse: [python3-gobject]
+  ubuntu: [python3-gi-cairo]
 python3-git:
   arch: [python-gitpython]
   debian: [python3-git]
@@ -7233,6 +7271,11 @@ python3-nose-yanc:
   debian: [python3-nose-yanc]
   openembedded: [python3-nose-yanc@meta-ros-common]
   ubuntu: [python3-nose-yanc]
+python3-numba:
+  debian: [python3-numba]
+  ubuntu:
+    bionic: [python3-numba]
+    focal: [python3-numba]
 python3-numpy:
   alpine:
     '*': [py3-numpy, py3-numpy-dev]
@@ -7271,13 +7314,13 @@ python3-nuscenes-devkit-pip:
 python3-open3d-pip:
   debian:
     pip:
-      packages: [open3d-python]
+      packages: [open3d]
   fedora:
     pip:
-      packages: [open3d-python]
+      packages: [open3d]
   ubuntu:
     pip:
-      packages: [open3d-python]
+      packages: [open3d]
 python3-opencv:
   alpine: [py3-opencv]
   debian:
@@ -7616,6 +7659,13 @@ python3-pydot:
     '*': ['python%{python3_pkgversion}-pydot']
     '7': null
   ubuntu: [python3-pydot]
+python3-pyftdi-pip:
+  debian:
+    pip:
+      packages: [pyftdi]
+  ubuntu:
+    pip:
+      packages: [pyftdi]
 python3-pyftpdlib:
   debian: [python3-pyftpdlib]
   gentoo: [dev-python/pyftpdlib]
@@ -7728,6 +7778,7 @@ python3-pymodbus:
   ubuntu:
     '*': [python3-pymodbus]
     xenial: null
+python3-pymodbus-pip: *migrate_eol_2027_04_30_python3_pymodbus_pip
 python3-pymongo:
   arch: [python-pymongo]
   debian: [python3-pymongo]
@@ -7814,6 +7865,15 @@ python3-pyside2.qtopengl:
   gentoo: [dev-python/pyside2]
   ubuntu:
     '*': [python3-pyside2.qtopengl]
+    bionic: null
+    xenial: null
+python3-pyside2.qtquick:
+  arch: [pyside2]
+  debian: [python3-pyside2.qtquick]
+  fedora: [python3-pyside2]
+  gentoo: [dev-python/pyside2]
+  ubuntu:
+    '*': [python3-pyside2.qtquick]
     bionic: null
     xenial: null
 python3-pyside2.qtuitools:
@@ -8360,6 +8420,14 @@ python3-smc-pip:
   ubuntu:
     pip:
       packages: [smc]
+python3-socketio:
+  debian:
+    '*': [python3-socketio]
+    buster: null
+  fedora: [python3-socketio]
+  ubuntu:
+    '*': [python3-socketio]
+    bionic: null
 python3-sortedcollections-pip:
   debian:
     pip:
@@ -8448,6 +8516,13 @@ python3-stable-baselines3-pip:
   ubuntu:
     pip:
       packages: [stable-baselines3]
+python3-staticmap-pip:
+  debian:
+    pip:
+      packages: [staticmap]
+  ubuntu:
+    pip:
+      packages: [staticmap]
 python3-suas-interop-clients-pip:
   debian:
     pip:
@@ -8703,6 +8778,25 @@ python3-weasyprint-pip:
   ubuntu:
     pip:
       packages: [weasyprint]
+python3-webargs:
+  arch: [python-webargs]
+  debian:
+    '*': [python3-webargs]
+    bullseye:
+      pip:
+        packages: [webargs]
+    buster:
+      pip:
+        packages: [webargs]
+  nixos: [python39Packages.webargs]
+  ubuntu:
+    '*': [python3-webargs]
+    bionic:
+      pip:
+        packages: [webargs]
+    focal:
+      pip:
+        packages: [webargs]
 python3-websocket:
   debian: [python3-websocket]
   fedora: [python3-websocket-client]
@@ -8739,12 +8833,28 @@ python3-whichcraft:
   gentoo: [dev-python/whichcraft]
   nixos: [python3Packages.whichcraft]
   ubuntu: [python3-whichcraft]
+python3-wrapt:
+  arch: [python-wrapt]
+  debian: [python3-wrapt]
+  fedora: [python3-wrapt]
+  gentoo: [dev-python/wrapt]
+  nixos: [python3Packages.wrapt]
+  opensuse: [python3-wrapt]
+  rhel:
+    '8': [python3-wrapt]
+  ubuntu: [python3-wrapt]
 python3-wxgtk4.0:
   debian: [python3-wxgtk4.0]
   fedora: [python3-wxpython4]
   gentoo: [dev-python/wxpython]
   nixos: [python3Packages.wxPython_4_0]
   ubuntu: [python3-wxgtk4.0]
+python3-xdot:
+  arch: [xdot]
+  debian: [xdot]
+  fedora: [python-xdot]
+  gentoo: [media-gfx/xdot]
+  ubuntu: [xdot]
 python3-xmlschema:
   debian:
     '*': [python3-xmlschema]
