@@ -63,7 +63,16 @@ def get_commit_date(repo_dir, commit):
 
 
 def get_rosdistro_counts(index_path):
-    i = rosdistro.get_index(index_path)
+    index_uri = os.path.join(index_path, 'index.yaml')
+    if not os.path.exists(index_uri):
+        print('failed to find %s falling back to v4' % index_uri)
+        index_uri = os.path.join(index_path, 'index-v4.yaml')
+        if not os.path.exists(index_uri):
+            print('Could not find index at this path either %s %s' % (index_path, index_uri))
+            subprocess.call('ls %s' % index_path, shell=True)
+            return []
+    index_uri = 'file://' + index_uri
+    i = rosdistro.get_index(index_uri)
     results = []
     for d in valid_distros:
         try:
@@ -111,7 +120,7 @@ try:
         subprocess.check_call('git -C %s clean -fxd' % repo_location, shell=True)
         subprocess.check_call('git -C %s checkout --quiet %s' % (repo_location, commit), shell=True)
         commit_date = get_commit_date(repo_location, commit)
-        counts = get_rosdistro_counts('file://%s/index.yaml' % repo_location)
+        counts = get_rosdistro_counts(repo_location)
         csv_strings.append(", ".join([commit_date] + [str(c) for c in counts]))
         print("progress: %s" % csv_strings[-1])
 
