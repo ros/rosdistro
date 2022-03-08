@@ -125,5 +125,6 @@ finally:
 
 with open(OUTPUT_FILE, 'w') as outfh:
     print("Writing to %s" % OUTPUT_FILE)
+    outfh.write(', '.join(['date'] + valid_distros))
     for l in csv_strings:
         outfh.write(l + '\n')
