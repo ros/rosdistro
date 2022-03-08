@@ -46,7 +46,8 @@ args = parser.parse_args()
 
 # if not os.path.exists(args.index_path):
 #     parser.error("invalid rosdistro index url")
-valid_distros = ['groovy', 'hydro', 'indigo', 'jade', 'kinetic', 'lunar']
+valid_distros = ['groovy', 'hydro', 'indigo', 'jade', 'kinetic', 'lunar', 'melodic', 'noetic',
+    'ardent', 'bouncy', 'crystal', 'dashing', 'eloquent', 'foxy', 'galactic', 'rolling']
 
 FIRST_HASH = 'be9218681f14d0fac908da46902eb2f1dad084fa'
 OUTPUT_FILE = args.output_file
