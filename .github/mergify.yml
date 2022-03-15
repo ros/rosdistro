@@ -1,4 +1,10 @@
 pull_request_rules:
+  - name: Comment on PRs with an end-of-life label
+    conditions:
+      - label=end-of-life
+    actions:
+      comment:
+        message: This pull request has changes files for a ROS distribution that is no longer supported (End Of Life) and the distribution will not have any future syncs to include this change.
   - name: Close on changes only to EOL folders
     conditions:
       - and:
@@ -15,4 +21,3 @@ pull_request_rules:
         - label!=rosdep
     actions:
       close:
-        message: This pull request has been automatically closed by Mergify since it only changes files for a ROS distribution that is no longer supported (End Of Life) and the distribution will not have any future syncs to include this change.
