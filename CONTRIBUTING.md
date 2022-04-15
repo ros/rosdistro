@@ -276,7 +276,7 @@ See above for the Gentoo specific guidelines.
 #### pip mixed with system packages
 
 Some packages are only available as system packages in newer distributions.
-In such case, you can specify the default as system package, and pip for older distributions.
+In such case, you can specify the default as system package, and pip for older distributions for which the system packages are not available.
 
 For example:
 
