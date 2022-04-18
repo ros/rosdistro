@@ -127,6 +127,8 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         print('Adding repo:', repo_name)
         if release_spec.type != 'git':
             raise ValueError('This script can only handle git repositories.')
+        if release_spec.version is None:
+            raise ValueError(f'{repo_name} is not released in the source distribution (release version is missing or blank).')
         remote_url = release_spec.url
         release_repo = remote_url.split('/')[-1]
         if release_repo.endswith('.git'):
