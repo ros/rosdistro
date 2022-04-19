@@ -21,7 +21,11 @@ from rosdistro.writer import yaml_from_distribution_file
 # make assumptions about the release repository that are not true during the
 # manipulation of the release repository for this script.
 def read_tracks_file():
-    return yaml.safe_load(show('master', 'tracks.yaml'))
+    tracks_yaml = show('master', 'tracks.yaml')
+    if tracks_yaml:
+        return yaml.safe_load(tracks_yaml)
+    else:
+        raise ValueError('repository is missing tracks.yaml in master branch.')
 
 @inbranch('master')
 def write_tracks_file(tracks, commit_msg=None):
