@@ -213,7 +213,7 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
 
         # Bloom will not run with multiple remotes.
         subprocess.check_call(['git', 'remote', 'remove', 'oldorigin'])
-        subprocess.check_call(['git', 'bloom-release', '--non-interactive', '--release-increment', release_inc, '--unsafe', args.dest], env=os.environ)
+        subprocess.check_call(['git', 'bloom-release', '--non-interactive', '--release-increment', release_inc, '--unsafe', args.dest], stdin=subprocess.DEVNULL, env=os.environ)
         subprocess.check_call(['git', 'push', 'origin', '--all', '--force'])
         subprocess.check_call(['git', 'push', 'origin', '--tags', '--force'])
         subprocess.check_call(['git', 'checkout', 'master'])
