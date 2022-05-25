@@ -32,7 +32,7 @@ More info at https://github.com/ros/rosdistro/blob/master/CONTRIBUTING.md#guidel
   - REQUIRED
 - Ubuntu: https://packages.ubuntu.com/
    - REQUIRED
-- Fedora: https://src.fedoraproject.org/browse/projects/
+- Fedora: https://packages.fedoraproject.org/
   - IF AVAILABLE
 - Arch: https://www.archlinux.org/packages/
   - IF AVAILABLE
