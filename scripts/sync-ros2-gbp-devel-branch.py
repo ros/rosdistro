@@ -85,6 +85,7 @@ import keyring
 import os
 import sys
 import tempfile
+import time
 import urllib.request
 import yaml
 
@@ -236,7 +237,21 @@ This makes it match the source entry in https://github.com/ros/rosdistro/{ros_di
 
             gh_title = 'Update {ros_distro} devel_branch to match rosdistro source entry'.format(ros_distro=ros_distro)
             gh_repo = gh.get_repo(release_end)
-            pull = gh_repo.create_pull(title=gh_title, head=branch_name, base='master', body=gh_body)
+
+            tries = 10
+            succeeded = False
+            while not succeeded and tries > 0:
+                try:
+                    pull = gh_repo.create_pull(title=gh_title, head=branch_name, base='master', body=gh_body)
+                    succeeded = True
+                except github.GithubException as e:
+                    print('Failed to create pull request, waiting:', e)
+                    time.sleep(30)
+                    tries -= 1
+
+            if tries == 0:
+                print('Failed to create pull request and exceeded max tries, giving up')
+                return 1
 
     return 0
 

@@ -266,6 +266,7 @@ jupyter-notebook:
     '*': [jupyter-notebook]
     jessie: [ipython-notebook]
   fedora: [python3-notebook]
+  nixos: [jupyter]
   ubuntu:
     '*': [jupyter-notebook]
     trusty: [ipython-notebook]
@@ -356,6 +357,7 @@ pydrive-pip:
       packages: [PyDrive]
 pyflakes3:
   alpine: [py3-pyflakes]
+  arch: [python-pyflakes]
   debian: [pyflakes3]
   fedora: [python3-pyflakes]
   gentoo: [dev-python/pyflakes]
@@ -456,7 +458,9 @@ python:
   nixos: [python]
   openembedded: [python@meta-python2]
   opensuse: [python-devel]
-  rhel: [python2-devel]
+  rhel:
+    '7': [python2-devel]
+    '8': [python2-devel]
   slackware:
     slackpkg:
       packages: [python]
@@ -582,7 +586,9 @@ python-argparse:
   osx:
     pip:
       packages: [argparse]
-  rhel: [python2]
+  rhel:
+    '7': [python2]
+    '8': [python2]
   slackware:
     pip:
       packages: [argparse]
@@ -859,8 +865,8 @@ python-cairo:
   nixos: [pythonPackages.pycairo]
   opensuse: [python2-cairo]
   rhel:
-    '*': [python2-cairo]
     '7': [pycairo]
+    '8': [python2-cairo]
   slackware:
     slackpkg:
       packages: [pycairo]
@@ -1254,8 +1260,8 @@ python-coverage:
     pip:
       packages: [coverage]
   rhel:
-    '*': [python2-coverage]
     '7': [python-coverage]
+    '8': [python2-coverage]
   slackware: [coverage]
   ubuntu:
     artful: [python-coverage]
@@ -1824,7 +1830,9 @@ python-ftdi1:
 python-funcsigs:
   debian: [python-funcsigs]
   fedora: [python-funcsigs]
-  rhel: [python2-funcsigs]
+  rhel:
+    '7': [python2-funcsigs]
+    '8': [python2-funcsigs]
   ubuntu: [python-funcsigs]
 python-future:
   debian: [python-future]
@@ -2258,7 +2266,9 @@ python-gtk2:
   osx:
     pip:
       packages: []
-  rhel: [pygtk2]
+  rhel:
+    '7': [pygtk2]
+    '8': [pygtk2]
   ubuntu:
     '*': null
     bionic: [python-gtk2]
@@ -2649,8 +2659,8 @@ python-lxml:
     pip:
       packages: [lxml]
   rhel:
-    '*': [python2-lxml]
     '7': [python-lxml]
+    '8': [python2-lxml]
   ubuntu:
     bionic: [python-lxml]
     focal: [python-lxml]
@@ -2750,7 +2760,9 @@ python-mock:
   osx:
     pip:
       packages: [mock]
-  rhel: [python2-mock]
+  rhel:
+    '7': [python2-mock]
+    '8': [python2-mock]
   slackware: [mock]
   ubuntu:
     artful: [python-mock]
@@ -2985,7 +2997,9 @@ python-nose:
   osx:
     pip:
       packages: [nose]
-  rhel: [python2-nose]
+  rhel:
+    '7': [python2-nose]
+    '8': [python2-nose]
   slackware: [nose]
   ubuntu:
     '*': [python-nose]
@@ -3011,7 +3025,9 @@ python-numpy:
   osx:
     pip:
       packages: [numpy]
-  rhel: [python2-numpy]
+  rhel:
+    '7': [python2-numpy]
+    '8': [python2-numpy]
   slackware: [numpy]
   ubuntu:
     bionic: [python-numpy]
@@ -3283,7 +3299,9 @@ python-pathtools:
 python-pbr:
   debian: [python-pbr]
   fedora: [python-pbr]
-  rhel: [python2-pbr]
+  rhel:
+    '7': [python2-pbr]
+    '8': [python2-pbr]
   ubuntu: [python-pbr]
 python-pcapy:
   arch: [python2-pcapy]
@@ -3486,7 +3504,9 @@ python-psutil:
   osx:
     pip:
       packages: [psutil]
-  rhel: [python2-psutil]
+  rhel:
+    '7': [python2-psutil]
+    '8': [python2-psutil]
   slackware: [psutil]
   ubuntu:
     '*': [python-psutil]
@@ -3550,7 +3570,9 @@ python-pycodestyle:
   fedora: [python-pycodestyle]
   gentoo: [dev-python/pycodestyle]
   nixos: [pythonPackages.pycodestyle]
-  rhel: [python2-pycodestyle]
+  rhel:
+    '7': [python2-pycodestyle]
+    '8': [python2-pycodestyle]
   ubuntu:
     '*': null
     bionic: [python-pycodestyle]
@@ -3575,7 +3597,9 @@ python-pycryptodome:
   osx:
     pip:
       packages: [pycryptodome]
-  rhel: [python2-pycryptodomex]
+  rhel:
+    '7': [python2-pycryptodomex]
+    '8': [python2-pycryptodomex]
   ubuntu: [python-pycryptodome]
 python-pycurl:
   debian: [python-pycurl]
@@ -4591,7 +4615,9 @@ python-setuptools:
   osx:
     pip:
       packages: [setuptools]
-  rhel: [python2-setuptools]
+  rhel:
+    '7': [python2-setuptools]
+    '8': [python2-setuptools]
   ubuntu:
     artful: [python-setuptools]
     bionic: [python-setuptools]
@@ -5190,8 +5216,8 @@ python-tk:
   openembedded: ['${PYTHON_PN}-tkinter@openembedded-core']
   opensuse: [python-tk]
   rhel:
-    '*': [python2-tkinter]
     '7': [tkinter]
+    '8': [python2-tkinter]
   ubuntu:
     '*': [python-tk]
     bionic_python3: [python3-tk]
@@ -5495,8 +5521,8 @@ python-virtualenv:
   nixos: [pythonPackages.virtualenv]
   openembedded: ['${PYTHON_PN}-virtualenv@meta-ros2']
   rhel:
-    '*': [python2-virtualenv]
     '7': [python-virtualenv]
+    '8': [python2-virtualenv]
   ubuntu: [python-virtualenv]
 python-visual:
   debian: [python-visual]
@@ -5737,8 +5763,8 @@ python-yaml:
       depends: [yaml]
       packages: [PyYAML]
   rhel:
-    '*': [python2-pyyaml]
     '7': [PyYAML]
+    '8': [python2-pyyaml]
   slackware: [PyYAML]
   ubuntu:
     artful: [python-yaml]
@@ -5932,6 +5958,16 @@ python3-autobahn:
     '*': ['python%{python3_pkgversion}-autobahn']
     '7': null
   ubuntu: [python3-autobahn]
+python3-awsiotsdk-pip:
+  debian:
+    pip:
+      packages: [awsiotsdk]
+  fedora:
+    pip:
+      packages: [awsiotsdk]
+  ubuntu:
+    pip:
+      packages: [awsiotsdk]
 python3-babeltrace:
   alpine: [py3-babeltrace]
   debian: [python3-babeltrace]
@@ -6181,6 +6217,21 @@ python3-colorama:
   openembedded: [python3-colorama@meta-python]
   rhel: ['python%{python3_pkgversion}-colorama']
   ubuntu: [python3-colorama]
+python3-colorcet:
+  debian:
+    '*': [python3-colorcet]
+    buster:
+      pip:
+        packages: [colorcet]
+  fedora: [python3-colorcet]
+  ubuntu:
+    '*': [python3-colorcet]
+    bionic:
+      pip:
+        packages: [colorcet]
+    focal:
+      pip:
+        packages: [colorcet]
 python3-conan-pip:
   debian:
     pip:
@@ -6887,8 +6938,9 @@ python3-importlib-metadata:
     pip:
       packages: [importlib_metadata]
   rhel:
-    '*': ['python%{python3_pkgversion}-importlib-metadata']
+    '*': [python3]
     '7': null
+    '8': [python3-importlib-metadata]
   ubuntu:
     '*': [python3-importlib-metadata]
     bionic:
@@ -6915,8 +6967,9 @@ python3-importlib-resources:
     pip:
       packages: [importlib-resources]
   rhel:
-    '*': ['python%{python3_pkgversion}-importlib-resources']
+    '*': [python3]
     '7': null
+    '8': [python3-importlib-resources]
   ubuntu:
     '*': [python3-minimal]
     bionic:
@@ -7054,6 +7107,7 @@ python3-lark-parser:
     xenial: [python3-lark-parser]
 python3-lttng:
   alpine: [py3-lttng]
+  arch: [python-lttngust]
   debian: [python3-lttng]
   fedora: [python3-lttng]
   openembedded: [lttng-tools@openembedded-core]
@@ -7196,6 +7250,16 @@ python3-msgpack:
   nixos: [python3Packages.msgpack]
   openembedded: [python3-msgpack@meta-python]
   ubuntu: [python3-msgpack]
+python3-multimethod-pip:
+  debian:
+    pip:
+      packages: [multimethod]
+  fedora:
+    pip:
+      packages: [multimethod]
+  ubuntu:
+    pip:
+      packages: [multimethod]
 python3-mypy:
   alpine: [py3-mypy]
   arch: [mypy]
@@ -7266,6 +7330,7 @@ python3-nlopt:
     bionic: null
     xenial: null
 python3-nose:
+  arch: [python-nose]
   debian: [python3-nose]
   fedora: [python3-nose]
   gentoo: [dev-python/nose]
@@ -7818,7 +7883,7 @@ python3-pygments:
   ubuntu: [python3-pygments]
 python3-pygraphviz:
   alpine: [py3-graphviz]
-  arch: [python2-pygraphviz]
+  arch: [python-graphviz]
   debian: [python3-pygraphviz]
   fedora: [python3-pygraphviz]
   freebsd: [py-pygraphviz]
@@ -8231,6 +8296,13 @@ python3-retrying:
     pip:
       packages: [retrying]
   ubuntu: [python3-retrying]
+python3-robodk-pip:
+  debian:
+    pip:
+      packages: [robodk]
+  ubuntu:
+    pip:
+      packages: [robodk]
 python3-rocker:
   debian: [python3-rocker]
   ubuntu: [python3-rocker]
@@ -9038,6 +9110,13 @@ python3-west-pip:
   ubuntu:
     pip:
       packages: [west]
+python3-wgconfig-pip:
+  debian:
+    pip:
+      packages: [wgconfig]
+  ubuntu:
+    pip:
+      packages: [wgconfig]
 python3-whichcraft:
   arch: [python-whichcraft]
   debian: [python3-whichcraft]
@@ -9097,7 +9176,7 @@ python3-yaml:
   osx:
     pip:
       packages: [pyyaml]
-  rhel: ['python%{python3_pkgversion}-PyYAML']
+  rhel: ['python%{python3_pkgversion}-yaml']
   ubuntu: [python3-yaml]
 python3-yappi:
   debian:
