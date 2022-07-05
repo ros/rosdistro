@@ -266,6 +266,7 @@ jupyter-notebook:
     '*': [jupyter-notebook]
     jessie: [ipython-notebook]
   fedora: [python3-notebook]
+  nixos: [jupyter]
   ubuntu:
     '*': [jupyter-notebook]
     trusty: [ipython-notebook]
@@ -356,6 +357,7 @@ pydrive-pip:
       packages: [PyDrive]
 pyflakes3:
   alpine: [py3-pyflakes]
+  arch: [python-pyflakes]
   debian: [pyflakes3]
   fedora: [python3-pyflakes]
   gentoo: [dev-python/pyflakes]
@@ -5956,6 +5958,16 @@ python3-autobahn:
     '*': ['python%{python3_pkgversion}-autobahn']
     '7': null
   ubuntu: [python3-autobahn]
+python3-awsiotsdk-pip:
+  debian:
+    pip:
+      packages: [awsiotsdk]
+  fedora:
+    pip:
+      packages: [awsiotsdk]
+  ubuntu:
+    pip:
+      packages: [awsiotsdk]
 python3-babeltrace:
   alpine: [py3-babeltrace]
   debian: [python3-babeltrace]
@@ -6205,6 +6217,21 @@ python3-colorama:
   openembedded: [python3-colorama@meta-python]
   rhel: ['python%{python3_pkgversion}-colorama']
   ubuntu: [python3-colorama]
+python3-colorcet:
+  debian:
+    '*': [python3-colorcet]
+    buster:
+      pip:
+        packages: [colorcet]
+  fedora: [python3-colorcet]
+  ubuntu:
+    '*': [python3-colorcet]
+    bionic:
+      pip:
+        packages: [colorcet]
+    focal:
+      pip:
+        packages: [colorcet]
 python3-conan-pip:
   debian:
     pip:
@@ -6911,8 +6938,9 @@ python3-importlib-metadata:
     pip:
       packages: [importlib_metadata]
   rhel:
-    '*': ['python%{python3_pkgversion}-importlib-metadata']
+    '*': [python3]
     '7': null
+    '8': [python3-importlib-metadata]
   ubuntu:
     '*': [python3-importlib-metadata]
     bionic:
@@ -6939,8 +6967,9 @@ python3-importlib-resources:
     pip:
       packages: [importlib-resources]
   rhel:
-    '*': ['python%{python3_pkgversion}-importlib-resources']
+    '*': [python3]
     '7': null
+    '8': [python3-importlib-resources]
   ubuntu:
     '*': [python3-minimal]
     bionic:
@@ -7078,6 +7107,7 @@ python3-lark-parser:
     xenial: [python3-lark-parser]
 python3-lttng:
   alpine: [py3-lttng]
+  arch: [python-lttngust]
   debian: [python3-lttng]
   fedora: [python3-lttng]
   openembedded: [lttng-tools@openembedded-core]
@@ -7220,6 +7250,16 @@ python3-msgpack:
   nixos: [python3Packages.msgpack]
   openembedded: [python3-msgpack@meta-python]
   ubuntu: [python3-msgpack]
+python3-multimethod-pip:
+  debian:
+    pip:
+      packages: [multimethod]
+  fedora:
+    pip:
+      packages: [multimethod]
+  ubuntu:
+    pip:
+      packages: [multimethod]
 python3-mypy:
   alpine: [py3-mypy]
   arch: [mypy]
@@ -7290,6 +7330,7 @@ python3-nlopt:
     bionic: null
     xenial: null
 python3-nose:
+  arch: [python-nose]
   debian: [python3-nose]
   fedora: [python3-nose]
   gentoo: [dev-python/nose]
@@ -7842,7 +7883,7 @@ python3-pygments:
   ubuntu: [python3-pygments]
 python3-pygraphviz:
   alpine: [py3-graphviz]
-  arch: [python2-pygraphviz]
+  arch: [python-graphviz]
   debian: [python3-pygraphviz]
   fedora: [python3-pygraphviz]
   freebsd: [py-pygraphviz]
@@ -8255,6 +8296,13 @@ python3-retrying:
     pip:
       packages: [retrying]
   ubuntu: [python3-retrying]
+python3-robodk-pip:
+  debian:
+    pip:
+      packages: [robodk]
+  ubuntu:
+    pip:
+      packages: [robodk]
 python3-rocker:
   debian: [python3-rocker]
   ubuntu: [python3-rocker]

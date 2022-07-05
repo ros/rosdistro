@@ -48,6 +48,7 @@ def parse_apkindex(f):
     # t:1602354892
     # c:183e99f73bb1223768aa7231a836a3e98e94c03e
     # i:docs rtpproxy=2.1.1-r0
+    # p:alias-of-rtpproxy=2.1.1-r0
 
     while True:
         entry = {}
@@ -59,6 +60,45 @@ def parse_apkindex(f):
             yield entry
         else:
             break
+
+
+class Dependency:
+    """
+    Dependency class represents apk (Alpine Package) dependency information.
+    """
+
+    type = None
+    """
+    :ivar: the type of the Dependency.
+           e.g.
+           - None: package
+           - 'cmd': command
+           - 'so': shared object
+    """
+
+    name = None
+    """
+    :ivar: the name of the Dependency.
+    """
+
+    version = None
+    """
+    :ivar: the version of the Dependency.
+    """
+
+    def __init__(self, item):
+        try:
+            self.type, self.name = item.split(':', 1)
+        except (ValueError):
+            self.name = item
+        try:
+            self.name, self.version = self.name.split('=', 1)
+        except (ValueError):
+            pass
+
+
+def parse_deps(text):
+    return [Dependency(item) for item in text.split(' ')]
 
 
 def enumerate_apk_packages(base_url, os_name, os_code_name, os_arch):
@@ -92,6 +132,11 @@ def enumerate_apk_packages(base_url, os_name, os_code_name, os_arch):
                 pkg_filename = '%s-%s.apk' % (pkg_name, pkg_version)
                 pkg_url = os.path.join(base_url, pkg_filename)
                 yield PackageEntry(pkg_name, pkg_version, pkg_url, source_name=source_name)
+
+                if 'p' in index_entry:
+                    for d in parse_deps(index_entry['p']):
+                        if d.type is None:
+                            yield PackageEntry(d.name, pkg_version, pkg_url, source_name=source_name, binary_name=pkg_name)
 
 
 def apk_base_url(base_url):
