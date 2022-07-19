@@ -4,6 +4,10 @@ package_sources:
   - !apk_base_url https://dl-cdn.alpinelinux.org/alpine/$releasever/main
   - !apk_base_url https://dl-cdn.alpinelinux.org/alpine/$releasever/community
   - !apk_base_url https://dl-cdn.alpinelinux.org/alpine/$releasever/testing
+  arch:
+  - !pacman_base_url https://archive.archlinux.org/repos/last/$repo/os/$arch/ core
+  - !pacman_base_url https://archive.archlinux.org/repos/last/$repo/os/$arch/ extra
+  - !pacman_base_url https://archive.archlinux.org/repos/last/$repo/os/$arch/ community
   debian:
   - !deb_base_url http://deb.debian.org/debian main
   - !deb_base_url http://deb.debian.org/debian contrib
@@ -39,6 +43,8 @@ package_sources:
   - !deb_base_url http://repos.ros.org/repos/ros_bootstrap main
 
 package_dashboards:
+- pattern: !regular_expression .*//archive.archlinux.org/repos/last/([^/]+)/os/.*
+  url: https://archlinux.org/packages/\1/{os_arch}/{source_name}/
 - pattern: !regular_expression .*//deb.debian.org/debian/.*
   url: https://packages.debian.org/{os_code_name}/{binary_name}
 - pattern: !regular_expression .*//dl.fedoraproject.org/pub/.*
@@ -53,6 +59,8 @@ package_dashboards:
 supported_versions:
   alpine:
   - edge
+  arch:
+  - ''
   debian:
   - buster
   - bullseye
@@ -71,6 +79,8 @@ supported_versions:
 
 supported_arches:
   alpine:
+  - x86_64
+  arch:
   - x86_64
   debian:
   - amd64
