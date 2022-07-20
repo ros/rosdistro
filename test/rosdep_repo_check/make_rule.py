@@ -96,15 +96,15 @@ class Rule:
             if os not in yaml_dict:
                 yaml_dict[os] = {}
             for release in releases:
-                yaml_dict[os][release] = self._packages[(os, release)]
+                yaml_dict[os][release] = [self._packages[(os, release)]]
 
         # Second pass, minimize keys
         if minimal:
             for os, release_packages in yaml_dict.items():
-                package_names = set(release_packages.values())
+                package_names = set([l[0] for l in release_packages.values()])
                 if len(package_names) == 1:
                     # All releases have the same package name
-                    yaml_dict[os] = package_names.pop()
+                    yaml_dict[os] = [package_names.pop()]
                 elif len(package_names) == 2 and None in package_names:
                     # Not all releases have the package.
                     # The ones that do have the same name.
@@ -112,7 +112,7 @@ class Rule:
                     # may be the wrong thing to do if a distro stopped
                     # releasing a package.
                     package_name = [n for n in package_names if n][0]
-                    new_os_dict = {'*': package_name}
+                    new_os_dict = {'*': [package_name]}
                     for release, package in release_packages.items():
                         if package is None:
                             new_os_dict[release] = None
@@ -125,6 +125,14 @@ def _add_package_url(package_urls, os, release, url):
     if os not in package_urls.keys():
         package_urls[os] = {}
     package_urls[os][release] = url
+
+
+def _represent_list(self, data):
+    if all([isinstance(v, str) for v in data]):
+        # This is a list of packages
+        return self.represent_sequence(
+            'tag:yaml.org,2002:seq', data, flow_style='block')
+    return yaml.Dumper.represent_list(data)
 
 
 def main():
@@ -193,6 +201,9 @@ def main():
                     pkg = suggestion.binary_name
                     r.set_package_for_platform(os, release, pkg)
                     _add_package_url(package_urls, os, release, suggestion.url)
+
+    # Make lists use block style if they contain only strings
+    yaml.Dumper.add_representer(list, _represent_list)
 
     print('-' * 25)
     print('# URLs  for packages')
