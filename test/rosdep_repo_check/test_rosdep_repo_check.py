@@ -38,8 +38,8 @@ from . import get_package_link
 from .config import load_config
 from .suggest import make_suggestion
 from .verify import verify_rules
-from .yaml import AnnotatedSafeLoader
-from .yaml import isolate_yaml_snippets_from_line_numbers
+from .yaml_tools import AnnotatedSafeLoader
+from .yaml_tools import isolate_yaml_snippets_from_line_numbers
 
 
 def detect_lines(diffstr):
