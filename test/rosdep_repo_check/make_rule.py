@@ -132,7 +132,7 @@ def _represent_list(self, data):
         # This is a list of packages
         return self.represent_sequence(
             'tag:yaml.org,2002:seq', data, flow_style='block')
-    return yaml.Dumper.represent_list(data)
+    return yaml.Dumper.represent_list(self, data)
 
 
 def main():
@@ -169,10 +169,7 @@ def main():
 
     # Make sure requested package exists
     arch = cfg['supported_arches'][arg.os][0]
-    try:
-        suggestion = find_package(cfg, arg.package, arg.os, arg.release, arch)
-    except HTTPError:
-        pass
+    suggestion = find_package(cfg, arg.package, arg.os, arg.release, arch)
     if not suggestion:
         raise RuntimeError(
             f'Did not find package {arg.package} in {arg.os} {arg.release}')
@@ -190,17 +187,23 @@ def main():
             suggestion = make_suggestion(cfg, arg.package, os)
         except HTTPError:
             pass
-        if suggestion:
+        else:
+            if suggestion is None:
+                continue
+            os_pkg = suggestion.binary_name
+            arch = cfg['supported_arches'][os][0]
             for release in releases:
                 try:
-                    suggestion = find_package(
-                        cfg, arg.package, os, release, arch)
+                    suggestion = find_package(cfg, os_pkg, os, release, arch)
                 except HTTPError:
                     pass
-                if suggestion:
-                    pkg = suggestion.binary_name
-                    r.set_package_for_platform(os, release, pkg)
-                    _add_package_url(package_urls, os, release, suggestion.url)
+                else:
+                    if suggestion is None:
+                        continue
+                    r.set_package_for_platform(
+                        os, release, suggestion.binary_name)
+                    _add_package_url(
+                        package_urls, os, release, suggestion.url)
 
     # Make lists use block style if they contain only strings
     yaml.Dumper.add_representer(list, _represent_list)
