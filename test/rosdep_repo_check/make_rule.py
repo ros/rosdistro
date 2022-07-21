@@ -197,12 +197,6 @@ def main():
     print('# Minimized rules')
     _minimize_rules(yaml_dict, cfg['supported_versions'])
     print(yaml.dump(yaml_dict))
-    print('# Minimized rules twice')
-    _minimize_rules(yaml_dict, cfg['supported_versions'])
-    print(yaml.dump(yaml_dict))
-    print('# Minimized rules three times')
-    _minimize_rules(yaml_dict, cfg['supported_versions'])
-    print(yaml.dump(yaml_dict))
 
 
 if __name__ == '__main__':
