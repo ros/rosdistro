@@ -12,53 +12,20 @@ from typing import Optional
 from typing import Sequence
 from typing import Tuple
 
-import rosdistro
-
 import yaml
 
 
-def active_distros(index: rosdistro.index.Index) -> Sequence[str]:
-    distros = []
-    for distro_name, metadata in index.distributions.items():
-        if 'active' == metadata['distribution_status']:
-            distros.append(distro_name)
-    return tuple(distros)
+class Key:
 
-
-def get_index() -> rosdistro.index.Index:
-    return rosdistro.get_index(rosdistro.get_index_url())
-
-
-def release_platforms(
-        index: rosdistro.index.Index,
-        distro_names: Sequence[str]
-    ) -> Dict[str, Sequence[str]]:
-
-    platforms = {}
-    for distro in distro_names:
-        for distro_file in rosdistro.get_distribution_files(index, distro):
-            for os, releases in distro_file.release_platforms.items():
-                if os not in platforms:
-                    platforms[os] = releases
-                else:
-                    for release in releases:
-                        if release not in platforms[os]:
-                            platforms[os].append(release)
-    return platforms
-
-
-
-class Rule:
-
-    def __init__(self, *, key=None):
+    def __init__(self, *, name=None):
         # ex: 'ubuntu': ['focal', 'jammy']
         self._platforms: Dict[str, List[str]] = {}
         # ex: ('ubuntu', 'focal'): 'cmake'
         self._packages: Dict[Tuple[str, str], Optional[str]] = {}
-        # Override the key of the rosdep rule
-        self._key = key
+        # Override the name of the rosdep key
+        self._name = name
 
-    def set_package_for_platform(
+    def add_rule(
             self, os: str, release: str, package_name: Optional[str] = None
         ) -> None:
         os = str(os)
@@ -71,7 +38,7 @@ class Rule:
             self._platforms[os].append(release)
         self._packages[(os, release)] = package_name
 
-    def _calculate_key(self) -> Optional[str]:
+    def _calculate_name(self) -> Optional[str]:
         # Prioritize name of ubuntu package as the key name
         for os in ('ubuntu', 'debian'):
             if os in self._platforms.keys():
@@ -81,14 +48,14 @@ class Rule:
                         return package
 
     @property
-    def key(self) -> Optional[str]:
-        if not self._key:
-            self._key = self._calculate_key()
-        return self._key
+    def name(self) -> Optional[str]:
+        if not self._name:
+            self._name = self._calculate_name()
+        return self._name
 
     def as_dict(self):
-        if self.key is None:
-            raise ValueError('Rule has no key')
+        if self.name is None:
+            raise ValueError('Key has no name')
         yaml_dict = {}
 
         for os, releases in self._platforms.items():
@@ -98,41 +65,39 @@ class Rule:
                 package = self._packages[(os, release)]
                 yaml_dict[os][release] = [package] if package else None
 
-        return {self.key: yaml_dict}
+        return {self.name: yaml_dict}
 
 
 def _minimize_rules(yaml_dict, supported_versions):
-    # 1. Remove entries which are entirely null
-    for key in list(yaml_dict.keys()):
-        for os in list(yaml_dict[key].keys()):
-            for release, package in (yaml_dict[key][os] or {}).items():
-                if package is not None:
-                    break
-            else:
-                del yaml_dict[key][os]
-        if not yaml_dict[key]:
-            del yaml_dict[key]
-    for key, rule in yaml_dict.items():
-        # 2. Based on supported versions, convert the most recent version to '*'
-        for os, release_packages in rule.items():
+    # Remove entries which are entirely null
+    for key_name in list(yaml_dict.keys()):
+        for os in list(yaml_dict[key_name].keys()):
+            os_rules = yaml_dict[key_name][os]
+            if isinstance(os_rules, dict):
+                if any(os_rules.values()):
+                    continue
+            elif isinstance(os_rules, list):
+                if any(os_rules):
+                    continue
+            del yaml_dict[key_name][os]
+    for _, rules in yaml_dict.items():
+        # Based on supported versions, convert the most recent version to '*'
+        for os, release_packages in rules.items():
             if os not in supported_versions:
                 continue
             latest_version = supported_versions[os][-1]
             if latest_version in release_packages:
                 release_packages['*'] = release_packages[latest_version]
                 del release_packages[latest_version]
-                # 3. Add explicit null for any other missing versions
-                for release in supported_versions[os][:-1]:
-                    release_packages.setdefault(release, None)
-                # 4. Drop any other versions which are the same as the latest
+                # Drop any other versions which are the same as the latest
                 for release in list(release_packages.keys()):
                     if release == '*':
                         continue
                     if release_packages[release] == release_packages['*']:
                         del release_packages[release]
-                # 5. Condense iff the only version remaining is '*'
+                # Condense iff the only version remaining is '*'
                 if tuple(release_packages.keys()) == ('*',):
-                    rule[os] = release_packages['*']
+                    rules[os] = release_packages['*']
 
 
 def _add_package_url(package_urls, os, release, url):
@@ -150,7 +115,7 @@ def _represent_list(self, data):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Make a rosdep rule')
+    parser = argparse.ArgumentParser(description='Make a rosdep key')
     parser.add_argument(
         'os', metavar='OS',
         help='An os name (ubuntu, etc)')
@@ -159,7 +124,7 @@ def main():
         help='An os release (focal, etc)')
     parser.add_argument(
         'package', metavar='PACKAGE',
-        help='The name of the package to create a rule for')
+        help='The name of the package to create a key for')
 
     arg = parser.parse_args()
 
@@ -167,13 +132,11 @@ def main():
 
     cfg = load_config()
 
-    index = get_index()
-    platforms = release_platforms(index, active_distros(index))
-
-    r = Rule()
-    for os, releases in platforms.items():
+    # Add null entries for all supported platforms
+    r = Key()
+    for os, releases in cfg['supported_versions'].items():
         for release in releases:
-            r.set_package_for_platform(os, release)
+            r.add_rule(os, release)
 
     from . import find_package
     from .config import load_config
@@ -188,14 +151,13 @@ def main():
         raise RuntimeError(
             f'Did not find package {arg.package} in {arg.os} {arg.release}')
 
-    r.set_package_for_platform(arg.os, arg.release, suggestion.binary_name)
+    r.add_rule(arg.os, arg.release, suggestion.binary_name)
 
     # ex: 'ubuntu': {'focal': 'https://...'}
     package_urls: Dict[str, Dict[str, str]] = {}
     _add_package_url(package_urls, arg.os, arg.release, suggestion.url)
 
     # Look up packages for all platforms
-    # Assumes cfg['supported_versions'] includes all active platforms
     for os, releases in cfg['supported_versions'].items():
         try:
             suggestion = make_suggestion(cfg, arg.package, os)
@@ -214,8 +176,7 @@ def main():
                 else:
                     if suggestion is None:
                         continue
-                    r.set_package_for_platform(
-                        os, release, suggestion.binary_name)
+                    r.add_rule(os, release, suggestion.binary_name)
                     _add_package_url(
                         package_urls, os, release, suggestion.url)
 
@@ -229,11 +190,17 @@ def main():
         for release, url in sorted(release_urls.items()):
             print(f'  * [{release}]({url})')
     print('-' * 25)
-    print('# Non-minimized rule')
+    print('# Non-minimized rules')
     yaml_dict = r.as_dict()
     print(yaml.dump(yaml_dict))
     print('-' * 25)
-    print('# Minimized rule')
+    print('# Minimized rules')
+    _minimize_rules(yaml_dict, cfg['supported_versions'])
+    print(yaml.dump(yaml_dict))
+    print('# Minimized rules twice')
+    _minimize_rules(yaml_dict, cfg['supported_versions'])
+    print(yaml.dump(yaml_dict))
+    print('# Minimized rules three times')
     _minimize_rules(yaml_dict, cfg['supported_versions'])
     print(yaml.dump(yaml_dict))
 
