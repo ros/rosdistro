@@ -86,39 +86,53 @@ class Rule:
             self._key = self._calculate_key()
         return self._key
 
-    def as_dict(self, minimal=True):
+    def as_dict(self):
         if self.key is None:
             raise ValueError('Rule has no key')
         yaml_dict = {}
 
-        # First pass, put all the data in
         for os, releases in self._platforms.items():
             if os not in yaml_dict:
                 yaml_dict[os] = {}
             for release in releases:
-                yaml_dict[os][release] = [self._packages[(os, release)]]
+                package = self._packages[(os, release)]
+                yaml_dict[os][release] = [package] if package else None
 
-        # Second pass, minimize keys
-        if minimal:
-            for os, release_packages in yaml_dict.items():
-                package_names = set([l[0] for l in release_packages.values()])
-                if len(package_names) == 1:
-                    # All releases have the same package name
-                    yaml_dict[os] = [package_names.pop()]
-                elif len(package_names) == 2 and None in package_names:
-                    # Not all releases have the package.
-                    # The ones that do have the same name.
-                    # This assumes releases without the package are older, and
-                    # may be the wrong thing to do if a distro stopped
-                    # releasing a package.
-                    package_name = [n for n in package_names if n][0]
-                    new_os_dict = {'*': [package_name]}
-                    for release, package in release_packages.items():
-                        if package is None:
-                            new_os_dict[release] = None
-                    yaml_dict[os] = new_os_dict
-    
         return {self.key: yaml_dict}
+
+
+def _minimize_rules(yaml_dict, supported_versions):
+    # 1. Remove entries which are entirely null
+    for key in list(yaml_dict.keys()):
+        for os in list(yaml_dict[key].keys()):
+            for release, package in (yaml_dict[key][os] or {}).items():
+                if package is not None:
+                    break
+            else:
+                del yaml_dict[key][os]
+        if not yaml_dict[key]:
+            del yaml_dict[key]
+    for key, rule in yaml_dict.items():
+        # 2. Based on supported versions, convert the most recent version to '*'
+        for os, release_packages in rule.items():
+            if os not in supported_versions:
+                continue
+            latest_version = supported_versions[os][-1]
+            if latest_version in release_packages:
+                release_packages['*'] = release_packages[latest_version]
+                del release_packages[latest_version]
+                # 3. Add explicit null for any other missing versions
+                for release in supported_versions[os][:-1]:
+                    release_packages.setdefault(release, None)
+                # 4. Drop any other versions which are the same as the latest
+                for release in list(release_packages.keys()):
+                    if release == '*':
+                        continue
+                    if release_packages[release] == release_packages['*']:
+                        del release_packages[release]
+                # 5. Condense iff the only version remaining is '*'
+                if tuple(release_packages.keys()) == ('*',):
+                    rule[os] = release_packages['*']
 
 
 def _add_package_url(package_urls, os, release, url):
@@ -216,10 +230,12 @@ def main():
             print(f'  * [{release}]({url})')
     print('-' * 25)
     print('# Non-minimized rule')
-    print(yaml.dump(r.as_dict(minimal=False)))
+    yaml_dict = r.as_dict()
+    print(yaml.dump(yaml_dict))
     print('-' * 25)
     print('# Minimized rule')
-    print(yaml.dump(r.as_dict()))
+    _minimize_rules(yaml_dict, cfg['supported_versions'])
+    print(yaml.dump(yaml_dict))
 
 
 if __name__ == '__main__':
