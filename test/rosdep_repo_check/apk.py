@@ -63,9 +63,28 @@ def parse_apkindex(f):
 
 
 class Dependency:
+    """
+    Dependency class represents apk (Alpine Package) dependency information.
+    """
+
     type = None
+    """
+    :ivar: the type of the Dependency.
+           e.g.
+           - None: package
+           - 'cmd': command
+           - 'so': shared object
+    """
+
     name = None
+    """
+    :ivar: the name of the Dependency.
+    """
+
     version = None
+    """
+    :ivar: the version of the Dependency.
+    """
 
     def __init__(self, item):
         try:

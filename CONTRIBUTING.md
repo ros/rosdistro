@@ -111,7 +111,7 @@ There is a guide for submitting rosdep keys [here](http://docs.ros.org/independe
 Updates to rosdep rules require the review of two people.
 This will usually means that it needs a +1, and then it can be merged by a different person.
 
-For convenience in reviewing, please comment in the PR with links to the web listings of packages such as on http://packages.ubuntu.com, http://packages.debian.org, and https://apps.fedoraproject.org/packages or if a pip package pypi.python.org.
+For convenience in reviewing, please comment in the PR with links to the web listings of packages such as on http://packages.ubuntu.com, http://packages.debian.org, and https://packages.fedoraproject.org or if a pip package pypi.python.org.
 
 Please also briefly describe the package being added and what use case you want to use it for.
 It's valuable to have a record of the packages as submitted and their intended purpose for clarity in the future so that if there's a conflict there's information to fall back on instead of speculation about the original use cases.
@@ -272,6 +272,22 @@ The `-pip` key should be removed when the package becomes available on all platf
 
 As a reminder `pip` rules should not be used on Gentoo.
 See above for the Gentoo specific guidelines.
+
+#### pip mixed with system packages
+
+Some packages are only available as system packages in newer distributions.
+In such case, you can specify the default as system package, and pip for older distributions for which the system packages are not available.
+
+For example:
+
+```yaml
+python3-relatively-new-package
+  ubuntu:
+    '*': [python3-relatively-new-package]
+    bionic:
+      pip:
+        packages: [relatively-new-package]
+```
 
 How to submit pull requests
 ---------------------------

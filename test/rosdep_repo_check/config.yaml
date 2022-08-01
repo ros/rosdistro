@@ -42,7 +42,7 @@ package_dashboards:
 - pattern: !regular_expression .*//deb.debian.org/debian/.*
   url: https://packages.debian.org/{os_code_name}/{binary_name}
 - pattern: !regular_expression .*//dl.fedoraproject.org/pub/.*
-  url: https://src.fedoraproject.org/rpms/{source_name}#bodhi_updates
+  url: https://packages.fedoraproject.org/pkgs/{source_name}/{binary_name}/
 - pattern: !regular_expression .*//download.opensuse.org/.*
   url: https://software.opensuse.org/package/{source_name}
 - pattern: !regular_expression .*//archive.ubuntu.com/ubuntu/.*
@@ -59,8 +59,8 @@ supported_versions:
   - buster
   - bullseye
   fedora:
-  - '34'
   - '35'
+  - '36'
   opensuse:
   - '15.2'
   rhel:
@@ -87,9 +87,9 @@ supported_arches:
 
 name_replacements:
   fedora:
-    '34':
-      '%{__isa_name}': 'x86'
     '35':
+      '%{__isa_name}': 'x86'
+    '36':
       '%{__isa_name}': 'x86'
   rhel:
     '7':
