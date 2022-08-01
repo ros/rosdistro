@@ -46,7 +46,8 @@ args = parser.parse_args()
 
 # if not os.path.exists(args.index_path):
 #     parser.error("invalid rosdistro index url")
-valid_distros = ['groovy', 'hydro', 'indigo', 'jade', 'kinetic', 'lunar']
+valid_distros = ['groovy', 'hydro', 'indigo', 'jade', 'kinetic', 'lunar', 'melodic', 'noetic',
+    'ardent', 'bouncy', 'crystal', 'dashing', 'eloquent', 'foxy', 'galactic', 'rolling']
 
 FIRST_HASH = 'be9218681f14d0fac908da46902eb2f1dad084fa'
 OUTPUT_FILE = args.output_file
@@ -62,7 +63,16 @@ def get_commit_date(repo_dir, commit):
 
 
 def get_rosdistro_counts(index_path):
-    i = rosdistro.get_index(index_path)
+    index_uri = os.path.join(index_path, 'index.yaml')
+    if not os.path.exists(index_uri):
+        print('failed to find %s falling back to v4' % index_uri)
+        index_uri = os.path.join(index_path, 'index-v4.yaml')
+        if not os.path.exists(index_uri):
+            print('Could not find index at this path either %s %s' % (index_path, index_uri))
+            subprocess.call('ls %s' % index_path, shell=True)
+            return []
+    index_uri = 'file://' + index_uri
+    i = rosdistro.get_index(index_uri)
     results = []
     for d in valid_distros:
         try:
@@ -110,7 +120,7 @@ try:
         subprocess.check_call('git -C %s clean -fxd' % repo_location, shell=True)
         subprocess.check_call('git -C %s checkout --quiet %s' % (repo_location, commit), shell=True)
         commit_date = get_commit_date(repo_location, commit)
-        counts = get_rosdistro_counts('file://%s/index.yaml' % repo_location)
+        counts = get_rosdistro_counts(repo_location)
         csv_strings.append(", ".join([commit_date] + [str(c) for c in counts]))
         print("progress: %s" % csv_strings[-1])
 
@@ -124,5 +134,6 @@ finally:
 
 with open(OUTPUT_FILE, 'w') as outfh:
     print("Writing to %s" % OUTPUT_FILE)
+    outfh.write(', '.join(['date'] + valid_distros))
     for l in csv_strings:
         outfh.write(l + '\n')
