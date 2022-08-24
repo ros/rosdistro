@@ -1418,6 +1418,9 @@ gnuplot:
   nixos: [gnuplot]
   openembedded: [gnuplot@meta-oe]
   ubuntu: [gnuplot]
+gnuplot-iostream:
+  debian: [libgnuplot-iostream-dev]
+  ubuntu: [libgnuplot-iostream-dev]
 gnuplot-x11:
   debian: [gnuplot-x11]
   ubuntu: [gnuplot-x11]
@@ -1757,7 +1760,7 @@ hddtemp:
   rhel: [hddtemp]
   slackware: [hddtemp]
   ubuntu:
-    "*": null
+    '*': null
     bionic: [hddtemp]
     focal: [hddtemp]
     impish: [hddtemp]
@@ -3184,6 +3187,21 @@ libfreenect-dev:
     '*': [libfreenect-devel]
     '7': null
   ubuntu: [libfreenect-dev]
+libfreetype-dev:
+  alpine: [freetype-dev]
+  arch: [freetype2]
+  debian:
+    '*': [libfreetype-dev]
+    buster: [libfreetype6-dev]
+  fedora: [freetype-devel]
+  gentoo: [media-libs/freetype]
+  nixos: [freetype]
+  openembedded: [freetype@openembedded-core]
+  opensuse: [freetype-devel]
+  rhel: [freetype-devel]
+  ubuntu:
+    '*': [libfreetype-dev]
+    bionic: [libfreetype6-dev]
 libfreetype6:
   alpine: [freetype]
   arch: [freetype2]
@@ -3810,13 +3828,11 @@ libjsoncpp:
   opensuse: [libjsoncpp19]
   rhel: [jsoncpp]
   ubuntu:
-    '*': [libjsoncpp1]
-    precise: [libjsoncpp0]
-    saucy: [libjsoncpp0]
+    '*': [libjsoncpp25]
+    bionic: [libjsoncpp1]
+    focal: [libjsoncpp1]
     trusty: [libjsoncpp0]
-    utopic: [libjsoncpp0]
-    vivid: [libjsoncpp0]
-    wily: [libjsoncpp0v5]
+    xenial: [libjsoncpp1]
 libjsoncpp-dev:
   arch: [jsoncpp]
   debian: [libjsoncpp-dev]
@@ -3896,6 +3912,17 @@ liblinphone-dev:
   gentoo: [net-voip/linphone]
   nixos: [liblinphone]
   ubuntu: [liblinphone-dev]
+liblmdb-dev:
+  alpine: [lmdb-dev]
+  arch: [lmdb]
+  debian: [liblmdb-dev]
+  fedora: [lmdb-devel]
+  gentoo: [dev-db/lmdb]
+  macports: [lmdb]
+  nixos: [lmdb]
+  opensuse: [lmdb-devel]
+  rhel: [lmdb-devel]
+  ubuntu: [liblmdb-dev]
 liblttng-ust-dev:
   arch: [lttng-ust]
   debian: [liblttng-ust-dev]
@@ -4138,6 +4165,12 @@ libogre:
   opensuse: [ogre-devel]
   slackware: [ogre]
   ubuntu: [libogre-1.9.0v5]
+libogre-1.12-dev:
+  debian:
+    bullseye: [libogre-1.12-dev]
+  ubuntu:
+    focal: [libogre-1.12-dev]
+    jammy: [libogre-1.12-dev]
 libogre-dev:
   arch: [ogre-1.9]
   debian:
@@ -4154,6 +4187,11 @@ libogre-dev:
   opensuse: [libOgreMain-devel, libOgreOverlay-devel, libOgrePaging-devel, libOgreProperty-devel, libOgreRTShaderSystem-devel, libOgreTerrain-devel, libOgreVolume-devel]
   slackware: [ogre]
   ubuntu: [libogre-1.9-dev]
+libogre1.12.10:
+  debian:
+    bullseye: [libogre1.12.10]
+  ubuntu:
+    jammy: [libogre1.12.10]
 libois-dev:
   arch: [ois]
   debian: [libois-dev]
@@ -4994,6 +5032,15 @@ libreadline-java:
   debian: [libreadline-java]
   gentoo: [dev-java/libreadline-java]
   ubuntu: [libreadline-java]
+librtaudio-dev:
+  arch: [rtaudio]
+  debian: [librtaudio-dev]
+  fedora: [rtaudio-devel]
+  gentoo: [media-libs/rtaudio]
+  macports: [rtaudio]
+  nixos: [rtaudio]
+  opensuse: [rtaudio-devel]
+  ubuntu: [librtaudio-dev]
 libsecp256k1-dev:
   debian: [libsecp256k1-dev]
   fedora: [libsecp256k1-devel]
@@ -6776,7 +6823,7 @@ pybind11-dev:
   arch: [pybind11]
   debian: [pybind11-dev]
   fedora: [pybind11-devel]
-  nixos: [pybind11]
+  nixos: [pythonPackages.pybind11]
   rhel:
     '*': [pybind11-devel]
     '7': null
@@ -8096,6 +8143,17 @@ yamllint:
       packages: [yamllint]
   rhel: [yamllint]
   ubuntu: [yamllint]
+yarn:
+  alpine: [yarn]
+  arch: [yarn]
+  debian: [yarnpkg]
+  fedora: [yarnpkg]
+  gentoo: [sys-apps/yarn]
+  macports: [yarn]
+  nixos: [yarn]
+  ubuntu:
+    '*': [yarnpkg]
+    bionic: null
 yasm:
   arch: [yasm]
   debian: [yasm]

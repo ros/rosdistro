@@ -19,7 +19,7 @@ TODO link to source repository
 
 ## Purpose of using this:
 
-TODO Replace. This dependency is being used for this reason. This is why I think it's valuable to be added to the rosdep database. 
+TODO Replace. This dependency is being used for this reason. This is why I think it's valuable to be added to the rosdep database.
 
 Distro packaging links:
 
@@ -44,6 +44,8 @@ More info at https://github.com/ros/rosdistro/blob/master/CONTRIBUTING.md#guidel
   - IF AVAILABLE
 - NixOS/nixpkgs: https://search.nixos.org/packages
   - OPTIONAL
+- openSUSE: https://software.opensuse.org/package/
+  - IF AVAILABLE
 
 
 <!-- DOC_INDEX_TEMPLATE: add package to rosdistro for documentation indexing -->
@@ -54,7 +56,7 @@ More info at https://github.com/ros/rosdistro/blob/master/CONTRIBUTING.md#guidel
 
 ROSDISTRO NAME
 
-# The source is here: 
+# The source is here:
 
 http://sourcecode_url
 
