@@ -25,7 +25,12 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
+import re
+
 from . import find_package
+
+
+_PYTHON_PATTERN = re.compile(r'^python(\d)-(.*)')
 
 
 def make_suggestion(config, key, os_name):
@@ -67,3 +72,15 @@ def make_suggestion(config, key, os_name):
         suggestion = make_suggestion(config, 'pkgconfig(' + key[:-6] + ')', os_name)
         if suggestion:
             return suggestion
+    # 5) Try python?dist(foo)
+    py_match = _PYTHON_PATTERN.match(key)
+    if py_match:
+        suggestion = make_suggestion(
+            config, 'python%sdist(%s)' % (py_match.group(1), py_match.group(2)), os_name)
+        if suggestion:
+            return suggestion
+        if '-' in py_match.group(2):
+            suggestion = make_suggestion(
+                config, 'python%sdist(%s)' % (py_match.group(1), py_match.group(2).replace('-', '_')), os_name)
+            if suggestion:
+                return suggestion
