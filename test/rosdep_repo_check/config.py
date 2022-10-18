@@ -31,6 +31,7 @@ import yaml
 
 from .apk import apk_base_url
 from .deb import deb_base_url
+from .pacman import pacman_base_url
 from .rpm import rpm_base_url
 
 
@@ -48,6 +49,11 @@ def load_deb_base_url(loader, node):
     return deb_base_url(base_url, comp)
 
 
+def load_pacman_base_url(loader, node):
+    base_url, repo_name = node.value.rsplit(' ', 1)
+    return pacman_base_url(base_url, repo_name)
+
+
 def load_rpm_base_url(loader, node):
     return rpm_base_url(node.value)
 
@@ -60,6 +66,8 @@ yaml.add_constructor(
     u'!apk_base_url', load_apk_base_url, Loader=yaml.SafeLoader)
 yaml.add_constructor(
     u'!deb_base_url', load_deb_base_url, Loader=yaml.SafeLoader)
+yaml.add_constructor(
+    u'!pacman_base_url', load_pacman_base_url, Loader=yaml.SafeLoader)
 yaml.add_constructor(
     u'!rpm_base_url', load_rpm_base_url, Loader=yaml.SafeLoader)
 yaml.add_constructor(
