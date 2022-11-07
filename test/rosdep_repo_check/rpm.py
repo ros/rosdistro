@@ -177,6 +177,8 @@ def enumerate_rpm_packages_from_mirrorlist(mirrorlist_url, os_name, os_code_name
         try:
             for pkg in enumerate_rpm_packages(base_url, os_name, os_code_name, os_arch):
                 yield pkg
+            else:
+                return
         except Exception as e:
             if not isinstance(e, (
                 ConnectionResetError,
@@ -188,8 +190,6 @@ def enumerate_rpm_packages_from_mirrorlist(mirrorlist_url, os_name, os_code_name
             print('Falling back to next available mirror...')
             # We may end up re-enumerating some packages, but it's better than
             # erroring out due to a connection reset...
-            continue
-        return
     else:
         raise RuntimeError('All mirrors were tried')
 
