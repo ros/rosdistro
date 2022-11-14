@@ -14,28 +14,27 @@ package_sources:
   - !deb_base_url http://deb.debian.org/debian non-free
   - !deb_base_url http://repos.ros.org/repos/ros_bootstrap main
   fedora:
-  - !rpm_base_url https://dl.fedoraproject.org/pub/$distname/linux/releases/$releasever/Everything/$basearch/os/
-  - !rpm_base_url https://dl.fedoraproject.org/pub/$distname/linux/updates/$releasever/Everything/$basearch/
-  - !rpm_base_url https://download1.rpmfusion.org/free/$distname/releases/$releasever/Everything/$basearch/os/
+  - !rpm_mirrorlist_url https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever&arch=$basearch
+  - !rpm_mirrorlist_url https://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f$releasever&arch=$basearch
+  - !rpm_mirrorlist_url https://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-$releasever&arch=$basearch
   opensuse:
   - !rpm_base_url http://download.opensuse.org/distribution/leap/$releasever/repo/oss/
   - !rpm_base_url http://download.opensuse.org/distribution/leap/$releasever/repo/non-oss/
   - !rpm_base_url http://download.opensuse.org/update/leap/$releasever/oss/
   - !rpm_base_url http://download.opensuse.org/update/leap/$releasever/non-oss/
   rhel:
+  - !rpm_mirrorlist_url https://mirrors.fedoraproject.org/mirrorlist?repo=epel-$releasever&arch=$basearch
   - '7':
-    - !rpm_base_url https://dl.fedoraproject.org/pub/epel/$releasever/$basearch/
-    - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/os/$basearch/
-    - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/updates/$basearch/
-    - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/extras/$basearch/
-    - !rpm_base_url http://mirror.centos.org/centos-$releasever/$releasever/sclo/$basearch/rh/
+    - !rpm_mirrorlist_url http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os
+    - !rpm_mirrorlist_url http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=updates
+    - !rpm_mirrorlist_url http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras
+    - !rpm_mirrorlist_url http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=sclo-sclo
     '8':
-    - !rpm_base_url https://dl.fedoraproject.org/pub/epel/$releasever/Everything/$basearch/
-    - !rpm_base_url https://repo.almalinux.org/almalinux/$releasever/BaseOS/$basearch/os/
-    - !rpm_base_url https://repo.almalinux.org/almalinux/$releasever/AppStream/$basearch/os/
-    - !rpm_base_url https://repo.almalinux.org/almalinux/$releasever/PowerTools/$basearch/os/
-    - !rpm_base_url https://repo.almalinux.org/almalinux/$releasever/extras/$basearch/os/
-  - !rpm_base_url https://download1.rpmfusion.org/free/el/updates/$releasever/$basearch/
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/baseos
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/appstream
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/powertools
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/extras
+  - !rpm_mirrorlist_url https://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-released-$releasever&arch=$basearch
   ubuntu:
   - !deb_base_url http://archive.ubuntu.com/ubuntu main
   - !deb_base_url http://archive.ubuntu.com/ubuntu universe
