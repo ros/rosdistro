@@ -31,6 +31,7 @@ from xml.etree import ElementTree
 from . import open_gz_url
 from . import PackageEntry
 from . import RepositoryCacheCollection
+from . import URLError
 
 
 def replace_tokens(string, os_name, os_code_name, os_arch):
@@ -69,6 +70,19 @@ def get_primary_name(repomd_url):
                 return data_child.attrib['href']
             root.clear()
     raise RuntimeError('Failed to determine primary data file name')
+
+
+def enumerate_base_urls(mirrorlist_url):
+    """Get candidate RPM repository base URLs from a mirrorlist file."""
+    with open_gz_url(mirrorlist_url) as f:
+        while True:
+            line = f.readline().decode('utf-8')
+            if not len(line):
+                break
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            yield line
 
 
 def enumerate_rpm_packages(base_url, os_name, os_code_name, os_arch):
@@ -146,6 +160,40 @@ def enumerate_rpm_packages(base_url, os_name, os_code_name, os_arch):
             element.clear()
 
 
+def enumerate_rpm_packages_from_mirrorlist(mirrorlist_url, os_name, os_code_name, os_arch):
+    """
+    Enumerate packages in an RPM repository using a mirrorlist.
+
+    :param mirrorlist_url: the RPM repository mirrorlist file URL.
+    :param os_name: the name of the OS associated with the repository.
+    :param os_code_name: the OS version associated with the repository.
+    :param os_arch: the system architecture associated with the repository.
+
+    :returns: an enumeration of package entries.
+    """
+    mirrorlist_url = replace_tokens(mirrorlist_url, os_name, os_code_name, os_arch)
+    print('Reading RPM mirrorlist from ' + mirrorlist_url)
+    for base_url in enumerate_base_urls(mirrorlist_url):
+        try:
+            for pkg in enumerate_rpm_packages(base_url, os_name, os_code_name, os_arch):
+                yield pkg
+            else:
+                return
+        except Exception as e:
+            if not isinstance(e, (
+                ConnectionResetError,
+                RuntimeError,
+                URLError,
+            )):
+                raise
+            print("Error reading from mirror '%s': %s" % (base_url, str(e)))
+            print('Falling back to next available mirror...')
+            # We may end up re-enumerating some packages, but it's better than
+            # erroring out due to a connection reset...
+    else:
+        raise RuntimeError('All mirrors were tried')
+
+
 def rpm_base_url(base_url):
     """
     Create an enumerable cache for an RPM repository.
@@ -157,3 +205,17 @@ def rpm_base_url(base_url):
     return RepositoryCacheCollection(
         lambda os_name, os_code_name, os_arch:
             enumerate_rpm_packages(base_url, os_name, os_code_name, os_arch))
+
+
+def rpm_mirrorlist_url(mirrorlist_url):
+    """
+    Create an enumerable cache for an RPM repository mirrorlist.
+
+    :param mirrorlist_url: the URL of the RPM repository mirrorlist file.
+
+    :returns: an enumerable repository cache instance.
+    """
+    return RepositoryCacheCollection(
+        lambda os_name, os_code_name, os_arch:
+            enumerate_rpm_packages_from_mirrorlist(
+                mirrorlist_url, os_name, os_code_name, os_arch))
