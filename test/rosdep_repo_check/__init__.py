@@ -41,6 +41,10 @@ except ImportError:
     from urllib2 import urlopen
 
 
+def fmt_os(os_name, os_code_name):
+    return (os_name + ' ' + os_code_name) if os_code_name else os_name
+
+
 def is_probably_gzip(response):
     """
     Determine if a urllib response is likely gzip'd.
@@ -196,7 +200,7 @@ def summarize_broken_packages(broken):
     grouped = {}
 
     for os_name, os_ver, os_arch, key, package, _ in broken:
-        platform = '%s %s on %s' % (os_name, os_ver, os_arch)
+        platform = '%s on %s' % (fmt_os(os_name, os_ver), os_arch)
         if platform not in grouped:
             grouped[platform] = set()
         grouped[platform].add('- Package %s for rosdep key %s' % (package, key))
@@ -228,7 +232,9 @@ def find_package(config, pkg_name, os_name, os_code_name, os_arch):
         else:
             sources = [os_sources]
         if not sources:
-            print('WARNING: No sources for %s %s' % (os_name, os_code_name), file=sys.stderr)
+            print(
+                'WARNING: No sources for %s' % (fmt_os(os_name, os_code_name)),
+                 file=sys.stderr)
         for source in sources:
             for p in source.enumerate_packages(os_name, os_code_name, os_arch):
                 if p == pkg_name:
