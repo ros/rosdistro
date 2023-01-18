@@ -1,18 +1,31 @@
 #!/usr/bin/env python3
 
-# Copyright 2017 Open Source Robotics Foundation
+# Copyright (c) 2017, Open Source Robotics Foundation
+# All rights reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above copyright
+#       notice, this list of conditions and the following disclaimer in the
+#       documentation and/or other materials provided with the distribution.
+#     * Neither the name of the Willow Garage, Inc. nor the names of its
+#       contributors may be used to endorse or promote products derived from
+#       this software without specific prior written permission.
 #
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
 
 import argparse
 from dateutil import parser as dateparser
@@ -33,7 +46,8 @@ args = parser.parse_args()
 
 # if not os.path.exists(args.index_path):
 #     parser.error("invalid rosdistro index url")
-valid_distros = ['groovy', 'hydro', 'indigo', 'jade', 'kinetic', 'lunar']
+valid_distros = ['groovy', 'hydro', 'indigo', 'jade', 'kinetic', 'lunar', 'melodic', 'noetic',
+    'ardent', 'bouncy', 'crystal', 'dashing', 'eloquent', 'foxy', 'galactic', 'rolling']
 
 FIRST_HASH = 'be9218681f14d0fac908da46902eb2f1dad084fa'
 OUTPUT_FILE = args.output_file
@@ -49,7 +63,16 @@ def get_commit_date(repo_dir, commit):
 
 
 def get_rosdistro_counts(index_path):
-    i = rosdistro.get_index(index_path)
+    index_uri = os.path.join(index_path, 'index.yaml')
+    if not os.path.exists(index_uri):
+        print('failed to find %s falling back to v4' % index_uri)
+        index_uri = os.path.join(index_path, 'index-v4.yaml')
+        if not os.path.exists(index_uri):
+            print('Could not find index at this path either %s %s' % (index_path, index_uri))
+            subprocess.call('ls %s' % index_path, shell=True)
+            return []
+    index_uri = 'file://' + index_uri
+    i = rosdistro.get_index(index_uri)
     results = []
     for d in valid_distros:
         try:
@@ -97,7 +120,7 @@ try:
         subprocess.check_call('git -C %s clean -fxd' % repo_location, shell=True)
         subprocess.check_call('git -C %s checkout --quiet %s' % (repo_location, commit), shell=True)
         commit_date = get_commit_date(repo_location, commit)
-        counts = get_rosdistro_counts('file://%s/index.yaml' % repo_location)
+        counts = get_rosdistro_counts(repo_location)
         csv_strings.append(", ".join([commit_date] + [str(c) for c in counts]))
         print("progress: %s" % csv_strings[-1])
 
@@ -111,5 +134,6 @@ finally:
 
 with open(OUTPUT_FILE, 'w') as outfh:
     print("Writing to %s" % OUTPUT_FILE)
+    outfh.write(', '.join(['date'] + valid_distros))
     for l in csv_strings:
         outfh.write(l + '\n')
