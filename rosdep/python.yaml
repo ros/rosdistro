@@ -2771,6 +2771,14 @@ python-mechanize:
   gentoo: [dev-python/mechanize]
   nixos: [pythonPackages.mechanize]
   ubuntu: [python-mechanize]
+python-mistune:
+  debian:
+    '*': null
+    buster: [python-mistune]
+  opensuse: [python2-mistune]
+  ubuntu:
+    '*': null
+    bionic: [python-mistune]
 python-mock:
   alpine: [py-mock]
   arch: [python2-mock]
@@ -4013,7 +4021,7 @@ python-pytides-pip:
   ubuntu:
     pip:
       packages: [pytides]
-python-pytorch-pip:
+python-pytorch-pip: &migrate_eol_2025_04_30_python3_pytorch_pip
   debian:
     pip:
       packages: [torch, torchvision]
@@ -5333,6 +5341,9 @@ python-transforms3d-pip:
     focal:
       pip:
         packages: [transforms3d]
+    jammy:
+      pip:
+        packages: [transforms3d]
 python-transitions:
   debian:
     '*': [python-transitions]
@@ -6052,6 +6063,14 @@ python3-backoff-pip:
   ubuntu:
     pip:
       packages: [backoff]
+python3-bcrypt:
+  debian: [python3-bcrypt]
+  fedora: [python3-bcrypt]
+  gentoo: [dev-python/bcrypt]
+  nixos: [python39Packages.bcrypt]
+  opensuse: [python3-bcrypt]
+  rhel: ['python%{python3_pkgversion}-bcrypt']
+  ubuntu: [python3-bcrypt]
 python3-bitarray:
   debian: [python3-bitarray]
   fedora: [python3-bitarray]
@@ -6256,6 +6275,14 @@ python3-catkin-tools:
   fedora: [python3-catkin_tools]
   openembedded: [python3-catkin-tools@meta-ros-common]
   ubuntu: [python3-catkin-tools]
+python3-certifi:
+  debian: [python3-certifi]
+  fedora: [python3-certifi]
+  gentoo: [dev-python/certifi]
+  nixos: [python39Packages.certifi]
+  opensuse: [python3-certifi]
+  rhel: ['python%{python3_pkgversion}-certifi']
+  ubuntu: [python3-certifi]
 python3-cffi:
   debian: [python3-cffi]
   fedora: [python3-cffi]
@@ -6884,6 +6911,10 @@ python3-flake8-docstrings-pip:
 python3-flake8-import-order:
   fedora: [python3-flake8-import-order]
   opensuse: [python3-flake8-import-order]
+  rhel:
+    '*': [python3-flake8-import-order]
+    '7': null
+    '8': null
   ubuntu:
     '*': [python3-flake8-import-order]
     bionic: null
@@ -6893,7 +6924,14 @@ python3-flake8-import-order-pip:
     pip:
       packages: [flake8-import-order]
 python3-flake8-quotes:
+  fedora:
+    '*': [python3-flake8-quotes]
+    '35': null
   opensuse: [python3-flake8-quotes]
+  rhel:
+    '*': [python3-flake8-quotes]
+    '7': null
+    '8': null
   ubuntu:
     '*': [python3-flake8-quotes]
     bionic: null
@@ -6909,6 +6947,10 @@ python3-flask:
   nixos: [python3Packages.flask]
   rhel: [python3-flask]
   ubuntu: [python3-flask]
+python3-flask-bcrypt:
+  debian: [python3-flask-bcrypt]
+  nixos: [python39Packages.flask-bcrypt]
+  ubuntu: [python3-flask-bcrypt]
 python3-flask-cors:
   debian: [python3-flask-cors]
   fedora: [python3-flask-cors]
@@ -6933,6 +6975,14 @@ python3-flask-jwt-extended:
     bionic:
       pip:
         packages: [flask-jwt-extended]
+python3-flask-migrate:
+  debian: [python3-flask-migrate]
+  fedora: [python3-flask-migrate]
+  gentoo: [dev-python/flask-migrate]
+  rhel:
+    '*': ['python%{python3_pkgversion}-flask-migrate']
+    '7': null
+  ubuntu: [python3-flask-migrate]
 python3-flask-restplus-pip:
   ubuntu:
     pip:
@@ -7001,6 +7051,12 @@ python3-geographiclib:
     '*': [python3-GeographicLib]
     '7': null
   ubuntu: [python3-geographiclib]
+python3-geojson:
+  arch: [python-geojson]
+  debian: [python3-geojson]
+  fedora: [python3-geojson]
+  opensuse: [python3-geojson]
+  ubuntu: [python3-geojson]
 python3-geomag-pip:
   debian:
     pip:
@@ -7425,6 +7481,16 @@ python3-kiwisolver:
     bionic:
       pip:
         packages: [kiwisolver]
+python3-kml2geojson-pip:
+  debian:
+    pip:
+      packages: [kml2geojson]
+  fedora:
+    pip:
+      packages: [kml2geojson]
+  ubuntu:
+    pip:
+      packages: [kml2geojson]
 python3-lark-parser:
   alpine: [py3-lark-parser]
   arch: [python-lark-parser]
@@ -7441,6 +7507,20 @@ python3-lark-parser:
     '*': [python3-lark]
     bionic: [python3-lark-parser]
     xenial: [python3-lark-parser]
+python3-libgpiod:
+  alpine: [py3-libgpiod]
+  arch: [libgpiod]
+  debian: [python3-libgpiod]
+  fedora: [python3-libgpiod]
+  gentoo: [dev-libs/libgpiod]
+  nixos: [python3Packages.libgpiod]
+  opensuse: [python3-gpiod]
+  rhel:
+    '*': [python3-libgpiod]
+    '7': null
+  ubuntu:
+    '*': [python3-libgpiod]
+    bionic: null
 python3-lingua-franca-pip:
   debian:
     pip:
@@ -7519,6 +7599,16 @@ python3-markdown:
   gentoo: [dev-python/markdown]
   nixos: [python3Packages.markdown]
   ubuntu: [python3-markdown]
+python3-marshmallow:
+  debian: [python3-marshmallow]
+  fedora: [python3-marshmallow]
+  gentoo: [dev-python/marshmallow]
+  nixos: [python39Packages.marshmallow]
+  opensuse: [python3-marshmallow]
+  rhel:
+    '*': ['python%{python3_pkgversion}-marshmallow']
+    '7': null
+  ubuntu: [python3-marshmallow]
 python3-marshmallow-dataclass-pip:
   ubuntu:
     pip:
@@ -7578,6 +7668,20 @@ python3-meson-pip:
   ubuntu:
     pip:
       packages: [meson]
+python3-mistune:
+  alpine:
+    pip:
+      packages: [mistune]
+  arch: [python-mistune]
+  debian: [python3-mistune]
+  fedora: [python3-mistune]
+  gentoo: [dev-python/mistune]
+  nixos: [python39Packages.mistune]
+  opensuse: [python3-mistune]
+  osx:
+    pip:
+      packages: [mistune]
+  ubuntu: [python3-mistune]
 python3-mlflow:
   debian:
     pip:
@@ -7645,6 +7749,15 @@ python3-multimethod-pip:
   ubuntu:
     pip:
       packages: [multimethod]
+python3-munkres:
+  debian: [python3-munkres]
+  fedora: [python3-munkres]
+  nixos: [python3Packages.munkre]
+  opensuse: [python3-munkres]
+  rhel:
+    '*': [python3-munkres]
+    '7': null
+  ubuntu: [python3-munkres]
 python3-mycroft-messagebus-client-pip:
   debian:
     pip:
@@ -7854,6 +7967,16 @@ python3-open3d-pip:
   ubuntu:
     pip:
       packages: [open3d]
+python3-openai-pip:
+  debian:
+    pip:
+      packages: [openai]
+  fedora:
+    pip:
+      packages: [openai]
+  ubuntu:
+    pip:
+      packages: [openai]
 python3-opencv:
   debian: [python3-opencv]
   fedora: [python3-opencv]
@@ -7861,6 +7984,10 @@ python3-opencv:
   nixos: [python3Packages.opencv3]
   openembedded: [opencv@meta-oe]
   opensuse: [python3-opencv]
+  rhel:
+    '*': [python3-opencv]
+    '7': null
+    '8': null
   ubuntu: [python3-opencv]
 python3-opengl:
   debian: [python3-opengl]
@@ -7958,6 +8085,16 @@ python3-paramiko:
   opensuse: [python3-paramiko]
   rhel: ['python%{python3_pkgversion}-paramiko']
   ubuntu: [python3-paramiko]
+python3-parse:
+  arch: [python-parse]
+  debian: [python3-parse]
+  fedora: [python3-parse]
+  gentoo: [dev-python/parse]
+  opensuse: [python3-parse]
+  rhel:
+    '*': [python3-parse]
+    '7': null
+  ubuntu: [python3-parse]
 python3-pcg-gazebo-pip:
   debian:
     pip:
@@ -8667,6 +8804,7 @@ python3-pytest-timeout:
   opensuse: [python3-pytest-timeout]
   rhel: ['python%{python3_pkgversion}-pytest-timeout']
   ubuntu: [python3-pytest-timeout]
+python3-pytorch-pip: *migrate_eol_2025_04_30_python3_pytorch_pip
 python3-pytrinamic-pip:
   debian:
     pip:
@@ -8697,6 +8835,16 @@ python3-pyxdg-pip:
   ubuntu:
     pip:
       packages: [pyxdg]
+python3-qrcode:
+  arch: [python-qrcode]
+  debian: [python3-qrcode]
+  fedora: [python3-qrcode]
+  gentoo: [dev-python/qrcode]
+  nixos: [python39Packages.qrcode]
+  opensuse: [python3-qrcode]
+  rhel:
+    '8': [python3-qrcode]
+  ubuntu: [python3-qrcode]
 python3-qt5-bindings:
   alpine: [py3-qt5]
   arch: [python-pyqt5]
@@ -8781,6 +8929,20 @@ python3-rdflib:
   rhel:
     '8': ['python%{python3_pkgversion}-rdflib']
   ubuntu: [python3-rdflib]
+python3-reportlab:
+  arch: [python-reportlab]
+  debian: [python3-reportlab]
+  fedora: [python3-reportlab]
+  gentoo: [dev-python/reportlab]
+  nixos: [python3Packages.reportlab]
+  opensuse: [python3-reportlab]
+  osx:
+    pip:
+      packages: [reportlab]
+  rhel:
+    '*': [python3-reportlab]
+    '7': null
+  ubuntu: [python3-reportlab]
 python3-requests:
   debian: [python3-requests]
   fedora: [python3-requests]
@@ -9120,6 +9282,16 @@ python3-simplejson:
   nixos: [python3Packages.simplejson]
   openembedded: [python3-simplejson@meta-python]
   ubuntu: [python3-simplejson]
+python3-simplification-pip:
+  debian:
+    pip:
+      packages: [simplification]
+  fedora:
+    pip:
+      packages: [simplification]
+  ubuntu:
+    pip:
+      packages: [simplification]
 python3-sip:
   debian: [python3-sip-dev]
   fedora: [python3-sip-devel]
@@ -9477,6 +9649,13 @@ python3-tqdm:
   ubuntu:
     '*': [python3-tqdm]
     xenial: null
+python3-transformers-pip:
+  debian:
+    pip:
+      packages: [transformers]
+  ubuntu:
+    pip:
+      packages: [transformers]
 python3-transforms3d:
   debian:
     pip:
