@@ -43,6 +43,7 @@ There are a few different types of pull requests that are opened against this re
         * The license must be reflected in the package.xml file of all sub-packages in the repository.
         * The source repository must be publicly accessible.
         * The source repository should contain one or more ROS packages (meaning they have a `package.xml` in the source repository). Packages that are not ROS packages can be accepted, but they are rare and require special handling in the release repository.
+    1. The best practices for Rolling releases is to use a release repository in the https://github.com/ros2-gbp organization. That way this package can be automatically released from Rolling into the next stable ROS distribution.  There are instructions in https://github.com/ros2-gbp/ros2-gbp-github-org/blob/latest/CONTRIBUTING.md describing how to create one.
 
     Once the above criteria are satisfied, and the ROS distribution isn't in a "sync freeze", then the PR will be merged.
 
