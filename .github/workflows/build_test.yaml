@@ -28,8 +28,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip setuptools wheel
         python -m pip install -r test/requirements.txt
+    - name: Run Tests
+      run: pytest -s
     - name: Run Nose Tests
-      run: nosetests -s
+      run: |
+        pip install nose
+        nosetests -s
   yamllint:
     name: Yaml Linting
     runs-on: ubuntu-20.04
