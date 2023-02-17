@@ -57,7 +57,7 @@ def detect_lines(diffstr):
 
 
 def get_changed_line_numbers():
-    UPSTREAM_NAME = 'unittest_upstream_comparision'
+    UPSTREAM_NAME = 'unittest_upstream_comparison'
     DIFF_BRANCH = 'master'
     DIFF_REPO = 'https://github.com/ros/rosdistro.git'
 
@@ -156,7 +156,7 @@ class TestRosdepRepositoryCheck(unittest.TestCase):
                             self._config['supported_arches'][missing_os][0])
                         print(
                             '\n::warning file=%s,line=%d::'
-                            "Key '%s' might be satisifed by %s package named '%s': %s" % (
+                            "Key '%s' might be satisfied by %s package named '%s': %s" % (
                                 path, key.__line__, key, missing_os, suggestion.binary_name,
                                 suggestion_url),
                             file=sys.stderr)
