@@ -298,7 +298,7 @@ The unit tests enforce alphabetization of elements and a consistent formatting t
 If you want to run the tests before submitting, first install the dependencies. Using `pip` is recommended.
 
 ```bash
-python3 -m pip install -r requirements.txt
+python3 -m pip install -r test/requirements.txt
 ```
 
 To run the tests run ``nosetests`` in the root of the repository.
