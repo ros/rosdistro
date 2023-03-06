@@ -24,15 +24,15 @@ package_sources:
   - !rpm_base_url http://download.opensuse.org/update/leap/$releasever/non-oss/
   rhel:
   - !rpm_mirrorlist_url https://mirrors.fedoraproject.org/mirrorlist?repo=epel-$releasever&arch=$basearch
-  - '7':
-    - !rpm_mirrorlist_url http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os
-    - !rpm_mirrorlist_url http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=updates
-    - !rpm_mirrorlist_url http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras
-    - !rpm_mirrorlist_url http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=sclo-sclo
-    '8':
+  - '8':
     - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/baseos
     - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/appstream
     - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/powertools
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/extras
+    '9':
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/baseos
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/appstream
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/crb
     - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/extras
   - !rpm_mirrorlist_url https://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-released-$releasever&arch=$basearch
   ubuntu:
@@ -68,8 +68,8 @@ supported_versions:
   opensuse:
   - '15.2'
   rhel:
-  - '7'
   - '8'
+  - '9'
   ubuntu:
   - bionic
   - focal
@@ -98,9 +98,9 @@ name_replacements:
     '37':
       '%{__isa_name}': 'x86'
   rhel:
-    '7':
-      '%{__isa_name}': 'x86'
-      '%{python3_pkgversion}': '36'
     '8':
+      '%{__isa_name}': 'x86'
+      '%{python3_pkgversion}': '3'
+    '9':
       '%{__isa_name}': 'x86'
       '%{python3_pkgversion}': '3'
