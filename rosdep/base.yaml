@@ -528,10 +528,7 @@ clang:
 clang-format:
   alpine: [clang]
   arch: [clang]
-  debian:
-    bullseye: [clang-format]
-    buster: [clang-format]
-    stretch: [clang-format]
+  debian: [clang-format]
   fedora: [clang]
   gentoo: [sys-devel/clang]
   nixos: [clang]
@@ -543,10 +540,7 @@ clang-format:
 clang-tidy:
   alpine: [clang-extra-tools]
   arch: [clang]
-  debian:
-    bullseye: [clang-tidy]
-    buster: [clang-tidy]
-    stretch: [clang-tidy]
+  debian: [clang-tidy]
   fedora: [clang-tools-extra]
   gentoo: [sys-devel/clang]
   nixos: [clang]
@@ -576,25 +570,30 @@ coinor-libcbc-dev:
   debian: [coinor-libcbc-dev]
   fedora: [coin-or-Cbc-devel]
   gentoo: [sci-libs/coinor-cbc]
+  nixos: [cbc]
   ubuntu: [coinor-libcbc-dev]
 coinor-libcbc3:
   debian: [coinor-libcbc3]
   fedora: [coin-or-Cbc]
+  nixos: [cbc]
   ubuntu: [coinor-libcbc3]
 coinor-libcgl-dev:
   debian: [coinor-libcgl-dev]
   fedora: [coin-or-Cgl-devel]
   gentoo: [sci-libs/coinor-cgl]
+  nixos: [cbc]
   ubuntu: [coinor-libcgl-dev]
 coinor-libclp-dev:
   debian: [coinor-libclp-dev]
   fedora: [coin-or-Clp-devel]
   gentoo: [sci-libs/coinor-clp]
+  nixos: [clp]
   ubuntu: [coinor-libclp-dev]
 coinor-libcoinutils-dev:
   debian: [coinor-libcoinutils-dev]
   fedora: [coin-or-CoinUtils-devel]
   gentoo: [sci-libs/coinor-utils]
+  nixos: [cbc]
   rhel:
     '7': [coin-or-CoinUtils-devel]
   ubuntu: [coinor-libcoinutils-dev]
@@ -603,6 +602,7 @@ coinor-libipopt-dev:
   debian: [coinor-libipopt-dev]
   fedora: [coin-or-Ipopt-devel]
   gentoo: [sci-libs/ipopt]
+  nixos: [ipopt]
   rhel:
     '7': [coin-or-Ipopt-devel]
   ubuntu: [coinor-libipopt-dev]
@@ -610,6 +610,7 @@ coinor-libosi-dev:
   debian: [coinor-libosi-dev]
   fedora: [coin-or-Osi-devel]
   gentoo: [sci-libs/coinor-osi]
+  nixos: [osi]
   ubuntu: [coinor-libosi-dev]
 collada-dom:
   arch: [collada-dom]
@@ -2401,6 +2402,12 @@ libabsl-dev:
     '*': [libabsl-dev]
     bionic: null
     focal: null
+libadolc-dev:
+  debian: [libadolc-dev]
+  gentoo: [sci-libs/adolc]
+  nixos: [adolc]
+  opensuse: [adolc-devel]
+  ubuntu: [libadolc-dev]
 libalglib-dev:
   debian: [libalglib-dev]
   fedora: [alglib-devel]
@@ -2589,6 +2596,35 @@ libboost-chrono-dev:
   opensuse: [libboost_chrono1_66_0-devel]
   rhel: [boost-devel]
   ubuntu: [libboost-chrono-dev]
+libboost-coroutine:
+  alpine: [boost-dev]
+  debian:
+    bullseye: [libboost-coroutine1.74.0]
+    buster: [libboost-coroutine1.67.0]
+  fedora: [boost-coroutine]
+  gentoo: [dev-libs/boost]
+  nixos: [boost]
+  openembedded: [boost@openembedded-core]
+  opensuse: [libboost_coroutine1_66_0]
+  rhel:
+    '*': [boost-coroutine]
+    '7': null
+  ubuntu:
+    bionic: [libboost-coroutine1.65.1]
+    eoan: [libboost-coroutine1.67.0]
+    focal: [libboost-coroutine1.71.0]
+    jammy: [libboost-coroutine1.74.0]
+    xenial: [libboost-coroutine1.58.0]
+libboost-coroutine-dev:
+  alpine: [boost-dev]
+  debian: [libboost-coroutine-dev]
+  fedora: [boost-devel]
+  gentoo: [dev-libs/boost]
+  nixos: [boost]
+  openembedded: [boost@openembedded-core]
+  opensuse: [libboost_coroutine1_66_0-devel]
+  rhel: [boost-devel]
+  ubuntu: [libboost-coroutine-dev]
 libboost-date-time:
   debian:
     bullseye: [libboost-date-time1.74.0]
@@ -4249,6 +4285,15 @@ libmysqlcppconn-dev:
   gentoo: [dev-db/mysql-connector-c++]
   opensuse: [libmysqlcppconn-devel]
   ubuntu: [libmysqlcppconn-dev]
+libnanoflann-dev:
+  debian:
+    '*': [libnanoflann-dev]
+    buster: null
+  gentoo: [sci-libs/nanoflann]
+  ubuntu:
+    '*': [libnanoflann-dev]
+    bionic: null
+    focal: null
 libncurses:
   arch: [ncurses]
   debian: [libncurses5]
@@ -5053,8 +5098,8 @@ libpoco-dev:
   openembedded: [poco@meta-oe]
   opensuse: [poco-devel]
   rhel:
-    '*': null
-    '7': [poco-devel]
+    '*': [poco-devel]
+    '8': null
   slackware: [poco]
   ubuntu: [libpoco-dev]
 libpocofoundation9:
@@ -6842,6 +6887,14 @@ muparser:
   nixos: [muparser]
   opensuse: [muparser-devel]
   ubuntu: [libmuparser-dev]
+nanoflann:
+  debian:
+    '*': [libnanoflann-dev]
+    buster: null
+  ubuntu:
+    '*': [libnanoflann-dev]
+    bionic: null
+    focal: null
 nasm:
   arch: [nasm]
   debian: [nasm]
@@ -7803,6 +7856,14 @@ sfml-dev:
   gentoo: [media-libs/libsfml]
   nixos: [sfml]
   ubuntu: [libsfml-dev]
+simde:
+  debian:
+    '*': [libsimde-dev]
+    buster: null
+  ubuntu:
+    '*': [libsimde-dev]
+    bionic: null
+    focal: null
 sixad:
   ubuntu: [sixad]
 slime:
@@ -8465,6 +8526,7 @@ wget:
   osx:
     homebrew:
       packages: [wget]
+  rhel: [wget]
   ubuntu: [wget]
 wireguard:
   debian:

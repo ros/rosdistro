@@ -55,7 +55,7 @@ from .fold_block import Fold
 # for commented debugging code below
 # import pprint
 
-UPSTREAM_NAME = 'unittest_upstream_comparision'
+UPSTREAM_NAME = 'unittest_upstream_comparison'
 DIFF_BRANCH = 'master'
 DIFF_REPO = 'https://github.com/ros/rosdistro.git'
 
