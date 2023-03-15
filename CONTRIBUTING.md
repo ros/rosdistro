@@ -295,10 +295,16 @@ How to submit pull requests
 When submitting pull requests it is expected that they pass the unit tests for formatting.
 The unit tests enforce alphabetization of elements and a consistent formatting to keep merging as clean as possible.
 
+If you want to run the tests before submitting, first install the dependencies. Using `pip` is recommended.
+
+```bash
+python3 -m pip install -r test/requirements.txt
+```
+
 To run the tests run ``nosetests`` in the root of the repository.
 These tests require several dependencies that can be installed either from the ROS repositories or via pip(list built based on the content of [.travis.yaml](https://github.com/ros/rosdistro/blob/master/.travis.yml):
 
-|   Dependency   |            Ubuntu package         |   Pip package  |
+| Dependency   | Ubuntu package (<=20.04)| Pip package  |
 | :------------: | --------------------------------- | -------------- |
 | catkin_pkg     | python-catkin-pkg                 | catkin-pkg     |
 | github         | python-github                     | PyGithub       |
