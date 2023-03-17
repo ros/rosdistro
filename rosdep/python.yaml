@@ -8996,7 +8996,10 @@ python3-qt5-bindings:
   nixos: [python3Packages.pyqt5]
   openembedded: [python3-pyqt5@meta-qt5]
   opensuse: [python3-qt5]
-  rhel: ['python%{python3_pkgversion}-qt5-devel', 'python%{python3_pkgversion}-sip-devel', libXext-devel, redhat-rpm-config]
+  rhel:
+    '*': [python3-pyside2-devel, python3-shiboken2-devel]
+    '7': ['python%{python3_pkgversion}-qt5-devel', 'python%{python3_pkgversion}-sip-devel', libXext-devel, redhat-rpm-config]
+    '8': ['python%{python3_pkgversion}-qt5-devel', 'python%{python3_pkgversion}-sip-devel', libXext-devel, redhat-rpm-config]
   slackware: [python3-PyQt5]
   ubuntu:
     '*': [libpyside2-dev, libshiboken2-dev, pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-pyside2.qtsvg, python3-sip-dev, shiboken2]
