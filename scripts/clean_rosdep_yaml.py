@@ -43,14 +43,14 @@ def prn(n, nm, lvl):
         return "%s%s: %s\n" % (pad, nm, 'null')
     elif isinstance(n, str):
         if len(n.split('\n')) > 1:
-            return "%s%s: |\n%s" % (pad, nm, paddify(n, lvl+1))
+            return "%s%s: |\n%s" % (pad, nm, paddify(n, lvl + 1))
         else:
             if nm in dont_bracket:
                 return "%s%s: %s\n" % (pad, nm, quote_if_necessary(n))
             return "%s%s: [%s]\n" % (pad, nm, ', '.join(quote_if_necessary(n.split())))
     buf = "%s%s:\n" % (pad, nm)
     for a in sorted(n.keys()):
-        buf += prn(n[a], a, lvl+1)
+        buf += prn(n[a], a, lvl + 1)
     return buf
 
 
