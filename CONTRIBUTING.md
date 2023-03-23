@@ -295,14 +295,19 @@ How to submit pull requests
 When submitting pull requests it is expected that they pass the unit tests for formatting.
 The unit tests enforce alphabetization of elements and a consistent formatting to keep merging as clean as possible.
 
-If you want to run the tests before submitting, first install the dependencies. Using `pip` is recommended.
+#### Testing
+
+To run the tests run ``nosetests`` (nose tests) in the root of the repository.
+
+Note: There's a [known issue](https://github.com/disqus/nose-unittest/issues/2) discovered [here](https://github.com/ros/rosdistro/issues/16336) that most tests won't run if you have the python package `nose-unitttest` installed.
+
+The contained tests require several dependencies that can be installed either from the ROS repositories or via pip (list built based on the content of [.travis.yaml](https://github.com/ros/rosdistro/blob/master/.travis.yml)). If you want to run the tests before submitting, first install the dependencies. Using `pip` is recommended, e.g. by this command:
 
 ```bash
 python3 -m pip install -r test/requirements.txt
 ```
 
-To run the tests run ``nosetests`` in the root of the repository.
-These tests require several dependencies that can be installed either from the ROS repositories or via pip(list built based on the content of [.travis.yaml](https://github.com/ros/rosdistro/blob/master/.travis.yml):
+The following modules/packages are needed and will see install by avobe comment.
 
 | Dependency   | Ubuntu package (<=20.04)| Pip package  |
 | :------------: | --------------------------------- | -------------- |
@@ -314,6 +319,6 @@ These tests require several dependencies that can be installed either from the R
 | unidiff        | python-unidiff (Zesty and higher) | unidiff        |
 | yamllint       | yamllint                          | yamllint       |
 
-There is a tool ``rosdistro_reformat`` which will fix most formatting errors such as alphabetization and correct formatting.
+#### Formatting
 
-Note: There's a [known issue](https://github.com/disqus/nose-unittest/issues/2) discovered [here](https://github.com/ros/rosdistro/issues/16336) that most tests won't run if you have the python package `nose-unitttest` installed.
+There is further the tool ``rosdistro_reformat`` which will fix most formatting errors such as alphabetization and correct formatting. This tool takes an ``index`` parameter that is a required command line argument. With option ``-n`` a dry run is possible. 
