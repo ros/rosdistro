@@ -104,7 +104,7 @@ def get_ros2_core_repositories(ros_distro, ros_distro_yaml):
     constrained_list = []
     for repo in ros_distro_yaml['repositories']:
         repo_dict = ros_distro_yaml['repositories'][repo]
-        if not 'source' in repo_dict:
+        if 'source' not in repo_dict:
             print("Package '{repo}' has no source entry, skipping".format(repo=repo))
             continue
         source_url = repo_dict['source']['url']
@@ -118,13 +118,14 @@ def get_ros2_core_repositories(ros_distro, ros_distro_yaml):
                 # will only add it to the constrained_list if it has both a
                 # 'release' section and it is on github.
                 item_to_delete = ros2_repo
-                if not 'release' in repo_dict:
+                if 'release' not in repo_dict:
                     print("No release section for package '{repo}', skipping".format(repo=repo))
                     break
 
                 release_url = repo_dict['release']['url']
                 if not release_url.startswith('https://github.com'):
-                    print("Release URL {release_url} for package '{repo}' is not on GitHub, do not know how to fetch tracks.yaml data".format(release_url=release_url, repo=repo))
+                    print("Release URL {release_url} for package '{repo}' is not on GitHub, do not know how to fetch tracks.yaml data".format(
+                        release_url=release_url, repo=repo))
                     break
 
                 constrained_list.append(repo_dict)
@@ -140,17 +141,18 @@ def get_all_ros2_repositories(ros_distro_yaml):
     constrained_list = []
     for repo in ros_distro_yaml['repositories']:
         repo_dict = ros_distro_yaml['repositories'][repo]
-        if not 'source' in repo_dict:
+        if 'source' not in repo_dict:
             print("Package '{repo}' has no source entry, skipping".format(repo=repo))
             continue
 
-        if not 'release' in repo_dict:
+        if 'release' not in repo_dict:
             print("No release section for package '{repo}', skipping".format(repo=repo))
             continue
 
         release_url = repo_dict['release']['url']
         if not release_url.startswith('https://github.com'):
-            print("Release URL {release_url} for package '{repo}' is not on GitHub, do not know how to fetch tracks.yaml data".format(release_url=release_url, repo=repo))
+            print("Release URL {release_url} for package '{repo}' is not on GitHub, do not know how to fetch tracks.yaml data".format(
+                release_url=release_url, repo=repo))
             continue
 
         constrained_list.append(repo_dict)
@@ -203,7 +205,8 @@ def main():
         tracks_yaml_distro = tracks_yaml['tracks'][ros_distro]
 
         if tracks_yaml_distro['devel_branch'] != repo['source']['version']:
-            print("Package '{reponame}' rosdistro source branch ({source_branch}) does not match release branch ({release_branch})".format(reponame=tracks_yaml_distro['name'], source_branch=repo['source']['version'], release_branch=tracks_yaml_distro['devel_branch']))
+            print("Package '{reponame}' rosdistro source branch ({source_branch}) does not match release branch ({release_branch})".format(
+                reponame=tracks_yaml_distro['name'], source_branch=repo['source']['version'], release_branch=tracks_yaml_distro['devel_branch']))
 
             if args.dry_run:
                 continue
@@ -232,8 +235,9 @@ This makes it match the source entry in https://github.com/ros/rosdistro/{ros_di
                 try:
                     gitrepo.git.push('--set-upstream', gitrepo.remote(), gitrepo.head.ref)
                 except git.exc.GitCommandError:
-                   print('Could not push to release repo for {ros_distro}: {reponame}, skipping...'.format(ros_distro=ros_distro, reponame=tracks_yaml_distro['name']))
-                   continue
+                    print('Could not push to release repo for {ros_distro}: {reponame}, skipping...'.format(
+                        ros_distro=ros_distro, reponame=tracks_yaml_distro['name']))
+                    continue
 
             gh_title = 'Update {ros_distro} devel_branch to match rosdistro source entry'.format(ros_distro=ros_distro)
             gh_repo = gh.get_repo(release_end)
