@@ -111,7 +111,8 @@ def check_git_remote_exists(url, version, tags_valid=False, commits_valid=False)
 
     # Check for tags first as they take priority.
     # From Cloudbees Support:
-    #  >the way git plugin handles this conflict, a tag/sha1 is always preferred to branch as this is the way most user use an existing job to trigger a release build.
+    #  >the way git plugin handles this conflict, a tag/sha1 is always preferred to branch
+    #  as this is the way most user use an existing job to trigger a release build.
     #  Catching the corner case to #20286
 
     tag_match = False
@@ -125,7 +126,7 @@ def check_git_remote_exists(url, version, tags_valid=False, commits_valid=False)
     tags = [t for _, t in (l.split(None, 1) for l in tag_list.splitlines())]
     if 'refs/tags/%s' % version in tags:
         tag_match = True
-    
+
     if tag_match:
         if tags_valid:
             return (True, '')
@@ -149,7 +150,7 @@ def check_git_remote_exists(url, version, tags_valid=False, commits_valid=False)
             subprocess.check_call('git -C %s/git-repo branch -r --contains %s' % (tmpdir, version), shell=True)
             commit_match = True
         except:
-            pass #return (False, 'No commit found matching %s' % version)
+            pass  # return (False, 'No commit found matching %s' % version)
         finally:
             shutil.rmtree(tmpdir)
 
@@ -173,7 +174,7 @@ def check_git_remote_exists(url, version, tags_valid=False, commits_valid=False)
     if 'refs/heads/%s' % version in branch_list:
         return (True, '')
     return (False, 'No branch found matching %s' % version)
-    
+
 
 def check_source_repo_entry_for_errors(source, tags_valid=False, commits_valid=False):
     errors = []
@@ -200,7 +201,9 @@ def check_source_repo_entry_for_errors(source, tags_valid=False, commits_valid=F
             if not rosghprb_token:
                 print('No ROSGHPRB_TOKEN set, continuing without checking hooks')
             else:
-                hooks_valid = hook_permissions.check_hooks_on_repo(user, repo, hook_errors, hook_user='ros-pull-request-builder', callback_url='http://build.ros.org/ghprbhook/', token=rosghprb_token)
+                hooks_valid = hook_permissions.check_hooks_on_repo(
+                    user, repo, hook_errors, hook_user='ros-pull-request-builder',
+                    callback_url='http://build.ros.org/ghprbhook/', token=rosghprb_token)
                 if not hooks_valid:
                     errors += hook_errors
         else:
@@ -335,7 +338,6 @@ def main():
 
     diffed_lines = detect_lines(diff)
     # print("Diff lines %s" % diffed_lines)
-
 
     for path, lines in diffed_lines.items():
         directory = os.path.join(os.path.dirname(__file__), '..')
