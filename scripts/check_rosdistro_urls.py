@@ -59,7 +59,8 @@ def main(index_url, rosdistro_name):
                 for prefix in prefixes:
                     if repo.url.startswith(prefix):
                         print()
-                        print("Repository '%s' with url '%s' must use 'https://github.com/%s' instead" % (repo_name, repo.url, repo.url[len(prefix):]), file=sys.stderr)
+                        print("Repository '%s' with url '%s' must use 'https://github.com/%s' instead" % (
+                            repo_name, repo.url, repo.url[len(prefix):]), file=sys.stderr)
                         success = False
                 for prefix in prefixes + ['https://github.com/']:
                     if repo.url.startswith(prefix) and not repo.url.endswith('.git'):
