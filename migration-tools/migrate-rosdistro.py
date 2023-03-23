@@ -16,6 +16,7 @@ import yaml
 from rosdistro import DistributionFile, get_distribution_cache, get_distribution_file, get_index
 from rosdistro.writer import yaml_from_distribution_file
 
+
 # These functions are adapted from Bloom's internal 'get_tracks_dict_raw' and
 # 'write_tracks_dict_raw' functions.  We cannot use them directly since they
 # make assumptions about the release repository that are not true during the
@@ -26,6 +27,7 @@ def read_tracks_file():
         return yaml.safe_load(tracks_yaml)
     else:
         raise ValueError('repository is missing tracks.yaml in master branch.')
+
 
 @inbranch('master')
 def write_tracks_file(tracks, commit_msg=None):
@@ -68,9 +70,9 @@ if len(index_yaml['distributions'][args.source]['distribution']) != 1 or \
 # There is a possibility that the source_ref has a different distribution file
 # layout. Check that they match.
 source_ref_index_yaml = yaml.safe_load(show(args.source_ref, 'index-v4.yaml'))
-if source_ref_index_yaml['distributions'][args.source]['distribution'] != \
-  index_yaml['distributions'][args.source]['distribution']:
-      raise RuntimeError('The distribution file layout has changed between the source ref and now.')
+if (source_ref_index_yaml['distributions'][args.source]['distribution'] !=
+        index_yaml['distributions'][args.source]['distribution']):
+    raise RuntimeError('The distribution file layout has changed between the source ref and now.')
 
 source_distribution_filename = index_yaml['distributions'][args.source]['distribution'][0]
 dest_distribution_filename = index_yaml['distributions'][args.dest]['distribution'][0]
@@ -89,7 +91,7 @@ for repo_name, repo_data in sorted(source_distribution.repositories.items()):
         if dest_repo_data.release_repository:
             new_repositories.append(repo_name)
             release_tag = dest_repo_data.release_repository.tags['release']
-            release_tag = release_tag.replace(args.source,args.dest)
+            release_tag = release_tag.replace(args.source, args.dest)
             dest_repo_data.release_repository.tags['release'] = release_tag
         dest_distribution.repositories[repo_name] = dest_repo_data
     elif dest_distribution.repositories[repo_name].release_repository is not None and \
@@ -169,7 +171,7 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
                 if line == '':
                     continue
                 obj, ref = line.split('\t')
-                ref = ref[11:] # strip 'refs/heads/'
+                ref = ref[11:]  # strip 'refs/heads/'
                 newref = ref.replace(args.source, args.dest)
                 subprocess.check_call(['git', 'branch', newref, obj])
                 if newref.startswith('patches/'):
@@ -217,7 +219,8 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
 
         # Bloom will not run with multiple remotes.
         subprocess.check_call(['git', 'remote', 'remove', 'oldorigin'])
-        subprocess.check_call(['git', 'bloom-release', '--non-interactive', '--release-increment', release_inc, '--unsafe', args.dest], stdin=subprocess.DEVNULL, env=os.environ)
+        subprocess.check_call(['git', 'bloom-release', '--non-interactive', '--release-increment', release_inc, '--unsafe', args.dest],
+                              stdin=subprocess.DEVNULL, env=os.environ)
         subprocess.check_call(['git', 'push', 'origin', '--all', '--force'])
         subprocess.check_call(['git', 'push', 'origin', '--tags', '--force'])
         subprocess.check_call(['git', 'checkout', 'master'])
