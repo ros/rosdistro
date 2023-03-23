@@ -35,7 +35,7 @@ codeCodes = {
 def printc(text, color):
     """Print in color."""
     if sys.stdout.isatty():
-        print("\033["+codeCodes[color]+"m"+text+"\033[0m")
+        print("\033[" + codeCodes[color] + "m" + text + "\033[0m")
     else:
         print(text)
 
@@ -52,7 +52,7 @@ def no_trailing_spaces(buf):
     clean = True
     for i, l in enumerate(buf.split('\n')):
         if re.search(r' $', l) is not None:
-            print_err("trailing space line %u" % (i+1))
+            print_err("trailing space line %u" % (i + 1))
             clean = False
     return clean
 
@@ -61,7 +61,7 @@ def no_blank_lines(buf):
     clean = True
     for i, l in enumerate(buf.split('\n')[:-1]):
         if re.match(r'^\s*$', l):
-            print_err("blank line %u" % (i+1))
+            print_err("blank line %u" % (i + 1))
             clean = False
     return clean
 
@@ -106,10 +106,10 @@ def correct_indent(buf):
         lvl = o['lvl']
         fun.lvl = lvl
         if s % ilen > 0:
-            print_err("invalid indentation level line %u: %u" % (i+1, s))
+            print_err("invalid indentation level line %u: %u" % (i + 1, s))
             return False
         if lvl > olvl + 1:
-            print_err("too much indentation line %u" % (i+1))
+            print_err("too much indentation line %u" % (i + 1))
             return False
         return True
     fun.lvl = 0
@@ -124,7 +124,7 @@ def check_brackets(buf):
         if m is not None and m.groups()[0] not in excepts:
             if m.groups()[1] == 'null':
                 return True
-            print_err("list not in square brackets line %u" % (i+1))
+            print_err("list not in square brackets line %u" % (i + 1))
             return False
         return True
     return generic_parser(buf, fun)
@@ -150,7 +150,7 @@ def check_order(buf):
             raise
         st[lvl] = item
         if item < prev:
-            print_err("list out of alphabetical order line %u.  '%s' should come before '%s'" % ((i+1), item, prev))
+            print_err("list out of alphabetical order line %u.  '%s' should come before '%s'" % ((i + 1), item, prev))
             return False
         return True
     fun.namestack = ['']
