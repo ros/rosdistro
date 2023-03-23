@@ -55,7 +55,7 @@ class GHPRBHookDetector(object):
                 'Failed to access repo [ %s/%s ] Reason %s'
                 % (username, reponame, ex),
                 file=sys.stderr
-                )
+            )
             return None
         return repo
 
@@ -87,7 +87,8 @@ class GHPRBHookDetector(object):
                 return True
 
 
-def check_hooks_on_repo(user, repo, errors, hook_user='ros-pull-request-builder',
+def check_hooks_on_repo(
+        user, repo, errors, hook_user='ros-pull-request-builder',
         callback_url='http://build.ros.org/ghprbhook/', token=None, strict=False):
     ghprb_detector = GHPRBHookDetector(hook_user, token, callback_url)
     test_repo = ghprb_detector.get_repo(user, repo)
@@ -120,12 +121,9 @@ def main():
                     'to a GitHub repo.')
     parser.add_argument('user', type=str)
     parser.add_argument('repo', type=str)
-    parser.add_argument('--callback-url', type=str,
-        default='http://build.ros.org/ghprbhook/')
-    parser.add_argument('--hook-user', type=str,
-        default='ros-pull-request-builder')
-    parser.add_argument('--password-env', type=str,
-        default='ROSGHPRB_TOKEN')
+    parser.add_argument('--callback-url', type=str, default='http://build.ros.org/ghprbhook/')
+    parser.add_argument('--hook-user', type=str, default='ros-pull-request-builder')
+    parser.add_argument('--password-env', type=str, default='ROSGHPRB_TOKEN')
 
     args = parser.parse_args()
 
