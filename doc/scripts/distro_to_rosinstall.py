@@ -5,16 +5,17 @@ import sys
 import yaml
 from rospkg.distro import load_distro, distro_uri
 
+
 def translate(distro, translate_dir):
     d = load_distro(distro_uri(distro))
     repo_list = d.get_stacks(True)
     for name, item in repo_list.iteritems():
         if item.vcs_config.type == 'svn':
-            rosinstall = [{item.vcs_config.type: \
+            rosinstall = [{item.vcs_config.type:
                            {'local-name': item.name,
                             'uri': item.vcs_config.anon_dev}}]
         else:
-            rosinstall = [{item.vcs_config.type: \
+            rosinstall = [{item.vcs_config.type:
                            {'local-name': item.name,
                             'uri': item.vcs_config.anon_repo_uri,
                             'version': item.vcs_config.dev_branch}}]
