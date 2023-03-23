@@ -85,7 +85,7 @@ def enumerate_blocks(url):
 
             block[k] = v
 
-        if block: 
+        if block:
             yield block
 
 
