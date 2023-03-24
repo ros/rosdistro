@@ -307,7 +307,7 @@ The contained tests require several dependencies that can be installed either fr
 python3 -m pip install -r test/requirements.txt
 ```
 
-The following modules/packages are needed and will see install by avobe comment.
+The following modules/packages are needed and will see install by the above command.
 
 | Dependency   | Ubuntu package (<=20.04)| Pip package  |
 | :------------: | --------------------------------- | -------------- |
