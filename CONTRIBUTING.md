@@ -135,6 +135,8 @@ Guidelines for rosdep rules
     * If specific versions are called out, there should be coverage of all versions currently targeted by supported ROS distros.
      * If there's a new distro in prerelease adding a rule for it is fine.
        However please don't target 'sid' as it's a rolling target and when the keys change our database gets out of date.
+    * Rules for EOL Distros will be pruned periodically.
+      * If you are trying to use an EOL platform for historical purposes, you can access the old rules from tags of the rosdistro when that platform was supported, but there will not be any support or changes. [example](https://github.com/ros/rosdistro/issues/31569#issuecomment-1003974561)
   * Keep everything in alphabetical order for better merging.
   * No trailing whitespace.
   * No blank lines.
