@@ -4,7 +4,6 @@ Please select the appropriate template from below: ROSDEP_RULE_TEMPLATE or DOC_I
 If you're making a new release with bloom please use bloom to create the pull request automatically.
 If you've already run the release bloom has a `--pull-request-only` option you can use.-->
 
-
 <!-- ROSDEP_RULE_TEMPLATE: Submitter Please review the contributing guidelines: https://github.com/ros/rosdistro/blob/master/CONTRIBUTING.md -->
 
 Please add the following dependency to the rosdep database.
@@ -31,7 +30,7 @@ More info at https://github.com/ros/rosdistro/blob/master/CONTRIBUTING.md#guidel
 - Debian: https://packages.debian.org/
   - REQUIRED
 - Ubuntu: https://packages.ubuntu.com/
-   - REQUIRED
+  - REQUIRED
 - Fedora: https://packages.fedoraproject.org/
   - IF AVAILABLE
 - Arch: https://www.archlinux.org/packages/
@@ -47,7 +46,6 @@ More info at https://github.com/ros/rosdistro/blob/master/CONTRIBUTING.md#guidel
 - openSUSE: https://software.opensuse.org/package/
   - IF AVAILABLE
 
-
 <!-- DOC_INDEX_TEMPLATE: add package to rosdistro for documentation indexing -->
 
 <!--- Templated for adding a package to be indexed in a rosdistro: http://wiki.ros.org/rosdistro/Tutorials/Indexing%20Your%20ROS%20Repository%20for%20Documentation%20Generation -->
@@ -59,8 +57,6 @@ ROSDISTRO NAME
 # The source is here:
 
 http://sourcecode_url
-
-
 
 # Checks
  - [ ] All packages have a declared license in the package.xml
