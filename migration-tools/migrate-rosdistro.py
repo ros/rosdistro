@@ -182,7 +182,7 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
                     set_patch_config(newref, config)
             # Check for a release repo url in the track configuration
             if 'release_repo_url' in dest_track:
-                del dest_track['release_repo_url']
+                dest_track['release_repo_url'] = None
             write_tracks_file(tracks, f'Copy {args.source} track to {args.dest} with migrate-rosdistro.py.')
         else:
             dest_track = tracks['tracks'][args.dest]
