@@ -219,6 +219,7 @@ This makes it match the source entry in https://github.com/ros/rosdistro/{ros_di
 
             with tempfile.TemporaryDirectory() as tmpdirname:
                 gitrepo = git.Repo.clone_from(release_url, tmpdirname)
+                gitrepo.git.checkout('master')
                 branch = gitrepo.create_head(branch_name)
                 branch.checkout()
                 with open(os.path.join(tmpdirname, 'tracks.yaml'), 'r') as infp:
@@ -232,8 +233,8 @@ This makes it match the source entry in https://github.com/ros/rosdistro/{ros_di
                 try:
                     gitrepo.git.push('--set-upstream', gitrepo.remote(), gitrepo.head.ref)
                 except git.exc.GitCommandError:
-                   print('Could not push to release repo for {ros_distro}: {reponame}, skipping...'.format(ros_distro=ros_distro, reponame=tracks_yaml_distro['name']))
-                   continue
+                    print('Could not push to release repo for {ros_distro}: {reponame}, skipping...'.format(ros_distro=ros_distro, reponame=tracks_yaml_distro['name']))
+                    continue
 
             gh_title = 'Update {ros_distro} devel_branch to match rosdistro source entry'.format(ros_distro=ros_distro)
             gh_repo = gh.get_repo(release_end)
