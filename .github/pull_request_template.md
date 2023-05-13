@@ -45,6 +45,8 @@ More info at https://github.com/ros/rosdistro/blob/master/CONTRIBUTING.md#guidel
   - OPTIONAL
 - openSUSE: https://software.opensuse.org/package/
   - IF AVAILABLE
+- rhel: http://eastus.azure.repo.almalinux.org/almalinux/9.2/AppStream/x86_64/os/Packages/
+  - IF AVAILABLE
 
 <!-- DOC_INDEX_TEMPLATE: add package to rosdistro for documentation indexing -->
 
