@@ -316,6 +316,12 @@ These tests require several dependencies that can be installed either from the R
 | unidiff        | python-unidiff (Zesty and higher) | unidiff        |
 | yamllint       | yamllint                          | yamllint       |
 
-There is a tool ``rosdistro_reformat`` which will fix most formatting errors such as alphabetization and correct formatting.
+There is a tool [scripts/check_rosdep](./scripts/check_rosdep.py) which will check most formatting errors such as alphabetization and correct formatting.
+It is recommended to run it before submitting your contribution.
+
+For example, to check a change to `rosdep/base.yaml`:
+```bash
+python3 scripts/check_rosdep.py rosdep/base.yaml
+```
 
 Note: There's a [known issue](https://github.com/disqus/nose-unittest/issues/2) discovered [here](https://github.com/ros/rosdistro/issues/16336) that most tests won't run if you have the python package `nose-unitttest` installed.
