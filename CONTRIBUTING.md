@@ -124,7 +124,7 @@ Guidelines for rosdep rules
    For example if an ubuntu package is the same for all versions only write the generic ubuntu rule, don't call out the same package name for every version of ubuntu.
    Similarly don't call out indirect dependencies or default options for packages.
  * Python packages should go in the `python.yaml`.
- * Homebrew into `osx-homebrew.yaml`.
+ * The `osx-homebrew.yaml` file is deprecated; new macOS/Homebrew rules should go into either `base.yaml` or `python.yaml`.
  * Supported Platforms
    * Rules can be contributed for any platform.
      However to be released they must be at least cover the supported platforms in REP 3: http://www.ros.org/reps/rep-0003.html So:
