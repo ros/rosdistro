@@ -124,7 +124,7 @@ Guidelines for rosdep rules
    For example if an ubuntu package is the same for all versions only write the generic ubuntu rule, don't call out the same package name for every version of ubuntu.
    Similarly don't call out indirect dependencies or default options for packages.
  * Python packages should go in the `python.yaml`.
- * Homebrew into `osx-homebrew.yaml`.
+ * The `osx-homebrew.yaml` file is deprecated; new macOS/Homebrew rules should go into either `base.yaml` or `python.yaml`.
  * Supported Platforms
    * Rules can be contributed for any platform.
      However to be released they must be at least cover the supported platforms in REP 3: http://www.ros.org/reps/rep-0003.html So:
@@ -316,6 +316,12 @@ These tests require several dependencies that can be installed either from the R
 | unidiff        | python-unidiff (Zesty and higher) | unidiff        |
 | yamllint       | yamllint                          | yamllint       |
 
-There is a tool ``rosdistro_reformat`` which will fix most formatting errors such as alphabetization and correct formatting.
+There is a tool [scripts/check_rosdep](./scripts/check_rosdep.py) which will check most formatting errors such as alphabetization and correct formatting.
+It is recommended to run it before submitting your contribution.
+
+For example, to check a change to `rosdep/base.yaml`:
+```bash
+python3 scripts/check_rosdep.py rosdep/base.yaml
+```
 
 Note: There's a [known issue](https://github.com/disqus/nose-unittest/issues/2) discovered [here](https://github.com/ros/rosdistro/issues/16336) that most tests won't run if you have the python package `nose-unitttest` installed.
