@@ -43,6 +43,7 @@ There are a few different types of pull requests that are opened against this re
         * The license must be reflected in the package.xml file of all sub-packages in the repository.
         * The source repository must be publicly accessible.
         * The source repository should contain one or more ROS packages (meaning they have a `package.xml` in the source repository). Packages that are not ROS packages can be accepted, but they are rare and require special handling in the release repository.
+        * The name of the repository and the packages within it must comply with the guidelines in [REP-144](https://www.ros.org/reps/rep-0144.html).
     1. The best practices for Rolling releases is to use a release repository in the https://github.com/ros2-gbp organization. That way this package can be automatically released from Rolling into the next stable ROS distribution.  There are instructions in https://github.com/ros2-gbp/ros2-gbp-github-org/blob/latest/CONTRIBUTING.md describing how to create one.
 
     Once the above criteria are satisfied, and the ROS distribution isn't in a "sync freeze", then the PR will be merged.
@@ -50,6 +51,8 @@ There are a few different types of pull requests that are opened against this re
 1.  A new rosdep key.  An example of this kind of PR is [25995](https://github.com/ros/rosdistro/pull/25995). These pull requests should conform to the standards documented at [CONTRIBUTING.md#rosdep-rules-contributions](CONTRIBUTING.md#rosdep-rules-contributions). Some rules in addition to contributing guidelines:
     * A pull request to update rosdep should never change the name of existing keys.
     * When adding a new key, Ubuntu and Debian are required, Fedora, Gentoo, and openSUSE are encouraged if the package also exists on those Linux distributions.
+    * Native packages are strongly preferred.  If a native package exists for the key in question, then that should always be used over e.g. a pip key.
+    * If a native package is available, the key name should match the name of the package in Ubuntu.
     * If a package was added to e.g. Ubuntu Focal but isn’t available in Bionic or Xenial, the key should look like:
     ```
     mykey:
@@ -65,7 +68,5 @@ There are a few different types of pull requests that are opened against this re
 1.  A revert of an existing package.  This can happen if the package in question can’t be built on the farm for some reason, or the maintainer doesn’t want to maintain it, or for various other reasons.  An example of this kind of PR is [26427](https://github.com/ros/rosdistro/pull/26427).  If a package was previously merged into rosdistro, but has never been synced to main, these will be merged right away (no downstream users could have installed them).  If a package *has* been synced to main, it is still safe to remove it.  However, the submitter should be aware that the package will disappear from ROS completely; no old versions will be kept around for users to install.  The reviewer will ensure that the maintainer is aware of that limitation.  If the submitter is OK with that situation, then these will be merged.  It can be determined if a package has been synced to main by visiting either [ROS 1 Status](http://repositories.ros.org/status_page) or [ROS 2 Status](http://repo.ros2.org/status_page/), and clicking on the distribution in question.  For instance, to look up Melodic, click on [http://repositories.ros.org/status_page/ros_melodic_default.html](http://repositories.ros.org/status_page/ros_melodic_default.html).  The package can be searched for on the top bar.  The three boxes to the right of the package name determine its status in the "building", "testing", and "main" repositories.  If a package is red in "main", then it has never been synced to main.
 
 1.  Changes to the rosdistro code. These pull requests change any of the scripts or tests that are housed in the rosdistro repositories.  They will be reviewed as any other code change in the ROS ecosystem.
-
-1.  Maintainership changes. In an open source ecosystem it is necessary to change maintainership of packages from time to time. In optimal situations the current maintainer can designate their successor and officially hand off maintainership. If the maintainer is no longer able to do the necessary work a request can be made of the rosdistro release manager to take over maintenance. The manager will review each request on a case by case basis. If you see a change of maintainership please hold it for review by the release manager.
 
 1.  Miscellaneous. Any other pull requests adding or modifying documentation, or anything else will be reviewed as any other code change in the ROS ecosystem.
