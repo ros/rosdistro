@@ -74,7 +74,9 @@ There are a few different types of pull requests that are opened against this re
 Reviewer utilities
 ------------------
 
-New package review checklist, to copy paste into review comments
+### New package review checklist
+
+You can copy-paste the below into your review comment when reviewing a new package addition into rosdistro.
 
 - [ ] At least one of the following must be present
   - [ ] Top level license file:
@@ -100,3 +102,11 @@ $ find . -name "package.xml" -exec grep --color=auto -e "<license>" "{}" "+"
 <OUTPUT HERE>
 ```
 </details>
+
+### pip keys standard disclaimer
+
+You can copy-paste the following as a comment when reviewing a new rosdistro key using `pip` (even if you are approving!)
+
+Standard pip disclaimer: ROS packages that depend on `pip` keys cannot be released into a ROS distribution.
+They can only be depended on by from-source builds.
+Because of this, system packages are highly preferred to pip packages.
