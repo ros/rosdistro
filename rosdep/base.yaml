@@ -507,6 +507,17 @@ checkinstall:
   debian: [checkinstall]
   nixos: [checkinstall]
   ubuntu: [checkinstall]
+chromedriver:
+  alpine: [chromium-chromedriver]
+  arch: [chromium]
+  debian: [chromium-driver]
+  fedora: [chromedriver]
+  gentoo: [www-apps/chromedriver-bin]
+  macports: [chromedriver]
+  nixos: [chromedriver]
+  opensuse: [chromedriver]
+  rhel: [chromedriver]
+  ubuntu: [chromium-chromedriver]
 chromium-browser:
   debian: [chromium]
   fedora: [chromium]
@@ -2408,6 +2419,9 @@ libatomic:
   gentoo: [sys-devel/gcc]
   nixos: []
   openembedded: [gcc-runtime@openembedded-core]
+  osx:
+    homebrew:
+      packages: [libatomic_ops]
   rhel: [libatomic]
   ubuntu: [libatomic1]
 libav:
@@ -3025,6 +3039,20 @@ libconsole-bridge-dev:
 libcos4-dev:
   debian: [libcos4-dev]
   ubuntu: [libcos4-dev]
+libcpp-httplib-dev:
+  debian:
+    '*': [libcpp-httplib-dev]
+    bullseye: null
+  fedora: [cpp-httplib-devel]
+  gentoo: [cpp-httplib]
+  osx:
+    homebrew:
+      packages: [cpp-httplib]
+  rhel: [cpp-httplib-devel]
+  ubuntu:
+    '*': [libcpp-httplib-dev]
+    bionic: null
+    focal: null
 libcpprest-dev:
   debian:
     buster: [libcpprest-dev]
@@ -4043,6 +4071,12 @@ liblmdb-dev:
   opensuse: [lmdb-devel]
   rhel: [lmdb-devel]
   ubuntu: [liblmdb-dev]
+liblttng-ctl-dev:
+  debian: [liblttng-ctl-dev]
+  fedora: [lttng-tools-devel]
+  opensuse: [lttng-tools-devel]
+  rhel: [lttng-tools-devel]
+  ubuntu: [liblttng-ctl-dev]
 liblttng-ust-dev:
   arch: [lttng-ust]
   debian: [liblttng-ust-dev]
@@ -5324,8 +5358,16 @@ libqt5-sql:
   gentoo: ['dev-qt/qtsql:5']
   nixos: [qt5.qtbase]
   ubuntu: [libqt5sql5]
+libqt5-svg:
+  arch: [qt5-svg]
+  debian: [libqt5svg5]
+  fedora: [qt5-qtsvg]
+  opensuse: [libqt5-qtsvg]
+  rhel: [qt5-qtsvg]
+  ubuntu: [libqt5svg5]
 libqt5-svg-dev:
   alpine: [qt5-qtsvg-dev]
+  arch: [qt5-svg]
   debian: [libqt5svg5-dev]
   fedora: [qt5-qtsvg-devel]
   freebsd: [qt5-svg]
@@ -5532,6 +5574,14 @@ libsoqt4-dev:
   fedora: [SoQt-devel]
   gentoo: [media-libs/SoQt]
   ubuntu: [libsoqt4-dev]
+libsoundio-dev:
+  alpine: [libsoundio]
+  debian: [libsoundio-dev]
+  fedora: [libsoundio]
+  gentoo: [libsoundio]
+  macports: [libsoundio]
+  nixos: [libsoundio]
+  ubuntu: [libsoundio-dev]
 libspatialindex-dev:
   debian: [libspatialindex-dev]
   fedora: [spatialindex-devel]
@@ -5710,12 +5760,7 @@ libtins-dev:
   ubuntu: [libtins-dev]
 libtool:
   arch: [libtool]
-  debian:
-    buster: [libtool, libltdl-dev, libtool-bin]
-    lenny: [libtool, libltdl3-dev]
-    squeeze: [libtool, libltdl-dev]
-    stretch: [libtool, libltdl-dev, libtool-bin]
-    wheezy: [libtool, libltdl-dev]
+  debian: [libtool, libltdl-dev, libtool-bin]
   fedora: [libtool, libtool-ltdl-devel]
   freebsd: [libtool]
   gentoo: [sys-devel/libtool]
@@ -5725,10 +5770,7 @@ libtool:
   opensuse: [libtool, libltdl7]
   rhel: [libtool, libtool-ltdl-devel]
   slackware: [libtool]
-  ubuntu:
-    bionic: [libtool, libltdl-dev, libtool-bin]
-    focal: [libtool, libltdl-dev, libtool-bin]
-    jammy: [libtool, libltdl-dev, libtool-bin]
+  ubuntu: [libtool, libltdl-dev, libtool-bin]
 libttspico:
   debian: [libttspico-dev, libttspico-data, libttspico-utils, libttspico0]
   ubuntu: [libttspico-dev, libttspico-data, libttspico-utils, libttspico0]
@@ -6424,6 +6466,30 @@ lz4:
   rhel: [lz4-devel]
   slackware: [lz4]
   ubuntu: [liblz4-dev]
+m2r:
+  alpine:
+    pip:
+      packages: [m2r]
+  arch:
+    pip:
+      packages: [m2r]
+  debian:
+    '*': [m2r]
+    buster:
+      pip:
+        packages: [m2r]
+  fedora: [python3-m2r]
+  gentoo:
+    pip:
+      packages: [m2r]
+  nixos: [m2r]
+  opensuse: [python3-m2r]
+  osx:
+    pip:
+      packages: [m2r]
+  ubuntu:
+    '*': [m2r]
+    bionic: null
 m4:
   arch: [m4]
   debian: [m4]
@@ -7543,6 +7609,16 @@ sdl2-ttf:
   gentoo: [media-libs/sdl2-ttf]
   nixos: [SDL2_ttf]
   ubuntu: [libsdl2-ttf-dev]
+semgrep:
+  debian:
+    pip:
+      packages: [semgrep]
+  osx:
+    homebrew:
+      packages: [semgrep]
+  ubuntu:
+    pip:
+      packages: [semgrep]
 setserial:
   debian: [setserial]
   fedora: [setserial]
@@ -7560,6 +7636,7 @@ simde:
   debian:
     '*': [libsimde-dev]
     buster: null
+  fedora: [simde-devel]
   rhel:
     '*': [simde-devel]
     '9': null
@@ -8510,6 +8587,18 @@ zlib:
     slackpkg:
       packages: [zlib]
   ubuntu: [zlib1g-dev]
+zsh:
+  alpine: [zsh]
+  arch: [zsh]
+  debian: [zsh]
+  fedora: [zsh]
+  freebsd: [zsh]
+  gentoo: [shells/zsh]
+  macports: [zsh]
+  nixos: [zsh]
+  opensuse: [zsh]
+  rhel: [zsh]
+  ubuntu: [zsh]
 zziplib:
   arch: [zziplib]
   debian: [libzzip-0-13, libzzip-dev]

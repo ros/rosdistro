@@ -44,7 +44,6 @@ except ImportError:
     from urlparse import urlparse
 
 import rosdistro
-from scripts import eol_distro_names
 import unidiff
 import yaml
 from yaml.composer import Composer
@@ -72,19 +71,6 @@ def get_all_distribution_filenames(url=None):
         for f in d['distribution']:
             dpath = os.path.abspath(urlparse(f).path)
             distribution_filenames.append(dpath)
-    return distribution_filenames
-
-
-def get_eol_distribution_filenames(url=None):
-    if not url:
-        url = rosdistro.get_index_url()
-    distribution_filenames = []
-    i = rosdistro.get_index(url)
-    for d_name, d in i.distributions.items():
-        if d_name in eol_distro_names:
-            for f in d['distribution']:
-                dpath = os.path.abspath(urlparse(f).path)
-                distribution_filenames.append(dpath)
     return distribution_filenames
 
 
@@ -346,7 +332,6 @@ def main():
             continue
         with Fold():
             print("verifying diff of file '%s'" % path)
-            is_eol_distro = path in get_eol_distribution_filenames(url)
             data = load_yaml_with_lines(path)
 
             repos = data['repositories']
@@ -362,10 +347,6 @@ def main():
                 errors = check_repo_for_errors(r)
                 detected_errors.extend(["In file '''%s''': " % path + e
                                         for e in errors])
-                if is_eol_distro:
-                    errors = detect_post_eol_release(n, r, lines)
-                    detected_errors.extend(["In file '''%s''': " % path + e
-                                            for e in errors])
 
     for e in detected_errors:
 
