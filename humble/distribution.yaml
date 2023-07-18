@@ -172,11 +172,12 @@ repositories:
       - ament_cmake_python
       - ament_cmake_target_dependencies
       - ament_cmake_test
+      - ament_cmake_vendor_package
       - ament_cmake_version
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/ament_cmake-release.git
-      version: 1.3.4-2
+      version: 1.3.5-1
     source:
       test_pull_requests: true
       type: git
@@ -187,16 +188,16 @@ repositories:
     doc:
       type: git
       url: https://github.com/open-rmf/ament_cmake_catch2.git
-      version: rolling
+      version: humble
     release:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/ament_cmake_catch2-release.git
-      version: 1.2.0-3
+      version: 1.2.1-1
     source:
       type: git
       url: https://github.com/open-rmf/ament_cmake_catch2.git
-      version: rolling
+      version: humble
     status: developed
   ament_cmake_ros:
     doc:
@@ -609,11 +610,28 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/BehaviorTree/behaviortree_cpp_v3-release.git
-      version: 3.8.3-2
+      version: 3.8.4-1
     source:
       type: git
       url: https://github.com/BehaviorTree/BehaviorTree.CPP.git
       version: v3.8
+    status: developed
+  behaviortree_cpp_v4:
+    doc:
+      type: git
+      url: https://github.com/BehaviorTree/BehaviorTree.CPP.git
+      version: master
+    release:
+      packages:
+      - behaviortree_cpp
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/ros2-gbp/behaviortree_cpp_v4-release.git
+      version: 4.3.3-1
+    source:
+      type: git
+      url: https://github.com/BehaviorTree/BehaviorTree.CPP.git
+      version: master
     status: developed
   bno055:
     doc:
@@ -737,6 +755,11 @@ repositories:
       type: git
       url: https://github.com/ngmor/catch_ros2.git
       version: humble
+    release:
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/ros2-gbp/catch_ros2-release.git
+      version: 0.1.0-1
     source:
       type: git
       url: https://github.com/ngmor/catch_ros2.git
@@ -758,6 +781,107 @@ repositories:
       url: https://github.com/ros/class_loader.git
       version: humble
     status: maintained
+  classic_bags:
+    source:
+      type: git
+      url: https://github.com/MetroRobots/classic_bags.git
+      version: main
+    status: developed
+  clearpath_common:
+    doc:
+      type: git
+      url: https://github.com/clearpathrobotics/clearpath_common.git
+      version: humble
+    release:
+      packages:
+      - clearpath_common
+      - clearpath_control
+      - clearpath_description
+      - clearpath_generator_common
+      - clearpath_mounts_description
+      - clearpath_platform
+      - clearpath_platform_description
+      - clearpath_sensors_description
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/clearpath-gbp/clearpath_common-release.git
+      version: 0.0.6-1
+    source:
+      type: git
+      url: https://github.com/clearpathrobotics/clearpath_common.git
+      version: humble
+    status: developed
+  clearpath_config:
+    doc:
+      type: git
+      url: https://github.com/clearpathrobotics/clearpath_config.git
+      version: main
+    release:
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/clearpath-gbp/clearpath_config-release.git
+      version: 0.0.3-1
+    source:
+      type: git
+      url: https://github.com/clearpathrobotics/clearpath_config.git
+      version: main
+    status: developed
+  clearpath_desktop:
+    doc:
+      type: git
+      url: https://github.com/clearpathrobotics/clearpath_desktop.git
+      version: main
+    release:
+      packages:
+      - clearpath_config_live
+      - clearpath_desktop
+      - clearpath_viz
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/clearpath-gbp/clearpath_desktop-release.git
+      version: 0.0.2-1
+    source:
+      type: git
+      url: https://github.com/clearpathrobotics/clearpath_desktop.git
+      version: main
+    status: developed
+  clearpath_msgs:
+    doc:
+      type: git
+      url: https://github.com/clearpathrobotics/clearpath_msgs.git
+      version: main
+    release:
+      packages:
+      - clearpath_msgs
+      - clearpath_platform_msgs
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/clearpath-gbp/clearpath_msgs-release.git
+      version: 0.0.4-1
+    source:
+      type: git
+      url: https://github.com/clearpathrobotics/clearpath_msgs.git
+      version: main
+    status: developed
+  clearpath_simulator:
+    doc:
+      type: git
+      url: https://github.com/clearpathrobotics/clearpath_simulator.git
+      version: main
+    release:
+      packages:
+      - clearpath_generator_gz
+      - clearpath_gz
+      - clearpath_simulator
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/clearpath-gbp/clearpath_simulator-release.git
+      version: 0.0.2-1
+    source:
+      type: git
+      url: https://github.com/clearpathrobotics/clearpath_simulator.git
+      version: main
+    status: developed
   color_names:
     doc:
       type: git
@@ -1069,7 +1193,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/luxonis/depthai-core-release.git
-      version: 2.21.2-1
+      version: 2.22.0-1
     source:
       test_pull_requests: true
       type: git
@@ -1093,7 +1217,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/luxonis/depthai-ros-release.git
-      version: 2.7.2-1
+      version: 2.7.4-1
     source:
       test_pull_requests: true
       type: git
@@ -1375,7 +1499,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/fastrtps-release.git
-      version: 2.6.4-1
+      version: 2.6.5-1
     source:
       test_commits: true
       test_pull_requests: false
@@ -1414,6 +1538,26 @@ repositories:
       url: https://github.com/introlab/find-object.git
       version: humble-devel
     status: maintained
+  flexbe_app:
+    doc:
+      type: git
+      url: https://github.com/flexbe/flexbe_app.git
+      version: humble
+    source:
+      type: git
+      url: https://github.com/flexbe/flexbe_app.git
+      version: humble
+    status: developed
+  flexbe_behavior_engine:
+    doc:
+      type: git
+      url: https://github.com/flexbe/flexbe_behavior_engine.git
+      version: humble
+    source:
+      type: git
+      url: https://github.com/flexbe/flexbe_behavior_engine.git
+      version: humble
+    status: developed
   fluent_bit_vendor:
     source:
       type: git
@@ -1524,7 +1668,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/foxglove_bridge-release.git
-      version: 0.6.2-1
+      version: 0.7.0-1
     source:
       type: git
       url: https://github.com/foxglove/ros-foxglove-bridge.git
@@ -1755,7 +1899,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/gps_umd-release.git
-      version: 2.0.0-1
+      version: 2.0.2-1
     source:
       test_pull_requests: true
       type: git
@@ -1877,7 +2021,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/gtsam-release.git
-      version: 4.2.0-1
+      version: 4.2.0-2
     source:
       type: git
       url: https://github.com/borglab/gtsam.git
@@ -1922,7 +2066,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/pal-gbp/hey5_description-release.git
-      version: 3.0.2-1
+      version: 3.0.3-1
     source:
       type: git
       url: https://github.com/pal-robotics/hey5_description.git
@@ -2426,7 +2570,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/pal-gbp/launch_pal-release.git
-      version: 0.0.7-1
+      version: 0.0.8-2
     source:
       type: git
       url: https://github.com/pal-robotics/launch_pal.git
@@ -2606,7 +2750,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/IntelRealSense/librealsense2-release.git
-      version: 2.51.1-2
+      version: 2.54.1-1
     source:
       type: git
       url: https://github.com/IntelRealSense/librealsense.git
@@ -2638,6 +2782,21 @@ repositories:
       type: git
       url: https://github.com/ros2/libyaml_vendor.git
       version: humble
+    status: maintained
+  lms1xx:
+    doc:
+      type: git
+      url: https://github.com/clearpathrobotics/LMS1xx.git
+      version: humble-devel
+    release:
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/clearpath-gbp/LMS1xx-release.git
+      version: 1.0.1-1
+    source:
+      type: git
+      url: https://github.com/clearpathrobotics/LMS1xx.git
+      version: humble-devel
     status: maintained
   locator_ros_bridge:
     doc:
@@ -2695,7 +2854,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/nobleo/magic_enum-release.git
-      version: 0.8.2-1
+      version: 0.9.3-1
     source:
       type: git
       url: https://github.com/Neargye/magic_enum.git
@@ -2716,7 +2875,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/mapviz-release.git
-      version: 2.2.0-1
+      version: 2.2.1-1
     source:
       type: git
       url: https://github.com/swri-robotics/mapviz.git
@@ -2744,6 +2903,7 @@ repositories:
       version: ros2-devel
     release:
       packages:
+      - swri_cli_tools
       - swri_console_util
       - swri_dbw_interface
       - swri_geometry_util
@@ -2759,7 +2919,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/marti_common-release.git
-      version: 3.5.1-2
+      version: 3.5.2-1
     source:
       test_pull_requests: true
       type: git
@@ -2785,7 +2945,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/marti_messages-release.git
-      version: 1.4.1-1
+      version: 1.4.1-2
     source:
       test_pull_requests: true
       type: git
@@ -2819,7 +2979,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/mavlink-gbp-release.git
-      version: 2022.12.30-1
+      version: 2023.6.6-1
     source:
       type: git
       url: https://github.com/ros2-gbp/mavlink-gbp-release.git
@@ -2849,16 +3009,16 @@ repositories:
     doc:
       type: git
       url: https://github.com/open-rmf/menge_vendor.git
-      version: rolling
+      version: humble
     release:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/menge_vendor-release.git
-      version: 1.0.0-4
+      version: 1.0.1-1
     source:
       type: git
       url: https://github.com/open-rmf/menge_vendor.git
-      version: rolling
+      version: humble
     status: developed
   message_filters:
     doc:
@@ -2885,7 +3045,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ika-rwth-aachen/message_tf_frame_transformer-release.git
-      version: 1.0.0-2
+      version: 1.1.0-1
     source:
       type: git
       url: https://github.com/ika-rwth-aachen/message_tf_frame_transformer.git
@@ -3091,6 +3251,39 @@ repositories:
       url: https://github.com/ros-planning/moveit_visual_tools.git
       version: ros2
     status: maintained
+  mp2p_icp:
+    doc:
+      type: git
+      url: https://github.com/MOLAorg/mp2p_icp.git
+      version: master
+    release:
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/ros2-gbp/mp2p_icp-release.git
+      version: 0.1.0-1
+    source:
+      type: git
+      url: https://github.com/MOLAorg/mp2p_icp.git
+      version: master
+    status: developed
+  mqtt_client:
+    doc:
+      type: git
+      url: https://github.com/ika-rwth-aachen/mqtt_client.git
+      version: main
+    release:
+      packages:
+      - mqtt_client
+      - mqtt_client_interfaces
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/ika-rwth-aachen/mqtt_client-release.git
+      version: 2.0.1-1
+    source:
+      type: git
+      url: https://github.com/ika-rwth-aachen/mqtt_client.git
+      version: main
+    status: maintained
   mrpt2:
     doc:
       type: git
@@ -3100,7 +3293,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/mrpt2-release.git
-      version: 2.8.1-1
+      version: 2.10.0-1
     source:
       type: git
       url: https://github.com/MRPT/mrpt.git
@@ -3115,12 +3308,27 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/mrpt_msgs-release.git
-      version: 0.4.5-1
+      version: 0.4.6-1
     source:
       type: git
       url: https://github.com/mrpt-ros-pkg/mrpt_msgs.git
       version: master
     status: maintained
+  mrpt_path_planning:
+    doc:
+      type: git
+      url: https://github.com/MRPT/mrpt_path_planning.git
+      version: develop
+    release:
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/ros2-gbp/mrpt_path_planning-release.git
+      version: 0.1.0-1
+    source:
+      type: git
+      url: https://github.com/MRPT/mrpt_path_planning.git
+      version: develop
+    status: developed
   mrt_cmake_modules:
     doc:
       type: git
@@ -3145,7 +3353,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/mvsim-release.git
-      version: 0.7.0-1
+      version: 0.7.1-1
     source:
       type: git
       url: https://github.com/MRPT/mvsim.git
@@ -3225,6 +3433,7 @@ repositories:
       - nav2_dwb_controller
       - nav2_lifecycle_manager
       - nav2_map_server
+      - nav2_mppi_controller
       - nav2_msgs
       - nav2_navfn_planner
       - nav2_planner
@@ -3246,7 +3455,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/SteveMacenski/navigation2-release.git
-      version: 1.1.6-1
+      version: 1.1.8-2
     source:
       type: git
       url: https://github.com/ros-planning/navigation2.git
@@ -3311,7 +3520,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/nlohmann_json_schema_validator_vendor-release.git
-      version: 0.2.4-1
+      version: 0.2.5-1
     source:
       type: git
       url: https://github.com/open-rmf/nlohmann_json_schema_validator_vendor.git
@@ -3666,7 +3875,22 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/pal-gbp/pal_gazebo_plugins-release.git
-      version: 4.0.3-1
+      version: 4.0.4-1
+    source:
+      type: git
+      url: https://github.com/pal-robotics/pal_gazebo_plugins.git
+      version: humble-devel
+    status: developed
+  pal_gazebo_worlds:
+    doc:
+      type: git
+      url: https://github.com/pal-robotics/pal_gazebo_plugins.git
+      version: humble-devel
+    release:
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/pal-gbp/pal_gazebo_worlds-ros2-release.git
+      version: 4.0.0-1
     source:
       type: git
       url: https://github.com/pal-robotics/pal_gazebo_plugins.git
@@ -3868,6 +4092,24 @@ repositories:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/picknik_ament_copyright-release.git
       version: 0.0.2-3
+  picknik_controllers:
+    doc:
+      type: git
+      url: https://github.com/PickNikRobotics/picknik_controllers.git
+      version: main
+    release:
+      packages:
+      - picknik_reset_fault_controller
+      - picknik_twist_controller
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/ros2-gbp/picknik_controllers-release.git
+      version: 0.0.2-1
+    source:
+      type: git
+      url: https://github.com/PickNikRobotics/picknik_controllers.git
+      version: main
+    status: developed
   pinocchio:
     doc:
       type: git
@@ -3895,7 +4137,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/pal-gbp/play_motion2-release.git
-      version: 0.0.8-1
+      version: 0.0.9-1
     source:
       type: git
       url: https://github.com/pal-robotics/play_motion2.git
@@ -3976,7 +4218,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/pal-gbp/pmb2_navigation-gbp.git
-      version: 4.0.4-1
+      version: 4.0.5-1
     source:
       type: git
       url: https://github.com/pal-robotics/pmb2_navigation.git
@@ -3996,7 +4238,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/pal-gbp/pmb2_robot-gbp.git
-      version: 5.0.4-1
+      version: 5.0.7-1
     source:
       type: git
       url: https://github.com/pal-robotics/pmb2_robot.git
@@ -4014,7 +4256,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/pal-gbp/pmb2_simulation-release.git
-      version: 4.0.3-1
+      version: 4.0.4-1
     source:
       type: git
       url: https://github.com/pal-robotics/pmb2_simulation.git
@@ -4184,16 +4426,16 @@ repositories:
     doc:
       type: git
       url: https://github.com/open-rmf/pybind11_json_vendor.git
-      version: main
+      version: humble
     release:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/pybind11_json_vendor-release.git
-      version: 0.2.2-1
+      version: 0.2.3-1
     source:
       type: git
       url: https://github.com/open-rmf/pybind11_json_vendor.git
-      version: main
+      version: humble
     status: developed
   pybind11_vendor:
     doc:
@@ -4441,7 +4683,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/rc_reason_clients-release.git
-      version: 0.2.1-4
+      version: 0.3.1-1
     source:
       test_pull_requests: true
       type: git
@@ -4639,11 +4881,21 @@ repositories:
       url: https://github.com/ros2/rcutils.git
       version: humble
     status: maintained
+  reach:
+    source:
+      type: git
+      url: https://github.com/ros-industrial/reach.git
+      version: master
+  reach_ros:
+    source:
+      type: git
+      url: https://github.com/ros-industrial/reach_ros2.git
+      version: master
   realsense2_camera:
     doc:
       type: git
       url: https://github.com/IntelRealSense/realsense-ros.git
-      version: ros2-beta
+      version: ros2-development
     release:
       packages:
       - realsense2_camera
@@ -4652,11 +4904,11 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/IntelRealSense/realsense-ros-release.git
-      version: 4.51.1-1
+      version: 4.54.1-1
     source:
       type: git
       url: https://github.com/IntelRealSense/realsense-ros.git
-      version: ros2-beta
+      version: ros2-development
     status: developed
   realtime_support:
     doc:
@@ -4727,12 +4979,12 @@ repositories:
     doc:
       type: git
       url: https://github.com/open-rmf/rmf_api_msgs.git
-      version: main
+      version: humble
     release:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/rmf_api_msgs-release.git
-      version: 0.0.1-1
+      version: 0.0.3-1
     source:
       type: git
       url: https://github.com/open-rmf/rmf_api_msgs.git
@@ -4742,31 +4994,31 @@ repositories:
     doc:
       type: git
       url: https://github.com/open-rmf/rmf_battery.git
-      version: main
+      version: humble
     release:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/rmf_battery-release.git
-      version: 0.1.3-2
+      version: 0.1.5-1
     source:
       type: git
       url: https://github.com/open-rmf/rmf_battery.git
-      version: main
+      version: humble
     status: developed
   rmf_building_map_msgs:
     doc:
       type: git
       url: https://github.com/open-rmf/rmf_building_map_msgs.git
-      version: rolling
+      version: humble
     release:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/rmf_building_map_msgs-release.git
-      version: 1.2.0-6
+      version: 1.2.1-1
     source:
       type: git
       url: https://github.com/open-rmf/rmf_building_map_msgs.git
-      version: rolling
+      version: humble
     status: developed
   rmf_cmake_uncrustify:
     doc:
@@ -4797,7 +5049,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/open-rmf/rmf_internal_msgs.git
-      version: main
+      version: humble
     release:
       packages:
       - rmf_charger_msgs
@@ -4815,11 +5067,11 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/rmf_internal_msgs-release.git
-      version: 3.0.2-1
+      version: 3.0.3-1
     source:
       type: git
       url: https://github.com/open-rmf/rmf_internal_msgs.git
-      version: main
+      version: humble
     status: developed
   rmf_ros2:
     doc:
@@ -4836,7 +5088,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/rmf_ros2-release.git
-      version: 2.1.5-1
+      version: 2.1.6-1
     source:
       type: git
       url: https://github.com/open-rmf/rmf_ros2.git
@@ -4846,7 +5098,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/open-rmf/rmf_simulation.git
-      version: main
+      version: humble
     release:
       packages:
       - rmf_building_sim_common
@@ -4858,11 +5110,11 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/rmf_simulation-release.git
-      version: 2.0.0-1
+      version: 2.0.2-1
     source:
       type: git
       url: https://github.com/open-rmf/rmf_simulation.git
-      version: main
+      version: humble
     status: developed
   rmf_task:
     doc:
@@ -4876,7 +5128,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/rmf_task-release.git
-      version: 2.1.1-1
+      version: 2.1.5-1
     source:
       type: git
       url: https://github.com/open-rmf/rmf_task.git
@@ -4886,7 +5138,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/open-rmf/rmf_traffic.git
-      version: main
+      version: humble
     release:
       packages:
       - rmf_traffic
@@ -4894,17 +5146,17 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/rmf_traffic-release.git
-      version: 3.0.0-1
+      version: 3.0.1-1
     source:
       type: git
       url: https://github.com/open-rmf/rmf_traffic.git
-      version: main
+      version: humble
     status: developed
   rmf_traffic_editor:
     doc:
       type: git
       url: https://github.com/open-rmf/rmf_traffic_editor.git
-      version: main
+      version: humble
     release:
       packages:
       - rmf_building_map_tools
@@ -4914,32 +5166,49 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/rmf_traffic_editor-release.git
-      version: 1.6.0-1
+      version: 1.6.1-1
     source:
       type: git
       url: https://github.com/open-rmf/rmf_traffic_editor.git
-      version: main
+      version: humble
     status: developed
   rmf_utils:
     doc:
       type: git
       url: https://github.com/open-rmf/rmf_utils.git
-      version: main
+      version: humble
     release:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/rmf_utils-release.git
-      version: 1.4.0-2
+      version: 1.4.1-1
     source:
       type: git
       url: https://github.com/open-rmf/rmf_utils.git
+      version: humble
+    status: developed
+  rmf_variants:
+    doc:
+      type: git
+      url: https://github.com/open-rmf/rmf_variants.git
+      version: main
+    release:
+      packages:
+      - rmf_dev
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/ros2-gbp/rmf_variants-release.git
+      version: 0.0.1-1
+    source:
+      type: git
+      url: https://github.com/open-rmf/rmf_variants.git
       version: main
     status: developed
   rmf_visualization:
     doc:
       type: git
       url: https://github.com/open-rmf/rmf_visualization.git
-      version: main
+      version: humble
     release:
       packages:
       - rmf_visualization
@@ -4953,26 +5222,26 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/rmf_visualization-release.git
-      version: 2.0.0-1
+      version: 2.0.2-1
     source:
       type: git
       url: https://github.com/open-rmf/rmf_visualization.git
-      version: main
+      version: humble
     status: developed
   rmf_visualization_msgs:
     doc:
       type: git
       url: https://github.com/open-rmf/rmf_visualization_msgs.git
-      version: main
+      version: humble
     release:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/rmf_visualization_msgs-release.git
-      version: 1.2.0-4
+      version: 1.2.1-1
     source:
       type: git
       url: https://github.com/open-rmf/rmf_visualization_msgs.git
-      version: main
+      version: humble
     status: developed
   rmw:
     doc:
@@ -5175,7 +5444,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/clearpath-gbp/robot_upstart-release.git
-      version: 1.0.2-1
+      version: 1.0.3-1
     source:
       type: git
       url: https://github.com/clearpathrobotics/robot_upstart.git
@@ -5207,6 +5476,16 @@ repositories:
       url: https://github.com/ros2/ros1_bridge.git
       version: master
     status: maintained
+  ros2_canopen:
+    doc:
+      type: git
+      url: https://github.com/ros-industrial/ros2_canopen.git
+      version: humble
+    source:
+      type: git
+      url: https://github.com/ros-industrial/ros2_canopen.git
+      version: humble
+    status: developed
   ros2_control:
     doc:
       type: git
@@ -5227,7 +5506,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/ros2_control-release.git
-      version: 2.26.0-1
+      version: 2.29.0-1
     source:
       type: git
       url: https://github.com/ros-controls/ros2_control.git
@@ -5240,7 +5519,9 @@ repositories:
       version: humble
     release:
       packages:
+      - ackermann_steering_controller
       - admittance_controller
+      - bicycle_steering_controller
       - diff_drive_controller
       - effort_controllers
       - force_torque_sensor_broadcaster
@@ -5253,16 +5534,28 @@ repositories:
       - ros2_controllers
       - ros2_controllers_test_nodes
       - rqt_joint_trajectory_controller
+      - steering_controllers_library
       - tricycle_controller
+      - tricycle_steering_controller
       - velocity_controllers
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/ros2_controllers-release.git
-      version: 2.20.0-1
+      version: 2.23.0-1
     source:
       type: git
       url: https://github.com/ros-controls/ros2_controllers.git
       version: humble
+    status: developed
+  ros2_kortex:
+    doc:
+      type: git
+      url: https://github.com/PickNikRobotics/ros2_kortex.git
+      version: main
+    source:
+      type: git
+      url: https://github.com/PickNikRobotics/ros2_kortex.git
+      version: main
     status: developed
   ros2_ouster_drivers:
     doc:
@@ -5312,6 +5605,12 @@ repositories:
       url: https://github.com/IntelligentRoboticsLabs/ros2_planning_system.git
       version: humble-devel
     status: developed
+  ros2_robotiq_gripper:
+    source:
+      type: git
+      url: https://github.com/PickNikRobotics/ros2_robotiq_gripper.git
+      version: main
+    status: maintained
   ros2_socketcan:
     doc:
       type: git
@@ -5528,6 +5827,24 @@ repositories:
       url: https://github.com/ros2/ros_testing.git
       version: humble
     status: maintained
+  ros_tutorials:
+    doc:
+      type: git
+      url: https://github.com/ros/ros_tutorials.git
+      version: humble
+    release:
+      packages:
+      - turtlesim
+      tags:
+        release: release/rolling/{package}/{version}
+      url: https://github.com/ros2-gbp/ros_tutorials-release.git
+      version: 1.4.2-1
+    source:
+      test_pull_requests: true
+      type: git
+      url: https://github.com/ros/ros_tutorials.git
+      version: humble
+    status: maintained
   ros_workspace:
     release:
       tags:
@@ -5568,7 +5885,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/rosbag2-release.git
-      version: 0.15.5-1
+      version: 0.15.6-1
     source:
       test_pull_requests: true
       type: git
@@ -6518,7 +6835,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/simple_launch-release.git
-      version: 1.7.0-1
+      version: 1.7.1-1
     source:
       type: git
       url: https://github.com/oKermorgant/simple_launch.git
@@ -6594,6 +6911,26 @@ repositories:
       url: https://github.com/robosoft-ai/SMACC2.git
       version: humble
     status: developed
+  smach:
+    doc:
+      type: git
+      url: https://github.com/ros/executive_smach.git
+      version: ros2
+    release:
+      packages:
+      - executive_smach
+      - smach
+      - smach_msgs
+      - smach_ros
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/ros2-gbp/executive_smach-release.git
+      version: 3.0.3-1
+    source:
+      type: git
+      url: https://github.com/ros/executive_smach.git
+      version: ros2
+    status: maintained
   snowbot_operating_system:
     doc:
       type: git
@@ -6875,17 +7212,17 @@ repositories:
     doc:
       type: git
       url: https://github.com/ros2/teleop_twist_joy.git
-      version: rolling
+      version: humble
     release:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/teleop_twist_joy-release.git
-      version: 2.4.3-4
+      version: 2.4.5-1
     source:
       test_pull_requests: true
       type: git
       url: https://github.com/ros2/teleop_twist_joy.git
-      version: rolling
+      version: humble
     status: maintained
   teleop_twist_keyboard:
     doc:
@@ -6959,7 +7296,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/pal-gbp/tiago_moveit_config-release.git
-      version: 3.0.1-1
+      version: 3.0.2-1
     source:
       type: git
       url: https://github.com/pal-robotics/tiago_moveit_config.git
@@ -6978,7 +7315,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/pal-gbp/tiago_navigation-release.git
-      version: 4.0.4-1
+      version: 4.0.5-1
     source:
       type: git
       url: https://github.com/pal-robotics/tiago_navigation.git
@@ -6998,7 +7335,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/pal-gbp/tiago_robot-release.git
-      version: 4.0.7-1
+      version: 4.0.13-1
     source:
       type: git
       url: https://github.com/pal-robotics/tiago_robot.git
@@ -7016,7 +7353,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/pal-gbp/tiago_simulation-release.git
-      version: 4.0.2-1
+      version: 4.0.3-1
     source:
       type: git
       url: https://github.com/pal-robotics/tiago_simulation.git
@@ -7081,6 +7418,12 @@ repositories:
       url: https://github.com/ros2/tlsf.git
       version: humble
     status: maintained
+  topic_based_ros2_control:
+    release:
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/PickNikRobotics/topic_based_ros2_control-release.git
+      version: 0.1.1-1
   topic_tools:
     doc:
       type: git
@@ -7264,7 +7607,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/turtlebot4-release.git
-      version: 1.0.2-1
+      version: 1.0.3-1
     source:
       type: git
       url: https://github.com/turtlebot/turtlebot4.git
@@ -7363,21 +7706,42 @@ repositories:
       url: https://github.com/turtlebot/turtlebot4_tutorials.git
       version: humble
     status: developed
-  turtlesim:
+  tuw_geometry:
     doc:
       type: git
-      url: https://github.com/ros/ros_tutorials.git
-      version: humble
+      url: https://github.com/tuw-robotics/tuw_geometry.git
+      version: ros2
     release:
       tags:
         release: release/humble/{package}/{version}
-      url: https://github.com/ros2-gbp/ros_tutorials-release.git
-      version: 1.4.2-1
+      url: https://github.com/tuw-robotics/tuw_geometry-release.git
+      version: 0.1.1-1
     source:
-      test_pull_requests: true
       type: git
-      url: https://github.com/ros/ros_tutorials.git
-      version: humble
+      url: https://github.com/tuw-robotics/tuw_geometry.git
+      version: ros2
+    status: maintained
+  tuw_msgs:
+    doc:
+      type: git
+      url: https://github.com/tuw-robotics/tuw_msgs.git
+      version: ros2
+    release:
+      packages:
+      - tuw_airskin_msgs
+      - tuw_geometry_msgs
+      - tuw_msgs
+      - tuw_multi_robot_msgs
+      - tuw_nav_msgs
+      - tuw_object_msgs
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/tuw-robotics/tuw_msgs-release.git
+      version: 0.2.1-1
+    source:
+      type: git
+      url: https://github.com/tuw-robotics/tuw_msgs.git
+      version: ros2
     status: maintained
   tuw_geometry:
     doc:
@@ -7445,6 +7809,21 @@ repositories:
       type: git
       url: https://github.com/ros-teleop/twist_mux.git
       version: foxy-devel
+    status: maintained
+  twist_mux_msgs:
+    doc:
+      type: git
+      url: https://github.com/ros-teleop/twist_mux_msgs.git
+      version: master
+    release:
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/ros2-gbp/twist_mux_msgs-release.git
+      version: 3.0.1-1
+    source:
+      type: git
+      url: https://github.com/ros-teleop/twist_mux_msgs.git
+      version: master
     status: maintained
   twist_stamper:
     doc:
@@ -7555,7 +7934,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/Universal_Robots_Client_Library-release.git
-      version: 1.3.1-1
+      version: 1.3.2-1
     source:
       type: git
       url: https://github.com/UniversalRobots/Universal_Robots_Client_Library.git
@@ -7565,16 +7944,16 @@ repositories:
     doc:
       type: git
       url: https://github.com/UniversalRobots/Universal_Robots_ROS2_Description.git
-      version: ros2
+      version: humble
     release:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/ur_description-release.git
-      version: 2.0.1-1
+      version: 2.1.0-1
     source:
       type: git
       url: https://github.com/UniversalRobots/Universal_Robots_ROS2_Description.git
-      version: ros2
+      version: humble
     status: developed
   ur_msgs:
     doc:
@@ -7608,7 +7987,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/Universal_Robots_ROS2_Driver-release.git
-      version: 2.2.6-1
+      version: 2.2.8-1
     source:
       type: git
       url: https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver.git
@@ -7749,7 +8128,7 @@ repositories:
     doc:
       type: git
       url: https://github.com/ros-drivers/urg_node_msgs.git
-      version: master
+      version: iron
     release:
       tags:
         release: release/humble/{package}/{version}
@@ -7828,7 +8207,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/velodyne-release.git
-      version: 2.3.0-1
+      version: 2.4.0-1
     source:
       type: git
       url: https://github.com/ros-drivers/velodyne.git
@@ -8047,7 +8426,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/webots_ros2-release.git
-      version: 2023.0.4-1
+      version: 2023.1.0-1
     source:
       test_pull_requests: true
       type: git
