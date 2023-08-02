@@ -303,17 +303,19 @@ If you want to run the tests before submitting, first install the dependencies. 
 python3 -m pip install -r test/requirements.txt
 ```
 
-To run the tests run ``nosetests`` in the root of the repository.
-These tests require several dependencies that can be installed either from the ROS repositories or via pip(list built based on the content of [.travis.yaml](https://github.com/ros/rosdistro/blob/master/.travis.yml):
+To run the tests run ``pytest -s test`` in the root of the repository.
+These tests require several dependencies that can be installed either from the ROS repositories or via pip (list built based on the content of [test/requirements.txt](https://github.com/ros/rosdistro/blob/master/test/requirements.txt):
 
-| Dependency   | Ubuntu package (<=20.04)| Pip package  |
+| Dependency   | Ubuntu package (<=22.04)| Pip package  |
 | :------------: | --------------------------------- | -------------- |
-| catkin_pkg     | python-catkin-pkg                 | catkin-pkg     |
-| github         | python-github                     | PyGithub       |
-| nose           | python-nose                       | nose           |
-| rosdistro      | python-rosdistro                  | rosdistro      |
-| ros_buildfarm  | python-ros-buildfarm              | ros-buildfarm  |
-| unidiff        | python-unidiff (Zesty and higher) | unidiff        |
+| catkin_pkg     | python3-catkin-pkg                 | catkin-pkg     |
+| github         | python3-github                     | PyGithub       |
+| pytest         | python3-pytest                    | pytest         |
+| yaml           | python3-yaml                      | PyYAML         |
+| rosdep         | python3-rosdep                    | rosdep         |
+| rosdistro      | python3-rosdistro                  | rosdistro      |
+| ros_buildfarm  | python3-ros-buildfarm              | ros-buildfarm  |
+| unidiff        | python3-unidiff (Zesty and higher) | unidiff        |
 | yamllint       | yamllint                          | yamllint       |
 
 There is a tool [scripts/check_rosdep](./scripts/check_rosdep.py) which will check most formatting errors such as alphabetization and correct formatting.
@@ -323,5 +325,3 @@ For example, to check a change to `rosdep/base.yaml`:
 ```bash
 python3 scripts/check_rosdep.py rosdep/base.yaml
 ```
-
-Note: There's a [known issue](https://github.com/disqus/nose-unittest/issues/2) discovered [here](https://github.com/ros/rosdistro/issues/16336) that most tests won't run if you have the python package `nose-unitttest` installed.
