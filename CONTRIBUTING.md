@@ -297,31 +297,41 @@ How to submit pull requests
 When submitting pull requests it is expected that they pass the unit tests for formatting.
 The unit tests enforce alphabetization of elements and a consistent formatting to keep merging as clean as possible.
 
-If you want to run the tests before submitting, first install the dependencies. Using `pip` is recommended.
+### Testing
+
+It is highly recommended to run the tests before submitting a pull request.
+(the test will be run automatically by the CI system anyways, but it will save you time)
+
+Tests are written using [pytest](https://docs.pytest.org/).
+To run the tests, first install the dependencies.
+Using a virtual environment and `pip` is recommended.
 
 ```bash
-python3 -m pip install -r test/requirements.txt
+# create the virtual environment
+python3 -m venv .venv
+# "activate" the virtual environment
+# this will let pip install dependencies into the virtual environment
+# use activate.zsh if you use zsh, activate.fish if you use fish, etc.
+source .venv/bin/activate
+
+# install the dependencies
+pip3 install -r test/requirements.txt
+
+# run the tests
+pytest
 ```
 
-To run the tests run ``nosetests`` in the root of the repository.
-These tests require several dependencies that can be installed either from the ROS repositories or via pip(list built based on the content of [.travis.yaml](https://github.com/ros/rosdistro/blob/master/.travis.yml):
-
-| Dependency   | Ubuntu package (<=20.04)| Pip package  |
-| :------------: | --------------------------------- | -------------- |
-| catkin_pkg     | python-catkin-pkg                 | catkin-pkg     |
-| github         | python-github                     | PyGithub       |
-| nose           | python-nose                       | nose           |
-| rosdistro      | python-rosdistro                  | rosdistro      |
-| ros_buildfarm  | python-ros-buildfarm              | ros-buildfarm  |
-| unidiff        | python-unidiff (Zesty and higher) | unidiff        |
-| yamllint       | yamllint                          | yamllint       |
+#### Quick testing
 
 There is a tool [scripts/check_rosdep](./scripts/check_rosdep.py) which will check most formatting errors such as alphabetization and correct formatting.
-It is recommended to run it before submitting your contribution.
+It will not check for all errors, but it is a quick way to check for common errors.
 
-For example, to check a change to `rosdep/base.yaml`:
+Here is a one liner to check all files in the [rosdep](./rosdep) directory:
 ```bash
-python3 scripts/check_rosdep.py rosdep/base.yaml
+for f in ./rosdep/*.yaml; do echo "$f"; ./scripts/check_rosdep.py "$f"; done
 ```
 
-Note: There's a [known issue](https://github.com/disqus/nose-unittest/issues/2) discovered [here](https://github.com/ros/rosdistro/issues/16336) that most tests won't run if you have the python package `nose-unitttest` installed.
+Or simply use `pytest` (although the output is quite verbose):
+```bash
+pytest test/rosdep_formatting_test.py
+```
