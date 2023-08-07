@@ -22,9 +22,9 @@ class Fold(object):
 
     def __enter__(self):
         if os.environ.get('TRAVIS') == 'true':
-            print('travis_fold:start:%s' % self.get_block_name())
+            print('::group::%s' % self.get_block_name())
         return self
 
     def __exit__(self, type, value, traceback):
         if os.environ.get('TRAVIS') == 'true':
-            print('travis_fold:end:%s' % self.get_block_name())
+            print('::endgroup::')
