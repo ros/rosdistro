@@ -301,10 +301,26 @@ The unit tests enforce alphabetization of elements and a consistent formatting t
 
 It is highly recommended to run the tests before submitting a pull request.
 (the test will be run automatically by the CI system anyways, but it will save you time)
+To run the tests, run `pytest` in the root of the repository.
+
+#### Test Dependencies
 
 Tests are written using [pytest](https://docs.pytest.org/).
-To run the tests, first install the dependencies.
-Using a virtual environment and `pip` is recommended.
+These tests require several dependencies that can be installed either from the ROS repositories or via pip (list built based on the content of [test/requirements.txt](https://github.com/ros/rosdistro/blob/master/test/requirements.txt)):
+
+| Dependency   | Ubuntu package (<=22.04)| Pip package  |
+| :------------: | --------------------------------- | -------------- |
+| catkin_pkg     | python3-catkin-pkg                 | catkin-pkg     |
+| github         | python3-github                     | PyGithub       |
+| pytest         | python3-pytest                    | pytest         |
+| yaml           | python3-yaml                      | PyYAML         |
+| rosdep         | python3-rosdep                    | rosdep         |
+| rosdistro      | python3-rosdistro                  | rosdistro      |
+| ros_buildfarm  | python3-ros-buildfarm              | ros-buildfarm  |
+| unidiff        | python3-unidiff (Zesty and higher) | unidiff        |
+| yamllint       | yamllint                          | yamllint       |
+
+Using a virtual environment and `pip` is recommended to install the dependencies.
 
 ```bash
 # create the virtual environment
@@ -316,9 +332,6 @@ source .venv/bin/activate
 
 # install the dependencies
 pip3 install -r test/requirements.txt
-
-# run the tests
-pytest
 ```
 
 #### Quick testing
