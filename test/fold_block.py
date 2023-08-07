@@ -40,8 +40,7 @@ class TravisCiCfg(BaseCiCfg):
         return self._get_message_folded(msg)
 
     def __enter__(self):
-        if os.environ.get("TRAVIS") == "true":
-            print("travis_fold:start:%s" % self.get_block_name())
+        print("travis_fold:start:%s" % self.get_block_name())
         return self
 
     def __exit__(self, type, value, traceback):
@@ -57,13 +56,11 @@ class GithubActionsCiCfg(BaseCiCfg):
         return self._get_message_folded(msg)
 
     def __enter__(self):
-        if os.environ.get("TRAVIS") == "true":
-            print("::group::%s" % self.get_block_name())
+        print("::group::%s" % self.get_block_name())
         return self
 
     def __exit__(self, type, value, traceback):
-        if os.environ.get("TRAVIS") == "true":
-            print("::endgroup::")
+        print("::endgroup::")
 
 
 # determine CI system, and set as Fold
