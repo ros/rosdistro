@@ -36,22 +36,26 @@ If this fails you can run 'rosdistro_build_cache index.yaml' to perform the same
 
         # also check topological order to prevent circular dependencies
         for dist_name, cache in caches.items():
-            pkgs = {}
-            print("Parsing manifest files for '%s'" % dist_name)
-            for pkg_name, pkg_xml in cache.release_package_xmls.items():
-                # Collect parsing warnings and fail if version convention are not respected
-                warnings = []
-                pkgs[pkg_name] = parse_package_string(pkg_xml, warnings=warnings)
-                for warning in warnings:
-                    if 'version conventions' in warning:
-                        errors.append('%s: %s' % (pkg_name, warning))
-                    else:
-                        print('%s: WARNING: %s' % (pkg_name, warning))
-            print("Order all packages in '%s' topologically" % dist_name)
-            try:
-                topological_order_packages(pkgs)
-            except RuntimeError as e:
-                errors.append('%s: %s' % (dist_name, e))
+            with Fold():
+                pkgs = {}
+                print("Parsing manifest files for '%s'" % dist_name)
+                for pkg_name, pkg_xml in cache.release_package_xmls.items():
+                    # Collect parsing warnings and fail if version convention
+                    # are not respected
+                    warnings = []
+                    pkgs[pkg_name] = parse_package_string(
+                        pkg_xml, warnings=warnings
+                    )
+                    for warning in warnings:
+                        if 'version conventions' in warning:
+                            errors.append('%s: %s' % (pkg_name, warning))
+                        else:
+                            print('%s: WARNING: %s' % (pkg_name, warning))
+                print("Order all packages in '%s' topologically" % dist_name)
+                try:
+                    topological_order_packages(pkgs)
+                except RuntimeError as e:
+                    errors.append('%s: %s' % (dist_name, e))
 
         if errors:
             raise RuntimeError('\n'.join(errors))
