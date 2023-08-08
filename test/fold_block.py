@@ -1,5 +1,6 @@
 import itertools
 import os
+import typing
 
 
 class BaseCiCfg:
@@ -48,9 +49,17 @@ class GithubActionsCiCfg(BaseCiCfg):
 
 
 # determine CI system, and set as Fold
-for cls_ in BaseCiCfg.__subclasses__():
-    if cls_.is_ci():
-        Fold = cls_
-        break
-else:
-    Fold = BaseCiCfg
+def _determine_ci_system() -> typing.Type[BaseCiCfg]:
+    def visitor(cls: typing.Type[BaseCiCfg]) -> typing.Optional[typing.Type[BaseCiCfg]]:
+        for sub in cls.__subclasses__():
+            if sub.is_ci():
+                return sub
+            res = visitor(sub)
+            if res:
+                return res
+        return None
+
+    return visitor(BaseCiCfg) or BaseCiCfg
+
+
+Fold = _determine_ci_system()
