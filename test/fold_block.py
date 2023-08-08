@@ -31,22 +31,6 @@ class BaseCiCfg:
         pass
 
 
-class TravisCiCfg(BaseCiCfg):
-    @classmethod
-    def is_ci(cls) -> bool:
-        return os.environ.get("TRAVIS") == "true"
-
-    def get_message(self, msg=""):
-        return self._get_message_folded(msg)
-
-    def __enter__(self):
-        print("\ntravis_fold:start:%s" % self.get_block_name())
-        return self
-
-    def __exit__(self, type, value, traceback):
-        print("\ntravis_fold:end:%s" % self.get_block_name())
-
-
 class GithubActionsCiCfg(BaseCiCfg):
     @classmethod
     def is_ci(cls) -> bool:
