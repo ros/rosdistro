@@ -36,6 +36,9 @@ If this fails you can run 'rosdistro_build_cache index.yaml' to perform the same
 
         # also check topological order to prevent circular dependencies
         for dist_name, cache in caches.items():
+            # This fold is here since github actions doesn't support nested groups.
+            # We should remove it once it's supported.
+            # See: https://github.com/actions/toolkit/issues/1001
             with Fold():
                 pkgs = {}
                 print("Parsing manifest files for '%s'" % dist_name)
