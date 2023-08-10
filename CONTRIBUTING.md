@@ -317,6 +317,9 @@ source .venv/bin/activate
 
 # install the dependencies
 pip3 install -r test/requirements.txt
+
+# run the tests!
+pytest
 ```
 
 Tests are written using [pytest](https://docs.pytest.org/).
