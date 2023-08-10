@@ -305,6 +305,20 @@ To run the tests, run `pytest` in the root of the repository.
 
 #### Test Dependencies
 
+Using a virtual environment and `pip` is recommended to install the dependencies.
+
+```bash
+# create the virtual environment
+python3 -m venv .venv
+# "activate" the virtual environment
+# this will let pip install dependencies into the virtual environment
+# use activate.zsh if you use zsh, activate.fish if you use fish, etc.
+source .venv/bin/activate
+
+# install the dependencies
+pip3 install -r test/requirements.txt
+```
+
 Tests are written using [pytest](https://docs.pytest.org/).
 These tests require several dependencies that can be installed either from the ROS repositories or via pip (list built based on the content of [test/requirements.txt](https://github.com/ros/rosdistro/blob/master/test/requirements.txt)):
 
@@ -319,20 +333,6 @@ These tests require several dependencies that can be installed either from the R
 | ros_buildfarm  | python3-ros-buildfarm              | ros-buildfarm  |
 | unidiff        | python3-unidiff (Zesty and higher) | unidiff        |
 | yamllint       | yamllint                          | yamllint       |
-
-Using a virtual environment and `pip` is recommended to install the dependencies.
-
-```bash
-# create the virtual environment
-python3 -m venv .venv
-# "activate" the virtual environment
-# this will let pip install dependencies into the virtual environment
-# use activate.zsh if you use zsh, activate.fish if you use fish, etc.
-source .venv/bin/activate
-
-# install the dependencies
-pip3 install -r test/requirements.txt
-```
 
 #### Quick testing
 
