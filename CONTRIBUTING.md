@@ -297,19 +297,15 @@ How to submit pull requests
 When submitting pull requests it is expected that they pass the unit tests for formatting.
 The unit tests enforce alphabetization of elements and a consistent formatting to keep merging as clean as possible.
 
-### Testing
+### Unit Testing
 
-It is highly recommended to run the tests before submitting a pull request.
-(the test will be run automatically by the CI system anyways, but it will save you time)
-To run the tests, run `pytest` in the root of the repository.
-
-#### Test Dependencies
-
-Using a virtual environment and `pip` is recommended to install the dependencies.
+It is recommended to use a virtual environment and pip to install the unit test dependencies.
+They are listed in tests/requirements.txt.
 
 ```bash
 # create the virtual environment
 python3 -m venv .venv
+
 # "activate" the virtual environment
 # this will let pip install dependencies into the virtual environment
 # use activate.zsh if you use zsh, activate.fish if you use fish, etc.
@@ -322,32 +318,6 @@ pip3 install -r test/requirements.txt
 pytest
 ```
 
-Tests are written using [pytest](https://docs.pytest.org/).
-These tests require several dependencies that can be installed either from the ROS repositories or via pip (list built based on the content of [test/requirements.txt](https://github.com/ros/rosdistro/blob/master/test/requirements.txt)):
+It is highly recommended to run the unit tests before submitting a pull request.
+(the CI system will run them anyways, but it will save you time)
 
-| Dependency   | Ubuntu package (<=22.04)| Pip package  |
-| :------------: | --------------------------------- | -------------- |
-| catkin_pkg     | python3-catkin-pkg                 | catkin-pkg     |
-| github         | python3-github                     | PyGithub       |
-| pytest         | python3-pytest                    | pytest         |
-| yaml           | python3-yaml                      | PyYAML         |
-| rosdep         | python3-rosdep                    | rosdep         |
-| rosdistro      | python3-rosdistro                  | rosdistro      |
-| ros_buildfarm  | python3-ros-buildfarm              | ros-buildfarm  |
-| unidiff        | python3-unidiff (Zesty and higher) | unidiff        |
-| yamllint       | yamllint                          | yamllint       |
-
-#### Quick testing
-
-There is a tool [scripts/check_rosdep](./scripts/check_rosdep.py) which will check most formatting errors such as alphabetization and correct formatting.
-It will not check for all errors, but it is a quick way to check for common errors.
-
-Here is a one liner to check all files in the [rosdep](./rosdep) directory:
-```bash
-for f in ./rosdep/*.yaml; do echo "$f"; ./scripts/check_rosdep.py "$f"; done
-```
-
-Or simply use `pytest` (although the output is quite verbose):
-```bash
-pytest test/rosdep_formatting_test.py
-```
