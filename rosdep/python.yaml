@@ -289,6 +289,15 @@ jupyter-notebook:
 libgv-python:
   debian: [libgv-python]
   ubuntu: [libgv-python]
+libshiboken2-dev:
+  alpine: [libshiboken2-dev]
+  debian: [libshiboken2-dev]
+  fedora: [python3-shiboken2-devel]
+  opensuse: [python3-pyside2-devel]
+  rhel:
+    '*': [python3-shiboken2-devel]
+    '8': null
+  ubuntu: [libshiboken2-dev]
 mcap-ros2-support:
   debian:
     pip:
@@ -802,7 +811,7 @@ python-bson:
   debian: [python-bson]
   fedora: [python-bson]
   gentoo: [dev-python/pymongo]
-  nixos: [pythonPackages.bson]
+  nixos: [pythonPackages.pymongo]
   openembedded: ['${PYTHON_PN}-pymongo@meta-python']
   osx:
     pip:
@@ -4891,6 +4900,12 @@ python3-asyncssh:
   debian: [python3-asyncssh]
   fedora: [python3-asyncssh]
   ubuntu: [python3-asyncssh]
+python3-attrs:
+  debian: [python3-attr]
+  fedora: [python3-attrs]
+  opensuse: [python3-attrs]
+  rhel: [python3-attrs]
+  ubuntu: [python3-attr]
 python3-autobahn:
   debian: [python3-autobahn]
   fedora: [python3-autobahn]
@@ -6637,6 +6652,15 @@ python3-matplotlib:
     '7': null
   slackware: [python3-matplotlib]
   ubuntu: [python3-matplotlib]
+python3-mccabe:
+  arch: [python-mccabe]
+  debian: [python3-mccabe]
+  fedora: [python3-mccabe]
+  gentoo: [dev-python/mccabe]
+  nixos: [python310Packages.mccabe]
+  opensuse: [python3-mccabe]
+  rhel: [python3-mccabe]
+  ubuntu: [python3-mccabe]
 python3-mechanize:
   debian:
     '*': [python3-mechanize]
@@ -6862,6 +6886,11 @@ python3-nlopt:
   ubuntu:
     '*': [python3-nlopt]
     bionic: null
+python3-nmcli-pip:
+  ubuntu:
+    pip:
+      depends: [network-manager]
+      packages: [nmcli]
 python3-nose:
   arch: [python-nose]
   debian: [python3-nose]
@@ -7758,8 +7787,22 @@ python3-pyside2:
   fedora: [python3-pyside2, pyside2-tools, python3-pyside2-devel, python3-shiboken2, python3-shiboken2-devel, shiboken2]
   gentoo: [dev-python/pyside2, dev/python/shiboken2]
   ubuntu:
-    "*": [libpyside2-dev, libshiboken2-dev, python3-pyside2.qtcore, python3-pyside2.qtgui, python3-pyside2.qthelp, python3-pyside2.qtnetwork, python3-pyside2.qtprintsupport, python3-pyside2.qtsvg, python3-pyside2.qttest, python3-pyside2.qtwidgets, python3-pyside2.qtxml, shiboken2]
+    '*': [libpyside2-dev, libshiboken2-dev, python3-pyside2.qtcore, python3-pyside2.qtgui, python3-pyside2.qthelp, python3-pyside2.qtnetwork, python3-pyside2.qtprintsupport, python3-pyside2.qtsvg, python3-pyside2.qttest, python3-pyside2.qtwidgets, python3-pyside2.qtxml, shiboken2]
     bionic: null
+python3-pyside2.qtcore:
+  debian: [python3-pyside2.qtcore]
+  fedora: [python3-pyside2]
+  rhel:
+    '*': [python3-pyside2]
+    '8': null
+  ubuntu: [python3-pyside2.qtcore]
+python3-pyside2.qtgui:
+  debian: [python3-pyside2.qtgui]
+  fedora: [python3-pyside2]
+  rhel:
+    '*': [python3-pyside2]
+    '8': null
+  ubuntu: [python3-pyside2.qtgui]
 python3-pyside2.qtopengl:
   arch: [pyside2]
   debian: [python3-pyside2.qtopengl]
@@ -7778,9 +7821,20 @@ python3-pyside2.qtquick:
     bionic: null
 python3-pyside2.qtuitools:
   debian: [python3-pyside2.qtuitools]
+  fedora: [python3-pyside2]
+  rhel:
+    '*': [python3-pyside2]
+    '8': null
   ubuntu:
     '*': [python3-pyside2.qtuitools]
     bionic: null
+python3-pyside2.qtwidgets:
+  debian: [python3-pyside2.qtwidgets]
+  fedora: [python3-pyside2]
+  rhel:
+    '*': [python3-pyside2]
+    '8': null
+  ubuntu: [python3-pyside2.qtwidgets]
 python3-pysnmp:
   debian: [python3-pysnmp4]
   fedora: [python3-pysnmp]
@@ -8580,6 +8634,20 @@ python3-sqlalchemy-utils:
   nixos: [python3Packages.sqlalchemy-utils]
   opensuse: [python3-SQLAlchemy-Utils]
   ubuntu: [python3-sqlalchemy-utils]
+python3-sqlmodel:
+  debian:
+    '*': [python3-sqlmodel]
+    bullseye:
+      pip:
+        packages: [sqlmodel]
+  ubuntu:
+    '*': [python3-sqlmodel]
+    focal:
+      pip:
+        packages: [sqlmodel]
+    jammy:
+      pip:
+        packages: [sqlmodel]
 python3-squaternion-pip:
   debian:
     pip:
@@ -9020,6 +9088,7 @@ python3-vcstool:
   macports:
     pip:
       packages: [vcstool]
+  nixos: [vcstool]
   osx:
     pip:
       packages: [vcstool]
@@ -9064,6 +9133,14 @@ python3-voluptuous:
     '*': [python3-voluptuous]
     '7': null
   ubuntu: [python3-voluptuous]
+python3-waitress:
+  debian: [python3-waitress]
+  fedora: [python3-waitress]
+  gentoo: [dev-python/waitress]
+  nixos: [python3Packages.waitress]
+  opensuse: [python3-waitress]
+  rhel: [python3-waitress]
+  ubuntu: [python3-waitress]
 python3-watchdog:
   debian: [python3-watchdog]
   fedora: [python3-watchdog]
