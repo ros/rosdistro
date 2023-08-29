@@ -45,6 +45,8 @@ More info at https://github.com/ros/rosdistro/blob/master/CONTRIBUTING.md#guidel
   - OPTIONAL
 - openSUSE: https://software.opensuse.org/package/
   - IF AVAILABLE
+- rhel: https://rhel.pkgs.org/
+  - IF AVAILABLE
 
 <!-- DOC_INDEX_TEMPLATE: add package to rosdistro for documentation indexing -->
 
