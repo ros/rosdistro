@@ -200,6 +200,7 @@ Work has been proposed to add a separate installer for AUR packages [ros-infrast
 
 * [NixOS unstable channel](https://github.com/NixOS/nixpkgs/tree/nixos-unstable), search available at https://search.nixos.org/packages
 * [nix-ros-overlay](https://github.com/lopsided98/nix-ros-overlay)
+* Following the [NixOS Python Guide](https://nixos.org/manual/nixpkgs/stable/#python), use `pythonPackages` for Python 2 and `python3Packages` for Python 3 keys.
 
 #### openSUSE
 
