@@ -2359,15 +2359,6 @@ python-monotonic:
   nixos: [pythonPackages.monotonic]
   opensuse: [python2-monotonic]
   ubuntu: [python-monotonic]
-python-moonraker-api-pip: &migrate_eol_2025_04_30_python3_moonraker-api_pip
-  debian:
-    '*':
-      pip:
-        packages: [moonraker-api]
-  ubuntu:
-    '*':
-      pip:
-        packages: [moonraker-api]
 python-more-itertools:
   arch: [python-more-itertools]
   debian: [python-more-itertools]
@@ -6876,7 +6867,15 @@ python3-mock:
       packages: [mock]
   rhel: ['python%{python3_pkgversion}-mock']
   ubuntu: [python3-mock]
-python3-moonraker-api-pip: *migrate_eol_2025_04_30_python3_moonraker-api_pip
+python3-moonraker-api-pip:
+  debian:
+    '*':
+      pip:
+        packages: [moonraker-api]
+  ubuntu:
+    '*':
+      pip:
+        packages: [moonraker-api]
 python3-more-itertools:
   arch: [python-more-itertools]
   debian: [python3-more-itertools]
