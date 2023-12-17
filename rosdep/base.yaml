@@ -1137,6 +1137,11 @@ fonts-noto:
   fedora: [google-noto-sans-mono-fonts, google-noto-serif-fonts]
   gentoo: [media-fonts/noto]
   ubuntu: [fonts-noto]
+fonts-roboto:
+  arch: [ttf-roboto]
+  debian: [fonts-roboto-hinted, fonts-roboto-unhinted]
+  fedora: [google-roboto-fonts, google-roboto-condensed-fonts]
+  ubuntu: [fonts-roboto-hinted, fonts-roboto-unhinted]
 fping:
   arch: [fping]
   debian: [fping]
@@ -4439,7 +4444,7 @@ libopencv-dev:
   freebsd: [opencv-core]
   gentoo: [media-libs/opencv]
   macports: [opencv]
-  nixos: [opencv]
+  nixos: [opencv, opencv.cxxdev]
   openembedded: [opencv@meta-oe]
   opensuse: [opencv-devel]
   rhel: [opencv-devel]
@@ -4449,7 +4454,7 @@ libopencv-imgproc-dev:
   debian: [libopencv-imgproc-dev]
   fedora: [opencv-devel]
   gentoo: [media-libs/opencv]
-  nixos: [opencv]
+  nixos: [opencv, opencv.cxxdev]
   openembedded: [opencv@meta-oe]
   rhel: [opencv-devel]
   ubuntu: [libopencv-imgproc-dev]
@@ -6824,6 +6829,11 @@ nvidia-cuda-dev:
   debian: [nvidia-cuda-dev]
   gentoo: [dev-util/nvidia-cuda-sdk, dev-util/nvidia-cuda-gdk]
   ubuntu: [nvidia-cuda-dev]
+nvidia-cudnn:
+  debian: [nvidia-cudnn]
+  ubuntu:
+    '*': [nvidia-cudnn]
+    focal: null
 ocl-icd-opencl-dev:
   debian: [ocl-icd-opencl-dev]
   fedora: [ocl-icd-devel]
@@ -7178,6 +7188,13 @@ protobuf:
     bionic: [libprotobuf10]
     focal: [libprotobuf17]
     jammy: [libprotobuf23]
+protobuf-compiler-grpc:
+  debian: [protobuf-compiler-grpc]
+  fedora: [grpc-plugins]
+  rhel:
+    '8': null
+    '9': [grpc-plugins]
+  ubuntu: [protobuf-compiler-grpc]
 protobuf-dev:
   arch: [protobuf]
   debian: [libprotobuf-dev, protobuf-compiler, libprotoc-dev]
