@@ -1,5 +1,5 @@
-<!-- Thank you for contributing a change to the rosdistro. There are two primary types of submissions.
-Please select the appropriate template from below: ROSDEP_RULE_TEMPLATE or DOC_INDEX_TEMPLATE
+<!-- Thank you for contributing a change to the rosdistro. There are three primary types of submissions.
+Please select the appropriate template from below: ROSDEP_RULE_TEMPLATE, NAMING_REVIEW_TEMPLATE or DOC_INDEX_TEMPLATE
 
 If you're making a new release with bloom please use bloom to create the pull request automatically (except for the naming review request which must be made manually).
 If you've already run the release bloom has a `--pull-request-only` option you can use.-->
@@ -47,6 +47,21 @@ More info at https://github.com/ros/rosdistro/blob/master/CONTRIBUTING.md#guidel
   - IF AVAILABLE
 - rhel: https://rhel.pkgs.org/
   - IF AVAILABLE
+ 
+<!-- NAMING_REVIEW_TEMPLATE: add package to rosdistro for name reviewing prior to first release -->
+
+# Please Add This Package to be indexed in the rosdistro (Naming Review)
+
+## Package name
+
+package_name
+
+## Package source code
+
+http://sourcecode_url
+
+# Checks
+- [ ] Does the package naming comply with [REP-144](https://ros.org/reps/rep-0144.html) ? 
 
 <!-- DOC_INDEX_TEMPLATE: add package to rosdistro for documentation indexing -->
 
