@@ -1,7 +1,7 @@
 <!-- Thank you for contributing a change to the rosdistro. There are two primary types of submissions.
 Please select the appropriate template from below: ROSDEP_RULE_TEMPLATE or DOC_INDEX_TEMPLATE
 
-If you're making a new release with bloom please use bloom to create the pull request automatically.
+If you're making a new release with bloom please use bloom to create the pull request automatically (except for the naming review request which must be made manually).
 If you've already run the release bloom has a `--pull-request-only` option you can use.-->
 
 <!-- ROSDEP_RULE_TEMPLATE: Submitter Please review the contributing guidelines: https://github.com/ros/rosdistro/blob/master/CONTRIBUTING.md -->
@@ -44,6 +44,8 @@ More info at https://github.com/ros/rosdistro/blob/master/CONTRIBUTING.md#guidel
 - NixOS/nixpkgs: https://search.nixos.org/packages
   - OPTIONAL
 - openSUSE: https://software.opensuse.org/package/
+  - IF AVAILABLE
+- rhel: https://rhel.pkgs.org/
   - IF AVAILABLE
 
 <!-- DOC_INDEX_TEMPLATE: add package to rosdistro for documentation indexing -->

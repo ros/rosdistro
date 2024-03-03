@@ -70,3 +70,43 @@ There are a few different types of pull requests that are opened against this re
 1.  Changes to the rosdistro code. These pull requests change any of the scripts or tests that are housed in the rosdistro repositories.  They will be reviewed as any other code change in the ROS ecosystem.
 
 1.  Miscellaneous. Any other pull requests adding or modifying documentation, or anything else will be reviewed as any other code change in the ROS ecosystem.
+
+Reviewer utilities
+------------------
+
+### New package review checklist
+
+You can copy-paste the below into your review comment when reviewing a new package addition into rosdistro.
+
+- [ ] At least one of the following must be present
+  - [ ] Top level license file:
+  - [ ] Per package license files:
+- [ ] License is [OSI-approved](https://opensource.org/licenses):
+- [ ] License correctly listed in package.xmls
+- [ ] Public source repo:
+- [ ] Source repository contains ROS packages
+- [ ] Each package meets [REP-144](https://www.ros.org/reps/rep-0144.html) naming conventions
+
+<details><summary>Package name details</summary>
+
+```console
+$ find . -name "package.xml" -exec grep --color=auto -e "<name>" "{}" ";"
+<OUTPUT HERE>
+```
+</details>
+
+<details><summary>License details</summary>
+
+```console
+$ find . -name "package.xml" -exec grep --color=auto -e "<license>" "{}" "+"
+<OUTPUT HERE>
+```
+</details>
+
+### pip keys standard disclaimer
+
+You can copy-paste the following as a comment when reviewing a new rosdistro key using `pip` (even if you are approving!)
+
+Standard pip disclaimer: ROS packages that depend on `pip` keys cannot be released into a ROS distribution.
+They can only be depended on by from-source builds.
+Because of this, system packages are highly preferred to pip packages.
