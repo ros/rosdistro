@@ -61,7 +61,7 @@ package_name
 http://sourcecode_url
 
 # Checks
-- [ ] Does the package naming comply with [REP-144](https://ros.org/reps/rep-0144.html) ? 
+- [ ] Does the package naming comply with [REP-144](https://ros.org/reps/rep-0144.html)? 
 
 <!-- DOC_INDEX_TEMPLATE: add package to rosdistro for documentation indexing -->
 
