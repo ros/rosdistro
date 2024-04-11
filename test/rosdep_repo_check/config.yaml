@@ -17,6 +17,8 @@ package_sources:
   - !rpm_mirrorlist_url https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever&arch=$basearch
   - !rpm_mirrorlist_url https://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f$releasever&arch=$basearch
   - !rpm_mirrorlist_url https://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-$releasever&arch=$basearch
+  openembedded:
+  - !layer_index_url http://layers.openembedded.org/layerindex/api/
   opensuse:
   - !rpm_base_url http://download.opensuse.org/distribution/leap/$releasever/repo/oss/
   - !rpm_base_url http://download.opensuse.org/distribution/leap/$releasever/repo/non-oss/
@@ -48,6 +50,8 @@ package_dashboards:
   url: https://packages.debian.org/{os_code_name}/{binary_name}
 - pattern: !regular_expression .*//dl.fedoraproject.org/pub/.*
   url: https://packages.fedoraproject.org/pkgs/{source_name}/{binary_name}/
+- pattern: !regular_expression .*://layers.openembedded.org/layerindex/api/recipes/([^/]+)
+  url: https://layers.openembedded.org/layerindex/recipe/\1/
 - pattern: !regular_expression .*//download.opensuse.org/.*
   url: https://software.opensuse.org/package/{source_name}
 - pattern: !regular_expression .*//archive.ubuntu.com/ubuntu/.*
@@ -63,10 +67,12 @@ supported_versions:
   debian:
   - bookworm
   fedora:
-  - '37'
   - '38'
+  - '39'
   opensuse:
   - '15.2'
+  openembedded:
+  - master
   rhel:
   - '8'
   - '9'
@@ -86,6 +92,8 @@ supported_arches:
   - x86_64
   opensuse:
   - x86_64
+  openembedded:
+  - ''
   rhel:
   - x86_64
   ubuntu:
@@ -97,6 +105,9 @@ name_replacements:
       '%{__isa_name}': 'x86'
     '38':
       '%{__isa_name}': 'x86'
+  openembedded:
+    master:
+      '${PYTHON_PN}': 'python3'
   rhel:
     '8':
       '%{__isa_name}': 'x86'
