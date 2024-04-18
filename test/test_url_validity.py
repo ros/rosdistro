@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # Copyright (c) 2017, Open Source Robotics Foundation
 # All rights reserved.
 #
@@ -27,10 +25,8 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from __future__ import print_function
 from . import hook_permissions
 
-from io import StringIO
 import os
 import re
 import shutil
@@ -45,20 +41,15 @@ except ImportError:
 
 import rosdistro
 from scripts import eol_distro_names
-import unidiff
 import yaml
 from yaml.composer import Composer
 from yaml.constructor import Constructor
 
 from .fold_block import Fold
+from .get_changed_lines import get_changed_line_numbers
 
 # for commented debugging code below
 # import pprint
-
-UPSTREAM_NAME = 'unittest_upstream_comparison'
-DIFF_BRANCH = 'master'
-DIFF_REPO = 'https://github.com/ros/rosdistro.git'
-
 
 TARGET_FILE_BLACKLIST = []
 
@@ -86,23 +77,6 @@ def get_eol_distribution_filenames(url=None):
                 dpath = os.path.abspath(urlparse(f).path)
                 distribution_filenames.append(dpath)
     return distribution_filenames
-
-
-def detect_lines(diffstr):
-    """Take a diff string and return a dict of
-    files with line numbers changed"""
-    resultant_lines = {}
-    # diffstr is already decoded
-    io = StringIO(diffstr)
-    udiff = unidiff.PatchSet(io)
-    for file in udiff:
-        target_lines = []
-        # if file.path in TARGET_FILES:
-        for hunk in file:
-            target_lines += range(hunk.target_start,
-                                  hunk.target_start + hunk.target_length)
-        resultant_lines[file.path] = target_lines
-    return resultant_lines
 
 
 def check_git_remote_exists(url, version, tags_valid=False, commits_valid=False):
@@ -308,32 +282,7 @@ def isolate_yaml_snippets_from_line_numbers(yaml_dict, line_numbers):
 def main():
     detected_errors = []
 
-    # See if UPSTREAM_NAME remote is available and use it as it's expected to be setup by CI
-    # Otherwise fall back to origin/master
-    try:
-        cmd = ('git config --get remote.%s.url' % UPSTREAM_NAME).split()
-        try:
-            remote_url = subprocess.check_output(cmd).decode('utf-8').strip()
-            # Remote exists
-            # Check url
-            if remote_url != DIFF_REPO:
-                detected_errors.append('%s remote url [%s] is different than %s' % (UPSTREAM_NAME, remote_url, DIFF_REPO))
-                return detected_errors
-
-            target_branch = '%s/%s' % (UPSTREAM_NAME, DIFF_BRANCH)
-        except subprocess.CalledProcessError:
-            # No remote so fall back to origin/master
-            print('WARNING: No remote %s detected, falling back to origin master. Make sure it is up to date.' % UPSTREAM_NAME)
-            target_branch = 'origin/master'
-
-        cmd = ('git diff --unified=0 %s' % target_branch).split()
-        diff = subprocess.check_output(cmd).decode('utf-8')
-    except subprocess.CalledProcessError as ex:
-        detected_errors.append('%s' % ex)
-        return detected_errors
-    # print("output", diff)
-
-    diffed_lines = detect_lines(diff)
+    diffed_lines = get_changed_line_numbers()
     # print("Diff lines %s" % diffed_lines)
 
 

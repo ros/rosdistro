@@ -25,12 +25,9 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from io import StringIO
 import os
 import pprint
-import subprocess
 import sys
-import unidiff
 import unittest
 import yaml
 
@@ -41,52 +38,14 @@ from .verify import verify_rules
 from .yaml import AnnotatedSafeLoader
 from .yaml import isolate_yaml_snippets_from_line_numbers
 
-
-def detect_lines(diffstr):
-    """Take a diff string and return a dict of files with line numbers changed."""
-    resultant_lines = {}
-    io = StringIO(diffstr)
-    udiff = unidiff.PatchSet(io)
-    for file in udiff:
-        target_lines = []
-        for hunk in file:
-            target_lines += range(hunk.target_start,
-                                  hunk.target_start + hunk.target_length)
-        resultant_lines[file.path] = target_lines
-    return resultant_lines
-
-
-def get_changed_line_numbers():
-    UPSTREAM_NAME = 'unittest_upstream_comparison'
-    DIFF_BRANCH = 'master'
-    DIFF_REPO = 'https://github.com/ros/rosdistro.git'
-
-    # See if UPSTREAM_NAME remote is available and use it as it's expected to be setup by CI
-    # Otherwise fall back to origin/master
-    cmd = 'git config --get remote.%s.url' % UPSTREAM_NAME
-    try:
-        remote_url = subprocess.check_output(cmd.split()).decode('utf-8').strip()
-        # Remote exists
-        # Check url
-        assert remote_url == DIFF_REPO, \
-            '%s remote url [%s] is different than %s' % (UPSTREAM_NAME, remote_url, DIFF_REPO)
-        base_ref = '%s/%s' % (UPSTREAM_NAME, DIFF_BRANCH)
-    except subprocess.CalledProcessError:
-        # No remote so fall back to origin/master
-        print('WARNING: No remote %s detected, falling back to origin master. Make sure it is up to date.' % UPSTREAM_NAME, file=sys.stderr)
-        base_ref = 'origin/master'
-
-    cmd = 'git diff --unified=0 %s -- rosdep' % (base_ref,)
-    print("Detecting changed rules with '%s'" % (cmd,))
-    diff = subprocess.check_output(cmd.split()).decode('utf-8')
-    return detect_lines(diff)
+from ..get_changed_lines import get_changed_line_numbers
 
 
 class TestRosdepRepositoryCheck(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls._changed_lines = get_changed_line_numbers()
+        cls._changed_lines = get_changed_line_numbers('rosdep')
         cls._config = load_config()
         cls._full_data = {}
         cls._isolated_data = {}
