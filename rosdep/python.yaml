@@ -109,6 +109,7 @@ black:
   fedora: [black]
   gentoo: [dev-python/black]
   nixos: [pythonPackages.black]
+  openembedded: [python3-black@meta-ros]
   ubuntu:
     '*': [black]
     bionic: null
@@ -312,6 +313,7 @@ meson:
   alpine: [meson]
   debian: [meson]
   fedora: [meson]
+  gentoo: [dev-build/meson]
   nixos: [meson]
   opensuse: [meson]
   rhel: [meson]
@@ -1067,6 +1069,7 @@ python-construct:
   arch: [python-construct]
   debian: [python-construct]
   gentoo: [dev-python/construct]
+  openembedded: [python3-construct@meta-ros2]
   ubuntu:
     bionic: [python-construct]
 python-construct-pip:
@@ -2056,6 +2059,10 @@ python-jasmine-pip:
   ubuntu:
     pip:
       packages: [jasmine]
+python-jetson-gpio-pip:
+  ubuntu:
+    pip:
+      packages: [Jetson.GPIO]
 python-jetson-stats-pip:
   ubuntu:
     pip:
@@ -2063,7 +2070,7 @@ python-jetson-stats-pip:
 python-jinja2:
   debian: [python-jinja2]
   fedora: [python-jinja2]
-  gentoo: [=dev-python/jinja-2*]
+  gentoo: [dev-python/jinja]
   nixos: [pythonPackages.jinja2]
   ubuntu: [python-jinja2]
 python-jira-pip:
@@ -4774,6 +4781,10 @@ python3-adafruit-circuitpython-mcp230xx-pip:
   ubuntu:
     pip:
       packages: [adafruit-circuitpython-mcp230xx]
+python3-adafruit-circuitpython-motor-pip:
+  '*':
+    pip:
+      packages: [adafruit-circuitpython-motor]
 python3-adafruit-circuitpython-mpu6050-pip:
   debian:
     pip:
@@ -4784,6 +4795,10 @@ python3-adafruit-circuitpython-mpu6050-pip:
   ubuntu:
     pip:
       packages: [adafruit-circuitpython-mpu6050]
+python3-adafruit-servokit-pip:
+  '*':
+    pip:
+      packages: [adafruit-circuitpython-servokit]
 python3-adapt-parser-pip:
   debian:
     pip:
@@ -4942,6 +4957,7 @@ python3-babeltrace:
   debian: [python3-babeltrace]
   fedora: [python3-babeltrace]
   gentoo: [dev-util/babeltrace]
+  nixos: [babeltrace]
   opensuse: [python3-babeltrace]
   rhel:
     '*': [python3-babeltrace]
@@ -5165,13 +5181,13 @@ python3-cantools-pip:
       packages: [cantools]
 python3-catkin-lint:
   debian:
-    '*': [python3-catkin-lint]
+    '*': [catkin-lint]
     stretch: null
   fedora: [python3-catkin_lint]
   openembedded: [python3-catkin-lint@meta-ros-common]
   rhel: [python3-catkin_lint]
   ubuntu:
-    '*': [python3-catkin-lint]
+    '*': [catkin-lint]
     bionic: null
 python3-catkin-pkg:
   alpine: [py3-catkin-pkg]
@@ -5343,6 +5359,7 @@ python3-colorcet:
       pip:
         packages: [colorcet]
   fedora: [python3-colorcet]
+  nixos: [python3Packages.colorcet]
   ubuntu:
     '*': [python3-colorcet]
     bionic:
@@ -5512,6 +5529,7 @@ python3-deprecated:
     '*': [python3-deprecated]
     buster: null
   fedora: [python3-deprecated]
+  nixos: [python3Packages.deprecated]
   rhel:
     '*': [python3-deprecated]
     '7': null
@@ -5544,6 +5562,7 @@ python3-distro:
   fedora: [python3-distro]
   gentoo: [dev-python/distro]
   nixos: [python3Packages.distro]
+  rhel: [python3-distro]
   ubuntu: [python3-distro]
 python3-distutils:
   debian:
@@ -5592,6 +5611,17 @@ python3-dlib-pip:
     pip:
       depends: [cmake, build-essential, python3-dev]
       packages: [dlib]
+python3-dm-env-pip:
+  '*':
+    pip:
+      packages: [dm-env]
+python3-do-mpc-pip:
+  debian:
+    pip:
+      packages: [do-mpc]
+  ubuntu:
+    pip:
+      packages: [do-mpc]
 python3-docker:
   arch: [python-docker]
   debian: [python3-docker]
@@ -5847,6 +5877,7 @@ python3-fiona:
   debian: [python3-fiona]
   fedora: [python3-fiona]
   nixos: [python3Packages.fiona]
+  openembedded: [python3-fiona@meta-ros2]
   rhel:
     '*': [python3-fiona]
     '7': null
@@ -5905,6 +5936,8 @@ python3-flake8-builtins:
       pip:
         packages: [flake8-builtins]
   fedora: [python3-flake8-builtins]
+  nixos: []
+  openembedded: [python3-flake8-builtins@meta-ros-common]
   opensuse: [python3-flake8-builtins]
   rhel:
     '*': [python3-flake8-builtins]
@@ -5941,6 +5974,8 @@ python3-flake8-comprehensions:
       pip:
         packages: [flake8-comprehensions]
   fedora: [python3-flake8-comprehensions]
+  nixos: []
+  openembedded: [python3-flake8-comprehensions@meta-ros-common]
   rhel:
     '*': [python3-flake8-comprehensions]
     '8':
@@ -5973,6 +6008,8 @@ python3-flake8-docstrings:
   arch: [python-flake8-docstrings]
   debian: [python3-flake8-docstrings]
   fedora: [python3-flake8-docstrings]
+  nixos: [python3Packages.flake8-docstrings]
+  openembedded: [python3-flake8-docstrings@meta-ros-common]
   opensuse: [python3-flake8-docstrings]
   rhel:
     '*': [python3-flake8-docstrings]
@@ -5989,6 +6026,8 @@ python3-flake8-import-order:
       pip:
         packages: [flake8-import-order]
   fedora: [python3-flake8-import-order]
+  nixos: [python3Packages.flake8-import-order]
+  openembedded: [python3-flake8-import-order@meta-ros-common]
   opensuse: [python3-flake8-import-order]
   rhel:
     '*': [python3-flake8-import-order]
@@ -6025,6 +6064,8 @@ python3-flake8-quotes:
   fedora:
     '*': [python3-flake8-quotes]
     '35': null
+  nixos: []
+  openembedded: [python3-flake8-quotes@meta-ros-common]
   opensuse: [python3-flake8-quotes]
   rhel:
     '*': [python3-flake8-quotes]
@@ -6270,6 +6311,7 @@ python3-git:
   fedora: [python3-GitPython]
   gentoo: [dev-python/git-python]
   nixos: [python3Packages.GitPython]
+  openembedded: [python3-git@openembedded-core]
   rhel:
     '*': [python3-GitPython]
     '7': null
@@ -6414,6 +6456,7 @@ python3-graphviz:
   gentoo: [dev-python/graphviz]
   nixos: [python3Packages.graphviz]
   opensuse: [python3-graphviz]
+  rhel: [python3-pygraphviz]
   ubuntu: [python3-graphviz]
 python3-grip:
   debian:
@@ -6489,10 +6532,14 @@ python3-gz-math6:
   ubuntu:
     focal: [python3-gz-math6]
     jammy: [python3-gz-math6]
+python3-gz-math7:
+  gentoo: ['sci-libs/gz-math:7[python]']
 python3-gz-sim6:
   ubuntu:
     focal: [python3-gz-sim6]
     jammy: [python3-gz-sim6]
+python3-gz-sim7:
+  gentoo: ['sci-electronics/gz-sim:7[python]']
 python3-h5py:
   debian: [python3-h5py]
   fedora: [python3-h5py]
@@ -6556,6 +6603,7 @@ python3-img2pdf:
   fedora: [python3-img2pdf]
   gentoo: [media-gfx/img2pdf]
   nixos: [python3Packages.img2pdf]
+  openembedded: [python3-img2pdf@meta-ros-common]
   opensuse: [python3-img2pdf]
   rhel:
     '*': [python3-img2pdf]
@@ -6696,8 +6744,9 @@ python3-jinja2:
   alpine: [py3-jinja2]
   debian: [python3-jinja2]
   fedora: [python3-jinja2]
-  gentoo: [=dev-python/jinja-2*]
+  gentoo: [dev-python/jinja]
   nixos: [python3Packages.jinja2]
+  openembedded: [python3-jinja2@openembedded-core]
   rhel:
     '*': [python3-jinja2]
     '7': [python36-jinja2]
@@ -6717,6 +6766,10 @@ python3-joblib:
   nixos: [python3Packages.joblib]
   opensuse: [python3-joblib]
   ubuntu: [python3-joblib]
+python3-json-stream-pip:
+  '*':
+    pip:
+      packages: [json-stream]
 python3-jsonpickle:
   arch: [python-jsonpickle]
   debian: [python3-jsonpickle]
@@ -6728,6 +6781,7 @@ python3-jsonschema:
   fedora: [python3-jsonschema]
   gentoo: [dev-python/jsonschema]
   nixos: [python3Packages.jsonschema]
+  openembedded: [python3-jsonschema@openembedded-core]
   rhel:
     '*': [python3-jsonschema]
     '7': [python36-jsonschema]
@@ -6842,6 +6896,7 @@ python3-lttng:
   arch: [python-lttngust]
   debian: [python3-lttng]
   fedora: [python3-lttng]
+  nixos: [python3Packages.lttng]
   openembedded: [lttng-tools@openembedded-core]
   rhel:
     '*': [python3-lttng]
@@ -7061,6 +7116,13 @@ python3-moteus-pip:
   ubuntu:
     pip:
       packages: [moteus]
+python3-motor-pip:
+  debian:
+    pip:
+      packages: [motor]
+  ubuntu:
+    pip:
+      packages: [motor]
 python3-msgpack:
   debian:
     '*': [python3-msgpack]
@@ -7162,6 +7224,7 @@ python3-natsort:
   fedora: [python3-natsort]
   gentoo: [dev-python/natsort]
   nixos: [python3Packages.natsort]
+  openembedded: [python3-natsort@meta-python]
   opensuse: [python3-natsort]
   rhel: [python3-natsort]
   ubuntu: [python3-natsort]
@@ -7246,6 +7309,7 @@ python3-ntplib:
   fedora: [python3-ntplib]
   gentoo: [dev-python/ntplib]
   nixos: [python3Packages.ntplib]
+  openembedded: [python3-ntplib@meta-python]
   opensuse: [python3-ntplib]
   rhel:
     '*': [python%{python3_pkgversion}-ntplib]
@@ -7399,6 +7463,9 @@ python3-openai-pip:
   fedora:
     pip:
       packages: [openai]
+  rhel:
+    pip:
+      packages: [openai]
   ubuntu:
     pip:
       packages: [openai]
@@ -7431,6 +7498,62 @@ python3-openhsi-pip:
   ubuntu:
     pip:
       packages: [openhsi]
+python3-opentelemetry-api-pip:
+  '*':
+    pip:
+      packages: [opentelemetry-api]
+python3-opentelemetry-exporter-otlp-pip:
+  '*':
+    pip:
+      packages: [opentelemetry-exporter-otlp]
+python3-opentelemetry-instrumentation-requests-pip:
+  '*':
+    pip:
+      packages: [opentelemetry-instrumentation-requests]
+python3-opentelemetry-instrumentation-sqlalchemy-pip:
+  '*':
+    pip:
+      packages: [opentelemetry-instrumentation-sqlalchemy]
+python3-opentelemetry-sdk-pip:
+  '*':
+    pip:
+      packages: [opentelemetry-sdk]
+python3-orjson:
+  # Replace pip packages with native packages when this bug is resolved:
+  # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1002996
+  arch: [python-orjson]
+  debian:
+    pip:
+      packages: [orjson]
+  fedora: [python3-orjson]
+  gentoo: [dev-python/orjson]
+  nixos: ['python%{python3_pkgversion}Packages.orjson']
+  openembedded:
+    pip:
+      packages: [orjson]
+  opensuse:
+    pip:
+      packages: [orjson]
+  rhel:
+    pip:
+      packages: [orjson]
+  ubuntu:
+    pip:
+      packages: [orjson]
+python3-overrides:
+  arch: [python-overrides]
+  debian:
+    pip:
+      packages: [overrides]
+  fedora:
+    pip:
+      packages: [overrides]
+  osx:
+    pip:
+      packages: [overrides]
+  ubuntu:
+    pip:
+      packages: [overrides]
 python3-owlready2-pip:
   debian:
     pip:
@@ -7729,6 +7852,7 @@ python3-protobuf:
   fedora: [python3-protobuf]
   gentoo: [dev-python/protobuf-python]
   nixos: [python3Packages.protobuf]
+  openembedded: [python3-protobuf@meta-python]
   rhel:
     '*': [python3-protobuf]
     '7': null
@@ -7768,6 +7892,16 @@ python3-py3exiv2-pip:
   ubuntu:
     pip:
       packages: [py3exiv2]
+python3-pyads-pip:
+  debian:
+    pip:
+      packages: [pyads]
+  fedora:
+    pip:
+      packages: [pyads]
+  ubuntu:
+    pip:
+      packages: [pyads]
 python3-pyassimp:
   debian:
     '*': [python3-pyassimp]
@@ -7843,6 +7977,7 @@ python3-pydantic:
       pip: [pydantic]
   fedora: [python3-pydantic]
   gentoo: [dev-python/pydantic]
+  nixos: [python3Packages.pydantic]
   ubuntu:
     '*': [python3-pydantic]
     bionic:
@@ -8047,6 +8182,13 @@ python3-pymongo:
   nixos: [python3Packages.pymongo]
   openembedded: [python3-pymongo@meta-python]
   ubuntu: [python3-pymongo]
+python3-pymongo-pip:
+  debian:
+    pip:
+      packages: [pymongo]
+  ubuntu:
+    pip:
+      packages: [pymongo]
 python3-pynmea2:
   debian: [python3-nmea2]
   fedora:
@@ -8060,6 +8202,11 @@ python3-pynmeagps-pip:
   ubuntu:
     pip:
       packages: [pynmeagps]
+python3-pynput:
+  debian: [python3-pynput]
+  ubuntu:
+    '*': [python3-pynput]
+    focal: null
 python3-pyosmium:
   debian: [python3-pyosmium]
   fedora: [python3-osmium]
@@ -8330,6 +8477,7 @@ python3-pytest-timeout:
   fedora: [python3-pytest-timeout]
   gentoo: [dev-python/pytest-timeout]
   nixos: [python3Packages.pytest-timeout]
+  openembedded: [python3-pytest-timeout@meta-python]
   opensuse: [python3-pytest-timeout]
   rhel: [python%{python3_pkgversion}-pytest-timeout]
   ubuntu: [python3-pytest-timeout]
@@ -8499,6 +8647,13 @@ python3-rapidfuzz-pip:
   ubuntu:
     pip:
       packages: [rapidfuzz]
+python3-rasterio:
+  debian: [python3-rasterio]
+  fedora: [python3-rasterio]
+  osx:
+    pip:
+      packages: [rasterio]
+  ubuntu: [python3-rasterio]
 python3-rdflib:
   arch: [python-rdflib]
   debian: [python3-rdflib]
@@ -8672,6 +8827,7 @@ python3-rtree:
   fedora: [python3-rtree]
   gentoo: [sci-libs/rtree]
   nixos: [python3Packages.Rtree]
+  openembedded: [python3-rtree@meta-ros2]
   rhel:
     '*': [python3-rtree]
     '7': null
@@ -8715,6 +8871,53 @@ python3-schema:
       packages: [schema]
   rhel: [python3-schema]
   ubuntu: [python3-schema]
+python3-scikit-sparse-pip:
+  arch:
+    pip:
+      depends: [suitesparse]
+      packages: [scikit-sparse]
+  debian:
+    pip:
+      depends: [suitesparse]
+      packages: [scikit-sparse]
+  fedora:
+    pip:
+      depends: [suitesparse]
+      packages: [scikit-sparse]
+  gentoo:
+    pip:
+      depends: [suitesparse]
+      packages: [scikit-sparse]
+  nixos:
+    pip:
+      depends: [suitesparse]
+      packages: [scikit-sparse]
+  opensuse: [python-scikit-sparse]
+  osx:
+    pip:
+      depends: [suitesparse]
+      packages: [scikit-sparse]
+  rhel:
+    pip:
+      depends: [suitesparse]
+      packages: [scikit-sparse]
+  ubuntu:
+    pip:
+      depends: [suitesparse]
+      packages: [scikit-sparse]
+python3-scikit-spatial-pip:
+  debian:
+    pip:
+      packages: [scikit-spatial]
+  fedora:
+    pip:
+      packages: [scikit-spatial]
+  osx:
+    pip:
+      packages: [scikit-spatial]
+  ubuntu:
+    pip:
+      packages: [scikit-spatial]
 python3-scipy:
   arch: [python-scipy]
   debian: [python3-scipy]
@@ -8739,6 +8942,8 @@ python3-scp:
     '*': [python3-scp]
     '7': null
   ubuntu: [python3-scp]
+python3-sdformat13:
+  gentoo: ['dev-libs/sdformat:13[python]']
 python3-seaborn:
   arch: [python-seaborn]
   debian: [python3-seaborn]
@@ -8851,6 +9056,7 @@ python3-shapely:
   fedora: [python3-shapely]
   gentoo: [sci-libs/Shapely]
   nixos: [python3Packages.shapely]
+  openembedded: [python3-shapely@meta-ros2]
   osx:
     pip:
       packages: [shapely]
@@ -8910,6 +9116,16 @@ python3-simplification-pip:
   ubuntu:
     pip:
       packages: [simplification]
+python3-singleton-pattern-decorator-pip:
+  debian:
+    pip:
+      packages: [singleton-pattern-decorator]
+  fedora:
+    pip:
+      packages: [singleton-pattern-decorator]
+  ubuntu:
+    pip:
+      packages: [singleton-pattern-decorator]
 python3-sip:
   debian: [python3-sip-dev]
   fedora: [python3-sip-devel]
@@ -8959,7 +9175,11 @@ python3-smbus:
   arch: [i2c-tools]
   debian: [python3-smbus]
   fedora: [python3-i2c-tools]
+  nixos: [python3Packages.i2c-tools]
   opensuse: [python3-smbus]
+  rhel:
+    '*': [python3-i2c-tools]
+    '8': null
   ubuntu: [python3-smbus]
 python3-smbus2-pip:
   debian:
@@ -9227,7 +9447,22 @@ python3-tabulate:
   fedora: [python3-tabulate]
   gentoo: [dev-python/tabulate]
   nixos: [python3Packages.tabulate]
+  rhel: [python3-tabulate]
   ubuntu: [python3-tabulate]
+python3-tcr-roboclaw-pip:
+  debian:
+    pip:
+      packages: [tcr-roboclaw]
+  fedora:
+    pip:
+      packages: [tcr-roboclaw]
+  ubuntu:
+    pip:
+      packages: [tcr-roboclaw]
+python3-tensorboard-pip:
+  '*':
+    pip:
+      packages: [tensorboard]
 python3-tensorboardX-pip:
   debian:
     pip:
@@ -9318,6 +9553,19 @@ python3-toml:
   gentoo: [dev-python/toml]
   nixos: [python3Packages.toml]
   ubuntu: [python3-toml]
+python3-toppra-pip:
+  debian:
+    pip:
+      packages: [toppra]
+  fedora:
+    pip:
+      packages: [toppra]
+  osx:
+    pip:
+      packages: [toppra]
+  ubuntu:
+    pip:
+      packages: [toppra]
 python3-torch:
   arch: [python-pytorch]
   debian: [python3-torch]
@@ -9329,6 +9577,10 @@ python3-torch:
     '*': [python3-torch]
     bionic: null
     focal: null
+python3-torch-geometric-pip:
+  '*':
+    pip:
+      packages: [torch-geometric]
 python3-torchvision:
   arch: [python-torchvision]
   debian: [python3-torchvision]
@@ -9362,6 +9614,7 @@ python3-tqdm:
   osx:
     pip:
       packages: [tqdm]
+  rhel: [python3-tqdm]
   ubuntu:
     '*': [python3-tqdm]
 python3-transformers-pip:
@@ -9441,6 +9694,7 @@ python3-typeguard:
   fedora: [python3-typeguard]
   gentoo: [dev-python/typeguard]
   nixos: [python3Packages.typeguard]
+  openembedded: [python3-typeguard@meta-python]
   osx:
     pip:
       packages: [typeguard]
@@ -9462,6 +9716,19 @@ python3-typeguard-pip:
   ubuntu:
     pip:
       packages: [typeguard]
+python3-types-pyyaml:
+  debian: [python3-typeshed]
+  fedora: [python3-types-pyyaml]
+  rhel:
+    '*': [python3-types-pyyaml]
+    '8':
+      pip:
+        packages: [types-pyyaml]
+  ubuntu:
+    '*': [python3-typeshed]
+    focal:
+      pip:
+        packages: [types-pyyaml]
 python3-typing-extensions:
   arch: [python-typing_extensions]
   debian: [python3-typing-extensions]
@@ -9526,6 +9793,7 @@ python3-unidiff:
   fedora: [python3-unidiff]
   gentoo: [dev-python/unidiff]
   nixos: [python3Packages.unidiff]
+  openembedded: [python3-unidiff@meta-python]
   opensuse: [python-unidiff]
   rhel: [python3-unidiff]
   ubuntu: [python3-unidiff]
@@ -9563,6 +9831,7 @@ python3-uvloop:
   fedora: [python3-uvloop]
   gentoo: [dev-python/uvloop]
   nixos: [python3Packages.uvloop]
+  openembedded: [python3-uvloop@meta-ros2]
   ubuntu: [python3-uvloop]
 python3-vcstool:
   alpine: [vcstool]
@@ -9573,6 +9842,7 @@ python3-vcstool:
     pip:
       packages: [vcstool]
   nixos: [vcstool]
+  openembedded: [python3-vcstool@meta-ros-common]
   osx:
     pip:
       packages: [vcstool]
@@ -9794,6 +10064,10 @@ python3-yappi:
   ubuntu:
     '*': [python3-yappi]
     bionic: null
+python3-yoctopuce-pip:
+  ubuntu:
+    pip:
+      packages: [yoctopuce]
 python3-yolov5:
   debian:
     pip:
