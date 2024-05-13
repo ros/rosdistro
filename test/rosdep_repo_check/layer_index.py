@@ -28,7 +28,7 @@
 import json
 import os
 
-from . import open_gz_url
+from . import open_compressed_url
 from . import PackageEntry
 from . import RepositoryCacheCollection
 
@@ -37,7 +37,7 @@ def enumerate_recipes(base_url, branch_name):
     recipes_url = os.path.join(base_url, 'recipes')
     recipes_url += f'?filter=layerbranch__branch__name:{branch_name}'
     print('Reading OpenEmbedded recipe metadata from ' + recipes_url)
-    with open_gz_url(recipes_url) as f:
+    with open_compressed_url(recipes_url) as f:
         yield from json.load(f)
 
 
@@ -46,7 +46,7 @@ def enumerate_layers_by_layer_branch_id(base_url, branch_name):
     layer_branches_url = os.path.join(base_url, 'layerBranches')
     layer_branches_url += f'?filter=branch__name:{branch_name}'
     print('Reading OpenEmbedded layer branches from ' + layer_branches_url)
-    with open_gz_url(layer_branches_url) as f:
+    with open_compressed_url(layer_branches_url) as f:
         for layer_branch in json.load(f):
             layer_branch_id = str(layer_branch.get('id', ''))
             layer_id = str(layer_branch.get('layer', ''))
@@ -63,7 +63,7 @@ def enumerate_layers_by_layer_branch_id(base_url, branch_name):
 def enumerate_layers(base_url):
     layers_url = os.path.join(base_url, 'layerItems')
     print('Reading OpenEmbedded layers from ' + layers_url)
-    with open_gz_url(layers_url) as f:
+    with open_compressed_url(layers_url) as f:
         for layer in json.load(f):
             layer_id = str(layer.get('id', ''))
             layer_name = layer.get('name')

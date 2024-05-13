@@ -28,7 +28,7 @@
 import os
 import tarfile
 
-from . import open_gz_url
+from . import open_compressed_url
 from . import PackageEntry
 from . import RepositoryCacheCollection
 
@@ -117,7 +117,7 @@ def enumerate_apk_packages(base_url, os_name, os_code_name, os_arch):
     apkindex_url = os.path.join(base_url, os_arch, 'APKINDEX.tar.gz')
     print('Reading apk package metadata from ' + apkindex_url)
 
-    with open_gz_url(apkindex_url) as f:
+    with open_compressed_url(apkindex_url) as f:
         with tarfile.open(mode='r|', fileobj=f) as tf:
             index = None
             for ti in tf:
