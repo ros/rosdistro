@@ -244,7 +244,7 @@ For example:
 
 ```yaml
 python3-foobar-pip:
-  ubuntu:
+  '*':
     pip:
       packages: [foobar]
 ```
@@ -259,7 +259,7 @@ For example:
 
 ```yaml
 python-foobar-pip: &migrate_eol_2025_04_30_python3_foobar_pip # Anchor
-  ubuntu:
+  '*':
     pip:
       packages: [foobar]
 python3-foobar-pip: *migrate_eol_2025_04_30_python3_foobar_pip # Alias
