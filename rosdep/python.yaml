@@ -465,6 +465,13 @@ pyqt5-dev-tools:
   openembedded: ['${PYTHON_PN}-pyqt5@meta-qt5']
   rhel: [python3-qt5-devel]
   ubuntu: [pyqt5-dev-tools]
+pyqt6-dev-tools:
+  debian: [pyqt6-dev-tools]
+  fedora: [python3-pyqt6-base]
+  ubuntu:
+    '*': [pyqt6-dev-tools]
+    focal: null
+    jammy: null
 pyrebase-pip:
   debian:
     pip:
@@ -4781,6 +4788,10 @@ python3-adafruit-circuitpython-mcp230xx-pip:
   ubuntu:
     pip:
       packages: [adafruit-circuitpython-mcp230xx]
+python3-adafruit-circuitpython-motor-pip:
+  '*':
+    pip:
+      packages: [adafruit-circuitpython-motor]
 python3-adafruit-circuitpython-mpu6050-pip:
   debian:
     pip:
@@ -4791,6 +4802,10 @@ python3-adafruit-circuitpython-mpu6050-pip:
   ubuntu:
     pip:
       packages: [adafruit-circuitpython-mpu6050]
+python3-adafruit-servokit-pip:
+  '*':
+    pip:
+      packages: [adafruit-circuitpython-servokit]
 python3-adapt-parser-pip:
   debian:
     pip:
@@ -4949,6 +4964,7 @@ python3-babeltrace:
   debian: [python3-babeltrace]
   fedora: [python3-babeltrace]
   gentoo: [dev-util/babeltrace]
+  nixos: [babeltrace]
   opensuse: [python3-babeltrace]
   rhel:
     '*': [python3-babeltrace]
@@ -5172,13 +5188,13 @@ python3-cantools-pip:
       packages: [cantools]
 python3-catkin-lint:
   debian:
-    '*': [python3-catkin-lint]
+    '*': [catkin-lint]
     stretch: null
   fedora: [python3-catkin_lint]
   openembedded: [python3-catkin-lint@meta-ros-common]
   rhel: [python3-catkin_lint]
   ubuntu:
-    '*': [python3-catkin-lint]
+    '*': [catkin-lint]
     bionic: null
 python3-catkin-pkg:
   alpine: [py3-catkin-pkg]
@@ -5334,6 +5350,7 @@ python3-colorcet:
       pip:
         packages: [colorcet]
   fedora: [python3-colorcet]
+  nixos: [python3Packages.colorcet]
   ubuntu:
     '*': [python3-colorcet]
     bionic:
@@ -5494,6 +5511,7 @@ python3-deprecated:
     '*': [python3-deprecated]
     buster: null
   fedora: [python3-deprecated]
+  nixos: [python3Packages.deprecated]
   rhel:
     '*': [python3-deprecated]
     '7': null
@@ -5575,6 +5593,10 @@ python3-dlib-pip:
     pip:
       depends: [cmake, build-essential, python3-dev]
       packages: [dlib]
+python3-dm-env-pip:
+  '*':
+    pip:
+      packages: [dm-env]
 python3-do-mpc-pip:
   debian:
     pip:
@@ -5880,6 +5902,7 @@ python3-flake8-builtins:
       pip:
         packages: [flake8-builtins]
   fedora: [python3-flake8-builtins]
+  nixos: []
   openembedded: [python3-flake8-builtins@meta-ros-common]
   opensuse: [python3-flake8-builtins]
   rhel:
@@ -5917,6 +5940,7 @@ python3-flake8-comprehensions:
       pip:
         packages: [flake8-comprehensions]
   fedora: [python3-flake8-comprehensions]
+  nixos: []
   openembedded: [python3-flake8-comprehensions@meta-ros-common]
   rhel:
     '*': [python3-flake8-comprehensions]
@@ -5950,6 +5974,7 @@ python3-flake8-docstrings:
   arch: [python-flake8-docstrings]
   debian: [python3-flake8-docstrings]
   fedora: [python3-flake8-docstrings]
+  nixos: [python3Packages.flake8-docstrings]
   openembedded: [python3-flake8-docstrings@meta-ros-common]
   opensuse: [python3-flake8-docstrings]
   rhel:
@@ -5967,6 +5992,7 @@ python3-flake8-import-order:
       pip:
         packages: [flake8-import-order]
   fedora: [python3-flake8-import-order]
+  nixos: [python3Packages.flake8-import-order]
   openembedded: [python3-flake8-import-order@meta-ros-common]
   opensuse: [python3-flake8-import-order]
   rhel:
@@ -6004,6 +6030,7 @@ python3-flake8-quotes:
   fedora:
     '*': [python3-flake8-quotes]
     '35': null
+  nixos: []
   openembedded: [python3-flake8-quotes@meta-ros-common]
   opensuse: [python3-flake8-quotes]
   rhel:
@@ -6642,6 +6669,10 @@ python3-joblib:
   nixos: [python3Packages.joblib]
   opensuse: [python3-joblib]
   ubuntu: [python3-joblib]
+python3-json-stream-pip:
+  '*':
+    pip:
+      packages: [json-stream]
 python3-jsonpickle:
   arch: [python-jsonpickle]
   debian: [python3-jsonpickle]
@@ -7370,6 +7401,26 @@ python3-openhsi-pip:
   ubuntu:
     pip:
       packages: [openhsi]
+python3-opentelemetry-api-pip:
+  '*':
+    pip:
+      packages: [opentelemetry-api]
+python3-opentelemetry-exporter-otlp-pip:
+  '*':
+    pip:
+      packages: [opentelemetry-exporter-otlp]
+python3-opentelemetry-instrumentation-requests-pip:
+  '*':
+    pip:
+      packages: [opentelemetry-instrumentation-requests]
+python3-opentelemetry-instrumentation-sqlalchemy-pip:
+  '*':
+    pip:
+      packages: [opentelemetry-instrumentation-sqlalchemy]
+python3-opentelemetry-sdk-pip:
+  '*':
+    pip:
+      packages: [opentelemetry-sdk]
 python3-orjson:
   # Replace pip packages with native packages when this bug is resolved:
   # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1002996
@@ -7566,6 +7617,11 @@ python3-pil:
     slackpkg:
       packages: [python3-pillow]
   ubuntu: [python3-pil]
+python3-pil-imagetk:
+  debian: [python3-pil.imagetk]
+  fedora: [python3-pillow-tk]
+  rhel: [python3-pillow-tk]
+  ubuntu: [python3-pil.imagetk]
 python3-pip:
   alpine: [py3-pip]
   debian: [python3-pip]
@@ -7829,6 +7885,7 @@ python3-pydantic:
       pip: [pydantic]
   fedora: [python3-pydantic]
   gentoo: [dev-python/pydantic]
+  nixos: [python3Packages.pydantic]
   ubuntu:
     '*': [python3-pydantic]
     bionic:
@@ -9002,6 +9059,7 @@ python3-smbus:
   arch: [i2c-tools]
   debian: [python3-smbus]
   fedora: [python3-i2c-tools]
+  nixos: [python3Packages.i2c-tools]
   opensuse: [python3-smbus]
   rhel:
     '*': [python3-i2c-tools]
@@ -9279,6 +9337,10 @@ python3-tcr-roboclaw-pip:
   ubuntu:
     pip:
       packages: [tcr-roboclaw]
+python3-tensorboard-pip:
+  '*':
+    pip:
+      packages: [tensorboard]
 python3-tensorboardX-pip:
   debian:
     pip:
@@ -9393,6 +9455,10 @@ python3-torch:
     '*': [python3-torch]
     bionic: null
     focal: null
+python3-torch-geometric-pip:
+  '*':
+    pip:
+      packages: [torch-geometric]
 python3-torchvision:
   arch: [python-torchvision]
   debian: [python3-torchvision]
@@ -9893,6 +9959,10 @@ python3-yolov5:
   ubuntu:
     pip:
       packages: [yolov5]
+python3-yourdfpy-pip:
+  '*':
+    pip:
+      packages: [yourdfpy]
 python3-zmq:
   arch: [python-pyzmq]
   debian: [python3-zmq]
