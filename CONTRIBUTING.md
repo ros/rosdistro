@@ -301,7 +301,7 @@ The unit tests enforce alphabetization of elements and a consistent formatting t
 ### Unit Testing
 
 It is recommended to use a virtual environment and pip to install the unit test dependencies.
-The test dependencies are listed in tests/requirements.txt.
+The test dependencies are listed in [test/requirements.txt](./test/requirements.txt).
 
 ```bash
 # create the virtual environment
