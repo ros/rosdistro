@@ -244,7 +244,7 @@ For example:
 
 ```yaml
 python3-foobar-pip:
-  ubuntu:
+  '*':
     pip:
       packages: [foobar]
 ```
@@ -259,7 +259,7 @@ For example:
 
 ```yaml
 python-foobar-pip: &migrate_eol_2025_04_30_python3_foobar_pip # Anchor
-  ubuntu:
+  '*':
     pip:
       packages: [foobar]
 python3-foobar-pip: *migrate_eol_2025_04_30_python3_foobar_pip # Alias
@@ -301,7 +301,7 @@ The unit tests enforce alphabetization of elements and a consistent formatting t
 ### Unit Testing
 
 It is recommended to use a virtual environment and pip to install the unit test dependencies.
-The test dependencies are listed in tests/requirements.txt.
+The test dependencies are listed in [test/requirements.txt](./test/requirements.txt).
 
 ```bash
 # create the virtual environment
