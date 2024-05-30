@@ -182,7 +182,7 @@ def check_source_repo_entry_for_errors(source, tags_valid=False, commits_valid=F
               % (source['type'], source['__line__']))
         return None
 
-    version = source['version'] if source['version'] else None
+    version = source['version'] if 'version' in source else None
     (remote_exists, error_reason) = check_git_remote_exists(source['url'], version, tags_valid, commits_valid)
     if not remote_exists:
         errors.append(
