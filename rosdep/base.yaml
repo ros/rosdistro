@@ -473,6 +473,9 @@ catch2:
   freebsd: [catch2]
   gentoo: [dev-cpp/catch]
   nixos: [catch2]
+  rhel:
+    '*': [catch2-devel]
+    '8': null
   ubuntu:
     '*': [catch2]
     focal: null
@@ -3281,10 +3284,12 @@ libdpkg-dev:
 libdraco-dev:
   arch: [draco]
   debian: [libdraco-dev]
-  fedora: [draco-devel]
+  fedora:
+    '*': [draco-devel, draco-static]
+    '39': [draco-devel]
   nixos: [draco]
   rhel:
-    '*': [draco-devel]
+    '*': [draco-devel, draco-static]
     '8': null
   ubuntu:
     '*': [libdraco-dev]
@@ -4552,6 +4557,7 @@ libnss3-dev:
 liboctomap-dev:
   debian: [liboctomap-dev]
   fedora: [octomap-devel]
+  nixos: [octomap]
   rhel: [octomap-devel]
   ubuntu: [liboctomap-dev]
 libogg:
@@ -4824,6 +4830,7 @@ libpaho-mqtt:
   nixos: [paho-mqtt-c]
   openembedded: [paho-mqtt-c@meta-oe]
   opensuse: [libpaho-mqtt1]
+  rhel: [paho-c]
   ubuntu:
     '*': [libpaho-mqtt1.3]
     bionic: null
@@ -4835,6 +4842,7 @@ libpaho-mqtt-dev:
   nixos: [paho-mqtt-c]
   openembedded: [paho-mqtt-c@meta-oe]
   opensuse: [libpaho-mqtt-devel]
+  rhel: [paho-c-devel]
   ubuntu:
     '*': [libpaho-mqtt-dev]
     bionic: null
@@ -5860,6 +5868,7 @@ libsensors4-dev:
   nixos: [lm_sensors]
   openembedded: [lmsensors@meta-oe]
   opensuse: [libsensors4-devel]
+  rhel: [lm_sensors-devel]
   ubuntu: [libsensors4-dev]
 libserial-dev:
   debian: [libserial-dev]
@@ -6204,10 +6213,11 @@ liburdfdom-tools:
 libusb:
   arch: [libusb-compat]
   debian: [libusb-0.1-4]
-  fedora: [libusb]
+  fedora: [libusb-compat-0.1]
   gentoo: ['virtual/libusb:0']
   macports: [libusb]
   nixos: [libusb-compat-0_1]
+  rhel: [libusb]
   ubuntu: [libusb-0.1-4]
 libusb-1.0:
   arch: [libusbx]
@@ -6233,7 +6243,7 @@ libusb-1.0-dev:
 libusb-dev:
   arch: [libusb-compat]
   debian: [libusb-dev]
-  fedora: [libusb-devel]
+  fedora: [libusb-compat-0.1-devel]
   gentoo: [virtual/libusb]
   macports: [libusb]
   nixos: [libusb1]
@@ -7893,6 +7903,7 @@ rapidjson-dev:
   fedora: [rapidjson]
   gentoo: [dev-libs/rapidjson]
   nixos: [rapidjson]
+  rhel: [rapidjson-devel]
   ubuntu: [rapidjson-dev]
 readline-dev:
   arch: [readline]
@@ -8368,6 +8379,7 @@ swig:
   gentoo: [dev-lang/swig]
   nixos: [swig]
   openembedded: [swig@openembedded-core]
+  rhel: [swig]
   ubuntu: [swig]
 swig-wx:
   gentoo: [dev-lang/swig]
@@ -8442,7 +8454,7 @@ tbb:
   fedora: [tbb-devel]
   gentoo: [dev-cpp/tbb]
   macports: [tbb]
-  nixos: [tbb_2021_8]
+  nixos: [tbb_2021_11]
   openembedded: [tbb@meta-oe]
   opensuse: [tbb-devel]
   rhel: [tbb-devel]

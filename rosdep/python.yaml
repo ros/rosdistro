@@ -4287,16 +4287,8 @@ python-transforms3d-pip:
     pip:
       packages: [transforms3d]
   ubuntu:
-    '*': null
-    bionic:
-      pip:
-        packages: [transforms3d]
-    focal:
-      pip:
-        packages: [transforms3d]
-    jammy:
-      pip:
-        packages: [transforms3d]
+    pip:
+      packages: [transforms3d]
 python-transitions:
   debian:
     '*': [python-transitions]
@@ -5571,10 +5563,12 @@ python3-dill:
   ubuntu: [python3-dill]
 python3-distro:
   debian: [python3-distro]
-  fedora: [python3-distro]
+  fedora: [python3-distro, lsb_release]
   gentoo: [dev-python/distro]
   nixos: [python3Packages.distro]
-  rhel: [python3-distro]
+  rhel:
+    '*': [python3-distro, lsb_release]
+    '8': [python3-distro, redhat-lsb-core]
   ubuntu: [python3-distro]
 python3-distutils:
   debian:
@@ -5806,6 +5800,7 @@ python3-fastapi:
       pip:
         packages: [fastapi]
   fedora: [python-fastapi]
+  nixos: [python3Packages.fastapi]
   ubuntu:
     '*': [python3-fastapi]
     bionic:
@@ -6169,6 +6164,7 @@ python3-flask-restplus-pip:
 python3-flask-socketio:
   debian: [python3-flask-socketio]
   fedora: [python3-flask-socketio]
+  nixos: [python3Packages.flask-socketio]
   openembedded: [python3-flask-socketio@meta-python]
   ubuntu: [python3-flask-socketio]
 python3-flask-sqlalchemy:
@@ -6757,6 +6753,14 @@ python3-jsonschema:
     '*': [python3-jsonschema]
     '7': [python36-jsonschema]
   ubuntu: [python3-jsonschema]
+python3-juliacall-pip:
+  '*':
+    pip:
+      packages: [juliacall]
+python3-juliapkg-pip:
+  '*':
+    pip:
+      packages: [juliapkg]
 python3-junitparser:
   debian:
     '*': [python3-junitparser]
@@ -7592,6 +7596,7 @@ python3-padatious-pip:
 python3-paho-mqtt:
   debian: [python3-paho-mqtt]
   fedora: [python3-paho-mqtt]
+  nixos: [python3Packages.paho-mqtt]
   rhel:
     '*': [python3-paho-mqtt]
     '7': null
@@ -7730,6 +7735,10 @@ python3-pip:
   opensuse: [python3-pip]
   rhel: [python3-pip]
   ubuntu: [python3-pip]
+python3-pipython-pip:
+  '*':
+    pip:
+      packages: [PIPython]
 python3-pkg-resources:
   alpine: [py3-setuptools]
   arch: [python-setuptools]
@@ -8297,11 +8306,14 @@ python3-pyqt5.qtquick:
   ubuntu: [python3-pyqt5.qtquick]
 python3-pyqt5.qtwebengine:
   debian: [python3-pyqt5.qtwebengine]
-  fedora: [python3-qt5-webengine]
+  fedora: [python3-qt5-webengine, pyqtwebengine-devel]
   gentoo: [dev-python/PyQtWebEngine]
   nixos: [python3Packages.pyqtwebengine]
   openembedded: ['${PYTHON_PN}-pyqt5@meta-qt5']
   opensuse: [python3-qtwebengine-qt5]
+  rhel:
+    '*': [python3-qt5-webengine, pyqtwebengine-devel]
+    '8': null
   ubuntu: [python3-pyqt5.qtwebengine]
 python3-pyqt6.qtmultimedia:
   debian:
@@ -9038,6 +9050,7 @@ python3-semver:
   debian: [python3-semver]
   fedora: [python3-semver]
   freebsd: [py36-semver]
+  nixos: [python3Packages.semver]
   rhel: [python3-semver]
   ubuntu: [python3-semver]
 python3-sense-emu-pip:
@@ -9587,6 +9600,16 @@ python3-timm-pip:
   ubuntu:
     pip:
       packages: [timm]
+python3-tinkerforge-pip:
+  debian:
+    pip:
+      packages: [tinkerforge]
+  fedora:
+    pip:
+      packages: [tinkerforge]
+  ubuntu:
+    pip:
+      packages: [tinkerforge]
 python3-tk:
   debian: [python3-tk]
   fedora: [python3-tkinter]
@@ -9596,6 +9619,10 @@ python3-tk:
   opensuse: [python3-tk]
   rhel: ['python%{python3_pkgversion}-tkinter']
   ubuntu: [python3-tk]
+python3-tkintermapview-pip:
+  '*':
+    pip:
+      packages: [tkintermapview]
 python3-toml:
   debian: [python3-toml]
   fedora: [python3-toml]
@@ -9879,6 +9906,7 @@ python3-uvicorn:
   alpine: [uvicorn]
   debian: [python3-uvicorn]
   fedora: [python-uvicorn]
+  nixos: [python3Packages.uvicorn]
   ubuntu:
     '*': [python3-uvicorn]
     bionic:
