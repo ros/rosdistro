@@ -1,0 +1,32 @@
+# This workflow builds and releases the rosdistro cache on a tag push.
+---
+name: release-cache
+
+on:
+  push:
+    tags:
+    - '**'  # Double ** needed to match tags containing '/'
+
+jobs:
+  build-and-release-cache:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Environmental variables
+      run: |
+        ROSDISTRO_TAG=${{ github.ref_name }}
+        echo "ROSDISTRO_TAG=${ROSDISTRO_TAG}" >> $GITHUB_ENV
+        echo "ROSDISTRO_TARGET=${ROSDISTRO_TAG%%/*}" >> $GITHUB_ENV
+        echo "ROSDISTRO_RELEASE=${ROSDISTRO_TAG#*/}" >> $GITHUB_ENV
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+    - run: pip install rosdistro
+    - run: |
+        rosdistro_build_cache --debug "${GITHUB_WORKSPACE}/index-v4.yaml" "${ROSDISTRO_TARGET}"
+        mv "${ROSDISTRO_TARGET}-cache.yaml.gz" "${ROSDISTRO_TARGET}-${ROSDISTRO_RELEASE}-cache.yaml.gz"
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: "${{env.ROSDISTRO_TAG}}"
+        files: "${{env.ROSDISTRO_TARGET}}-${{env.ROSDISTRO_RELEASE}}-cache.yaml.gz"
