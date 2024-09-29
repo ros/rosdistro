@@ -28,5 +28,7 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: "${{env.ROSDISTRO_TAG}}"
-        files: "${{env.ROSDISTRO_TARGET}}-${{env.ROSDISTRO_RELEASE}}-cache.yaml.gz"
+        body: "Generated cache for ${{ env.ROSDISTRO_TAG }}"
+        tag_name: "${{ env.ROSDISTRO_TAG }}"
+        files: "${{ env.ROSDISTRO_TARGET }}-${{ env.ROSDISTRO_RELEASE }}-cache.yaml.gz"
+        generate_release_notes: False
