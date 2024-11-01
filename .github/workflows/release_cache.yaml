@@ -4,6 +4,12 @@ name: release-cache
 
 on:  # yamllint disable-line rule:truthy
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release cache for.'
+        required: true
+        type: string
+        default: ''
   push:
     tags:
     - '**'  # Double ** needed to match tags containing '/'
