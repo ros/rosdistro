@@ -1,7 +1,7 @@
 ---
 name: Automated review
 on:  # yamllint disable-line rule:truthy
-  pull_request:
+  pull_request_target:
     types:
     - opened
     - ready_for_review
@@ -20,6 +20,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
+    - run: git fetch origin ${{ github.event.pull_request.head.sha }}
     - uses: ros-infrastructure/rosdistro-reviewer@main
       with:
         token: ${{ github.token }}
