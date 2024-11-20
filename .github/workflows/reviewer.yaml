@@ -4,8 +4,9 @@ on:  # yamllint disable-line rule:truthy
   pull_request:
     types:
     - opened
+    - ready_for_review
     - reopened
-    - review_requested
+    - synchronize
 
 permissions:
   pull-requests: write
@@ -14,7 +15,7 @@ jobs:
   automated_review:
     name: Generate automated review
     runs-on: ubuntu-latest
-    if: ${{ github.event.action != 'review_requested' || github.event.requested_reviewer.login == 'github-actions[bot]' }}
+    if: ${{ !github.event.pull_request.draft }}
     steps:
     - uses: actions/checkout@v4
       with:
