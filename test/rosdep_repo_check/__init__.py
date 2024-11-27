@@ -41,6 +41,8 @@ except ImportError:
     from urllib2 import URLError
     from urllib2 import urlopen
 
+from zstandard import ZstdDecompressor
+
 
 def fmt_os(os_name, os_code_name):
     return (os_name + ' ' + os_code_name) if os_code_name else os_name
@@ -68,8 +70,21 @@ def is_probably_lzma(response):
             response.getheader('Content-Type') == 'application/x-xz')
 
 
+def is_probably_zstd(response):
+    """
+    Determine if a urllib response is likely ztsd'd.
+
+    :param response: the urllib response
+    """
+    return (response.url.endswith('.zst') or
+            response.url.endswith('.zck') or
+            response.getheader('Content-Encoding') == 'zstd' or
+            response.getheader('Content-Type') == 'application/zstd')
+
+
 def open_gz_url(url, retry=2, retry_period=1, timeout=10):
     return open_compressed_url(url, retry, retry_period, timeout)
+
 
 def open_compressed_url(url, retry=2, retry_period=1, timeout=10):
     """
@@ -104,6 +119,9 @@ def open_compressed_url(url, retry=2, retry_period=1, timeout=10):
         return GzipFile(fileobj=f, mode='rb')
     elif is_probably_lzma(f):
         return LZMAFile(f, mode='rb')
+    elif is_probably_zstd(f):
+        dctx = ZstdDecompressor()
+        return dctx.stream_reader(f)
     return f
 
 
