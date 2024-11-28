@@ -38,7 +38,8 @@ def test_verify_files_identical():
     with Fold() as fold:
         print("""Checking if index.yaml and all referenced files comply to the formatting rules.
 If this fails you can run 'rosdistro_reformat index.yaml' to help cleanup.
-'rosdistro_reformat' shows the diff between the current files and their expected formatting.
+'rosdistro_reformat' shows the diff between the current files and their expected formatting and
+can be installed via `sudo apt install python3-rosdistro`.
 """)
 
         index_url = 'file://' + FILES_DIR + '/index.yaml'
