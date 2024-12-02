@@ -1,0 +1,27 @@
+---
+pull_request_rules:
+- name: Comment on PRs with an end-of-life label
+  conditions:
+  - label=end-of-life
+  actions:
+    comment:
+      message: >
+        This pull request changes files for a ROS distribution
+        that is no longer supported (End Of Life)
+        and the distribution will not have any future syncs to include this change.
+- name: Close on changes only to EOL folders
+  conditions:
+  - and:
+    - label=end-of-life
+    # Active ROS 1 distros
+    - label!=melodic
+    - label!=noetic
+    # Active ROS 2 distros
+    - label!=foxy
+    - label!=galactic
+    - label!=humble
+    - label!=rolling
+    # Other labels
+    - label!=rosdep
+  actions:
+    close:

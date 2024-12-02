@@ -1,0 +1,20 @@
+---
+name: "Pull Request Labeler"
+# this is fine since gha runs with yaml 1.2
+on:  # yamllint disable-line rule:truthy
+- pull_request_target
+
+permissions:
+  contents: read
+
+jobs:
+  triage:
+    permissions:
+      contents: read  # for actions/labeler to determine modified files
+      pull-requests: write  # for actions/labeler to add labels to PRs
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/labeler@v3
+      with:
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        configuration-path: ".github/labeler-config.yaml"

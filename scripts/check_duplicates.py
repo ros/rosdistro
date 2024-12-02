@@ -42,11 +42,14 @@ def create_default_sources():
     sources = []
     # get all rosdistro files
     basedir = os.path.realpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
-    filepath = os.path.join(basedir, 'index.yaml')
+    filepath = os.path.join(basedir, 'index-v4.yaml')
     with open(filepath) as f:
         content = f.read()
-    index = yaml.load(content)
-    for distro in index['distributions']:
+    index = yaml.safe_load(content)
+    for distro, metadata in index['distributions'].items():
+        if metadata['distribution_status'] == 'end-of-life':
+            # Skip end-of-life distributions
+            continue
         distfile = 'file://' + basedir + '/' + distro + '/distribution.yaml'
         print('loading %s' % distfile)
         try:
@@ -68,7 +71,7 @@ def create_default_sources():
         filepath = os.path.join(basedir, 'rosdep', filename)
         with open(filepath) as f:
             content = f.read()
-        rosdep_data = yaml.load(content)
+        rosdep_data = yaml.safe_load(content)
         tag = 'osx' if 'osx-' in filepath else ''
         sources.append(CachedDataSource('yaml', 'file://' + filepath, [tag], rosdep_data))
     return sources
@@ -125,7 +128,7 @@ def main(infile):
         filepath = os.path.join(os.getcwd(), filename)
         with open(filepath) as f:
             content = f.read()
-        rosdep_data = yaml.load(content)
+        rosdep_data = yaml.safe_load(content)
         # osx-homebrew uses osx tag
         tag = 'osx' if 'osx-' in filepath else ''
         model = CachedDataSource('yaml', 'file://' + filepath, [tag], rosdep_data)

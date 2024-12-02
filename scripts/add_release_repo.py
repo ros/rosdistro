@@ -9,7 +9,7 @@ from sort_yaml import sort_yaml_data
 
 
 def add_release_repository(yaml_file, name, url, version):
-    data = yaml.load(open(yaml_file, 'r'))
+    data = yaml.safe_load(open(yaml_file, 'r'))
     if data['type'] == 'gbp':
         add_release_repository_fuerte(yaml_file, data, name, url, version)
         return
