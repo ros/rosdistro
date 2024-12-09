@@ -144,6 +144,7 @@ asio:
   arch: [asio]
   debian: [libasio-dev]
   fedora: [asio-devel]
+  freebsd: [asio]
   gentoo: [dev-cpp/asio]
   nixos: [asio]
   openembedded: [asio@meta-oe]
@@ -325,6 +326,7 @@ benchmark:
     '*': [libbenchmark-dev]
     stretch: null
   fedora: [google-benchmark-devel]
+  freebsd: [benchmark]
   gentoo: [dev-cpp/benchmark]
   nixos: [gbenchmark]
   openembedded: [google-benchmark@meta-ros2]
@@ -399,6 +401,7 @@ bullet:
   arch: [bullet]
   debian: [libbullet-dev]
   fedora: [bullet-devel]
+  freebsd: [bullet]
   gentoo: [sci-physics/bullet]
   macports: [bullet]
   nixos: [bullet]
@@ -468,9 +471,7 @@ catch2:
   alpine: [catch2]
   arch: [catch2]
   debian: [catch2]
-  fedora:
-    '*': [catch2-devel]
-    '37': null
+  fedora: [catch2-devel]
   freebsd: [catch2]
   gentoo: [dev-cpp/catch]
   nixos: [catch2]
@@ -558,6 +559,7 @@ clang-format:
   arch: [clang]
   debian: [clang-format]
   fedora: [clang-tools-extra, git-clang-format]
+  freebsd: [llvm]
   gentoo: [sys-devel/clang]
   nixos: [clang]
   opensuse: [clang]
@@ -573,6 +575,7 @@ clang-tidy:
   arch: [clang]
   debian: [clang-tidy]
   fedora: [clang-tools-extra]
+  freebsd: [llvm]
   gentoo: [sys-devel/clang]
   nixos: [clang]
   opensuse: [clang]
@@ -591,6 +594,16 @@ clangd:
   opensuse: [clang]
   rhel: [clang-tools-extra]
   ubuntu: [clangd]
+cli11:
+  arch: [cli11]
+  debian: [libcli11-dev]
+  fedora: [cli11-devel]
+  gentoo: [dev-cpp/cli11]
+  nixos: [cli11]
+  rhel: [cli11-devel]
+  ubuntu:
+    '*': [libcli11-dev]
+    'focal': null
 cmake:
   alpine: [cmake]
   arch: [cmake]
@@ -704,6 +717,7 @@ cppcheck:
   arch: [cppcheck]
   debian: [cppcheck]
   fedora: [cppcheck]
+  freebsd: [cppcheck]
   gentoo: [dev-util/cppcheck]
   nixos: [cppcheck]
   openembedded: [cppcheck@meta-ros-common]
@@ -824,6 +838,9 @@ dfu-util:
   gentoo: [app-mobilephone/dfu-util]
   nixos: [dfu-util]
   ubuntu: [dfu-util]
+dh-python:
+  debian: [dh-python]
+  ubuntu: [dh-python]
 disper:
   debian: [disper]
   nixos: [disper]
@@ -1085,6 +1102,7 @@ file:
   arch: [file]
   debian: [file]
   fedora: [file]
+  freebsd: [file]
   gentoo: [sys-apps/file]
   nixos: [file]
   openembedded: [file@openembedded-core]
@@ -1566,7 +1584,7 @@ google-mock:
   arch: [gtest]
   debian: [google-mock]
   fedora: [gmock-devel]
-  freebsd: [googlemock]
+  freebsd: [googletest]
   gentoo: [dev-cpp/gtest]
   nixos: [gtest]
   openembedded: [gtest@meta-oe]
@@ -2496,6 +2514,26 @@ lcov:
   opensuse: [lcov]
   rhel: [lcov]
   ubuntu: [lcov]
+lensfun:
+  alpine: [lensfun]
+  arch: [lensfun]
+  debian: [liblensfun1]
+  fedora: [lensfun]
+  gentoo: [media-libs/lensfun]
+  nixos: [lensfun]
+  opensuse: [liblensfun1]
+  rhel: [lensfun]
+  ubuntu: [liblensfun1]
+lensfun-dev:
+  alpine: [lensfun-dev]
+  arch: [lensfun]
+  debian: [liblensfun-dev]
+  fedora: [lensfun-devel]
+  gentoo: [media-libs/lensfun]
+  nixos: [lensfun]
+  opensuse: [lensfun-devel]
+  rhel: [lensfun-devel]
+  ubuntu: [liblensfun-dev]
 leveldb:
   arch: [leveldb]
   debian: [libleveldb-dev]
@@ -3377,9 +3415,7 @@ libdpkg-dev:
 libdraco-dev:
   arch: [draco]
   debian: [libdraco-dev]
-  fedora:
-    '*': [draco-devel, draco-static]
-    '39': [draco-devel]
+  fedora: [draco-devel, draco-static]
   nixos: [draco]
   rhel:
     '*': [draco-devel, draco-static]
@@ -3490,6 +3526,45 @@ libevent-dev:
   opensuse: [libevent-devel]
   rhel: [libevent-devel]
   ubuntu: [libevent-dev]
+libexif:
+  alpine: [libexif]
+  arch: [libexif]
+  debian: [libexif12]
+  fedora: [libexif]
+  gentoo: [media-libs/libexif]
+  nixos: [libexif]
+  opensuse: [libexif]
+  osx:
+    homebrew:
+      packages: [libexif]
+  rhel: [libexif]
+  ubuntu: [libexif12]
+libexif-dev:
+  alpine: [libexif-dev]
+  arch: [libexif]
+  debian: [libexif-dev]
+  fedora: [libexif-devel]
+  gentoo: [media-libs/libexif]
+  nixos: [libexif]
+  opensuse: [libexif]
+  osx:
+    homebrew:
+      packages: [libexif]
+  rhel: [libexif-devel]
+  ubuntu: [libexif-dev]
+libexiv2-dev:
+  alpine: [exiv2-dev]
+  arch: [exiv2]
+  debian: [libexiv2-dev]
+  fedora: [exiv2-devel]
+  gentoo: [media-gfx/exiv2]
+  nixos: [exiv2]
+  opensuse: [libexiv2-devel]
+  osx:
+    homebrew:
+      packages: [exiv2]
+  rhel: [exiv2-devel]
+  ubuntu: [libexiv2-dev]
 libexpat1-dev:
   arch: [expat]
   debian: [libexpat1-dev]
@@ -3506,6 +3581,19 @@ libext2fs-dev:
   opensuse: [libext2fs-devel]
   rhel: [e2fsprogs-devel]
   ubuntu: [libext2fs-dev]
+libfcl:
+  debian:
+    '*': [libfcl0.7]
+    bullseye: [libfcl0.6]
+    buster: [libfcl0.5]
+  fedora: [fcl]
+  gentoo: [sci-libs/fcl]
+  nixos: [fcl]
+  openembedded: [fcl@meta-ros-common]
+  rhel: [fcl]
+  ubuntu:
+    '*': [libfcl0.7]
+    focal: [libfcl0.5]
 libfcl-dev:
   debian: [libfcl-dev]
   fedora: [fcl-devel]
@@ -3637,6 +3725,7 @@ libfreetype-dev:
     '*': [libfreetype-dev]
     buster: [libfreetype6-dev]
   fedora: [freetype-devel]
+  freebsd: [freetype2]
   gentoo: [media-libs/freetype]
   nixos: [freetype]
   openembedded: [freetype@openembedded-core]
@@ -3650,6 +3739,7 @@ libfreetype6:
   arch: [freetype2]
   debian: [libfreetype6]
   fedora: [freetype]
+  freebsd: [freetype2]
   gentoo: [media-libs/freetype]
   nixos: [freetype]
   openembedded: [freetype@openembedded-core]
@@ -4414,6 +4504,7 @@ liblttng-ust-dev:
   arch: [lttng-ust]
   debian: [liblttng-ust-dev]
   fedora: [lttng-ust-devel]
+  freebsd: [lttng-ust]
   gentoo: [dev-util/lttng-ust]
   nixos: [lttng-ust]
   openembedded: [lttng-ust@openembedded-core]
@@ -4423,6 +4514,7 @@ liblz4:
   arch: [lz4]
   debian: [liblz4-1]
   fedora: [lz4-libs]
+  freebsd: [liblz4]
   nixos: [lz4]
   opensuse:
     '*': [liblz4]
@@ -4433,6 +4525,7 @@ liblz4-dev:
   arch: [lz4]
   debian: [liblz4-dev]
   fedora: [lz4-devel]
+  freebsd: [liblz4]
   nixos: [lz4]
   opensuse:
     '*': [liblz4-devel]
@@ -4612,6 +4705,7 @@ libncurses-dev:
   arch: [ncurses]
   debian: [libncurses-dev]
   fedora: [ncurses-devel]
+  freebsd: [ncurses]
   gentoo: [sys-libs/ncurses]
   macports: [ncurses]
   nixos: [ncurses]
@@ -4803,7 +4897,7 @@ libopencv-dev:
   arch: [opencv]
   debian: [libopencv-dev]
   fedora: [opencv-devel]
-  freebsd: [opencv-core]
+  freebsd: [opencv]
   gentoo: [media-libs/opencv]
   macports: [opencv]
   nixos: [opencv, opencv.cxxdev]
@@ -5810,6 +5904,7 @@ libqt5-svg:
   arch: [qt5-svg]
   debian: [libqt5svg5]
   fedora: [qt5-qtsvg]
+  freebsd: [qt5-svg]
   gentoo: ['dev-qt/qtsvg:5']
   nixos: [qt5.qtsvg]
   openembedded: [qtsvg@meta-qt5]
@@ -6093,6 +6188,7 @@ libsqlite3-dev:
   arch: [sqlite]
   debian: [libsqlite3-dev]
   fedora: [libsq3-devel]
+  freebsd: [sqlite3]
   gentoo: ['dev-db/sqlite:3']
   nixos: [sqlite]
   openembedded: [sqlite3@openembedded-core]
@@ -6532,6 +6628,18 @@ libwebp-dev:
   nixos: [libwebp]
   openembedded: [libwebp@openembedded-core]
   ubuntu: [libwebp-dev]
+libwebp-tools:
+  alpine: [libwebp-tools]
+  debian: [webp]
+  fedora: [libwebp-tools]
+  opensuse: [libwebp-tools]
+  osx:
+    homebrew:
+      packages: [webp]
+  rhel:
+    '*': [libwebp-tools]
+    '8': null
+  ubuntu: [webp]
 libwebsocketpp-dev:
   arch: [websocketpp]
   debian: [libwebsocketpp-dev]
@@ -6567,6 +6675,7 @@ libx11-dev:
   arch: [libx11]
   debian: [libx11-dev]
   fedora: [libX11-devel]
+  freebsd: [libX11]
   gentoo: [x11-libs/libX11]
   nixos: [xorg.libX11]
   openembedded: [libx11@openembedded-core]
@@ -6687,6 +6796,7 @@ libxml2-utils:
   arch: [libxml2]
   debian: [libxml2-utils]
   fedora: [libxml2]
+  freebsd: [libxml2]
   gentoo: [dev-libs/libxml2]
   nixos: [libxml2]
   openembedded: [libxml2@openembedded-core]
@@ -6715,6 +6825,7 @@ libxrandr:
   arch: [libxrandr]
   debian: [libxrandr-dev]
   fedora: [libXrandr-devel]
+  freebsd: [libXrandr]
   gentoo: [x11-libs/libXrandr]
   macports: [xorg-libXrandr]
   nixos: [xorg.libXrandr]
@@ -6767,6 +6878,7 @@ libyaml:
   arch: [libyaml]
   debian: [libyaml-0-2]
   fedora: [libyaml]
+  freebsd: [libyaml]
   gentoo: [dev-libs/libyaml]
   nixos: [libyaml]
   openembedded: [libyaml@openembedded-core]
@@ -6778,6 +6890,7 @@ libyaml-dev:
   arch: [libyaml]
   debian: [libyaml-dev]
   fedora: [libyaml-devel]
+  freebsd: [libyaml]
   gentoo: [dev-libs/libyaml]
   nixos: [libyaml]
   openembedded: [libyaml@openembedded-core]
@@ -6818,6 +6931,7 @@ libzstd-dev:
   arch: [zstd]
   debian: [libzstd-dev]
   fedora: [libzstd-devel]
+  freebsd: [zstd]
   gentoo: [app-arch/zstd]
   nixos: [zstd]
   openembedded: [zstd@meta-oe]
@@ -7216,6 +7330,22 @@ muparser:
   nixos: [muparser]
   opensuse: [muparser-devel]
   ubuntu: [libmuparser-dev]
+nanobind-dev:
+  arch: [nanobind]
+  debian:
+    '*': [nanobind-dev]
+    bookworm:
+      pip:
+        packages: [nanobind]
+  freebsd: [nanobind]
+  ubuntu:
+    '*': [nanobind-dev]
+    focal:
+      pip:
+        packages: [nanobind]
+    jammy:
+      pip:
+        packages: [nanobind]
 nanoflann:
   debian:
     '*': [libnanoflann-dev]
@@ -7502,6 +7632,7 @@ openssl:
   arch: [openssl]
   debian: [openssl]
   fedora: [openssl]
+  freebsd: [openssl]
   gentoo: [dev-libs/openssl]
   nixos: [openssl]
   openembedded: [openssl@openembedded-core]
@@ -7524,10 +7655,10 @@ osm2pgsql:
   ubuntu: [osm2pgsql]
 osmium:
   arch: [libosmium]
-  debian: [libosmium-dev]
+  debian: [libosmium2-dev]
   fedora: [libosmium-devel]
   nixos: [libosmium]
-  ubuntu: [libosmium-dev]
+  ubuntu: [libosmium2-dev]
 pandoc:
   arch: [pandoc-cli]
   debian: [pandoc]
@@ -7790,6 +7921,18 @@ ps-engine:
   debian: [ps-engine]
   fedora: [openni-primesense]
   ubuntu: [ps-engine]
+psmisc:
+  alpine: [psmisc]
+  arch: [psmisc]
+  debian: [psmisc]
+  fedora: [psmisc]
+  freebsd: [psmisc]
+  gentoo: [sys-process/psmisc]
+  nixos: [psmisc]
+  openembedded: [psmisc@openembedded-core]
+  opensuse: [psmisc]
+  rhel: [psmisc]
+  ubuntu: [psmisc]
 pstoedit:
   arch: [pstoedit]
   debian: [pstoedit]
@@ -7818,6 +7961,7 @@ pybind11-dev:
   arch: [pybind11]
   debian: [pybind11-dev]
   fedora: [pybind11-devel]
+  freebsd: [pybind11]
   gentoo: [dev-python/pybind11]
   nixos: [pythonPackages.pybind11]
   openembedded: [python3-pybind11@meta-python]
@@ -7828,9 +7972,7 @@ pybind11-dev:
   ubuntu: [pybind11-dev]
 pybind11-json-dev:
   debian: [pybind11-json-dev]
-  fedora:
-    '*': [pybind11-json-devel]
-    '38': null
+  fedora: [pybind11-json-devel]
   rhel: [pybind11-json-devel]
   ubuntu:
     '*': [pybind11-json-dev]
@@ -7992,7 +8134,7 @@ qt5-qmake:
   arch: [qt5-base]
   debian: [qt5-qmake]
   fedora: [qt5-qtbase-devel]
-  freebsd: [qt5-qmake]
+  freebsd: [qt5-buildtools, qt5-qmake]
   gentoo: ['dev-qt/qtcore:5']
   nixos: [qt5.qtbase]
   openembedded: [qtbase@meta-qt5]
@@ -8440,6 +8582,7 @@ spdlog:
   arch: [spdlog]
   debian: [libspdlog-dev]
   fedora: [spdlog-devel]
+  freebsd: [spdlog]
   gentoo: [dev-libs/spdlog]
   nixos: [spdlog]
   openembedded: [spdlog@meta-oe]
@@ -8886,6 +9029,7 @@ uncrustify:
   arch: [uncrustify]
   debian: [uncrustify]
   fedora: [uncrustify]
+  freebsd: [uncrustify]
   gentoo: [dev-util/uncrustify]
   nixos: [uncrustify]
   openembedded: [uncrustify@meta-ros-common]
@@ -9233,15 +9377,15 @@ xsltproc:
   nixos: [libxslt]
   ubuntu: [xsltproc]
 xtensor:
+  debian: [libxtensor-dev]
   fedora: [xtensor-devel]
   nixos: [xtensor]
   rhel:
     '*': [xtensor-devel]
     '8': null
   ubuntu:
-    bionic: [xtensor-dev]
-    jammy: [libxtensor-dev]
-    noble: [libxtensor-dev]
+    '*': [libxtensor-dev]
+    focal: null
 xterm:
   arch: [xterm]
   debian: [xterm]
@@ -9278,6 +9422,7 @@ yaml:
   arch: [libyaml]
   debian: [libyaml-dev]
   fedora: [libyaml]
+  freebsd: [libyaml]
   gentoo: [dev-libs/libyaml]
   macports: [libyaml]
   nixos: [libyaml]
