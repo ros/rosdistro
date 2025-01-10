@@ -1,4 +1,4 @@
-The rosdistro repository stores two independent datasets used in ROS:
+This repository maintains two independent sets of packaging metadata used in ROS:
 
 1. The lists of repositories that curate ROS packages for each ROS distributions,
    implementing the data structure defined in [REP 143](http://ros.org/reps/rep-0143.html).
