@@ -43,12 +43,17 @@ There are a few different types of pull requests that are opened against this re
         * The license must be reflected in the package.xml file of all sub-packages in the repository.
         * The source repository must be publicly accessible.
         * The source repository should contain one or more ROS packages (meaning they have a `package.xml` in the source repository). Packages that are not ROS packages can be accepted, but they are rare and require special handling in the release repository.
+        * The source repository should generally *not* be a fork of an existing ROS package. If it is a fork, then the reviewer should inquire why the fork was made, and what efforts have been made to contact the upstream. The submitter should have at least opened an issue on the upstream asking for a release, then waited for a response. If there is no response after 4 weeks, then the reviewer can allow the fork. Note that these rules are general guidelines, rather than hard-and-fast rules; each of these situations is different and may require some different handling.
+        * The name of the repository and the packages within it must comply with the guidelines in [REP-144](https://www.ros.org/reps/rep-0144.html).
+    1. The best practices for Rolling releases is to use a release repository in the https://github.com/ros2-gbp organization. That way this package can be automatically released from Rolling into the next stable ROS distribution.  There are instructions in https://github.com/ros2-gbp/ros2-gbp-github-org/blob/latest/CONTRIBUTING.md describing how to create one.
 
     Once the above criteria are satisfied, and the ROS distribution isn't in a "sync freeze", then the PR will be merged.
 
 1.  A new rosdep key.  An example of this kind of PR is [25995](https://github.com/ros/rosdistro/pull/25995). These pull requests should conform to the standards documented at [CONTRIBUTING.md#rosdep-rules-contributions](CONTRIBUTING.md#rosdep-rules-contributions). Some rules in addition to contributing guidelines:
     * A pull request to update rosdep should never change the name of existing keys.
     * When adding a new key, Ubuntu and Debian are required, Fedora, Gentoo, and openSUSE are encouraged if the package also exists on those Linux distributions.
+    * Native packages are strongly preferred.  If a native package exists for the key in question, then that should always be used over e.g. a pip key.
+    * If a native package is available, the key name should match the name of the package in Ubuntu.
     * If a package was added to e.g. Ubuntu Focal but isn’t available in Bionic or Xenial, the key should look like:
     ```
     mykey:
@@ -65,6 +70,44 @@ There are a few different types of pull requests that are opened against this re
 
 1.  Changes to the rosdistro code. These pull requests change any of the scripts or tests that are housed in the rosdistro repositories.  They will be reviewed as any other code change in the ROS ecosystem.
 
-1.  Maintainership changes. In an open source ecosystem it is necessary to change maintainership of packages from time to time. In optimal situations the current maintainer can designate their successor and officially hand off maintainership. If the maintainer is no longer able to do the necessary work a request can be made of the rosdistro release manager to take over maintenance. The manager will review each request on a case by case basis. If you see a change of maintainership please hold it for review by the release manager.
-
 1.  Miscellaneous. Any other pull requests adding or modifying documentation, or anything else will be reviewed as any other code change in the ROS ecosystem.
+
+Reviewer utilities
+------------------
+
+### New package review checklist
+
+You can copy-paste the below into your review comment when reviewing a new package addition into rosdistro.
+
+- [ ] At least one of the following must be present
+  - [ ] Top level license file:
+  - [ ] Per package license files:
+- [ ] License is [OSI-approved](https://opensource.org/licenses):
+- [ ] License correctly listed in package.xmls
+- [ ] Public source repo:
+- [ ] Source repository contains ROS packages
+- [ ] Each package meets [REP-144](https://www.ros.org/reps/rep-0144.html) naming conventions
+
+<details><summary>Package name details</summary>
+
+```console
+$ find . -name "package.xml" -exec grep --color=auto -e "<name>" "{}" ";"
+<OUTPUT HERE>
+```
+</details>
+
+<details><summary>License details</summary>
+
+```console
+$ find . -name "package.xml" -exec grep --color=auto -e "<license>" "{}" "+"
+<OUTPUT HERE>
+```
+</details>
+
+### pip keys standard disclaimer
+
+You can copy-paste the following as a comment when reviewing a new rosdistro key using `pip` (even if you are approving!)
+
+Standard pip disclaimer: ROS packages that depend on `pip` keys cannot be released into a ROS distribution.
+They can only be depended on by from-source builds.
+Because of this, system packages are highly preferred to pip packages.

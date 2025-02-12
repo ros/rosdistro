@@ -124,7 +124,7 @@ Guidelines for rosdep rules
    For example if an ubuntu package is the same for all versions only write the generic ubuntu rule, don't call out the same package name for every version of ubuntu.
    Similarly don't call out indirect dependencies or default options for packages.
  * Python packages should go in the `python.yaml`.
- * Homebrew into `osx-homebrew.yaml`.
+ * The `osx-homebrew.yaml` file is deprecated; new macOS/Homebrew rules should go into either `base.yaml` or `python.yaml`.
  * Supported Platforms
    * Rules can be contributed for any platform.
      However to be released they must be at least cover the supported platforms in REP 3: http://www.ros.org/reps/rep-0003.html So:
@@ -135,6 +135,8 @@ Guidelines for rosdep rules
     * If specific versions are called out, there should be coverage of all versions currently targeted by supported ROS distros.
      * If there's a new distro in prerelease adding a rule for it is fine.
        However please don't target 'sid' as it's a rolling target and when the keys change our database gets out of date.
+    * Rules for EOL Distros will be pruned periodically.
+      * If you are trying to use an EOL platform for historical purposes, you can access the old rules from tags of the rosdistro when that platform was supported, but there will not be any support or changes. [example](https://github.com/ros/rosdistro/issues/31569#issuecomment-1003974561)
   * Keep everything in alphabetical order for better merging.
   * No trailing whitespace.
   * No blank lines.
@@ -198,6 +200,7 @@ Work has been proposed to add a separate installer for AUR packages [ros-infrast
 
 * [NixOS unstable channel](https://github.com/NixOS/nixpkgs/tree/nixos-unstable), search available at https://search.nixos.org/packages
 * [nix-ros-overlay](https://github.com/lopsided98/nix-ros-overlay)
+* Following the [NixOS Python Guide](https://nixos.org/manual/nixpkgs/stable/#python), use `pythonPackages` for Python 2 and `python3Packages` for Python 3 keys.
 
 #### openSUSE
 
@@ -241,7 +244,7 @@ For example:
 
 ```yaml
 python3-foobar-pip:
-  ubuntu:
+  '*':
     pip:
       packages: [foobar]
 ```
@@ -256,7 +259,7 @@ For example:
 
 ```yaml
 python-foobar-pip: &migrate_eol_2025_04_30_python3_foobar_pip # Anchor
-  ubuntu:
+  '*':
     pip:
       packages: [foobar]
 python3-foobar-pip: *migrate_eol_2025_04_30_python3_foobar_pip # Alias
@@ -295,19 +298,27 @@ How to submit pull requests
 When submitting pull requests it is expected that they pass the unit tests for formatting.
 The unit tests enforce alphabetization of elements and a consistent formatting to keep merging as clean as possible.
 
-To run the tests run ``nosetests`` in the root of the repository.
-These tests require several dependencies that can be installed either from the ROS repositories or via pip(list built based on the content of [.travis.yaml](https://github.com/ros/rosdistro/blob/master/.travis.yml):
+### Unit Testing
 
-|   Dependency   |            Ubuntu package         |   Pip package  |
-| :------------: | --------------------------------- | -------------- |
-| catkin_pkg     | python-catkin-pkg                 | catkin-pkg     |
-| github         | python-github                     | PyGithub       |
-| nose           | python-nose                       | nose           |
-| rosdistro      | python-rosdistro                  | rosdistro      |
-| ros_buildfarm  | python-ros-buildfarm              | ros-buildfarm  |
-| unidiff        | python-unidiff (Zesty and higher) | unidiff        |
-| yamllint       | yamllint                          | yamllint       |
+It is recommended to use a virtual environment and pip to install the unit test dependencies.
+The test dependencies are listed in [test/requirements.txt](./test/requirements.txt).
 
-There is a tool ``rosdistro_reformat`` which will fix most formatting errors such as alphabetization and correct formatting.
+```bash
+# create the virtual environment
+python3 -m venv .venv
 
-Note: There's a [known issue](https://github.com/disqus/nose-unittest/issues/2) discovered [here](https://github.com/ros/rosdistro/issues/16336) that most tests won't run if you have the python package `nose-unitttest` installed.
+# "activate" the virtual environment
+# this will let pip install dependencies into the virtual environment
+# use activate.zsh if you use zsh, activate.fish if you use fish, etc.
+source .venv/bin/activate
+
+# install the dependencies
+pip3 install -r test/requirements.txt
+
+# run the tests!
+pytest
+```
+
+It is highly recommended to run the unit tests before submitting a pull request.
+(the CI system will run them anyways, but it will save you time)
+

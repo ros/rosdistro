@@ -41,7 +41,7 @@ def make_suggestion(config, key, os_name):
     key. Many of the heuristics do not apply to all platforms.
 
     :param config: the parsed YAML configuration.
-    :param key: the name of the unsatisifed key.
+    :param key: the name of the unsatisfied key.
     :param os_name: the name of the OS associated with the package.
     """
     os_version = config['supported_versions'][os_name][-1]

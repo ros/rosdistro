@@ -28,7 +28,7 @@
 import os
 from xml.etree import ElementTree
 
-from . import open_gz_url
+from . import open_compressed_url
 from . import PackageEntry
 from . import RepositoryCacheCollection
 from . import URLError
@@ -48,7 +48,7 @@ def replace_tokens(string, os_name, os_code_name, os_arch):
 def get_primary_name(repomd_url):
     """Get the URL of the 'primary' metadata from the 'repo' metadata."""
     print('Reading RPM repository metadata from ' + repomd_url)
-    with open_gz_url(repomd_url) as f:
+    with open_compressed_url(repomd_url) as f:
         tree = iter(ElementTree.iterparse(f, events=('start', 'end')))
         event, root = next(tree)
         if root.tag != '{http://linux.duke.edu/metadata/repo}repomd':
@@ -74,7 +74,7 @@ def get_primary_name(repomd_url):
 
 def enumerate_base_urls(mirrorlist_url):
     """Get candidate RPM repository base URLs from a mirrorlist file."""
-    with open_gz_url(mirrorlist_url) as f:
+    with open_compressed_url(mirrorlist_url) as f:
         while True:
             line = f.readline().decode('utf-8')
             if not len(line):
@@ -101,7 +101,7 @@ def enumerate_rpm_packages(base_url, os_name, os_code_name, os_arch):
     primary_xml_name = get_primary_name(repomd_url)
     primary_xml_url = os.path.join(base_url, primary_xml_name)
     print('Reading RPM primary metadata from ' + primary_xml_url)
-    with open_gz_url(primary_xml_url) as f:
+    with open_compressed_url(primary_xml_url) as f:
         tree = ElementTree.iterparse(f)
         for event, element in tree:
             if (

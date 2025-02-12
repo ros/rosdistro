@@ -42,11 +42,14 @@ def create_default_sources():
     sources = []
     # get all rosdistro files
     basedir = os.path.realpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..'))
-    filepath = os.path.join(basedir, 'index.yaml')
+    filepath = os.path.join(basedir, 'index-v4.yaml')
     with open(filepath) as f:
         content = f.read()
     index = yaml.safe_load(content)
-    for distro in index['distributions']:
+    for distro, metadata in index['distributions'].items():
+        if metadata['distribution_status'] == 'end-of-life':
+            # Skip end-of-life distributions
+            continue
         distfile = 'file://' + basedir + '/' + distro + '/distribution.yaml'
         print('loading %s' % distfile)
         try:

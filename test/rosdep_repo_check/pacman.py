@@ -28,7 +28,7 @@
 import os
 import tarfile
 
-from . import open_gz_url
+from . import open_compressed_url
 from . import PackageEntry
 from . import RepositoryCacheCollection
 
@@ -51,7 +51,7 @@ def enumerate_descs(url):
 
     :returns: an enumeration of desc file contents.
     """
-    with open_gz_url(url) as f:
+    with open_compressed_url(url) as f:
         with tarfile.open(mode='r|', fileobj=f) as tf:
             for ti in tf:
                 if ti.name.endswith('/desc'):

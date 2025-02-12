@@ -180,6 +180,9 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
                     config = get_patch_config(newref)
                     config['parent'] = config['parent'].replace(args.source, args.dest)
                     set_patch_config(newref, config)
+            # Check for a release repo url in the track configuration
+            if 'release_repo_url' in dest_track:
+                dest_track['release_repo_url'] = None
             write_tracks_file(tracks, f'Copy {args.source} track to {args.dest} with migrate-rosdistro.py.')
         else:
             dest_track = tracks['tracks'][args.dest]
@@ -240,7 +243,7 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         release_spec.version = '-'.join([ver, new_release_track_inc])
         repositories_bloomed.append(repo_name)
         subprocess.check_call(['git', 'push', 'origin', 'master'])
-    except (subprocess.CalledProcessError, ValueError) as e:
+    except (subprocess.CalledProcessError, ValueError, github.GithubException) as e:
         repositories_with_errors.append((repo_name, e))
     os.chdir(workdir)
 
