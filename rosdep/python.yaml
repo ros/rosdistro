@@ -361,6 +361,14 @@ pika:
     pip:
       packages: [pika]
   ubuntu: [python-pika]
+platformio:
+  debian:
+    pip:
+      packages: [platformio]
+  fedora: [platformio]
+  ubuntu:
+    '*': [platformio]
+    focal: null
 pydocstyle:
   alpine: [py3-pydocstyle]
   arch: [python-pydocstyle]
@@ -4909,6 +4917,7 @@ python3-ansible-runner-pip:
       packages: [ansible-runner]
 python3-antlr4:
   debian: [python3-antlr4]
+  nixos: [python3Packages.antlr4-python3-runtime]
   ubuntu:
     '*': [python3-antlr4]
     focal: null
@@ -4995,6 +5004,7 @@ python3-babeltrace:
   fedora: [python3-babeltrace]
   gentoo: [dev-util/babeltrace]
   nixos: [babeltrace]
+  openembedded: [babeltrace@openembedded-core]
   opensuse: [python3-babeltrace]
   rhel:
     '*': [python3-babeltrace]
@@ -5427,6 +5437,7 @@ python3-construct:
   fedora: [python3-construct]
   gentoo: [dev-python/construct]
   nixos: [python3Packages.construct]
+  openembedded: [python3-construct@meta-ros2]
   rhel:
     '*': [python3-construct]
     '7': null
@@ -5609,6 +5620,7 @@ python3-distro:
   fedora: [python3-distro, lsb_release]
   gentoo: [dev-python/distro]
   nixos: [python3Packages.distro]
+  openembedded: [python3-distro@meta-python]
   rhel:
     '*': [python3-distro, lsb_release]
     '8': [python3-distro, redhat-lsb-core]
@@ -5810,6 +5822,7 @@ python3-events-pip:
       packages: [Events]
 python3-expiringdict:
   debian: [python3-expiringdict]
+  nixos: [python3Packages.expiringdict]
   ubuntu: [python3-expiringdict]
 python3-ezdxf:
   debian:
@@ -5988,6 +6001,7 @@ python3-flake8-blind-except:
       pip:
         packages: [flake8-blind-except]
   fedora: [python3-flake8-blind-except]
+  nixos: [python3Packages.flake8-blind-except]
   opensuse: [python3-flake8-blind-except]
   rhel:
     '*': [python3-flake8-blind-except]
@@ -6033,6 +6047,7 @@ python3-flake8-class-newline:
       pip:
         packages: [flake8-class-newline]
   fedora: [python3-flake8-class-newline]
+  nixos: [python3Packages.flake8-class-newline]
   opensuse: [python3-flake8-class-newline]
   rhel:
     '*': [python3-flake8-class-newline]
@@ -6077,6 +6092,7 @@ python3-flake8-deprecated:
       pip:
         packages: [flake8-deprecated]
   fedora: [python3-flake8-deprecated]
+  nixos: [python3Packages.flake8-deprecated]
   opensuse: [python3-flake8-deprecated]
   rhel:
     '*': [python3-flake8-deprecated]
@@ -6617,6 +6633,21 @@ python3-httplib2:
   fedora: [python3-httplib2]
   gentoo: [dev-python/httplib2]
   ubuntu: [python3-httplib2]
+python3-httpx:
+  alpine: [httpx]
+  arch: [python-httpx]
+  debian: [python3-httpx]
+  fedora: [python3-httpx]
+  gentoo: [dev-python/httpx]
+  osx:
+    pip:
+      packages: [httpx]
+  rhel: [python3-httpx]
+  ubuntu:
+    '*': [python3-httpx]
+    focal:
+      pip:
+        packages: [httpx]
 python3-hypothesis:
   debian: [python3-hypothesis]
   fedora: [python3-hypothesis]
@@ -7939,6 +7970,7 @@ python3-petact-pip:
 python3-pexpect:
   debian: [python3-pexpect]
   fedora: [python3-pexpect]
+  nixos: [python3Packages.pexpect]
   opensuse: [python3-pexpect]
   rhel: ['python%{python3_pkgversion}-pexpect']
   ubuntu: [python3-pexpect]
@@ -8047,6 +8079,7 @@ python3-ply:
   fedora: [python3-ply]
   gentoo: [dev-python/ply]
   nixos: [python3Packages.ply]
+  openembedded: [python3-ply@openembedded-core]
   opensuse: [python3-ply]
   rhel:
     '*': [python3-ply]
@@ -8095,6 +8128,7 @@ python3-pre-commit:
       pip:
         packages: [pre-commit]
   fedora: [pre-commit]
+  nixos: [pre-commit]
   ubuntu:
     '*': [pre-commit]
     bionic:
@@ -8277,6 +8311,7 @@ python3-pydantic:
   fedora: [python3-pydantic]
   gentoo: [dev-python/pydantic]
   nixos: [python3Packages.pydantic]
+  openembedded: [python3-pydantic@meta-python]
   rhel:
     '*': [python3-pydantic]
     '8': null
@@ -8457,6 +8492,7 @@ python3-pymap3d:
     buster: null
     stretch: null
   gentoo: [sci-geosciences/pymap3d]
+  openembedded: [python3-pymap3d@meta-ros2]
   ubuntu:
     '*': [python3-pymap3d]
     bionic: null
@@ -8487,13 +8523,6 @@ python3-pymongo:
   nixos: [python3Packages.pymongo]
   openembedded: [python3-pymongo@meta-python]
   ubuntu: [python3-pymongo]
-python3-pymongo-pip:
-  debian:
-    pip:
-      packages: [pymongo]
-  ubuntu:
-    pip:
-      packages: [pymongo]
 python3-pynmea2:
   debian: [python3-nmea2]
   fedora:
@@ -9026,6 +9055,10 @@ python3-pytest-xvfb:
     pip:
       packages: [pytest-xvfb]
   ubuntu: [python3-pytest-xvfb]
+python3-python-snap7-pip:
+  "*":
+    pip:
+      packages: [python-snap7]
 python3-pytorch-pip: *migrate_eol_2025_04_30_python3_pytorch_pip
 python3-pytrinamic-pip:
   debian:
@@ -9258,6 +9291,7 @@ python3-rich:
   debian: [python3-rich]
   fedora: [python3-rich]
   gentoo: [rich]
+  nixos: [python3Packages.rich]
   osx:
     pip:
       packages: [rich]
@@ -9496,6 +9530,7 @@ python3-scipy:
   gentoo: [sci-libs/scipy]
   macports: [py37-scipy]
   nixos: [python3Packages.scipy]
+  openembedded: [python3-scipy@meta-scipy]
   opensuse: [python3-scipy]
   osx:
     pip:
@@ -9583,6 +9618,18 @@ python3-serial:
     '*': ['python%{python3_pkgversion}-pyserial']
     '7': null
   ubuntu: [python3-serial]
+python3-setproctitle:
+  alpine: [py3-setproctitle]
+  arch: [python-setproctitle]
+  debian: [python3-setproctitle]
+  fedora: [python3-setproctitle]
+  gentoo: [dev-python/setproctitle]
+  opensuse: [python3-setproctitle]
+  osx:
+    pip:
+      packages: [setproctitle]
+  rhel: [python3-setproctitle]
+  ubuntu: [python3-setproctitle]
 python3-setuptools:
   alpine: [py3-setuptools]
   arch: [python-setuptools]
@@ -9747,6 +9794,7 @@ python3-smbus:
   debian: [python3-smbus]
   fedora: [python3-i2c-tools]
   nixos: [python3Packages.i2c-tools]
+  openembedded: [python3-smbus@meta-python]
   opensuse: [python3-smbus]
   rhel:
     '*': [python3-i2c-tools]
@@ -10203,6 +10251,10 @@ python3-torch-geometric-pip:
   '*':
     pip:
       packages: [torch-geometric]
+python3-torchrl-pip:
+  '*':
+    pip:
+      packages: [torchrl]
 python3-torchvision:
   arch: [python-torchvision]
   debian: [python3-torchvision]
@@ -10357,6 +10409,7 @@ python3-typing-extensions:
   fedora: [python3-typing-extensions]
   freebsd: [devel/py-typing-extensions]
   gentoo: [dev-python/typing-extensions]
+  nixos: [python3Packages.typing-extensions]
   opensuse: [python3-typing_extensions]
   rhel:
     '*': [python3-typing-extensions]
@@ -10379,6 +10432,7 @@ python3-tz:
   ubuntu: [python3-tz]
 python3-ubjson:
   debian: [python3-ubjson]
+  nixos: [python3Packages.py-ubjson]
   ubuntu:
     '*': [python3-ubjson]
 python3-ujson:
@@ -10504,6 +10558,7 @@ python3-venv:
   fedora: [python3-libs]
   gentoo: [dev-lang/python]
   nixos: [python3]
+  openembedded: [python3@openembedded-core]
   opensuse: [python3-virtualenv]
   osx:
     pip:
@@ -10550,6 +10605,7 @@ python3-watchdog:
   fedora: [python3-watchdog]
   gentoo: [dev-python/watchdog]
   nixos: [python3Packages.watchdog]
+  openembedded: [python3-watchdog@meta-python]
   ubuntu: [python3-watchdog]
 python3-waymo-open-dataset-tf-2-6-0-pip:
   debian:
