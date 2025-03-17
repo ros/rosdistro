@@ -29,6 +29,10 @@ Prior to the sync, the ROS Boss will announce a "sync freeze" on [Discourse](htt
 During the sync freeze, no new packages or package updates will be merged into that particular ROS distribution without the express consent of the ROS Boss.
 Every ROS distribution is on a different sync schedule.
 
+End-of-Life Distributions
+-------------------------
+End-of-life distributions are sealed. No changes should be made to the distribution.yaml file of an EOL distro.
+
 Types of Pull Requests
 ----------------------
 There are a few different types of pull requests that are opened against this repository (these are in order of most likely to least likely to happen):
