@@ -221,8 +221,20 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         # Bloom will not run with multiple remotes.
         subprocess.check_call(['git', 'remote', 'remove', 'oldorigin'])
         subprocess.check_call(['git', 'bloom-release', '--non-interactive', '--release-increment', release_inc, '--unsafe', args.dest], stdin=subprocess.DEVNULL, env=os.environ)
-        subprocess.check_call(['git', 'push', 'origin', '--all', '--force'])
-        subprocess.check_call(['git', 'push', 'origin', '--tags', '--force'])
+
+        # If something goes wrong, use dry run pushes to ensure we don't
+        # destroy any data in the repository.
+        # 1. Ensure we never force-push branches
+        subprocess.check_call(['git', 'push', 'origin', '--all', '--dry-run'])
+        # 2. Upstream tags may be force pushed, so take care of upstream branch and tags
+        subprocess.check_call(['git', 'push', 'origin', 'upstream'])
+        subprocess.check_call(['git', 'push', 'origin', 'refs/tags/upstream/*', '--force'])
+        # 3. Ensure we never force-push any other tags
+        subprocess.check_call(['git', 'push', 'origin', '--tags', '--dry-run'])
+        # 4. Push all branches and tags, which we now expect to succeed
+        subprocess.check_call(['git', 'push', 'origin', '--all'])
+        subprocess.check_call(['git', 'push', 'origin', '--tags'])
+
         subprocess.check_call(['git', 'checkout', 'master'])
 
         # Re-read tracks.yaml after release.
