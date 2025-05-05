@@ -8357,13 +8357,17 @@ qml-module-qtquick2:
   nixos: [qt5.qtquickcontrols2]
   rhel: [qt5-qtdeclarative]
   ubuntu: [qml-module-qtquick2]
-qml6-module-qtquick2:
-  arch: [qt6-quickcontrols2]
-  debian: [qml6-module-qtquick2]
+qml6-module-qtquick:
+  arch: [qt6-quickcontrols]
+  debian: [qml6-module-qtquick]
   fedora: [qt6-qtdeclarative]
-  nixos: [qt6.qtquickcontrols2]
-  rhel: [qt6-qtdeclarative]
-  ubuntu: [qml6-module-qtquick2]
+  nixos: [qt6.qtquickcontrols]
+  rhel:
+    '*': [qt6-qtdeclarative]
+    '8': null
+  ubuntu:
+    '*': [qml6-module-qtquick]
+    'focal': null
 qrencode:
   arch: [qrencode]
   debian: [qrencode]
@@ -8422,10 +8426,16 @@ qt6-base-dev:
   gentoo: ['dev-qt/qtcore:6', 'dev-qt/qtwidgets:6', 'dev-qt/qttest:6']
   nixos: [qt6.qtbase]
   openembedded: [qtbase@meta-qt6]
-  opensuse: [libqt6-qtbase-devel]
-  rhel: [qt6-qtbase-devel]
+  opensuse:
+    '*': [libqt6-qtbase-devel]
+    '15.2': null
+  rhel:
+    '*': [qt6-qtbase-devel]
+    '8': null
   slackware: [qt6]
-  ubuntu: [qt6-base-dev]
+  ubuntu:
+    '*': [qt6-base-dev]
+    'focal': null
 qtbase5-dev:
   alpine: [qt5-qtbase-dev]
   arch: [qt5-base]
