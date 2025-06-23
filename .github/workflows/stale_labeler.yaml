@@ -1,0 +1,29 @@
+---
+name: 'Label inactive PRs as stale'
+
+# this is fine since gha runs with yaml 1.2
+on:  # yamllint disable-line rule:truthy
+  schedule:
+  - cron: '0 11 * * *'  # runs at 11am UTC every day => early morning in US
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/stale@v8  # https://github.com/marketplace/actions/close-stale-issues
+      with:
+        stale-pr-label: 'stale'
+        stale-pr-message: >
+          This PR hasn't been activity in 14 days.
+          If you are still are interested in getting it merged
+          please provide an update.
+          Otherwise it will likely be closed by a rosdistro maintainer
+          following our [contributing policy](https://github.com/ros/rosdistro/blob/master/CONTRIBUTING.md).
+          It's been labeled "stale" for visibility to the maintainers.
+          If this label isn't appropriate,
+          you can ask a maintainer to remove the label and add the 'persistent' label.
+        days-before-pr-stale: 14
+        days-before-pr-close: -1     # don't close PRs automatically
+        days-before-issue-stale: -1  # don't label issues as stale
+        days-before-issue-close: -1  # don't close issues automatically
+        exempt-pr-labels: 'persistent'

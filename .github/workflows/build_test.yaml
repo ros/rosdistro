@@ -1,43 +1,48 @@
+---
 name: Validate rosdistro
-on: [push, pull_request]
+# this is fine since gha runs with yaml 1.2
+on:  # yamllint disable-line rule:truthy
+  push:
+    branches: ['master']
+  pull_request:
+
+permissions:
+  contents: read
 
 jobs:
-  nosetests:
-    name: Nosetests
-    runs-on: ubuntu-20.04
+  checks:
+    name: rosdistro / rosdep checks
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         python-version: [3.8]
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     - name: Fetch upstream (to enable diff)
       run: |
-        git remote add unittest_upstream_comparision https://github.com/ros/rosdistro.git || git remote set-url unittest_upstream_comparision https://github.com/ros/rosdistro.git
-        git fetch --no-tags --depth=1 unittest_upstream_comparision master
+        git remote add unittest_upstream_comparison https://github.com/ros/rosdistro.git \
+        || git remote set-url unittest_upstream_comparison https://github.com/ros/rosdistro.git
+        git fetch --no-tags --depth=1 unittest_upstream_comparison master
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip setuptools wheel
-        pip install PyYAML argparse
-        pip install catkin-pkg ros-buildfarm rosdistro nose coverage
-        pip install unidiff
-        pip install rosdep
-        pip install PyGithub
-    - name: Run Nose Tests
-      run: nosetests -s
+        python -m pip install -r test/requirements.txt
+    - name: Run Tests
+      run: pytest -s test
   yamllint:
     name: Yaml Linting
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         python-version: [3.8]
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install Dependencies
@@ -45,4 +50,4 @@ jobs:
         python -m pip install --upgrade pip setuptools wheel
         pip install yamllint
     - name: Run yamllint
-      run: yamllint */
+      run: yamllint .

@@ -21,7 +21,11 @@ from rosdistro.writer import yaml_from_distribution_file
 # make assumptions about the release repository that are not true during the
 # manipulation of the release repository for this script.
 def read_tracks_file():
-    return yaml.safe_load(show('master', 'tracks.yaml'))
+    tracks_yaml = show('master', 'tracks.yaml')
+    if tracks_yaml:
+        return yaml.safe_load(tracks_yaml)
+    else:
+        raise ValueError('repository is missing tracks.yaml in master branch.')
 
 @inbranch('master')
 def write_tracks_file(tracks, commit_msg=None):
@@ -44,10 +48,6 @@ parser.add_argument('--dest', required=True, help='The destination rosdistro nam
 parser.add_argument('--release-org', required=True, help='The organization containing release repositories')
 
 args = parser.parse_args()
-
-gclient = github.Github(os.environ['GITHUB_TOKEN'])
-release_org = gclient.get_organization(args.release_org)
-org_release_repos = [r.name for r in release_org.get_repos() if r.name]
 
 if not os.path.isfile('index-v4.yaml'):
     raise RuntimeError('This script must be run from a rosdistro index directory.')
@@ -127,21 +127,22 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         print('Adding repo:', repo_name)
         if release_spec.type != 'git':
             raise ValueError('This script can only handle git repositories.')
+        if release_spec.version is None:
+            raise ValueError(f'{repo_name} is not released in the source distribution (release version is missing or blank).')
         remote_url = release_spec.url
-        release_repo = remote_url.split('/')[-1][:-4]
+
+        if not remote_url.startswith(f'https://github.com/{args.release_org}/'):
+            raise ValueError(f'{remote_url} is not in the release org. Mirror the repository there to continue.')
+
+        release_repo = remote_url.split('/')[-1]
+        if release_repo.endswith('.git'):
+            release_repo = release_repo[:-4]
         subprocess.check_call(['git', 'clone', remote_url])
         os.chdir(release_repo)
         tracks = read_tracks_file()
 
         if not tracks['tracks'].get(args.source):
             raise ValueError('Repository has not been released.')
-
-        if release_repo not in org_release_repos:
-            release_org.create_repo(release_repo)
-        new_release_repo_url = f'https://github.com/{args.release_org}/{release_repo}.git'
-        subprocess.check_call(['git', 'remote', 'rename', 'origin', 'oldorigin'])
-        subprocess.check_call(['git', 'remote', 'set-url', '--push', 'oldorigin', 'no_push'])
-        subprocess.check_call(['git', 'remote', 'add', 'origin', new_release_repo_url])
 
         if args.source != args.dest:
             # Copy a bloom .ignored file from source to target distro.
@@ -156,7 +157,7 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
             dest_track = copy.deepcopy(tracks['tracks'][args.source])
             dest_track['ros_distro'] = args.dest
             tracks['tracks'][args.dest] = dest_track
-            ls_remote = subprocess.check_output(['git', 'ls-remote', '--heads', 'oldorigin', f'*{args.source}*'], universal_newlines=True)
+            ls_remote = subprocess.check_output(['git', 'ls-remote', '--heads', 'origin', f'*{args.source}*'], universal_newlines=True)
             for line in ls_remote.split('\n'):
                 if line == '':
                     continue
@@ -172,6 +173,9 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
                     config = get_patch_config(newref)
                     config['parent'] = config['parent'].replace(args.source, args.dest)
                     set_patch_config(newref, config)
+            # Check for a release repo url in the track configuration
+            if 'release_repo_url' in dest_track:
+                dest_track['release_repo_url'] = None
             write_tracks_file(tracks, f'Copy {args.source} track to {args.dest} with migrate-rosdistro.py.')
         else:
             dest_track = tracks['tracks'][args.dest]
@@ -181,10 +185,12 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         # interactivity and :{auto} may result in a previously unreleased tag
         # on the development branch being released for the first time.
         if dest_track['version'] in [':{ask}', ':{auto}']:
-            # Override the version for this release to guarantee the same version is released.
+            # Override the version for this release to guarantee the same version from our
+            # source distribution is released.
             dest_track['version_saved'] = dest_track['version']
-            dest_track['version'] = dest_track['last_version']
-            write_tracks_file(tracks, f'Update {args.dest} track to release exactly last-released version.')
+            source_version, source_inc = source_distribution.repositories[repo_name].release_repository.version.split('-')
+            dest_track['version'] = source_version
+            write_tracks_file(tracks, f'Update {args.dest} track to release the same version as the source distribution.')
 
         if dest_track['release_tag'] == ':{ask}' and 'last_release' in dest_track:
             # Override the version for this release to guarantee the same version is released.
@@ -192,9 +198,20 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
             dest_track['release_tag'] = dest_track['last_release']
             write_tracks_file(tracks, f'Update {args.dest} track to release exactly last-released tag.')
 
-        # Bloom will not run with multiple remotes.
-        subprocess.check_call(['git', 'remote', 'remove', 'oldorigin'])
-        subprocess.check_call(['git', 'bloom-release', '--non-interactive', '--unsafe', args.dest], env=os.environ)
+        # Update release increment for the upcoming release.
+        # We increment whichever is greater between the source distribution's
+        # release increment and the release increment in the bloom track since
+        # there may be releases that were not committed to the source
+        # distribution.
+        # This heuristic does not fully cover situations where the version in
+        # the source distribution and the version in the release track differ.
+        # In that case it is still possible for this tool to overwrite a
+        # release increment if the greatest increment of the source version is
+        # not in the source distribution and does not match the version
+        # currently in the release track.
+        release_inc = str(max(int(source_inc), int(dest_track['release_inc'])) + 1)
+
+        subprocess.check_call(['git', 'bloom-release', '--non-interactive', '--release-increment', release_inc, '--unsafe', args.dest], stdin=subprocess.DEVNULL, env=os.environ)
         subprocess.check_call(['git', 'push', 'origin', '--all', '--force'])
         subprocess.check_call(['git', 'push', 'origin', '--tags', '--force'])
         subprocess.check_call(['git', 'checkout', 'master'])
@@ -217,7 +234,7 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         release_spec.version = '-'.join([ver, new_release_track_inc])
         repositories_bloomed.append(repo_name)
         subprocess.check_call(['git', 'push', 'origin', 'master'])
-    except (subprocess.CalledProcessError, ValueError) as e:
+    except (subprocess.CalledProcessError, ValueError, github.GithubException) as e:
         repositories_with_errors.append((repo_name, e))
     os.chdir(workdir)
 

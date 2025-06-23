@@ -1,30 +1,65 @@
+import itertools
 import os
+import typing
 
-next_block_id = 1
 
-
-class Fold(object):
+class BaseCiCfg:
+    _block_id_gen = itertools.count(1)
 
     def __init__(self):
-        global next_block_id
-        self.block_id = next_block_id
-        next_block_id += 1
+        self.block_id = next(self._block_id_gen)
 
-    def get_message(self, msg=''):
-        if os.environ.get('TRAVIS') == 'true':
-            if msg:
-                msg += ', '
-            msg += "see folded block '%s' above for details" % self.get_block_name()
+    @classmethod
+    def is_ci(cls) -> bool:
+        raise NotImplementedError("Use BaseCiCfg only as fallback")
+
+    def get_message(self, msg: str = "") -> str:
         return msg
 
-    def get_block_name(self):
-        return 'block%d' % self.block_id
+    def _get_message_folded(self, msg: str = "") -> str:
+        if msg:
+            msg += ", "
+        msg += "see folded block '%s' above for details" % self.get_block_name()
+        return msg
+
+    def get_block_name(self) -> str:
+        return "block%d" % self.block_id
 
     def __enter__(self):
-        if os.environ.get('TRAVIS') == 'true':
-            print('travis_fold:start:%s' % self.get_block_name())
         return self
 
     def __exit__(self, type, value, traceback):
-        if os.environ.get('TRAVIS') == 'true':
-            print('travis_fold:end:%s' % self.get_block_name())
+        pass
+
+
+class GithubActionsCiCfg(BaseCiCfg):
+    @classmethod
+    def is_ci(cls) -> bool:
+        return os.environ.get("GITHUB_ACTIONS") == "true"
+
+    def get_message(self, msg=""):
+        return self._get_message_folded(msg)
+
+    def __enter__(self):
+        print("\n::group::%s" % self.get_block_name())
+        return self
+
+    def __exit__(self, type, value, traceback):
+        print("\n::endgroup::")
+
+
+# determine CI system, and set as Fold
+def _determine_ci_system() -> typing.Type[BaseCiCfg]:
+    def visitor(cls: typing.Type[BaseCiCfg]) -> typing.Optional[typing.Type[BaseCiCfg]]:
+        for sub in cls.__subclasses__():
+            if sub.is_ci():
+                return sub
+            res = visitor(sub)
+            if res:
+                return res
+        return None
+
+    return visitor(BaseCiCfg) or BaseCiCfg
+
+
+Fold = _determine_ci_system()

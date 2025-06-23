@@ -79,7 +79,7 @@ def generic_parser(buf, cb):
         if re.search(r'^\s*#', l) is not None:
             continue
         try:
-            s = re.search(r'(?!' + indent_atom + ')[^\s]', l).start()
+            s = re.search(r'(?!' + indent_atom + r')[^\s]', l).start()
         except:
             print_err("line %u: %s" % (i, l))
             raise

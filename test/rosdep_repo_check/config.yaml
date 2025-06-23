@@ -1,0 +1,116 @@
+---
+package_sources:
+  alpine:
+  - !apk_base_url https://dl-cdn.alpinelinux.org/alpine/$releasever/main
+  - !apk_base_url https://dl-cdn.alpinelinux.org/alpine/$releasever/community
+  - !apk_base_url https://dl-cdn.alpinelinux.org/alpine/$releasever/testing
+  arch:
+  - !pacman_base_url https://archive.archlinux.org/repos/last/$repo/os/$arch/ core
+  - !pacman_base_url https://archive.archlinux.org/repos/last/$repo/os/$arch/ extra
+  debian:
+  - !deb_base_url http://deb.debian.org/debian main
+  - !deb_base_url http://deb.debian.org/debian contrib
+  - !deb_base_url http://deb.debian.org/debian non-free
+  - !deb_base_url http://repos.ros.org/repos/ros_bootstrap main
+  fedora:
+  - !rpm_mirrorlist_url https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever&arch=$basearch
+  - !rpm_mirrorlist_url https://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f$releasever&arch=$basearch
+  - !rpm_mirrorlist_url https://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-$releasever&arch=$basearch
+  openembedded:
+  - !layer_index_url http://layers.openembedded.org/layerindex/api/
+  opensuse:
+  - !rpm_base_url http://download.opensuse.org/distribution/leap/$releasever/repo/oss/
+  - !rpm_base_url http://download.opensuse.org/distribution/leap/$releasever/repo/non-oss/
+  - !rpm_base_url http://download.opensuse.org/update/leap/$releasever/oss/
+  - !rpm_base_url http://download.opensuse.org/update/leap/$releasever/non-oss/
+  rhel:
+  - !rpm_mirrorlist_url https://mirrors.fedoraproject.org/mirrorlist?repo=epel-$releasever&arch=$basearch
+  - '8':
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/baseos
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/appstream
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/powertools
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/extras
+    '9':
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/baseos
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/appstream
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/crb
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/extras
+  - !rpm_mirrorlist_url https://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-released-$releasever&arch=$basearch
+  ubuntu:
+  - !deb_base_url http://archive.ubuntu.com/ubuntu main
+  - !deb_base_url http://archive.ubuntu.com/ubuntu universe
+  - !deb_base_url http://archive.ubuntu.com/ubuntu multiverse
+  - !deb_base_url http://repos.ros.org/repos/ros_bootstrap main
+
+package_dashboards:
+- pattern: !regular_expression .*//archive.archlinux.org/repos/last/([^/]+)/os/.*
+  url: https://archlinux.org/packages/\1/{os_arch}/{source_name}/
+- pattern: !regular_expression .*//deb.debian.org/debian/.*
+  url: https://packages.debian.org/{os_code_name}/{binary_name}
+- pattern: !regular_expression .*//dl.fedoraproject.org/pub/.*
+  url: https://packages.fedoraproject.org/pkgs/{source_name}/{binary_name}/
+- pattern: !regular_expression .*://layers.openembedded.org/layerindex/api/recipes/([^/]+)
+  url: https://layers.openembedded.org/layerindex/recipe/\1/
+- pattern: !regular_expression .*//download.opensuse.org/.*
+  url: https://software.opensuse.org/package/{source_name}
+- pattern: !regular_expression .*//archive.ubuntu.com/ubuntu/.*
+  url: https://packages.ubuntu.com/{os_code_name}/{binary_name}
+- pattern: !regular_expression .*//dl-cdn.alpinelinux.org/alpine/[^/]+/([^/]+)/.*
+  url: https://pkgs.alpinelinux.org/package/{os_code_name}/\1/{os_arch}/{binary_name}
+
+supported_versions:
+  alpine:
+  - edge
+  arch:
+  - ''
+  debian:
+  - bookworm
+  fedora:
+  - '41'
+  - '42'
+  opensuse:
+  - '15.2'
+  openembedded:
+  - master
+  rhel:
+  - '8'
+  - '9'
+  ubuntu:
+  - focal
+  - jammy
+  - noble
+
+supported_arches:
+  alpine:
+  - x86_64
+  arch:
+  - x86_64
+  debian:
+  - amd64
+  fedora:
+  - x86_64
+  opensuse:
+  - x86_64
+  openembedded:
+  - ''
+  rhel:
+  - x86_64
+  ubuntu:
+  - amd64
+
+name_replacements:
+  fedora:
+    '41':
+      '%{__isa_name}': 'x86'
+    '42':
+      '%{__isa_name}': 'x86'
+  openembedded:
+    master:
+      '${PYTHON_PN}': 'python3'
+  rhel:
+    '8':
+      '%{__isa_name}': 'x86'
+      '%{python3_pkgversion}': '3'
+    '9':
+      '%{__isa_name}': 'x86'
+      '%{python3_pkgversion}': '3'

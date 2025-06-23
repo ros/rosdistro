@@ -1,13 +1,17 @@
-This repo maintains the lists of repositories defining ROS distributions.
+This repository maintains two independent sets of packaging metadata used in ROS:
 
-It is the implementation of [REP 143](http://ros.org/reps/rep-0143.html)
+1. The lists of repositories that curate ROS packages for each ROS distributions,
+   implementing the data structure defined in [REP 143](http://ros.org/reps/rep-0143.html).
+   Any ROS package release will generate pull requests to the distribution files
+   in this repository.
 
-It also the home of the rosdep rules.
+2. The rosdep rules database, which map the package names used in package.xml files to
+   system package names.
 
 Guide to Contributing
 ---------------------
 
-Please see [CONTRIBUTING.md](CONTRIBUTING.md)
+Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Review guidelines
 -----------------
