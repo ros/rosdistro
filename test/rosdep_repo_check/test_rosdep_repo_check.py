@@ -70,7 +70,7 @@ def get_changed_line_numbers():
         # Check url
         assert remote_url == DIFF_REPO, \
             '%s remote url [%s] is different than %s' % (UPSTREAM_NAME, remote_url, DIFF_REPO)
-        base_ref = '%s/%s' % (UPSTREAM_NAME, DIFF_BRANCH)
+        base_ref = '%s/%s...' % (UPSTREAM_NAME, DIFF_BRANCH)
     except subprocess.CalledProcessError:
         # No remote so fall back to origin/master
         print('WARNING: No remote %s detected, falling back to origin master. Make sure it is up to date.' % UPSTREAM_NAME, file=sys.stderr)
