@@ -201,10 +201,17 @@ exhale-pip:
   ubuntu:
     pip:
       packages: [exhale]
-python3-faiss-cpu:
+python3-faiss:
+  debian:
+     '*': [python3-faiss]
+     bookworm:
+       pip:  [faiss-cpu]
+  ubuntu:
+    '*': [python3-faiss]
+    noble:
+      pip: [faiss-cpu]
   '*':
-    pip:
-      packages: [faiss-cpu]
+    pip: [faiss-cpu]
 gunicorn:
   debian: [gunicorn]
   fedora: [python-gunicorn]
