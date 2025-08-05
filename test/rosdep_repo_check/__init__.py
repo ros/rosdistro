@@ -97,7 +97,7 @@ def open_compressed_url(url, retry=2, retry_period=1, timeout=10):
 
     :returns: file-like object for streaming file data.
     """
-    request = Request(url, headers={'Accept-Encoding': 'gzip'})
+    request = Request(url)
     try:
         f = urlopen(request, timeout=timeout)
     except HTTPError as e:
