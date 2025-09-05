@@ -28,6 +28,7 @@ Approximately every two weeks, the ROS Boss of the corresponding ROS distributio
 Prior to the sync, the ROS Boss will announce a "sync freeze" on [Discourse](https://discourse.ros.org/).
 During the sync freeze, no new packages or package updates will be merged into that particular ROS distribution without the express consent of the ROS Boss.
 Every ROS distribution is on a different sync schedule.
+All pull requests to this repository should only target a single rosdistro to avoid cross-coupling syncs.
 
 End-of-Life Distributions
 -------------------------
