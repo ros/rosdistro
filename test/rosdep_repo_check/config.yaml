@@ -16,8 +16,9 @@ package_sources:
   - !rpm_mirrorlist_url https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-$releasever&arch=$basearch
   - !rpm_mirrorlist_url https://mirrors.fedoraproject.org/mirrorlist?repo=updates-released-f$releasever&arch=$basearch
   - !rpm_mirrorlist_url https://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-$releasever&arch=$basearch
-  openembedded:
-  - !layer_index_url http://layers.openembedded.org/layerindex/api/
+  # Disabled due to API errors
+  # openembedded:
+  # - !layer_index_url http://layers.openembedded.org/layerindex/api/
   opensuse:
   - !rpm_base_url http://download.opensuse.org/distribution/leap/$releasever/repo/oss/
   - !rpm_base_url http://download.opensuse.org/distribution/leap/$releasever/repo/non-oss/
@@ -66,8 +67,8 @@ supported_versions:
   debian:
   - bookworm
   fedora:
-  - '40'
   - '41'
+  - '42'
   opensuse:
   - '15.2'
   openembedded:
@@ -100,9 +101,9 @@ supported_arches:
 
 name_replacements:
   fedora:
-    '40':
-      '%{__isa_name}': 'x86'
     '41':
+      '%{__isa_name}': 'x86'
+    '42':
       '%{__isa_name}': 'x86'
   openembedded:
     master:

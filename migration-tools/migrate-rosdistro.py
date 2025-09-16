@@ -49,10 +49,6 @@ parser.add_argument('--release-org', required=True, help='The organization conta
 
 args = parser.parse_args()
 
-gclient = github.Github(os.environ['GITHUB_TOKEN'])
-release_org = gclient.get_organization(args.release_org)
-org_release_repos = [r.name for r in release_org.get_repos() if r.name]
-
 if not os.path.isfile('index-v4.yaml'):
     raise RuntimeError('This script must be run from a rosdistro index directory.')
 rosdistro_dir = os.path.abspath(os.getcwd())
@@ -134,6 +130,10 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         if release_spec.version is None:
             raise ValueError(f'{repo_name} is not released in the source distribution (release version is missing or blank).')
         remote_url = release_spec.url
+
+        if not remote_url.startswith(f'https://github.com/{args.release_org}/'):
+            raise ValueError(f'{remote_url} is not in the release org. Mirror the repository there to continue.')
+
         release_repo = remote_url.split('/')[-1]
         if release_repo.endswith('.git'):
             release_repo = release_repo[:-4]
@@ -143,13 +143,6 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
 
         if not tracks['tracks'].get(args.source):
             raise ValueError('Repository has not been released.')
-
-        if release_repo not in org_release_repos:
-            release_org.create_repo(release_repo)
-        new_release_repo_url = f'https://github.com/{args.release_org}/{release_repo}.git'
-        subprocess.check_call(['git', 'remote', 'rename', 'origin', 'oldorigin'])
-        subprocess.check_call(['git', 'remote', 'set-url', '--push', 'oldorigin', 'no_push'])
-        subprocess.check_call(['git', 'remote', 'add', 'origin', new_release_repo_url])
 
         if args.source != args.dest:
             # Copy a bloom .ignored file from source to target distro.
@@ -164,7 +157,7 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
             dest_track = copy.deepcopy(tracks['tracks'][args.source])
             dest_track['ros_distro'] = args.dest
             tracks['tracks'][args.dest] = dest_track
-            ls_remote = subprocess.check_output(['git', 'ls-remote', '--heads', 'oldorigin', f'*{args.source}*'], universal_newlines=True)
+            ls_remote = subprocess.check_output(['git', 'ls-remote', '--heads', 'origin', f'*{args.source}*'], universal_newlines=True)
             for line in ls_remote.split('\n'):
                 if line == '':
                     continue
@@ -218,8 +211,6 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         # currently in the release track.
         release_inc = str(max(int(source_inc), int(dest_track['release_inc'])) + 1)
 
-        # Bloom will not run with multiple remotes.
-        subprocess.check_call(['git', 'remote', 'remove', 'oldorigin'])
         subprocess.check_call(['git', 'bloom-release', '--non-interactive', '--release-increment', release_inc, '--unsafe', args.dest], stdin=subprocess.DEVNULL, env=os.environ)
         subprocess.check_call(['git', 'push', 'origin', '--all', '--force'])
         subprocess.check_call(['git', 'push', 'origin', '--tags', '--force'])
