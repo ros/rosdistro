@@ -1041,7 +1041,6 @@ python-click:
   fedora: [python-click]
   gentoo: [dev-python/click]
   nixos: [pythonPackages.click]
-  openembedded: ['${PYTHON_PN}-click@meta-python']
   osx:
     pip:
       packages: [click]
@@ -2272,7 +2271,6 @@ python-lxml:
   freebsd: [py27-lxml]
   gentoo: [dev-python/lxml]
   nixos: [pythonPackages.lxml]
-  openembedded: ['${PYTHON_PN}-lxml@meta-python']
   opensuse: [python2-lxml]
   osx:
     pip:
@@ -3982,7 +3980,6 @@ python-sphinx:
   gentoo: [dev-python/sphinx]
   macports: [py27-sphinx]
   nixos: [pythonPackages.sphinx]
-  openembedded: ['${PYTHON_PN}-sphinx@meta-ros-common']
   opensuse: [python-Sphinx]
   osx:
     pip:
@@ -4203,7 +4200,7 @@ python-termcolor:
   fedora: [python-termcolor]
   gentoo: [dev-python/termcolor]
   nixos: [pythonPackages.termcolor]
-  openembedded: ['${PYTHON_PN}-termcolor@openembedded-core']
+  openembedded: [python3-termcolor@meta-python]
   osx:
     pip:
       packages: [termcolor]
@@ -4300,7 +4297,6 @@ python-tqdm:
     buster: [python-tqdm]
     stretch: [python-tqdm]
   fedora: [python-tqdm]
-  openembedded: [python3-tqdm@meta-python]
   ubuntu:
     bionic: [python-tqdm]
 python-transforms3d-pip:
@@ -4372,7 +4368,7 @@ python-twisted-core:
   debian: [python-twisted-core]
   gentoo: [dev-python/twisted]
   nixos: [pythonPackages.twisted]
-  openembedded: ['${PYTHON_PN}-twisted-core@meta-python']
+  openembedded: [python3-twisted@meta-python]
   opensuse: [python2-Twisted]
   ubuntu: [python-twisted-core]
 python-twisted-web:
@@ -4708,7 +4704,6 @@ python-yaml:
   gentoo: [dev-python/pyyaml]
   macports: [py27-yaml]
   nixos: [pythonPackages.pyyaml]
-  openembedded: ['${PYTHON_PN}-pyyaml@meta-python']
   opensuse: [python2-PyYAML]
   osx:
     pip:
@@ -5379,7 +5374,7 @@ python3-click:
   fedora: [python3-click]
   gentoo: [dev-python/click]
   nixos: [python3Packages.click]
-  openembedded: [python3-click@meta-python]
+  openembedded: [python3-click@openembedded-core]
   rhel: ['python%{python3_pkgversion}-click']
   ubuntu: [python3-click]
 python3-colcon-common-extensions:
@@ -5417,7 +5412,7 @@ python3-colorama:
   fedora: [python3-colorama]
   gentoo: [dev-python/colorama]
   nixos: [python3Packages.colorama]
-  openembedded: [python3-colorama@meta-python]
+  openembedded: [python3-colorama@openembedded-core]
   rhel: ['python%{python3_pkgversion}-colorama']
   ubuntu: [python3-colorama]
 python3-colorcet:
@@ -5609,6 +5604,7 @@ python3-deprecated:
     buster: null
   fedora: [python3-deprecated]
   nixos: [python3Packages.deprecated]
+  openembedded: [python3-deprecated@meta-python]
   rhel:
     '*': [python3-deprecated]
     '7': null
@@ -5735,6 +5731,16 @@ python3-docopt:
   gentoo: [dev-python/docopt]
   nixos: [python3Packages.docopt]
   ubuntu: [python3-docopt]
+python3-docstring-parser:
+  '*':
+    pip:
+      packages: [docstring-parser]
+  debian:
+    trixie: [python3-docstring-parser]
+  fedora: [python3-docstring-parser]
+  nixos: [python3Packages.docstring-parser]
+  ubuntu:
+    noble: [python3-docstring-parser]
 python3-docutils:
   arch: [python-docutils]
   debian: [python3-docutils]
@@ -6805,7 +6811,7 @@ python3-importlib-metadata:
   freebsd: [python3]
   gentoo: [dev-python/importlib-metadata]
   nixos: [python3Packages.importlib-metadata]
-  openembedded: [python3-importlib-metadata@openembedded-core]
+  openembedded: [python3-importlib-metadata@meta-python]
   osx:
     pip:
       packages: [importlib_metadata]
@@ -7203,7 +7209,7 @@ python3-lxml:
   freebsd: [devel/py-lxml]
   gentoo: [dev-python/lxml]
   nixos: [python3Packages.lxml]
-  openembedded: [python3-lxml@meta-python]
+  openembedded: [python3-lxml@openembedded-core]
   opensuse: [python3-lxml]
   osx:
     pip:
@@ -7428,6 +7434,20 @@ python3-mock:
       packages: [mock]
   rhel: ['python%{python3_pkgversion}-mock']
   ubuntu: [python3-mock]
+python3-mongomock:
+  debian:
+    '*': [python3-mongomock]
+    bookworm:
+      pip:
+        packages: [mongomock]
+  ubuntu:
+    '*': [python3-mongomock]
+    focal:
+      pip:
+        packages: [mongomock]
+    jammy:
+      pip:
+        packages: [mongomock]
 python3-moonraker-api-pip:
   debian:
     pip:
@@ -8062,6 +8082,7 @@ python3-paho-mqtt:
   debian: [python3-paho-mqtt]
   fedora: [python3-paho-mqtt]
   nixos: [python3Packages.paho-mqtt]
+  openembedded: [python3-paho-mqtt@meta-python]
   rhel:
     '*': [python3-paho-mqtt]
     '7': null
@@ -8331,6 +8352,7 @@ python3-pre-commit:
         packages: [pre-commit]
   fedora: [pre-commit]
   nixos: [pre-commit]
+  openembedded: [python3-pre-commit@meta-python]
   rhel:
     '*': [pre-commit]
     '8': null
@@ -8498,7 +8520,7 @@ python3-pycryptodome:
   fedora: [python3-pycryptodomex]
   gentoo: [dev-python/pycryptodome]
   nixos: [python3Packages.pycryptodomex]
-  openembedded: [python3-pycryptodomex@meta-python]
+  openembedded: [python3-pycryptodomex@openembedded-core]
   opensuse: [python3-pycryptodomex]
   osx:
     pip:
@@ -8779,7 +8801,7 @@ python3-pyparsing:
   fedora: [python3-pyparsing]
   gentoo: [dev-python/pyparsing]
   nixos: [python3Packages.pyparsing]
-  openembedded: [python3-pyparsing@meta-python]
+  openembedded: [python3-pyparsing@openembedded-core]
   opensuse: [python3-pyparsing]
   ubuntu: [python3-pyparsing]
 python3-pypdf:
@@ -9180,7 +9202,7 @@ python3-pytest:
   freebsd: [devel/py-pytest]
   gentoo: [dev-python/pytest]
   nixos: [python3Packages.pytest]
-  openembedded: [python3-pytest@meta-python]
+  openembedded: [python3-pytest@openembedded-core]
   opensuse: [python3-pytest]
   osx:
     pip:
@@ -9223,6 +9245,21 @@ python3-pytest-cov:
   openembedded: [python3-pytest-cov@meta-ros-common]
   rhel: ['python%{python3_pkgversion}-pytest-cov']
   ubuntu: [python3-pytest-cov]
+python3-pytest-dependency:
+  alpine: [py3-pytest-dependency]
+  arch: [python-pytest-dependency]
+  debian: [python3-pytest-dependency]
+  fedora: [python3-pytest-dependency]
+  gentoo: [dev-python/pytest-dependency]
+  nixos: [python3Packages.pytest-dependency]
+  openembedded: [python3-pytest-dependency]
+  rhel:
+    '*': [python3-pytest-dependency]
+    '7': null
+    '8': null
+  ubuntu:
+    '*': [python3-pytest-dependency]
+    focal: null
 python3-pytest-mock:
   alpine: [py3-pytest-mock]
   arch: [python-pytest-mock]
@@ -9543,7 +9580,7 @@ python3-requests:
   fedora: [python3-requests]
   gentoo: [dev-python/requests]
   nixos: [python3Packages.requests]
-  openembedded: [python3-requests@meta-python]
+  openembedded: [python3-requests@openembedded-core]
   rhel: ['python%{python3_pkgversion}-requests']
   ubuntu: [python3-requests]
 python3-requests-futures:
@@ -9588,6 +9625,7 @@ python3-rich:
   fedora: [python3-rich]
   gentoo: [rich]
   nixos: [python3Packages.rich]
+  openembedded: [python3-rich@meta-python]
   osx:
     pip:
       packages: [rich]
@@ -9748,7 +9786,7 @@ python3-ruamel.yaml:
     stretch: [python3-ruamel.yaml]
   fedora: [python3-ruamel-yaml]
   nixos: [python3Packages.ruamel_yaml]
-  openembedded: [python3-ruamel-yaml@meta-python]
+  openembedded: [python3-ruamel-yaml@openembedded-core]
   rhel: ['python%{python3_pkgversion}-ruamel-yaml']
   ubuntu: [python3-ruamel.yaml]
 python3-ruff-pip:
@@ -9892,6 +9930,7 @@ python3-semver:
   fedora: [python3-semver]
   freebsd: [py36-semver]
   nixos: [python3Packages.semver]
+  openembedded: [python3-semver@meta-python]
   rhel: [python3-semver]
   ubuntu: [python3-semver]
 python3-sense-emu-pip:
@@ -10197,7 +10236,7 @@ python3-sphinx:
   fedora: [python3-sphinx]
   gentoo: [dev-python/sphinx]
   nixos: [python3Packages.sphinx]
-  openembedded: [python3-sphinx@meta-ros-common]
+  openembedded: [python3-sphinx@openembedded-core]
   opensuse: [python3-Sphinx]
   rhel: ['python%{python3_pkgversion}-sphinx']
   ubuntu: [python3-sphinx]
@@ -10622,6 +10661,7 @@ python3-tqdm:
   debian: [python3-tqdm]
   fedora: [python3-tqdm]
   nixos: [python3Packages.tqdm]
+  openembedded: [python3-tqdm@meta-python]
   osx:
     pip:
       packages: [tqdm]
@@ -10763,6 +10803,7 @@ python3-typing-extensions:
   freebsd: [devel/py-typing-extensions]
   gentoo: [dev-python/typing-extensions]
   nixos: [python3Packages.typing-extensions]
+  openembedded: [python3-typing-extensions@openembedded-core]
   opensuse: [python3-typing_extensions]
   rhel:
     '*': [python3-typing-extensions]
@@ -10952,6 +10993,7 @@ python3-waitress:
   fedora: [python3-waitress]
   gentoo: [dev-python/waitress]
   nixos: [python3Packages.waitress]
+  openembedded: [python3-waitress@meta-python]
   opensuse: [python3-waitress]
   rhel: [python3-waitress]
   ubuntu: [python3-waitress]
@@ -11132,7 +11174,7 @@ python3-yaml:
   freebsd: [devel/py-pyyaml]
   gentoo: [dev-python/pyyaml]
   nixos: [python3Packages.pyyaml]
-  openembedded: [python3-pyyaml@meta-python]
+  openembedded: [python3-pyyaml@openembedded-core]
   opensuse: [python3-PyYAML]
   osx:
     pip:
