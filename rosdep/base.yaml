@@ -487,7 +487,7 @@ castxml:
   fedora: [castxml]
   macports: [castxml]
   nixos: [castxml]
-  openembedded: [castxml@meta-clang]
+  openembedded: [castxml@meta-oe]
   ubuntu: [castxml]
 catch2:
   alpine: [catch2]
@@ -1235,7 +1235,7 @@ fmt:
   fedora: [fmt-devel]
   gentoo: [dev-libs/libfmt]
   nixos: [fmt]
-  openembedded: [fmt@meta-oe]
+  openembedded: [fmt@openembedded-core]
   osx:
     homebrew:
       packages: [fmt]
@@ -3593,6 +3593,20 @@ libdw-dev:
       packages: [elfutils]
   rhel: [elfutils-devel]
   ubuntu: [libdw-dev]
+libdwarf-dev:
+  alpine: [libdwarf-dev]
+  arch: [libdwarf]
+  debian: [libdwarf-dev]
+  fedora: [libdwarf-devel]
+  gentoo: [dev-libs/libdwarf]
+  nixos: [libdwarf]
+  openembedded: [libdwarf]
+  opensuse: [libdwarf-devel]
+  osx:
+    homebrew:
+      packages: [dwarfutils]
+  rhel: [libdwarf-devel]
+  ubuntu: [libdwarf-dev]
 libdxflib-dev:
   debian: [libdxflib-dev]
   fedora: [libdxflib-devel]
@@ -4237,7 +4251,7 @@ libgrpc:
   fedora: [grpc-devel]
   gentoo: [net-libs/grpc]
   nixos: [grpc]
-  openembedded: [grpc@meta-networking]
+  openembedded: [grpc@meta-oe]
   opensuse: [grpc-devel]
   osx:
     homebrew:
@@ -4765,7 +4779,7 @@ libmicrohttpd:
   fedora: [libmicrohttpd-devel]
   gentoo: [net-libs/libmicrohttpd]
   nixos: [libmicrohttpd]
-  openembedded: [libmicrohttpd@meta-oe]
+  openembedded: [libmicrohttpd@openembedded-core]
   rhel: [libmicrohttpd-devel]
   ubuntu: [libmicrohttpd-dev]
 libmlpack-dev:
@@ -5062,7 +5076,7 @@ libomp-dev:
   fedora: [libomp-devel]
   gentoo: [sys-libs/libomp]
   nixos: [llvmPackages.openmp]
-  openembedded: [openmp@meta-clang]
+  openembedded: [openmp@openembedded-core]
   rhel:
     '*': [libomp-devel]
     '7': null
@@ -5291,6 +5305,7 @@ libpaho-mqttpp:
     bullseye: null
   nixos: [paho-mqtt-cpp]
   openembedded: [paho-mqtt-cpp@meta-oe]
+  rhel: [paho-cpp]
   ubuntu:
     '*': [libpaho-mqttpp3-1]
     bionic: null
@@ -5301,6 +5316,7 @@ libpaho-mqttpp-dev:
     bullseye: null
   nixos: [paho-mqtt-cpp]
   openembedded: [paho-mqtt-cpp@meta-oe]
+  rhel: [paho-cpp-devel]
   ubuntu:
     '*': [libpaho-mqttpp-dev]
     bionic: null
@@ -6255,6 +6271,18 @@ libqt6-quick:
   ubuntu:
     '*': [libqt6quick6]
     'focal': null
+libqt6bluetooth6:
+  alpine: [qt6-qtconnectivity]
+  arch: [qt6-connectivity]
+  debian: [libqt6bluetooth6]
+  fedora: [qt6-qtconnectivity]
+  gentoo: ['dev-qt/qtconnectivity:6']
+  rhel:
+    '*': [qt6-qtconnectivity]
+    '8': null
+  ubuntu:
+    '*': [libqt6bluetooth6]
+    'focal': null
 libqt6svg6:
   alpine: [qt6-qtsvg]
   arch: [qt6-svg]
@@ -6734,6 +6762,13 @@ libturbojpeg:
   rhel: [libjpeg-turbo-devel, turbojpeg-devel]
   ubuntu:
     '*': [libturbojpeg0-dev]
+libtweeny-dev:
+  alpine: [tweeny]
+  debian: [libtweeny-dev]
+  fedora: [tweeny-devel]
+  freebsd: [tweeny]
+  nixos: [tweeny]
+  ubuntu: [libtweeny-dev]
 libudev-dev:
   arch: [systemd]
   debian: [libudev-dev]
@@ -7310,7 +7345,7 @@ libzstd-dev:
   freebsd: [zstd]
   gentoo: [app-arch/zstd]
   nixos: [zstd]
-  openembedded: [zstd@meta-oe]
+  openembedded: [zstd@openembedded-core]
   rhel: [libzstd-devel]
   ubuntu:
     '*': [libzstd-dev]
@@ -8766,6 +8801,18 @@ qt6-base-private-dev:
   ubuntu:
     '*': [qt6-base-private-dev]
     'focal': null
+qt6-connectivity-dev:
+  alpine: [qt6-qtconnectivity-dev]
+  arch: [qt6-connectivity]
+  debian: [qt6-connectivity-dev]
+  fedora: [qt6-qtconnectivity-devel]
+  gentoo: ['dev-qt/qtconnectivity:6']
+  rhel:
+    '*': [qt6-qtconnectivity-devel]
+    '8': null
+  ubuntu:
+    '*': [qt6-connectivity-dev]
+    'focal': null
 qt6-declarative-dev:
   arch: [qt6-declarative]
   debian: [qt6-declarative-dev]
@@ -9106,7 +9153,7 @@ sdl:
   gentoo: [media-libs/libsdl]
   macports: [libsdl]
   nixos: [SDL]
-  openembedded: [libsdl@openembedded-core]
+  openembedded: [libsdl@meta-oe]
   opensuse: [libSDL-devel]
   rhel: [SDL-devel]
   ubuntu: [libsdl1.2-dev]
