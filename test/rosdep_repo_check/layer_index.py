@@ -27,10 +27,12 @@
 
 import json
 import os
+import urllib.error
 
 from . import open_compressed_url
 from . import PackageEntry
 from . import RepositoryCacheCollection
+from . import SkipPlatform
 
 
 def enumerate_recipes(base_url, branch_name):
@@ -106,6 +108,13 @@ def enumerate_layer_index_packages(base_url, branch_name):
             yield PackageEntry(f'{prov}@{layer}', pv, recipe_url, pn, pn)
 
 
+def try_enumerate_layer_index_packages(base_url, os_name, branch_name):
+    try:
+        yield from enumerate_layer_index_packages(base_url, branch_name)
+    except urllib.error.HTTPError as e:
+        raise SkipPlatform(os_name) from e
+
+
 def layer_index_url(base_url):
     """
     Create an enumerable cache for an OpenEmbedded layer index.
@@ -116,4 +125,5 @@ def layer_index_url(base_url):
     """
     return RepositoryCacheCollection(
         lambda os_name, os_code_name, os_arch:
-            enumerate_layer_index_packages(base_url, os_code_name))
+            try_enumerate_layer_index_packages(
+                base_url, os_name, os_code_name))
