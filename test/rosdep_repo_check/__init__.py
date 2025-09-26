@@ -44,6 +44,13 @@ except ImportError:
 from zstandard import ZstdDecompressor
 
 
+class SkipPlatform(Exception):
+
+    def __init__(self, os_name):
+        super().__init__(
+            "Skipping check for '%s' due to unexpected error" % (os_name,))
+
+
 def fmt_os(os_name, os_code_name):
     return (os_name + ' ' + os_code_name) if os_code_name else os_name
 
