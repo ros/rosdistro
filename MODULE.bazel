@@ -21,16 +21,27 @@ module(
 bazel_dep(name = "rules_cc", version = "0.2.4")
 bazel_dep(name = "rules_python", version = "1.6.1")
 
+PYTHON_VERSIONS = [
+    "3.11",
+    "3.12",  # default
+]
+
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
-python.toolchain(
-    python_version = "3.12",
-    is_default = True,
-)
+[
+    python.toolchain(
+        python_version = python_version,
+        is_default = python_version == PYTHON_VERSIONS[-1],
+    )
+    for python_version in PYTHON_VERSIONS
+]
 
 pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
-pip.parse(
-    hub_name = "pip_ros",
-    python_version = "3.12",
-    requirements_lock = "requirements_lock.txt",
-)
+[
+    pip.parse(
+        hub_name = "pip_ros",
+        python_version = python_version,
+        requirements_lock = "requirements_lock.txt",
+    )
+    for python_version in PYTHON_VERSIONS
+]
 use_repo(pip, "pip_ros")
