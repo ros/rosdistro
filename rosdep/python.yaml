@@ -1167,6 +1167,7 @@ python-crccheck-pip:
   fedora:
     pip:
       packages: [crccheck]
+  nixos: [python3Packages.crccheck]
   osx:
     pip:
       packages: [crccheck]
@@ -4863,12 +4864,18 @@ python3-aiohttp-cors:
   ubuntu: [python3-aiohttp-cors]
 python3-aiortc:
   debian:
-    bookworm: [python3-aiortc]
+    '*': [python3-aiortc]
+    bullseye:
+      pip:
+        packages: [aiortc]
   osx:
     pip:
       packages: [aiortc]
   ubuntu:
-    jammy: [python3-aiortc]
+    '*': [python3-aiortc]
+    focal:
+      pip:
+        packages: [aortc]
 python3-albumentations-pip:
   debian:
     pip:
@@ -5191,7 +5198,7 @@ python3-bson:
   debian: [python3-bson]
   fedora: [python3-bson]
   gentoo: [dev-python/pymongo]
-  nixos: [python3Packages.bson]
+  nixos: [python3Packages.pymongo]
   openembedded: [python3-pymongo@meta-python]
   osx:
     pip:
