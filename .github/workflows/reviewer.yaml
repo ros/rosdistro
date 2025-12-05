@@ -1,0 +1,26 @@
+---
+name: Automated review
+on:  # yamllint disable-line rule:truthy
+  pull_request_target:
+    types:
+    - opened
+    - ready_for_review
+    - reopened
+    - synchronize
+
+permissions:
+  pull-requests: write
+
+jobs:
+  automated_review:
+    name: Generate automated review
+    runs-on: ubuntu-latest
+    if: ${{ !github.event.pull_request.draft }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - run: git fetch origin ${{ github.event.pull_request.head.sha }}
+    - uses: ros-infrastructure/rosdistro-reviewer@main
+      with:
+        token: ${{ github.token }}
