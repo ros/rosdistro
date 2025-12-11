@@ -17,7 +17,7 @@ It is expected that all maintainers are watching those categories to allow us to
 
 ### Guidelines for Package Naming
 
-When releasing a new package into a distribution, please follow the naming guidelines set out in the [ROS REP 144: ROS Package Naming](https://www.ros.org/reps/rep-0144.html).
+When releasing a new package into a distribution, please follow the naming guidelines set out in the [ROS REP 144: ROS Package Naming](https://reps.openrobotics.org/rep-0144/).
 
 ### Guidelines for Package Contents
 
@@ -321,4 +321,3 @@ pytest
 
 It is highly recommended to run the unit tests before submitting a pull request.
 (the CI system will run them anyways, but it will save you time)
-
