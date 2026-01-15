@@ -28,6 +28,7 @@ Approximately every two weeks, the ROS Boss of the corresponding ROS distributio
 Prior to the sync, the ROS Boss will announce a "sync freeze" on [Discourse](https://discourse.ros.org/).
 During the sync freeze, no new packages or package updates will be merged into that particular ROS distribution without the express consent of the ROS Boss.
 Every ROS distribution is on a different sync schedule.
+All pull requests to this repository should only target a single rosdistro to avoid cross-coupling syncs.
 
 End-of-Life Distributions
 -------------------------
@@ -48,7 +49,7 @@ There are a few different types of pull requests that are opened against this re
         * The source repository must be publicly accessible.
         * The source repository should contain one or more ROS packages (meaning they have a `package.xml` in the source repository). Packages that are not ROS packages can be accepted, but they are rare and require special handling in the release repository.
         * The source repository should generally *not* be a fork of an existing ROS package. If it is a fork, then the reviewer should inquire why the fork was made, and what efforts have been made to contact the upstream. The submitter should have at least opened an issue on the upstream asking for a release, then waited for a response. If there is no response after 4 weeks, then the reviewer can allow the fork. Note that these rules are general guidelines, rather than hard-and-fast rules; each of these situations is different and may require some different handling.
-        * The name of the repository and the packages within it must comply with the guidelines in [REP-144](https://www.ros.org/reps/rep-0144.html).
+        * The name of the repository and the packages within it must comply with the guidelines in [REP-144](https://reps.openrobotics.org/rep-0144/).
     1. The best practices for Rolling releases is to use a release repository in the https://github.com/ros2-gbp organization. That way this package can be automatically released from Rolling into the next stable ROS distribution.  There are instructions in https://github.com/ros2-gbp/ros2-gbp-github-org/blob/latest/CONTRIBUTING.md describing how to create one.
 
     Once the above criteria are satisfied, and the ROS distribution isn't in a "sync freeze", then the PR will be merged.
@@ -92,7 +93,7 @@ You can copy-paste the below into your review comment when reviewing a new packa
 - [ ] License correctly listed in package.xmls
 - [ ] Public source repo:
 - [ ] Source repository contains ROS packages
-- [ ] Each package meets [REP-144](https://www.ros.org/reps/rep-0144.html) naming conventions
+- [ ] Each package meets [REP-144](https://reps.openrobotics.org/rep-0144/) naming conventions
 
 <details><summary>Package name details</summary>
 
