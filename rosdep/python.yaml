@@ -492,7 +492,6 @@ pyqt5-dev-tools:
   fedora: [python-qt5-devel]
   gentoo: [dev-python/PyQt5]
   nixos: [python3Packages.pyqt5]
-  openembedded: ['${PYTHON_PN}-pyqt5@meta-qt5']
   rhel: [python3-qt5-devel]
   ubuntu: [pyqt5-dev-tools]
 pyqt6-dev-tools:
@@ -3065,7 +3064,6 @@ python-pydot:
   gentoo: [dev-python/pydot]
   macports: [py27-pydot]
   nixos: [pythonPackages.pydot]
-  openembedded: ['${PYTHON_PN}-pydot@meta-ros-common']
   opensuse: [python2-pydot]
   osx:
     pip:
@@ -3487,7 +3485,6 @@ python-qt5-bindings:
   freebsd: [py27-qt5]
   gentoo: ['dev-python/PyQt5[gui,widgets]']
   nixos: [pythonPackages.pyqt5]
-  openembedded: ['${PYTHON_PN}-pyqt5@meta-qt5']
   opensuse: [python2-qt5-devel, python2-sip-devel]
   slackware: [PyQt5]
   ubuntu:
@@ -3501,14 +3498,12 @@ python-qt5-bindings-gl:
   freebsd: [py27-qt5-opengl]
   gentoo: ['dev-python/PyQt5[opengl]']
   nixos: [pythonPackages.pyqt5]
-  openembedded: ['${PYTHON_PN}-pyqt5@meta-qt5']
   opensuse: [python2-qt5]
   slackware: [PyQt5]
   ubuntu:
     bionic: [python-pyqt5.qtopengl]
 python-qt5-bindings-qsci:
   debian: [python-pyqt5.qsci]
-  openembedded: ['${PYTHON_PN}-pyqt5@meta-qt5']
   ubuntu: [python-pyqt5.qsci]
 python-qt5-bindings-quick:
   debian: [python-pyqt5.qtquick]
@@ -3522,7 +3517,6 @@ python-qt5-bindings-webkit:
   freebsd: [py27-qt5-webkit]
   gentoo: ['dev-python/PyQt5[webkit]']
   nixos: [pythonPackages.pyqt5_with_qtwebkit]
-  openembedded: ['${PYTHON_PN}-pyqt5@meta-qt5']
   opensuse: [python2-qt5]
   ubuntu:
     bionic: [python-pyqt5.qtwebkit]
@@ -6833,6 +6827,9 @@ python3-httpx:
     focal:
       pip:
         packages: [httpx]
+python3-huggingface-hub-pip:
+  '*':
+    pip: [huggingface_hub]
 python3-hydra-core-pip:
   '*':
     pip: [hydra-core]
@@ -7825,7 +7822,7 @@ python3-nose:
   fedora: [python3-nose]
   gentoo: [dev-python/nose]
   nixos: [python3Packages.nose]
-  openembedded: [python3-nose@openembedded-core]
+  openembedded: [python3-nose@meta-ros-common]
   opensuse: [python3-nose]
   osx:
     pip:
@@ -8131,6 +8128,24 @@ python3-osrf-pycommon:
   nixos: [python3Packages.osrf-pycommon]
   rhel: [python3-osrf-pycommon]
   ubuntu: [python3-osrf-pycommon]
+python3-overpy:
+  alpine: [py3-overpy]
+  arch:
+    pip:
+      packages: [overpy]
+  debian: [python3-overpy]
+  fedora: [python3-overpy]
+  nixos: [python3Packages.overpy]
+  opensuse:
+    pip:
+      packages: [overpy]
+  osx:
+    pip:
+      packages: [overpy]
+  rhel:
+    pip:
+      packages: [overpy]
+  ubuntu: [python3-overpy]
 python3-overrides:
   arch: [python-overrides]
   debian:
@@ -8990,7 +9005,7 @@ python3-pyqt5.qtwebengine:
   fedora: [python3-qt5-webengine, pyqtwebengine-devel]
   gentoo: [dev-python/PyQtWebEngine]
   nixos: [python3Packages.pyqtwebengine]
-  openembedded: ['${PYTHON_PN}-pyqt5@meta-qt5']
+  openembedded: [python3-pyqt5@meta-qt5]
   opensuse: [python3-qtwebengine-qt5]
   rhel:
     '*': [python3-qt5-webengine, pyqtwebengine-devel]
@@ -9505,6 +9520,28 @@ python3-pyxdg-pip:
   ubuntu:
     pip:
       packages: [pyxdg]
+python3-pyzbar:
+  alpine: [py3-pyzbar]
+  arch:
+    pip:
+      packages: [pyzbar]
+  debian: [python3-pyzbar]
+  fedora:
+    pip:
+      packages: [pyzbar]
+  nixos: [python3Packages.pyzbar]
+  opensuse:
+    pip:
+      packages: [pyzbar]
+  osx:
+    pip:
+      packages: [pyzbar]
+  rhel:
+    pip:
+      packages: [pyzbar]
+  ubuntu:
+    '*': [python3-pyzbar]
+    focal: null
 python3-qpsolvers-pip:
   debian:
     pip:
@@ -10273,6 +10310,7 @@ python3-smbus:
   ubuntu: [python3-smbus]
 python3-smbus2:
   debian: [python3-smbus2]
+  nixos: [python3Packages.smbus2]
   ubuntu:
     '*': [python3-smbus2]
     focal: null
@@ -11022,6 +11060,11 @@ python3-usb:
   nixos: [python3Packages.pyusb]
   openembedded: [python3-pyusb@meta-python]
   ubuntu: [python3-usb]
+python3-usd:
+  '*':
+    pip:
+      packages: [usd-core]
+  fedora: [python3-usd]
 python3-utm:
   debian:
     '*': [python3-utm]
