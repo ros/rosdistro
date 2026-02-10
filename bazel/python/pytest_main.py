@@ -32,16 +32,28 @@ def _ensure_solib_in_ld_library_path():
     if not runfiles_dir:
         return
 
-    solib_dir = os.path.join(runfiles_dir, '_main', '_solib_k8')
-    if not os.path.isdir(solib_dir):
+    # The solib directory name is architecture-specific: _solib_k8 (x86_64),
+    # _solib_aarch64 (arm64), etc. Find any _solib_* directory.
+    main_dir = os.path.join(runfiles_dir, '_main')
+    if not os.path.isdir(main_dir):
+        return
+
+    solib_dirs = [
+        os.path.join(main_dir, d)
+        for d in os.listdir(main_dir)
+        if d.startswith('_solib_') and os.path.isdir(os.path.join(main_dir, d))
+    ]
+    if not solib_dirs:
         return
 
     ld_path = os.environ.get('LD_LIBRARY_PATH', '')
-    if solib_dir in ld_path:
+    new_dirs = [d for d in solib_dirs if d not in ld_path]
+    if not new_dirs:
         return  # Already set, no need to re-exec.
 
     # Update LD_LIBRARY_PATH and re-exec to ensure glibc sees it at startup.
-    os.environ['LD_LIBRARY_PATH'] = solib_dir + (':' + ld_path if ld_path else '')
+    combined = ':'.join(new_dirs)
+    os.environ['LD_LIBRARY_PATH'] = combined + (':' + ld_path if ld_path else '')
     os.execv(sys.executable, [sys.executable] + sys.argv)
 
 
