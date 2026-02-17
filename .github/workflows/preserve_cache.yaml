@@ -1,0 +1,22 @@
+name: Add a distribution cache for each release
+on:
+  workflow_dispatch:
+    inputs:
+      distribution:
+        description: 'The distribution key'
+        required: true
+        default: 'rolling'
+        type: string
+      release_tag:
+        description: 'The release tag for the distribution'
+        required: true
+        default: '2025-09-05'
+        type: string
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.distribution }} / ${{ inputs.release_tag }}
