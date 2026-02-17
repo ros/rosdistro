@@ -12,6 +12,8 @@ on:
         required: true
         default: '2025-09-05'
         type: string
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,3 +35,21 @@ jobs:
           echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
           sudo apt-get update -qq
           sudo apt-get install -y python3-rosdistro
+      - name: Regenerate cache
+        run: |
+          cd ${{ inputs.distribution }}
+          rosdistro_build_cache ../index-v4.yaml ${{ inputs.distribution }}
+          mv ${{ inputs.distribution }}-cache.yaml.gz ..
+          cd ..
+      - name: Replace index cache entry
+        run: |
+          export OLD_URL="http://repo.ros2.org/rosdistro_cache/${{ inputs.distribution }}-cache.yaml.gz"
+          export NEW_URL="https://github.com/asymingt/rosdistro/releases/download/${{ inputs.distribution }}/${{ inputs.release_tag }}/${{ inputs.distribution }}-cache.yaml.gz"
+          sed -i "s|${OLD_URL}|${NEW_URL}|g" index-v4.yaml
+      - name: Push release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ inputs.distribution }}/${{ inputs.release_tag }}
+          files: |
+            ${{ inputs.distribution }}-cache.yaml.gz
+            index-v4.yaml
