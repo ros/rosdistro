@@ -1,5 +1,9 @@
+---
 extends:
   default
+
+ignore: |
+  .venv
 
 rules:
   document-start:
@@ -7,11 +11,15 @@ rules:
       releases/*.yaml
       rosdep/*.yaml
   indentation:
+    indent-sequences: false
     spaces: consistent
-    indent-sequences: no
   key-duplicates: enable
+  key-ordering:
+    ignore: |
+      .github/
+      test/rosdep_repo_check/config.yaml
   line-length:
-    max: 125
-    allow-non-breakable-words: yes
+    allow-non-breakable-words: true
     ignore: |
       rosdep/*.yaml
+    max: 125

@@ -20,13 +20,9 @@ Make sure rosdep is initialized if it isn't already.
 
     sudo rosdep init
 
-Configure a GitHub access token and release repository organization.
-The token only needs public repository access and must belong to a member of the target GitHub organization with repository creation permissions.
-
-```
-GITHUB_TOKEN={token with public repository access}
-export GITHUB_TOKEN
-```
+This script used to copy release repositories into the release org as-needed.
+This worked for the initial bootstrapping but creates split-brain problems when releases are split between the official release org and others.
+Instead, use `git clone --mirror` and `git push --mirror` on release repositories that are not yet in the release org and update your rosdistro before running this script.
 
 ## Script arguments
 
@@ -34,7 +30,7 @@ The migration script has several named arguments, all of which are required.
 * `--dest DEST_ROSDISTRO`: The rosdistro which will receive the newly bloomed repositories.
 * `--source SOURCE_ROSDISTRO`: The rosdistro to take release repositories from for migration.
 * `--source-ref GIT_COMMIT_ID_OR_REF`: The migration may be attempted multiple times. Each attempt must specify ref or commit to start from so that future changes to the source distribution do not unintentionally affect migration. This also enables platform migration without changing the rosdistro name.
-* `--release-org GITHUB_ORG`: A GitHub organization for storing release repositories. If the repository does not exist in this organization a new repository will be created.
+* `--release-org GITHUB_ORG`: A GitHub organization for storing release repositories.
 
 ## Features
 

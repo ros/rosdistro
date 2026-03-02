@@ -26,6 +26,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 from gzip import GzipFile
+from lzma import LZMAFile
 import socket
 import sys
 import time
@@ -39,6 +40,15 @@ except ImportError:
     from urllib2 import Request
     from urllib2 import URLError
     from urllib2 import urlopen
+
+from zstandard import ZstdDecompressor
+
+
+class SkipPlatform(Exception):
+
+    def __init__(self, os_name):
+        super().__init__(
+            "Skipping check for '%s' due to unexpected error" % (os_name,))
 
 
 def fmt_os(os_name, os_code_name):
@@ -56,9 +66,36 @@ def is_probably_gzip(response):
             response.getheader('Content-Type') == 'application/x-gzip')
 
 
-def open_gz_url(url, retry=2, retry_period=1, timeout=10):
+def is_probably_lzma(response):
     """
-    Open a URL to a possibly gzip'd file.
+    Determine if a urllib response is likely lzma'd.
+
+    :param response: the urllib response
+    """
+    return (response.url.endswith('.xz') or
+            response.getheader('Content-Encoding') == 'xz' or
+            response.getheader('Content-Type') == 'application/x-xz')
+
+
+def is_probably_zstd(response):
+    """
+    Determine if a urllib response is likely ztsd'd.
+
+    :param response: the urllib response
+    """
+    return (response.url.endswith('.zst') or
+            response.url.endswith('.zck') or
+            response.getheader('Content-Encoding') == 'zstd' or
+            response.getheader('Content-Type') == 'application/zstd')
+
+
+def open_gz_url(url, retry=2, retry_period=1, timeout=10):
+    return open_compressed_url(url, retry, retry_period, timeout)
+
+
+def open_compressed_url(url, retry=2, retry_period=1, timeout=10):
+    """
+    Open a URL to a possibly compressed file.
 
     :param url: URL to the file.
     :param retry: number of times to re-attempt the download.
@@ -67,7 +104,7 @@ def open_gz_url(url, retry=2, retry_period=1, timeout=10):
 
     :returns: file-like object for streaming file data.
     """
-    request = Request(url, headers={'Accept-Encoding': 'gzip'})
+    request = Request(url)
     try:
         f = urlopen(request, timeout=timeout)
     except HTTPError as e:
@@ -85,7 +122,14 @@ def open_gz_url(url, retry=2, retry_period=1, timeout=10):
                 url, retry=retry - 1, retry_period=retry_period,
                 timeout=timeout)
         raise URLError(str(e) + ' (%s)' % url)
-    return GzipFile(fileobj=f, mode='rb') if is_probably_gzip(f) else f
+    if is_probably_gzip(f):
+        return GzipFile(fileobj=f, mode='rb')
+    elif is_probably_lzma(f):
+        return LZMAFile(f, mode='rb')
+    elif is_probably_zstd(f):
+        dctx = ZstdDecompressor()
+        return dctx.stream_reader(f)
+    return f
 
 
 class PackageEntry(str):
