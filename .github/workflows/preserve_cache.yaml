@@ -1,16 +1,15 @@
-name: Add a distribution cache for each release
+name: Preserve the distribution cache for releases.
 on:
+  push:
+    tags:
+      - 'lyrical/*'
+      - 'rolling/*'
   workflow_dispatch:
     inputs:
-      distribution:
-        description: 'The distribution key'
+      tag_name:
+        description: 'The release tag'
         required: true
-        default: 'rolling'
-        type: string
-      release_tag:
-        description: 'The release tag for the distribution'
-        required: true
-        default: '2026-01-21'
+        default: 'rolling/2026-01-21'
         type: string
 permissions:
   contents: write
@@ -18,6 +17,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Determine release
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            RELEASE="${{ github.event.inputs.tag_name }}"
+          else
+            RELEASE="${{ github.ref_name }}"
+          fi
+          echo "RELEASE=\"$RELEASE\"" >> $GITHUB_ENV
+          echo "DISTRIBUTION=\"$(dirname \"$RELEASE\")\"" >> $GITHUB_ENV
+      - name: Print release
+        run: |
+          echo "Processing version: ${{ env.RELEASE }}"
+          echo "Processing distribution: ${{ env.DISTRIBUTION }}"
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -37,19 +49,19 @@ jobs:
           sudo apt-get install -y python3-rosdistro
       - name: Regenerate cache
         run: |
-          cd ${{ inputs.distribution }}
-          rosdistro_build_cache ../index-v4.yaml ${{ inputs.distribution }}
-          mv ${{ inputs.distribution }}-cache.yaml.gz ..
+          cd ${{ env.DISTRIBUTION }}
+          rosdistro_build_cache --preclean --ignore-local ../index-v4.yaml ${{ env.DISTRIBUTION }}
+          mv ${{ env.DISTRIBUTION }}-cache.yaml.gz ..
           cd ..
       - name: Replace index cache entry
         run: |
-          export OLD_URL="http://repo.ros2.org/rosdistro_cache/${{ inputs.distribution }}-cache.yaml.gz"
-          export NEW_URL="https://github.com/asymingt/rosdistro/releases/download/${{ inputs.distribution }}/${{ inputs.release_tag }}/${{ inputs.distribution }}-cache.yaml.gz"
+          export OLD_URL="http://repo.ros2.org/rosdistro_cache/${{ enb.DISTRIBUTION }}-cache.yaml.gz"
+          export NEW_URL="https://github.com/asymingt/rosdistro/releases/download/${{ env.DISTRIBUTION }}/${{ env.RELEASE }}-cache.yaml.gz"
           sed -i "s|${OLD_URL}|${NEW_URL}|g" index-v4.yaml
       - name: Push release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ inputs.distribution }}/${{ inputs.release_tag }}
+          tag_name: ${{ env.RELEASE }}
           files: |
-            ${{ inputs.distribution }}-cache.yaml.gz
+            ${{ env.DISTRIBUTION }}-cache.yaml.gz
             index-v4.yaml
