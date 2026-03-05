@@ -55,7 +55,7 @@ jobs:
           cd ..
       - name: Replace index cache entry
         run: |
-          export OLD_URL="http://repo.ros2.org/rosdistro_cache/${{ enb.DISTRIBUTION }}-cache.yaml.gz"
+          export OLD_URL="http://repo.ros2.org/rosdistro_cache/${{ env.DISTRIBUTION }}-cache.yaml.gz"
           export NEW_URL="https://github.com/asymingt/rosdistro/releases/download/${{ env.DISTRIBUTION }}/${{ env.RELEASE }}-cache.yaml.gz"
           sed -i "s|${OLD_URL}|${NEW_URL}|g" index-v4.yaml
       - name: Push release
