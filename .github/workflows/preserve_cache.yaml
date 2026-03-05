@@ -1,4 +1,4 @@
-name: Preserve the distribution cache for releases.
+name: Preserve release distribution cache
 on:
   push:
     tags:
@@ -25,7 +25,7 @@ jobs:
             RELEASE="${{ github.ref_name }}"
           fi
           echo "RELEASE=\"$RELEASE\"" >> $GITHUB_ENV
-          echo "DISTRIBUTION=\"$(dirname \"$RELEASE\")\"" >> $GITHUB_ENV
+          echo "DISTRIBUTION=\"$(dirname $RELEASE)\"" >> $GITHUB_ENV
       - name: Print release
         run: |
           echo "Processing version: ${{ env.RELEASE }}"
