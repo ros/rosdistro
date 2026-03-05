@@ -49,14 +49,12 @@ jobs:
           echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
           sudo apt-get update -qq
           sudo apt-get install -y python3-rosdistro
-      - name: Fix a ros-gbp -> ros2-gbp bug in index-v4.yaml
-        run: |
-          export OLD_URL="https://github.com/ros-gbp/"
-          export NEW_URL="https://github.com/ros2-gbp/"
-          sed -i "s|${OLD_URL}|${NEW_URL}|g" index-v4.yaml
       - name: Regenerate cache
         run: |
           cd ${{ env.DISTRIBUTION }}
+          export OLD_URL="https://github.com/ros-gbp/"
+          export NEW_URL="https://github.com/ros2-gbp/"
+          sed -i "s|${OLD_URL}|${NEW_URL}|g" distribution.yaml
           rosdistro_build_cache --preclean --ignore-local ../index-v4.yaml ${{ env.DISTRIBUTION }}
           mv ${{ env.DISTRIBUTION }}-cache.yaml.gz ..
           cd ..
