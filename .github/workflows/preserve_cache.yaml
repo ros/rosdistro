@@ -1,0 +1,67 @@
+name: Preserve release distribution cache
+on:
+  push:
+    tags:
+      - 'lyrical/*'
+      - 'rolling/*'
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'The release tag'
+        required: true
+        default: 'rolling/2025-07-16'
+        type: string
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine release
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            RELEASE="${{ github.event.inputs.tag_name }}"
+          else
+            RELEASE="${{ github.ref_name }}"
+          fi
+          echo "RELEASE=$RELEASE" >> $GITHUB_ENV
+          echo "DISTRIBUTION=$(dirname $RELEASE)" >> $GITHUB_ENV
+      - name: Print release
+        run: |
+          echo "Processing version: ${{ env.RELEASE }}"
+          echo "Processing distribution: ${{ env.DISTRIBUTION }}"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.RELEASE }}
+      - name: Install dependencies
+        run: |
+          sudo apt update && sudo apt install locales
+          sudo locale-gen en_US en_US.UTF-8
+          sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+          export LANG=en_US.UTF-8
+          sudo apt install software-properties-common
+          sudo add-apt-repository universe
+          sudo apt update && sudo apt install curl -y
+          sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+          sudo apt-get update -qq
+          sudo apt-get install -y python3-rosdistro
+      - name: Regenerate cache
+        run: |
+          cd ${{ env.DISTRIBUTION }}
+          rosdistro_build_cache --preclean --ignore-local ../index-v4.yaml ${{ env.DISTRIBUTION }}
+          mv ${{ env.DISTRIBUTION }}-cache.yaml.gz ..
+          cd ..
+      - name: Replace index cache entry
+        run: |
+          export OLD_URL="http://repo.ros2.org/rosdistro_cache/${{ env.DISTRIBUTION }}-cache.yaml.gz"
+          export NEW_URL="https://github.com/ros/rosdistro/releases/download/${{ env.DISTRIBUTION }}/${{ env.RELEASE }}-cache.yaml.gz"
+          sed -i "s|${OLD_URL}|${NEW_URL}|g" index-v4.yaml
+      - name: Push release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE }}
+          files: |
+            ${{ env.DISTRIBUTION }}-cache.yaml.gz
+            index-v4.yaml
