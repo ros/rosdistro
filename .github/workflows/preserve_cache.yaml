@@ -33,7 +33,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.distribution }}/${{ inputs.release_tag }}
+          ref: ${{ env.RELEASE }}
       - name: Install dependencies
         run: |
           sudo apt update && sudo apt install locales
