@@ -46,12 +46,14 @@ jobs:
           FINAL_REF=${{ inputs.distribution }}/$FINAL_DATE
           echo "Date provided: $FINAL_DATE (tag: $FINAL_REF, must exist)"
         fi
+        OLD_URL_SUFFIX=${{ inputs.distribution }}-cache.yaml.gz
+        NEW_URL_SUFFIX=${{ inputs.distribution }}/$FINAL_DATE/${{ inputs.distribution }}-cache.yaml.gz
         echo "RELEASE_DISTRIBUTION=${{ inputs.distribution }}" >> $GITHUB_ENV
         echo "RELEASE_DATE=$FINAL_DATE" >> $GITHUB_ENV
         echo "RELEASE_REF=$FINAL_REF" >> $GITHUB_ENV
         echo "RELEASE_TAG=${{ inputs.distribution }}/$FINAL_DATE" >> $GITHUB_ENV
-        echo "RELEASE_CACHE_OLD_URL=${{ env.OLD_CACHE_URL_BASE }}/${{ inputs.distribution }}-cache.yaml.gz" >> $GITHUB_ENV
-        echo "RELEASE_CACHE_NEW_URL=${{ env.NEW_CACHE_URL_BASE }}/${{ inputs.distribution }}/$FINAL_DATE/${{ inputs.distribution }}-cache.yaml.gz" >> $GITHUB_ENV
+        echo "RELEASE_CACHE_OLD_URL=${{ env.OLD_CACHE_URL_BASE }}/$OLD_URL_SUFFIX" >> $GITHUB_ENV
+        echo "RELEASE_CACHE_NEW_URL=${{ env.NEW_CACHE_URL_BASE }}/$NEW_URL_SUFFIX" >> $GITHUB_ENV
 
     # Echo the release information to console.
     - name: Print release information
