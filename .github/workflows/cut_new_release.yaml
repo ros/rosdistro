@@ -101,7 +101,7 @@ jobs:
         sed -i "s|${{ env.RELEASE_CACHE_OLD_URL }}|${{ env.RELEASE_CACHE_NEW_URL }}|g" index-v4.yaml
         git add index.yaml index-v4.yaml
         git commit -m "chore: update cache entry for ${{ env.RELEASE_DISTRIBUTION }}"
-        git tag ${{ env.RELEASE_TAG }}
+        git tag -f ${{ env.RELEASE_TAG }}
         git push -f origin tags/${{ env.RELEASE_TAG }}
 
     # Force-push the release.
