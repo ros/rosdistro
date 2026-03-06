@@ -9,10 +9,10 @@ on:  # yamllint disable-line rule:truthy
         required: true
         type: choice
         options:
-          - 'jazzy'
-          - 'kilted'
-          - 'lyrical'
-          - 'rolling'
+        - 'jazzy'
+        - 'kilted'
+        - 'lyrical'
+        - 'rolling'
         default: 'rolling'
 jobs:
   apply-sync-hold:
@@ -20,26 +20,26 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Add a sync hold label to PRs
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TARGET_FILE: "${{ inputs.distribution }}/distribution.yaml"
-          LABEL_TO_ADD: "held for ${{ inputs.distribution }} sync"
-        run: |
-          # Find all PRs that touch the target file ...
-          PR_NUMBERS=$(gh pr list --state open --json number,files | \
-            jq -r --arg FILE "${{ env.TARGET_FILE }}" '.[] | select(.files[].path == $FILE) | .number')
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Add a sync hold label to PRs
+      env:
+        GH_TOKEN: ${{ github.token }}
+        TARGET_FILE: "${{ inputs.distribution }}/distribution.yaml"
+        LABEL_TO_ADD: "held for ${{ inputs.distribution }} sync"
+      run: |
+        # Find all PRs that touch the target file ...
+        PR_NUMBERS=$(gh pr list --state open --json number,files | \
+          jq -r --arg FILE "${{ env.TARGET_FILE }}" '.[] | select(.files[].path == $FILE) | .number')
 
-          # Special case: nothing needs to be held for sync so bail early.
-          if [ -z "$PR_NUMBERS" ]; then
-            echo "No PRs found touching ${{ env.TARGET_FILE }}"
-            exit 0
-          fi
+        # Special case: nothing needs to be held for sync so bail early.
+        if [ -z "$PR_NUMBERS" ]; then
+          echo "No PRs found touching ${{ env.TARGET_FILE }}"
+          exit 0
+        fi
 
-          # Loop through and remove the label
-          for PR in $PR_NUMBERS; do
-            echo "Processing PR #$PR..."
-            gh pr edit $PR --add-label "${{ env.LABEL_TO_ADD }}" || echo "Label not found on #$PR"
-          done
+        # Loop through and remove the label
+        for PR in $PR_NUMBERS; do
+          echo "Processing PR #$PR..."
+          gh pr edit $PR --add-label "${{ env.LABEL_TO_ADD }}" || echo "Label not found on #$PR"
+        done
