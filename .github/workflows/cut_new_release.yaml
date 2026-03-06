@@ -1,0 +1,130 @@
+---
+name: Cut a new ROS release
+# this is fine since gha runs with yaml 1.2
+on:  # yamllint disable-line rule:truthy
+  workflow_dispatch:
+    inputs:
+      distribution:
+        description: 'Which distribution is the release for?'
+        required: true
+        type: choice
+        options:
+          - 'jazzy'
+          - 'kilted'
+          - 'lyrical'
+          - 'rolling'
+        default: 'rolling'
+      date:
+        description: 'Release in YYYY-MM-DD. Leave empty for new.'
+        required: false
+        type: string
+      remove_held_for_sync_tags:
+        description: 'Remove all held-for-sync labels?'
+        required: true
+        type: boolean
+        default: true
+jobs:
+  cut-new-release:
+    permissions:
+      pull-requests: write
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      # Add any missing inputs.
+      - name: Calculate final inputs
+        run: |
+          USER_INPUT="${{ inputs.date }}"
+          if [ -z "$USER_INPUT" ]; then
+            FINAL_DATE=$(TZ="America/Los_Angeles" date +%Y-%m-%d)
+            FINAL_REF=master
+            echo "Date used: $FINAL_DATE (branch: $FINAL_REF, must exist)"
+          else
+            FINAL_DATE=$USER_INPUT
+            FINAL_REF=${{ inputs.distribution }}/$FINAL_DATE
+            echo "Date provided: $FINAL_DATE (tag: $FINAL_REF, must exist)"
+          fi
+          echo "RELEASE_DISTRIBUTION=${{ inputs.distribution }}" >> $GITHUB_ENV
+          echo "RELEASE_DATE=$FINAL_DATE" >> $GITHUB_ENV
+          echo "RELEASE_REF=$FINAL_REF" >> $GITHUB_ENV
+          echo "RELEASE_TAG=${{ inputs.distribution }}/$FINAL_DATE" >> $GITHUB_ENV
+          echo "RELEASE_CACHE_OLD_URL=http://repo.ros2.org/rosdistro_cache/${{ inputs.distribution }}-cache.yaml.gz" >> $GITHUB_ENV
+          echo "RELEASE_CACHE_NEW_URL=https://github.com/ros/rosdistro/releases/download/${{ inputs.distribution }}/$FINAL_DATE/${{ inputs.distribution }}-cache.yaml.gz" >> $GITHUB_ENV
+
+      # Echo the release information to console.
+      - name: Print release information
+        run: |
+          echo "Ref: ${{ env.RELEASE_REF }}"
+          echo "Distribution: ${{ env.RELEASE_DISTRIBUTION }}"
+          echo "Date: ${{ env.RELEASE_DATE }}"
+          echo "Tag: ${{ env.RELEASE_TAG }}"
+          echo "Old cache URL: ${{ env.RELEASE_CACHE_OLD_URL }}"
+          echo "New cache URL: ${{ env.RELEASE_CACHE_NEW_URL }}"
+
+      # Checkout the repository master branch.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.RELEASE_REF }}
+
+      # Set up a clean Python environment (Avoids OS-level pip blocks)
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      # Install dependencies for the rosdistro_build_cache tool.
+      - name: Install extra tools via pip
+        run: |
+          python -m pip install --upgrade pip
+          pip install rosdistro
+
+      # Rebuild the cache from scratch.
+      - name: Rebuild cache
+        run: |
+          cd ${{ env.RELEASE_DISTRIBUTION }}
+          sed -i "s|https://github.com/ros-gbp|https://github.com/ros2-gbp|g" distribution.yaml
+          rosdistro_build_cache ../index-v4.yaml ${{ env.RELEASE_DISTRIBUTION }}
+          cd ..
+
+      # Commit the change to the distribution file and push the tagged orphaned commit.
+      - name: Tag orphaned commit for the release
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          sed -i "s|${{ env.RELEASE_CACHE_OLD_URL }}|${{ env.RELEASE_CACHE_NEW_URL }}|g" index.yaml
+          sed -i "s|${{ env.RELEASE_CACHE_OLD_URL }}|${{ env.RELEASE_CACHE_NEW_URL }}|g" index-v4.yaml
+          git add index.yaml index-v4.yaml
+          git commit -m "chore: update cache entry for ${{ env.RELEASE_DISTRIBUTION }}"
+          git tag ${{ env.RELEASE_TAG }}
+          git push -f origin tags/${{ env.RELEASE_TAG }}
+
+      # Push the release
+      - name: Push release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          files: |
+            ${{ env.RELEASE_DISTRIBUTION }}/${{ env.RELEASE_DISTRIBUTION }}-cache.yaml.gz
+
+      # Find a PRs with 
+      - name: Remove all held for sync labels on PRs
+        if: ${{ inputs.remove_held_for_sync_tags == true }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LABEL_TO_REMOVE: "held for ${{ inputs.distribution }} sync"
+        run: |
+          # Get all open PRs that have a held for sync label matching the current release.
+          PR_NUMBERS=$(gh pr list --state open --label "${{ env.LABEL_TO_REMOVE }}" --json number --jq '.[].number')
+          
+          # Special case: nothing was held for sync so bail early.
+          if [ -z "$PR_NUMBERS" ]; then
+            echo "No PRs found with label: ${{ env.LABEL_TO_REMOVE }}"
+            exit 0
+          fi
+
+          # Loop through PRs that match and remove the label.
+          for PR in $PR_NUMBERS; do
+            echo "Processing PR #$PR..."
+            gh pr edit $PR --remove-label "${{ env.LABEL_TO_REMOVE }}" || echo "Label not found on #$PR"
+          done
