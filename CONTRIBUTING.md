@@ -127,7 +127,7 @@ Guidelines for rosdep rules
  * The `osx-homebrew.yaml` file is deprecated; new macOS/Homebrew rules should go into either `base.yaml` or `python.yaml`.
  * Supported Platforms
    * Rules can be contributed for any platform.
-     However to be released they must be at least cover the supported platforms in REP 3: http://www.ros.org/reps/rep-0003.html So:
+     However to be released they must at least cover the supported platforms in REP 2000: https://reps.openrobotics.org/rep-2000 So:
     * Ubuntu and Debian are top priority.
     * Fedora and Gentoo have packaging jobs and should be filled in if they are available.
     * OSX is also nice to have.
