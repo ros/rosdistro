@@ -35,6 +35,11 @@ package_sources:
     - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/appstream
     - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/crb
     - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/extras
+    '10':
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/baseos
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/appstream
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/crb
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/extras
   - !rpm_mirrorlist_url https://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-released-$releasever&arch=$basearch
   ubuntu:
   - !deb_base_url http://archive.ubuntu.com/ubuntu main
@@ -65,6 +70,7 @@ supported_versions:
   - ''
   debian:
   - bookworm
+  - trixie
   fedora:
   - '42'
   - '43'
@@ -75,10 +81,12 @@ supported_versions:
   rhel:
   - '8'
   - '9'
+  - '10'
   ubuntu:
   - focal
   - jammy
   - noble
+  - resolute
 
 supported_arches:
   alpine:
@@ -112,5 +120,8 @@ name_replacements:
       '%{__isa_name}': 'x86'
       '%{python3_pkgversion}': '3'
     '9':
+      '%{__isa_name}': 'x86'
+      '%{python3_pkgversion}': '3'
+    '10':
       '%{__isa_name}': 'x86'
       '%{python3_pkgversion}': '3'
