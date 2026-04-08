@@ -15,14 +15,9 @@ on:  # yamllint disable-line rule:truthy
         - 'rolling'
         default: 'rolling'
       date:
-        description: 'Release in YYYY-MM-DD. Leave empty for new.'
+        description: 'Release in YYYY-MM-DD. Default is today.'
         required: false
         type: string
-      remove_held_for_sync_tags:
-        description: 'Remove all held-for-sync labels?'
-        required: true
-        type: boolean
-        default: true
 jobs:
   cut-new-release:
     permissions:
@@ -111,25 +106,3 @@ jobs:
         tag_name: ${{ env.RELEASE_TAG }}
         files: |
           ${{ env.RELEASE_DISTRIBUTION }}/${{ env.RELEASE_DISTRIBUTION }}-cache.yaml.gz
-
-    # Find all PRs with the sync label and remove them.
-    - name: Remove all held for sync labels on PRs
-      if: ${{ inputs.remove_held_for_sync_tags == true }}
-      env:
-        GH_TOKEN: ${{ github.token }}
-        LABEL_TO_REMOVE: "held for ${{ inputs.distribution }} sync"
-      run: |
-        # Get all open PRs that have a held for sync label matching the current release.
-        PR_NUMBERS=$(gh pr list --state open --label "${{ env.LABEL_TO_REMOVE }}" --json number --jq '.[].number')
-
-        # Special case: nothing was held for sync so bail early.
-        if [ -z "$PR_NUMBERS" ]; then
-          echo "No PRs found with label: ${{ env.LABEL_TO_REMOVE }}"
-          exit 0
-        fi
-
-        # Loop through PRs that match and remove the label.
-        for PR in $PR_NUMBERS; do
-          echo "Processing PR #$PR..."
-          gh pr edit $PR --remove-label "${{ env.LABEL_TO_REMOVE }}" || echo "Label not found on #$PR"
-        done
