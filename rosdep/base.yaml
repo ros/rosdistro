@@ -3524,6 +3524,7 @@ libcpp-httplib-dev:
     bullseye: null
   fedora: [cpp-httplib-devel]
   gentoo: [cpp-httplib]
+  nixos: [httplib]
   osx:
     homebrew:
       packages: [cpp-httplib]
@@ -3837,7 +3838,7 @@ libexpected-dev:
   debian: [libexpected-dev]
   fedora: [expected-devel]
   gentoo: [dev-cpp/expected]
-  nixos: [tl-expected]
+  nixos: [tl-expected-nixpkgs]
   osx:
     homebrew:
       packages: [tl-expected]
@@ -4220,6 +4221,7 @@ libglib-dev:
   gentoo: [dev-libs/glib]
   nixos: [glib]
   openembedded: [glib-2.0@openembedded-core]
+  rhel: [glib2-devel]
   ubuntu: [libglib2.0-dev, libglib2.0-dev-bin]
 libglm-dev:
   arch: [glm]
@@ -4250,13 +4252,13 @@ libgmock-dev:
   fedora: [gmock-devel]
   freebsd: [googlemock]
   gentoo: [dev-cpp/gtest]
-  nixos: [gmock]
+  nixos: [gtest]
   openembedded: [gtest@meta-oe]
-  opensuse: [gmock-devel]
+  opensuse: [gmock]
+  osx:
+    homebrew: [googletest]
   rhel: [gmock-devel]
-  ubuntu:
-    '*': [libgmock-dev]
-    bionic: null
+  ubuntu: [libgmock-dev]
 libgmp:
   arch: [gmp]
   debian: [libgmp-dev]
@@ -4422,6 +4424,18 @@ libgstrtspserver-1.0-dev:
   fedora: [gstreamer1-rtsp-server-devel]
   nixos: [gst_all_1.gst-rtsp-server]
   ubuntu: [libgstrtspserver-1.0-dev]
+libgtest-dev:
+  alpine: [gtest-dev]
+  arch: [gtest]
+  debian: [libgtest-dev]
+  fedora: [gtest-devel]
+  gentoo: [dev-cpp/gtest]
+  nixos: [gtest]
+  opensuse: [gtest]
+  osx:
+    homebrew: [googletest]
+  rhel: [gtest-devel]
+  ubuntu: [libgtest-dev]
 libgtkmm:
   arch: [gtkmm]
   debian: [libgtkmm-2.4-dev]
@@ -5285,13 +5299,16 @@ libopencv-core:
     bullseye: [libopencv-core45]
     trixie: [libopencv-core410]
   fedora: [opencv-core]
+  nixos: [opencv]
   rhel: [opencv-core]
   ubuntu:
     jammy: [libopencv-core4.5d]
     noble: [libopencv-core406t64]
+    resolute: [libopencv-core410]
 libopencv-core-dev:
   debian: [libopencv-core-dev]
   fedora: [opencv-devel]
+  nixos: [opencv]
   rhel: [opencv-devel]
   ubuntu: [libopencv-core-dev]
 libopencv-dev:
@@ -5313,6 +5330,7 @@ libopencv-highgui:
     bookworm: [libopencv-highgui406]
     bullseye: [libopencv-highgui4.5]
   fedora: [opencv-highgui]
+  nixos: [opencv]
   rhel:
     '*': [opencv-highgui]
     '8': [opencv-core]
@@ -5328,6 +5346,7 @@ libopencv-imgcodecs:
     bullseye: [libopencv-imgcodecs45]
     trixie: [libopencv-imgcodecs410]
   fedora: [opencv-imgcodecs]
+  nixos: [opencv]
   rhel:
     '*': [opencv-imgcodecs]
     '8': [opencv-core]
@@ -5335,9 +5354,11 @@ libopencv-imgcodecs:
   ubuntu:
     jammy: [libopencv-imgcodecs4.5d]
     noble: [libopencv-imgcodecs406t64]
+    resolute: [libopencv-imgcodecs410]
 libopencv-imgcodecs-dev:
   debian: [libopencv-imgcodecs-dev]
   fedora: [opencv-devel]
+  nixos: [opencv]
   rhel: [opencv-devel]
   ubuntu: [libopencv-imgcodecs-dev]
 libopencv-imgproc:
@@ -5346,6 +5367,7 @@ libopencv-imgproc:
     bullseye: [libopencv-imgproc45]
     trixie: [libopencv-imgproc410]
   fedora: [opencv-imgproc]
+  nixos: [opencv]
   rhel:
     '*': [opencv-imgproc]
     '8': [opencv-core]
@@ -5353,6 +5375,7 @@ libopencv-imgproc:
   ubuntu:
     jammy: [libopencv-imgproc4.5d]
     noble: [libopencv-imgproc406t64]
+    resolute: [libopencv-imgproc410]
 libopencv-imgproc-dev:
   arch: [opencv]
   debian: [libopencv-imgproc-dev]
@@ -5368,6 +5391,7 @@ libopencv-videoio:
     bookworm: [libopencv-videoio406]
     bullseye: [libopencv-videoio4.5]
   fedora: [opencv-videoio]
+  nixos: [opencv]
   rhel:
     '*': [opencv-videoio]
     '8': [opencv-core]
@@ -6599,26 +6623,30 @@ libqt6gui6t64:
   debian: [libqt6gui6]
   fedora: [qt6-qtbase-gui]
   nixos: [qt6.qtbase]
+  openembedded: [qtbase@meta-qt6]
   rhel:
     '*': [qt6-qtbase-gui]
     '8': null
   ubuntu:
-    '*': [libqt6gui6t64]
+    '*': [libqt6gui6]
     'focal': null
     'jammy': [libqt6gui6]
+    'noble': [libqt6gui6t64]
 libqt6opengl6t64:
   alpine: [qt6-qtbase]
   arch: [qt6-base]
   debian: [libqt6opengl6]
   fedora: [qt6-qtbase]
   nixos: [qt6.qtbase]
+  openembedded: [qtbase@meta-qt6]
   rhel:
     '*': [qt6-qtbase]
     '8': null
   ubuntu:
-    '*': [libqt6opengl6t64]
+    '*': [libqt6opengl6]
     'focal': null
     'jammy': [libqt6opengl6]
+    'noble': [libqt6opengl6t64]
 libqt6statemachine6:
   arch: [qt6-scxml]
   debian: [libqt6statemachine6]
@@ -6647,13 +6675,15 @@ libqt6widgets6t64:
   debian: [libqt6widgets6]
   fedora: [qt6-qtbase-gui]
   nixos: [qt6.qtbase]
+  openembedded: [qtbase@meta-qt6]
   rhel:
     '*': [qt6-qtbase]
     '8': null
   ubuntu:
-    '*': [libqt6widgets6t64]
+    '*': [libqt6widgets6]
     'focal': null
     'jammy': [libqt6widgets6]
+    'noble': [libqt6widgets6t64]
 libqtgui4:
   debian: [libqtgui4]
   fedora: [qt-x11]
@@ -6928,7 +6958,7 @@ libspnav-dev:
   debian: [libspnav-dev, libx11-dev]
   fedora: [libspnav-devel, libX11-devel]
   gentoo: [dev-libs/libspnav]
-  nixos: [libspnav]
+  nixos: [libspnav, libx11]
   rhel: [libspnav-devel, libX11-devel]
   ubuntu: [libspnav-dev, libx11-dev]
 libsqlite3-dev:
@@ -7034,6 +7064,7 @@ libsystemd-dev:
   arch: [systemd-libs]
   debian: [libsystemd-dev]
   fedora: [systemd-devel]
+  nixos: [systemd]
   openembedded: [systemd@openembedded-core]
   ubuntu:
     '*': [libsystemd-dev]
@@ -7505,6 +7536,19 @@ libxaw:
   opensuse: [xorg-x11-devel]
   rhel: [libXaw-devel]
   ubuntu: [libxaw7-dev]
+libxcb-cursor0:
+  alpine: [xcb-util-cursor]
+  arch: [xcb-util-cursor]
+  debian: [libxcb-cursor0]
+  fedora: [xcb-util-cursor]
+  gentoo: [xcb-util-cursor]
+  nixos: [xcb-util-cursor-HEAD]
+  opensuse: [libxcb-cursor0]
+  osx:
+    homebrew:
+      packages: [xcb-util-cursor]
+  rhel: [xcb-util-cursor]
+  ubuntu: [libxcb-cursor0]
 libxcb-randr0-dev:
   alpine: [libxcb-dev]
   arch: [libxcb]
@@ -9586,6 +9630,15 @@ rti-connext-dds-7.3.0:
     '*': [rti-connext-dds-7.3.0-ros]
     focal: null
     jammy: null
+rti-connext-dds-7.7.0:
+  debian:
+    '*': [rti-connext-dds-7.7.0-ros]
+    bookworm: null
+  nixos: []
+  ubuntu:
+    '*': [rti-connext-dds-7.7.0-ros]
+    focal: null
+    jammy: null
 rtklib:
   debian: [rtklib]
   fedora: [rtklib]
@@ -10795,7 +10848,6 @@ yasm:
   fedora: [yasm]
   gentoo: [dev-lang/yasm]
   nixos: [yasm]
-  openembedded: [yasm@meta-oe]
   ubuntu: [yasm]
 zbar:
   arch: [zbar]

@@ -426,7 +426,7 @@ pyflakes3:
   freebsd: [devel/py-pyflakes]
   gentoo: [dev-python/pyflakes]
   nixos: [python3Packages.pyflakes]
-  openembedded: ['${PYTHON_PN}-pyflakes@meta-ros-common']
+  openembedded: [python3-pyflakes@meta-python]
   osx:
     pip:
       packages: [pyflakes]
@@ -2535,7 +2535,6 @@ python-nose:
   gentoo: [dev-python/nose]
   macports: [py27-nose]
   nixos: [pythonPackages.nose]
-  openembedded: ['${PYTHON_PN}-nose@openembedded-core']
   opensuse: [python2-nose]
   osx:
     pip:
@@ -5015,6 +5014,12 @@ python3-asn1tools-pip:
     pip:
       packages: [asn1tools]
 python3-astrometry-pip: *migrate_eol_2025_04_30_python3_astrometry_pip
+python3-astropy:
+  arch: [python-astropy]
+  debian: [python3-astropy]
+  fedora: [python3-astropy]
+  gentoo: [dev-python/astropy]
+  ubuntu: [python3-astropy]
 python3-astropy-pip:
   debian:
     pip:
@@ -6597,7 +6602,7 @@ python3-git:
   debian: [python3-git]
   fedora: [python3-GitPython]
   gentoo: [dev-python/git-python]
-  nixos: [python3Packages.GitPython]
+  nixos: [python3Packages.gitpython]
   openembedded: [python3-git@openembedded-core]
   rhel:
     '*': [python3-GitPython]
@@ -9584,6 +9589,21 @@ python3-qrcode:
   rhel:
     '8': [python3-qrcode]
   ubuntu: [python3-qrcode]
+python3-qt-bindings:
+  debian:
+    '*': [libpyside6-dev, libshiboken6-dev, pyqt6-dev, python3-pyqt6, python3-pyqt6.qtsvg, python3-pyside6.qtsvg, qt6-base-dev, shiboken6, python3-sipbuild, python3-pyqtbuild, pyqt6-dev-tools]
+    'bookworm': [libpyside2-dev, libshiboken2-dev, pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-pyside2.qtsvg, python3-sip-dev, qtbase5-dev, shiboken2, python3-sipbuild]
+    'bullseye': [libpyside2-dev, libshiboken2-dev, pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-pyside2.qtsvg, python3-sip-dev, qtbase5-dev, shiboken2, python3-sipbuild]
+  fedora: [python3-pyqt6-devel, python3-pyqt6-sip, sip6]
+  rhel:
+    '*': [python3-qt6-devel, python3-pyqt6-devel, python3-pyqt6-sip, sip6, PyQt-Builder]
+    '8': ['python%{python3_pkgversion}-qt5-devel', 'python%{python3_pkgversion}-sip-devel', libXext-devel, redhat-rpm-config]
+    '9': [python3-qt5-devel, python3-sip-devel, sip6, libXext-devel]
+  ubuntu:
+    '*': [libpyside6-dev, libshiboken6-dev, pyqt6-dev, python3-pyqt6, python3-pyqt6.qtsvg, python3-pyside6.qtsvg, qt6-base-dev, shiboken6, python3-sipbuild, python3-pyqtbuild, pyqt6-dev-tools]
+    focal: [libpyside2-dev, libshiboken2-dev, pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-pyside2.qtsvg, python3-sip-dev, shiboken2]
+    jammy: [libpyside2-dev, libshiboken2-dev, pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-pyside2.qtsvg, python3-sip-dev, shiboken2, python3-sipbuild]
+    noble: [libpyside2-dev, libshiboken2-dev, pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-pyside2.qtsvg, python3-sip-dev, qtbase5-dev, shiboken2, python3-sipbuild]
 python3-qt-material-pip:
   '*':
     pip:
@@ -9633,6 +9653,33 @@ python3-qtpy:
   rhel:
     '8': [python3-QtPy]
   ubuntu: [python3-qtpy]
+python3-questionary:
+  debian:
+    '*': [python3-questionary]
+    bookworm:
+      pip:
+        packages: [questionary]
+  fedora: [python3-questionary]
+  nixos: [python3Packages.questionary]
+  opensuse:
+    '*': [python-questionary]
+    '15.2':
+      pip:
+        packages: [questionary]
+    '15.3':
+      pip:
+        packages: [questionary]
+    '15.4':
+      pip:
+        packages: [questionary]
+  ubuntu:
+    '*': [python3-questionary]
+    focal:
+      pip:
+        packages: [questionary]
+    jammy:
+      pip:
+        packages: [questionary]
 python3-quick2wire-api-pip:
   '*':
     pip:
@@ -9969,6 +10016,10 @@ python3-ruff-pip:
   ubuntu:
     pip:
       packages: [ruff]
+python3-sb3-contrib-pip:
+  "*":
+    pip:
+      packages: [sb3-contrib]
 python3-sbp-pip: *migrate_eol_2027_04_30_python3_sbp_pip
 python3-scapy:
   debian: [python3-scapy]
@@ -10980,6 +11031,17 @@ python3-types-pyyaml:
     focal:
       pip:
         packages: [types-pyyaml]
+python3-types-setuptools:
+  debian: [python3-typeshed]
+  fedora: [python3-types-setuptools]
+  rhel:
+    pip:
+      packages: [types-setuptools]
+  ubuntu:
+    '*': [python3-typeshed]
+    focal:
+      pip:
+        packages: [types-setuptools]
 python3-typing-extensions:
   arch: [python-typing_extensions]
   debian: [python3-typing-extensions]
@@ -11053,6 +11115,10 @@ python3-unidiff:
   opensuse: [python-unidiff]
   rhel: [python3-unidiff]
   ubuntu: [python3-unidiff]
+python3-unified-planning-pip:
+  "*":
+    pip:
+      packages: [unified-planning]
 python3-urchin-pip:
   '*':
     pip:
