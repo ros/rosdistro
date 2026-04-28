@@ -228,7 +228,6 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
             del dest_track['release_tag_saved']
             write_tracks_file(tracks, f'Restore saved version and tag for {args.dest} track.')
         new_release_track_inc = str(int(tracks['tracks'][args.dest]['release_inc']))
-        release_spec.url = new_release_repo_url
 
         ver, _inc = release_spec.version.split('-')
         release_spec.version = '-'.join([ver, new_release_track_inc])
