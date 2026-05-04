@@ -628,6 +628,7 @@ python-argparse:
   alpine: [py-argparse]
   arch: [python2]
   debian:
+    bullseye: [libpython2.7-stdlib]
     buster: [libpython2.7-stdlib]
     squeeze: [python-argparse]
     stretch: [libpython2.7-stdlib]
@@ -10907,8 +10908,10 @@ python3-transformers-pip:
       packages: [transformers]
 python3-transforms3d:
   debian:
-    pip:
-      packages: [transforms3d]
+    '*': [python3-transforms3d]
+    bullseye:
+      pip:
+        packages: [transforms3d]
   fedora: [python3-transforms3d]
   nixos: [python3Packages.transforms3d]
   ubuntu:
