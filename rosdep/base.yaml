@@ -1145,7 +1145,9 @@ ffmpeg:
 ffmpeg-dev:
   alpine: [ffmpeg-dev]
   arch: [ffmpeg]
-  debian: [libavcodec-dev, libavdevice-dev, libavfilter-dev, libavformat-dev, libavutil-dev, libpostproc-dev, libswresample-dev, libswscale-dev]
+  debian:
+    '*': [libavcodec-dev, libavdevice-dev, libavfilter-dev, libavformat-dev, libavutil-dev, libswresample-dev, libswscale-dev]
+    bookworm: [libavcodec-dev, libavdevice-dev, libavfilter-dev, libavformat-dev, libavutil-dev, libpostproc-dev, libswresample-dev, libswscale-dev]
   fedora: [ffmpeg-free-devel]
   freebsd: [ffmpeg]
   gentoo: [virtual/ffmpeg]
@@ -1157,7 +1159,11 @@ ffmpeg-dev:
     '*': [ffmpeg-free-devel]
     '8': null
   slackware: [ffmpeg]
-  ubuntu: [libavcodec-dev, libavdevice-dev, libavfilter-dev, libavformat-dev, libavutil-dev, libpostproc-dev, libswresample-dev, libswscale-dev]
+  ubuntu:
+    '*': [libavcodec-dev, libavdevice-dev, libavfilter-dev, libavformat-dev, libavutil-dev, libswresample-dev, libswscale-dev]
+    focal: [libavcodec-dev, libavdevice-dev, libavfilter-dev, libavformat-dev, libavutil-dev, libpostproc-dev, libswresample-dev, libswscale-dev]
+    jammy: [libavcodec-dev, libavdevice-dev, libavfilter-dev, libavformat-dev, libavutil-dev, libpostproc-dev, libswresample-dev, libswscale-dev]
+    noble: [libavcodec-dev, libavdevice-dev, libavfilter-dev, libavformat-dev, libavutil-dev, libpostproc-dev, libswresample-dev, libswscale-dev]
 ffmpeg2theora:
   arch: [ffmpeg2theora]
   debian: [ffmpeg2theora]
@@ -2898,6 +2904,7 @@ libboost-atomic:
     bookworm: [libboost-atomic1.74.0]
     bullseye: [libboost-atomic1.74.0]
     buster: [libboost-atomic1.67.0]
+    trixie: [libboost-atomic1.83.0]
   fedora: [boost-atomic]
   gentoo: [dev-libs/boost]
   nixos: [boost]
@@ -2909,6 +2916,7 @@ libboost-atomic:
     focal: [libboost-atomic1.71.0]
     jammy: [libboost-atomic1.74.0]
     noble: [libboost-atomic1.83.0]
+    resolute: [libboost-atomic1.83.0]
 libboost-atomic-dev:
   arch: [boost]
   debian: [libboost-atomic-dev]
@@ -2925,6 +2933,7 @@ libboost-chrono:
     bookworm: [libboost-chrono1.74.0]
     bullseye: [libboost-chrono1.74.0]
     buster: [libboost-chrono1.67.0]
+    trixie: [libboost-chrono1.83.0t64]
   fedora: [boost-chrono]
   gentoo: [dev-libs/boost]
   nixos: [boost]
@@ -2936,6 +2945,7 @@ libboost-chrono:
     focal: [libboost-chrono1.71.0]
     jammy: [libboost-chrono1.74.0]
     noble: [libboost-chrono1.83.0t64]
+    resolute: [libboost-chrono1.83.0t64]
 libboost-chrono-dev:
   arch: [boost]
   debian: [libboost-chrono-dev]
@@ -2983,6 +2993,7 @@ libboost-date-time:
     bookworm: [libboost-date-time1.74.0]
     bullseye: [libboost-date-time1.74.0]
     buster: [libboost-date-time1.67.0]
+    trixie: [libboost-date-time1.83.0]
   fedora: [boost-date-time]
   gentoo: [dev-libs/boost]
   nixos: [boost]
@@ -2994,6 +3005,7 @@ libboost-date-time:
     focal: [libboost-date-time1.71.0]
     jammy: [libboost-date-time1.74.0]
     noble: [libboost-date-time1.83.0]
+    resolute: [libboost-date-time1.83.0]
 libboost-date-time-dev:
   arch: [boost]
   debian: [libboost-date-time-dev]
@@ -3020,6 +3032,7 @@ libboost-filesystem:
     bookworm: [libboost-filesystem1.74.0]
     bullseye: [libboost-filesystem1.74.0]
     buster: [libboost-filesystem1.67.0]
+    trixie: [libboost-filesystem1.83.0]
   fedora: [boost-filesystem]
   gentoo: [dev-libs/boost]
   nixos: [boost]
@@ -3031,6 +3044,7 @@ libboost-filesystem:
     focal: [libboost-filesystem1.71.0]
     jammy: [libboost-filesystem1.74.0]
     noble: [libboost-filesystem1.83.0]
+    resolute: [libboost-filesystem1.83.0]
 libboost-filesystem-dev:
   arch: [boost]
   debian: [libboost-filesystem-dev]
@@ -3108,6 +3122,7 @@ libboost-program-options:
     bookworm: [libboost-program-options1.74.0]
     bullseye: [libboost-program-options1.74.0]
     buster: [libboost-program-options1.67.0]
+    trixie: [libboost-program-options1.83.0]
   fedora: [boost-program-options]
   gentoo: [dev-libs/boost]
   nixos: [boost]
@@ -3119,6 +3134,7 @@ libboost-program-options:
     focal: [libboost-program-options1.71.0]
     jammy: [libboost-program-options1.74.0]
     noble: [libboost-program-options1.83.0]
+    resolute: [libboost-program-options1.83.0]
 libboost-program-options-dev:
   arch: [boost]
   debian: [libboost-program-options-dev]
@@ -3136,6 +3152,7 @@ libboost-python:
     bookworm: [libboost-python1.74.0]
     bullseye: [libboost-python1.74.0]
     buster: [libboost-python1.67.0]
+    trixie: [libboost-python1.83.0]
   fedora: [boost-python3]
   gentoo: ['dev-libs/boost[python]']
   nixos: [boost]
@@ -3149,6 +3166,7 @@ libboost-python:
     focal: [libboost-python1.71.0]
     jammy: [libboost-python1.74.0]
     noble: [libboost-python1.83.0]
+    resolute: [libboost-python1.83.0]
 libboost-python-dev:
   alpine: [boost-python2]
   arch: [boost]
@@ -3168,6 +3186,7 @@ libboost-random:
     bookworm: [libboost-random1.74.0]
     bullseye: [libboost-random1.74.0]
     buster: [libboost-random1.67.0]
+    trixie: [libboost-random1.83.0]
   fedora: [boost-random]
   gentoo: [dev-libs/boost]
   nixos: [boost]
@@ -3179,6 +3198,7 @@ libboost-random:
     focal: [libboost-random1.71.0]
     jammy: [libboost-random1.74.0]
     noble: [libboost-random1.83.0]
+    resolute: [libboost-random1.83.0]
 libboost-random-dev:
   arch: [boost]
   debian: [libboost-random-dev]
@@ -3195,6 +3215,7 @@ libboost-regex:
     bookworm: [libboost-regex1.74.0]
     bullseye: [libboost-regex1.74.0]
     buster: [libboost-regex1.67.0]
+    trixie: [libboost-regex1.83.0]
   fedora: [boost-regex]
   gentoo: [dev-libs/boost]
   nixos: [boost]
@@ -3206,6 +3227,7 @@ libboost-regex:
     focal: [libboost-regex1.71.0]
     jammy: [libboost-regex1.74.0]
     noble: [libboost-regex1.83.0]
+    resolute: [libboost-regex1.83.0]
 libboost-regex-dev:
   arch: [boost]
   debian: [libboost-regex-dev]
@@ -3249,6 +3271,7 @@ libboost-system:
     bookworm: [libboost-system1.74.0]
     bullseye: [libboost-system1.74.0]
     buster: [libboost-system1.67.0]
+    trixie: [libboost-system1.83.0]
   fedora: [boost-system]
   gentoo: [dev-libs/boost]
   nixos: [boost]
@@ -3260,6 +3283,7 @@ libboost-system:
     focal: [libboost-system1.71.0]
     jammy: [libboost-system1.74.0]
     noble: [libboost-system1.83.0]
+    resolute: [libboost-system1.83.0]
 libboost-system-dev:
   arch: [boost]
   debian: [libboost-system-dev]
@@ -3276,6 +3300,7 @@ libboost-thread:
     bookworm: [libboost-thread1.74.0]
     bullseye: [libboost-thread1.74.0]
     buster: [libboost-thread1.67.0]
+    trixie: [libboost-thread1.83.0]
   fedora: [boost-thread]
   gentoo: ['dev-libs/boost[threads]']
   nixos: [boost]
@@ -3287,6 +3312,7 @@ libboost-thread:
     focal: [libboost-thread1.71.0]
     jammy: [libboost-thread1.74.0]
     noble: [libboost-thread1.83.0]
+    resolute: [libboost-thread1.83.0]
 libboost-thread-dev:
   arch: [boost]
   debian: [libboost-thread-dev]
@@ -5221,6 +5247,7 @@ libogre-1.12-dev:
 libogre-dev:
   arch: [ogre]
   debian:
+    bullseye: [libogre-1.9-dev]
     buster: [libogre-1.9-dev]
     stretch: [libogre-1.9-dev]
     wheezy: [libogre-dev]
@@ -5648,6 +5675,7 @@ libpcl-common:
     bookworm: [libpcl-common1.13]
     bullseye: [libpcl-common1.11]
     buster: [libpcl-common1.9]
+    trixie: [libpcl-common1.15]
   fedora: [pcl]
   freebsd: [libpcl]
   gentoo: [sci-libs/pcl]
@@ -5661,12 +5689,14 @@ libpcl-common:
     focal: [libpcl-common1.10]
     jammy: [libpcl-common1.12]
     noble: [libpcl-common1.14]
+    resolute: [libpcl-common1.15]
 libpcl-features:
   alpine: [pcl-libs]
   debian:
     bookworm: [libpcl-features1.13]
     bullseye: [libpcl-features1.11]
     buster: [libpcl-features1.9]
+    trixie: [libpcl-features1.15]
   fedora: [pcl]
   freebsd: [libpcl]
   gentoo: [sci-libs/pcl]
@@ -5680,12 +5710,14 @@ libpcl-features:
     focal: [libpcl-features1.10]
     jammy: [libpcl-features1.12]
     noble: [libpcl-features1.14]
+    resolute: [libpcl-features1.15]
 libpcl-filters:
   alpine: [pcl-libs]
   debian:
     bookworm: [libpcl-filters1.13]
     bullseye: [libpcl-filters1.11]
     buster: [libpcl-filters1.9]
+    trixie: [libpcl-filters1.15]
   fedora: [pcl]
   freebsd: [libpcl]
   gentoo: [sci-libs/pcl]
@@ -5699,12 +5731,14 @@ libpcl-filters:
     focal: [libpcl-filters1.10]
     jammy: [libpcl-filters1.12]
     noble: [libpcl-filters1.14]
+    resolute: [libpcl-filters1.15]
 libpcl-io:
   alpine: [pcl-libs]
   debian:
     bookworm: [libpcl-io1.13]
     bullseye: [libpcl-io1.11]
     buster: [libpcl-io1.9]
+    trixie: [libpcl-io1.15]
   fedora: [pcl]
   freebsd: [libpcl]
   gentoo: [sci-libs/pcl]
@@ -5718,6 +5752,7 @@ libpcl-io:
     focal: [libpcl-io1.10]
     jammy: [libpcl-io1.12]
     noble: [libpcl-io1.14]
+    resolute: [libpcl-io1.15]
 libpcl-kdtree:
   alpine: [pcl-libs]
   debian:
@@ -5904,6 +5939,7 @@ libpcl-segmentation:
     bookworm: [libpcl-segmentation1.13]
     bullseye: [libpcl-segmentation1.11]
     buster: [libpcl-segmentation1.9]
+    trixie: [libpcl-segmentation1.15]
   fedora: [pcl]
   freebsd: [libpcl]
   gentoo: [sci-libs/pcl]
@@ -5917,6 +5953,7 @@ libpcl-segmentation:
     focal: [libpcl-segmentation1.10]
     jammy: [libpcl-segmentation1.12]
     noble: [libpcl-segmentation1.14]
+    resolute: [libpcl-segmentation1.15]
 libpcl-stereo:
   alpine: [pcl-libs]
   debian:
@@ -5941,6 +5978,7 @@ libpcl-surface:
     bookworm: [libpcl-surface1.13]
     bullseye: [libpcl-surface1.11]
     buster: [libpcl-surface1.9]
+    trixie: [libpcl-surface1.15]
   fedora: [pcl]
   freebsd: [libpcl]
   gentoo: [sci-libs/pcl]
@@ -5954,6 +5992,7 @@ libpcl-surface:
     focal: [libpcl-surface1.10]
     jammy: [libpcl-surface1.12]
     noble: [libpcl-surface1.14]
+    resolute: [libpcl-surface1.15]
 libpcl-tracking:
   alpine: [pcl-libs]
   debian:
@@ -6684,6 +6723,48 @@ libqt6widgets6t64:
     'focal': null
     'jammy': [libqt6widgets6]
     'noble': [libqt6widgets6t64]
+libqtcore:
+  alpine: [qt6-qtbase]
+  arch: [qt6-base]
+  debian:
+    '*': [libqt6core6t64]
+    bookworm: [libqt6core6]
+  fedora: [qt6-qtbase]
+  gentoo: ['dev-qt/qtcore:6']
+  nixos: [qt6.qtbase]
+  openembedded: [qtbase@meta-qt6]
+  opensuse:
+    '*': [libQt6Core6]
+    '15.2': null
+  rhel:
+    '*': [qt6-qtbase]
+    '8': null
+    '9': [qt5-qtbase]
+  slackware: [qt6]
+  ubuntu:
+    '*': [libqt6core6t64]
+    focal: null
+    jammy: null
+    noble: [libqt5core5t64]
+libqtgui:
+  alpine: [qt6-qtbase]
+  arch: [qt6-base]
+  debian: [libqt6gui6]
+  fedora: [qt6-qtbase-gui]
+  freebsd: [qt6-gui]
+  gentoo: ['dev-qt/qtgui:6']
+  nixos: [qt6.qtbase]
+  openembedded: [qtbase@meta-qt6]
+  rhel:
+    '*': [qt6-qtbase-gui]
+    '8': null
+    '9': [qt5-qtbase-gui]
+  slackware: [qt6]
+  ubuntu:
+    '*': [libqt6gui6]
+    'focal': null
+    'jammy': null
+    'noble': [libqt5gui5t64]
 libqtgui4:
   debian: [libqtgui4]
   fedora: [qt-x11]
@@ -6692,6 +6773,39 @@ libqtgui4:
   rhel:
     '7': [qt-x11]
   ubuntu: [libqtgui4]
+libqtopengl:
+  alpine: [qt6-qtbase]
+  arch: [qt6-base]
+  debian: [libqt6opengl6]
+  fedora: [qt6-qtbase]
+  nixos: [qt6.qtbase]
+  openembedded: [qtbase@meta-qt6]
+  rhel:
+    '*': [qt6-qtbase]
+    '8': null
+    '9': [qt5-qtbase]
+  ubuntu:
+    '*': [libqt6opengl6]
+    'focal': null
+    'jammy': null
+    'noble': [libqt5opengl5t64]
+libqtsvg:
+  alpine: [qt6-qtsvg]
+  arch: [qt6-svg]
+  debian: [libqt6svg6]
+  fedora: [qt6-qtsvg]
+  gentoo: ['dev-qt/qtsvg:6']
+  nixos: [qt6.qtsvg]
+  openembedded: [qtsvg@meta-qt6]
+  rhel:
+    '*': [qt6-qtsvg]
+    '8': null
+    '9': [qt5-qtsvg]
+  ubuntu:
+    '*': [libqt6svg6]
+    'focal': null
+    'jammy': null
+    'noble': [libqt5svg5]
 libqtwebkit-dev:
   debian: [libqtwebkit-dev]
   fedora: [qtwebkit-devel]
@@ -6699,6 +6813,21 @@ libqtwebkit-dev:
   nixos: [qt5.qtwebkit]
   openembedded: [qtwebkit@meta-qt5]
   ubuntu: [libqtwebkit-dev]
+libqtwidgets:
+  arch: [qt6-base]
+  debian: [libqt6widgets6]
+  fedora: [qt6-qtbase-gui]
+  nixos: [qt6.qtbase]
+  openembedded: [qtbase@meta-qt6]
+  rhel:
+    '*': [qt6-qtbase]
+    '8': null
+    '9': [qt5-qtbase]
+  ubuntu:
+    '*': [libqt6widgets6]
+    'focal': null
+    'jammy': null
+    'noble': [libqt5widgets5t64]
 libqwt-qt5-dev:
   arch: [qwt]
   debian: [libqwt-qt5-dev]
@@ -8764,6 +8893,7 @@ protobuf:
     bookworm: [libprotobuf32]
     bullseye: [libprotobuf23]
     buster: [libprotobuf17]
+    trixie: [libprotobuf32t64]
   fedora: [protobuf]
   freebsd: [protobuf]
   gentoo: [dev-libs/protobuf]
@@ -8778,6 +8908,7 @@ protobuf:
     focal: [libprotobuf17]
     jammy: [libprotobuf23]
     noble: [libprotobuf32t64]
+    resolute: [libprotobuf32t64]
 protobuf-compiler-grpc:
   arch: [grpc]
   debian: [protobuf-compiler-grpc]
@@ -9207,6 +9338,44 @@ qrencode:
   gentoo: [media-gfx/qrencode]
   nixos: [qrencode]
   ubuntu: [qrencode]
+qt-base-dev:
+  alpine: [qt6-qtbase-dev]
+  arch: [qt6-base]
+  debian: [qt6-base-dev]
+  fedora: [qt6-qtbase-devel]
+  gentoo: ['dev-qt/qtcore:6', 'dev-qt/qtwidgets:6', 'dev-qt/qttest:6']
+  nixos: [qt6.qtbase]
+  openembedded: [qtbase@meta-qt6]
+  opensuse:
+    '*': [libqt6-qtbase-devel]
+    '15.2': null
+  rhel:
+    '*': [qt6-qtbase-devel]
+    '8': null
+    '9': [qt5-qtbase-devel]
+  slackware: [qt6]
+  ubuntu:
+    '*': [qt6-base-dev]
+    'focal': null
+    'jammy': null
+    'noble': [qtbase5-dev]
+qt-svg-dev:
+  alpine: [qt6-qtsvg-dev]
+  arch: [qt6-svg]
+  debian: [qt6-svg-dev]
+  fedora: [qt6-qtsvg-devel]
+  gentoo: ['dev-qt/qtsvg:6']
+  nixos: [qt6.qtsvg]
+  openembedded: [qtsvg@meta-qt6]
+  rhel:
+    '*': [qt6-qtsvg-devel]
+    '8': null
+    '9': [qt5-qtsvg-devel]
+  ubuntu:
+    '*': [qt6-svg-dev]
+    'focal': null
+    'jammy': null
+    'noble': [libqt5svg5-dev]
 qt4-dev-tools:
   debian: [qt4-dev-tools]
   fedora: [qt-devel]
