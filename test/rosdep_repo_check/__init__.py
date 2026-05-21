@@ -104,7 +104,9 @@ def open_compressed_url(url, retry=2, retry_period=1, timeout=10):
 
     :returns: file-like object for streaming file data.
     """
-    request = Request(url)
+    request = Request(url, headers={
+        'User-Agent': 'rosdep_repo_check/1.0',
+    })
     try:
         f = urlopen(request, timeout=timeout)
     except HTTPError as e:
