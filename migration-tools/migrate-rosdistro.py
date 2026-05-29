@@ -8,7 +8,7 @@ import sys
 import tempfile
 
 from bloom.commands.git.patch.common import get_patch_config, set_patch_config
-from bloom.git import inbranch, show
+from bloom.git import inbranch, show, track_branches
 
 import github
 import yaml
@@ -138,6 +138,7 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         if release_repo.endswith('.git'):
             release_repo = release_repo[:-4]
         subprocess.check_call(['git', 'clone', remote_url])
+        track_branches(None, release_repo)
         os.chdir(release_repo)
         tracks = read_tracks_file()
 
