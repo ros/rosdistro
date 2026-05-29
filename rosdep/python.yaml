@@ -282,6 +282,10 @@ jupyter-notebook:
     '*': [jupyter-notebook]
   fedora: [python3-notebook]
   nixos: [python3Packages.notebook]
+  rhel:
+    '*': [python3-notebook]
+    '8': null
+    '9': null
   ubuntu:
     '*': [jupyter-notebook]
 libgv-python:
@@ -628,6 +632,7 @@ python-argparse:
   alpine: [py-argparse]
   arch: [python2]
   debian:
+    bullseye: [libpython2.7-stdlib]
     buster: [libpython2.7-stdlib]
     squeeze: [python-argparse]
     stretch: [libpython2.7-stdlib]
@@ -5833,6 +5838,12 @@ python3-docutils:
   nixos: [python3Packages.docutils]
   openembedded: [python3-docutils@openembedded-core]
   ubuntu: [python3-docutils]
+python3-dotenv:
+  arch: [python-dotenv]
+  debian: [python3-dotenv]
+  fedora: [python3-dotenv]
+  gentoo: [dev-python/python-dotenv]
+  ubuntu: [python3-dotenv]
 python3-dubins-pip:
   debian:
     pip:
@@ -6034,9 +6045,13 @@ python3-fastapi:
     buster:
       pip:
         packages: [fastapi]
-  fedora: [python-fastapi]
+  fedora: [python3-fastapi]
   nixos: [python3Packages.fastapi]
   openembedded: [python3-fastapi@meta-python]
+  rhel:
+    '*': [python3-fastapi]
+    '8': null
+    '9': null
   ubuntu:
     '*': [python3-fastapi]
     bionic:
@@ -6612,7 +6627,7 @@ python3-github:
   debian: [python3-github]
   fedora: [python3-github]
   gentoo: [dev-python/PyGithub]
-  nixos: [python3Packages.PyGithub]
+  nixos: [python3Packages.pygithub]
   rhel: ['python%{python3_pkgversion}-pygithub']
   ubuntu: [python3-github]
 python3-gitlab:
@@ -7132,6 +7147,9 @@ python3-junitparser:
   debian:
     '*': [python3-junitparser]
     stretch: null
+  fedora:
+    '*': [python3-junitparser]
+    '42': null
   ubuntu:
     '*': [python3-junitparser]
     bionic: null
@@ -8205,6 +8223,10 @@ python3-owslib:
   nixos: [python3Packages.owslib]
   rhel: [python3-OWSLib]
   ubuntu: [python3-owslib]
+python3-oxrdflib-pip:
+  '*':
+    pip:
+      packages: [oxrdflib]
 python3-packaging:
   alpine: [py3-packaging]
   arch: [python-packaging]
@@ -8951,6 +8973,10 @@ python3-pyotp:
     '*': [python3-pyotp]
     '8': null
   ubuntu: [python3-pyotp]
+python3-pyoxigraph-pip:
+  '*':
+    pip:
+      packages: [pyoxigraph]
 python3-pyparsing:
   arch: [python-pyparsing]
   debian: [python3-pyparsing]
@@ -9594,16 +9620,17 @@ python3-qt-bindings:
     '*': [libpyside6-dev, libshiboken6-dev, pyqt6-dev, python3-pyqt6, python3-pyqt6.qtsvg, python3-pyside6.qtsvg, qt6-base-dev, shiboken6, python3-sipbuild, python3-pyqtbuild, pyqt6-dev-tools]
     'bookworm': [libpyside2-dev, libshiboken2-dev, pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-pyside2.qtsvg, python3-sip-dev, qtbase5-dev, shiboken2, python3-sipbuild]
     'bullseye': [libpyside2-dev, libshiboken2-dev, pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-pyside2.qtsvg, python3-sip-dev, qtbase5-dev, shiboken2, python3-sipbuild]
-  fedora: [python3-pyqt6-devel, python3-pyqt6-sip, sip6]
+  fedora: [python3-pyqt6-devel, python3-pyqt6-sip, sip6, PyQt-builder]
+  nixos: [python-qt-bindings-deps]
   rhel:
-    '*': [python3-qt6-devel, python3-pyqt6-devel, python3-pyqt6-sip, sip6, PyQt-Builder]
+    '*': [python3-pyqt6-devel, python3-pyqt6-sip, sip6, PyQt-builder]
     '8': ['python%{python3_pkgversion}-qt5-devel', 'python%{python3_pkgversion}-sip-devel', libXext-devel, redhat-rpm-config]
-    '9': [python3-qt5-devel, python3-sip-devel, sip6, libXext-devel]
+    '9': [python3-qt5-devel, python3-sip-devel, sip6, libXext-devel, PyQt-builder]
   ubuntu:
     '*': [libpyside6-dev, libshiboken6-dev, pyqt6-dev, python3-pyqt6, python3-pyqt6.qtsvg, python3-pyside6.qtsvg, qt6-base-dev, shiboken6, python3-sipbuild, python3-pyqtbuild, pyqt6-dev-tools]
     focal: [libpyside2-dev, libshiboken2-dev, pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-pyside2.qtsvg, python3-sip-dev, shiboken2]
     jammy: [libpyside2-dev, libshiboken2-dev, pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-pyside2.qtsvg, python3-sip-dev, shiboken2, python3-sipbuild]
-    noble: [libpyside2-dev, libshiboken2-dev, pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-pyside2.qtsvg, python3-sip-dev, qtbase5-dev, shiboken2, python3-sipbuild]
+    noble: [libpyside2-dev, libshiboken2-dev, pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-pyside2.qtsvg, python3-sip-dev, qtbase5-dev, shiboken2, python3-sipbuild, python3-pyqtbuild]
 python3-qt-material-pip:
   '*':
     pip:
@@ -9742,6 +9769,10 @@ python3-rdflib:
   rhel:
     '8': ['python%{python3_pkgversion}-rdflib']
   ubuntu: [python3-rdflib]
+python3-reasonable-pip:
+  '*':
+    pip:
+      packages: [reasonable]
 python3-redis:
   debian: [python3-redis]
   fedora: [python3-redis]
@@ -9884,6 +9915,10 @@ python3-robodk-pip:
   ubuntu:
     pip:
       packages: [robodk]
+python3-robotmem-pip:
+  '*':
+    pip:
+      packages: [robotmem]
 python3-robyn-pip:
   '*':
     pip:
@@ -9994,7 +10029,7 @@ python3-rtree:
   debian: [python3-rtree]
   fedora: [python3-rtree]
   gentoo: [sci-libs/rtree]
-  nixos: [python3Packages.Rtree]
+  nixos: [python3Packages.rtree]
   openembedded: [python3-rtree@meta-ros2]
   rhel:
     '*': [python3-rtree]
@@ -10723,6 +10758,7 @@ python3-termcolor:
   nixos: [python3Packages.termcolor]
   openembedded: [python3-termcolor@meta-python]
   opensuse: [python3-termcolor]
+  rhel: [python3-termcolor]
   ubuntu: [python3-termcolor]
 python3-texttable:
   debian: [python3-texttable]
@@ -10911,8 +10947,10 @@ python3-transformers-pip:
       packages: [transformers]
 python3-transforms3d:
   debian:
-    pip:
-      packages: [transforms3d]
+    '*': [python3-transforms3d]
+    bullseye:
+      pip:
+        packages: [transforms3d]
   fedora: [python3-transforms3d]
   nixos: [python3Packages.transforms3d]
   ubuntu:
@@ -11165,8 +11203,13 @@ python3-utm:
 python3-uvicorn:
   alpine: [uvicorn]
   debian: [python3-uvicorn]
-  fedora: [python-uvicorn]
+  fedora: [python3-uvicorn]
   nixos: [python3Packages.uvicorn]
+  openembedded: [python3-uvicorn@meta-python]
+  rhel:
+    '*': [python3-uvicorn]
+    '8': null
+    '9': null
   ubuntu:
     '*': [python3-uvicorn]
     bionic:
