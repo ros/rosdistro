@@ -3537,7 +3537,7 @@ libconfig-dev:
   fedora: [libconfig-devel]
   gentoo: ['dev-libs/libconfig[cxx]']
   nixos: [libconfig]
-  openembedded: [libconfig@meta-oe]
+  openembedded: [libconfig@openembedded-core]
   rhel: [libconfig-devel]
   ubuntu: [libconfig-dev]
 libconsole-bridge-dev:
@@ -4773,9 +4773,11 @@ libjsoncpp:
   opensuse: [libjsoncpp19]
   rhel: [jsoncpp]
   ubuntu:
-    '*': [libjsoncpp25]
+    '*': [libjsoncpp26]
     bionic: [libjsoncpp1]
     focal: [libjsoncpp1]
+    jammy: [libjsoncpp25]
+    noble: [libjsoncpp25]
 libjsoncpp-dev:
   arch: [jsoncpp]
   debian: [libjsoncpp-dev]
@@ -6628,6 +6630,32 @@ libqt6-multimedia:
   ubuntu:
     '*': [libqt6multimedia6]
     'focal': null
+libqt6-opengl:
+  alpine: [qt6-qtbase]
+  arch: [qt6-base]
+  debian: [libqt6opengl6]
+  fedora: [qt6-qtbase]
+  nixos: [qt6.qtbase]
+  openembedded: [qtbase@meta-qt6]
+  rhel:
+    '*': [qt6-qtbase]
+    '8': null
+  ubuntu:
+    '*': [libqt6opengl6]
+    'focal': null
+    'noble': [libqt6opengl6t64]
+libqt6-opengl-dev:
+  arch: [qt6-base]
+  debian: [qt6-base-dev]
+  fedora: [qt6-qtbase-devel]
+  nixos: [qt6.qtbase]
+  openembedded: [qtbase@meta-qt6]
+  rhel:
+    '*': [qt6-qtbase-devel]
+    '8': null
+  ubuntu:
+    '*': [qt6-base-dev]
+    'focal': null
 libqt6-qml:
   arch: [qt6-declarative]
   debian: [libqt6qml6]
@@ -6675,6 +6703,20 @@ libqt6-websockets:
   ubuntu:
     '*': [libqt6websockets6]
     'focal': null
+libqt6-widgets:
+  alpine: [qt6-qtbase]
+  arch: [qt6-base]
+  debian: [libqt6widgets6]
+  fedora: [qt6-qtbase]
+  nixos: [qt6.qtbase]
+  openembedded: [qtbase@meta-qt6]
+  rhel:
+    '*': [qt6-qtbase]
+    '8': null
+  ubuntu:
+    '*': [libqt6widgets6]
+    'focal': null
+    'noble': [libqt6widgets6t64]
 libqt6bluetooth6:
   alpine: [qt6-qtconnectivity]
   arch: [qt6-connectivity]
@@ -6836,6 +6878,7 @@ libqtsvg:
     'focal': null
     'jammy': null
     'noble': [libqt5svg5]
+    'resolute': [libqt6svg6, qt6-svg-plugins]
 libqtwebkit-dev:
   debian: [libqtwebkit-dev]
   fedora: [qtwebkit-devel]
@@ -7031,6 +7074,10 @@ libsimage-dev:
   debian: [libsimage-dev]
   gentoo: [media-libs/simage]
   ubuntu: [libsimage-dev]
+libsimpleini-dev:
+  debian: [libsimpleini-dev]
+  fedora: [simpleini-devel]
+  ubuntu: [libsimpleini-dev]
 libsndfile1-dev:
   arch: [libsndfile]
   debian: [libsndfile1-dev]
@@ -7040,6 +7087,15 @@ libsndfile1-dev:
   openembedded: [libsndfile1@openembedded-core]
   rhel: [libsndfile-devel]
   ubuntu: [libsndfile1-dev]
+libsocketcan-dev:
+  debian: [libsocketcan-dev]
+  fedora: [libsocketcan-devel]
+  opensuse: [libsocketcan-devel]
+  rhel:
+    '*': null
+    '8': [libsocketcan-devel]
+    '9': [libsocketcan-devel]
+  ubuntu: [libsocketcan-dev]
 libsodium-dev:
   alpine: [libsodium-dev]
   arch: [libsodium]
@@ -7878,6 +7934,22 @@ libxxf86vm:
   opensuse: [xorg-x11-devel]
   rhel: [libXxf86vm-devel]
   ubuntu: [libxxf86vm-dev]
+libxxhash-dev:
+  alpine: [xxhash-dev]
+  arch: [xxhash]
+  debian: [libxxhash-dev]
+  fedora: [xxhash-devel]
+  freebsd: [xxhash]
+  gentoo: [dev-libs/xxhash]
+  nixos: [xxHash]
+  opensuse: [xxhash]
+  osx:
+    macports: [xxhash]
+  rhel:
+    '*': [xxhash-devel]
+    '8': null
+    '9': null
+  ubuntu: [libxxhash-dev]
 libyaml:
   alpine: [yaml]
   arch: [libyaml]
@@ -7957,6 +8029,21 @@ libzstd-dev:
   rhel: [libzstd-devel]
   ubuntu:
     '*': [libzstd-dev]
+libzxing-dev:
+  alpine: [zxing-cpp-dev]
+  arch: [zxing-cpp]
+  debian: [libzxing-dev]
+  fedora: [zxing-cpp-devel]
+  gentoo: [media-libs/zxing-cpp]
+  nixos: [zxing-cpp]
+  osx:
+    homebrew:
+      packages: [zxing-cpp]
+  rhel: [zxing-cpp-devel]
+  ubuntu:
+    '*': [libzxing-dev]
+    focal: [libzxingcore-dev]
+    jammy: [libzxingcore-dev]
 light-locker:
   arch: [light-locker]
   debian: [light-locker]
@@ -8349,7 +8436,6 @@ msr-tools:
   fedora: [msr-tools]
   gentoo: [sys-apps/msr-tools]
   nixos: [msr-tools]
-  openembedded: [msr-tools@meta-oe]
   opensuse: [msr-tools]
   rhel: [msr-tools]
   ubuntu: [msr-tools]
@@ -8528,6 +8614,7 @@ nvidia-cuda:
   arch: [cuda]
   debian: [nvidia-cuda-toolkit]
   gentoo: [dev-util/nvidia-cuda-toolkit]
+  nixos: [cudaPackages.cudatoolkit]
   ubuntu: [nvidia-cuda-toolkit]
 nvidia-cuda-dev:
   arch: [cuda]
@@ -9824,6 +9911,7 @@ rsyslog:
   fedora: [rsyslog]
   gentoo: [app-admin/rsyslog]
   nixos: [rsyslog]
+  openembedded: [rsyslog@meta-oe]
   opensuse: [rsyslog]
   rhel: [rsyslog]
   ubuntu: [rsyslog]
