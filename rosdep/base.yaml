@@ -62,7 +62,7 @@ alsa-utils:
   debian: [alsa-utils]
   fedora: [alsa-utils]
   gentoo: [media-sound/alsa-utils]
-  nixos: [alsaUtils]
+  nixos: [alsa-utils]
   openembedded: [alsa-utils@openembedded-core]
   opensuse: [alsa-utils]
   rhel: [alsa-utils]
@@ -1123,6 +1123,7 @@ festival:
   debian: [festival, festvox-kallpc16k]
   fedora: [festival, festvox-kal-diphone]
   gentoo: [app-accessibility/festival]
+  nixos: [festival-stub]
   openembedded: [festival@meta-ros1]
   ubuntu: [festival, festvox-kallpc16k]
 festival-dev:
@@ -1880,7 +1881,10 @@ gstreamer1.0-plugins-good:
   openembedded: [gstreamer1.0-plugins-good@openembedded-core]
   opensuse: [gstreamer-plugins-good]
   rhel: [gstreamer1-plugins-good]
-  ubuntu: [gstreamer1.0-plugins-good, libgstreamer-plugins-good1.0-0]
+  ubuntu:
+    '*': [gstreamer1.0-plugins-good]
+    jammy: [gstreamer1.0-plugins-good, libgstreamer-plugins-good1.0-0]
+    noble: [gstreamer1.0-plugins-good, libgstreamer-plugins-good1.0-0]
 gstreamer1.0-plugins-ugly:
   arch: [gst-plugins-ugly]
   debian: [gstreamer1.0-plugins-ugly]
@@ -2543,6 +2547,16 @@ iputils-ping:
   fedora: [iputils]
   nixos: [unixtools.ping]
   ubuntu: [iputils-ping]
+iw:
+  alpine: [iw]
+  arch: [iw]
+  debian: [iw]
+  fedora: [iw]
+  gentoo: [net-wireless/iw]
+  nixos: [iw]
+  opensuse: [iw]
+  rhel: [iw]
+  ubuntu: [iw]
 iwyu:
   debian: [iwyu]
   fedora: [iwyu]
@@ -2606,6 +2620,10 @@ jskeus:
   debian: [jskeus]
   ubuntu:
     jammy: [jskeus]
+jskeus-dev:
+  debian: [jskeus-dev]
+  ubuntu:
+    jammy: [jskeus-dev]
 julius-voxforge:
   fedora: [julius-voxforge]
   ubuntu: [julius-voxforge]
@@ -6859,7 +6877,7 @@ libqtopengl:
   ubuntu:
     '*': [libqt6opengl6]
     'focal': null
-    'jammy': null
+    'jammy': [libqt5opengl5]
     'noble': [libqt5opengl5t64]
 libqtsvg:
   alpine: [qt6-qtsvg]
@@ -7077,6 +7095,7 @@ libsimage-dev:
 libsimpleini-dev:
   debian: [libsimpleini-dev]
   fedora: [simpleini-devel]
+  nixos: [simpleini]
   ubuntu: [libsimpleini-dev]
 libsndfile1-dev:
   arch: [libsndfile]
@@ -9746,6 +9765,7 @@ qtbase5-private-dev:
   arch: [qt5-base]
   debian: [qtbase5-private-dev]
   fedora: [qt5-qtbase-private-devel]
+  nixos: [qt5.qtbase]
   rhel: [qt5-qtbase-private-devel]
   ubuntu: [qtbase5-private-dev]
 qtdeclarative5-dev:
