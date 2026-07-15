@@ -25,7 +25,44 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
+import sys
+
 from . import find_package
+from . import SkipPlatform
+
+
+def _verify_rules(config, key, os_name, os_rules, all_rules, include_found):
+    if os_name not in config['package_sources']:
+        return
+    packages_to_check = {}
+    if not isinstance(os_rules, dict):
+        for os_ver in config['supported_versions'].get(os_name, ()):
+            packages_to_check[os_ver] = os_rules
+    else:
+        packages_to_check = os_rules
+        if '*' in os_rules:
+            for os_ver in config['supported_versions'].get(os_name, ()):
+                if os_ver not in all_rules[key][os_name]:
+                    packages_to_check.setdefault(os_ver, os_rules['*'])
+            del packages_to_check['*']
+    for os_ver, packages in packages_to_check.items():
+        if os_ver not in config['supported_versions'].get(os_name, ()):
+            continue
+        if isinstance(packages, dict) and \
+                tuple(packages.keys()) == ('packages',):
+            packages = packages['packages']
+        if not isinstance(packages, list):
+            # Probably a dict specifying the key type, which is not
+            # currently supported
+            continue
+        for package in packages or []:
+            for needle, haystack in config['name_replacements'].get(
+                    os_name, {}).get(os_ver, {}).items():
+                package = package.replace(needle, haystack)
+            for os_arch in config['supported_arches'][os_name]:
+                res = find_package(config, package, os_name, os_ver, os_arch)
+                if not res or include_found:
+                    yield (os_name, os_ver, os_arch, key, package, res)
 
 
 def verify_rules(config, rules_to_check, all_rules, include_found=False):
@@ -50,34 +87,11 @@ def verify_rules(config, rules_to_check, all_rules, include_found=False):
     """
     for key, rules in rules_to_check.items():
         for os_name, os_rules in rules.items():
-            if os_name not in config['package_sources']:
-                continue
-            packages_to_check = {}
-            if not isinstance(os_rules, dict):
-                for os_ver in config['supported_versions'].get(os_name, ()):
-                    packages_to_check[os_ver] = os_rules
-            else:
-                packages_to_check = os_rules
-                if '*' in os_rules:
-                    for os_ver in config['supported_versions'].get(os_name, ()):
-                        if os_ver not in all_rules[key][os_name]:
-                            packages_to_check.setdefault(os_ver, os_rules['*'])
-                    del packages_to_check['*']
-            for os_ver, packages in packages_to_check.items():
-                if os_ver not in config['supported_versions'].get(os_name, ()):
-                    continue
-                if isinstance(packages, dict) and \
-                        tuple(packages.keys()) == ('packages',):
-                    packages = packages['packages']
-                if not isinstance(packages, list):
-                    # Probably a dict specifying the key type, which is not
-                    # currently supported
-                    continue
-                for package in packages or []:
-                    for needle, haystack in config['name_replacements'].get(
-                            os_name, {}).get(os_ver, {}).items():
-                        package = package.replace(needle, haystack)
-                    for os_arch in config['supported_arches'][os_name]:
-                        res = find_package(config, package, os_name, os_ver, os_arch)
-                        if not res or include_found:
-                            yield (os_name, os_ver, os_arch, key, package, res)
+            try:
+                yield from _verify_rules(
+                    config, key, os_name, os_rules, all_rules, include_found)
+            except SkipPlatform as e:
+                msg = '\n::warning::' + str(e)
+                if e.__cause__:
+                    msg += ': ' + str(e.__cause__)
+                print(msg, file=sys.stderr)

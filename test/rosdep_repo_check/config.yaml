@@ -7,7 +7,6 @@ package_sources:
   arch:
   - !pacman_base_url https://archive.archlinux.org/repos/last/$repo/os/$arch/ core
   - !pacman_base_url https://archive.archlinux.org/repos/last/$repo/os/$arch/ extra
-  - !pacman_base_url https://archive.archlinux.org/repos/last/$repo/os/$arch/ community
   debian:
   - !deb_base_url http://deb.debian.org/debian main
   - !deb_base_url http://deb.debian.org/debian contrib
@@ -32,6 +31,11 @@ package_sources:
     - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/powertools
     - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/extras
     '9':
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/baseos
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/appstream
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/crb
+    - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/extras
+    '10':
     - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/baseos
     - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/appstream
     - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/crb
@@ -66,9 +70,11 @@ supported_versions:
   - ''
   debian:
   - bookworm
+  - trixie
   fedora:
-  - '39'
-  - '40'
+  - '42'
+  - '43'
+  - '44'
   opensuse:
   - '15.2'
   openembedded:
@@ -76,10 +82,12 @@ supported_versions:
   rhel:
   - '8'
   - '9'
+  - '10'
   ubuntu:
   - focal
   - jammy
   - noble
+  - resolute
 
 supported_arches:
   alpine:
@@ -101,9 +109,11 @@ supported_arches:
 
 name_replacements:
   fedora:
-    '37':
+    '42':
       '%{__isa_name}': 'x86'
-    '38':
+    '43':
+      '%{__isa_name}': 'x86'
+    '44':
       '%{__isa_name}': 'x86'
   openembedded:
     master:
@@ -113,5 +123,8 @@ name_replacements:
       '%{__isa_name}': 'x86'
       '%{python3_pkgversion}': '3'
     '9':
+      '%{__isa_name}': 'x86'
+      '%{python3_pkgversion}': '3'
+    '10':
       '%{__isa_name}': 'x86'
       '%{python3_pkgversion}': '3'
