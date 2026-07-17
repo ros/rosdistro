@@ -62,7 +62,7 @@ alsa-utils:
   debian: [alsa-utils]
   fedora: [alsa-utils]
   gentoo: [media-sound/alsa-utils]
-  nixos: [alsaUtils]
+  nixos: [alsa-utils]
   openembedded: [alsa-utils@openembedded-core]
   opensuse: [alsa-utils]
   rhel: [alsa-utils]
@@ -197,6 +197,16 @@ assimp-dev:
   slackware: [assimp]
   ubuntu:
     '*': [libassimp-dev]
+at:
+  alpine: [at]
+  arch: [at]
+  debian: [at]
+  fedora: [at]
+  gentoo: [sys-process/at]
+  nixos: [at]
+  opensuse: [at]
+  rhel: [at]
+  ubuntu: [at]
 at-spi2-core:
   arch: [at-spi2-core]
   debian: [at-spi2-core]
@@ -551,6 +561,12 @@ cgal-qt5-dev:
   fedora: [CGAL-devel]
   gentoo: ['sci-mathematics/cgal[qt5]']
   ubuntu: [libcgal-qt5-dev]
+chafa:
+  arch: [chafa]
+  debian: [chafa]
+  fedora: [chafa]
+  rhel: [chafa]
+  ubuntu: [chafa]
 checkinstall:
   debian: [checkinstall]
   nixos: [checkinstall]
@@ -1123,6 +1139,7 @@ festival:
   debian: [festival, festvox-kallpc16k]
   fedora: [festival, festvox-kal-diphone]
   gentoo: [app-accessibility/festival]
+  nixos: [festival-stub]
   openembedded: [festival@meta-ros1]
   ubuntu: [festival, festvox-kallpc16k]
 festival-dev:
@@ -1880,7 +1897,10 @@ gstreamer1.0-plugins-good:
   openembedded: [gstreamer1.0-plugins-good@openembedded-core]
   opensuse: [gstreamer-plugins-good]
   rhel: [gstreamer1-plugins-good]
-  ubuntu: [gstreamer1.0-plugins-good, libgstreamer-plugins-good1.0-0]
+  ubuntu:
+    '*': [gstreamer1.0-plugins-good]
+    jammy: [gstreamer1.0-plugins-good, libgstreamer-plugins-good1.0-0]
+    noble: [gstreamer1.0-plugins-good, libgstreamer-plugins-good1.0-0]
 gstreamer1.0-plugins-ugly:
   arch: [gst-plugins-ugly]
   debian: [gstreamer1.0-plugins-ugly]
@@ -2543,6 +2563,16 @@ iputils-ping:
   fedora: [iputils]
   nixos: [unixtools.ping]
   ubuntu: [iputils-ping]
+iw:
+  alpine: [iw]
+  arch: [iw]
+  debian: [iw]
+  fedora: [iw]
+  gentoo: [net-wireless/iw]
+  nixos: [iw]
+  opensuse: [iw]
+  rhel: [iw]
+  ubuntu: [iw]
 iwyu:
   debian: [iwyu]
   fedora: [iwyu]
@@ -2606,6 +2636,10 @@ jskeus:
   debian: [jskeus]
   ubuntu:
     jammy: [jskeus]
+jskeus-dev:
+  debian: [jskeus-dev]
+  ubuntu:
+    jammy: [jskeus-dev]
 julius-voxforge:
   fedora: [julius-voxforge]
   ubuntu: [julius-voxforge]
@@ -4773,9 +4807,11 @@ libjsoncpp:
   opensuse: [libjsoncpp19]
   rhel: [jsoncpp]
   ubuntu:
-    '*': [libjsoncpp25]
+    '*': [libjsoncpp26]
     bionic: [libjsoncpp1]
     focal: [libjsoncpp1]
+    jammy: [libjsoncpp25]
+    noble: [libjsoncpp25]
 libjsoncpp-dev:
   arch: [jsoncpp]
   debian: [libjsoncpp-dev]
@@ -6628,6 +6664,32 @@ libqt6-multimedia:
   ubuntu:
     '*': [libqt6multimedia6]
     'focal': null
+libqt6-opengl:
+  alpine: [qt6-qtbase]
+  arch: [qt6-base]
+  debian: [libqt6opengl6]
+  fedora: [qt6-qtbase]
+  nixos: [qt6.qtbase]
+  openembedded: [qtbase@meta-qt6]
+  rhel:
+    '*': [qt6-qtbase]
+    '8': null
+  ubuntu:
+    '*': [libqt6opengl6]
+    'focal': null
+    'noble': [libqt6opengl6t64]
+libqt6-opengl-dev:
+  arch: [qt6-base]
+  debian: [qt6-base-dev]
+  fedora: [qt6-qtbase-devel]
+  nixos: [qt6.qtbase]
+  openembedded: [qtbase@meta-qt6]
+  rhel:
+    '*': [qt6-qtbase-devel]
+    '8': null
+  ubuntu:
+    '*': [qt6-base-dev]
+    'focal': null
 libqt6-qml:
   arch: [qt6-declarative]
   debian: [libqt6qml6]
@@ -6675,6 +6737,20 @@ libqt6-websockets:
   ubuntu:
     '*': [libqt6websockets6]
     'focal': null
+libqt6-widgets:
+  alpine: [qt6-qtbase]
+  arch: [qt6-base]
+  debian: [libqt6widgets6]
+  fedora: [qt6-qtbase]
+  nixos: [qt6.qtbase]
+  openembedded: [qtbase@meta-qt6]
+  rhel:
+    '*': [qt6-qtbase]
+    '8': null
+  ubuntu:
+    '*': [libqt6widgets6]
+    'focal': null
+    'noble': [libqt6widgets6t64]
 libqt6bluetooth6:
   alpine: [qt6-qtconnectivity]
   arch: [qt6-connectivity]
@@ -6793,7 +6869,7 @@ libqtgui:
   ubuntu:
     '*': [libqt6gui6]
     'focal': null
-    'jammy': null
+    'jammy': [libqt5gui5]
     'noble': [libqt5gui5t64]
 libqtgui4:
   debian: [libqtgui4]
@@ -6817,7 +6893,7 @@ libqtopengl:
   ubuntu:
     '*': [libqt6opengl6]
     'focal': null
-    'jammy': null
+    'jammy': [libqt5opengl5]
     'noble': [libqt5opengl5t64]
 libqtsvg:
   alpine: [qt6-qtsvg]
@@ -6836,6 +6912,7 @@ libqtsvg:
     'focal': null
     'jammy': null
     'noble': [libqt5svg5]
+    'resolute': [libqt6svg6, qt6-svg-plugins]
 libqtwebkit-dev:
   debian: [libqtwebkit-dev]
   fedora: [qtwebkit-devel]
@@ -7031,6 +7108,11 @@ libsimage-dev:
   debian: [libsimage-dev]
   gentoo: [media-libs/simage]
   ubuntu: [libsimage-dev]
+libsimpleini-dev:
+  debian: [libsimpleini-dev]
+  fedora: [simpleini-devel]
+  nixos: [simpleini]
+  ubuntu: [libsimpleini-dev]
 libsndfile1-dev:
   arch: [libsndfile]
   debian: [libsndfile1-dev]
@@ -7982,6 +8064,21 @@ libzstd-dev:
   rhel: [libzstd-devel]
   ubuntu:
     '*': [libzstd-dev]
+libzxing-dev:
+  alpine: [zxing-cpp-dev]
+  arch: [zxing-cpp]
+  debian: [libzxing-dev]
+  fedora: [zxing-cpp-devel]
+  gentoo: [media-libs/zxing-cpp]
+  nixos: [zxing-cpp]
+  osx:
+    homebrew:
+      packages: [zxing-cpp]
+  rhel: [zxing-cpp-devel]
+  ubuntu:
+    '*': [libzxing-dev]
+    focal: [libzxingcore-dev]
+    jammy: [libzxingcore-dev]
 light-locker:
   arch: [light-locker]
   debian: [light-locker]
@@ -8558,10 +8655,12 @@ nvidia-cuda-dev:
   arch: [cuda]
   debian: [nvidia-cuda-dev]
   gentoo: [dev-util/nvidia-cuda-sdk, dev-util/nvidia-cuda-gdk]
+  nixos: [cudaPackages.cudatoolkit]
   ubuntu: [nvidia-cuda-dev]
 nvidia-cudnn:
   arch: [cudnn]
   debian: [nvidia-cudnn]
+  nixos: [cudaPackages.cudnn]
   ubuntu:
     '*': [nvidia-cudnn]
     focal: null
@@ -9412,7 +9511,7 @@ qt-base-dev:
   ubuntu:
     '*': [qt6-base-dev]
     'focal': null
-    'jammy': null
+    'jammy': [qtbase5-dev]
     'noble': [qtbase5-dev]
 qt-svg-dev:
   alpine: [qt6-qtsvg-dev]
@@ -9673,6 +9772,7 @@ qtbase5-private-dev:
   arch: [qt5-base]
   debian: [qtbase5-private-dev]
   fedora: [qt5-qtbase-private-devel]
+  nixos: [qt5.qtbase]
   rhel: [qt5-qtbase-private-devel]
   ubuntu: [qtbase5-private-dev]
 qtdeclarative5-dev:
@@ -9838,6 +9938,7 @@ rsyslog:
   fedora: [rsyslog]
   gentoo: [app-admin/rsyslog]
   nixos: [rsyslog]
+  openembedded: [rsyslog@meta-oe]
   opensuse: [rsyslog]
   rhel: [rsyslog]
   ubuntu: [rsyslog]
@@ -10789,6 +10890,18 @@ wayland-dev:
   openembedded: [wayland@openembedded-core]
   rhel: [wayland-devel, wayland-protocols-devel]
   ubuntu: [libwayland-dev, wayland-protocols]
+websockify:
+  alpine: [websockify]
+  arch: null
+  debian: [websockify]
+  fedora: [python3-websockify]
+  freebsd: [py312-websockify]
+  gentoo: [dev-python/websockify]
+  nixos: [python313Packages.websockify]
+  openembedded: null
+  opensuse: [python-websockify]
+  rhel: [python3-websockify]
+  ubuntu: [websockify]
 wget:
   arch: [wget]
   debian: [wget]

@@ -183,6 +183,31 @@ cython3:
   gentoo: [dev-python/cython]
   nixos: [python3Packages.cython]
   ubuntu: [cython3]
+datamodel-code-generator:
+  arch:
+    '*':
+      pip:
+        packages: [datamodel-code-generator]
+  debian:
+    '*':
+      pip:
+        packages: [datamodel-code-generator]
+    trixie: [python3-datamodel-code-generator]
+  fedora:
+    '*':
+      pip:
+        packages: [datamodel-code-generator]
+  nixos: [python3Packages.datamodel-code-generator]
+  opensuse:
+    '*':
+      pip:
+        packages: [datamodel-code-generator]
+    tumbleweed: [python-datamodel-code-generator]
+  ubuntu:
+    '*':
+      pip:
+        packages: [datamodel-code-generator]
+    resolute: [python3-datamodel-code-generator]
 dpath-pip:
   ubuntu:
     pip:
@@ -548,6 +573,22 @@ python3-aabbtree-pip:
   '*':
     pip:
       packages: [aabbtree]
+python3-absl:
+  alpine:
+    pip:
+      packages: [absl-py]
+  arch: [python-absl]
+  debian: [python3-absl]
+  fedora: [python3-absl-py]
+  gentoo: [dev-python/abseil-py]
+  nixos: [python3Packages.absl-py]
+  opensuse: [python3-abseil]
+  rhel: [python3-absl-py]
+  ubuntu:
+    '*': [python3-absl]
+    focal:
+      pip:
+        packages: [absl-py]
 python3-adafruit-blinka-pip:
   debian:
     pip:
@@ -839,6 +880,10 @@ python3-awsiotsdk-pip:
   ubuntu:
     pip:
       packages: [awsiotsdk]
+python3-azure-storage:
+  debian: [python3-azure-storage]
+  fedora: [python3-azure-storage-blob]
+  ubuntu: [python3-azure-storage]
 python3-babel:
   debian: [python3-babel]
   fedora: [python3-babel]
@@ -2593,6 +2638,7 @@ python3-graphviz:
   fedora: [python3-graphviz]
   gentoo: [dev-python/graphviz]
   nixos: [python3Packages.graphviz]
+  openembedded: [python3-graphviz@meta-python]
   opensuse: [python3-graphviz]
   rhel: [python3-pygraphviz]
   ubuntu: [python3-graphviz]
@@ -2912,6 +2958,12 @@ python3-interpreter:
   rhel: [python3]
   slackware: [python3]
   ubuntu: [python3-minimal]
+python3-intervals:
+  debian: [python3-intervals]
+  opensuse: [python3-intervals]
+  ubuntu:
+    '*': [python3-intervals]
+    focal: null
 python3-isaaclab-pip:
   '*':
     pip:
@@ -3415,6 +3467,19 @@ python3-minimalmodbus-pip:
   ubuntu:
     pip:
       packages: [minimalmodbus]
+python3-minio-pip:
+  debian:
+    pip:
+      packages: [minio]
+  fedora:
+    pip:
+      packages: [minio]
+  osx:
+    pip:
+      packages: [minio]
+  ubuntu:
+    pip:
+      packages: [minio]
 python3-mistune:
   alpine:
     pip:
@@ -3636,6 +3701,10 @@ python3-myst-parser-pip:
   ubuntu:
     pip:
       packages: [myst-parser]
+python3-nanobind-pip:
+  '*':
+    pip:
+      packages: [nanobind]
 python3-natsort:
   debian: [python3-natsort]
   fedora: [python3-natsort]
@@ -4434,6 +4503,7 @@ python3-prettytable:
   fedora: [python3-prettytable]
   gentoo: [dev-python/prettytable]
   nixos: [python3Packages.prettytable]
+  openembedded: [python3-prettytable@meta-python]
   ubuntu: [python3-prettytable]
 python3-progressbar:
   arch: [python-progressbar]
@@ -4844,6 +4914,13 @@ python3-pynput:
   ubuntu:
     '*': [python3-pynput]
     focal: null
+python3-pynvml:
+  debian: [python3-pynvml]
+  fedora:
+    pip:
+      packages: [pynvml]
+  nixos: [python3Packages.pynvml]
+  ubuntu: [python3-pynvml]
 python3-pyosmium:
   debian: [python3-pyosmium]
   fedora: [python3-osmium]
@@ -4935,7 +5012,9 @@ python3-pyqt5:
   opensuse: [python3-qt5]
   rhel: ['python%{python3_pkgversion}-qt5-devel', 'python%{python3_pkgversion}-sip-devel', libXext-devel, redhat-rpm-config]
   slackware: [python3-PyQt5]
-  ubuntu: [pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-sip-dev]
+  ubuntu:
+    '*': [pyqt5-dev, python3-pyqt5, python3-pyqt5.qtsvg, python3-sip-dev]
+    resolute: [python3-pyqt5]
 python3-pyqt5.qtquick:
   debian: [python3-pyqt5.qtquick]
   ubuntu: [python3-pyqt5.qtquick]
@@ -4950,6 +5029,19 @@ python3-pyqt5.qtwebengine:
     '*': [python3-qt5-webengine, pyqtwebengine-devel]
     '8': null
   ubuntu: [python3-pyqt5.qtwebengine]
+python3-pyqt6:
+  debian:
+    '*': [python3-pyqt6]
+    bullseye: null
+  fedora: [python3-pyqt6]
+  rhel:
+    '*': [python3-pyqt6]
+    '8': null
+    '9': null
+  ubuntu:
+    '*': [python3-pyqt6]
+    focal: null
+    jammy: null
 python3-pyqt6.qtmultimedia:
   debian:
     '*': [python3-pyqt6.qtmultimedia]
@@ -6323,6 +6415,7 @@ python3-smbus:
 python3-smbus2:
   debian: [python3-smbus2]
   nixos: [python3Packages.smbus2]
+  openembedded: [python3-smbus2@meta-python]
   ubuntu:
     '*': [python3-smbus2]
     focal: null
@@ -6360,6 +6453,14 @@ python3-socketio:
   ubuntu:
     '*': [python3-socketio]
     bionic: null
+python3-sortedcollections:
+  debian: [python3-sortedcollections]
+  fedora:
+    '*': null
+    '41': [python3-sortedcollections]
+    '42': [python3-sortedcollections]
+  opensuse: [python3-sortedcollections]
+  ubuntu: [python3-sortedcollections]
 python3-sortedcollections-pip:
   debian:
     pip:
@@ -7033,6 +7134,7 @@ python3-ujson:
   fedora: [python3-ujson]
   gentoo: [dev-python/ujson]
   nixos: [python3Packages.ujson]
+  openembedded: [python3-ujson@meta-python]
   osx:
     pip:
       packages: [ujson]
@@ -7141,6 +7243,7 @@ python3-uvloop:
 python3-validators:
   debian: [python3-validators]
   fedora: [python3-validators]
+  openembedded: [python3-validators@meta-python]
   opensuse: [python3-validators]
   ubuntu:
     '*': [python3-validators]
@@ -7446,6 +7549,18 @@ python3-zmq:
   nixos: [python3Packages.pyzmq]
   rhel: [python3-zmq]
   ubuntu: [python3-zmq]
+python3-zxing-cpp:
+  alpine: [py3-zxing-cpp]
+  debian: [python3-zxing-cpp]
+  fedora: [python3-zxing-cpp]
+  rhel:
+    '*': [python3-zxing-cpp]
+    '8': null
+    '9': null
+  ubuntu:
+    '*': [python3-zxing-cpp]
+    focal: null
+    jammy: null
 qdarkstyle-pip:
   debian:
     pip: [qdarkstyle]
