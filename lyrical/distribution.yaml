@@ -5,11 +5,34 @@
 release_platforms:
   debian:
   - trixie
+  fedora:
+  - '43'
   rhel:
   - '10'
   ubuntu:
   - resolute
 repositories:
+  NavMap:
+    doc:
+      type: git
+      url: https://github.com/EasyNavigation/NavMap.git
+      version: lyrical
+    release:
+      packages:
+      - navmap_core
+      - navmap_examples
+      - navmap_ros
+      - navmap_ros_interfaces
+      - navmap_rviz_plugin
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/EasyNavigation/NavMap-release.git
+      version: 0.5.1-1
+    source:
+      type: git
+      url: https://github.com/EasyNavigation/NavMap.git
+      version: lyrical
+    status: developed
   SMACC2:
     doc:
       type: git
@@ -223,7 +246,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/ament_cmake-release.git
-      version: 2.8.7-3
+      version: 2.8.8-1
     source:
       test_pull_requests: true
       type: git
@@ -946,7 +969,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/behaviortree_cpp_v4-release.git
-      version: 4.9.1-1
+      version: 4.10.0-1
     source:
       type: git
       url: https://github.com/BehaviorTree/BehaviorTree.CPP.git
@@ -1124,7 +1147,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/cascade_lifecycle-release.git
-      version: 2.0.4-3
+      version: 2.0.6-1
     source:
       type: git
       url: https://github.com/fmrico/cascade_lifecycle.git
@@ -1775,12 +1798,13 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/dynamixel_hardware-release.git
-      version: 0.6.0-3
+      version: 0.6.1-2
     source:
       type: git
       url: https://github.com/dynamixel-community/dynamixel_hardware.git
       version: rolling
-    status: developed
+    status: end-of-life
+    status_description: Use dynamixel_hardware_interface; see https://github.com/dynamixel-community/dynamixel_hardware
   dynamixel_hardware_interface:
     doc:
       type: git
@@ -1859,6 +1883,72 @@ repositories:
       url: https://github.com/ROBOTIS-GIT/dynamixel-workbench-msgs.git
       version: ros2
     status: maintained
+  easynav:
+    doc:
+      type: git
+      url: https://github.com/EasyNavigation/EasyNavigation.git
+      version: lyrical
+    release:
+      packages:
+      - easynav
+      - easynav_common
+      - easynav_controller
+      - easynav_core
+      - easynav_interfaces
+      - easynav_localizer
+      - easynav_maps_manager
+      - easynav_planner
+      - easynav_sensors
+      - easynav_support_py
+      - easynav_system
+      - easynav_tools
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/EasyNavigation/EasyNavigation-release.git
+      version: 0.4.2-2
+    source:
+      type: git
+      url: https://github.com/EasyNavigation/EasyNavigation.git
+      version: lyrical
+    status: developed
+  easynav_plugins:
+    doc:
+      type: git
+      url: https://github.com/EasyNavigation/easynav_plugins.git
+      version: lyrical
+    release:
+      packages:
+      - easynav_bonxai_maps_manager
+      - easynav_costmap_common
+      - easynav_costmap_localizer
+      - easynav_costmap_maps_manager
+      - easynav_costmap_planner
+      - easynav_fusion_localizer
+      - easynav_gps_localizer
+      - easynav_mpc_controller
+      - easynav_mppi_controller
+      - easynav_navmap_localizer
+      - easynav_navmap_maps_manager
+      - easynav_navmap_planner
+      - easynav_octomap_maps_manager
+      - easynav_regulated_pp_controller
+      - easynav_routes_maps_manager
+      - easynav_serest_controller
+      - easynav_simple_common
+      - easynav_simple_controller
+      - easynav_simple_localizer
+      - easynav_simple_maps_manager
+      - easynav_simple_planner
+      - easynav_vff_controller
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/EasyNavigation/easynav_plugins-release.git
+      version: 0.4.2-2
+    source:
+      type: git
+      url: https://github.com/EasyNavigation/easynav_plugins.git
+      version: lyrical
+    status: developed
   ecal:
     doc:
       type: git
@@ -2482,7 +2572,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/foxglove_bridge-release.git
-      version: 3.4.2-1
+      version: 3.4.3-1
     source:
       type: git
       url: https://github.com/foxglove/foxglove-sdk.git
@@ -2593,7 +2683,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/generate_parameter_library-release.git
-      version: 1.2.0-1
+      version: 1.3.0-1
     source:
       type: git
       url: https://github.com/PickNikRobotics/generate_parameter_library.git
@@ -2658,7 +2748,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/geometry2-release.git
-      version: 0.45.8-1
+      version: 0.45.9-1
     source:
       test_pull_requests: true
       type: git
@@ -2763,7 +2853,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/graph_msgs-release.git
-      version: 0.2.0-7
+      version: 0.2.1-1
     source:
       type: git
       url: https://github.com/PickNikRobotics/graph_msgs.git
@@ -2913,7 +3003,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/gz_common_vendor-release.git
-      version: 0.3.5-4
+      version: 0.3.6-1
     source:
       test_pull_requests: true
       type: git
@@ -2993,7 +3083,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/gz_math_vendor-release.git
-      version: 0.4.3-3
+      version: 0.4.4-1
     source:
       test_pull_requests: true
       type: git
@@ -3009,7 +3099,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/gz_msgs_vendor-release.git
-      version: 0.3.3-3
+      version: 0.3.4-2
     source:
       test_pull_requests: true
       type: git
@@ -3041,7 +3131,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/gz_physics_vendor-release.git
-      version: 0.4.4-1
+      version: 0.4.5-1
     source:
       test_pull_requests: true
       type: git
@@ -3073,7 +3163,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/gz_rendering_vendor-release.git
-      version: 0.4.3-3
+      version: 0.4.4-1
     source:
       test_pull_requests: true
       type: git
@@ -3107,7 +3197,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/gz_sensors_vendor-release.git
-      version: 0.3.2-3
+      version: 0.3.3-1
     source:
       test_pull_requests: true
       type: git
@@ -3123,7 +3213,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/gz_sim_vendor-release.git
-      version: 0.4.5-1
+      version: 0.4.6-1
     source:
       test_pull_requests: true
       type: git
@@ -3155,7 +3245,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/gz_transport_vendor-release.git
-      version: 0.3.4-3
+      version: 0.3.5-1
     source:
       test_pull_requests: true
       type: git
@@ -3606,7 +3696,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/joint_state_publisher-release.git
-      version: 2.4.2-1
+      version: 2.4.3-1
     source:
       test_pull_requests: true
       type: git
@@ -3667,6 +3757,29 @@ repositories:
       url: https://github.com/jrl-umi3218/jrl-cmakemodules.git
       version: master
     status: maintained
+  jsk_common_msgs:
+    doc:
+      type: git
+      url: https://github.com/jsk-ros-pkg/jsk_common_msgs.git
+      version: master
+    release:
+      packages:
+      - jsk_common_msgs
+      - jsk_footstep_msgs
+      - jsk_gui_msgs
+      - jsk_hark_msgs
+      - posedetection_msgs
+      - speech_recognition_msgs
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/tork-a/jsk_common_msgs-release.git
+      version: 5.0.1-3
+    source:
+      test_commits: false
+      type: git
+      url: https://github.com/jsk-ros-pkg/jsk_common_msgs.git
+      version: master
+    status: developed
   kdl_parser:
     doc:
       type: git
@@ -4097,7 +4210,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/lazytatzv/libbno055_linux-release.git
-      version: 1.7.1-1
+      version: 1.7.2-1
     source:
       type: git
       url: https://github.com/lazytatzv/libbno055-linux.git
@@ -4450,7 +4563,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/mavlink-gbp-release.git
-      version: 2026.6.19-1
+      version: 2026.8.8-1
     source:
       type: git
       url: https://github.com/mavlink/mavlink-gbp-release.git
@@ -4471,7 +4584,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/mavros-release.git
-      version: 2.14.0-3
+      version: 2.15.0-1
     source:
       type: git
       url: https://github.com/mavlink/mavros.git
@@ -4771,7 +4884,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/mola_input_rosbag1-release.git
-      version: 0.2.0-1
+      version: 0.4.0-1
     source:
       type: git
       url: https://github.com/MOLAorg/mola_input_rosbag1.git
@@ -4786,7 +4899,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/mola_lidar_odometry-release.git
-      version: 3.0.0-1
+      version: 3.1.0-1
     source:
       type: git
       url: https://github.com/MOLAorg/mola_lidar_odometry.git
@@ -4872,6 +4985,21 @@ repositories:
       version: ros2
     status: developed
   move_base_flex:
+    release:
+      packages:
+      - mbf_abstract_core
+      - mbf_abstract_nav
+      - mbf_msgs
+      - mbf_simple_core
+      - mbf_simple_nav
+      - mbf_test_utility
+      - mbf_utility
+      - move_base_flex
+      - rviz_mbf_plugins
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/ros2-gbp/move_base_flex-release.git
+      version: 1.2.1-1
     source:
       type: git
       url: https://github.com/naturerobots/move_base_flex.git
@@ -5005,7 +5133,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/moveit_visual_tools-release.git
-      version: 4.1.2-3
+      version: 4.2.0-1
     source:
       type: git
       url: https://github.com/ros-planning/moveit_visual_tools.git
@@ -5193,7 +5321,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/mrpt_ros-release.git
-      version: 2.15.19-1
+      version: 2.15.20-1
     source:
       type: git
       url: https://github.com/MRPT/mrpt_ros.git
@@ -5342,7 +5470,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/nanoflann-release.git
-      version: 1.10.1-1
+      version: 1.11.0-1
     source:
       type: git
       url: https://github.com/jlblancoc/nanoflann.git
@@ -5420,6 +5548,68 @@ repositories:
       url: https://github.com/ros-navigation/nav2_minimal_turtlebot_simulation.git
       version: main
     status: maintained
+  navigation2:
+    doc:
+      type: git
+      url: https://github.com/ros-planning/navigation2.git
+      version: lyrical
+    release:
+      packages:
+      - costmap_queue
+      - dwb_core
+      - dwb_critics
+      - dwb_msgs
+      - dwb_plugins
+      - nav2_amcl
+      - nav2_behavior_tree
+      - nav2_behaviors
+      - nav2_bringup
+      - nav2_bt_navigator
+      - nav2_collision_monitor
+      - nav2_common
+      - nav2_constrained_smoother
+      - nav2_controller
+      - nav2_core
+      - nav2_costmap_2d
+      - nav2_dwb_controller
+      - nav2_graceful_controller
+      - nav2_lifecycle_manager
+      - nav2_loopback_sim
+      - nav2_map_server
+      - nav2_mppi_controller
+      - nav2_msgs
+      - nav2_navfn_planner
+      - nav2_planner
+      - nav2_regulated_pure_pursuit_controller
+      - nav2_ros_common
+      - nav2_rotation_shim_controller
+      - nav2_route
+      - nav2_rviz_plugins
+      - nav2_simple_commander
+      - nav2_smac_planner
+      - nav2_smoother
+      - nav2_system_tests
+      - nav2_theta_star_planner
+      - nav2_util
+      - nav2_velocity_smoother
+      - nav2_voxel_grid
+      - nav2_waypoint_follower
+      - nav_2d_msgs
+      - nav_2d_utils
+      - navigation2
+      - opennav_docking
+      - opennav_docking_bt
+      - opennav_docking_core
+      - opennav_following
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/ros2-gbp/navigation2-release.git
+      version: 1.5.0-1
+    source:
+      type: git
+      url: https://github.com/ros-planning/navigation2.git
+      version: lyrical
+    status: developed
   navigation_msgs:
     doc:
       type: git
@@ -5571,6 +5761,21 @@ repositories:
       url: https://github.com/osrf/nodl_to_policy.git
       version: master
     status: maintained
+  nonpersistent_voxel_layer:
+    doc:
+      type: git
+      url: https://github.com/SteveMacenski/nonpersistent_voxel_layer.git
+      version: lyrical
+    release:
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/SteveMacenski/nonpersistent_voxel_layer-release.git
+      version: 2.7.0-1
+    source:
+      type: git
+      url: https://github.com/SteveMacenski/nonpersistent_voxel_layer.git
+      version: lyrical
+    status: developed
   novatel_gps_driver:
     doc:
       type: git
@@ -5997,7 +6202,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/pal_statistics-release.git
-      version: 2.7.0-3
+      version: 2.8.0-1
     source:
       type: git
       url: https://github.com/pal-robotics/pal_statistics.git
@@ -6180,7 +6385,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/pick_ik-release.git
-      version: 1.1.1-3
+      version: 1.1.3-1
     source:
       type: git
       url: https://github.com/PickNikRobotics/pick_ik.git
@@ -6409,7 +6614,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/li9i/pointcloud-conversions-release.git
-      version: 0.0.3-1
+      version: 0.0.4-3
     source:
       type: git
       url: https://github.com/li9i/pointcloud-conversions.git
@@ -6452,6 +6657,21 @@ repositories:
       url: https://github.com/MetroRobots/polygon_ros.git
       version: main
     status: developed
+  popf:
+    doc:
+      type: git
+      url: https://github.com/fmrico/popf.git
+      version: lyrical-devel
+    release:
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/ros2-gbp/popf-release.git
+      version: 0.0.20-1
+    source:
+      type: git
+      url: https://github.com/fmrico/popf.git
+      version: lyrical-devel
+    status: maintained
   pose_cov_ops:
     doc:
       type: git
@@ -6491,8 +6711,9 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/proxsuite-release.git
-      version: 0.6.5-3
+      version: 0.7.3-1
     source:
+      test_commits: false
       type: git
       url: https://github.com/Simple-Robotics/proxsuite.git
       version: devel
@@ -7081,7 +7302,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/rclcpp-release.git
-      version: 32.0.1-1
+      version: 32.0.2-1
     source:
       test_pull_requests: true
       type: git
@@ -7305,7 +7526,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/rig_reconfigure-release.git
-      version: 1.6.0-3
+      version: 1.6.1-1
     source:
       test_pull_requests: true
       type: git
@@ -7321,7 +7542,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/rko_lio-release.git
-      version: 0.3.1-1
+      version: 0.3.2-1
     source:
       type: git
       url: https://github.com/PRBonn/rko_lio.git
@@ -7720,7 +7941,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/rmw_fastrtps-release.git
-      version: 9.4.8-1
+      version: 9.4.9-1
     source:
       test_pull_requests: true
       type: git
@@ -7754,7 +7975,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/rmw_implementation-release.git
-      version: 3.1.5-6
+      version: 3.1.6-1
     source:
       test_pull_requests: true
       type: git
@@ -7774,7 +7995,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/rmw_zenoh-release.git
-      version: 0.10.4-1
+      version: 0.10.5-1
     source:
       type: git
       url: https://github.com/ros2/rmw_zenoh.git
@@ -7798,7 +8019,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/roboplan-release.git
-      version: 0.5.1-1
+      version: 0.6.0-1
     source:
       type: git
       url: https://github.com/open-planning/roboplan.git
@@ -7809,6 +8030,17 @@ repositories:
       type: git
       url: https://github.com/open-planning/roboplan-ros.git
       version: main
+    release:
+      packages:
+      - roboplan_ros_cpp
+      - roboplan_ros_examples
+      - roboplan_ros_franka
+      - roboplan_ros_py
+      - roboplan_ros_visualization
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/ros2-gbp/roboplan_ros-release.git
+      version: 0.6.0-1
     source:
       type: git
       url: https://github.com/open-planning/roboplan-ros.git
@@ -8099,6 +8331,39 @@ repositories:
       type: git
       url: https://github.com/selfpatch/ros2_medkit.git
       version: main
+    status: developed
+  ros2_planning_system:
+    doc:
+      type: git
+      url: https://github.com/PlanSys2/ros2_planning_system.git
+      version: lyrical-devel
+    release:
+      packages:
+      - plansys2
+      - plansys2_bringup
+      - plansys2_bt_actions
+      - plansys2_core
+      - plansys2_domain_expert
+      - plansys2_executor
+      - plansys2_lifecycle_manager
+      - plansys2_msgs
+      - plansys2_pddl_parser
+      - plansys2_planner
+      - plansys2_popf_plan_solver
+      - plansys2_problem_expert
+      - plansys2_support_py
+      - plansys2_terminal
+      - plansys2_tests
+      - plansys2_tools
+      - plansys2_tui_cli
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/ros2-gbp/ros2_planning_system-release.git
+      version: 3.1.0-1
+    source:
+      type: git
+      url: https://github.com/PlanSys2/ros2_planning_system.git
+      version: lyrical-devel
     status: developed
   ros2_robotiq_gripper:
     doc:
@@ -9545,7 +9810,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/rviz_2d_overlay_plugins-release.git
-      version: 1.4.1-3
+      version: 1.4.2-1
     source:
       type: git
       url: https://github.com/teamspatzenhirn/rviz_2d_overlay_plugins.git
@@ -9581,7 +9846,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/rviz_visual_tools-release.git
-      version: 4.1.4-5
+      version: 4.2.0-1
     source:
       type: git
       url: https://github.com/PickNikRobotics/rviz_visual_tools.git
@@ -9592,6 +9857,11 @@ repositories:
       type: git
       url: https://github.com/SBG-Systems/sbg_ros2.git
       version: master
+    release:
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/SBG-Systems/sbg_ros2-release.git
+      version: 3.4.0-1
     source:
       test_pull_requests: true
       type: git
@@ -9673,7 +9943,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/sick_safetyscanners2-release.git
-      version: 1.0.4-3
+      version: 1.0.5-1
     source:
       type: git
       url: https://github.com/SICKAG/sick_safetyscanners2.git
@@ -9688,7 +9958,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/sick_safetyscanners2_interfaces-release.git
-      version: 1.0.0-3
+      version: 1.0.1-1
     source:
       type: git
       url: https://github.com/SICKAG/sick_safetyscanners2_interfaces.git
@@ -9819,7 +10089,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/SteveMacenski/slam_toolbox-release.git
-      version: 2.10.0-1
+      version: 2.10.0-2
     source:
       test_pull_requests: true
       type: git
@@ -9975,6 +10245,24 @@ repositories:
       url: https://github.com/clalancette/sophus.git
       version: release/1.22.x
     status: maintained
+  spatio_temporal_voxel_layer:
+    doc:
+      type: git
+      url: https://github.com/SteveMacenski/spatio_temporal_voxel_layer.git
+      version: lyrical
+    release:
+      packages:
+      - openvdb_vendor
+      - spatio_temporal_voxel_layer
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/SteveMacenski/spatio_temporal_voxel_layer-release.git
+      version: 2.7.0-1
+    source:
+      type: git
+      url: https://github.com/SteveMacenski/spatio_temporal_voxel_layer.git
+      version: lyrical
+    status: developed
   spdlog_vendor:
     release:
       tags:
@@ -10415,7 +10703,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/toppra-release.git
-      version: 0.6.8-1
+      version: 0.6.9-1
     source:
       type: git
       url: https://github.com/hungpham2511/toppra.git
@@ -10855,7 +11143,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/Universal_Robots_Client_Library-release.git
-      version: 2.14.0-1
+      version: 2.14.1-1
     source:
       type: git
       url: https://github.com/UniversalRobots/Universal_Robots_Client_Library.git
@@ -11109,16 +11397,16 @@ repositories:
     doc:
       type: git
       url: https://gitlab.com/boldhearts/ros2_v4l2_camera.git
-      version: rolling
+      version: lyrical
     release:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/ros2_v4l2_camera-release.git
-      version: 0.8.0-3
+      version: 0.8.1-1
     source:
       type: git
       url: https://gitlab.com/boldhearts/ros2_v4l2_camera.git
-      version: rolling
+      version: lyrical
     status: developed
   variants:
     doc:
@@ -11305,7 +11593,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/warehouse_ros-release.git
-      version: 2.0.6-3
+      version: 2.0.7-1
     source:
       type: git
       url: https://github.com/ros-planning/warehouse_ros.git
@@ -11320,7 +11608,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/warehouse_ros_sqlite-release.git
-      version: 1.0.8-1
+      version: 1.0.9-1
     source:
       type: git
       url: https://github.com/ros-planning/warehouse_ros_sqlite.git
@@ -11406,6 +11694,21 @@ repositories:
       url: https://github.com/ros/xacro.git
       version: ros2
     status: maintained
+  yaets:
+    doc:
+      type: git
+      url: https://github.com/fmrico/yaets.git
+      version: lyrical
+    release:
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/fmrico/yaets-release.git
+      version: 1.1.0-1
+    source:
+      type: git
+      url: https://github.com/fmrico/yaets.git
+      version: lyrical
+    status: developed
   yaml_cpp_vendor:
     release:
       tags:
@@ -11438,7 +11741,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/yasmin-release.git
-      version: 6.0.0-1
+      version: 6.1.1-1
     source:
       type: git
       url: https://github.com/uleroboticsgroup/yasmin.git
