@@ -20,7 +20,7 @@ def paddify(s, l):
 def quote_if_necessary(s):
     if type(s) is list:
         return [quote_if_necessary(a) for a in s]
-    return re.search('a: (.*)\n', yaml.dump({'a': s})).group(1)
+    return yaml.dump([s], default_flow_style=True).strip()[1:-1]
 
 
 def prn(n, nm, lvl):
@@ -32,7 +32,12 @@ def prn(n, nm, lvl):
         try:
             nm_int = int(nm)
         except ValueError:
-            pass
+            try:
+                float(nm)
+            except ValueError:
+                pass
+            else:
+                nm = "'%s'" % nm
         else:
             if str(nm_int) == nm:
                 nm = "'%d'" % nm_int
