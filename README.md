@@ -1,7 +1,7 @@
 This repository maintains two independent sets of packaging metadata used in ROS:
 
 1. The lists of repositories that curate ROS packages for each ROS distributions,
-   implementing the data structure defined in [REP 143](http://ros.org/reps/rep-0143.html).
+   implementing the data structure defined in [REP 143](https://reps.openrobotics.org/rep-0143/).
    Any ROS package release will generate pull requests to the distribution files
    in this repository.
 
