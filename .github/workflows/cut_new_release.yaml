@@ -1,0 +1,110 @@
+---
+name: Cut a new ROS release
+# this is fine since gha runs with yaml 1.2
+on:  # yamllint disable-line rule:truthy
+  workflow_dispatch:
+    inputs:
+      distribution:
+        description: 'Which distribution is the release for?'
+        required: true
+        type: choice
+        options:
+        - 'jazzy'
+        - 'kilted'
+        - 'lyrical'
+        - 'rolling'
+        default: 'rolling'
+      date:
+        description: 'Release in YYYY-MM-DD. Default is today.'
+        required: false
+        type: string
+jobs:
+  cut-new-release:
+    permissions:
+      pull-requests: write
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+    # Add any missing inputs.
+    - name: Calculate final inputs
+      env:
+        OLD_CACHE_URL_BASE: "http://repo.ros2.org/rosdistro_cache"
+        NEW_CACHE_URL_BASE: "https://github.com/ros/rosdistro/releases/download"
+      run: |
+        USER_INPUT="${{ inputs.date }}"
+        if [ -z "$USER_INPUT" ]; then
+          FINAL_DATE=$(TZ="America/Los_Angeles" date +%Y-%m-%d)
+          FINAL_REF=master
+          echo "Date used: $FINAL_DATE (branch: $FINAL_REF, must exist)"
+        else
+          FINAL_DATE=$USER_INPUT
+          FINAL_REF=${{ inputs.distribution }}/$FINAL_DATE
+          echo "Date provided: $FINAL_DATE (tag: $FINAL_REF, must exist)"
+        fi
+        OLD_URL_SUFFIX=${{ inputs.distribution }}-cache.yaml.gz
+        NEW_URL_SUFFIX=${{ inputs.distribution }}/$FINAL_DATE/${{ inputs.distribution }}-cache.yaml.gz
+        echo "RELEASE_DISTRIBUTION=${{ inputs.distribution }}" >> $GITHUB_ENV
+        echo "RELEASE_DATE=$FINAL_DATE" >> $GITHUB_ENV
+        echo "RELEASE_REF=$FINAL_REF" >> $GITHUB_ENV
+        echo "RELEASE_TAG=${{ inputs.distribution }}/$FINAL_DATE" >> $GITHUB_ENV
+        echo "RELEASE_CACHE_OLD_URL=${{ env.OLD_CACHE_URL_BASE }}/$OLD_URL_SUFFIX" >> $GITHUB_ENV
+        echo "RELEASE_CACHE_NEW_URL=${{ env.NEW_CACHE_URL_BASE }}/$NEW_URL_SUFFIX" >> $GITHUB_ENV
+
+    # Echo the release information to console.
+    - name: Print release information
+      run: |
+        echo "Ref: ${{ env.RELEASE_REF }}"
+        echo "Distribution: ${{ env.RELEASE_DISTRIBUTION }}"
+        echo "Date: ${{ env.RELEASE_DATE }}"
+        echo "Tag: ${{ env.RELEASE_TAG }}"
+        echo "Old cache URL: ${{ env.RELEASE_CACHE_OLD_URL }}"
+        echo "New cache URL: ${{ env.RELEASE_CACHE_NEW_URL }}"
+
+    # Checkout the repository master branch.
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ env.RELEASE_REF }}
+
+    # Set up a clean Python environment (Avoids OS-level pip blocks)
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    # Install dependencies for the rosdistro_build_cache tool.
+    - name: Install extra tools via pip
+      run: |
+        python -m pip install --upgrade pip
+        pip install rosdistro
+
+    # Rebuild the cache from scratch.
+    - name: Rebuild cache
+      run: |
+        cd ${{ env.RELEASE_DISTRIBUTION }}
+        sed -i "s|https://github.com/ros-gbp|https://github.com/ros2-gbp|g" distribution.yaml
+        rosdistro_build_cache ../index-v4.yaml ${{ env.RELEASE_DISTRIBUTION }}
+        cd ..
+
+    # Commit the change to the distribution file and push the tagged orphaned commit.
+    - name: Tag orphaned commit for the release
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        sed -i "s|${{ env.RELEASE_CACHE_OLD_URL }}|${{ env.RELEASE_CACHE_NEW_URL }}|g" index.yaml
+        sed -i "s|${{ env.RELEASE_CACHE_OLD_URL }}|${{ env.RELEASE_CACHE_NEW_URL }}|g" index-v4.yaml
+        git add index.yaml index-v4.yaml
+        git commit -m "chore: update cache entry for ${{ env.RELEASE_DISTRIBUTION }}"
+        git tag -f ${{ env.RELEASE_TAG }}
+        git push -f origin tags/${{ env.RELEASE_TAG }}
+
+    # Force-push the release.
+    - name: Push release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ env.RELEASE_TAG }}
+        files: |
+          index.yaml
+          index-v4.yaml
+          ${{ env.RELEASE_DISTRIBUTION }}/${{ env.RELEASE_DISTRIBUTION }}-cache.yaml.gz
