@@ -212,8 +212,20 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
         release_inc = str(max(int(source_inc), int(dest_track['release_inc'])) + 1)
 
         subprocess.check_call(['git', 'bloom-release', '--non-interactive', '--release-increment', release_inc, '--unsafe', args.dest], stdin=subprocess.DEVNULL, env=os.environ)
-        subprocess.check_call(['git', 'push', 'origin', '--all', '--force'])
-        subprocess.check_call(['git', 'push', 'origin', '--tags', '--force'])
+
+        # If something goes wrong, use dry run pushes to ensure we don't
+        # destroy any data in the repository.
+        # 1. Ensure we never force-push branches
+        subprocess.check_call(['git', 'push', 'origin', '--all', '--dry-run'])
+        # 2. Upstream tags may be force pushed, so take care of upstream branch and tags
+        subprocess.check_call(['git', 'push', 'origin', 'upstream'])
+        subprocess.check_call(['git', 'push', 'origin', 'refs/tags/upstream/*', '--force'])
+        # 3. Ensure we never force-push any other tags
+        subprocess.check_call(['git', 'push', 'origin', '--tags', '--dry-run'])
+        # 4. Push all branches and tags, which we now expect to succeed
+        subprocess.check_call(['git', 'push', 'origin', '--all'])
+        subprocess.check_call(['git', 'push', 'origin', '--tags'])
+
         subprocess.check_call(['git', 'checkout', 'master'])
 
         # Re-read tracks.yaml after release.
@@ -228,7 +240,6 @@ for repo_name in sorted(new_repositories + repositories_to_retry):
             del dest_track['release_tag_saved']
             write_tracks_file(tracks, f'Restore saved version and tag for {args.dest} track.')
         new_release_track_inc = str(int(tracks['tracks'][args.dest]['release_inc']))
-        release_spec.url = new_release_repo_url
 
         ver, _inc = release_spec.version.split('-')
         release_spec.version = '-'.join([ver, new_release_track_inc])
