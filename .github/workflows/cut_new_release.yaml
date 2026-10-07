@@ -9,8 +9,6 @@ on:  # yamllint disable-line rule:truthy
         required: true
         type: choice
         options:
-        - 'jazzy'
-        - 'kilted'
         - 'lyrical'
         - 'rolling'
         default: 'rolling'
@@ -83,7 +81,6 @@ jobs:
     - name: Rebuild cache
       run: |
         cd ${{ env.RELEASE_DISTRIBUTION }}
-        sed -i "s|https://github.com/ros-gbp|https://github.com/ros2-gbp|g" distribution.yaml
         rosdistro_build_cache ../index-v4.yaml ${{ env.RELEASE_DISTRIBUTION }}
         cd ..
 
