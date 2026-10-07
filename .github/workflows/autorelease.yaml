@@ -5,6 +5,14 @@ on:  # yamllint disable-line rule:truthy
   push:
     tags:
     - '*/*'
+  # Manual trigger to back-process tags that were created before this workflow
+  # existed (tag pushes only run the workflow present at the tagged commit).
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing tag to release, of the form <distribution>/<YYYY-MM-DD>'
+        required: true
+        type: string
 jobs:
   autorelease:
     permissions:
@@ -12,19 +20,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # Derive the release parameters from the tag name, which is expected to
-    # be of the form <distribution>/<YYYY-MM-DD>.
+    # be of the form <distribution>/<YYYY-MM-DD>. On a tag push the tag comes
+    # from GITHUB_REF; on a manual run it comes from the 'tag' input.
     - name: Calculate release parameters
       env:
         OLD_CACHE_URL_BASE: "http://repo.ros2.org/rosdistro_cache"
         NEW_CACHE_URL_BASE: "https://github.com/ros/rosdistro/releases/download"
+        INPUT_TAG: ${{ inputs.tag }}
       run: |
-        TAG_NAME="${GITHUB_REF#refs/tags/}"
-        DISTRIBUTION="${TAG_NAME%%/*}"
-        RELEASE_DATE="${TAG_NAME#*/}"
-        if ! [[ "$RELEASE_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          TAG_NAME="$INPUT_TAG"
+        else
+          TAG_NAME="${GITHUB_REF#refs/tags/}"
+        fi
+        if ! [[ "$TAG_NAME" =~ ^[a-z]+/[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
           echo "::error::Tag '$TAG_NAME' does not match <distribution>/<YYYY-MM-DD>"
           exit 1
         fi
+        DISTRIBUTION="${TAG_NAME%%/*}"
+        RELEASE_DATE="${TAG_NAME#*/}"
         OLD_URL_SUFFIX=$DISTRIBUTION-cache.yaml.gz
         NEW_URL_SUFFIX=$DISTRIBUTION/$RELEASE_DATE/$DISTRIBUTION-cache.yaml.gz
         echo "RELEASE_DISTRIBUTION=$DISTRIBUTION" >> $GITHUB_ENV
@@ -42,9 +56,11 @@ jobs:
         echo "Old cache URL: ${{ env.RELEASE_CACHE_OLD_URL }}"
         echo "New cache URL: ${{ env.RELEASE_CACHE_NEW_URL }}"
 
-    # Checkout the repository at the pushed tag.
+    # Checkout the repository at the release tag (must already exist).
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        ref: refs/tags/${{ env.RELEASE_TAG }}
 
     # Set up a clean Python environment (Avoids OS-level pip blocks)
     - name: Set up Python
