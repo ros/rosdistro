@@ -70,7 +70,7 @@ jobs:
       with:
         ref: refs/tags/${{ env.RELEASE_TAG }}
 
-    # Set up a clean Python environment (Avoids OS-level pip blocks)
+    # Set up a clean Python environment (avoids OS-level pip blocks).
     - name: Set up Python
       uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
       with:
@@ -118,17 +118,15 @@ jobs:
       uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64  # v3.0.3
       with:
         tag_name: ${{ env.RELEASE_TAG }}
-        body: |
-          This release is exclusively for `${{ env.RELEASE_TAG }}` and contains sufficient
-          self-contained metadata for `rosinstall_generator` and `rosdistro` to recreate a
-          source workspace for this specific release.
+        body: >
+          This release contains metadata required by `rosinstall_generator` and `rosdistro` to recreate
+          a source workspace for the `${{ env.RELEASE_TAG }}` release. To use it, set the environment
+          variable `ROSDISTRO_INDEX_URL` to the following value before running `rosinstall_generator`
+          to generate a `.repos` file, or before calling `rosdep update` to fetch dependency information:
 
-          To use it, export `ROSDISTRO_INDEX_URL` before running `rosinstall_generator` to
-          generate a repos file, or calling `rosdep update` to fetch dependency information:
-
-          ```bash
-          export ROSDISTRO_INDEX_URL=${{ env.RELEASE_INDEX_URL }}
-          ```
+            ```bash
+            ${{ env.RELEASE_INDEX_URL }}
+            ```
         files: |
           index.yaml
           index-v4.yaml
