@@ -88,6 +88,14 @@ jobs:
       run: |
         sed -i "s|${{ env.RELEASE_CACHE_OLD_URL }}|${{ env.RELEASE_CACHE_NEW_URL }}|g" index.yaml
         sed -i "s|${{ env.RELEASE_CACHE_OLD_URL }}|${{ env.RELEASE_CACHE_NEW_URL }}|g" index-v4.yaml
+        if git diff --quiet index.yaml; then
+          echo "::error::index.yaml was not modified (old cache URL not found)"
+          exit 1
+        fi
+        if git diff --quiet index-v4.yaml; then
+          echo "::error::index-v4.yaml was not modified (old cache URL not found)"
+          exit 1
+        fi
 
     # Publish the release against the existing tag.
     - name: Push release
