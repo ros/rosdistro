@@ -493,6 +493,20 @@ cargo:
   opensuse: [cargo]
   rhel: [cargo]
   ubuntu: [cargo]
+cargo-latest:  # for a recent rust version on OS with a pinned release
+  arch: [rust]  # version regularly updated - see https://archlinux.org/packages/extra/x86_64/rust
+  debian: [cargo]  # 1.85 in trixie, 1.95 in forky/sid - Debian has no versioned `cargo-X.Y` packages at all
+  fedora: [cargo]  # version regularly updated - see https://packages.fedoraproject.org/pkgs/rust/cargo/index.html
+  gentoo: [dev-lang/rust]  # version regularly updated - see https://packages.gentoo.org/packages/dev-lang/rust
+  nixos: [cargo]  # version regularly updated - see https://search.nixos.org/packages?show=cargo&query=cargo
+  openembedded: [cargo@openembedded-core]  # version regularly updated - see https://layers.openembedded.org/layerindex/branch/scarthgap/layer/lts-rust-mixin/
+  opensuse: [cargo]  # version regularly updated - see https://software.opensuse.org/package/cargo
+  rhel: [cargo]  # version regularly updated - see https://docs.redhat.com/en/documentation/red_hat_developer_tools/1/html/using_rust_1.88.0_toolset/rust-toolset
+  ubuntu:
+    '*': [cargo]  # default to cargo package
+    jammy: [cargo-1.91]     # newest available in 22.04
+    noble: [cargo-1.91]     # newest available in 24.04
+    resolute: [cargo-1.93]  # newest available in 26.04
 castxml:
   debian: [castxml]
   fedora: [castxml]
