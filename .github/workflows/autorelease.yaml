@@ -50,6 +50,7 @@ jobs:
         echo "RELEASE_CACHE_NEW_URL=${{ env.NEW_CACHE_URL_BASE }}/$NEW_URL_SUFFIX" >> $GITHUB_ENV
         echo "RELEASE_DISTRO_OLD_URL=$OLD_DISTRO_URL" >> $GITHUB_ENV
         echo "RELEASE_DISTRO_NEW_URL=${{ env.NEW_CACHE_URL_BASE }}/$NEW_DISTRO_URL_SUFFIX" >> $GITHUB_ENV
+        echo "RELEASE_INDEX_URL=${{ env.NEW_CACHE_URL_BASE }}/$TAG_NAME/index-v4.yaml" >> $GITHUB_ENV
 
     # Echo the release information to console.
     - name: Print release information
@@ -61,6 +62,7 @@ jobs:
         echo "New cache URL: ${{ env.RELEASE_CACHE_NEW_URL }}"
         echo "Old distro URL: ${{ env.RELEASE_DISTRO_OLD_URL }}"
         echo "New distro URL: ${{ env.RELEASE_DISTRO_NEW_URL }}"
+        echo "New index URL: ${{ env.RELEASE_INDEX_URL }}"
 
     # Checkout the repository at the release tag (must already exist).
     - name: Checkout repository
@@ -116,6 +118,17 @@ jobs:
       uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64  # v3.0.3
       with:
         tag_name: ${{ env.RELEASE_TAG }}
+        body: |
+          This release is exclusively for `${{ env.RELEASE_TAG }}` and contains sufficient
+          self-contained metadata for `rosinstall_generator` and `rosdistro` to recreate a
+          source workspace for this specific release.
+
+          To use it, export `ROSDISTRO_INDEX_URL` before running `rosinstall_generator` to
+          generate a repos file, or calling `rosdep update` to fetch dependency information:
+
+          ```bash
+          export ROSDISTRO_INDEX_URL=${{ env.RELEASE_INDEX_URL }}
+          ```
         files: |
           index.yaml
           index-v4.yaml
