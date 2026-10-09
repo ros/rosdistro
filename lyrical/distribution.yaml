@@ -1,6 +1,6 @@
 %YAML 1.1
 # ROS distribution file
-# see REP 143: https://reps.openrobotics.org/rep-0143/
+# see REP 143: http://ros.org/reps/rep-0143.html
 ---
 release_platforms:
   debian:
@@ -24,10 +24,11 @@ repositories:
       - navmap_ros
       - navmap_ros_interfaces
       - navmap_rviz_plugin
+      - navmap_tools
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/EasyNavigation/NavMap-release.git
-      version: 0.5.1-1
+      version: 0.6.0-1
     source:
       type: git
       url: https://github.com/EasyNavigation/NavMap.git
@@ -584,7 +585,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/aruco_ros-release.git
-      version: 5.0.5-3
+      version: 5.0.6-1
     source:
       type: git
       url: https://github.com/pal-robotics/aruco_ros.git
@@ -1961,6 +1962,7 @@ repositories:
       - easynav_localizer
       - easynav_maps_manager
       - easynav_planner
+      - easynav_recovery
       - easynav_sensors
       - easynav_support_py
       - easynav_system
@@ -1968,10 +1970,53 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/EasyNavigation/EasyNavigation-release.git
-      version: 0.4.2-2
+      version: 0.5.0-1
     source:
       type: git
       url: https://github.com/EasyNavigation/EasyNavigation.git
+      version: lyrical
+    status: developed
+  easynav_nav2_bridge:
+    doc:
+      type: git
+      url: https://github.com/EasyNavigation/easynav_nav2_bridge.git
+      version: lyrical
+    release:
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/EasyNavigation/easynav_nav2_bridge-release.git
+      version: 0.5.0-1
+    source:
+      type: git
+      url: https://github.com/EasyNavigation/easynav_nav2_bridge.git
+      version: lyrical
+    status: developed
+  easynav_playgrounds:
+    doc:
+      type: git
+      url: https://github.com/EasyNavigation/easynav_playgrounds.git
+      version: lyrical
+    release:
+      packages:
+      - easynav_playground_kobuki
+      - easynav_playground_kobuki_description
+      - easynav_playground_kobuki_worlds
+      - easynav_playground_omni
+      - easynav_playground_omni_description
+      - easynav_playground_omni_worlds
+      - easynav_playground_summit
+      - easynav_playground_summit_description
+      - easynav_playground_summit_worlds
+      - easynav_playground_tiago
+      - easynav_playground_tiago_description
+      - easynav_playground_tiago_worlds
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/EasyNavigation/easynav_playgrounds-release.git
+      version: 0.5.0-1
+    source:
+      type: git
+      url: https://github.com/EasyNavigation/easynav_playgrounds.git
       version: lyrical
     status: developed
   easynav_plugins:
@@ -1986,8 +2031,9 @@ repositories:
       - easynav_costmap_localizer
       - easynav_costmap_maps_manager
       - easynav_costmap_planner
+      - easynav_diagnostic_recovery
       - easynav_fusion_localizer
-      - easynav_gps_localizer
+      - easynav_mhamcl_localizer
       - easynav_mpc_controller
       - easynav_mppi_controller
       - easynav_navmap_localizer
@@ -2002,11 +2048,12 @@ repositories:
       - easynav_simple_localizer
       - easynav_simple_maps_manager
       - easynav_simple_planner
+      - easynav_simple_recovery
       - easynav_vff_controller
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/EasyNavigation/easynav_plugins-release.git
-      version: 0.4.2-2
+      version: 0.5.0-1
     source:
       type: git
       url: https://github.com/EasyNavigation/easynav_plugins.git
@@ -2420,7 +2467,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/ffmpeg_image_transport-release.git
-      version: 3.0.4-1
+      version: 3.0.5-1
     source:
       type: git
       url: https://github.com/ros-misc-utilities/ffmpeg_image_transport.git
@@ -2507,6 +2554,11 @@ repositories:
       type: git
       url: https://github.com/introlab/find-object.git
       version: rolling-devel
+    release:
+      tags:
+        release: release/lyrical/{package}/{version}
+      url: https://github.com/ros2-gbp/find_object_2d-release.git
+      version: 0.7.5-1
     source:
       type: git
       url: https://github.com/introlab/find-object.git
@@ -3148,7 +3200,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/gz_gui_vendor-release.git
-      version: 0.3.2-1
+      version: 0.3.3-1
     source:
       test_pull_requests: true
       type: git
@@ -3260,7 +3312,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/gz_rendering_vendor-release.git
-      version: 0.4.4-1
+      version: 0.4.5-1
     source:
       test_pull_requests: true
       type: git
@@ -5063,7 +5115,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/mola_state_estimation-release.git
-      version: 3.0.2-1
+      version: 3.0.3-1
     source:
       type: git
       url: https://github.com/MOLAorg/mola_state_estimation.git
@@ -5280,7 +5332,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/mp2p_icp-release.git
-      version: 3.0.0-1
+      version: 3.0.2-1
     source:
       type: git
       url: https://github.com/MOLAorg/mp2p_icp.git
@@ -5366,7 +5418,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/mrpt3-release.git
-      version: 3.4.0-1
+      version: 3.5.0-1
     source:
       type: git
       url: https://github.com/MRPT/mrpt.git
@@ -6124,7 +6176,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/onnxruntime_vendor-release.git
-      version: 0.1.0-2
+      version: 0.1.1-1
     source:
       type: git
       url: https://github.com/ros-controls/onnxruntime_vendor.git
@@ -7310,7 +7362,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/rc_reason_clients-release.git
-      version: 0.5.0-3
+      version: 0.6.1-1
     source:
       test_pull_requests: true
       type: git
@@ -8082,16 +8134,16 @@ repositories:
     doc:
       type: git
       url: https://github.com/signetlabdei/rmw_desert.git
-      version: main
+      version: lyrical
     release:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/rmw_desert-release.git
-      version: 4.0.2-1
+      version: 4.0.3-2
     source:
       type: git
       url: https://github.com/signetlabdei/rmw_desert.git
-      version: main
+      version: lyrical
     status: maintained
   rmw_email:
     doc:
@@ -8171,7 +8223,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/rmw_int2dds-release.git
-      version: 0.1.7-1
+      version: 0.1.8-1
     source:
       test_pull_requests: true
       type: git
@@ -8191,7 +8243,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/rmw_zenoh-release.git
-      version: 0.10.6-1
+      version: 0.10.7-1
     source:
       type: git
       url: https://github.com/ros2/rmw_zenoh.git
@@ -8384,7 +8436,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/ros2_control-release.git
-      version: 6.11.0-1
+      version: 6.12.0-1
     source:
       type: git
       url: https://github.com/ros-controls/ros2_control.git
@@ -11982,7 +12034,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/fmrico/yaets-release.git
-      version: 1.1.0-1
+      version: 1.2.0-1
     source:
       type: git
       url: https://github.com/fmrico/yaets.git
@@ -12055,7 +12107,7 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/zed-ros2-description-release.git
-      version: 0.1.5-1
+      version: 0.2.0-1
     source:
       type: git
       url: https://github.com/stereolabs/zed-ros2-description.git
@@ -12072,11 +12124,11 @@ repositories:
       tags:
         release: release/lyrical/{package}/{version}
       url: https://github.com/ros2-gbp/zed-ros2-interfaces-release.git
-      version: 5.3.0-1
+      version: 5.5.0-1
     source:
       type: git
       url: https://github.com/stereolabs/zed-ros2-interfaces.git
-      version: rolling
+      version: master
     status: maintained
   zenoh_bridge_dds:
     doc:
