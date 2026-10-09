@@ -1,6 +1,6 @@
 %YAML 1.1
 # ROS distribution file
-# see REP 143: http://ros.org/reps/rep-0143.html
+# see REP 143: https://reps.openrobotics.org/rep-0143/
 ---
 release_platforms:
   debian:
@@ -22,10 +22,11 @@ repositories:
       - navmap_ros
       - navmap_ros_interfaces
       - navmap_rviz_plugin
+      - navmap_tools
       tags:
         release: release/jazzy/{package}/{version}
       url: https://github.com/EasyNavigation/NavMap-release.git
-      version: 0.3.0-1
+      version: 0.6.0-1
     source:
       type: git
       url: https://github.com/EasyNavigation/NavMap.git
@@ -2603,6 +2604,7 @@ repositories:
       - easynav_localizer
       - easynav_maps_manager
       - easynav_planner
+      - easynav_recovery
       - easynav_sensors
       - easynav_support_py
       - easynav_system
@@ -2610,10 +2612,53 @@ repositories:
       tags:
         release: release/jazzy/{package}/{version}
       url: https://github.com/EasyNavigation/EasyNavigation-release.git
-      version: 0.4.0-1
+      version: 0.5.0-1
     source:
       type: git
       url: https://github.com/EasyNavigation/EasyNavigation.git
+      version: jazzy
+    status: developed
+  easynav_nav2_bridge:
+    doc:
+      type: git
+      url: https://github.com/EasyNavigation/easynav_nav2_bridge.git
+      version: jazzy
+    release:
+      tags:
+        release: release/jazzy/{package}/{version}
+      url: https://github.com/EasyNavigation/easynav_nav2_bridge-release.git
+      version: 0.5.0-1
+    source:
+      type: git
+      url: https://github.com/EasyNavigation/easynav_nav2_bridge.git
+      version: jazzy
+    status: developed
+  easynav_playgrounds:
+    doc:
+      type: git
+      url: https://github.com/EasyNavigation/easynav_playgrounds.git
+      version: jazzy
+    release:
+      packages:
+      - easynav_playground_kobuki
+      - easynav_playground_kobuki_description
+      - easynav_playground_kobuki_worlds
+      - easynav_playground_omni
+      - easynav_playground_omni_description
+      - easynav_playground_omni_worlds
+      - easynav_playground_summit
+      - easynav_playground_summit_description
+      - easynav_playground_summit_worlds
+      - easynav_playground_tiago
+      - easynav_playground_tiago_description
+      - easynav_playground_tiago_worlds
+      tags:
+        release: release/jazzy/{package}/{version}
+      url: https://github.com/EasyNavigation/easynav_playgrounds-release.git
+      version: 0.5.0-1
+    source:
+      type: git
+      url: https://github.com/EasyNavigation/easynav_playgrounds.git
       version: jazzy
     status: developed
   easynav_plugins:
@@ -2628,8 +2673,9 @@ repositories:
       - easynav_costmap_localizer
       - easynav_costmap_maps_manager
       - easynav_costmap_planner
+      - easynav_diagnostic_recovery
       - easynav_fusion_localizer
-      - easynav_gps_localizer
+      - easynav_mhamcl_localizer
       - easynav_mpc_controller
       - easynav_mppi_controller
       - easynav_navmap_localizer
@@ -2644,11 +2690,12 @@ repositories:
       - easynav_simple_localizer
       - easynav_simple_maps_manager
       - easynav_simple_planner
+      - easynav_simple_recovery
       - easynav_vff_controller
       tags:
         release: release/jazzy/{package}/{version}
       url: https://github.com/EasyNavigation/easynav_plugins-release.git
-      version: 0.4.0-1
+      version: 0.5.0-1
     source:
       type: git
       url: https://github.com/EasyNavigation/easynav_plugins.git
@@ -3132,7 +3179,7 @@ repositories:
       tags:
         release: release/jazzy/{package}/{version}
       url: https://github.com/ros2-gbp/ffmpeg_image_transport-release.git
-      version: 3.0.4-1
+      version: 3.0.5-2
     source:
       type: git
       url: https://github.com/ros-misc-utilities/ffmpeg_image_transport.git
@@ -4105,7 +4152,7 @@ repositories:
       tags:
         release: release/jazzy/{package}/{version}
       url: https://github.com/ros2-gbp/gz_rendering_vendor-release.git
-      version: 0.0.7-1
+      version: 0.0.8-1
     source:
       test_pull_requests: true
       type: git
@@ -4964,7 +5011,7 @@ repositories:
       url: https://github.com/automatika-robotics/kompass.git
       version: main
     status: developed
-  kuka_drivers:
+  kroshu_drivers:
     doc:
       type: git
       url: https://github.com/kroshu/kuka_drivers.git
@@ -4994,7 +5041,7 @@ repositories:
       url: https://github.com/kroshu/kuka_drivers.git
       version: master
     status: developed
-  kuka_external_control_sdk:
+  kroshu_external_control_sdk:
     doc:
       type: git
       url: https://github.com/kroshu/kuka-external-control-sdk.git
@@ -5012,10 +5059,30 @@ repositories:
       url: https://github.com/kroshu/kuka-external-control-sdk.git
       version: master
     status: developed
+  kuka_drivers:
+    doc:
+      type: git
+      url: https://github.com/kuka-ros/kuka_drivers.git
+      version: master
+    source:
+      type: git
+      url: https://github.com/kuka-ros/kuka_drivers.git
+      version: master
+    status: developed
+  kuka_external_control_sdk:
+    doc:
+      type: git
+      url: https://github.com/kuka-ros/kuka_external_control_sdk.git
+      version: master
+    source:
+      type: git
+      url: https://github.com/kuka-ros/kuka_external_control_sdk.git
+      version: master
+    status: developed
   kuka_robot_descriptions:
     doc:
       type: git
-      url: https://github.com/kroshu/kuka_robot_descriptions.git
+      url: https://github.com/kuka-ros/kuka_robot_descriptions.git
       version: master
     release:
       packages:
@@ -5040,7 +5107,7 @@ repositories:
       version: 2.0.2-1
     source:
       type: git
-      url: https://github.com/kroshu/kuka_robot_descriptions.git
+      url: https://github.com/kuka-ros/kuka_robot_descriptions.git
       version: master
     status: developed
   lanelet2:
@@ -6068,7 +6135,7 @@ repositories:
       tags:
         release: release/jazzy/{package}/{version}
       url: https://github.com/ros2-gbp/mola-release.git
-      version: 3.3.1-1
+      version: 3.3.2-1
     source:
       type: git
       url: https://github.com/MOLAorg/mola.git
@@ -6217,7 +6284,7 @@ repositories:
       tags:
         release: release/jazzy/{package}/{version}
       url: https://github.com/ros2-gbp/mola_state_estimation-release.git
-      version: 3.0.3-1
+      version: 3.0.4-1
     source:
       type: git
       url: https://github.com/MOLAorg/mola_state_estimation.git
@@ -6510,7 +6577,7 @@ repositories:
       tags:
         release: release/jazzy/{package}/{version}
       url: https://github.com/ros2-gbp/mrpt3-release.git
-      version: 3.5.0-1
+      version: 3.5.1-1
     source:
       type: git
       url: https://github.com/MRPT/mrpt.git
@@ -7445,6 +7512,23 @@ repositories:
       url: https://github.com/olive-robotics/olive-ros2-interfaces.git
       version: jazzy
     status: maintained
+  olive-openrmf-fleet-adapter:
+    doc:
+      type: git
+      url: https://github.com/olive-robotics/olive-openrmf-fleet-adapter.git
+      version: jazzy
+    release:
+      packages:
+      - olive_openrmf_fleet_adapter
+      tags:
+        release: release/jazzy/{package}/{version}
+      url: https://github.com/olive-robotics/olive-openrmf-fleet-adapter-release.git
+      version: 0.0.2-1
+    source:
+      type: git
+      url: https://github.com/olive-robotics/olive-openrmf-fleet-adapter.git
+      version: jazzy
+    status: developed
   ompl:
     doc:
       type: git
@@ -9213,6 +9297,16 @@ repositories:
       type: git
       url: https://github.com/ros-controls/realtime_tools.git
       version: jazzy
+    status: maintained
+  reduct_bridge:
+    doc:
+      type: git
+      url: https://github.com/reductstore/reduct-bridge.git
+      version: main
+    source:
+      type: git
+      url: https://github.com/reductstore/reduct-bridge.git
+      version: main
     status: maintained
   reductstore_agent:
     doc:
@@ -14276,16 +14370,16 @@ repositories:
     doc:
       type: git
       url: https://github.com/fmrico/yaets.git
-      version: jazzy-devel
+      version: jazzy
     release:
       tags:
         release: release/jazzy/{package}/{version}
       url: https://github.com/fmrico/yaets-release.git
-      version: 1.0.4-1
+      version: 1.2.0-1
     source:
       type: git
       url: https://github.com/fmrico/yaets.git
-      version: jazzy-devel
+      version: jazzy
     status: developed
   yaml_cpp_vendor:
     release:
@@ -14371,11 +14465,11 @@ repositories:
       tags:
         release: release/jazzy/{package}/{version}
       url: https://github.com/ros2-gbp/zed-ros2-interfaces-release.git
-      version: 5.3.0-1
+      version: 5.5.0-1
     source:
       type: git
       url: https://github.com/stereolabs/zed-ros2-interfaces.git
-      version: jazzy
+      version: master
     status: maintained
   zenoh_bridge_dds:
     doc:

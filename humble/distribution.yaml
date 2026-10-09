@@ -1,6 +1,6 @@
 %YAML 1.1
 # ROS distribution file
-# see REP 143: http://ros.org/reps/rep-0143.html
+# see REP 143: https://reps.openrobotics.org/rep-0143/
 ---
 release_platforms:
   rhel:
@@ -8,6 +8,28 @@ release_platforms:
   ubuntu:
   - jammy
 repositories:
+  NavMap:
+    doc:
+      type: git
+      url: https://github.com/EasyNavigation/NavMap.git
+      version: humble
+    release:
+      packages:
+      - navmap_core
+      - navmap_examples
+      - navmap_ros
+      - navmap_ros_interfaces
+      - navmap_rviz_plugin
+      - navmap_tools
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/EasyNavigation/NavMap-release.git
+      version: 0.6.0-1
+    source:
+      type: git
+      url: https://github.com/EasyNavigation/NavMap.git
+      version: humble
+    status: developed
   aandd_ekew_driver_py:
     doc:
       type: git
@@ -2626,6 +2648,90 @@ repositories:
       url: https://github.com/ROBOTIS-GIT/dynamixel-workbench-msgs.git
       version: humble-devel
     status: maintained
+  easynav:
+    doc:
+      type: git
+      url: https://github.com/EasyNavigation/EasyNavigation.git
+      version: humble
+    release:
+      packages:
+      - easynav
+      - easynav_common
+      - easynav_controller
+      - easynav_core
+      - easynav_interfaces
+      - easynav_localizer
+      - easynav_maps_manager
+      - easynav_planner
+      - easynav_recovery
+      - easynav_sensors
+      - easynav_support_py
+      - easynav_system
+      - easynav_tools
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/EasyNavigation/EasyNavigation-release.git
+      version: 0.5.0-1
+    source:
+      type: git
+      url: https://github.com/EasyNavigation/EasyNavigation.git
+      version: humble
+    status: developed
+  easynav_nav2_bridge:
+    doc:
+      type: git
+      url: https://github.com/EasyNavigation/easynav_nav2_bridge.git
+      version: humble
+    release:
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/EasyNavigation/easynav_nav2_bridge-release.git
+      version: 0.5.0-1
+    source:
+      type: git
+      url: https://github.com/EasyNavigation/easynav_nav2_bridge.git
+      version: humble
+    status: developed
+  easynav_plugins:
+    doc:
+      type: git
+      url: https://github.com/EasyNavigation/easynav_plugins.git
+      version: humble
+    release:
+      packages:
+      - easynav_bonxai_maps_manager
+      - easynav_costmap_common
+      - easynav_costmap_localizer
+      - easynav_costmap_maps_manager
+      - easynav_costmap_planner
+      - easynav_diagnostic_recovery
+      - easynav_fusion_localizer
+      - easynav_mhamcl_localizer
+      - easynav_mpc_controller
+      - easynav_mppi_controller
+      - easynav_navmap_localizer
+      - easynav_navmap_maps_manager
+      - easynav_navmap_planner
+      - easynav_octomap_maps_manager
+      - easynav_regulated_pp_controller
+      - easynav_routes_maps_manager
+      - easynav_serest_controller
+      - easynav_simple_common
+      - easynav_simple_controller
+      - easynav_simple_localizer
+      - easynav_simple_maps_manager
+      - easynav_simple_planner
+      - easynav_simple_recovery
+      - easynav_vff_controller
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/EasyNavigation/easynav_plugins-release.git
+      version: 0.5.0-1
+    source:
+      type: git
+      url: https://github.com/EasyNavigation/easynav_plugins.git
+      version: humble
+    status: developed
   ecal:
     doc:
       type: git
@@ -3217,7 +3323,7 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/ffmpeg_image_transport-release.git
-      version: 3.0.4-1
+      version: 3.0.5-1
     source:
       type: git
       url: https://github.com/ros-misc-utilities/ffmpeg_image_transport.git
@@ -5036,7 +5142,7 @@ repositories:
       url: https://github.com/automatika-robotics/kompass.git
       version: main
     status: developed
-  kuka_drivers:
+  kroshu_drivers:
     doc:
       type: git
       url: https://github.com/kroshu/kuka_drivers.git
@@ -5066,7 +5172,7 @@ repositories:
       url: https://github.com/kroshu/kuka_drivers.git
       version: humble
     status: developed
-  kuka_external_control_sdk:
+  kroshu_external_control_sdk:
     doc:
       type: git
       url: https://github.com/kroshu/kuka-external-control-sdk.git
@@ -5084,10 +5190,30 @@ repositories:
       url: https://github.com/kroshu/kuka-external-control-sdk.git
       version: master
     status: developed
+  kuka_drivers:
+    doc:
+      type: git
+      url: https://github.com/kuka-ros/kuka_drivers.git
+      version: humble
+    source:
+      type: git
+      url: https://github.com/kuka-ros/kuka_drivers.git
+      version: humble
+    status: developed
+  kuka_external_control_sdk:
+    doc:
+      type: git
+      url: https://github.com/kuka-ros/kuka_external_control_sdk.git
+      version: master
+    source:
+      type: git
+      url: https://github.com/kuka-ros/kuka_external_control_sdk.git
+      version: master
+    status: developed
   kuka_robot_descriptions:
     doc:
       type: git
-      url: https://github.com/kroshu/kuka_robot_descriptions.git
+      url: https://github.com/kuka-ros/kuka_robot_descriptions.git
       version: humble
     release:
       packages:
@@ -5112,7 +5238,7 @@ repositories:
       version: 1.1.2-1
     source:
       type: git
-      url: https://github.com/kroshu/kuka_robot_descriptions.git
+      url: https://github.com/kuka-ros/kuka_robot_descriptions.git
       version: humble
     status: developed
   lanelet2:
@@ -7621,6 +7747,23 @@ repositories:
       url: https://github.com/olive-robotics/olive-ros2-interfaces.git
       version: humble
     status: developed
+  olive-openrmf-fleet-adapter:
+    doc:
+      type: git
+      url: https://github.com/olive-robotics/olive-openrmf-fleet-adapter.git
+      version: humble
+    release:
+      packages:
+      - olive_openrmf_fleet_adapter
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/olive-robotics/olive-openrmf-fleet-adapter-release.git
+      version: 0.0.1-1
+    source:
+      type: git
+      url: https://github.com/olive-robotics/olive-openrmf-fleet-adapter.git
+      version: humble
+    status: developed
   omni_base_navigation:
     doc:
       type: git
@@ -9608,6 +9751,16 @@ repositories:
       type: git
       url: https://github.com/ros-controls/realtime_tools.git
       version: humble
+    status: maintained
+  reduct_bridge:
+    doc:
+      type: git
+      url: https://github.com/reductstore/reduct-bridge.git
+      version: main
+    source:
+      type: git
+      url: https://github.com/reductstore/reduct-bridge.git
+      version: main
     status: maintained
   replay_testing:
     doc:
@@ -14634,6 +14787,21 @@ repositories:
       url: https://github.com/ros/xacro.git
       version: ros2
     status: maintained
+  yaets:
+    doc:
+      type: git
+      url: https://github.com/fmrico/yaets.git
+      version: humble
+    release:
+      tags:
+        release: release/humble/{package}/{version}
+      url: https://github.com/fmrico/yaets-release.git
+      version: 1.2.0-1
+    source:
+      type: git
+      url: https://github.com/fmrico/yaets.git
+      version: humble
+    status: developed
   yaml_cpp_vendor:
     release:
       tags:
@@ -14725,11 +14893,11 @@ repositories:
       tags:
         release: release/humble/{package}/{version}
       url: https://github.com/ros2-gbp/zed-ros2-interfaces-release.git
-      version: 5.3.0-1
+      version: 5.5.0-1
     source:
       type: git
       url: https://github.com/stereolabs/zed-ros2-interfaces.git
-      version: humble
+      version: master
     status: maintained
   zenoh_bridge_dds:
     doc:
