@@ -7,6 +7,9 @@ package_sources:
   arch:
   - !pacman_base_url https://archive.archlinux.org/repos/last/$repo/os/$arch/ core
   - !pacman_base_url https://archive.archlinux.org/repos/last/$repo/os/$arch/ extra
+  conda_forge:
+  - !conda_channel_url https://conda.anaconda.org/conda-forge/$arch/repodata.json.zst
+  - !conda_channel_url https://conda.anaconda.org/conda-forge/noarch/repodata.json.zst
   debian:
   - !deb_base_url http://deb.debian.org/debian main
   - !deb_base_url http://deb.debian.org/debian contrib
@@ -62,11 +65,15 @@ package_dashboards:
   url: https://packages.ubuntu.com/{os_code_name}/{binary_name}
 - pattern: !regular_expression .*//dl-cdn.alpinelinux.org/alpine/[^/]+/([^/]+)/.*
   url: https://pkgs.alpinelinux.org/package/{os_code_name}/\1/{os_arch}/{binary_name}
+- pattern: !regular_expression .*//conda.anaconda.org/conda-forge/.*
+  url: https://anaconda.org/conda-forge/{binary_name}
 
 supported_versions:
   alpine:
   - edge
   arch:
+  - ''
+  conda_forge:
   - ''
   debian:
   - bookworm
@@ -94,6 +101,9 @@ supported_arches:
   - x86_64
   arch:
   - x86_64
+  conda_forge:
+  - linux-64
+  - win-64
   debian:
   - amd64
   fedora:
