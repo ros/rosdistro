@@ -41,11 +41,15 @@ jobs:
         RELEASE_DATE="${TAG_NAME#*/}"
         OLD_URL_SUFFIX=$DISTRIBUTION-cache.yaml.gz
         NEW_URL_SUFFIX=$DISTRIBUTION/$RELEASE_DATE/$DISTRIBUTION-cache.yaml.gz
+        OLD_DISTRO_URL=$DISTRIBUTION/distribution.yaml
+        NEW_DISTRO_URL_SUFFIX=$DISTRIBUTION/$RELEASE_DATE/distribution.yaml
         echo "RELEASE_DISTRIBUTION=$DISTRIBUTION" >> $GITHUB_ENV
         echo "RELEASE_DATE=$RELEASE_DATE" >> $GITHUB_ENV
         echo "RELEASE_TAG=$TAG_NAME" >> $GITHUB_ENV
         echo "RELEASE_CACHE_OLD_URL=${{ env.OLD_CACHE_URL_BASE }}/$OLD_URL_SUFFIX" >> $GITHUB_ENV
         echo "RELEASE_CACHE_NEW_URL=${{ env.NEW_CACHE_URL_BASE }}/$NEW_URL_SUFFIX" >> $GITHUB_ENV
+        echo "RELEASE_DISTRO_OLD_URL=$OLD_DISTRO_URL" >> $GITHUB_ENV
+        echo "RELEASE_DISTRO_NEW_URL=${{ env.NEW_CACHE_URL_BASE }}/$NEW_DISTRO_URL_SUFFIX" >> $GITHUB_ENV
 
     # Echo the release information to console.
     - name: Print release information
@@ -55,6 +59,8 @@ jobs:
         echo "Tag: ${{ env.RELEASE_TAG }}"
         echo "Old cache URL: ${{ env.RELEASE_CACHE_OLD_URL }}"
         echo "New cache URL: ${{ env.RELEASE_CACHE_NEW_URL }}"
+        echo "Old distro URL: ${{ env.RELEASE_DISTRO_OLD_URL }}"
+        echo "New distro URL: ${{ env.RELEASE_DISTRO_NEW_URL }}"
 
     # Checkout the repository at the release tag (must already exist).
     - name: Checkout repository
@@ -82,20 +88,28 @@ jobs:
         rosdistro_build_cache ../index-v4.yaml ${{ env.RELEASE_DISTRIBUTION }}
         cd ..
 
-    # Point the index files at the cache that will be attached to this release.
+    # Strip unrelated distributions and point the index files at the
+    # distribution and cache files that will be attached to this release.
     # This only modifies the working tree; nothing is committed or pushed.
-    - name: Update cache URL in index files
+    - name: Update index files
       run: |
-        sed -i "s|${{ env.RELEASE_CACHE_OLD_URL }}|${{ env.RELEASE_CACHE_NEW_URL }}|g" index.yaml
-        sed -i "s|${{ env.RELEASE_CACHE_OLD_URL }}|${{ env.RELEASE_CACHE_NEW_URL }}|g" index-v4.yaml
-        if git diff --quiet index.yaml; then
-          echo "::error::index.yaml was not modified (old cache URL not found)"
-          exit 1
-        fi
-        if git diff --quiet index-v4.yaml; then
-          echo "::error::index-v4.yaml was not modified (old cache URL not found)"
-          exit 1
-        fi
+        for file in index.yaml index-v4.yaml; do
+          awk -v d="  ${{ env.RELEASE_DISTRIBUTION }}:" '
+            /^[^ ]/ { keep=1 }
+            /^  [^ ]/ { keep=($0 == d) }
+            keep
+          ' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+          sed -i "s|${{ env.RELEASE_CACHE_OLD_URL }}|${{ env.RELEASE_CACHE_NEW_URL }}|g" "$file"
+          sed -i "s|${{ env.RELEASE_DISTRO_OLD_URL }}|${{ env.RELEASE_DISTRO_NEW_URL }}|g" "$file"
+          if ! grep -Fq "${{ env.RELEASE_CACHE_NEW_URL }}" "$file"; then
+            echo "::error::$file was not modified with new cache URL (old cache URL not found)"
+            exit 1
+          fi
+          if ! grep -Fq "${{ env.RELEASE_DISTRO_NEW_URL }}" "$file"; then
+            echo "::error::$file was not modified with new distro URL (old distro URL not found)"
+            exit 1
+          fi
+        done
 
     # Publish the release against the existing tag.
     - name: Push release
@@ -105,4 +119,5 @@ jobs:
         files: |
           index.yaml
           index-v4.yaml
+          ${{ env.RELEASE_DISTRIBUTION }}/distribution.yaml
           ${{ env.RELEASE_DISTRIBUTION }}/${{ env.RELEASE_DISTRIBUTION }}-cache.yaml.gz
