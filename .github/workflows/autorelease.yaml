@@ -25,7 +25,7 @@ jobs:
     - name: Calculate release parameters
       env:
         OLD_CACHE_URL_BASE: "http://repo.ros2.org/rosdistro_cache"
-        NEW_CACHE_URL_BASE: "https://github.com/ros/rosdistro/releases/download"
+        NEW_CACHE_URL_BASE: "${{ github.server_url }}/${{ github.repository }}/releases/download"
         INPUT_TAG: ${{ inputs.tag }}
       run: |
         if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -58,13 +58,13 @@ jobs:
 
     # Checkout the repository at the release tag (must already exist).
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
       with:
         ref: refs/tags/${{ env.RELEASE_TAG }}
 
     # Set up a clean Python environment (Avoids OS-level pip blocks)
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
       with:
         python-version: '3.11'
         cache: 'pip'
@@ -99,7 +99,7 @@ jobs:
 
     # Publish the release against the existing tag.
     - name: Push release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64  # v3.0.3
       with:
         tag_name: ${{ env.RELEASE_TAG }}
         files: |
