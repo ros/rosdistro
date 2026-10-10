@@ -1,0 +1,134 @@
+---
+name: Automatically create release based on distribution tag push
+# this is fine since gha runs with yaml 1.2
+on:  # yamllint disable-line rule:truthy
+  push:
+    tags:
+    - '*/*'
+  # Manual trigger to back-process tags that were created before this workflow
+  # existed (tag pushes only run the workflow present at the tagged commit).
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing tag to release, of the form <distribution>/<YYYY-MM-DD>'
+        required: true
+        type: string
+jobs:
+  autorelease:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+    # Derive the release parameters from the tag name, which is expected to
+    # be of the form <distribution>/<YYYY-MM-DD>. On a tag push the tag comes
+    # from GITHUB_REF; on a manual run it comes from the 'tag' input.
+    - name: Calculate release parameters
+      env:
+        OLD_CACHE_URL_BASE: "http://repo.ros2.org/rosdistro_cache"
+        NEW_CACHE_URL_BASE: "${{ github.server_url }}/${{ github.repository }}/releases/download"
+        INPUT_TAG: ${{ inputs.tag }}
+      run: |
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          TAG_NAME="$INPUT_TAG"
+        else
+          TAG_NAME="${GITHUB_REF#refs/tags/}"
+        fi
+        if ! [[ "$TAG_NAME" =~ ^[a-z]+/[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+          echo "::error::Tag '$TAG_NAME' does not match <distribution>/<YYYY-MM-DD>"
+          exit 1
+        fi
+        DISTRIBUTION="${TAG_NAME%%/*}"
+        RELEASE_DATE="${TAG_NAME#*/}"
+        OLD_URL_SUFFIX=$DISTRIBUTION-cache.yaml.gz
+        NEW_URL_SUFFIX=$DISTRIBUTION/$RELEASE_DATE/$DISTRIBUTION-cache.yaml.gz
+        OLD_DISTRO_URL=$DISTRIBUTION/distribution.yaml
+        NEW_DISTRO_URL_SUFFIX=$DISTRIBUTION/$RELEASE_DATE/distribution.yaml
+        echo "RELEASE_DISTRIBUTION=$DISTRIBUTION" >> $GITHUB_ENV
+        echo "RELEASE_DATE=$RELEASE_DATE" >> $GITHUB_ENV
+        echo "RELEASE_TAG=$TAG_NAME" >> $GITHUB_ENV
+        echo "RELEASE_CACHE_OLD_URL=${{ env.OLD_CACHE_URL_BASE }}/$OLD_URL_SUFFIX" >> $GITHUB_ENV
+        echo "RELEASE_CACHE_NEW_URL=${{ env.NEW_CACHE_URL_BASE }}/$NEW_URL_SUFFIX" >> $GITHUB_ENV
+        echo "RELEASE_DISTRO_OLD_URL=$OLD_DISTRO_URL" >> $GITHUB_ENV
+        echo "RELEASE_DISTRO_NEW_URL=${{ env.NEW_CACHE_URL_BASE }}/$NEW_DISTRO_URL_SUFFIX" >> $GITHUB_ENV
+        echo "RELEASE_INDEX_URL=${{ env.NEW_CACHE_URL_BASE }}/$TAG_NAME/index-v4.yaml" >> $GITHUB_ENV
+
+    # Echo the release information to console.
+    - name: Print release information
+      run: |
+        echo "Distribution: ${{ env.RELEASE_DISTRIBUTION }}"
+        echo "Date: ${{ env.RELEASE_DATE }}"
+        echo "Tag: ${{ env.RELEASE_TAG }}"
+        echo "Old cache URL: ${{ env.RELEASE_CACHE_OLD_URL }}"
+        echo "New cache URL: ${{ env.RELEASE_CACHE_NEW_URL }}"
+        echo "Old distro URL: ${{ env.RELEASE_DISTRO_OLD_URL }}"
+        echo "New distro URL: ${{ env.RELEASE_DISTRO_NEW_URL }}"
+        echo "New index URL: ${{ env.RELEASE_INDEX_URL }}"
+
+    # Checkout the repository at the release tag (must already exist).
+    - name: Checkout repository
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      with:
+        ref: refs/tags/${{ env.RELEASE_TAG }}
+
+    # Set up a clean Python environment (avoids OS-level pip blocks).
+    - name: Set up Python
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    # Install dependencies for the rosdistro_build_cache tool.
+    - name: Install extra tools via pip
+      run: |
+        python -m pip install --upgrade pip
+        pip install rosdistro
+
+    # Rebuild the cache from scratch.
+    - name: Rebuild cache
+      run: |
+        cd ${{ env.RELEASE_DISTRIBUTION }}
+        rosdistro_build_cache ../index-v4.yaml ${{ env.RELEASE_DISTRIBUTION }}
+        cd ..
+
+    # Strip unrelated distributions and point the index files at the
+    # distribution and cache files that will be attached to this release.
+    # This only modifies the working tree; nothing is committed or pushed.
+    - name: Update index files
+      run: |
+        for file in index.yaml index-v4.yaml; do
+          awk -v d="  ${{ env.RELEASE_DISTRIBUTION }}:" '
+            /^[^ ]/ { keep=1 }
+            /^  [^ ]/ { keep=($0 == d) }
+            keep
+          ' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+          sed -i "s|${{ env.RELEASE_CACHE_OLD_URL }}|${{ env.RELEASE_CACHE_NEW_URL }}|g" "$file"
+          sed -i "s|${{ env.RELEASE_DISTRO_OLD_URL }}|${{ env.RELEASE_DISTRO_NEW_URL }}|g" "$file"
+          if ! grep -Fq "${{ env.RELEASE_CACHE_NEW_URL }}" "$file"; then
+            echo "::error::$file was not modified with new cache URL (old cache URL not found)"
+            exit 1
+          fi
+          if ! grep -Fq "${{ env.RELEASE_DISTRO_NEW_URL }}" "$file"; then
+            echo "::error::$file was not modified with new distro URL (old distro URL not found)"
+            exit 1
+          fi
+        done
+
+    # Publish the release against the existing tag.
+    - name: Push release
+      uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64  # v3.0.3
+      with:
+        tag_name: ${{ env.RELEASE_TAG }}
+        body: >
+          This release contains metadata required by `rosinstall_generator` and `rosdistro` to recreate
+          a source workspace for the `${{ env.RELEASE_TAG }}` release. To use it, set the environment
+          variable `ROSDISTRO_INDEX_URL` to the following value before running `rosinstall_generator`
+          or `rosdep` on a target workspace:
+
+            ```bash
+            ${{ env.RELEASE_INDEX_URL }}
+            ```
+        files: |
+          index.yaml
+          index-v4.yaml
+          ${{ env.RELEASE_DISTRIBUTION }}/distribution.yaml
+          ${{ env.RELEASE_DISTRIBUTION }}/${{ env.RELEASE_DISTRIBUTION }}-cache.yaml.gz
