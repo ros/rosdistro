@@ -42,10 +42,16 @@ package_sources:
     - !rpm_mirrorlist_url https://mirrors.almalinux.org/mirrorlist/$releasever/extras
   - !rpm_mirrorlist_url https://mirrors.rpmfusion.org/mirrorlist?repo=free-el-updates-released-$releasever&arch=$basearch
   ubuntu:
-  - !deb_base_url http://archive.ubuntu.com/ubuntu main
-  - !deb_base_url http://archive.ubuntu.com/ubuntu universe
-  - !deb_base_url http://archive.ubuntu.com/ubuntu multiverse
-  - !deb_base_url http://repos.ros.org/repos/ros_bootstrap main
+  - !deb_base_url http://archive.ubuntu.com/ubuntu $(RELEASE) main
+  - !deb_base_url http://archive.ubuntu.com/ubuntu $(RELEASE) universe
+  - !deb_base_url http://archive.ubuntu.com/ubuntu $(RELEASE) multiverse
+  - !deb_base_url http://archive.ubuntu.com/ubuntu $(RELEASE)-updates main
+  - !deb_base_url http://archive.ubuntu.com/ubuntu $(RELEASE)-updates universe
+  - !deb_base_url http://archive.ubuntu.com/ubuntu $(RELEASE)-updates multiverse
+  - !deb_base_url http://archive.ubuntu.com/ubuntu $(RELEASE)-security main
+  - !deb_base_url http://archive.ubuntu.com/ubuntu $(RELEASE)-security universe
+  - !deb_base_url http://archive.ubuntu.com/ubuntu $(RELEASE)-security multiverse
+  - !deb_base_url http://repos.ros.org/repos/ros_bootstrap $(RELEASE) main
 
 package_dashboards:
 - pattern: !regular_expression .*//archive.archlinux.org/repos/last/([^/]+)/os/.*
