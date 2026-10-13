@@ -61,12 +61,32 @@ def enumerate_conda_packages(url_template, os_name, os_code_name, os_arch):
         data = json.load(f)
 
     for pkgs_key in ('packages', 'packages.conda'):
-        for fn, pkg_info in data.get(pkgs_key, {}).items():
+        pkgs = data.get(pkgs_key)
+        if not isinstance(pkgs, dict):
+            continue
+        for fn, pkg_info in pkgs.items():
+            if not isinstance(pkg_info, dict):
+                continue
             name = pkg_info.get('name')
             version = pkg_info.get('version')
             if name and version:
                 pkg_url = posixpath.join(channel_url, fn)
                 yield PackageEntry(name, version, pkg_url)
+
+    v3_data = data.get('v3')
+    if isinstance(v3_data, dict):
+        for ext, pkgs in v3_data.items():
+            if not isinstance(pkgs, dict):
+                continue
+            for fn_no_ext, pkg_info in pkgs.items():
+                if not isinstance(pkg_info, dict):
+                    continue
+                name = pkg_info.get('name')
+                version = pkg_info.get('version')
+                if name and version:
+                    fn = '%s.%s' % (fn_no_ext, ext)
+                    pkg_url = posixpath.join(channel_url, fn)
+                    yield PackageEntry(name, version, pkg_url)
 
 
 def conda_channel_url(url_template):
