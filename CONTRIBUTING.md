@@ -9,7 +9,7 @@ Binary Releases
 If you would like to add a package for binary release please see the [Bloom documentation](http://wiki.ros.org/bloom).
 Bloom is a tool which will help you do the release as well as open a pull-request for you.
 It will also assist adding documentation and source entries.
-There are [several helpful tutorials](http://wiki.ros.org/bloom/Tutorials) which provide instructions on how to do things like [make a first release](https://docs.ros.org/en/rolling/How-To-Guides/Releasing/First-Time-Release.html).
+There are [several helpful tutorials](http://wiki.ros.org/bloom/Tutorials) which provide instructions on how to do things like [make a first release](https://docs.ros.org/en/rolling/Developer-Tools/Build/Releasing/First-Time-Release.html).
 
 Once you have made a release make sure that you are subscribed to the appropriate subcategory of our [Release management Category](https://discourse.ros.org/c/release/16) for the appropriate distros.
 This is our primary method of communications with maintainers and is where the ROS Boss will coordinate releases.
