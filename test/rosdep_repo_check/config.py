@@ -52,8 +52,12 @@ def load_conda_channel_url(loader, node):
 
 
 def load_deb_base_url(loader, node):
-    base_url, comp = node.value.rsplit(' ', 1)
-    return deb_base_url(base_url, comp)
+    values = node.value.rsplit(' ', 2)
+    if len(values) <= 2:
+        base_url, comp = values
+        return deb_base_url(base_url, comp)
+    base_url, suite, comp = values
+    return deb_base_url(base_url, comp, suite=suite)
 
 
 def load_layer_index_url(loader, node):
