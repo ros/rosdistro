@@ -48,3 +48,10 @@ jobs:
         pip install yamllint
     - name: Run yamllint
       run: yamllint .
+  actionlint:
+    name: GitHub Actions Linting
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run actionlint
+      run: docker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint:1.7.12 -color
