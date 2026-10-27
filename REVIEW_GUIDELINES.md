@@ -82,6 +82,18 @@ There are a few different types of pull requests that are opened against this re
 Reviewer utilities
 ------------------
 
+[REVIEW_PROCEDURE.md](REVIEW_PROCEDURE.md) is a companion to this document: how to work the open pull request queue, how to read the automated reviewer and CI signals, and which parts of the policy above nothing automated checks.
+
+Two read-only helpers, both needing the [GitHub CLI](https://cli.github.com/):
+
+```
+# triage every open pull request into the categories above, and report what blocks each
+python3 scripts/review_queue.py
+
+# gather the new package checklist below for a source repository, without cloning it
+python3 scripts/new_package_check.py <owner>/<repo> [ref]
+```
+
 ### New package review checklist
 
 You can copy-paste the below into your review comment when reviewing a new package addition into rosdistro.
