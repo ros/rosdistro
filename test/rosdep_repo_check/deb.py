@@ -70,7 +70,17 @@ def enumerate_blocks(url):
         yield block
 
 
-def enumerate_deb_packages(base_url, comp, os_code_name, os_arch):
+def replace_tokens(string, os_code_name, os_arch):
+    """Replace Debian-specific tokens in the repository base URL."""
+    for key, value in {
+        '$(ARCH)': os_arch,
+        '$(RELEASE)': os_code_name,
+    }.items():
+        string = string.replace(key, value)
+    return string
+
+
+def enumerate_deb_packages(base_url, comp, os_code_name, os_arch, suite=None):
     """
     Enumerate debian packages in a repository.
 
@@ -78,10 +88,16 @@ def enumerate_deb_packages(base_url, comp, os_code_name, os_arch):
     :param comp: the component of the repository to enumerate.
     :param os_code_name: the OS version associated with the repository.
     :param os_arch: the system architecture associated with the repository.
+    :param suite: the distribution of the repository to enumerate.
 
     :returns: an enumeration of package entries.
     """
-    pkgs_url = os.path.join(base_url, 'dists', os_code_name,
+    base_url = replace_tokens(base_url, os_code_name, os_arch)
+    comp = replace_tokens(comp, os_code_name, os_arch)
+    if suite is None:
+        suite = '$(RELEASE)'
+    suite = replace_tokens(suite, os_code_name, os_arch)
+    pkgs_url = os.path.join(base_url, 'dists', suite,
                             comp, 'binary-' + os_arch, 'Packages.gz')
     print('Reading debian package metadata from ' + pkgs_url)
     for block in enumerate_blocks(pkgs_url):
@@ -90,14 +106,17 @@ def enumerate_deb_packages(base_url, comp, os_code_name, os_arch):
                            block.get('Source', block['Package']))
 
 
-def deb_base_url(base_url, comp):
+def deb_base_url(base_url, comp, suite=None):
     """
     Create an enumerable cache for a debian repository.
 
     :param base_url: the URL of the debian repository.
+    :param comp: the component of the repository to enumerate.
+    :param suite: the distribution of the repository to enumerate.
 
     :returns: an enumerable repository cache instance.
     """
     return RepositoryCacheCollection(
         lambda os_name, os_code_name, os_arch:
-            enumerate_deb_packages(base_url, comp, os_code_name, os_arch))
+            enumerate_deb_packages(
+                base_url, comp, os_code_name, os_arch, suite=suite))

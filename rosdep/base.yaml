@@ -493,6 +493,20 @@ cargo:
   opensuse: [cargo]
   rhel: [cargo]
   ubuntu: [cargo]
+cargo-latest:  # for a recent rust version on OS with a pinned release
+  arch: [rust]  # version regularly updated - see https://archlinux.org/packages/extra/x86_64/rust
+  debian: [cargo]  # 1.85 in trixie, 1.95 in forky/sid - Debian has no versioned `cargo-X.Y` packages at all
+  fedora: [cargo]  # version regularly updated - see https://packages.fedoraproject.org/pkgs/rust/cargo/index.html
+  gentoo: [dev-lang/rust]  # version regularly updated - see https://packages.gentoo.org/packages/dev-lang/rust
+  nixos: [cargo]  # version regularly updated - see https://search.nixos.org/packages?show=cargo&query=cargo
+  openembedded: [cargo@openembedded-core]  # version regularly updated - see https://layers.openembedded.org/layerindex/branch/scarthgap/layer/lts-rust-mixin/
+  opensuse: [cargo]  # version regularly updated - see https://software.opensuse.org/package/cargo
+  rhel: [cargo]  # version regularly updated - see https://docs.redhat.com/en/documentation/red_hat_developer_tools/1/html/using_rust_1.88.0_toolset/rust-toolset
+  ubuntu:
+    '*': [cargo]  # default to cargo package
+    jammy: [cargo-1.91]     # newest available in 22.04
+    noble: [cargo-1.91]     # newest available in 24.04
+    resolute: [cargo-1.93]  # newest available in 26.04
 castxml:
   debian: [castxml]
   fedora: [castxml]
@@ -817,6 +831,14 @@ crypto++:
   gentoo: [dev-libs/crypto++]
   nixos: [cryptopp]
   ubuntu: [libcrypto++-dev]
+cuda-toolkit:
+  arch: [cuda]
+  ubuntu:
+    focal: [nvidia-cuda-toolkit]
+    jammy: [nvidia-cuda-toolkit]
+    noble: [nvidia-cuda-toolkit]
+    questing: [nvidia-cuda-toolkit]
+    resolute: [cuda-toolkit]
 curl:
   alpine: [curl-dev]
   arch: [curl]
@@ -1095,12 +1117,10 @@ ethtool:
   ubuntu: [ethtool]
 euslisp:
   debian: [euslisp]
-  ubuntu:
-    jammy: [euslisp]
+  ubuntu: [euslisp]
 euslisp-dev:
   debian: [euslisp-dev]
-  ubuntu:
-    jammy: [euslisp-dev]
+  ubuntu: [euslisp-dev]
 exfat-fuse:
   debian: [exfat-fuse]
   gentoo: [sys-fs/fuse-exfat]
@@ -1764,6 +1784,19 @@ gprbuild:
   debian: [gprbuild]
   fedora: [gprbuild]
   ubuntu: [gprbuild]
+gpsbabel:
+  alpine: [gpsbabel]
+  arch: [gpsbabel]
+  debian: [gpsbabel]
+  fedora: [gpsbabel]
+  gentoo: [sci-geosciences/gpsbabel]
+  nixos: [gpsbabel]
+  opensuse: [gpsbabel]
+  osx:
+    homebrew:
+      packages: [gpsbabel]
+  rhel: [gpsbabel]
+  ubuntu: [gpsbabel]
 gpsd:
   arch: [gpsd]
   debian: [gpsd]
@@ -2657,10 +2690,12 @@ jskeus:
   debian: [jskeus]
   ubuntu:
     jammy: [jskeus]
+    resolute: [jskeus]
 jskeus-dev:
   debian: [jskeus-dev]
   ubuntu:
     jammy: [jskeus-dev]
+    resolute: [jskeus-dev]
 julius-voxforge:
   fedora: [julius-voxforge]
   ubuntu: [julius-voxforge]
@@ -3659,6 +3694,13 @@ libcpprest-dev:
   fedora: [cpprest-devel]
   openembedded: [cpprest@meta-oe]
   ubuntu: [libcpprest-dev]
+libcrypt-dev:
+  arch: [libxcrypt]
+  debian: [libcrypt-dev]
+  fedora: [libxcrypt-devel]
+  gentoo: [sys-libs/libxcrypt]
+  rhel: [libxcrypt-devel]
+  ubuntu: [libcrypt-dev]
 libcunit-dev:
   alpine: [cunit-dev]
   arch: [cunit]
@@ -3734,6 +3776,9 @@ libdc1394-dev:
   osx:
     macports:
       packages: [libdc1394]
+  rhel:
+    '*': [libdc1394-devel]
+    '8': null
   ubuntu:
     '*': [libdc1394-dev]
     bionic: [libdc1394-22-dev]
@@ -4011,12 +4056,24 @@ libffi-dev:
   ubuntu: [libffi-dev]
 libfftw3:
   arch: [fftw]
-  debian: [libfftw3-3, libfftw3-dev]
-  fedora: [fftw, fftw-devel]
+  debian: [libfftw3-double3, libfftw3-long3, libfftw3-single3]
+  fedora: [fftw]
   gentoo: ['sci-libs/fftw:3.0']
-  nixos: [fftw, fftwSinglePrec]
+  nixos: [fftw, fftwLongDouble, fftwFloat]
   openembedded: [fftw@meta-oe]
-  ubuntu: [libfftw3-3, libfftw3-dev]
+  opensuse: [libfftw3-3]
+  rhel: [fftw]
+  ubuntu: [libfftw3-double3, libfftw3-long3, libfftw3-single3]
+libfftw3-dev:
+  arch: [fftw]
+  debian: [libfftw3-dev]
+  fedora: [fftw-devel]
+  gentoo: ['sci-libs/fftw:3.0']
+  nixos: [fftw, fftwLongDouble, fftwFloat]
+  openembedded: [fftw@meta-oe]
+  opensuse: [fftw3-devel]
+  rhel: [fftw-devel]
+  ubuntu: [libfftw3-dev]
 libfl-dev:
   debian: [libfl-dev]
   fedora: [libfl-devel]
@@ -4175,6 +4232,11 @@ libftdi1-dev:
   fedora: [libftdi-devel]
   gentoo: [dev-embedded/libftdi]
   nixos: [libftdi1]
+  openembedded: [libftdi@meta-oe]
+  osx:
+    homebrew:
+      packages: [libftdi]
+  rhel: [libftdi-devel]
   ubuntu: [libftdi1-dev]
 libftdipp-dev:
   debian:
@@ -7181,6 +7243,7 @@ libreadline-dev:
   macports: [readline]
   nixos: [readline]
   openembedded: [readline@openembedded-core]
+  rhel: [readline-devel]
   ubuntu: [libreadline-dev]
 libreadline-java:
   debian: [libreadline-java]
@@ -7862,6 +7925,14 @@ libwebp-tools:
     '*': [libwebp-tools]
     '8': null
   ubuntu: [webp]
+libwebrtc-audio-processing-dev:
+  arch: [webrtc-audio-processing]
+  debian: [libwebrtc-audio-processing-dev]
+  fedora: [webrtc-audio-processing-devel]
+  gentoo: [media-libs/webrtc-audio-processing]
+  opensuse: [libwebrtc_audio_processing-devel]
+  rhel: [webrtc-audio-processing-devel]
+  ubuntu: [libwebrtc-audio-processing-dev]
 libwebsocketpp-dev:
   arch: [websocketpp]
   debian: [libwebsocketpp-dev]
@@ -9330,18 +9401,6 @@ pybind11-json-dev:
   ubuntu:
     '*': [pybind11-json-dev]
     focal: null
-python-dev:
-  arch: [python]
-  debian: [python-dev]
-  fedora: [python2-devel]
-  nixos: [pythonPackages.python]
-  openeuler: [python3-devel]
-  rhel:
-    '7': [python2-devel]
-    '8': [python2-devel]
-  ubuntu:
-    '*': [python-dev]
-    focal: [python2-dev]
 qemu-user-static:
   arch: [qemu-user-static]
   debian: [qemu-user-static]
