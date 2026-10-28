@@ -43,14 +43,16 @@ jobs:
         NEW_URL_SUFFIX=$DISTRIBUTION/$RELEASE_DATE/$DISTRIBUTION-cache.yaml.gz
         OLD_DISTRO_URL=$DISTRIBUTION/distribution.yaml
         NEW_DISTRO_URL_SUFFIX=$DISTRIBUTION/$RELEASE_DATE/distribution.yaml
-        echo "RELEASE_DISTRIBUTION=$DISTRIBUTION" >> $GITHUB_ENV
-        echo "RELEASE_DATE=$RELEASE_DATE" >> $GITHUB_ENV
-        echo "RELEASE_TAG=$TAG_NAME" >> $GITHUB_ENV
-        echo "RELEASE_CACHE_OLD_URL=${{ env.OLD_CACHE_URL_BASE }}/$OLD_URL_SUFFIX" >> $GITHUB_ENV
-        echo "RELEASE_CACHE_NEW_URL=${{ env.NEW_CACHE_URL_BASE }}/$NEW_URL_SUFFIX" >> $GITHUB_ENV
-        echo "RELEASE_DISTRO_OLD_URL=$OLD_DISTRO_URL" >> $GITHUB_ENV
-        echo "RELEASE_DISTRO_NEW_URL=${{ env.NEW_CACHE_URL_BASE }}/$NEW_DISTRO_URL_SUFFIX" >> $GITHUB_ENV
-        echo "RELEASE_INDEX_URL=${{ env.NEW_CACHE_URL_BASE }}/$TAG_NAME/index-v4.yaml" >> $GITHUB_ENV
+        {
+        echo "RELEASE_DISTRIBUTION=$DISTRIBUTION"
+        echo "RELEASE_DATE=$RELEASE_DATE"
+        echo "RELEASE_TAG=$TAG_NAME"
+        echo "RELEASE_CACHE_OLD_URL=${{ env.OLD_CACHE_URL_BASE }}/$OLD_URL_SUFFIX"
+        echo "RELEASE_CACHE_NEW_URL=${{ env.NEW_CACHE_URL_BASE }}/$NEW_URL_SUFFIX"
+        echo "RELEASE_DISTRO_OLD_URL=$OLD_DISTRO_URL"
+        echo "RELEASE_DISTRO_NEW_URL=${{ env.NEW_CACHE_URL_BASE }}/$NEW_DISTRO_URL_SUFFIX"
+        echo "RELEASE_INDEX_URL=${{ env.NEW_CACHE_URL_BASE }}/$TAG_NAME/index-v4.yaml"
+        } >> "$GITHUB_ENV"
 
     # Echo the release information to console.
     - name: Print release information
@@ -74,7 +76,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
       with:
-        python-version: '3.11'
+        python-version: '3.12'
         cache: 'pip'
 
     # Install dependencies for the rosdistro_build_cache tool.
