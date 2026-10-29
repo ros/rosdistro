@@ -26,6 +26,8 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 from gzip import GzipFile
+from http.client import IncompleteRead
+from io import BytesIO
 from lzma import LZMAFile
 import socket
 import sys
@@ -97,6 +99,10 @@ def open_compressed_url(url, retry=2, retry_period=1, timeout=10):
     """
     Open a URL to a possibly compressed file.
 
+    The entire response body is downloaded before it is returned so that a
+    connection which drops mid-transfer can be detected and retried rather
+    than surfacing later as a truncated stream.
+
     :param url: URL to the file.
     :param retry: number of times to re-attempt the download.
     :param retry_period: number of seconds to wait between retry attempts.
@@ -107,31 +113,54 @@ def open_compressed_url(url, retry=2, retry_period=1, timeout=10):
     request = Request(url, headers={
         'User-Agent': 'rosdep_repo_check/1.0',
     })
-    try:
-        f = urlopen(request, timeout=timeout)
-    except HTTPError as e:
-        if e.code == 503 and retry:
-            time.sleep(retry_period)
-            return open_gz_url(
-                url, retry=retry - 1, retry_period=retry_period,
-                timeout=timeout)
-        e.msg += ' (%s)' % url
-        raise
-    except URLError as e:
-        if isinstance(e.reason, socket.timeout) and retry:
-            time.sleep(retry_period)
-            return open_gz_url(
-                url, retry=retry - 1, retry_period=retry_period,
-                timeout=timeout)
-        raise URLError(str(e) + ' (%s)' % url)
+    while True:
+        try:
+            with urlopen(request, timeout=timeout) as f:
+                data = _read_response(f)
+            break
+        except HTTPError as e:
+            # Only a 503 (service unavailable) is worth retrying
+            if e.code != 503 or not retry:
+                e.msg += ' (%s)' % url
+                raise
+        except URLError as e:
+            # Retry connection timeouts, but not errors like a DNS failure
+            if not isinstance(e.reason, socket.timeout) or not retry:
+                raise URLError(str(e) + ' (%s)' % url)
+        except (IncompleteRead, OSError) as e:
+            # Connection dropped or stalled partway through the transfer
+            if not retry:
+                raise OSError('Failed to download %s: %s' % (url, e)) from e
+        retry -= 1
+        time.sleep(retry_period)
+    body = BytesIO(data)
     if is_probably_gzip(f):
-        return GzipFile(fileobj=f, mode='rb')
+        return GzipFile(fileobj=body, mode='rb')
     elif is_probably_lzma(f):
-        return LZMAFile(f, mode='rb')
+        return LZMAFile(body, mode='rb')
     elif is_probably_zstd(f):
         dctx = ZstdDecompressor()
-        return dctx.stream_reader(f)
-    return f
+        return dctx.stream_reader(body)
+    return body
+
+
+def _read_response(response):
+    """
+    Read an entire urllib response body, verifying its length.
+
+    :param response: the urllib response
+    :returns: the response body.
+    :raises IncompleteRead: if fewer bytes were received than advertised.
+    """
+    data = response.read()
+    expected = response.getheader('Content-Length')
+    if (
+        expected is not None and
+        response.getheader('Content-Encoding') in (None, 'identity') and
+        len(data) != int(expected)
+    ):
+        raise IncompleteRead(data, int(expected) - len(data))
+    return data
 
 
 class PackageEntry(str):
