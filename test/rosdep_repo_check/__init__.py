@@ -26,9 +26,12 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 from gzip import GzipFile
+from http.client import IncompleteRead
 from lzma import LZMAFile
+from shutil import copyfileobj
 import socket
 import sys
+from tempfile import TemporaryFile
 import time
 try:
     from urllib.error import HTTPError
@@ -108,7 +111,22 @@ def open_compressed_url(url, retry=2, retry_period=1, timeout=10):
         'User-Agent': 'rosdep_repo_check/1.0',
     })
     try:
-        f = urlopen(request, timeout=timeout)
+        with urlopen(request, timeout=timeout) as response:
+            gzip = is_probably_gzip(response)
+            lzma = is_probably_lzma(response)
+            zstd = is_probably_zstd(response)
+            # Package enumeration can pause while other repositories are checked.
+            # Finish the download so an idle HTTP connection cannot truncate it.
+            f = TemporaryFile()
+            try:
+                copyfileobj(response, f)
+                content_length = response.getheader('Content-Length')
+                if content_length and f.tell() < int(content_length):
+                    raise IncompleteRead(b'', int(content_length) - f.tell())
+                f.seek(0)
+            except Exception:
+                f.close()
+                raise
     except HTTPError as e:
         if e.code == 503 and retry:
             time.sleep(retry_period)
@@ -117,6 +135,13 @@ def open_compressed_url(url, retry=2, retry_period=1, timeout=10):
                 timeout=timeout)
         e.msg += ' (%s)' % url
         raise
+    except (IncompleteRead, ConnectionResetError, socket.timeout) as e:
+        if retry:
+            time.sleep(retry_period)
+            return open_compressed_url(
+                url, retry=retry - 1, retry_period=retry_period,
+                timeout=timeout)
+        raise URLError(str(e) + ' (%s)' % url) from e
     except URLError as e:
         if isinstance(e.reason, socket.timeout) and retry:
             time.sleep(retry_period)
@@ -124,11 +149,11 @@ def open_compressed_url(url, retry=2, retry_period=1, timeout=10):
                 url, retry=retry - 1, retry_period=retry_period,
                 timeout=timeout)
         raise URLError(str(e) + ' (%s)' % url)
-    if is_probably_gzip(f):
+    if gzip:
         return GzipFile(fileobj=f, mode='rb')
-    elif is_probably_lzma(f):
+    elif lzma:
         return LZMAFile(f, mode='rb')
-    elif is_probably_zstd(f):
+    elif zstd:
         dctx = ZstdDecompressor()
         return dctx.stream_reader(f)
     return f
