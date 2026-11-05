@@ -45,7 +45,7 @@ More info at https://github.com/ros/rosdistro/blob/master/CONTRIBUTING.md#guidel
   - OPTIONAL
 - openSUSE: https://software.opensuse.org/package/
   - IF AVAILABLE
-- rhel: https://rhel.pkgs.org/
+- RHEL: [Find a binary RPM in AlmaLinux or EPEL](https://github.com/ros/rosdistro/blob/master/CONTRIBUTING.md#rhelcentos)
   - IF AVAILABLE
 
 <!-- DOC_INDEX_TEMPLATE: add package to rosdistro for documentation indexing -->
