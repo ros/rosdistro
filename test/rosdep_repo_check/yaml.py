@@ -126,4 +126,7 @@ def isolate_yaml_snippets_from_line_numbers(yaml_dict, line_numbers):
                 if values.__line__ <= dl:
                     matches[name] = values
                     break
+            elif values is None and name.__line__ <= dl:
+                matches[name] = None
+                break
     return matches
