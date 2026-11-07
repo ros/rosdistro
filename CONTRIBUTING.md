@@ -162,8 +162,21 @@ Keys in the rosdep database are required to come from packages contained in the 
 #### RHEL/CentOS
 
 * CentOS Repositories: base, extras, centos-sclo-rh, or updates
-  * Additionally, for CentOS 8+: AppStream or PowerTools
+  * For EL 8 and later: BaseOS, AppStream, and the development repository
+    (PowerTools on EL 8, CRB on EL 9 and 10)
 * Fedora Project Repositories: epel
+
+For RHEL rules, the [rosdep repository check](test/rosdep_repo_check/config.yaml)
+uses AlmaLinux mirrors for these system packages. Browse the
+[AlmaLinux package archive](https://repo.almalinux.org/almalinux/)
+by major version, repository, and architecture, then look for the binary RPM under
+`os/Packages/`. For example, `glibc-langpack-de` is in the
+[AlmaLinux 9 BaseOS x86_64 package directory](https://repo.almalinux.org/almalinux/9/BaseOS/x86_64/os/Packages/).
+
+For EPEL, search [Fedora Packages](https://packages.fedoraproject.org/) for the
+binary package and check the **Stable** column in the Fedora EPEL row for the
+target EL release (see [htop](https://packages.fedoraproject.org/pkgs/htop/htop/)
+for an example). Include the package listing and EL release in your pull request.
 
 #### MacOS
 
