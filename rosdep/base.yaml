@@ -786,10 +786,14 @@ couchdb:
   gentoo: [dev-db/couchdb]
   nixos: [couchdb3]
 cppad:
-  debian: [cppad]
+  debian:
+    '*': [libcppad-dev]
+    bookworm: null
   fedora: [cppad]
   gentoo: [sci-libs/coinor-cppad]
-  ubuntu: [cppad]
+  ubuntu:
+    '*': [libcppad-dev]
+    focal: [cppad]
 cppcheck:
   alpine: [cppcheck]
   arch: [cppcheck]
@@ -1285,12 +1289,7 @@ fltk:  # Consider using the libfltk-dev and fluid (fltk runtime) keys instead.
   openembedded: [fltk@meta-oe]
   opensuse: [fltk-devel]
   slackware: [fltk]
-  ubuntu:
-    bionic: [fluid, libfltk1.3-dev]
-    focal: [fluid, libfltk1.3-dev]
-    jammy: [fluid, libfltk1.3-dev]
-    noble: [fluid, libfltk1.3-dev]
-    resolute: [fluid, libfltk1.3-dev]
+  ubuntu: [fluid, libfltk1.3-dev]
 fluid:
   arch: [fltk]
   debian: [libfltk1.1-dev]
@@ -2556,6 +2555,23 @@ imagemagick:
   nixos: [imagemagick]
   openembedded: [imagemagick@meta-oe]
   ubuntu: [imagemagick]
+inja-dev:
+  alpine: [inja-dev]
+  arch: [inja]
+  debian:
+    forky: [inja-dev]
+  fedora:
+    '*': [inja-devel]
+    '42': null
+  nixos: [inja]
+  osx:
+    homebrew:
+      packages: [inja]
+  ubuntu:
+    '*': [inja-dev]
+    focal: null
+    jammy: null
+    noble: null
 intel-gpu-tools:
   arch: [intel-gpu-tools]
   debian: [intel-gpu-tools]
@@ -3588,6 +3604,7 @@ libcereal-dev:
   debian: [libcereal-dev]
   fedora: [cereal-devel]
   gentoo: [dev-libs/cereal]
+  nixos: [cereal]
   openembedded: [libcereal@meta-oe]
   ubuntu: [libcereal-dev]
 libceres:
@@ -4274,12 +4291,7 @@ libftdipp-dev:
   fedora: [libftdi-c++-devel]
   gentoo: ['dev-embedded/libftdi[cxx]']
   openembedded: [libftdi@meta-oe]
-  ubuntu:
-    bionic: [libftdipp1-dev]
-    focal: [libftdipp1-dev]
-    jammy: [libftdipp1-dev]
-    noble: [libftdipp1-dev]
-    resolute: [libftdipp1-dev]
+  ubuntu: [libftdipp1-dev]
 libftgl-dev:
   arch: [ftgl]
   debian: [libftgl-dev]
@@ -7182,6 +7194,21 @@ libquazip1-qt5-dev:
     jammy: [libquazip5-dev]
     noble: [libquazip5-dev]
     resolute: [libquazip5-dev]
+libquazip1-qt6-dev:
+  alpine: [quazip-dev]
+  arch: [quazip-qt6]
+  debian: [libquazip1-qt6-dev]
+  fedora: [quazip-qt6-devel]
+  gentoo: [dev-libs/quazip]
+  osx:
+    homebrew:
+      packages: [quazip]
+  rhel:
+    '10': [quazip-qt6-devel]
+  ubuntu:
+    '*': [libquazip1-qt6-dev]
+    focal: null
+    jammy: null
 libqwt-qt5-dev:
   arch: [qwt]
   debian: [libqwt-qt5-dev]
@@ -7286,6 +7313,26 @@ libreadline-java:
   debian: [libreadline-java]
   gentoo: [dev-java/libreadline-java]
   ubuntu: [libreadline-java]
+librobotraconteur-companion-dev:
+  debian:
+    '*': [librobotraconteur-companion-dev]
+    bookworm: null
+    trixie: null
+  ubuntu:
+    '*': [librobotraconteur-companion-dev]
+    focal: null
+    jammy: null
+    noble: null
+librobotraconteur-dev:
+  debian:
+    '*': [librobotraconteur-dev]
+    bookworm: null
+    trixie: null
+  ubuntu:
+    '*': [librobotraconteur-dev]
+    focal: null
+    jammy: null
+    noble: null
 librocksdb-dev:
   alpine: [rocksdb-dev]
   debian: [librocksdb-dev]
@@ -7509,7 +7556,10 @@ libssl-dev:
   alpine: [libressl-dev]
   arch: [openssl]
   debian: [libssl-dev]
-  fedora: [openssl-devel, openssl-devel-engine]
+  fedora:
+    '*': [openssl-devel]
+    '43': [openssl-devel, openssl-devel-engine]
+    '44': [openssl-devel, openssl-devel-engine]
   freebsd: [openssl]
   gentoo: [dev-libs/openssl]
   nixos: [openssl]
@@ -8303,8 +8353,8 @@ libzmq3-dev:
     bionic: [libzmq3-dev]
     focal: [libzmq3-dev]
     jammy: [libzmq3-dev]
-    noble: [libzmq3-dev]
-    resolute: [libzmq3-dev]
+    noble: [libzmq3-dev, cppzmq-dev]
+    resolute: [libzmq3-dev, cppzmq-dev]
 libzmqpp-dev:
   ubuntu: [libzmqpp-dev]
 libzmqpp3:
@@ -8627,12 +8677,7 @@ mkdocs:
   fedora: [mkdocs]
   gentoo: [dev-python/mkdocs]
   nixos: [mkdocs]
-  ubuntu:
-    bionic: [mkdocs]
-    focal: [mkdocs]
-    jammy: [mkdocs]
-    noble: [mkdocs]
-    resolute: [mkdocs]
+  ubuntu: [mkdocs]
 mkdocs-bootstrap:
   debian:
     bookworm: [mkdocs-bootstrap]
@@ -8641,12 +8686,7 @@ mkdocs-bootstrap:
     trixie: [mkdocs-bootstrap]
   fedora: [mkdocs-bootstrap]
   gentoo: [dev-python/mkdocs-bootstrap]
-  ubuntu:
-    bionic: [mkdocs-bootstrap]
-    focal: [mkdocs-bootstrap]
-    jammy: [mkdocs-bootstrap]
-    noble: [mkdocs-bootstrap]
-    resolute: [mkdocs-bootstrap]
+  ubuntu: [mkdocs-bootstrap]
 mkdocs-bootswatch:
   debian:
     buster: [mkdocs-bootswatch]
@@ -9662,6 +9702,22 @@ qml6-module-qtcore:
   ubuntu:
     '*': [qml6-module-qtcore]
     'focal': null
+qml6-module-qtlocation:
+  alpine: [qt6-qtlocation]
+  arch: [qt6-location]
+  debian:
+    '*': [qml6-module-qtlocation]
+    bookworm: null
+  fedora: [qt6-qtlocation]
+  gentoo: ['dev-qt/qtlocation:6']
+  osx:
+    homebrew:
+      packages: [qtlocation]
+  ubuntu:
+    '*': [qml6-module-qtlocation]
+    focal: null
+    jammy: null
+    noble: null
 qml6-module-qtmultimedia:
   arch: [qt6-declarative, qt6-multimedia]
   debian: [qml6-module-qtmultimedia]
@@ -9959,6 +10015,22 @@ qt6-declarative-private-dev:
   ubuntu:
     '*': [qt6-declarative-private-dev]
     'focal': null
+qt6-location-plugins:
+  alpine: [qt6-qtlocation]
+  arch: [qt6-location]
+  debian:
+    '*': [qt6-location-plugins]
+    bookworm: null
+  fedora: [qt6-qtlocation]
+  gentoo: ['dev-qt/qtlocation:6']
+  osx:
+    homebrew:
+      packages: [qtlocation]
+  ubuntu:
+    '*': [qt6-location-plugins]
+    focal: null
+    jammy: null
+    noble: null
 qt6-multimedia-dev:
   arch: [qt6-multimedia]
   debian: [qt6-multimedia-dev]
@@ -9972,6 +10044,18 @@ qt6-multimedia-dev:
   ubuntu:
     '*': [qt6-multimedia-dev]
     'focal': null
+qt6-positioning-dev:
+  alpine: [qt6-qtpositioning-dev]
+  arch: [qt6-positioning]
+  debian: [qt6-positioning-dev]
+  fedora: [qt6-qtpositioning-devel]
+  gentoo: ['dev-qt/qtpositioning:6']
+  osx:
+    homebrew:
+      packages: [qtpositioning]
+  ubuntu:
+    '*': [qt6-positioning-dev]
+    focal: null
 qt6-qmake:
   alpine: [qt6-qtbase-dev]
   arch: [qt6-base]

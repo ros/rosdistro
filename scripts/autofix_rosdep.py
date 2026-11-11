@@ -62,11 +62,35 @@ Available fixes:
     pocket are read, from archive.ubuntu.com or old-releases.ubuntu.com. The
     first run downloads these older indices, which can take several minutes.
 
+  ubuntu-star
+    Replace the per-release (and '*') entries of an Ubuntu rule with a one
+    line 'ubuntu: [...]' entry, which applies to all releases like '*' does,
+    but only when all of them list the same packages: rules with renamed
+    packages or null entries for some release are not changed.
+
+      - Without a '*' entry, every current Ubuntu release (as for
+        ubuntu-simple: the LTS and supported releases from
+        --ubuntu-first-current, default bionic, through the newest supported
+        release, i.e. bionic, focal, jammy, noble and resolute) must have an
+        entry, so none of them changes what it resolves to.
+
+      - Whether or not there is a '*' entry, the rule is not trusted: all of
+        the packages must exist (or be provided) in every current release, on
+        the supported architecture.
+
+      - With a '*' entry, there must be at least one release entry, and all
+        release entries must list the same packages as '*'. Rules with only a
+        '*' entry are not changed.
+
+    Entries with comments on their lines are reported but not changed. Older
+    or interim releases without an entry also start resolving to the one line
+    entry; they are past their end of life and are not checked.
+
 Downloaded package indices are saved in the artifacts folder at the top of
-the repository. If a download fails or times out, the saved copy from a
-previous run is used instead, with a warning. --use-artifacts uses the saved
-copies without downloading, and only downloads indices that have no saved
-copy.
+the repository. By default, saved copies from a previous run are used without
+downloading, and only indices that have no saved copy are downloaded.
+--ignore-artifacts downloads all indices again; if a download fails or times
+out, the saved copy is used instead, with a warning.
 
 Each run, also with --dry-run, writes a report to artifacts/fixes.txt: the
 command line, then for each file the changes made, grouped by kind.
@@ -126,6 +150,8 @@ class RuleFile:
         self.removals = set()
         # (kind, description) of the changes made by fixes, kind from CHANGE_KINDS
         self.changes = []
+        # (key, os_name, codename) -> (line index, text) of entries added by fixes
+        self.added = {}
 
     def report(self, kind, text):
         print(text)
@@ -136,6 +162,9 @@ class RuleFile:
 
     def remove(self, index):
         self.removals.add(index)
+
+    def cancel_insertion(self, insertion):
+        self.insertions.remove(insertion)
 
     def write(self):
         # Removed lines are dropped last, so insertion indices stay valid.
@@ -280,7 +309,9 @@ def add_release(config, rule_file, os_name, os_arch, codename, previous_release,
         rule_file.report('release-added', '%s: %s %s: [%s] (copied from %s)' % (
             key, os_name, codename, ', '.join(entry), source))
         position, indent = entry_position(rule_file, os_rule, codename)
-        rule_file.insert(position, '%s%s: [%s]\n' % (indent, codename, ', '.join(entry)))
+        insertion = (position, '%s%s: [%s]\n' % (indent, codename, ', '.join(entry)))
+        rule_file.insert(*insertion)
+        rule_file.added[(key, os_name, codename)] = insertion
         # Newer releases may copy this entry.
         os_rule[codename] = entry
         added += 1
@@ -481,9 +512,95 @@ def fix_ubuntu_simple(config, rule_file, args):
     return removed
 
 
+def entry_line_indices(rule_file, entry_key):
+    """Return the line indices of an entry, from its key line through any lines nested under it."""
+    start = entry_key.__line__ - 1
+    line = rule_file.lines[start]
+    indent = line[:len(line) - len(line.lstrip())]
+    end = start + 1
+    while end < len(rule_file.lines) and rule_file.lines[end].startswith(indent + ' '):
+        end += 1
+    return range(start, end)
+
+
+def has_comment(lines):
+    """Return whether any of lines has a comment (approximate: any '#')."""
+    return any('#' in line for line in lines)
+
+
+def fix_ubuntu_star(config, rule_file, args):
+    """Replace identical per-release ubuntu entries with one line 'ubuntu: [...]'. Return the number of rules changed."""
+    releases = current_ubuntu_releases(config, args.ubuntu_first_current)
+    os_arch = config['supported_arches']['ubuntu'][0]
+    changed = 0
+    for key in sorted(rule_file.rules):
+        rule = rule_file.rules[key]
+        os_rule = rule.get('ubuntu') if isinstance(rule, dict) else None
+        if not isinstance(os_rule, dict) or any(k in os_rule for k in ('apt', 'pip', 'source')):
+            continue
+        has_star = '*' in os_rule
+        if has_star:
+            value = os_rule['*']
+        else:
+            # '*' also applies to future releases, so it takes the newest release's entry.
+            value = os_rule.get(releases[-1])
+            if not isinstance(value, list) or not value:
+                continue
+        if not isinstance(value, list) or not value:
+            continue
+        redundant = [r for r in os_rule if r != '*']
+        # Only when every release has the same packages: no renames or null entries.
+        # A rule with only a '*' entry is left as it is.
+        if not redundant or any(os_rule[r] != value for r in redundant):
+            continue
+        if not has_star:
+            # A current release without an entry would start resolving to '*'.
+            missing = [r for r in releases if r not in os_rule]
+            if missing:
+                print("%s: ubuntu [%s] could become '*', but %s %s no entry, not changed" % (
+                    key, ', '.join(value), ', '.join(missing), 'has' if len(missing) == 1 else 'have'))
+                continue
+        # Do not trust the rule: the packages must exist in every current release.
+        unavailable = [
+            '%s (%s)' % (r, ', '.join(p for p in value if p not in ubuntu_names(config, r, os_arch)))
+            for r in releases
+            if not all(p in ubuntu_names(config, r, os_arch) for p in value)]
+        if unavailable:
+            print("%s: ubuntu [%s] could become '*', but is not available in %s, not changed" % (
+                key, ', '.join(value), ', '.join(unavailable)))
+            continue
+
+        # The whole ubuntu entry, from its key line through the lines nested under it,
+        # becomes one line.
+        ubuntu_key = next(k for k in rule if k == 'ubuntu')
+        indices = entry_line_indices(rule_file, ubuntu_key)
+        if has_comment(rule_file.lines[i] for i in indices):
+            print('%s: ubuntu entries could become ubuntu: [%s], but have comments, '
+                  'not changed' % (key, ', '.join(value)))
+            continue
+
+        description = '%s: ubuntu: [%s] replaces %s' % (
+            key, ', '.join(value), ', '.join((['*'] if has_star else []) + redundant))
+        rule_file.report('ubuntu-star', description)
+
+        line = rule_file.lines[indices[0]]
+        indent = line[:len(line) - len(line.lstrip())]
+        rule_file.insert(indices[0], '%subuntu: [%s]\n' % (indent, ', '.join(value)))
+        for i in indices:
+            rule_file.remove(i)
+        for r in redundant:
+            insertion = rule_file.added.pop((key, 'ubuntu', r), None)
+            if insertion:
+                rule_file.cancel_insertion(insertion)
+        rule[ubuntu_key] = value
+        changed += 1
+    return changed
+
+
 FIXES = {
     'add-releases': fix_add_releases,
     'ubuntu-simple': fix_ubuntu_simple,
+    'ubuntu-star': fix_ubuntu_star,
 }
 
 # Kinds of changes reported by fixes, in report order, with the line introducing them
@@ -497,6 +614,9 @@ CHANGE_KINDS = {
     'rule-removed':
         "Keys removed entirely (ubuntu-simple), because their only entry was a one line 'ubuntu' "
         'entry that no current Ubuntu release has all of the packages of:',
+    'ubuntu-star':
+        "Per-release and '*' 'ubuntu' entries replaced by a one line 'ubuntu' entry "
+        '(ubuntu-star), because all of them list the same packages:',
 }
 
 
@@ -537,15 +657,16 @@ def main(argv=sys.argv[1:]):
         help='only show the changes that would be made')
     parser.add_argument(
         '--ubuntu-first-current', default='bionic', metavar='CODENAME',
-        help='oldest Ubuntu release the ubuntu-simple fix checks (default: %(default)s)')
+        help='oldest Ubuntu release the ubuntu-simple and ubuntu-star fixes check '
+             '(default: %(default)s)')
     parser.add_argument(
         '--last-release', action='store_true',
         help='with ubuntu-simple, report the last older Ubuntu release that had each removed '
              'entry (slow the first time, older indices are downloaded)')
     parser.add_argument(
-        '--use-artifacts', action='store_true',
-        help='use the package indices saved in %s instead of downloading them, '
-             'downloading only those not saved yet' % os.path.relpath(ARTIFACTS_DIR))
+        '--ignore-artifacts', dest='use_artifacts', action='store_false',
+        help='download all package indices again instead of using the copies saved in %s '
+             '(by default, only indices not saved yet are downloaded)' % os.path.relpath(ARTIFACTS_DIR))
     args = parser.parse_args(argv)
 
     # The Ubuntu and Debian sources read their package indices with deb.open_gz_url.
