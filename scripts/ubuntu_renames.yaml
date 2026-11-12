@@ -40,24 +40,6 @@ libxmlrpc-c++:
     replace:
       libxmlrpc-c++8-dev: libxmlrpc-c++9-dev
 
-# procps 4 split the library out as libproc2.
-libprocps-dev:
-  - from: noble
-    replace:
-      libprocps-dev: libproc2-dev
-
-# libsensors-dev exists from jammy; libsensors4-dev is gone from noble.
-libsensors4-dev:
-  - from: noble
-    replace:
-      libsensors4-dev: libsensors-dev
-
-# exfat-utils (FUSE) was replaced by exfatprogs.
-exfat-utils:
-  - from: jammy
-    replace:
-      exfat-utils: exfatprogs
-
 collada-dom:
   - from: resolute
     replace:
@@ -73,12 +55,6 @@ ntpdate:
     replace:
       ntpdate: ntpsec-ntpdate
 
-# google-perftools (the binaries) is gone; libgoogle-perftools-dev remains.
-gperftools:
-  - from: resolute
-    replace:
-      google-perftools: null
-
 # Only the unhinted Roboto fonts remain.
 fonts-roboto:
   - from: resolute
@@ -89,10 +65,3 @@ netpbm:
   - from: noble
     replace:
       libnetpbm10-dev: libnetpbm-dev
-
-# REVIEW: libmongoc2 is a new major version with a different API, so packages
-# depending on libmongoc-1.0-0 may not build against it.
-libmongoc-1.0-0:
-  - from: resolute
-    replace:
-      libmongoc-1.0-0t64: libmongoc2-2
