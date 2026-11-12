@@ -17,11 +17,7 @@
 # in a rule without '*', starts from the newest older release's entry.
 #
 # These are the keys of ubuntu_renames.yaml, checked against the bookworm and
-# trixie package indices. Not needed for Debian:
-#   collada-dom: libcollada-dom2.4-dp-dev is still in trixie
-#   gperftools: google-perftools is still in trixie
-#   libmongoc-1.0-0: already libmongoc-1.0-0t64 from trixie ('*'); libmongoc2
-#     is not in trixie
+# trixie package indices.
 
 # coinor-libcbc3 was renamed for the t64 transition.
 coinor-libcbc3:
@@ -49,6 +45,13 @@ libxmlrpc-c++:
   - from: trixie
     replace:
       libxmlrpc-c++8-dev: libxmlrpc-c++9-dev
+
+# libcollada-dom2.4-dp-dev is an empty transitional package depending on
+# libcollada-dom-dev (2.5) in bookworm and trixie, so this installs the same.
+collada-dom:
+  - from: bookworm
+    replace:
+      libcollada-dom2.4-dp-dev: libcollada-dom-dev
 
 # ntp and ntpdate are provided by ntpsec; they are gone from trixie.
 ntp:
