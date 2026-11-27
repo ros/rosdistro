@@ -62,6 +62,31 @@ Available fixes:
     pocket are read, from archive.ubuntu.com or old-releases.ubuntu.com. The
     first run downloads these older indices, which can take several minutes.
 
+  ubuntu-renames, debian-renames
+    Replace renamed packages, as listed in a renames file (--ubuntu-renames,
+    default scripts/ubuntu_renames.yaml, or --debian-renames, default
+    scripts/debian_renames.yaml), in the entries of the current releases from a
+    given release onward, and in the '*' entry, which newer releases use. A one
+    line 'ubuntu: [...]' or 'debian: [...]' entry becomes a '*' entry. The file
+    format is described at the top of the renames files.
+
+      - Current Ubuntu releases are as for ubuntu-simple (from
+        --ubuntu-first-current); current Debian releases are the supported
+        ones (supported_versions in test/rosdep_repo_check/config.yaml).
+
+      - Older releases keep the packages they resolve to now, with entries
+        added for them as needed. Releases before the current ones are not
+        changed, and may start resolving to the new '*' entry.
+
+      - A current release with no entry, in a rule without '*', starts from the
+        entry of the newest older release, so a rule whose packages were
+        renamed after its last release entry gets entries again.
+
+    All of the packages of each changed entry must exist in its release,
+    otherwise the rule is not changed. Rules with comments in their entry are
+    reported but not changed. These fixes only run when asked for with --fix,
+    and not together with other fixes (they can be combined with each other).
+
   ubuntu-star
     Replace the per-release (and '*') entries of an Ubuntu rule with a one
     line 'ubuntu: [...]' entry, which applies to all releases like '*' does,
@@ -133,6 +158,9 @@ OLD_DOWNLOAD_TIMEOUT = 60
 UBUNTU_PORTS_ARCHES = ('arm64', 'armhf')
 UBUNTU_PORTS_MIRROR = 'http://ports.ubuntu.com/ubuntu-ports'
 ROS_BOOTSTRAP = 'http://repos.ros.org/repos/ros_bootstrap'
+DEFAULT_RENAMES = {
+    os_name: os.path.join(BASEDIR, 'scripts', '%s_renames.yaml' % os_name)
+    for os_name in ('debian', 'ubuntu')}
 
 
 class RuleFile:
@@ -324,6 +352,8 @@ SIMPLE_UBUNTU_ENTRY = re.compile(r'^\s*ubuntu:\s*\[[^\]]*\]\s*(#.*)?$')
 PROVIDES = {}
 # codename -> names of the packages in, or provided by, an Ubuntu release
 UBUNTU_NAMES = {}
+# OS name (besides ubuntu) -> codename -> names of the packages in, or provided by, a release
+RELEASE_NAMES = {}
 # (codename, arch) -> names of the packages in, or provided by, an Ubuntu ports release
 UBUNTU_PORTS_NAMES = {}
 
@@ -339,21 +369,27 @@ def enumerate_blocks_recording_provides(url, enumerate_blocks=deb.enumerate_bloc
         yield block
 
 
-def ubuntu_names(config, codename, os_arch):
-    """Return the names of the packages in, or provided by, an Ubuntu release."""
-    if codename not in UBUNTU_NAMES:
+def release_names(config, os_name, codename, os_arch):
+    """Return the names of the packages in, or provided by, an Ubuntu or Debian release."""
+    cache = UBUNTU_NAMES if os_name == 'ubuntu' else RELEASE_NAMES.setdefault(os_name, {})
+    if codename not in cache:
         names = set()
-        for os_sources in config['package_sources']['ubuntu']:
+        for os_sources in config['package_sources'][os_name]:
             sources = os_sources.get(codename, []) if isinstance(os_sources, dict) else [os_sources]
             for source in sources:
                 # Read the whole index, so all of its Provides are recorded.
-                names.update(source.enumerate_packages('ubuntu', codename, os_arch))
+                names.update(source.enumerate_packages(os_name, codename, os_arch))
         # Suites of the release are codename, codename-updates, ...
         for url, provides in PROVIDES.items():
             if '/dists/%s/' % codename in url or '/dists/%s-' % codename in url:
                 names.update(provides)
-        UBUNTU_NAMES[codename] = names
-    return UBUNTU_NAMES[codename]
+        cache[codename] = names
+    return cache[codename]
+
+
+def ubuntu_names(config, codename, os_arch):
+    """Return the names of the packages in, or provided by, an Ubuntu release."""
+    return release_names(config, 'ubuntu', codename, os_arch)
 
 
 def read_index_names(url, use_artifacts, timeout):
@@ -597,11 +633,219 @@ def fix_ubuntu_star(config, rule_file, args):
     return changed
 
 
+def load_renames(path, os_name, releases):
+    """
+    Load the renames file of ubuntu-renames or debian-renames.
+
+    Return {rosdep key: [(from release, {old package: [new packages]})]}.
+    """
+    with open(path) as f:
+        data = yaml.safe_load(f) or {}
+    if not isinstance(data, dict):
+        sys.exit('error: %s: expected a mapping of rosdep keys' % path)
+    renames = {}
+    for key, steps in data.items():
+        if not isinstance(steps, list) or not steps:
+            sys.exit('error: %s: %s: expected a list of steps' % (path, key))
+        renames[key] = []
+        for step in steps:
+            if not isinstance(step, dict) or set(step) != {'from', 'replace'} or \
+                    not isinstance(step['replace'], dict) or not step['replace']:
+                sys.exit("error: %s: %s: each step needs 'from' and a non empty 'replace' mapping" %
+                         (path, key))
+            if step['from'] not in releases:
+                sys.exit('error: %s: %s: %s is not a current %s release (%s)' % (
+                    path, key, step['from'], os_name, ', '.join(releases)))
+            replace = {}
+            for old, new in step['replace'].items():
+                if new is None:
+                    new = []
+                elif isinstance(new, str):
+                    new = [new]
+                elif not isinstance(new, list) or not all(isinstance(p, str) for p in new):
+                    sys.exit('error: %s: %s: %s: expected a package name, a list of them, or null' %
+                             (path, key, old))
+                replace[old] = new
+            renames[key].append((step['from'], replace))
+    return renames
+
+
+def apply_renames(packages, replace):
+    """Return packages with the replacements of replace applied, without duplicates."""
+    result = []
+    for p in packages:
+        for new in replace.get(p, [p]):
+            if new not in result:
+                result.append(new)
+    return result
+
+
+def format_entry(codename, packages):
+    """Return the text of a release entry, without indent."""
+    name = "'*'" if codename == '*' else codename
+    return '%s: %s' % (name, 'null' if packages is None else '[%s]' % ', '.join(packages))
+
+
+# OS name -> keys of its renames file found in the rule files, so missing ones can be reported
+RENAMED_KEYS_FOUND = {}
+# Renames fixes -> OS name. They can be combined with each other, not with other fixes.
+RENAMES_FIXES = {'debian-renames': 'debian', 'ubuntu-renames': 'ubuntu'}
+
+
+def renames_releases(config, os_name, args):
+    """Return the releases a renames fix changes, oldest first."""
+    if os_name == 'ubuntu':
+        return current_ubuntu_releases(config, args.ubuntu_first_current)
+    order = release_order(os_name)
+    return sorted(config['supported_versions'][os_name], key=order.index)
+
+
+def fix_renames(config, rule_file, os_name, renames_path, releases):
+    """Replace renamed packages of an OS from a release onward. Return the number of rules changed."""
+    os_arch = config['supported_arches'][os_name][0]
+    order = release_order(os_name)
+    renames = load_renames(renames_path, os_name, releases)
+    changed = 0
+    for key in sorted(renames):
+        rule = rule_file.rules.get(key)
+        if rule is None:
+            continue
+        RENAMED_KEYS_FOUND.setdefault(os_name, set()).add(key)
+        os_rule = rule.get(os_name) if isinstance(rule, dict) else None
+        if isinstance(os_rule, list):
+            # A one line entry applies to all releases, like '*'.
+            entries = {'*': os_rule}
+        elif isinstance(os_rule, dict) and not any(k in os_rule for k in ('apt', 'pip', 'source')):
+            entries = dict(os_rule)
+        else:
+            print('%s: %s entry is missing or not a package list, not changed' % (key, os_name))
+            continue
+        if not all(v is None or isinstance(v, list) for v in entries.values()):
+            print('%s: %s entries are not all package lists, not changed' % (key, os_name))
+            continue
+
+        # What each current release resolves to now. None: no entry or null.
+        def resolve(codename):
+            return entries[codename] if codename in entries else entries.get('*')
+
+        def older_entry(codename):
+            """Return (release, packages) of the newest older release entry, or (None, None)."""
+            older = [
+                r for r in entries
+                if r != '*' and isinstance(entries[r], list) and r in order and
+                order.index(r) < order.index(codename)]
+            if not older:
+                return None, None
+            source = max(older, key=order.index)
+            return source, entries[source]
+
+        new_entries = dict(entries)
+        # Releases changed by a step, with the steps' old package names
+        renamed = {}
+        # Releases without an entry (and no '*') whose entry is renamed from an older release's
+        inherited = {}
+        for start, replace in renames[key]:
+            for r in releases[releases.index(start):]:
+                current = new_entries[r] if r in new_entries else new_entries.get('*')
+                source = None
+                if r not in new_entries and '*' not in new_entries:
+                    # Nothing to resolve to: start from the newest older release entry.
+                    source, current = older_entry(r)
+                if current is None:
+                    continue
+                packages = apply_renames(current, replace)
+                if packages != current:
+                    new_entries[r] = packages
+                    renamed.setdefault(r, set()).update(p for p in current if p in replace)
+                    if source:
+                        inherited[r] = source
+            # '*' is used by releases newer than the current ones.
+            if new_entries.get('*') is not None:
+                new_entries['*'] = apply_renames(new_entries['*'], replace)
+        if not renamed:
+            print('%s: none of the packages to replace are in %s %s..%s, not changed' % (
+                key, os_name, releases[0], releases[-1]))
+            continue
+        if '*' in new_entries and new_entries['*'] is not None:
+            # Releases resolving to '*' that the steps did not change keep their packages.
+            for r in releases:
+                if r not in new_entries and resolve(r) != new_entries['*']:
+                    new_entries[r] = resolve(r)
+            # Releases that now match '*' do not need an entry, unless they had one.
+            for r in releases:
+                if r not in entries and new_entries.get(r) == new_entries['*']:
+                    del new_entries[r]
+        empty = [r for r in renamed if not new_entries.get(r, new_entries.get('*'))]
+        if empty:
+            print('%s: %s %s would have no packages left, not changed' % (
+                key, os_name, ', '.join(empty)))
+            continue
+
+        # Do not trust the renames: the new packages must exist in each release.
+        checks = {r: new_entries.get(r, new_entries.get('*')) for r in renamed}
+        if new_entries.get('*') is not None:
+            checks.setdefault(releases[-1], new_entries['*'])
+        unavailable = [
+            '%s (%s)' % (r, ', '.join(
+                p for p in packages if p not in release_names(config, os_name, r, os_arch)))
+            for r, packages in sorted(checks.items(), key=lambda item: releases.index(item[0]))
+            if not all(p in release_names(config, os_name, r, os_arch) for p in packages)]
+        if unavailable:
+            print('%s: renamed packages are not available in %s %s, not changed' % (
+                key, os_name, ', '.join(unavailable)))
+            continue
+
+        os_key = next(k for k in rule if k == os_name)
+        indices = entry_line_indices(rule_file, os_key)
+        if has_comment(rule_file.lines[i] for i in indices):
+            print('%s: %s entries have comments, not changed' % (key, os_name))
+            continue
+
+        line = rule_file.lines[indices[0]]
+        indent = line[:len(line) - len(line.lstrip())]
+        # '*' sorts first, then the codenames alphabetically.
+        keys = sorted(new_entries, key=lambda k: (k != '*', k))
+        if keys == ['*']:
+            text = ['%s%s: [%s]\n' % (indent, os_name, ', '.join(new_entries['*']))]
+        else:
+            text = ['%s%s:\n' % (indent, os_name)] + [
+                '%s  %s\n' % (indent, format_entry(k, new_entries[k])) for k in keys]
+
+        old_names = sorted(set().union(*renamed.values()))
+        changed_releases = [
+            '%s (from %s)' % (r, inherited[r]) if r in inherited else r
+            for r in releases if r in renamed]
+        rule_file.report('%s-renamed' % os_name, '%s: %s in %s; %s: {%s}' % (
+            key, ', '.join(old_names), ', '.join(changed_releases), os_name,
+            ', '.join(format_entry(k, new_entries[k]) for k in keys)))
+        rule_file.insert(indices[0], ''.join(text))
+        for i in indices:
+            rule_file.remove(i)
+        changed += 1
+    return changed
+
+
+def fix_ubuntu_renames(config, rule_file, args):
+    """Replace renamed Ubuntu packages, from --ubuntu-renames. Return the number of rules changed."""
+    return fix_renames(config, rule_file, 'ubuntu', args.ubuntu_renames,
+                       renames_releases(config, 'ubuntu', args))
+
+
+def fix_debian_renames(config, rule_file, args):
+    """Replace renamed Debian packages, from --debian-renames. Return the number of rules changed."""
+    return fix_renames(config, rule_file, 'debian', args.debian_renames,
+                       renames_releases(config, 'debian', args))
+
+
 FIXES = {
     'add-releases': fix_add_releases,
+    'debian-renames': fix_debian_renames,
+    'ubuntu-renames': fix_ubuntu_renames,
     'ubuntu-simple': fix_ubuntu_simple,
     'ubuntu-star': fix_ubuntu_star,
 }
+# Fixes run when no --fix is given
+DEFAULT_FIXES = ['add-releases', 'ubuntu-simple', 'ubuntu-star']
 
 # Kinds of changes reported by fixes, in report order, with the line introducing them
 CHANGE_KINDS = {
@@ -614,6 +858,12 @@ CHANGE_KINDS = {
     'rule-removed':
         "Keys removed entirely (ubuntu-simple), because their only entry was a one line 'ubuntu' "
         'entry that no current Ubuntu release has all of the packages of:',
+    'debian-renamed':
+        "Renamed packages replaced in 'debian' entries (debian-renames, from the renames file), "
+        'for the releases listed. All of the new packages exist in those releases:',
+    'ubuntu-renamed':
+        "Renamed packages replaced in 'ubuntu' entries (ubuntu-renames, from the renames file), "
+        'for the releases listed. All of the new packages exist in those releases:',
     'ubuntu-star':
         "Per-release and '*' 'ubuntu' entries replaced by a one line 'ubuntu' entry "
         '(ubuntu-star), because all of them list the same packages:',
@@ -651,13 +901,13 @@ def main(argv=sys.argv[1:]):
         help='rosdep files to fix, e.g. rosdep/base.yaml')
     parser.add_argument(
         '--fix', action='append', choices=sorted(FIXES),
-        help='fix to apply, may be repeated (default: all)')
+        help='fix to apply, may be repeated (default: %s)' % ', '.join(DEFAULT_FIXES))
     parser.add_argument(
         '--dry-run', action='store_true',
         help='only show the changes that would be made')
     parser.add_argument(
         '--ubuntu-first-current', default='bionic', metavar='CODENAME',
-        help='oldest Ubuntu release the ubuntu-simple and ubuntu-star fixes check '
+        help='oldest Ubuntu release the ubuntu-renames, ubuntu-simple and ubuntu-star fixes check '
              '(default: %(default)s)')
     parser.add_argument(
         '--last-release', action='store_true',
@@ -667,7 +917,18 @@ def main(argv=sys.argv[1:]):
         '--ignore-artifacts', dest='use_artifacts', action='store_false',
         help='download all package indices again instead of using the copies saved in %s '
              '(by default, only indices not saved yet are downloaded)' % os.path.relpath(ARTIFACTS_DIR))
+    for os_name in sorted(DEFAULT_RENAMES):
+        parser.add_argument(
+            '--%s-renames' % os_name, default=DEFAULT_RENAMES[os_name], metavar='FILE',
+            help='package renames for %s-renames (default: %s)' % (
+                os_name, os.path.relpath(DEFAULT_RENAMES[os_name])))
     args = parser.parse_args(argv)
+    fixes = args.fix or DEFAULT_FIXES
+    renames_fixes = [f for f in fixes if f in RENAMES_FIXES]
+    if renames_fixes and len(renames_fixes) < len(fixes):
+        # They rewrite whole ubuntu or debian entries, which other fixes may also change.
+        parser.error('%s cannot be combined with other fixes, except each other' %
+                     ' and '.join(sorted(set(renames_fixes))))
 
     # The Ubuntu and Debian sources read their package indices with deb.open_gz_url.
     deb.open_gz_url = lambda url: open_artifact_url(url, args.use_artifacts)
@@ -679,7 +940,7 @@ def main(argv=sys.argv[1:]):
         rule_file = RuleFile(path)
         rule_files.append(rule_file)
         changes = 0
-        for name in args.fix or sorted(FIXES):
+        for name in fixes:
             print("Applying fix '%s' to %s" % (name, os.path.relpath(path)))
             changes += FIXES[name](config, rule_file, args)
         sys.stdout.flush()
@@ -687,6 +948,15 @@ def main(argv=sys.argv[1:]):
         if changes and not args.dry_run:
             rule_file.write()
             print('updated %s' % os.path.relpath(path), file=sys.stderr)
+
+    for name in sorted(set(renames_fixes)):
+        os_name = RENAMES_FIXES[name]
+        path = getattr(args, '%s_renames' % os_name)
+        keys = load_renames(path, os_name, renames_releases(config, os_name, args))
+        missing = sorted(set(keys) - RENAMED_KEYS_FOUND.get(os_name, set()))
+        if missing:
+            print('warning: keys of %s not found: %s' % (
+                os.path.relpath(path), ', '.join(missing)), file=sys.stderr)
 
     write_report(argv, args, rule_files)
     print('changes listed in %s' % os.path.relpath(FIXES_REPORT), file=sys.stderr)
